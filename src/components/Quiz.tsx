@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { generateQuiz } from '@/app/actions';
 import type { PersonalizedLearningPathOutput } from '@/ai/flows/personalized-learning-paths';
 import { Button } from '@/components/ui/button';
@@ -30,13 +30,8 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
   const searchParams = useSearchParams();
   const name = searchParams.get('name');
   const grade = searchParams.get('grade');
-  
-  const performanceData = useMemo(() => {
-    // In a real app, this would be loaded from a database.
-    return {}; 
-  }, []);
 
-  const fetchQuiz = async () => {
+  const fetchQuiz = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -44,25 +39,24 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
         studentId,
         gradeLevel,
         subject,
-        performanceData,
         numberOfQuestions: 5,
       });
       if (data.quizQuestions.length === 0) {
         setError('Não foi possível gerar perguntas. Tenta novamente mais tarde.');
+      } else {
+        setQuizData(data);
       }
-      setQuizData(data);
     } catch (e) {
       setError('Não foi possível carregar o quiz. Tenta novamente.');
       console.error(e);
     } finally {
       setLoading(false);
     }
-  }
+  }, [studentId, gradeLevel, subject]);
 
   useEffect(() => {
     fetchQuiz();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [studentId, gradeLevel, subject]);
+  }, [fetchQuiz]);
 
   const handleAudioPlayback = () => {
     if (quizData && 'speechSynthesis' in window) {

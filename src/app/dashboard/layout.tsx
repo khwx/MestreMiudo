@@ -2,8 +2,9 @@
 
 import { useSearchParams } from 'next/navigation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { User, BrainCircuit } from 'lucide-react';
+import { User, BrainCircuit, History } from 'lucide-react';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function DashboardLayout({
   children,
@@ -24,6 +25,12 @@ export default function DashboardLayout({
               <h1 className="font-headline text-3xl font-bold text-primary">MestreMiúdo</h1>
           </Link>
           <div className="flex items-center gap-4">
+            <Link href={`/dashboard/history?name=${encodeURIComponent(name)}&grade=${grade}`} passHref>
+                <Button variant="ghost">
+                    <History className="mr-2 h-5 w-5" />
+                    Histórico
+                </Button>
+            </Link>
             <div className="text-right hidden sm:block">
               <p className="font-bold text-lg">{name}</p>
               <p className="text-sm text-muted-foreground">{grade}º Ano</p>

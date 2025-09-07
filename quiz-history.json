@@ -1,0 +1,270 @@
+[
+  {
+    "timestamp": "2025-09-07T17:17:24.889Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "performanceData": {},
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual destas letras é uma vogal?",
+          "options": [
+            "B",
+            "A",
+            "P",
+            "T"
+          ],
+          "correctAnswer": "A",
+          "topic": "Vogais"
+        },
+        {
+          "question": "Qual a palavra para o objeto que usamos para sentar?",
+          "options": [
+            "Mesa",
+            "Cadeira",
+            "Cama",
+            "Armário"
+          ],
+          "correctAnswer": "Cadeira",
+          "topic": "Reconhecimento de Palavras"
+        },
+        {
+          "question": "Completa a frase: \"O cão ____ no jardim.\"",
+          "options": [
+            "dorme",
+            "voa",
+            "nada",
+            "escreve"
+          ],
+          "correctAnswer": "dorme",
+          "topic": "Formação de Frases"
+        },
+        {
+          "question": "Quantas sílabas tem a palavra \"cavalo\"?",
+          "options": [
+            "Uma",
+            "Duas",
+            "Três",
+            "Quatro"
+          ],
+          "correctAnswer": "Três",
+          "topic": "Sílabas"
+        },
+        {
+          "question": "Qual é o nome do animal que faz \"miau\"?",
+          "options": [
+            "Cão",
+            "Gato",
+            "Pássaro",
+            "Peixe"
+          ],
+          "correctAnswer": "Gato",
+          "topic": "Vocabulário"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-09-07T17:17:28.916Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "performanceData": {},
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual destas é a primeira letra da palavra 'bola'?",
+          "options": [
+            "B",
+            "O",
+            "L",
+            "A"
+          ],
+          "correctAnswer": "B",
+          "topic": "Reconhecimento de Letras"
+        },
+        {
+          "question": "Qual destas palavras começa com a letra 'M'?",
+          "options": [
+            "Pato",
+            "Mesa",
+            "Gato",
+            "Casa"
+          ],
+          "correctAnswer": "Mesa",
+          "topic": "Início de Palavras"
+        },
+        {
+          "question": "Quantas sílabas tem a palavra 'macaco'?",
+          "options": [
+            "Uma",
+            "Duas",
+            "Três",
+            "Quatro"
+          ],
+          "correctAnswer": "Três",
+          "topic": "Contagem de Sílabas"
+        },
+        {
+          "question": "Qual palavra rima com 'flor'?",
+          "options": [
+            "Sol",
+            "Azul",
+            "Amor",
+            "Pão"
+          ],
+          "correctAnswer": "Amor",
+          "topic": "Rimas"
+        },
+        {
+          "question": "Escolhe a letra que falta para formar a palavra 'ca__a' (referindo-se a uma casa de habitação).",
+          "options": [
+            "S",
+            "Z",
+            "X",
+            "L"
+          ],
+          "correctAnswer": "S",
+          "topic": "Completar Palavras"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-09-07T17:18:10.345Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "performanceData": {},
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual é o número que vem imediatamente depois do 4?",
+          "options": [
+            "3",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Reconhecimento de Números"
+        },
+        {
+          "question": "Quanto é 3 + 2?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Adição até 10"
+        },
+        {
+          "question": "Se tens 1 maçã e o teu amigo te dá mais 3 maçãs, com quantas maçãs ficas no total?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "4",
+          "topic": "Adição até 10 (Problemas)"
+        },
+        {
+          "question": "Qual destes é o número oito?",
+          "options": [
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "correctAnswer": "8",
+          "topic": "Reconhecimento de Números"
+        },
+        {
+          "question": "Qual é o número que está em falta na sequência: 1, 2, __, 4, 5?",
+          "options": [
+            "2",
+            "3",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "3",
+          "topic": "Sequência Numérica"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-09-07T17:18:19.067Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "performanceData": {},
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Quantos dedos tens em duas mãos?",
+          "options": [
+            "5",
+            "10",
+            "8",
+            "2"
+          ],
+          "correctAnswer": "10",
+          "topic": "Contagem e Números"
+        },
+        {
+          "question": "Se tens 3 maçãs e a tua amiga te dá mais 2, com quantas maçãs ficas?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "3"
+          ],
+          "correctAnswer": "5",
+          "topic": "Adição Simples"
+        },
+        {
+          "question": "Tinhas 7 balões e 2 voaram. Quantos balões te restam?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Subtração Simples"
+        },
+        {
+          "question": "Qual destas formas tem três lados?",
+          "options": [
+            "Círculo",
+            "Quadrado",
+            "Triângulo",
+            "Retângulo"
+          ],
+          "correctAnswer": "Triângulo",
+          "topic": "Formas Geométricas"
+        },
+        {
+          "question": "Qual é o número que vem depois do 15?",
+          "options": [
+            "14",
+            "16",
+            "17",
+            "13"
+          ],
+          "correctAnswer": "16",
+          "topic": "Sequência Numérica"
+        }
+      ]
+    }
+  }
+]
