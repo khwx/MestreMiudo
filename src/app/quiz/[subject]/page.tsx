@@ -2,11 +2,14 @@
 
 import { useSearchParams } from 'next/navigation';
 import { Quiz } from '@/components/Quiz';
+import { use } from 'react';
 
-export default function QuizPage({ params }: { params: { subject: string } }) {
+export default function QuizPage({ params: paramsPromise }: { params: Promise<{ subject: string }> }) {
   const searchParams = useSearchParams();
   const name = searchParams.get('name') || 'Jogador';
   const grade = searchParams.get('grade');
+  
+  const params = use(paramsPromise);
   
   // Capitalize subject from URL for display and API call
   const subjectParam = decodeURIComponent(params.subject);
