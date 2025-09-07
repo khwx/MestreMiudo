@@ -89,14 +89,9 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
   };
 
   const handleNextQuestion = () => {
-    if (currentQuestionIndex < (quizData?.quizQuestions.length ?? 0) - 1) {
-      setIsAnswered(false);
-      setSelectedAnswer(null);
-      setCurrentQuestionIndex(i => i + 1);
-    } else {
-      // End of quiz
-      setCurrentQuestionIndex(i => i + 1);
-    }
+    setIsAnswered(false);
+    setSelectedAnswer(null);
+    setCurrentQuestionIndex(i => i + 1);
   };
   
   const handleRestart = () => {
@@ -200,7 +195,9 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
       </CardContent>
       {isAnswered && (
         <CardFooter className="justify-end">
-          <Button onClick={handleNextQuestion} className="text-lg px-8 py-6 animate-pulse">Próxima Pergunta</Button>
+          <Button onClick={handleNextQuestion} className="text-lg px-8 py-6 animate-pulse">
+            {currentQuestionIndex < quizData.quizQuestions.length - 1 ? 'Próxima Pergunta' : 'Finalizar Quiz'}
+          </Button>
         </CardFooter>
       )}
     </Card>
