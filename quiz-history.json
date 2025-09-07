@@ -213,11 +213,11 @@
     "score": 4
   },
   {
-    "timestamp": "2025-09-07T20:42:31.619Z",
     "studentId": "Maria",
     "gradeLevel": 1,
     "subject": "Estudo do Meio",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-07T20:42:31.619Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -320,5 +320,321 @@
       }
     ],
     "score": 5
+  },
+  {
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-07T20:49:08.906Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Quantas maçãs vês na imagem?",
+          "options": [
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "correctAnswer": "6",
+          "topic": "Contagem",
+          "imageUrl": "https://pixabay.com/get/g085e19bfe094ce3de2998fe63ebc3a49cc90ef10c6dfcd35a363401ae7d5bb94c4a7798a90d4f24e65a3f97348b13f1d_640.jpg"
+        },
+        {
+          "question": "Quanto é 3 + 2?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Adição"
+        },
+        {
+          "question": "Se tens 5 balões e 2 voam, quantos balões te sobram?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "3",
+          "topic": "Subtração"
+        },
+        {
+          "question": "Que forma geométrica é esta?",
+          "options": [
+            "Quadrado",
+            "Triângulo",
+            "Círculo",
+            "Retângulo"
+          ],
+          "correctAnswer": "Círculo",
+          "topic": "Formas Geométricas",
+          "imageUrl": "https://pixabay.com/get/g00b24288e352e02a5c0f2e273618fdb03b6ded27dd0a946293a1c7859537533de319f7224aa3c99fa891301548935fcd_640.jpg"
+        },
+        {
+          "question": "Qual é o número que vem depois do 7?",
+          "options": [
+            "6",
+            "8",
+            "9",
+            "10"
+          ],
+          "correctAnswer": "8",
+          "topic": "Sucessão Numérica"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Quantas maçãs vês na imagem?",
+        "selectedAnswer": "5",
+        "correctAnswer": "6",
+        "isCorrect": false,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Quanto é 3 + 2?",
+        "selectedAnswer": "5",
+        "correctAnswer": "5",
+        "isCorrect": true,
+        "topic": "Adição"
+      },
+      {
+        "question": "Se tens 5 balões e 2 voam, quantos balões te sobram?",
+        "selectedAnswer": "3",
+        "correctAnswer": "3",
+        "isCorrect": true,
+        "topic": "Subtração"
+      },
+      {
+        "question": "Que forma geométrica é esta?",
+        "selectedAnswer": "Círculo",
+        "correctAnswer": "Círculo",
+        "isCorrect": true,
+        "topic": "Formas Geométricas"
+      },
+      {
+        "question": "Qual é o número que vem depois do 7?",
+        "selectedAnswer": "8",
+        "correctAnswer": "8",
+        "isCorrect": true,
+        "topic": "Sucessão Numérica"
+      }
+    ],
+    "score": 4
+  },
+  {
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-07T20:50:19.915Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual destas letras é uma vogal?",
+          "options": [
+            "B",
+            "A",
+            "P",
+            "D"
+          ],
+          "correctAnswer": "A",
+          "topic": "Vogais"
+        },
+        {
+          "question": "Qual destas letras é uma consoante?",
+          "options": [
+            "E",
+            "I",
+            "M",
+            "O"
+          ],
+          "correctAnswer": "M",
+          "topic": "Consoantes"
+        },
+        {
+          "question": "O que vês na imagem?",
+          "options": [
+            "Casa",
+            "Árvore",
+            "Flor",
+            "Carro"
+          ],
+          "correctAnswer": "Flor",
+          "topic": "Vocabulário",
+          "imageUrl": "https://pixabay.com/get/g1c9b8d98b0ab8feb55c3f6becc0984cd752fca5bdae742fcd298ee7cdf17452d1d8f4483652197db2f04a0051f1ec8d5_640.jpg"
+        },
+        {
+          "question": "Completa a frase: A __________ é azul.",
+          "options": [
+            "Mesa",
+            "Bola",
+            "Cadeira",
+            "Livro"
+          ],
+          "correctAnswer": "Bola",
+          "topic": "Formação de Frases"
+        },
+        {
+          "question": "Qual palavra rima com 'pão'?",
+          "options": [
+            "Cão",
+            "Gato",
+            "Mesa",
+            "Rato"
+          ],
+          "correctAnswer": "Cão",
+          "topic": "Rima"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual destas letras é uma vogal?",
+        "selectedAnswer": "A",
+        "correctAnswer": "A",
+        "isCorrect": true,
+        "topic": "Vogais"
+      },
+      {
+        "question": "Qual destas letras é uma consoante?",
+        "selectedAnswer": "M",
+        "correctAnswer": "M",
+        "isCorrect": true,
+        "topic": "Consoantes"
+      },
+      {
+        "question": "O que vês na imagem?",
+        "selectedAnswer": "Flor",
+        "correctAnswer": "Flor",
+        "isCorrect": true,
+        "topic": "Vocabulário"
+      },
+      {
+        "question": "Completa a frase: A __________ é azul.",
+        "selectedAnswer": "Livro",
+        "correctAnswer": "Bola",
+        "isCorrect": false,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "Qual palavra rima com 'pão'?",
+        "selectedAnswer": "Cão",
+        "correctAnswer": "Cão",
+        "isCorrect": true,
+        "topic": "Rima"
+      }
+    ],
+    "score": 4
+  },
+  {
+    "timestamp": "2025-09-07T20:51:49.958Z",
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Quantas maçãs vês na imagem?",
+          "options": [
+            "3",
+            "5",
+            "7",
+            "2"
+          ],
+          "correctAnswer": "5",
+          "topic": "Contagem",
+          "imageUrl": "https://pixabay.com/get/g82ac10e4c59cd86f3e0b5c01ab45ed7ea29da850ed060e42ec588c3835433aa2b9c2667a563d20350778064cb79e54a4_640.jpg"
+        },
+        {
+          "question": "Quantos dedos tens numa mão?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "5",
+          "topic": "Contagem"
+        },
+        {
+          "question": "Se tiveres 2 rebuçados e a tua amiga te der mais 3, quantos rebuçados tens no total?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Adição"
+        },
+        {
+          "question": "A Maria tinha 5 balões, mas 2 voaram. Quantos balões a Maria tem agora?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "3",
+          "topic": "Subtração"
+        },
+        {
+          "question": "Qual é o próximo número na sequência: 1, 2, 3, ___?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "4",
+          "topic": "Sucessão Numérica"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Quantas maçãs vês na imagem?",
+        "selectedAnswer": "2",
+        "correctAnswer": "5",
+        "isCorrect": false,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Quantos dedos tens numa mão?",
+        "selectedAnswer": "5",
+        "correctAnswer": "5",
+        "isCorrect": true,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Se tiveres 2 rebuçados e a tua amiga te der mais 3, quantos rebuçados tens no total?",
+        "selectedAnswer": "5",
+        "correctAnswer": "5",
+        "isCorrect": true,
+        "topic": "Adição"
+      },
+      {
+        "question": "A Maria tinha 5 balões, mas 2 voaram. Quantos balões a Maria tem agora?",
+        "selectedAnswer": "3",
+        "correctAnswer": "3",
+        "isCorrect": true,
+        "topic": "Subtração"
+      },
+      {
+        "question": "Qual é o próximo número na sequência: 1, 2, 3, ___?",
+        "selectedAnswer": "4",
+        "correctAnswer": "4",
+        "isCorrect": true,
+        "topic": "Sucessão Numérica"
+      }
+    ],
+    "score": 4
   }
 ]
