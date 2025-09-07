@@ -1,1591 +1,215 @@
 [
   {
-    "timestamp": "2025-09-07T17:17:24.889Z",
     "studentId": "Sara",
     "gradeLevel": 1,
     "subject": "Português",
-    "performanceData": {},
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-07T18:35:03.588Z",
     "quiz": {
       "quizQuestions": [
         {
-          "question": "Qual destas letras é uma vogal?",
+          "question": "Observa a imagem. Qual destas palavras corresponde ao que vês?",
           "options": [
-            "B",
-            "A",
+            "mala",
+            "casa",
+            "bola",
+            "gato"
+          ],
+          "correctAnswer": "casa",
+          "topic": "Leitura e Vocabulário",
+          "imageUrl": "https://pixabay.com/get/g67a1143d3753e7615d84bb2284dfbb398cd4e2ac03b500e5ca706e11db20627598527b94e4beb836d4f4754b6005da1c_640.jpg"
+        },
+        {
+          "question": "Olha para a imagem. Com que letra começa a palavra que descreve o animal?",
+          "options": [
             "P",
-            "T"
+            "G",
+            "C",
+            "R"
           ],
-          "correctAnswer": "A",
-          "topic": "Vogais"
+          "correctAnswer": "C",
+          "topic": "Identificação de Letras e Fonética",
+          "imageUrl": "https://pixabay.com/get/gcc95b9883a74c013cf05752e0eadfa3a52f96bf9706e8dd21bdc09b7a1c762c905fb809d29242d45915fab4b4a2f8aa2_640.jpg"
         },
         {
-          "question": "Qual a palavra para o objeto que usamos para sentar?",
+          "question": "Completa a frase: 'Eu gosto de ______ um livro.'",
           "options": [
-            "Mesa",
-            "Cadeira",
-            "Cama",
-            "Armário"
+            "comer",
+            "dormir",
+            "correr",
+            "ler"
           ],
-          "correctAnswer": "Cadeira",
-          "topic": "Reconhecimento de Palavras"
+          "correctAnswer": "ler",
+          "topic": "Formação de Frases e Verbos Simples"
         },
         {
-          "question": "Completa a frase: \"O cão ____ no jardim.\"",
+          "question": "Qual é o nome desta bonita planta?",
           "options": [
-            "dorme",
-            "voa",
-            "nada",
-            "escreve"
+            "árvore",
+            "relva",
+            "flor",
+            "pedra"
           ],
-          "correctAnswer": "dorme",
-          "topic": "Formação de Frases"
+          "correctAnswer": "flor",
+          "topic": "Vocabulário e Natureza",
+          "imageUrl": "https://pixabay.com/get/gab4beea8d4ab31d54f7408b3f14727c90eb9abe415778ea3b07454c1fdfeb09b38d316c483493a9d0262b4f55e65ef82_640.jpg"
         },
         {
-          "question": "Quantas sílabas tem a palavra \"cavalo\"?",
+          "question": "Qual destas palavras rima com 'pão'?",
           "options": [
-            "Uma",
-            "Duas",
-            "Três",
-            "Quatro"
+            "cão",
+            "sol",
+            "mesa",
+            "copo"
           ],
-          "correctAnswer": "Três",
-          "topic": "Sílabas"
-        },
-        {
-          "question": "Qual é o nome do animal que faz \"miau\"?",
-          "options": [
-            "Cão",
-            "Gato",
-            "Pássaro",
-            "Peixe"
-          ],
-          "correctAnswer": "Gato",
-          "topic": "Vocabulário"
+          "correctAnswer": "cão",
+          "topic": "Rimas e Sons de Palavras"
         }
       ]
-    }
+    },
+    "answers": [
+      {
+        "question": "Observa a imagem. Qual destas palavras corresponde ao que vês?",
+        "selectedAnswer": "casa",
+        "correctAnswer": "casa",
+        "isCorrect": true,
+        "topic": "Leitura e Vocabulário"
+      },
+      {
+        "question": "Olha para a imagem. Com que letra começa a palavra que descreve o animal?",
+        "selectedAnswer": "P",
+        "correctAnswer": "C",
+        "isCorrect": false,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Completa a frase: 'Eu gosto de ______ um livro.'",
+        "selectedAnswer": "ler",
+        "correctAnswer": "ler",
+        "isCorrect": true,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "Qual é o nome desta bonita planta?",
+        "selectedAnswer": "flor",
+        "correctAnswer": "flor",
+        "isCorrect": true,
+        "topic": "Vocabulário e Natureza"
+      },
+      {
+        "question": "Qual destas palavras rima com 'pão'?",
+        "selectedAnswer": "cão",
+        "correctAnswer": "cão",
+        "isCorrect": true,
+        "topic": "Rimas e Sons de Palavras"
+      }
+    ],
+    "score": 4
   },
   {
-    "timestamp": "2025-09-07T17:17:28.916Z",
+    "timestamp": "2025-09-07T20:28:25.508Z",
     "studentId": "Sara",
     "gradeLevel": 1,
     "subject": "Português",
-    "performanceData": {},
     "numberOfQuestions": 5,
     "quiz": {
       "quizQuestions": [
         {
-          "question": "Qual destas é a primeira letra da palavra 'bola'?",
+          "question": "Qual é a primeira letra da palavra 'bola'?",
           "options": [
+            "P",
             "B",
-            "O",
-            "L",
-            "A"
-          ],
-          "correctAnswer": "B",
-          "topic": "Reconhecimento de Letras"
-        },
-        {
-          "question": "Qual destas palavras começa com a letra 'M'?",
-          "options": [
-            "Pato",
-            "Mesa",
-            "Gato",
-            "Casa"
-          ],
-          "correctAnswer": "Mesa",
-          "topic": "Início de Palavras"
-        },
-        {
-          "question": "Quantas sílabas tem a palavra 'macaco'?",
-          "options": [
-            "Uma",
-            "Duas",
-            "Três",
-            "Quatro"
-          ],
-          "correctAnswer": "Três",
-          "topic": "Contagem de Sílabas"
-        },
-        {
-          "question": "Qual palavra rima com 'flor'?",
-          "options": [
-            "Sol",
-            "Azul",
-            "Amor",
-            "Pão"
-          ],
-          "correctAnswer": "Amor",
-          "topic": "Rimas"
-        },
-        {
-          "question": "Escolhe a letra que falta para formar a palavra 'ca__a' (referindo-se a uma casa de habitação).",
-          "options": [
-            "S",
-            "Z",
-            "X",
+            "D",
             "L"
           ],
-          "correctAnswer": "S",
-          "topic": "Completar Palavras"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:18:10.345Z",
-    "studentId": "Sara",
-    "gradeLevel": 1,
-    "subject": "Matemática",
-    "performanceData": {},
-    "numberOfQuestions": 5,
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Qual é o número que vem imediatamente depois do 4?",
-          "options": [
-            "3",
-            "5",
-            "6",
-            "7"
-          ],
-          "correctAnswer": "5",
-          "topic": "Reconhecimento de Números"
-        },
-        {
-          "question": "Quanto é 3 + 2?",
-          "options": [
-            "4",
-            "5",
-            "6",
-            "7"
-          ],
-          "correctAnswer": "5",
-          "topic": "Adição até 10"
-        },
-        {
-          "question": "Se tens 1 maçã e o teu amigo te dá mais 3 maçãs, com quantas maçãs ficas no total?",
-          "options": [
-            "3",
-            "4",
-            "5",
-            "6"
-          ],
-          "correctAnswer": "4",
-          "topic": "Adição até 10 (Problemas)"
-        },
-        {
-          "question": "Qual destes é o número oito?",
-          "options": [
-            "6",
-            "7",
-            "8",
-            "9"
-          ],
-          "correctAnswer": "8",
-          "topic": "Reconhecimento de Números"
-        },
-        {
-          "question": "Qual é o número que está em falta na sequência: 1, 2, __, 4, 5?",
-          "options": [
-            "2",
-            "3",
-            "6",
-            "7"
-          ],
-          "correctAnswer": "3",
-          "topic": "Sequência Numérica"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:18:19.067Z",
-    "studentId": "Sara",
-    "gradeLevel": 1,
-    "subject": "Matemática",
-    "performanceData": {},
-    "numberOfQuestions": 5,
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Quantos dedos tens em duas mãos?",
-          "options": [
-            "5",
-            "10",
-            "8",
-            "2"
-          ],
-          "correctAnswer": "10",
-          "topic": "Contagem e Números"
-        },
-        {
-          "question": "Se tens 3 maçãs e a tua amiga te dá mais 2, com quantas maçãs ficas?",
-          "options": [
-            "4",
-            "5",
-            "6",
-            "3"
-          ],
-          "correctAnswer": "5",
-          "topic": "Adição Simples"
-        },
-        {
-          "question": "Tinhas 7 balões e 2 voaram. Quantos balões te restam?",
-          "options": [
-            "4",
-            "5",
-            "6",
-            "7"
-          ],
-          "correctAnswer": "5",
-          "topic": "Subtração Simples"
-        },
-        {
-          "question": "Qual destas formas tem três lados?",
-          "options": [
-            "Círculo",
-            "Quadrado",
-            "Triângulo",
-            "Retângulo"
-          ],
-          "correctAnswer": "Triângulo",
-          "topic": "Formas Geométricas"
-        },
-        {
-          "question": "Qual é o número que vem depois do 15?",
-          "options": [
-            "14",
-            "16",
-            "17",
-            "13"
-          ],
-          "correctAnswer": "16",
-          "topic": "Sequência Numérica"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:19:09.807Z",
-    "studentId": "Sara",
-    "gradeLevel": 1,
-    "subject": "Matemática",
-    "numberOfQuestions": 5,
-    "performanceData": {
-      "Reconhecimento de Números": 0.8585525397576546,
-      "Adição até 10": 0.20532039849925954,
-      "Adição até 10 (Problemas)": 0.7811846922817709,
-      "Sequência Numérica": 0.4553638137414884,
-      "Contagem e Números": 0.62035538891863,
-      "Adição Simples": 0.8466706512885496,
-      "Subtração Simples": 0.046517050636549984,
-      "Formas Geométricas": 0.8817202089992491
-    },
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Quantos balões vês? (Considera que há 7 balões)",
-          "options": [
-            "5",
-            "6",
-            "7",
-            "8"
-          ],
-          "correctAnswer": "7",
-          "topic": "Contagem e Números"
-        },
-        {
-          "question": "Se tens 4 lápis e o teu amigo te dá mais 3, com quantos lápis ficas no total?",
-          "options": [
-            "6",
-            "7",
-            "8",
-            "9"
-          ],
-          "correctAnswer": "7",
-          "topic": "Adição"
-        },
-        {
-          "question": "A Maria tinha 8 biscoitos e comeu 2. Quantos biscoitos sobraram?",
-          "options": [
-            "4",
-            "5",
-            "6",
-            "7"
-          ],
-          "correctAnswer": "6",
-          "topic": "Subtração"
-        },
-        {
-          "question": "Qual destas formas tem quatro lados iguais?",
-          "options": [
-            "Um círculo",
-            "Um triângulo",
-            "Um quadrado",
-            "Um retângulo"
-          ],
-          "correctAnswer": "Um quadrado",
-          "topic": "Formas Geométricas"
-        },
-        {
-          "question": "O Pedro tem 6 bolachas e a Inês tem 4 bolachas. Quem tem mais bolachas?",
-          "options": [
-            "O Pedro",
-            "A Inês",
-            "Ambos têm o mesmo número",
-            "Nenhum"
-          ],
-          "correctAnswer": "O Pedro",
-          "topic": "Comparação de Números e Resolução de Problemas"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:35:20.913Z",
-    "studentId": "Maria",
-    "gradeLevel": 1,
-    "subject": "Português",
-    "numberOfQuestions": 5,
-    "performanceData": {},
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Qual é a primeira letra da palavra \"bola\"?",
-          "options": [
-            "O",
-            "B",
-            "L",
-            "A"
-          ],
           "correctAnswer": "B",
-          "topic": "Alfabeto e Sons"
+          "topic": "Identificação de Letras e Fonética"
         },
         {
-          "question": "Lê a palavra: M-A-L-A. O que é?",
+          "question": "Que som faz a letra 'M' na palavra 'mão'?",
           "options": [
-            "Mão",
-            "Mala",
-            "Mato",
-            "Mesa"
-          ],
-          "correctAnswer": "Mala",
-          "topic": "Leitura de Palavras Simples"
-        },
-        {
-          "question": "Qual destes é um animal que vive na água?",
-          "options": [
-            "Gato",
-            "Pássaro",
-            "Peixe",
-            "Cão"
-          ],
-          "correctAnswer": "Peixe",
-          "topic": "Vocabulário - Animais"
-        },
-        {
-          "question": "Completa a frase: \"A menina tem uma ______ vermelha.\"",
-          "options": [
-            "nuvem",
-            "casa",
-            "mala",
-            "caneta"
-          ],
-          "correctAnswer": "caneta",
-          "topic": "Formação de Frases Simples"
-        },
-        {
-          "question": "Qual é o plural da palavra \"livro\"?",
-          "options": [
-            "livro",
-            "livros",
-            "livrinho",
-            "livras"
-          ],
-          "correctAnswer": "livros",
-          "topic": "Singular e Plural"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:35:28.385Z",
-    "studentId": "Maria",
-    "gradeLevel": 1,
-    "subject": "Português",
-    "numberOfQuestions": 5,
-    "performanceData": {
-      "Alfabeto e Sons": 0.6197158122374771,
-      "Leitura de Palavras Simples": 0.07590607843214547,
-      "Vocabulário - Animais": 0.11717230836144221,
-      "Formação de Frases Simples": 0.8823147934434921,
-      "Singular e Plural": 0.3992055179884053
-    },
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Qual destas palavras começa com a letra 'A'?",
-          "options": [
-            "Bola",
-            "Árvore",
-            "Cão",
-            "Dedo"
-          ],
-          "correctAnswer": "Árvore",
-          "topic": "Início de Palavras (Letra 'A')"
-        },
-        {
-          "question": "Escolhe a palavra que completa a frase: 'Eu gosto de comer uma ____ deliciosa'.",
-          "options": [
-            "cadeira",
-            "flor",
-            "maçã",
-            "mesa"
-          ],
-          "correctAnswer": "maçã",
-          "topic": "Compreensão de Frases e Vocabulário"
-        },
-        {
-          "question": "Qual destas palavras é um animal?",
-          "options": [
-            "Carro",
-            "Sol",
-            "Gato",
-            "Casa"
-          ],
-          "correctAnswer": "Gato",
-          "topic": "Identificação de Nomes (Animais)"
-        },
-        {
-          "question": "Qual palavra rima com 'pão'?",
-          "options": [
-            "Mão",
-            "Pé",
-            "Céu",
-            "Mar"
-          ],
-          "correctAnswer": "Mão",
-          "topic": "Rimas"
-        },
-        {
-          "question": "Quantas sílabas tem a palavra 'casa'?",
-          "options": [
-            "Uma",
-            "Duas",
-            "Três",
-            "Quatro"
-          ],
-          "correctAnswer": "Duas",
-          "topic": "Separação Silábica"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:37:24.931Z",
-    "studentId": "Maria",
-    "gradeLevel": 1,
-    "subject": "Português",
-    "numberOfQuestions": 5,
-    "performanceData": {
-      "Alfabeto e Sons": 0.31319278721898125,
-      "Leitura de Palavras Simples": 0.7326706209961236,
-      "Vocabulário - Animais": 0.6515365007622274,
-      "Formação de Frases Simples": 0.4741232861915674,
-      "Singular e Plural": 0.16319334061036583,
-      "Início de Palavras (Letra 'A')": 0.16815751589339478,
-      "Compreensão de Frases e Vocabulário": 0.7063675774840525,
-      "Identificação de Nomes (Animais)": 0.6874214634923008,
-      "Rimas": 0.38237744327700973,
-      "Separação Silábica": 0.8380574102396827
-    },
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Qual destas é uma vogal?",
-          "options": [
-            "B",
+            "F",
+            "N",
             "M",
-            "A",
-            "T"
-          ],
-          "correctAnswer": "A",
-          "topic": "Vogais"
-        },
-        {
-          "question": "Qual sílaba falta para formar a palavra \"BOLA\"? B_ _ A",
-          "options": [
-            "LA",
-            "MA",
-            "SA",
-            "PA"
-          ],
-          "correctAnswer": "LA",
-          "topic": "Sílabas"
-        },
-        {
-          "question": "O que vês na imagem?",
-          "options": [
-            "Lua",
-            "Sol",
-            "Estrela",
-            "Nuvem"
-          ],
-          "correctAnswer": "Sol",
-          "topic": "Vocabulário",
-          "imageUrl": "https://pixabay.com/get/g6cbade9d0476285b42a365400f955eb0531aa4f953975893fab109c4c1e63d1f7ffb72e844333c1b4bc60bc15cd70e6d_640.jpg"
-        },
-        {
-          "question": "Qual a palavra correta para preencher a frase: ___ casa é bonita.",
-          "options": [
-            "O",
-            "A",
-            "Os",
-            "As"
-          ],
-          "correctAnswer": "A",
-          "topic": "Artigos Definidos"
-        },
-        {
-          "question": "Qual destas é uma consoante?",
-          "options": [
-            "E",
-            "I",
-            "U",
             "P"
           ],
-          "correctAnswer": "P",
-          "topic": "Consoantes"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:37:59.409Z",
-    "studentId": "Sara",
-    "gradeLevel": 1,
-    "subject": "Matemática",
-    "numberOfQuestions": 5,
-    "performanceData": {
-      "Reconhecimento de Números": 0.047675740779604014,
-      "Adição até 10": 0.0060925621405172325,
-      "Adição até 10 (Problemas)": 0.3170328571325485,
-      "Sequência Numérica": 0.20699684524844053,
-      "Contagem e Números": 0.1829474321588691,
-      "Adição Simples": 0.8290332323296272,
-      "Subtração Simples": 0.9120266528712506,
-      "Formas Geométricas": 0.5474900833382907,
-      "Adição": 0.5706345994402833,
-      "Subtração": 0.5169662956227263,
-      "Comparação de Números e Resolução de Problemas": 0.6223403853714784
-    },
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Quantos dedos tens em uma mão?",
-          "options": [
-            "Três",
-            "Quatro",
-            "Cinco",
-            "Seis"
-          ],
-          "correctAnswer": "Cinco",
-          "topic": "Contagem"
+          "correctAnswer": "M",
+          "topic": "Identificação de Letras e Fonética"
         },
         {
-          "question": "Se tens 2 maçãs e recebes mais 3, quantas maçãs tens no total?",
+          "question": "Observa a imagem. Qual destas palavras descreve o que vês?",
           "options": [
-            "3",
-            "4",
-            "5",
-            "6"
+            "Lua",
+            "Estrela",
+            "Sol",
+            "Chuva"
           ],
-          "correctAnswer": "5",
-          "topic": "Adição"
+          "correctAnswer": "Sol",
+          "topic": "Vocabulário e Natureza",
+          "imageUrl": "https://pixabay.com/get/gb28df16e32bfe431a4755ededec4d5369350c8970ca03bf85d4c26d8915bcf5e5363040c1991bf4d0ac7d3ae320635f9_640.jpg"
         },
         {
-          "question": "Tinhas 5 balões e 2 voaram. Quantos balões te restam?",
+          "question": "Completa a frase: 'O gato _______ leite.'",
           "options": [
-            "1",
-            "2",
-            "3",
-            "4"
+            "dorme",
+            "salta",
+            "bebe",
+            "corre"
           ],
-          "correctAnswer": "3",
-          "topic": "Subtração"
+          "correctAnswer": "bebe",
+          "topic": "Formação de Frases e Verbos Simples"
         },
         {
-          "question": "Qual é o número maior: 7 ou 4?",
-          "options": [
-            "4",
-            "7",
-            "São iguais",
-            "Nenhum"
-          ],
-          "correctAnswer": "7",
-          "topic": "Comparação de números"
-        },
-        {
-          "question": "Que forma tem uma bola de futebol?",
-          "options": [
-            "Quadrado",
-            "Triângulo",
-            "Círculo",
-            "Retângulo"
-          ],
-          "correctAnswer": "Círculo",
-          "topic": "Formas geométricas"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:38:13.148Z",
-    "studentId": "Sara",
-    "gradeLevel": 1,
-    "subject": "Matemática",
-    "numberOfQuestions": 5,
-    "performanceData": {
-      "Reconhecimento de Números": 0.47577308499693816,
-      "Adição até 10": 0.17067227111549,
-      "Adição até 10 (Problemas)": 0.23879926622013903,
-      "Sequência Numérica": 0.835001917240302,
-      "Contagem e Números": 0.0745614748254646,
-      "Adição Simples": 0.3198141562969439,
-      "Subtração Simples": 0.6588240761224318,
-      "Formas Geométricas": 0.5696112404795082,
-      "Adição": 0.6718885402556558,
-      "Subtração": 0.676020689711138,
-      "Comparação de Números e Resolução de Problemas": 0.8877458434073828,
-      "Contagem": 0.5067151561175676,
-      "Comparação de números": 0.9323993382473794,
-      "Formas geométricas": 0.3596761464617042
-    },
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Observa a imagem. Se tiveres 3 maçãs e te derem mais 2 maçãs, com quantas maçãs ficas no total?",
-          "options": [
-            "4",
-            "5",
-            "6",
-            "7"
-          ],
-          "correctAnswer": "5",
-          "topic": "Adição",
-          "imageUrl": "https://pixabay.com/get/g87328a163cb0a483c98fb21d47e069bb9cc27c438fcc60582ecd56404a26748b7dd5cdd6e7280e9a6a43ccc084276f02_640.jpg"
-        },
-        {
-          "question": "Se tens 8 rebuçados e dás 3 ao teu amigo, quantos rebuçados te sobram?",
-          "options": [
-            "4",
-            "5",
-            "6",
-            "7"
-          ],
-          "correctAnswer": "5",
-          "topic": "Subtração"
-        },
-        {
-          "question": "Qual é o maior número: 12, 7, 15, ou 9?",
-          "options": [
-            "7",
-            "9",
-            "12",
-            "15"
-          ],
-          "correctAnswer": "15",
-          "topic": "Comparação de Números"
-        },
-        {
-          "question": "Olha para a imagem. Se vires 4 patos e depois aparecerem mais 3 patos, quantos patos vês no total?",
-          "options": [
-            "6",
-            "7",
-            "8",
-            "9"
-          ],
-          "correctAnswer": "7",
-          "topic": "Adição",
-          "imageUrl": "https://pixabay.com/get/g3b56b7bdffe519ae21bb36af60e75815c18fd4f8fc67df6435ba2c56fb29bf4bec50e9da38d61c7dbd4b3a4d36530c24_640.jpg"
-        },
-        {
-          "question": "Na imagem, quantas nuvens consegues contar?",
-          "options": [
-            "4",
-            "5",
-            "6",
-            "7"
-          ],
-          "correctAnswer": "5",
-          "topic": "Contagem",
-          "imageUrl": "https://pixabay.com/get/g88d51936448da55ba59cd555dd040ec367b25b4bf623a0eab5f381a76c13b502bc73e17fd18dba8a72611572ccba1eb2_640.jpg"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:39:18.475Z",
-    "studentId": "Sara",
-    "gradeLevel": 1,
-    "subject": "Matemática",
-    "numberOfQuestions": 5,
-    "performanceData": {
-      "Reconhecimento de Números": 0.42361343867215906,
-      "Adição até 10": 0.44086233083989645,
-      "Adição até 10 (Problemas)": 0.7722608862083671,
-      "Sequência Numérica": 0.7400280274971014,
-      "Contagem e Números": 0.9551211056577027,
-      "Adição Simples": 0.6696784358946675,
-      "Subtração Simples": 0.8689655668685108,
-      "Formas Geométricas": 0.27864148575777437,
-      "Adição": 0.44581364607631846,
-      "Subtração": 0.2840226282141167,
-      "Comparação de Números e Resolução de Problemas": 0.009272601824349636,
-      "Contagem": 0.7092411515676673,
-      "Comparação de números": 0.10572524968295549,
-      "Formas geométricas": 0.0628575974099348,
-      "Comparação de Números": 0.5232345531496116
-    },
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Quantos dedos tens em duas mãos?",
-          "options": [
-            "8",
-            "9",
-            "10",
-            "11"
-          ],
-          "correctAnswer": "10",
-          "topic": "Contagem"
-        },
-        {
-          "question": "Se tiveres 3 maçãs e te derem mais 2, quantas maçãs terás no total?",
-          "options": [
-            "4",
-            "5",
-            "6",
-            "7"
-          ],
-          "correctAnswer": "5",
-          "topic": "Adição"
-        },
-        {
-          "question": "A Maria tinha 7 balões e 3 voaram. Quantos balões sobraram?",
-          "options": [
-            "3",
-            "4",
-            "5",
-            "6"
-          ],
-          "correctAnswer": "4",
-          "topic": "Subtração"
-        },
-        {
-          "question": "Qual é o número maior: 12 ou 8?",
-          "options": [
-            "8",
-            "12",
-            "São iguais",
-            "Nenhum"
-          ],
-          "correctAnswer": "12",
-          "topic": "Comparação de Números"
-        },
-        {
-          "question": "Que forma tem uma bola de futebol?",
-          "options": [
-            "Quadrado",
-            "Círculo",
-            "Triângulo",
-            "Retângulo"
-          ],
-          "correctAnswer": "Círculo",
-          "topic": "Formas Geométricas"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:40:46.617Z",
-    "studentId": "Maria",
-    "gradeLevel": 2,
-    "subject": "Português",
-    "numberOfQuestions": 5,
-    "performanceData": {
-      "Alfabeto e Sons": 0.5742881995029767,
-      "Leitura de Palavras Simples": 0.8556761263994774,
-      "Vocabulário - Animais": 0.22128348829430977,
-      "Formação de Frases Simples": 0.3383196244102704,
-      "Singular e Plural": 0.3671267273714909,
-      "Início de Palavras (Letra 'A')": 0.5354215514116707,
-      "Compreensão de Frases e Vocabulário": 0.18662965072866733,
-      "Identificação de Nomes (Animais)": 0.8278079578831059,
-      "Rimas": 0.9402750789166499,
-      "Separação Silábica": 0.37035781031809445,
-      "Vogais": 0.29490052397309796,
-      "Sílabas": 0.8264978854641245,
-      "Vocabulário": 0.5832326475741929,
-      "Artigos Definidos": 0.168916515027135,
-      "Consoantes": 0.753069579007992
-    },
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Observa a imagem. Qual é o nome do objeto?",
+          "question": "Olha para a imagem. O que é?",
           "options": [
             "Árvore",
+            "Grama",
             "Flor",
-            "Folha",
-            "Fruta"
+            "Pedra"
           ],
           "correctAnswer": "Flor",
-          "topic": "Vocabulário",
-          "imageUrl": "https://pixabay.com/get/gba9262ff801d3772d7b5d574b41aa29b279a5be80fb22a608197e201b19dbf7fdc25f39546c4a1b4af175ead37a22cc4_640.jpg"
-        },
-        {
-          "question": "Completa a frase com a palavra correta: A ____ é amarela.",
-          "options": [
-            "sol",
-            "nuvem",
-            "carro",
-            "livro"
-          ],
-          "correctAnswer": "nuvem",
-          "topic": "Gramática - Género"
-        },
-        {
-          "question": "Quantas sílabas tem a palavra 'banana'?",
-          "options": [
-            "Duas",
-            "Três",
-            "Quatro",
-            "Cinco"
-          ],
-          "correctAnswer": "Três",
-          "topic": "Sílabas"
-        },
-        {
-          "question": "Qual sinal de pontuação usamos no final de uma pergunta?",
-          "options": [
-            "Ponto final (.)",
-            "Vírgula (,)",
-            "Ponto de interrogação (?)",
-            "Ponto de exclamação (!)"
-          ],
-          "correctAnswer": "Ponto de interrogação (?)",
-          "topic": "Pontuação"
-        },
-        {
-          "question": "Lê a frase: 'O cão gosta de brincar com a bola.' O que gosta o cão de fazer?",
-          "options": [
-            "Comer",
-            "Dormir",
-            "Brincar",
-            "Correr"
-          ],
-          "correctAnswer": "Brincar",
-          "topic": "Leitura e Compreensão"
+          "topic": "Leitura e Vocabulário",
+          "imageUrl": "https://pixabay.com/get/g1bb5118d8e8936b059ec29b43324ea8f112aaada0e0f45eb3becf3652a4ff516c8cb269d17e02077fdd55ce72b42135c_640.jpg"
         }
       ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:40:59.411Z",
-    "studentId": "Maria",
-    "gradeLevel": 2,
-    "subject": "Português",
-    "numberOfQuestions": 5,
-    "performanceData": {
-      "Alfabeto e Sons": 0.10230681029430033,
-      "Leitura de Palavras Simples": 0.4992915632124777,
-      "Vocabulário - Animais": 0.5973055348884202,
-      "Formação de Frases Simples": 0.9070304702250114,
-      "Singular e Plural": 0.7175591920602657,
-      "Início de Palavras (Letra 'A')": 0.6928702513051634,
-      "Compreensão de Frases e Vocabulário": 0.3359736580975554,
-      "Identificação de Nomes (Animais)": 0.5440894868601027,
-      "Rimas": 0.5183585109050901,
-      "Separação Silábica": 0.30347159611484065,
-      "Vogais": 0.6114323537435953,
-      "Sílabas": 0.20919560116314062,
-      "Vocabulário": 0.8611436437217819,
-      "Artigos Definidos": 0.7820363202149825,
-      "Consoantes": 0.9512983447787309,
-      "Gramática - Género": 0.3722981684644724,
-      "Pontuação": 0.2930241710370234,
-      "Leitura e Compreensão": 0.8641528829254712
     },
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Qual é o sinónimo da palavra 'feliz'?",
-          "options": [
-            "alegre",
-            "triste",
-            "bravo",
-            "pequeno"
-          ],
-          "correctAnswer": "alegre",
-          "topic": "Identificação de sinónimos"
-        },
-        {
-          "question": "Observa a imagem. Qual destas frases descreve melhor o animal?",
-          "options": [
-            "É um cão grande.",
-            "É um gato pequeno.",
-            "É um pássaro colorido.",
-            "É um peixe na água."
-          ],
-          "correctAnswer": "É um gato pequeno.",
-          "topic": "Compreensão de frases simples",
-          "imageUrl": "https://pixabay.com/get/g68ab8a710fb79a838449bb1f310c97eb09dda3dee3626d2de3f007ec8e0f21b58bd55672f469942355bc17c560de2e9c_640.jpg"
-        },
-        {
-          "question": "Qual palavra significa o mesmo que 'rápido'?",
-          "options": [
-            "lento",
-            "veloz",
-            "pesado",
-            "sujo"
-          ],
-          "correctAnswer": "veloz",
-          "topic": "Identificação de sinónimos"
-        },
-        {
-          "question": "Lê a frase: 'A menina comeu uma maçã vermelha.' Quem comeu a maçã?",
-          "options": [
-            "O menino",
-            "A maçã",
-            "A menina",
-            "O cão"
-          ],
-          "correctAnswer": "A menina",
-          "topic": "Compreensão de frases simples"
-        },
-        {
-          "question": "Qual destas letras é uma vogal?",
-          "options": [
-            "B",
-            "M",
-            "A",
-            "T"
-          ],
-          "correctAnswer": "A",
-          "topic": "Vogais e Consoantes"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:41:42.843Z",
-    "studentId": "Maria",
-    "gradeLevel": 2,
-    "subject": "Português",
-    "numberOfQuestions": 5,
-    "performanceData": {
-      "Alfabeto e Sons": 0.3932196735329123,
-      "Leitura de Palavras Simples": 0.29158342014221095,
-      "Vocabulário - Animais": 0.3704344559735131,
-      "Formação de Frases Simples": 0.40718430108390313,
-      "Singular e Plural": 0.5451925683161536,
-      "Início de Palavras (Letra 'A')": 0.8080791446603837,
-      "Compreensão de Frases e Vocabulário": 0.3888794364216037,
-      "Identificação de Nomes (Animais)": 0.4716627401892952,
-      "Rimas": 0.3212143522840658,
-      "Separação Silábica": 0.738301466926254,
-      "Vogais": 0.9180835505207483,
-      "Sílabas": 0.2645272117787285,
-      "Vocabulário": 0.8968743445117506,
-      "Artigos Definidos": 0.9608558806857361,
-      "Consoantes": 0.643262828147267,
-      "Gramática - Género": 0.7160007833108644,
-      "Pontuação": 0.00008941622736347021,
-      "Leitura e Compreensão": 0.15607304159893975,
-      "Identificação de sinónimos": 0.7732574800131373,
-      "Compreensão de frases simples": 0.5987433769170929,
-      "Vogais e Consoantes": 0.7082953350071974
-    },
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Na frase 'Os pássaros cantam no jardim', qual é o sujeito?",
-          "options": [
-            "Os pássaros",
-            "cantam",
-            "no jardim",
-            "jardim"
-          ],
-          "correctAnswer": "Os pássaros",
-          "topic": "Gramática (Sujeito da frase)"
-        },
-        {
-          "question": "Completa a palavra que falta para terminar a frase corretamente: A ______ é onde aprendemos a ler e a escrever.",
-          "options": [
-            "escola",
-            "rua",
-            "parque",
-            "praia"
-          ],
-          "correctAnswer": "escola",
-          "topic": "Escrita (Completar palavras)"
-        },
-        {
-          "question": "O que vês nesta imagem?",
-          "options": [
-            "Uma casa",
-            "Um prédio",
-            "Um carro",
-            "Uma árvore"
-          ],
-          "correctAnswer": "Uma casa",
-          "topic": "Vocabulário (Objetos)",
-          "imageUrl": "https://pixabay.com/get/geffdf5b3d3e0394a91dccee7aa6cdb38819bd907fe22e2632c56081244e067d2b878efddf5ea38d369b36719f86dda1e_640.jpg"
-        },
-        {
-          "question": "Qual é o plural da palavra 'flor'?",
-          "options": [
-            "flores",
-            "flor",
-            "florzinha",
-            "floresta"
-          ],
-          "correctAnswer": "flores",
-          "topic": "Gramática (Plural de nomes)"
-        },
-        {
-          "question": "Ordena as palavras para formar uma frase correta: 'come / O / rato / queijo'.",
-          "options": [
-            "O rato come queijo.",
-            "Come o rato queijo.",
-            "Queijo o rato come.",
-            "Rato o queijo come."
-          ],
-          "correctAnswer": "O rato come queijo.",
-          "topic": "Leitura e Escrita (Formação de frases)"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:46:51.993Z",
-    "studentId": "Sara",
-    "gradeLevel": 1,
-    "subject": "Matemática",
-    "numberOfQuestions": 5,
-    "performanceData": {
-      "Reconhecimento de Números": 0.39283318215333396,
-      "Adição até 10": 0.8819629459390441,
-      "Adição até 10 (Problemas)": 0.34800503976018726,
-      "Sequência Numérica": 0.44765398384997845,
-      "Contagem e Números": 0.17090916647983034,
-      "Adição Simples": 0.49670590760426214,
-      "Subtração Simples": 0.10012761377122614,
-      "Formas Geométricas": 0.7266466452499014,
-      "Adição": 0.3626679179504402,
-      "Subtração": 0.09910178163504746,
-      "Comparação de Números e Resolução de Problemas": 0.03128985201289214,
-      "Contagem": 0.4402847745999383,
-      "Comparação de números": 0.05454736447962416,
-      "Formas geométricas": 0.5408903319469642,
-      "Comparação de Números": 0.47376334610788073
-    },
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Observa a imagem. Quantas maçãs vês?",
-          "options": [
-            "2",
-            "3",
-            "4",
-            "5"
-          ],
-          "correctAnswer": "4",
-          "topic": "Contagem de Números",
-          "imageUrl": "https://pixabay.com/get/g58f5c5bedba514b7cef3347c819edfc39e185eb99d0bbd21f1b55469db4fceab162a8781b11d37be644e64251159d177_640.jpg"
-        },
-        {
-          "question": "Qual destes números é o maior: 7, 3, 9 ou 5?",
-          "options": [
-            "7",
-            "3",
-            "9",
-            "5"
-          ],
-          "correctAnswer": "9",
-          "topic": "Comparação de Números"
-        },
-        {
-          "question": "Qual destas formas tem 3 lados?",
-          "options": [
-            "Círculo",
-            "Quadrado",
-            "Triângulo",
-            "Retângulo"
-          ],
-          "correctAnswer": "Triângulo",
-          "topic": "Formas Geométricas"
-        },
-        {
-          "question": "Se tens 2 lápis e a tua amiga te dá mais 3, quantos lápis tens no total?",
-          "options": [
-            "4",
-            "5",
-            "6",
-            "3"
-          ],
-          "correctAnswer": "5",
-          "topic": "Adição"
-        },
-        {
-          "question": "A Maria tinha 6 balões e 2 voaram. Quantos balões a Maria tem agora?",
-          "options": [
-            "3",
-            "4",
-            "5",
-            "8"
-          ],
-          "correctAnswer": "4",
-          "topic": "Subtração"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:46:59.978Z",
-    "studentId": "Sara",
-    "gradeLevel": 1,
-    "subject": "Matemática",
-    "numberOfQuestions": 5,
-    "performanceData": {
-      "Reconhecimento de Números": 0.008242139159468476,
-      "Adição até 10": 0.6165247918644465,
-      "Adição até 10 (Problemas)": 0.789770166343422,
-      "Sequência Numérica": 0.2604740957407672,
-      "Contagem e Números": 0.24890622087715797,
-      "Adição Simples": 0.22091797254703693,
-      "Subtração Simples": 0.02343118320607429,
-      "Formas Geométricas": 0.23250425185865864,
-      "Adição": 0.598944145805095,
-      "Subtração": 0.36734282824089304,
-      "Comparação de Números e Resolução de Problemas": 0.6889664489976033,
-      "Contagem": 0.5755624162016981,
-      "Comparação de números": 0.0379382570069422,
-      "Formas geométricas": 0.5927040639024153,
-      "Comparação de Números": 0.9097241717077473
-    },
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "A Maria tem 3 maçãs e o João dá-lhe mais 2 maçãs. Com quantas maçãs fica a Maria?",
-          "options": [
-            "3",
-            "4",
-            "5",
-            "6"
-          ],
-          "correctAnswer": "5",
-          "topic": "Adição",
-          "imageUrl": "https://pixabay.com/get/gc005a4d5b97edb21ee8a7f75d2b0cb1604662fe165fbb2dfc984b06278501115313213a499004bb50f9c42eee717e616_640.jpg"
-        },
-        {
-          "question": "A Joana colheu 7 flores e deu 3 à sua mãe. Quantas flores sobraram para a Joana?",
-          "options": [
-            "3",
-            "4",
-            "5",
-            "6"
-          ],
-          "correctAnswer": "4",
-          "topic": "Subtração",
-          "imageUrl": "https://pixabay.com/get/g4470f03acb776e7b1787c79717dad9e12ccddc01b81b9b95843cda4314c4d5878ff4cea069e2885abe08baa16679e42f_640.jpg"
-        },
-        {
-          "question": "Observa a imagem. Quantos carros vês?",
-          "options": [
-            "1",
-            "2",
-            "3",
-            "4"
-          ],
-          "correctAnswer": "1",
-          "topic": "Contagem e Reconhecimento de Números",
-          "imageUrl": "https://pixabay.com/get/g017c7a042557e1d6c8b8dd57d321dd3e02efd0361f69741b4bb877bc6a2c5d65b545256f7e6b6e17a5b627c9b379772f_640.jpg"
-        },
-        {
-          "question": "Qual é o resultado de 4 + 2?",
-          "options": [
-            "5",
-            "6",
-            "7",
-            "8"
-          ],
-          "correctAnswer": "6",
-          "topic": "Adição"
-        },
-        {
-          "question": "Se tiveres 9 lápis e deres 5 ao teu amigo, quantos lápis te sobram?",
-          "options": [
-            "3",
-            "4",
-            "5",
-            "6"
-          ],
-          "correctAnswer": "4",
-          "topic": "Subtração"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:51:23.906Z",
-    "studentId": "Sara",
-    "gradeLevel": 1,
-    "subject": "Matemática",
-    "numberOfQuestions": 5,
-    "performanceData": {
-      "Reconhecimento de Números": 0.8003715010103003,
-      "Adição até 10": 0.12809841892476403,
-      "Adição até 10 (Problemas)": 0.13571164690735915,
-      "Sequência Numérica": 0.49243241381006797,
-      "Contagem e Números": 0.7259794350031035,
-      "Adição Simples": 0.019283862388757234,
-      "Subtração Simples": 0.32942830463291983,
-      "Formas Geométricas": 0.3978687773345828,
-      "Adição": 0.312458097211757,
-      "Subtração": 0.8651063401784176,
-      "Comparação de Números e Resolução de Problemas": 0.9026417087754093,
-      "Contagem": 0.8781711881380525,
-      "Comparação de números": 0.9340978753705211,
-      "Formas geométricas": 0.21396413126882297,
-      "Comparação de Números": 0.13036322254678123,
-      "Contagem de Números": 0.7979597877097002,
-      "Contagem e Reconhecimento de Números": 0.49547953336086326
-    },
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "O João tem 7 lápis e dá 3 lápis à sua irmã. Quantos lápis restam ao João?",
-          "options": [
-            "2",
-            "3",
-            "4",
-            "5"
-          ],
-          "correctAnswer": "4",
-          "topic": "Subtração até 10"
-        },
-        {
-          "question": "Qual é o número que vem logo a seguir ao 8?",
-          "options": [
-            "6",
-            "7",
-            "9",
-            "10"
-          ],
-          "correctAnswer": "9",
-          "topic": "Números até 10"
-        },
-        {
-          "question": "A Maria tem 4 bonecas e a Joana tem 3 bonecas. Quantas bonecas têm as duas juntas?",
-          "options": [
-            "5",
-            "6",
-            "7",
-            "8"
-          ],
-          "correctAnswer": "7",
-          "topic": "Adição até 10"
-        },
-        {
-          "question": "Que forma geométrica tem uma bola de futebol?",
-          "options": [
-            "Quadrado",
-            "Círculo",
-            "Triângulo",
-            "Retângulo"
-          ],
-          "correctAnswer": "Círculo",
-          "topic": "Formas Geométricas"
-        },
-        {
-          "question": "Imagina que tens 5 maçãs. Se comeres 2 maçãs, quantas maçãs te restam?",
-          "options": [
-            "1",
-            "2",
-            "3",
-            "4"
-          ],
-          "correctAnswer": "3",
-          "topic": "Subtração até 10",
-          "imageUrl": "https://pixabay.com/get/g41056a6be0e2a0a7b9f8fa2e68c999561c46ce0a3970d6068896a40f24443c5177e1325ae4def69c3a461556a6ea8218_640.jpg"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T17:51:33.911Z",
-    "studentId": "Sara",
-    "gradeLevel": 1,
-    "subject": "Matemática",
-    "numberOfQuestions": 5,
-    "performanceData": {
-      "Reconhecimento de Números": 0.12419445350373959,
-      "Adição até 10": 0.16804052932003377,
-      "Adição até 10 (Problemas)": 0.16820706415459497,
-      "Sequência Numérica": 0.8215256716442512,
-      "Contagem e Números": 0.8935850996087793,
-      "Adição Simples": 0.8922017602766434,
-      "Subtração Simples": 0.04447651457391455,
-      "Formas Geométricas": 0.9199246189197952,
-      "Adição": 0.19002542877322393,
-      "Subtração": 0.07524457355146574,
-      "Comparação de Números e Resolução de Problemas": 0.87673315573056,
-      "Contagem": 0.7829932250331817,
-      "Comparação de números": 0.6523875664013363,
-      "Formas geométricas": 0.7267148296690302,
-      "Comparação de Números": 0.5759410329555195,
-      "Contagem de Números": 0.18655348137105054,
-      "Contagem e Reconhecimento de Números": 0.3292186152954355
-    },
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Se tens 3 maçãs e a tua mãe te dá mais 2 maçãs, quantas maçãs tens no total?",
-          "options": [
-            "3",
-            "4",
-            "5",
-            "6"
-          ],
-          "correctAnswer": "5",
-          "topic": "Adição",
-          "imageUrl": "https://pixabay.com/get/gc9692773e2f23da98793f4ffd8799cac162486492e46b7195000ef9e2348a44b7fffa2c006cdb280b1d1e83ecb7d4627_640.jpg"
-        },
-        {
-          "question": "O João tem 4 lápis azuis e 3 lápis vermelhos. Quantos lápis tem o João no total?",
-          "options": [
-            "5",
-            "6",
-            "7",
-            "8"
-          ],
-          "correctAnswer": "7",
-          "topic": "Adição"
-        },
-        {
-          "question": "A Maria tinha 7 flores e deu 2 à sua amiga. Com quantas flores ficou a Maria?",
-          "options": [
-            "3",
-            "4",
-            "5",
-            "6"
-          ],
-          "correctAnswer": "5",
-          "topic": "Subtração"
-        },
-        {
-          "question": "Qual é o número que vem depois do 9?",
-          "options": [
-            "8",
-            "10",
-            "11",
-            "12"
-          ],
-          "correctAnswer": "10",
-          "topic": "Contagem e Reconhecimento de Números"
-        },
-        {
-          "question": "Qual é o próximo número na sequência: 2, 4, 6, ___?",
-          "options": [
-            "7",
-            "8",
-            "9",
-            "10"
-          ],
-          "correctAnswer": "8",
-          "topic": "Padrões"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T18:04:50.569Z",
-    "studentId": "Sara",
-    "gradeLevel": 1,
-    "subject": "Matemática",
-    "numberOfQuestions": 5,
-    "performanceData": {
-      "Reconhecimento de Números": 0.8816203984331308,
-      "Adição até 10": 0.4286860635321468,
-      "Adição até 10 (Problemas)": 0.7376445759318886,
-      "Sequência Numérica": 0.8546506220628931,
-      "Contagem e Números": 0.5490472216957627,
-      "Adição Simples": 0.5595354854479342,
-      "Subtração Simples": 0.9953016031067277,
-      "Formas Geométricas": 0.05048221215472237,
-      "Adição": 0.88308370867489,
-      "Subtração": 0.9041094824468667,
-      "Comparação de Números e Resolução de Problemas": 0.4549946119531849,
-      "Contagem": 0.699862018291918,
-      "Comparação de números": 0.7026694364374875,
-      "Formas geométricas": 0.4637760475489616,
-      "Comparação de Números": 0.567162433831627,
-      "Contagem de Números": 0.40601199887826045,
-      "Contagem e Reconhecimento de Números": 0.5651011943917446,
-      "Subtração até 10": 0.6341941752487579,
-      "Números até 10": 0.8630936062024752,
-      "Padrões": 0.9853709353633708
-    },
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Qual é o número que vem depois do 5?",
-          "options": [
-            "4",
-            "6",
-            "7",
-            "8"
-          ],
-          "correctAnswer": "6",
-          "topic": "Contagem e Sucessão"
-        },
-        {
-          "question": "Quanto é 3 + 2?",
-          "options": [
-            "4",
-            "5",
-            "6",
-            "7"
-          ],
-          "correctAnswer": "5",
-          "topic": "Adição"
-        },
-        {
-          "question": "Se tens 7 maçãs e comes 3, quantas maçãs te restam?",
-          "options": [
-            "3",
-            "4",
-            "5",
-            "6"
-          ],
-          "correctAnswer": "4",
-          "topic": "Subtração"
-        },
-        {
-          "question": "Qual destas formas tem 3 lados?",
-          "options": [
-            "Quadrado",
-            "Círculo",
-            "Triângulo",
-            "Retângulo"
-          ],
-          "correctAnswer": "Triângulo",
-          "topic": "Formas Geométricas"
-        },
-        {
-          "question": "Qual é o maior número?",
-          "options": [
-            "9",
-            "5",
-            "2",
-            "7"
-          ],
-          "correctAnswer": "9",
-          "topic": "Comparação de Números"
-        }
-      ]
-    }
-  },
-  {
-    "timestamp": "2025-09-07T18:04:51.159Z",
-    "studentId": "Sara",
-    "gradeLevel": 1,
-    "subject": "Matemática",
-    "numberOfQuestions": 5,
-    "performanceData": {
-      "Reconhecimento de Números": 0.1477148931681811,
-      "Adição até 10": 0.1871279632906777,
-      "Adição até 10 (Problemas)": 0.5749843833129005,
-      "Sequência Numérica": 0.2575631128753084,
-      "Contagem e Números": 0.6841108193548371,
-      "Adição Simples": 0.5332388162139843,
-      "Subtração Simples": 0.8640247558125664,
-      "Formas Geométricas": 0.543317660056519,
-      "Adição": 0.17582398426841572,
-      "Subtração": 0.9486400283900656,
-      "Comparação de Números e Resolução de Problemas": 0.3895952386741537,
-      "Contagem": 0.29463515898519277,
-      "Comparação de números": 0.9329676358162631,
-      "Formas geométricas": 0.5188102877788239,
-      "Comparação de Números": 0.3388808056604842,
-      "Contagem de Números": 0.8583973691268283,
-      "Contagem e Reconhecimento de Números": 0.7445991280860689,
-      "Subtração até 10": 0.3909492498288556,
-      "Números até 10": 0.2775625723979118,
-      "Padrões": 0.7641069742522104
-    },
-    "quiz": {
-      "quizQuestions": [
-        {
-          "question": "Quantos lápis vês?",
-          "options": [
-            "3",
-            "4",
-            "5",
-            "6"
-          ],
-          "correctAnswer": "5",
-          "topic": "Contagem"
-        },
-        {
-          "question": "Quanto é 3 + 2?",
-          "options": [
-            "4",
-            "5",
-            "6",
-            "7"
-          ],
-          "correctAnswer": "5",
-          "topic": "Adição"
-        },
-        {
-          "question": "Se tens 7 maçãs e comes 3, com quantas maçãs ficas?",
-          "options": [
-            "2",
-            "3",
-            "4",
-            "5"
-          ],
-          "correctAnswer": "4",
-          "topic": "Subtração"
-        },
-        {
-          "question": "Qual é o número maior: 8 ou 5?",
-          "options": [
-            "8",
-            "5",
-            "São iguais",
-            "Não sei"
-          ],
-          "correctAnswer": "8",
-          "topic": "Comparação de Números"
-        },
-        {
-          "question": "Qual destas formas é um círculo?",
-          "options": [
-            "Um quadrado",
-            "Um triângulo",
-            "Um círculo",
-            "Um retângulo"
-          ],
-          "correctAnswer": "Um círculo",
-          "topic": "Formas Geométricas"
-        }
-      ]
-    }
+    "answers": [
+      {
+        "question": "Qual é a primeira letra da palavra 'bola'?",
+        "selectedAnswer": "B",
+        "correctAnswer": "B",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Que som faz a letra 'M' na palavra 'mão'?",
+        "selectedAnswer": "P",
+        "correctAnswer": "M",
+        "isCorrect": false,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Observa a imagem. Qual destas palavras descreve o que vês?",
+        "selectedAnswer": "Sol",
+        "correctAnswer": "Sol",
+        "isCorrect": true,
+        "topic": "Vocabulário e Natureza"
+      },
+      {
+        "question": "Completa a frase: 'O gato _______ leite.'",
+        "selectedAnswer": "bebe",
+        "correctAnswer": "bebe",
+        "isCorrect": true,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "Olha para a imagem. O que é?",
+        "selectedAnswer": "Flor",
+        "correctAnswer": "Flor",
+        "isCorrect": true,
+        "topic": "Leitura e Vocabulário"
+      }
+    ],
+    "score": 4
   }
 ]

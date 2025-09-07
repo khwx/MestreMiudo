@@ -3,19 +3,78 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Book, Divide, Leaf } from 'lucide-react';
+import { Book, Divide, Leaf, Loader2 } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
+import { useEffect, useState } from 'react';
+import { getFullQuizHistory, type QuizResultEntry } from '@/app/actions';
 
 const subjects = [
-  { name: 'Português', icon: Book, color: 'text-primary', bgColor: 'bg-primary/10', slug: 'português' },
-  { name: 'Matemática', icon: Divide, color: 'text-destructive', bgColor: 'bg-destructive/10', slug: 'matemática' },
+  { name: 'Português', icon: Book, color: 'text-primary', bgColor: 'bg-primary/10', slug: 'portugues' },
+  { name: 'Matemática', icon: Divide, color: 'text-destructive', bgColor: 'bg-destructive/10', slug: 'matematica' },
   { name: 'Estudo do Meio', icon: Leaf, color: 'text-[hsl(var(--chart-2))]', bgColor: 'bg-[hsl(var(--chart-2))]/10', slug: 'estudo-do-meio' },
 ];
+
+const levelThresholds = [
+    { level: 1, points: 0 },
+    { level: 2, points: 100 },
+    { level: 3, points: 300 },
+    { level: 4, points: 600 },
+    { level: 5, points: 1000 },
+    { level: 6, points: 1500 },
+];
+
+const calculateLevel = (totalPoints: number) => {
+    let currentLevel = 1;
+    let pointsForNextLevel = 100;
+    let pointsAtCurrentLevel = 0;
+
+    for (let i = levelThresholds.length - 1; i >= 0; i--) {
+        if (totalPoints >= levelThresholds[i].points) {
+            currentLevel = levelThresholds[i].level;
+            pointsAtCurrentLevel = levelThresholds[i].points;
+            if (i < levelThresholds.length - 1) {
+                pointsForNextLevel = levelThresholds[i + 1].points;
+            } else {
+                pointsForNextLevel = Infinity; // Max level reached
+            }
+            break;
+        }
+    }
+
+    const pointsToNext = pointsForNextLevel - pointsAtCurrentLevel;
+    const progressInLevel = totalPoints - pointsAtCurrentLevel;
+    const progressPercentage = pointsToNext > 0 ? (progressInLevel / pointsToNext) * 100 : 100;
+    
+    return {
+        level: currentLevel,
+        nextLevel: currentLevel + 1,
+        progressPercentage,
+        pointsNeeded: pointsToNext - progressInLevel
+    };
+};
+
 
 export default function DashboardPage() {
   const searchParams = useSearchParams();
   const name = searchParams.get('name') || 'Amigo';
   const grade = searchParams.get('grade');
+
+  const [history, setHistory] = useState<QuizResultEntry[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (name) {
+      getFullQuizHistory(name)
+        .then(setHistory)
+        .catch(console.error)
+        .finally(() => setLoading(false));
+    } else {
+        setLoading(false);
+    }
+  }, [name]);
+  
+  const totalPoints = history.reduce((acc, entry) => acc + entry.score * 10, 0);
+  const { level, nextLevel, progressPercentage, pointsNeeded } = calculateLevel(totalPoints);
 
   return (
     <div className="space-y-8 animate-in fade-in-50">
@@ -30,12 +89,22 @@ export default function DashboardPage() {
           <CardDescription>Completa desafios para subir de nível!</CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
-          <div className="flex items-center justify-between text-sm text-muted-foreground">
-            <span>Nível 1</span>
-            <span className="font-bold">Nível 2</span>
-          </div>
-          <Progress value={30} />
-          <p className="text-sm text-muted-foreground text-center pt-2">Faltam 70 pontos para o próximo nível!</p>
+            {loading ? (
+                <div className="flex justify-center items-center p-4">
+                    <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                </div>
+            ) : (
+                <>
+                    <div className="flex items-center justify-between text-sm text-muted-foreground">
+                        <span>Nível {level}</span>
+                        <span className="font-bold">Nível {nextLevel}</span>
+                    </div>
+                    <Progress value={progressPercentage} />
+                    <p className="text-sm text-muted-foreground text-center pt-2">
+                        {pointsNeeded > 0 ? `Faltam ${pointsNeeded} pontos para o próximo nível!` : "Nível máximo alcançado!"}
+                    </p>
+                </>
+            )}
         </CardContent>
       </Card>
 
