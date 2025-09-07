@@ -13,7 +13,11 @@ export default function QuizPage({ params: paramsPromise }: { params: Promise<{ 
   
   // Capitalize subject from URL for display and API call
   const subjectParam = decodeURIComponent(params.subject);
-  const subjectTitle = subjectParam.charAt(0).toUpperCase() + subjectParam.slice(1);
+  const subjectTitle = subjectParam
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+
 
   if (!grade) {
     return (

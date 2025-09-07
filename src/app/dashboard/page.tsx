@@ -7,9 +7,9 @@ import { Book, Divide, Leaf } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 
 const subjects = [
-  { name: 'Português', icon: Book, color: 'text-primary', bgColor: 'bg-primary/10', slug: 'Português' },
-  { name: 'Matemática', icon: Divide, color: 'text-destructive', bgColor: 'bg-destructive/10', slug: 'Matemática' },
-  { name: 'Estudo do Meio', icon: Leaf, color: 'text-[hsl(var(--chart-2))]', bgColor: 'bg-[hsl(var(--chart-2))]/10', slug: 'Estudo do Meio' },
+  { name: 'Português', icon: Book, color: 'text-primary', bgColor: 'bg-primary/10', slug: 'português' },
+  { name: 'Matemática', icon: Divide, color: 'text-destructive', bgColor: 'bg-destructive/10', slug: 'matemática' },
+  { name: 'Estudo do Meio', icon: Leaf, color: 'text-[hsl(var(--chart-2))]', bgColor: 'bg-[hsl(var(--chart-2))]/10', slug: 'estudo-do-meio' },
 ];
 
 export default function DashboardPage() {
@@ -43,7 +43,7 @@ export default function DashboardPage() {
         <h3 className="text-2xl font-bold text-center mb-6">Escolhe a tua próxima missão!</h3>
         <div className="grid md:grid-cols-3 gap-6">
           {subjects.map((subject) => (
-            <Link key={subject.name} href={`/quiz/${subject.slug.toLowerCase()}?name=${name}&grade=${grade}`} passHref>
+            <Link key={subject.name} href={`/quiz/${subject.slug}?name=${name}&grade=${grade}`} passHref>
               <Card className="hover:shadow-xl hover:border-primary transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-2xl font-bold">{subject.name}</CardTitle>

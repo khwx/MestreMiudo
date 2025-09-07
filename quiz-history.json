@@ -979,5 +979,95 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2025-09-07T17:41:42.843Z",
+    "studentId": "Maria",
+    "gradeLevel": 2,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "performanceData": {
+      "Alfabeto e Sons": 0.3932196735329123,
+      "Leitura de Palavras Simples": 0.29158342014221095,
+      "Vocabulário - Animais": 0.3704344559735131,
+      "Formação de Frases Simples": 0.40718430108390313,
+      "Singular e Plural": 0.5451925683161536,
+      "Início de Palavras (Letra 'A')": 0.8080791446603837,
+      "Compreensão de Frases e Vocabulário": 0.3888794364216037,
+      "Identificação de Nomes (Animais)": 0.4716627401892952,
+      "Rimas": 0.3212143522840658,
+      "Separação Silábica": 0.738301466926254,
+      "Vogais": 0.9180835505207483,
+      "Sílabas": 0.2645272117787285,
+      "Vocabulário": 0.8968743445117506,
+      "Artigos Definidos": 0.9608558806857361,
+      "Consoantes": 0.643262828147267,
+      "Gramática - Género": 0.7160007833108644,
+      "Pontuação": 0.00008941622736347021,
+      "Leitura e Compreensão": 0.15607304159893975,
+      "Identificação de sinónimos": 0.7732574800131373,
+      "Compreensão de frases simples": 0.5987433769170929,
+      "Vogais e Consoantes": 0.7082953350071974
+    },
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Na frase 'Os pássaros cantam no jardim', qual é o sujeito?",
+          "options": [
+            "Os pássaros",
+            "cantam",
+            "no jardim",
+            "jardim"
+          ],
+          "correctAnswer": "Os pássaros",
+          "topic": "Gramática (Sujeito da frase)"
+        },
+        {
+          "question": "Completa a palavra que falta para terminar a frase corretamente: A ______ é onde aprendemos a ler e a escrever.",
+          "options": [
+            "escola",
+            "rua",
+            "parque",
+            "praia"
+          ],
+          "correctAnswer": "escola",
+          "topic": "Escrita (Completar palavras)"
+        },
+        {
+          "question": "O que vês nesta imagem?",
+          "options": [
+            "Uma casa",
+            "Um prédio",
+            "Um carro",
+            "Uma árvore"
+          ],
+          "correctAnswer": "Uma casa",
+          "topic": "Vocabulário (Objetos)",
+          "imageUrl": "https://pixabay.com/get/geffdf5b3d3e0394a91dccee7aa6cdb38819bd907fe22e2632c56081244e067d2b878efddf5ea38d369b36719f86dda1e_640.jpg"
+        },
+        {
+          "question": "Qual é o plural da palavra 'flor'?",
+          "options": [
+            "flores",
+            "flor",
+            "florzinha",
+            "floresta"
+          ],
+          "correctAnswer": "flores",
+          "topic": "Gramática (Plural de nomes)"
+        },
+        {
+          "question": "Ordena as palavras para formar uma frase correta: 'come / O / rato / queijo'.",
+          "options": [
+            "O rato come queijo.",
+            "Come o rato queijo.",
+            "Queijo o rato come.",
+            "Rato o queijo come."
+          ],
+          "correctAnswer": "O rato come queijo.",
+          "topic": "Leitura e Escrita (Formação de frases)"
+        }
+      ]
+    }
   }
 ]
