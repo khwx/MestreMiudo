@@ -107,11 +107,11 @@
     "score": 4
   },
   {
-    "timestamp": "2025-09-07T20:28:25.508Z",
     "studentId": "Sara",
     "gradeLevel": 1,
     "subject": "Português",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-07T20:28:25.508Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -211,5 +211,114 @@
       }
     ],
     "score": 4
+  },
+  {
+    "timestamp": "2025-09-07T20:42:31.619Z",
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Estudo do Meio",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual parte do corpo usamos para cheirar uma flor?",
+          "options": [
+            "Olhos",
+            "Boca",
+            "Nariz",
+            "Orelhas"
+          ],
+          "correctAnswer": "Nariz",
+          "topic": "O Corpo Humano",
+          "imageUrl": "https://pixabay.com/get/gb9434f7a066b0996d080402dee20a2e28894063558e5028c4642b57b9798657a5c896e7314296006420a0eb225bde14a_640.jpg"
+        },
+        {
+          "question": "Quem faz parte da tua família?",
+          "options": [
+            "Os teus amigos",
+            "Os teus pais e irmãos",
+            "Os teus professores",
+            "Os teus vizinhos"
+          ],
+          "correctAnswer": "Os teus pais e irmãos",
+          "topic": "A Família",
+          "imageUrl": "https://pixabay.com/get/g5ae66c68527e2580ed87cc8ec35f44de6bd0e1c9b510fcf5134b60688e0652ce975340c107621dc3d3ea5c556aba916d_640.jpg"
+        },
+        {
+          "question": "Onde aprendemos a ler e a escrever?",
+          "options": [
+            "No parque",
+            "Na praia",
+            "Na escola",
+            "No supermercado"
+          ],
+          "correctAnswer": "Na escola",
+          "topic": "A Escola",
+          "imageUrl": "https://pixabay.com/get/ge005763c7b5bd25153d66ebe9b154f1776141f6e1ed729060d754007a7ab7f20b49981438576fb5dbe49cd97924ba502_640.jpg"
+        },
+        {
+          "question": "O que encontramos na natureza?",
+          "options": [
+            "Carros",
+            "Árvores e flores",
+            "Edifícios altos",
+            "Computadores"
+          ],
+          "correctAnswer": "Árvores e flores",
+          "topic": "A Natureza",
+          "imageUrl": "https://pixabay.com/get/gc8273cfca08241d5114a4999fc8007b459741afb9ad95ca5761e5fe81c757f40b7025ef1cc38e9d0cd72a7fe574b6d56_640.jpg"
+        },
+        {
+          "question": "Qual destes animais vive na quinta?",
+          "options": [
+            "Leão",
+            "Macaco",
+            "Vaca",
+            "Pinguim"
+          ],
+          "correctAnswer": "Vaca",
+          "topic": "Os Animais",
+          "imageUrl": "https://pixabay.com/get/gfed12df1ed4808689caec9837e67cdbb45d7756669f616c7d308e52edf206b773a59a3812acdd8fbb9c5d23dcd522dc5_640.jpg"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual parte do corpo usamos para cheirar uma flor?",
+        "selectedAnswer": "Nariz",
+        "correctAnswer": "Nariz",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Quem faz parte da tua família?",
+        "selectedAnswer": "Os teus pais e irmãos",
+        "correctAnswer": "Os teus pais e irmãos",
+        "isCorrect": true,
+        "topic": "A Família"
+      },
+      {
+        "question": "Onde aprendemos a ler e a escrever?",
+        "selectedAnswer": "Na escola",
+        "correctAnswer": "Na escola",
+        "isCorrect": true,
+        "topic": "A Escola"
+      },
+      {
+        "question": "O que encontramos na natureza?",
+        "selectedAnswer": "Árvores e flores",
+        "correctAnswer": "Árvores e flores",
+        "isCorrect": true,
+        "topic": "A Natureza"
+      },
+      {
+        "question": "Qual destes animais vive na quinta?",
+        "selectedAnswer": "Vaca",
+        "correctAnswer": "Vaca",
+        "isCorrect": true,
+        "topic": "Os Animais"
+      }
+    ],
+    "score": 5
   }
 ]

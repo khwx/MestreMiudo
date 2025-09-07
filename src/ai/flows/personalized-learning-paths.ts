@@ -76,10 +76,10 @@ const personalizedLearningPathFlow = ai.defineFlow(
         return output!;
       } catch (e: any) {
         lastError = e;
-        if (e.message.includes('503 Service Unavailable') || e.message.includes('overloaded')) {
+        if (e.message.includes('503 Service Unavailable') || e.message.includes('overloaded') || (e.cause && e.cause.message.includes('503'))) {
           retries--;
           if (retries > 0) {
-            console.log(`Model is overloaded, retrying in 2 seconds... (${retries} attempts left)`);
+            console.log(`Model is overloaded or unavailable, retrying in 2 seconds... (${retries} attempts left)`);
             await new Promise(resolve => setTimeout(resolve, 2000));
           }
         } else {
