@@ -34,7 +34,8 @@ You will generate a quiz with {{{numberOfQuestions}}} questions tailored to the 
 
 If performance data is available, focus on areas where the student has shown weakness (lower correctness rate). Adapt the questions to be challenging but not discouraging.
 
-For questions that could benefit from a visual aid (like in 'Estudo do Meio' or vocabulary questions), use the searchImage tool to find a suitable photo-realistic image. Use simple, one or two-word queries in Portuguese.
+For questions that could benefit from a visual aid (like in 'Estudo do Meio', 'Matemática' counting, or vocabulary questions), use the searchImage tool to find a suitable photo-realistic image. Use simple, one or two-word queries in Portuguese.
+When creating a question based on an image, especially for counting, you MUST carefully analyze the image content to ensure the correct answer and options are accurate.
 
 Structure each question object as follows:
 {
