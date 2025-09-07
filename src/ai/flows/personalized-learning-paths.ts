@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -43,7 +44,7 @@ export type PersonalizedLearningPathInput = z.infer<
   typeof PersonalizedLearningPathInputSchema
 >;
 
-const PersonalizedLearningPathOutputSchema = z.object({
+export const PersonalizedLearningPathOutputSchema = z.object({
   quizQuestions: z.array(
     z.object({
       question: z.string().describe('The quiz question.'),
@@ -92,7 +93,7 @@ Here's the student's information:
 - Grade Level: {{{gradeLevel}}}
 - Subject: {{{subject}}}
 {{#if performanceData}}
-- Performance Data: {{{performanceData}}}
+- Performance Data: {{{JSONstringify performanceData}}}
 {{/if}}
 `,
 });

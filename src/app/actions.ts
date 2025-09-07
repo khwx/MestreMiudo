@@ -1,6 +1,7 @@
+
 "use server"
 
-import { personalizedLearningPath, type PersonalizedLearningPathOutput } from "@/ai/flows/personalized-learning-paths";
+import { personalizedLearningPath, PersonalizedLearningPathOutputSchema, type PersonalizedLearningPathOutput } from "@/ai/flows/personalized-learning-paths";
 import { z } from "zod";
 import fs from 'fs/promises';
 import path from 'path';
@@ -14,17 +15,19 @@ const QuizInputSchema = z.object({
 
 type QuizInput = z.infer<typeof QuizInputSchema>;
 
-// This will be the structure for saving the results of a quiz
-const QuizResultSchema = QuizInputSchema.extend({
-  timestamp: z.string(),
-  quiz: PersonalizedLearningPathOutput,
-  answers: z.array(z.object({
+const AnswerSchema = z.object({
     question: z.string(),
     selectedAnswer: z.string(),
     correctAnswer: z.string(),
     isCorrect: z.boolean(),
     topic: z.string(),
-  })),
+});
+
+// This will be the structure for saving the results of a quiz
+const QuizResultSchema = QuizInputSchema.extend({
+  timestamp: z.string(),
+  quiz: PersonalizedLearningPathOutputSchema,
+  answers: z.array(AnswerSchema),
   score: z.number(),
 });
 
@@ -35,8 +38,13 @@ const historyFilePath = path.join(process.cwd(), 'quiz-history.json');
 async function getQuizHistory(): Promise<QuizResultEntry[]> {
   try {
     const data = await fs.readFile(historyFilePath, 'utf-8');
-    // We can use Zod to safely parse the history file
-    return z.array(QuizResultSchema).parse(JSON.parse(data));
+    // We can use Zod to safely parse the history file, gracefully handling errors
+    const parsed = z.array(QuizResultSchema).safeParse(JSON.parse(data));
+    if (!parsed.success) {
+        console.warn('Invalid quiz history file format. Starting fresh.', parsed.error);
+        return [];
+    }
+    return parsed.data;
   } catch (error: any) {
     if (error.code === 'ENOENT') {
       return []; // File doesn't exist, return empty history
@@ -76,14 +84,8 @@ export async function getPerformanceData(studentId: string, subject: string): Pr
 }
 
 const SaveQuizInputSchema = QuizInputSchema.extend({
-  answers: z.array(z.object({
-    question: z.string(),
-    selectedAnswer: z.string(),
-    correctAnswer: z.string(),
-    isCorrect: z.boolean(),
-    topic: z.string(),
-  })),
-  quiz: PersonalizedLearningPathOutput,
+  answers: z.array(AnswerSchema),
+  quiz: PersonalizedLearningPathOutputSchema,
   score: z.number(),
 });
 
@@ -118,9 +120,7 @@ export async function generateQuiz(input: QuizInput): Promise<PersonalizedLearni
   const performanceData = await getPerformanceData(validatedInput.studentId, validatedInput.subject);
   
   const quizOutput = await personalizedLearningPath({ ...validatedInput, performanceData });
-  
-  // Quiz is now saved after it's completed, not when it's generated.
-  
+    
   return quizOutput;
 }
 
