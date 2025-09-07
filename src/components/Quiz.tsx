@@ -10,6 +10,7 @@ import { Loader2, Volume2, Star, Trophy, RefreshCw } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from "@/hooks/use-toast";
 import { useRouter, useSearchParams } from 'next/navigation';
+import Image from 'next/image';
 
 type QuizProps = {
   studentId: string;
@@ -156,6 +157,17 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
         <p className="text-sm text-muted-foreground text-center mt-2">Pergunta {currentQuestionIndex + 1} de {quizData.quizQuestions.length}</p>
       </CardHeader>
       <CardContent className="space-y-6">
+        {currentQuestion.imageUrl && (
+            <div className="relative w-full aspect-video rounded-lg overflow-hidden border">
+                <Image 
+                    src={currentQuestion.imageUrl} 
+                    alt={currentQuestion.question}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+            </div>
+        )}
         <div className="flex items-center gap-4 p-4 bg-muted/50 rounded-lg">
           <p className="text-2xl font-semibold flex-1">{currentQuestion.question}</p>
           <Button variant="outline" size="icon" onClick={handleAudioPlayback} aria-label="Ouvir a pergunta" className="shrink-0">

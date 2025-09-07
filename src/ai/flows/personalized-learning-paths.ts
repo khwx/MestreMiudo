@@ -13,6 +13,7 @@
  */
 
 import {ai} from '@/ai/genkit';
+import {searchImage} from '@/ai/tools/image-search';
 import {z} from 'genkit';
 
 const PersonalizedLearningPathInputSchema = z.object({
@@ -29,7 +30,7 @@ const PersonalizedLearningPathInputSchema = z.object({
     .record(z.string(), z.number())
     .optional()
     .describe(
-      'Optional record of the student performance on previous quizzes, where keys are topics and values are the correctness rate (0-1).'  
+      'Optional record of the student performance on previous quizzes, where keys are topics and values are the correctness rate (0-1).'
     ),
   numberOfQuestions: z
     .number()
@@ -49,6 +50,7 @@ const PersonalizedLearningPathOutputSchema = z.object({
       options: z.array(z.string()).describe('The possible answer options.'),
       correctAnswer: z.string().describe('The correct answer to the question.'),
       topic: z.string().describe('The topic of the question'),
+      imageUrl: z.string().url().optional().describe('An optional image URL for the question.'),
     })
   ).describe('An array of quiz questions tailored to the student.'),
 });
@@ -66,18 +68,22 @@ const prompt = ai.definePrompt({
   name: 'personalizedLearningPathPrompt',
   input: {schema: PersonalizedLearningPathInputSchema},
   output: {schema: PersonalizedLearningPathOutputSchema},
+  tools: [searchImage],
   prompt: `You are an expert educator specializing in creating personalized quizzes for elementary school students in Portugal. The current year is 2024.
 
 You will generate a quiz with {{{numberOfQuestions}}} questions tailored to the student's grade level ({{{gradeLevel}}}), subject ({{{subject}}}), and past performance (if available).
 
 If performance data is available, focus on areas where the student has shown weakness (lower correctness rate). Adapt the questions to be challenging but not discouraging.
 
+For questions that could benefit from a visual aid (like in 'Estudo do Meio' or vocabulary questions), use the searchImage tool to find a suitable photo-realistic image. Use simple, one or two-word queries in Portuguese.
+
 Structure each question object as follows:
 {
   "question": "The question text",
   "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
   "correctAnswer": "The correct answer",
-  "topic": "The topic of the question"
+  "topic": "The topic of the question",
+  "imageUrl": "(Optional) URL of an image from the tool"
 }
 
 Output an array of these question objects.

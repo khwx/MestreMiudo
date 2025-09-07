@@ -342,5 +342,145 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2025-09-07T17:35:20.913Z",
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "performanceData": {},
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual é a primeira letra da palavra \"bola\"?",
+          "options": [
+            "O",
+            "B",
+            "L",
+            "A"
+          ],
+          "correctAnswer": "B",
+          "topic": "Alfabeto e Sons"
+        },
+        {
+          "question": "Lê a palavra: M-A-L-A. O que é?",
+          "options": [
+            "Mão",
+            "Mala",
+            "Mato",
+            "Mesa"
+          ],
+          "correctAnswer": "Mala",
+          "topic": "Leitura de Palavras Simples"
+        },
+        {
+          "question": "Qual destes é um animal que vive na água?",
+          "options": [
+            "Gato",
+            "Pássaro",
+            "Peixe",
+            "Cão"
+          ],
+          "correctAnswer": "Peixe",
+          "topic": "Vocabulário - Animais"
+        },
+        {
+          "question": "Completa a frase: \"A menina tem uma ______ vermelha.\"",
+          "options": [
+            "nuvem",
+            "casa",
+            "mala",
+            "caneta"
+          ],
+          "correctAnswer": "caneta",
+          "topic": "Formação de Frases Simples"
+        },
+        {
+          "question": "Qual é o plural da palavra \"livro\"?",
+          "options": [
+            "livro",
+            "livros",
+            "livrinho",
+            "livras"
+          ],
+          "correctAnswer": "livros",
+          "topic": "Singular e Plural"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-09-07T17:35:28.385Z",
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "performanceData": {
+      "Alfabeto e Sons": 0.6197158122374771,
+      "Leitura de Palavras Simples": 0.07590607843214547,
+      "Vocabulário - Animais": 0.11717230836144221,
+      "Formação de Frases Simples": 0.8823147934434921,
+      "Singular e Plural": 0.3992055179884053
+    },
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual destas palavras começa com a letra 'A'?",
+          "options": [
+            "Bola",
+            "Árvore",
+            "Cão",
+            "Dedo"
+          ],
+          "correctAnswer": "Árvore",
+          "topic": "Início de Palavras (Letra 'A')"
+        },
+        {
+          "question": "Escolhe a palavra que completa a frase: 'Eu gosto de comer uma ____ deliciosa'.",
+          "options": [
+            "cadeira",
+            "flor",
+            "maçã",
+            "mesa"
+          ],
+          "correctAnswer": "maçã",
+          "topic": "Compreensão de Frases e Vocabulário"
+        },
+        {
+          "question": "Qual destas palavras é um animal?",
+          "options": [
+            "Carro",
+            "Sol",
+            "Gato",
+            "Casa"
+          ],
+          "correctAnswer": "Gato",
+          "topic": "Identificação de Nomes (Animais)"
+        },
+        {
+          "question": "Qual palavra rima com 'pão'?",
+          "options": [
+            "Mão",
+            "Pé",
+            "Céu",
+            "Mar"
+          ],
+          "correctAnswer": "Mão",
+          "topic": "Rimas"
+        },
+        {
+          "question": "Quantas sílabas tem a palavra 'casa'?",
+          "options": [
+            "Uma",
+            "Duas",
+            "Três",
+            "Quatro"
+          ],
+          "correctAnswer": "Duas",
+          "topic": "Separação Silábica"
+        }
+      ]
+    }
   }
 ]
