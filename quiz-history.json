@@ -266,5 +266,81 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2025-09-07T17:19:09.807Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "performanceData": {
+      "Reconhecimento de Números": 0.8585525397576546,
+      "Adição até 10": 0.20532039849925954,
+      "Adição até 10 (Problemas)": 0.7811846922817709,
+      "Sequência Numérica": 0.4553638137414884,
+      "Contagem e Números": 0.62035538891863,
+      "Adição Simples": 0.8466706512885496,
+      "Subtração Simples": 0.046517050636549984,
+      "Formas Geométricas": 0.8817202089992491
+    },
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Quantos balões vês? (Considera que há 7 balões)",
+          "options": [
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "correctAnswer": "7",
+          "topic": "Contagem e Números"
+        },
+        {
+          "question": "Se tens 4 lápis e o teu amigo te dá mais 3, com quantos lápis ficas no total?",
+          "options": [
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "correctAnswer": "7",
+          "topic": "Adição"
+        },
+        {
+          "question": "A Maria tinha 8 biscoitos e comeu 2. Quantos biscoitos sobraram?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "6",
+          "topic": "Subtração"
+        },
+        {
+          "question": "Qual destas formas tem quatro lados iguais?",
+          "options": [
+            "Um círculo",
+            "Um triângulo",
+            "Um quadrado",
+            "Um retângulo"
+          ],
+          "correctAnswer": "Um quadrado",
+          "topic": "Formas Geométricas"
+        },
+        {
+          "question": "O Pedro tem 6 bolachas e a Inês tem 4 bolachas. Quem tem mais bolachas?",
+          "options": [
+            "O Pedro",
+            "A Inês",
+            "Ambos têm o mesmo número",
+            "Nenhum"
+          ],
+          "correctAnswer": "O Pedro",
+          "topic": "Comparação de Números e Resolução de Problemas"
+        }
+      ]
+    }
   }
 ]
