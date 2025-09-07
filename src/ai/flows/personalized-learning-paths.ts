@@ -103,8 +103,30 @@ const personalizedLearningPathFlow = ai.defineFlow(
     inputSchema: PersonalizedLearningPathInputSchema,
     outputSchema: PersonalizedLearningPathOutputSchema,
   },
-  async input => {
-    const {output} = await prompt(input);
-    return output!;
+  async (input, streamingCallback) => {
+    let retries = 3;
+    let lastError: any = null;
+
+    while (retries > 0) {
+      try {
+        const {output} = await prompt(input);
+        return output!;
+      } catch (e: any) {
+        lastError = e;
+        if (e.message.includes('503 Service Unavailable') || e.message.includes('overloaded')) {
+          retries--;
+          if (retries > 0) {
+            console.log(`Model is overloaded, retrying in 2 seconds... (${retries} attempts left)`);
+            await new Promise(resolve => setTimeout(resolve, 2000));
+          }
+        } else {
+          // It's a different error, so we don't retry.
+          throw e;
+        }
+      }
+    }
+    // If all retries fail, throw the last error.
+    console.error("All retries failed to generate quiz.");
+    throw lastError;
   }
 );

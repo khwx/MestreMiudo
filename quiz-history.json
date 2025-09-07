@@ -482,5 +482,84 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2025-09-07T17:37:24.931Z",
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "performanceData": {
+      "Alfabeto e Sons": 0.31319278721898125,
+      "Leitura de Palavras Simples": 0.7326706209961236,
+      "Vocabulário - Animais": 0.6515365007622274,
+      "Formação de Frases Simples": 0.4741232861915674,
+      "Singular e Plural": 0.16319334061036583,
+      "Início de Palavras (Letra 'A')": 0.16815751589339478,
+      "Compreensão de Frases e Vocabulário": 0.7063675774840525,
+      "Identificação de Nomes (Animais)": 0.6874214634923008,
+      "Rimas": 0.38237744327700973,
+      "Separação Silábica": 0.8380574102396827
+    },
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual destas é uma vogal?",
+          "options": [
+            "B",
+            "M",
+            "A",
+            "T"
+          ],
+          "correctAnswer": "A",
+          "topic": "Vogais"
+        },
+        {
+          "question": "Qual sílaba falta para formar a palavra \"BOLA\"? B_ _ A",
+          "options": [
+            "LA",
+            "MA",
+            "SA",
+            "PA"
+          ],
+          "correctAnswer": "LA",
+          "topic": "Sílabas"
+        },
+        {
+          "question": "O que vês na imagem?",
+          "options": [
+            "Lua",
+            "Sol",
+            "Estrela",
+            "Nuvem"
+          ],
+          "correctAnswer": "Sol",
+          "topic": "Vocabulário",
+          "imageUrl": "https://pixabay.com/get/g6cbade9d0476285b42a365400f955eb0531aa4f953975893fab109c4c1e63d1f7ffb72e844333c1b4bc60bc15cd70e6d_640.jpg"
+        },
+        {
+          "question": "Qual a palavra correta para preencher a frase: ___ casa é bonita.",
+          "options": [
+            "O",
+            "A",
+            "Os",
+            "As"
+          ],
+          "correctAnswer": "A",
+          "topic": "Artigos Definidos"
+        },
+        {
+          "question": "Qual destas é uma consoante?",
+          "options": [
+            "E",
+            "I",
+            "U",
+            "P"
+          ],
+          "correctAnswer": "P",
+          "topic": "Consoantes"
+        }
+      ]
+    }
   }
 ]
