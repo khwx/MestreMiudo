@@ -1,17 +1,11 @@
 
 "use server"
 
-import { personalizedLearningPath, PersonalizedLearningPathOutputSchema, type PersonalizedLearningPathOutput } from "@/ai/flows/personalized-learning-paths";
+import { personalizedLearningPath } from "@/ai/flows/personalized-learning-paths";
+import { PersonalizedLearningPathOutputSchema, type PersonalizedLearningPathOutput, QuizInputSchema } from "@/ai/schemas";
 import { z } from "zod";
 import fs from 'fs/promises';
 import path from 'path';
-
-const QuizInputSchema = z.object({
-  studentId: z.string(),
-  gradeLevel: z.coerce.number().min(1).max(4),
-  subject: z.enum(['Português', 'Matemática', 'Estudo do Meio']),
-  numberOfQuestions: z.number().min(5).max(20).default(5),
-});
 
 type QuizInput = z.infer<typeof QuizInputSchema>;
 

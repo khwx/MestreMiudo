@@ -9,55 +9,13 @@
  * and challenges focused on areas where the child needs the most help.
  *
  * - personalizedLearningPath - A function that generates a personalized learning path.
- * - PersonalizedLearningPathInput - The input type for the personalizedLearningPath function.
- * - PersonalizedLearningPathOutput - The return type for the personalizedLearningPath function.
  */
 
 import {ai} from '@/ai/genkit';
 import {searchImage} from '@/ai/tools/image-search';
-import {z} from 'genkit';
+import type { PersonalizedLearningPathInput, PersonalizedLearningPathOutput } from '@/ai/schemas';
+import { PersonalizedLearningPathInputSchema, PersonalizedLearningPathOutputSchema } from '@/ai/schemas';
 
-const PersonalizedLearningPathInputSchema = z.object({
-  studentId: z.string().describe('Unique identifier for the student.'),
-  gradeLevel: z
-    .number()
-    .min(1)
-    .max(4)
-    .describe('The grade level of the student (1-4).'),
-  subject: z
-    .enum(['Português', 'Matemática', 'Estudo do Meio'])
-    .describe('The subject for which to generate the learning path.'),
-  performanceData: z
-    .record(z.string(), z.number())
-    .optional()
-    .describe(
-      'Optional record of the student performance on previous quizzes, where keys are topics and values are the correctness rate (0-1).'
-    ),
-  numberOfQuestions: z
-    .number()
-    .min(5)
-    .max(20)
-    .default(10)
-    .describe('The number of questions for which to generate the learning path.'),
-});
-export type PersonalizedLearningPathInput = z.infer<
-  typeof PersonalizedLearningPathInputSchema
->;
-
-export const PersonalizedLearningPathOutputSchema = z.object({
-  quizQuestions: z.array(
-    z.object({
-      question: z.string().describe('The quiz question.'),
-      options: z.array(z.string()).describe('The possible answer options.'),
-      correctAnswer: z.string().describe('The correct answer to the question.'),
-      topic: z.string().describe('The topic of the question'),
-      imageUrl: z.string().url().optional().describe('An optional image URL for the question.'),
-    })
-  ).describe('An array of quiz questions tailored to the student.'),
-});
-export type PersonalizedLearningPathOutput = z.infer<
-  typeof PersonalizedLearningPathOutputSchema
->;
 
 export async function personalizedLearningPath(
   input: PersonalizedLearningPathInput

@@ -1,8 +1,9 @@
+
 "use client";
 
 import { useState, useEffect, useCallback } from 'react';
 import { generateQuiz, saveQuizResults } from '@/app/actions';
-import type { PersonalizedLearningPathOutput } from '@/ai/flows/personalized-learning-paths';
+import type { PersonalizedLearningPathOutput } from '@/ai/schemas';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
