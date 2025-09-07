@@ -4,6 +4,15 @@
 import { useSearchParams } from 'next/navigation';
 import { Quiz } from '@/components/Quiz';
 import { use } from 'react';
+import { notFound } from 'next/navigation';
+
+const subjectMap = {
+  'portugues': 'Português',
+  'matematica': 'Matemática',
+  'estudo-do-meio': 'Estudo do Meio',
+} as const;
+
+type SubjectSlug = keyof typeof subjectMap;
 
 export default function QuizPage({ params: paramsPromise }: { params: Promise<{ subject: string }> }) {
   const searchParams = useSearchParams();
@@ -12,13 +21,8 @@ export default function QuizPage({ params: paramsPromise }: { params: Promise<{ 
   
   const params = use(paramsPromise);
   
-  // Capitalize subject from URL for display and API call
-  const subjectParam = decodeURIComponent(params.subject);
-  const subjectTitle = subjectParam
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-
+  const subjectSlug = decodeURIComponent(params.subject) as SubjectSlug;
+  const subjectTitle = subjectMap[subjectSlug];
 
   if (!grade) {
     return (
@@ -28,8 +32,7 @@ export default function QuizPage({ params: paramsPromise }: { params: Promise<{ 
     );
   }
 
-  const validSubjects = ['Português', 'Matemática', 'Estudo do Meio'];
-  if (!validSubjects.includes(subjectTitle)) {
+  if (!subjectTitle) {
       return (
       <div className="flex items-center justify-center h-full text-center">
         <p className="text-destructive text-lg">Erro: Disciplina inválida.</p>
@@ -42,7 +45,7 @@ export default function QuizPage({ params: paramsPromise }: { params: Promise<{ 
       <Quiz
         studentId={name} // Using name as studentId for simplicity
         gradeLevel={parseInt(grade, 10)}
-        subject={subjectTitle as 'Português' | 'Matemática' | 'Estudo do Meio'}
+        subject={subjectTitle}
       />
     </div>
   );
