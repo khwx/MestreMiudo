@@ -51,7 +51,7 @@ Here's the student's information:
 - Grade Level: {{{gradeLevel}}}
 - Subject: {{{subject}}}
 {{#if performanceData}}
-- Performance Data: {{{JSONstringify performanceData}}}
+- Performance Data: {{{performanceData}}}
 {{/if}}
 `,
 });
@@ -68,7 +68,11 @@ const personalizedLearningPathFlow = ai.defineFlow(
 
     while (retries > 0) {
       try {
-        const {output} = await prompt(input);
+        const flowInput = {
+            ...input,
+            performanceData: input.performanceData ? JSON.stringify(input.performanceData, null, 2) : undefined,
+        };
+        const {output} = await prompt(flowInput);
         return output!;
       } catch (e: any) {
         lastError = e;
