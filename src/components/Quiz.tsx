@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from 'react';
-import { generateQuiz } from '@/app/actions';
+import { generateQuiz, saveQuizResults } from '@/app/actions';
 import type { PersonalizedLearningPathOutput } from '@/ai/flows/personalized-learning-paths';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -18,6 +18,14 @@ type QuizProps = {
   subject: 'Português' | 'Matemática' | 'Estudo do Meio';
 };
 
+type Answer = {
+    question: string;
+    selectedAnswer: string;
+    correctAnswer: string;
+    isCorrect: boolean;
+    topic: string;
+};
+
 export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
   const [quizData, setQuizData] = useState<PersonalizedLearningPathOutput | null>(null);
   const [loading, setLoading] = useState(true);
@@ -26,6 +34,8 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [score, setScore] = useState(0);
+  const [answers, setAnswers] = useState<Answer[]>([]);
+  
   const { toast } = useToast();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -46,6 +56,11 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
         setError('Não foi possível gerar perguntas. Tenta novamente mais tarde.');
       } else {
         setQuizData(data);
+        setCurrentQuestionIndex(0);
+        setScore(0);
+        setAnswers([]);
+        setIsAnswered(false);
+        setSelectedAnswer(null);
       }
     } catch (e) {
       setError('Não foi possível carregar o quiz. Tenta novamente.');
@@ -75,26 +90,60 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
   };
 
   const handleAnswerSelect = (option: string) => {
-    if (isAnswered) return;
+    if (isAnswered || !quizData) return;
+    
+    const currentQuestion = quizData.quizQuestions[currentQuestionIndex];
+    const isCorrect = option === currentQuestion.correctAnswer;
+    
     setSelectedAnswer(option);
     setIsAnswered(true);
-    if (option === quizData?.quizQuestions[currentQuestionIndex].correctAnswer) {
+    
+    if (isCorrect) {
       setScore(s => s + 1);
     }
+
+    setAnswers(prev => [...prev, {
+        question: currentQuestion.question,
+        selectedAnswer: option,
+        correctAnswer: currentQuestion.correctAnswer,
+        isCorrect: isCorrect,
+        topic: currentQuestion.topic,
+    }]);
   };
 
+  const finishQuiz = useCallback(async () => {
+    if (!quizData) return;
+    try {
+        await saveQuizResults({
+            studentId,
+            gradeLevel,
+            subject,
+            numberOfQuestions: quizData.quizQuestions.length,
+            quiz: quizData,
+            answers,
+            score,
+        });
+    } catch (error) {
+        console.error("Failed to save quiz results:", error);
+        toast({
+            title: "Erro ao guardar resultados",
+            description: "Não foi possível guardar os resultados deste quiz.",
+            variant: "destructive",
+        });
+    }
+  }, [quizData, studentId, gradeLevel, subject, answers, score, toast]);
+
   const handleNextQuestion = () => {
+    if (currentQuestionIndex >= (quizData?.quizQuestions.length ?? 0) - 1) {
+      // This is the last question, finish the quiz
+      finishQuiz();
+    }
     setIsAnswered(false);
     setSelectedAnswer(null);
     setCurrentQuestionIndex(i => i + 1);
   };
   
   const handleRestart = () => {
-    setQuizData(null);
-    setCurrentQuestionIndex(0);
-    setScore(0);
-    setIsAnswered(false);
-    setSelectedAnswer(null);
     fetchQuiz();
   }
 

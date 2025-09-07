@@ -1069,5 +1069,523 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2025-09-07T17:46:51.993Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "performanceData": {
+      "Reconhecimento de Números": 0.39283318215333396,
+      "Adição até 10": 0.8819629459390441,
+      "Adição até 10 (Problemas)": 0.34800503976018726,
+      "Sequência Numérica": 0.44765398384997845,
+      "Contagem e Números": 0.17090916647983034,
+      "Adição Simples": 0.49670590760426214,
+      "Subtração Simples": 0.10012761377122614,
+      "Formas Geométricas": 0.7266466452499014,
+      "Adição": 0.3626679179504402,
+      "Subtração": 0.09910178163504746,
+      "Comparação de Números e Resolução de Problemas": 0.03128985201289214,
+      "Contagem": 0.4402847745999383,
+      "Comparação de números": 0.05454736447962416,
+      "Formas geométricas": 0.5408903319469642,
+      "Comparação de Números": 0.47376334610788073
+    },
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Observa a imagem. Quantas maçãs vês?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "4",
+          "topic": "Contagem de Números",
+          "imageUrl": "https://pixabay.com/get/g58f5c5bedba514b7cef3347c819edfc39e185eb99d0bbd21f1b55469db4fceab162a8781b11d37be644e64251159d177_640.jpg"
+        },
+        {
+          "question": "Qual destes números é o maior: 7, 3, 9 ou 5?",
+          "options": [
+            "7",
+            "3",
+            "9",
+            "5"
+          ],
+          "correctAnswer": "9",
+          "topic": "Comparação de Números"
+        },
+        {
+          "question": "Qual destas formas tem 3 lados?",
+          "options": [
+            "Círculo",
+            "Quadrado",
+            "Triângulo",
+            "Retângulo"
+          ],
+          "correctAnswer": "Triângulo",
+          "topic": "Formas Geométricas"
+        },
+        {
+          "question": "Se tens 2 lápis e a tua amiga te dá mais 3, quantos lápis tens no total?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "3"
+          ],
+          "correctAnswer": "5",
+          "topic": "Adição"
+        },
+        {
+          "question": "A Maria tinha 6 balões e 2 voaram. Quantos balões a Maria tem agora?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "8"
+          ],
+          "correctAnswer": "4",
+          "topic": "Subtração"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-09-07T17:46:59.978Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "performanceData": {
+      "Reconhecimento de Números": 0.008242139159468476,
+      "Adição até 10": 0.6165247918644465,
+      "Adição até 10 (Problemas)": 0.789770166343422,
+      "Sequência Numérica": 0.2604740957407672,
+      "Contagem e Números": 0.24890622087715797,
+      "Adição Simples": 0.22091797254703693,
+      "Subtração Simples": 0.02343118320607429,
+      "Formas Geométricas": 0.23250425185865864,
+      "Adição": 0.598944145805095,
+      "Subtração": 0.36734282824089304,
+      "Comparação de Números e Resolução de Problemas": 0.6889664489976033,
+      "Contagem": 0.5755624162016981,
+      "Comparação de números": 0.0379382570069422,
+      "Formas geométricas": 0.5927040639024153,
+      "Comparação de Números": 0.9097241717077473
+    },
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "A Maria tem 3 maçãs e o João dá-lhe mais 2 maçãs. Com quantas maçãs fica a Maria?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "5",
+          "topic": "Adição",
+          "imageUrl": "https://pixabay.com/get/gc005a4d5b97edb21ee8a7f75d2b0cb1604662fe165fbb2dfc984b06278501115313213a499004bb50f9c42eee717e616_640.jpg"
+        },
+        {
+          "question": "A Joana colheu 7 flores e deu 3 à sua mãe. Quantas flores sobraram para a Joana?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "4",
+          "topic": "Subtração",
+          "imageUrl": "https://pixabay.com/get/g4470f03acb776e7b1787c79717dad9e12ccddc01b81b9b95843cda4314c4d5878ff4cea069e2885abe08baa16679e42f_640.jpg"
+        },
+        {
+          "question": "Observa a imagem. Quantos carros vês?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "1",
+          "topic": "Contagem e Reconhecimento de Números",
+          "imageUrl": "https://pixabay.com/get/g017c7a042557e1d6c8b8dd57d321dd3e02efd0361f69741b4bb877bc6a2c5d65b545256f7e6b6e17a5b627c9b379772f_640.jpg"
+        },
+        {
+          "question": "Qual é o resultado de 4 + 2?",
+          "options": [
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "correctAnswer": "6",
+          "topic": "Adição"
+        },
+        {
+          "question": "Se tiveres 9 lápis e deres 5 ao teu amigo, quantos lápis te sobram?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "4",
+          "topic": "Subtração"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-09-07T17:51:23.906Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "performanceData": {
+      "Reconhecimento de Números": 0.8003715010103003,
+      "Adição até 10": 0.12809841892476403,
+      "Adição até 10 (Problemas)": 0.13571164690735915,
+      "Sequência Numérica": 0.49243241381006797,
+      "Contagem e Números": 0.7259794350031035,
+      "Adição Simples": 0.019283862388757234,
+      "Subtração Simples": 0.32942830463291983,
+      "Formas Geométricas": 0.3978687773345828,
+      "Adição": 0.312458097211757,
+      "Subtração": 0.8651063401784176,
+      "Comparação de Números e Resolução de Problemas": 0.9026417087754093,
+      "Contagem": 0.8781711881380525,
+      "Comparação de números": 0.9340978753705211,
+      "Formas geométricas": 0.21396413126882297,
+      "Comparação de Números": 0.13036322254678123,
+      "Contagem de Números": 0.7979597877097002,
+      "Contagem e Reconhecimento de Números": 0.49547953336086326
+    },
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "O João tem 7 lápis e dá 3 lápis à sua irmã. Quantos lápis restam ao João?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "4",
+          "topic": "Subtração até 10"
+        },
+        {
+          "question": "Qual é o número que vem logo a seguir ao 8?",
+          "options": [
+            "6",
+            "7",
+            "9",
+            "10"
+          ],
+          "correctAnswer": "9",
+          "topic": "Números até 10"
+        },
+        {
+          "question": "A Maria tem 4 bonecas e a Joana tem 3 bonecas. Quantas bonecas têm as duas juntas?",
+          "options": [
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "correctAnswer": "7",
+          "topic": "Adição até 10"
+        },
+        {
+          "question": "Que forma geométrica tem uma bola de futebol?",
+          "options": [
+            "Quadrado",
+            "Círculo",
+            "Triângulo",
+            "Retângulo"
+          ],
+          "correctAnswer": "Círculo",
+          "topic": "Formas Geométricas"
+        },
+        {
+          "question": "Imagina que tens 5 maçãs. Se comeres 2 maçãs, quantas maçãs te restam?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "3",
+          "topic": "Subtração até 10",
+          "imageUrl": "https://pixabay.com/get/g41056a6be0e2a0a7b9f8fa2e68c999561c46ce0a3970d6068896a40f24443c5177e1325ae4def69c3a461556a6ea8218_640.jpg"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-09-07T17:51:33.911Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "performanceData": {
+      "Reconhecimento de Números": 0.12419445350373959,
+      "Adição até 10": 0.16804052932003377,
+      "Adição até 10 (Problemas)": 0.16820706415459497,
+      "Sequência Numérica": 0.8215256716442512,
+      "Contagem e Números": 0.8935850996087793,
+      "Adição Simples": 0.8922017602766434,
+      "Subtração Simples": 0.04447651457391455,
+      "Formas Geométricas": 0.9199246189197952,
+      "Adição": 0.19002542877322393,
+      "Subtração": 0.07524457355146574,
+      "Comparação de Números e Resolução de Problemas": 0.87673315573056,
+      "Contagem": 0.7829932250331817,
+      "Comparação de números": 0.6523875664013363,
+      "Formas geométricas": 0.7267148296690302,
+      "Comparação de Números": 0.5759410329555195,
+      "Contagem de Números": 0.18655348137105054,
+      "Contagem e Reconhecimento de Números": 0.3292186152954355
+    },
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Se tens 3 maçãs e a tua mãe te dá mais 2 maçãs, quantas maçãs tens no total?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "5",
+          "topic": "Adição",
+          "imageUrl": "https://pixabay.com/get/gc9692773e2f23da98793f4ffd8799cac162486492e46b7195000ef9e2348a44b7fffa2c006cdb280b1d1e83ecb7d4627_640.jpg"
+        },
+        {
+          "question": "O João tem 4 lápis azuis e 3 lápis vermelhos. Quantos lápis tem o João no total?",
+          "options": [
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "correctAnswer": "7",
+          "topic": "Adição"
+        },
+        {
+          "question": "A Maria tinha 7 flores e deu 2 à sua amiga. Com quantas flores ficou a Maria?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "5",
+          "topic": "Subtração"
+        },
+        {
+          "question": "Qual é o número que vem depois do 9?",
+          "options": [
+            "8",
+            "10",
+            "11",
+            "12"
+          ],
+          "correctAnswer": "10",
+          "topic": "Contagem e Reconhecimento de Números"
+        },
+        {
+          "question": "Qual é o próximo número na sequência: 2, 4, 6, ___?",
+          "options": [
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "correctAnswer": "8",
+          "topic": "Padrões"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-09-07T18:04:50.569Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "performanceData": {
+      "Reconhecimento de Números": 0.8816203984331308,
+      "Adição até 10": 0.4286860635321468,
+      "Adição até 10 (Problemas)": 0.7376445759318886,
+      "Sequência Numérica": 0.8546506220628931,
+      "Contagem e Números": 0.5490472216957627,
+      "Adição Simples": 0.5595354854479342,
+      "Subtração Simples": 0.9953016031067277,
+      "Formas Geométricas": 0.05048221215472237,
+      "Adição": 0.88308370867489,
+      "Subtração": 0.9041094824468667,
+      "Comparação de Números e Resolução de Problemas": 0.4549946119531849,
+      "Contagem": 0.699862018291918,
+      "Comparação de números": 0.7026694364374875,
+      "Formas geométricas": 0.4637760475489616,
+      "Comparação de Números": 0.567162433831627,
+      "Contagem de Números": 0.40601199887826045,
+      "Contagem e Reconhecimento de Números": 0.5651011943917446,
+      "Subtração até 10": 0.6341941752487579,
+      "Números até 10": 0.8630936062024752,
+      "Padrões": 0.9853709353633708
+    },
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual é o número que vem depois do 5?",
+          "options": [
+            "4",
+            "6",
+            "7",
+            "8"
+          ],
+          "correctAnswer": "6",
+          "topic": "Contagem e Sucessão"
+        },
+        {
+          "question": "Quanto é 3 + 2?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Adição"
+        },
+        {
+          "question": "Se tens 7 maçãs e comes 3, quantas maçãs te restam?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "4",
+          "topic": "Subtração"
+        },
+        {
+          "question": "Qual destas formas tem 3 lados?",
+          "options": [
+            "Quadrado",
+            "Círculo",
+            "Triângulo",
+            "Retângulo"
+          ],
+          "correctAnswer": "Triângulo",
+          "topic": "Formas Geométricas"
+        },
+        {
+          "question": "Qual é o maior número?",
+          "options": [
+            "9",
+            "5",
+            "2",
+            "7"
+          ],
+          "correctAnswer": "9",
+          "topic": "Comparação de Números"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-09-07T18:04:51.159Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "performanceData": {
+      "Reconhecimento de Números": 0.1477148931681811,
+      "Adição até 10": 0.1871279632906777,
+      "Adição até 10 (Problemas)": 0.5749843833129005,
+      "Sequência Numérica": 0.2575631128753084,
+      "Contagem e Números": 0.6841108193548371,
+      "Adição Simples": 0.5332388162139843,
+      "Subtração Simples": 0.8640247558125664,
+      "Formas Geométricas": 0.543317660056519,
+      "Adição": 0.17582398426841572,
+      "Subtração": 0.9486400283900656,
+      "Comparação de Números e Resolução de Problemas": 0.3895952386741537,
+      "Contagem": 0.29463515898519277,
+      "Comparação de números": 0.9329676358162631,
+      "Formas geométricas": 0.5188102877788239,
+      "Comparação de Números": 0.3388808056604842,
+      "Contagem de Números": 0.8583973691268283,
+      "Contagem e Reconhecimento de Números": 0.7445991280860689,
+      "Subtração até 10": 0.3909492498288556,
+      "Números até 10": 0.2775625723979118,
+      "Padrões": 0.7641069742522104
+    },
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Quantos lápis vês?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "5",
+          "topic": "Contagem"
+        },
+        {
+          "question": "Quanto é 3 + 2?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Adição"
+        },
+        {
+          "question": "Se tens 7 maçãs e comes 3, com quantas maçãs ficas?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "4",
+          "topic": "Subtração"
+        },
+        {
+          "question": "Qual é o número maior: 8 ou 5?",
+          "options": [
+            "8",
+            "5",
+            "São iguais",
+            "Não sei"
+          ],
+          "correctAnswer": "8",
+          "topic": "Comparação de Números"
+        },
+        {
+          "question": "Qual destas formas é um círculo?",
+          "options": [
+            "Um quadrado",
+            "Um triângulo",
+            "Um círculo",
+            "Um retângulo"
+          ],
+          "correctAnswer": "Um círculo",
+          "topic": "Formas Geométricas"
+        }
+      ]
+    }
   }
 ]

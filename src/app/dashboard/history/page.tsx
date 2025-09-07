@@ -3,12 +3,13 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { getFullQuizHistory, type QuizEntry } from '@/app/actions';
+import { getFullQuizHistory, type QuizResultEntry } from '@/app/actions';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Book, Divide, Leaf, Loader2 } from 'lucide-react';
+import { Book, Divide, Leaf, Loader2, Check, X } from 'lucide-react';
 import { format } from 'date-fns';
 import { pt } from 'date-fns/locale';
+import { cn } from '@/lib/utils';
 
 const subjectIcons = {
     'Português': <Book className="h-5 w-5" />,
@@ -19,7 +20,7 @@ const subjectIcons = {
 export default function HistoryPage() {
     const searchParams = useSearchParams();
     const name = searchParams.get('name');
-    const [history, setHistory] = useState<QuizEntry[]>([]);
+    const [history, setHistory] = useState<QuizResultEntry[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -70,17 +71,28 @@ export default function HistoryPage() {
                                             </div>
                                         </div>
                                         <div className="text-right">
-                                            <p className="text-lg">{entry.quiz.quizQuestions.length} Perguntas</p>
+                                            <p className="text-lg font-bold">Pontuação: {entry.score}/{entry.numberOfQuestions}</p>
                                         </div>
                                     </div>
                                 </AccordionTrigger>
                                 <AccordionContent className="p-6 pt-0">
+                                    <h4 className="font-bold mb-2">Respostas:</h4>
                                     <ul className="space-y-4">
-                                        {entry.quiz.quizQuestions.map((q, qIndex) => (
-                                            <li key={qIndex} className="p-3 bg-muted/50 rounded-lg">
-                                                <p className="font-semibold">{qIndex + 1}. {q.question}</p>
-                                                <p className="text-sm"><strong>Tópico:</strong> {q.topic}</p>
-                                                <p className="text-sm text-green-600"><strong>Resposta Correta:</strong> {q.correctAnswer}</p>
+                                        {entry.answers.map((answer, qIndex) => (
+                                            <li key={qIndex} className={cn("p-3 rounded-lg", answer.isCorrect ? 'bg-green-100' : 'bg-red-100')}>
+                                                <p className="font-semibold">{qIndex + 1}. {answer.question}</p>
+                                                <div className="flex items-center gap-2 mt-1">
+                                                    {answer.isCorrect ? <Check className="h-4 w-4 text-green-700" /> : <X className="h-4 w-4 text-red-700" />}
+                                                    <p className={cn("text-sm", answer.isCorrect ? 'text-green-800' : 'text-red-800')}>
+                                                        A tua resposta: {answer.selectedAnswer}
+                                                    </p>
+                                                </div>
+                                                {!answer.isCorrect && (
+                                                     <p className="text-sm text-gray-600 mt-1">
+                                                        Resposta Correta: {answer.correctAnswer}
+                                                    </p>
+                                                )}
+                                                 <p className="text-xs text-gray-500 mt-1">Tópico: {answer.topic}</p>
                                             </li>
                                         ))}
                                     </ul>
