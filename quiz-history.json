@@ -561,5 +561,169 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2025-09-07T17:37:59.409Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "performanceData": {
+      "Reconhecimento de Números": 0.047675740779604014,
+      "Adição até 10": 0.0060925621405172325,
+      "Adição até 10 (Problemas)": 0.3170328571325485,
+      "Sequência Numérica": 0.20699684524844053,
+      "Contagem e Números": 0.1829474321588691,
+      "Adição Simples": 0.8290332323296272,
+      "Subtração Simples": 0.9120266528712506,
+      "Formas Geométricas": 0.5474900833382907,
+      "Adição": 0.5706345994402833,
+      "Subtração": 0.5169662956227263,
+      "Comparação de Números e Resolução de Problemas": 0.6223403853714784
+    },
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Quantos dedos tens em uma mão?",
+          "options": [
+            "Três",
+            "Quatro",
+            "Cinco",
+            "Seis"
+          ],
+          "correctAnswer": "Cinco",
+          "topic": "Contagem"
+        },
+        {
+          "question": "Se tens 2 maçãs e recebes mais 3, quantas maçãs tens no total?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "5",
+          "topic": "Adição"
+        },
+        {
+          "question": "Tinhas 5 balões e 2 voaram. Quantos balões te restam?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "3",
+          "topic": "Subtração"
+        },
+        {
+          "question": "Qual é o número maior: 7 ou 4?",
+          "options": [
+            "4",
+            "7",
+            "São iguais",
+            "Nenhum"
+          ],
+          "correctAnswer": "7",
+          "topic": "Comparação de números"
+        },
+        {
+          "question": "Que forma tem uma bola de futebol?",
+          "options": [
+            "Quadrado",
+            "Triângulo",
+            "Círculo",
+            "Retângulo"
+          ],
+          "correctAnswer": "Círculo",
+          "topic": "Formas geométricas"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-09-07T17:38:13.148Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "performanceData": {
+      "Reconhecimento de Números": 0.47577308499693816,
+      "Adição até 10": 0.17067227111549,
+      "Adição até 10 (Problemas)": 0.23879926622013903,
+      "Sequência Numérica": 0.835001917240302,
+      "Contagem e Números": 0.0745614748254646,
+      "Adição Simples": 0.3198141562969439,
+      "Subtração Simples": 0.6588240761224318,
+      "Formas Geométricas": 0.5696112404795082,
+      "Adição": 0.6718885402556558,
+      "Subtração": 0.676020689711138,
+      "Comparação de Números e Resolução de Problemas": 0.8877458434073828,
+      "Contagem": 0.5067151561175676,
+      "Comparação de números": 0.9323993382473794,
+      "Formas geométricas": 0.3596761464617042
+    },
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Observa a imagem. Se tiveres 3 maçãs e te derem mais 2 maçãs, com quantas maçãs ficas no total?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Adição",
+          "imageUrl": "https://pixabay.com/get/g87328a163cb0a483c98fb21d47e069bb9cc27c438fcc60582ecd56404a26748b7dd5cdd6e7280e9a6a43ccc084276f02_640.jpg"
+        },
+        {
+          "question": "Se tens 8 rebuçados e dás 3 ao teu amigo, quantos rebuçados te sobram?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Subtração"
+        },
+        {
+          "question": "Qual é o maior número: 12, 7, 15, ou 9?",
+          "options": [
+            "7",
+            "9",
+            "12",
+            "15"
+          ],
+          "correctAnswer": "15",
+          "topic": "Comparação de Números"
+        },
+        {
+          "question": "Olha para a imagem. Se vires 4 patos e depois aparecerem mais 3 patos, quantos patos vês no total?",
+          "options": [
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "correctAnswer": "7",
+          "topic": "Adição",
+          "imageUrl": "https://pixabay.com/get/g3b56b7bdffe519ae21bb36af60e75815c18fd4f8fc67df6435ba2c56fb29bf4bec50e9da38d61c7dbd4b3a4d36530c24_640.jpg"
+        },
+        {
+          "question": "Na imagem, quantas nuvens consegues contar?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Contagem",
+          "imageUrl": "https://pixabay.com/get/g88d51936448da55ba59cd555dd040ec367b25b4bf623a0eab5f381a76c13b502bc73e17fd18dba8a72611572ccba1eb2_640.jpg"
+        }
+      ]
+    }
   }
 ]
