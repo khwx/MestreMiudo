@@ -74,10 +74,11 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
   useEffect(() => {
     fetchQuiz();
   }, [fetchQuiz]);
-
-  const handleAudioPlayback = () => {
-    if (quizData && 'speechSynthesis' in window) {
-      const text = quizData.quizQuestions[currentQuestionIndex].question;
+  
+  const speakText = (text: string) => {
+    if ('speechSynthesis' in window) {
+      // Cancel any ongoing speech
+      window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'pt-PT';
       window.speechSynthesis.speak(utterance);
@@ -87,6 +88,13 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
         description: "O teu navegador não suporta a leitura de áudio.",
         variant: "destructive"
       });
+    }
+  }
+
+  const handleAudioPlayback = () => {
+    if (quizData) {
+      const text = quizData.quizQuestions[currentQuestionIndex].question;
+      speakText(text);
     }
   };
 
@@ -230,21 +238,35 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
             const isSelected = option === selectedAnswer;
             
             return (
-              <Button
-                key={i}
-                variant="outline"
-                className={cn(
-                  'min-h-[4rem] py-4 text-lg whitespace-normal justify-start text-left',
-                  isAnswered && isCorrect && 'border-2 border-[hsl(var(--chart-2))] bg-[hsl(var(--chart-2))]/20 text-foreground',
-                  isAnswered && isSelected && !isCorrect && 'border-2 border-destructive bg-destructive/20 text-foreground',
-                  isAnswered && !isSelected && 'opacity-60'
-                )}
-                onClick={() => handleAnswerSelect(option)}
-                disabled={isAnswered}
-              >
-                <span className="mr-4 font-bold text-primary">{String.fromCharCode(65 + i)}.</span>
-                <span>{option}</span>
-              </Button>
+              <div key={i} className="flex gap-2">
+                <Button
+                  variant="outline"
+                  className={cn(
+                    'min-h-[4rem] py-4 text-lg whitespace-normal justify-start text-left flex-grow',
+                    isAnswered && isCorrect && 'border-2 border-[hsl(var(--chart-2))] bg-[hsl(var(--chart-2))]/20 text-foreground',
+                    isAnswered && isSelected && !isCorrect && 'border-2 border-destructive bg-destructive/20 text-foreground',
+                    isAnswered && !isSelected && 'opacity-60'
+                  )}
+                  onClick={() => handleAnswerSelect(option)}
+                  disabled={isAnswered}
+                >
+                  <span className="mr-4 font-bold text-primary">{String.fromCharCode(65 + i)}.</span>
+                  <span className="flex-1">{option}</span>
+                </Button>
+                <Button 
+                    variant="outline" 
+                    size="icon" 
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        speakText(option);
+                    }} 
+                    aria-label={`Ouvir a resposta ${option}`} 
+                    className="shrink-0 min-h-[4rem] w-14"
+                    disabled={isAnswered}
+                >
+                    <Volume2 className="h-6 w-6 text-primary" />
+                </Button>
+              </div>
             );
           })}
         </div>
@@ -259,3 +281,5 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
     </Card>
   );
 }
+
+    
