@@ -58,7 +58,7 @@ export function TicTacToe() {
                 handleClick(move);
             }
         }
-      }, 1000); // Wait 1 second before computer moves
+      }, 200); // Reduced wait time for computer move
 
       return () => clearTimeout(computerMoveTimeout);
     }
