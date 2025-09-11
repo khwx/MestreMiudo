@@ -4,28 +4,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
-import { Award, RotateCw, Skull, Lightbulb } from 'lucide-react';
-
-const wordList = [
-    { word: "CASA", hint: "Onde moramos" },
-    { word: "BOLA", hint: "Objeto redondo para brincar" },
-    { word: "GATO", hint: "Animal que mia" },
-    { word: "MACACO", hint: "Gosta de bananas" },
-    { word: "ELEFANTE", hint: "Tem uma tromba grande" },
-    { word: "LIVRO", hint: "Tem páginas e histórias" },
-    { word: "ESCOLA", hint: "Onde aprendemos a ler" },
-    { word: "FLOR", hint: "Planta bonita e cheirosa" },
-    { word: "SOL", hint: "A estrela que nos aquece" },
-    { word: "LUA", hint: "Vemos no céu à noite" },
-    { word: "ESTRELA", hint: "Brilha no céu noturno" },
-    { word: "ARVORE", hint: "Dá-nos sombra e frutos" },
-    { word: "RIO", hint: "Água corrente que vai para o mar" },
-    { word: "MAR", hint: "Grande e com água salgada" },
-    { word: "PEIXE", hint: "Animal que vive na água" },
-    { word: "LEAO", hint: "O rei da selva" },
-];
-
-const getRandomWord = () => wordList[Math.floor(Math.random() * wordList.length)];
+import { Award, RotateCw, Skull, Lightbulb, Loader2 } from 'lucide-react';
+import { generateWord } from '@/ai/flows/word-generation';
+import { useToast } from "@/hooks/use-toast";
 
 const HangmanDrawing = ({ numberOfGuesses }: { numberOfGuesses: number }) => {
     const bodyParts = [
@@ -81,30 +62,67 @@ const Keyboard = ({ activeLetters, inactiveLetters, onSelect, disabled }: {
     )
 }
 
+const normalize = (str: string) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
 export function HangmanGame() {
-    const [wordData, setWordData] = useState(getRandomWord);
+    const [wordData, setWordData] = useState<{ word: string; hint: string } | null>(null);
     const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
     const [showHint, setShowHint] = useState(false);
-    
-    const wordToGuess = wordData.word;
-    const hint = wordData.hint;
+    const [loading, setLoading] = useState(true);
+    const { toast } = useToast();
 
-    const incorrectLetters = guessedLetters.filter(letter => !wordToGuess.includes(letter));
-    const correctLetters = guessedLetters.filter(letter => wordToGuess.includes(letter));
+    const fetchWord = useCallback(async () => {
+        setLoading(true);
+        setGuessedLetters([]);
+        setShowHint(false);
+        try {
+            const newWordData = await generateWord({ category: "Animais", difficulty: "Fácil" });
+            setWordData({
+                word: newWordData.word.toUpperCase(),
+                hint: newWordData.hint
+            });
+        } catch (error) {
+            console.error("Failed to generate word:", error);
+            toast({
+                title: "Erro ao gerar palavra",
+                description: "Não foi possível obter uma nova palavra. Tente novamente.",
+                variant: "destructive"
+            });
+            // Fallback to a default word in case of API failure
+            setWordData({ word: "MESTRE", hint: "Quem te ensina a jogar" });
+        } finally {
+            setLoading(false);
+        }
+    }, [toast]);
+    
+    useEffect(() => {
+        fetchWord();
+    }, [fetchWord]);
+    
+    const wordToGuess = wordData?.word || "";
+    const hint = wordData?.hint || "";
+    
+    const normalizedWordToGuess = normalize(wordToGuess);
+
+    const incorrectLetters = guessedLetters.filter(letter => !normalizedWordToGuess.includes(letter));
+    const correctLetters = guessedLetters.filter(letter => normalizedWordToGuess.includes(letter));
 
     const isLoser = incorrectLetters.length >= 6;
-    const isWinner = wordToGuess.split("").every(letter => guessedLetters.includes(letter));
+    const isWinner = wordToGuess.split("").every(letter => guessedLetters.includes(normalize(letter)));
     
     const addGuessedLetter = useCallback((letter: string) => {
         if (guessedLetters.includes(letter) || isWinner || isLoser) return;
         setGuessedLetters(currentLetters => [...currentLetters, letter]);
     }, [guessedLetters, isWinner, isLoser]);
     
-    const handleRestart = () => {
-        setGuessedLetters([]);
-        setWordData(getRandomWord());
-        setShowHint(false);
-    };
+    if (loading) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
+                <Loader2 className="h-16 w-16 animate-spin text-primary" />
+                <p className="text-muted-foreground">A pensar numa palavra nova...</p>
+            </div>
+        );
+    }
 
     return (
         <div className="flex flex-col items-center gap-8 max-w-lg mx-auto p-4 animate-in fade-in-50">
@@ -113,7 +131,7 @@ export function HangmanGame() {
                     <Award className="h-20 w-20 text-accent mx-auto" />
                     <h2 className="text-3xl font-bold">Parabéns, ganhaste!</h2>
                     <p className="text-xl text-muted-foreground">A palavra era: <span className="font-bold text-primary">{wordToGuess}</span></p>
-                    <Button onClick={handleRestart} size="lg" className="animate-bounce">
+                    <Button onClick={fetchWord} size="lg" className="animate-bounce">
                         <RotateCw className="mr-2 h-5 w-5" />
                         Jogar Novamente
                     </Button>
@@ -124,7 +142,7 @@ export function HangmanGame() {
                     <Skull className="h-20 w-20 text-destructive mx-auto" />
                     <h2 className="text-3xl font-bold">Oh não, perdeste!</h2>
                     <p className="text-xl text-muted-foreground">A palavra correta era: <span className="font-bold text-primary">{wordToGuess}</span></p>
-                    <Button onClick={handleRestart} size="lg">
+                    <Button onClick={fetchWord} size="lg">
                         <RotateCw className="mr-2 h-5 w-5" />
                         Tentar Novamente
                     </Button>
@@ -140,7 +158,7 @@ export function HangmanGame() {
                             <span key={index} className="border-b-4 w-12 text-center">
                                 <span className={cn(
                                     'invisible',
-                                    guessedLetters.includes(letter) && 'visible'
+                                    (guessedLetters.includes(normalize(letter)) || letter === ' ') && 'visible'
                                 )}>
                                     {letter}
                                 </span>
@@ -170,7 +188,7 @@ export function HangmanGame() {
                                 Dá-me uma Dica!
                             </Button>
                         )}
-                        <Button onClick={handleRestart} variant="outline" className="mt-4">
+                        <Button onClick={fetchWord} variant="outline" className="mt-4">
                             <RotateCw className="mr-2 h-5 w-5" />
                             Nova Palavra
                         </Button>
@@ -180,3 +198,4 @@ export function HangmanGame() {
         </div>
     );
 }
+
