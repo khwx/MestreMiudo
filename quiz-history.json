@@ -1166,11 +1166,11 @@
     "score": 4
   },
   {
-    "timestamp": "2025-09-11T12:11:43.499Z",
     "studentId": "Maria",
     "gradeLevel": 3,
     "subject": "Matemática",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-11T12:11:43.499Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -1265,6 +1265,112 @@
         "correctAnswer": "7",
         "isCorrect": true,
         "topic": "Contagem"
+      }
+    ],
+    "score": 5
+  },
+  {
+    "timestamp": "2025-09-11T12:15:03.183Z",
+    "studentId": "Maria",
+    "gradeLevel": 3,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Quantas patas tem um cão?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "4",
+          "topic": "Contagem",
+          "imageUrl": "https://pixabay.com/get/g81c2422e6a513910ddd8fb4e78adb6663e2d9db201dd4234e9acfb86a20f9bdf810c12757787167148eb62a629d76593_640.jpg"
+        },
+        {
+          "question": "Qual é o próximo número na sequência: 5, 10, 15, 20, _?",
+          "options": [
+            "21",
+            "25",
+            "30",
+            "19"
+          ],
+          "correctAnswer": "25",
+          "topic": "Contagem / Sucessão Numérica"
+        },
+        {
+          "question": "Uma mesa tem 4 pernas. Quantas pernas têm 3 mesas iguais?",
+          "options": [
+            "7",
+            "10",
+            "12",
+            "16"
+          ],
+          "correctAnswer": "12",
+          "topic": "Contagem / Multiplicação",
+          "imageUrl": "https://pixabay.com/get/g452ccea60e24526cfd7138d4359b1f4447e88712a02f8c483b028b69caf055ffa30705c0e086aeb359a8d52ec25654a1_640.jpg"
+        },
+        {
+          "question": "A Maria tinha 15 lápis. Ela deu 3 lápis ao João e depois comprou mais 5. Quantos lápis tem a Maria agora?",
+          "options": [
+            "12",
+            "15",
+            "17",
+            "23"
+          ],
+          "correctAnswer": "17",
+          "topic": "Adição e Subtração / Resolução de Problemas"
+        },
+        {
+          "question": "Que forma geométrica tem 4 lados iguais e 4 ângulos retos?",
+          "options": [
+            "Retângulo",
+            "Triângulo",
+            "Círculo",
+            "Quadrado"
+          ],
+          "correctAnswer": "Quadrado",
+          "topic": "Formas Geométricas"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Quantas patas tem um cão?",
+        "selectedAnswer": "4",
+        "correctAnswer": "4",
+        "isCorrect": true,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Qual é o próximo número na sequência: 5, 10, 15, 20, _?",
+        "selectedAnswer": "25",
+        "correctAnswer": "25",
+        "isCorrect": true,
+        "topic": "Contagem / Sucessão Numérica"
+      },
+      {
+        "question": "Uma mesa tem 4 pernas. Quantas pernas têm 3 mesas iguais?",
+        "selectedAnswer": "12",
+        "correctAnswer": "12",
+        "isCorrect": true,
+        "topic": "Contagem / Multiplicação"
+      },
+      {
+        "question": "A Maria tinha 15 lápis. Ela deu 3 lápis ao João e depois comprou mais 5. Quantos lápis tem a Maria agora?",
+        "selectedAnswer": "17",
+        "correctAnswer": "17",
+        "isCorrect": true,
+        "topic": "Adição e Subtração / Resolução de Problemas"
+      },
+      {
+        "question": "Que forma geométrica tem 4 lados iguais e 4 ângulos retos?",
+        "selectedAnswer": "Quadrado",
+        "correctAnswer": "Quadrado",
+        "isCorrect": true,
+        "topic": "Formas Geométricas"
       }
     ],
     "score": 5

@@ -49,9 +49,13 @@ async function getQuizHistory(): Promise<QuizResultEntry[]> {
   }
 }
 
-export async function getPerformanceData(studentId: string, subject: string): Promise<Record<string, number>> {
+export async function getPerformanceData(studentId: string, subject: string): Promise<Record<string, number> | null> {
     const history = await getQuizHistory();
     const studentHistory = history.filter(entry => entry.studentId === studentId && entry.subject === subject);
+
+    if (studentHistory.length === 0) {
+        return null;
+    }
 
     const topicPerformance: Record<string, { correct: number; total: number }> = {};
 

@@ -34,11 +34,11 @@ You will generate a quiz with {{{numberOfQuestions}}} questions tailored to the 
 
 If performance data is available, focus on areas where the student has shown weakness (lower correctness rate). Adapt the questions to be challenging but not discouraging.
 
-For 'Matemática' counting questions (questions with "quantos/quantas"), you MAY use the searchImage tool to get an illustrative image, but the question MUST be about general knowledge and NOT require counting items in the photo. For example, show a picture of a single dog and ask "Quantas patas tem um cão?". The image is for context only.
+For 'Matemática' questions, you MAY use the searchImage tool to get an illustrative image, but the question MUST NOT require counting items in the photo. It should be a general knowledge question where the image provides context only (e.g., show a picture of a dog and ask "Quantas patas tem um cão?").
 
-For other questions that could benefit from a visual aid (like in 'Estudo do Meio' or for identifying shapes in 'Matemática'), use the searchImage tool to find a suitable photo-realistic image. Use simple, one or two-word queries in Portuguese. The images should be clear and simple for a child to understand.
+For other subjects that could benefit from a visual aid (like 'Estudo do Meio'), use the searchImage tool to find a suitable, clear, and simple photo-realistic image. Use one or two-word queries in Portuguese.
 
-For sentence ordering questions, you MUST provide the words in the question in a jumbled, incorrect order.
+For sentence ordering questions ("Formação de Frases"), you MUST provide the words in the question in a jumbled, incorrect order for the student to rearrange.
 
 Structure each question object as follows:
 {
@@ -55,7 +55,7 @@ Here's the student's information:
 - Grade Level: {{{gradeLevel}}}
 - Subject: {{{subject}}}
 {{#if performanceData}}
-- Performance Data: {{{performanceData}}}
+- Past Performance (topic: correctness ratio): {{{performanceData}}}
 {{/if}}
 `,
 });
@@ -109,7 +109,3 @@ const personalizedLearningPathFlow = ai.defineFlow(
     throw lastError;
   }
 );
-
-
-
-

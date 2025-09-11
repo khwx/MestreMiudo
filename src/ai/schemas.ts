@@ -19,7 +19,8 @@ export const PersonalizedLearningPathInputSchema = z.object({
     .enum(['Português', 'Matemática', 'Estudo do Meio'])
     .describe('The subject for which to generate the learning path.'),
   performanceData: z
-    .any()
+    .record(z.number())
+    .nullable()
     .optional()
     .describe(
       'Optional record of the student performance on previous quizzes, where keys are topics and values are the correctness rate (0-1).'
