@@ -234,7 +234,7 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
                 key={i}
                 variant="outline"
                 className={cn(
-                  'h-auto min-h-[4rem] py-4 text-lg whitespace-normal justify-start text-left',
+                  'min-h-[4rem] py-4 text-lg whitespace-normal justify-start text-left',
                   isAnswered && isCorrect && 'border-2 border-[hsl(var(--chart-2))] bg-[hsl(var(--chart-2))]/20 text-foreground',
                   isAnswered && isSelected && !isCorrect && 'border-2 border-destructive bg-destructive/20 text-foreground',
                   isAnswered && !isSelected && 'opacity-60'

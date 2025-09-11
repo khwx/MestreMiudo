@@ -533,11 +533,11 @@
     "score": 4
   },
   {
-    "timestamp": "2025-09-07T20:51:49.958Z",
     "studentId": "Maria",
     "gradeLevel": 1,
     "subject": "Matemática",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-07T20:51:49.958Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -636,5 +636,111 @@
       }
     ],
     "score": 4
+  },
+  {
+    "timestamp": "2025-09-11T11:07:41.218Z",
+    "studentId": "Maria",
+    "gradeLevel": 3,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual destas opções forma uma frase correta?",
+          "options": [
+            "A bola é vermelha a.",
+            "A vermelha bola é.",
+            "A bola é vermelha.",
+            "É bola a vermelha."
+          ],
+          "correctAnswer": "A bola é vermelha.",
+          "topic": "Formação de Frases"
+        },
+        {
+          "question": "Qual dos grupos de palavras é uma frase completa?",
+          "options": [
+            "O cão feliz",
+            "Corre rápido",
+            "A menina leu um livro.",
+            "Na escola nova"
+          ],
+          "correctAnswer": "A menina leu um livro.",
+          "topic": "Formação de Frases"
+        },
+        {
+          "question": "Observa a imagem. Completa a frase: A ______ é bonita.",
+          "options": [
+            "flor",
+            "casa",
+            "bola",
+            "árvore"
+          ],
+          "correctAnswer": "flor",
+          "topic": "Formação de Frases",
+          "imageUrl": "https://pixabay.com/get/g572e9959e434a495fdf757fddc33a3f19373624803739db8c94836d7100a1d5408e8bde93cb52724174e26d69a815fab_640.jpg"
+        },
+        {
+          "question": "Observa a imagem. Que objeto vês?",
+          "options": [
+            "Cadeira",
+            "Mesa",
+            "Armário",
+            "Janela"
+          ],
+          "correctAnswer": "Mesa",
+          "topic": "Vocabulário",
+          "imageUrl": "https://pixabay.com/get/gc885fce605ad0253d966b4252c0f136dc6d2cdac5a88a996d82ee0c7466f8fb81706b47152550c3482aebb4829ab9dbe_640.jpg"
+        },
+        {
+          "question": "Qual palavra rima com \"castelo\"?",
+          "options": [
+            "Janela",
+            "Cão",
+            "Martelo",
+            "Rato"
+          ],
+          "correctAnswer": "Martelo",
+          "topic": "Rima"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual destas opções forma uma frase correta?",
+        "selectedAnswer": "A bola é vermelha.",
+        "correctAnswer": "A bola é vermelha.",
+        "isCorrect": true,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "Qual dos grupos de palavras é uma frase completa?",
+        "selectedAnswer": "A menina leu um livro.",
+        "correctAnswer": "A menina leu um livro.",
+        "isCorrect": true,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "Observa a imagem. Completa a frase: A ______ é bonita.",
+        "selectedAnswer": "flor",
+        "correctAnswer": "flor",
+        "isCorrect": true,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "Observa a imagem. Que objeto vês?",
+        "selectedAnswer": "Mesa",
+        "correctAnswer": "Mesa",
+        "isCorrect": true,
+        "topic": "Vocabulário"
+      },
+      {
+        "question": "Qual palavra rima com \"castelo\"?",
+        "selectedAnswer": "Martelo",
+        "correctAnswer": "Martelo",
+        "isCorrect": true,
+        "topic": "Rima"
+      }
+    ],
+    "score": 5
   }
 ]
