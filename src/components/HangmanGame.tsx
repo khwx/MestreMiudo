@@ -4,14 +4,28 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
-import { Award, RotateCw, Skull } from 'lucide-react';
+import { Award, RotateCw, Skull, Lightbulb } from 'lucide-react';
 
-const words = [
-    "CASA", "BOLA", "GATO", "MACACO", "ELEFANTE", "LIVRO", "ESCOLA", "FLOR",
-    "SOL", "LUA", "ESTRELA", "ARVORE", "RIO", "MAR", "PEIXE", "LEAO",
+const wordList = [
+    { word: "CASA", hint: "Onde moramos" },
+    { word: "BOLA", hint: "Objeto redondo para brincar" },
+    { word: "GATO", hint: "Animal que mia" },
+    { word: "MACACO", hint: "Gosta de bananas" },
+    { word: "ELEFANTE", hint: "Tem uma tromba grande" },
+    { word: "LIVRO", hint: "Tem páginas e histórias" },
+    { word: "ESCOLA", hint: "Onde aprendemos a ler" },
+    { word: "FLOR", hint: "Planta bonita e cheirosa" },
+    { word: "SOL", hint: "A estrela que nos aquece" },
+    { word: "LUA", hint: "Vemos no céu à noite" },
+    { word: "ESTRELA", hint: "Brilha no céu noturno" },
+    { word: "ARVORE", hint: "Dá-nos sombra e frutos" },
+    { word: "RIO", hint: "Água corrente que vai para o mar" },
+    { word: "MAR", hint: "Grande e com água salgada" },
+    { word: "PEIXE", hint: "Animal que vive na água" },
+    { word: "LEAO", hint: "O rei da selva" },
 ];
 
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+const getRandomWord = () => wordList[Math.floor(Math.random() * wordList.length)];
 
 const HangmanDrawing = ({ numberOfGuesses }: { numberOfGuesses: number }) => {
     const bodyParts = [
@@ -40,6 +54,7 @@ const Keyboard = ({ activeLetters, inactiveLetters, onSelect, disabled }: {
     onSelect: (letter: string) => void;
     disabled?: boolean;
 }) => {
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
     return (
         <div className="grid grid-cols-7 gap-2 self-stretch">
             {alphabet.map(key => {
@@ -67,9 +82,13 @@ const Keyboard = ({ activeLetters, inactiveLetters, onSelect, disabled }: {
 }
 
 export function HangmanGame() {
-    const [wordToGuess, setWordToGuess] = useState(() => words[Math.floor(Math.random() * words.length)]);
+    const [wordData, setWordData] = useState(getRandomWord);
     const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+    const [showHint, setShowHint] = useState(false);
     
+    const wordToGuess = wordData.word;
+    const hint = wordData.hint;
+
     const incorrectLetters = guessedLetters.filter(letter => !wordToGuess.includes(letter));
     const correctLetters = guessedLetters.filter(letter => wordToGuess.includes(letter));
 
@@ -83,7 +102,8 @@ export function HangmanGame() {
     
     const handleRestart = () => {
         setGuessedLetters([]);
-        setWordToGuess(words[Math.floor(Math.random() * words.length)]);
+        setWordData(getRandomWord());
+        setShowHint(false);
     };
 
     return (
@@ -128,17 +148,33 @@ export function HangmanGame() {
                         ))}
                     </div>
                     
-                    <Keyboard 
-                        disabled={isWinner || isLoser}
-                        activeLetters={correctLetters}
-                        inactiveLetters={incorrectLetters}
-                        onSelect={addGuessedLetter}
-                    />
-
-                    <Button onClick={handleRestart} variant="outline" className="mt-4">
-                        <RotateCw className="mr-2 h-5 w-5" />
-                        Nova Palavra
-                    </Button>
+                    {showHint && (
+                        <div className="text-center bg-yellow-100 border border-yellow-300 text-yellow-800 p-2 rounded-lg">
+                            <p><span className="font-bold">Dica:</span> {hint}</p>
+                        </div>
+                    )}
+                    
+                    <div className="self-stretch">
+                        <Keyboard 
+                            disabled={isWinner || isLoser}
+                            activeLetters={correctLetters}
+                            inactiveLetters={incorrectLetters}
+                            onSelect={addGuessedLetter}
+                        />
+                    </div>
+                    
+                    <div className="flex gap-4 mt-4">
+                        {!showHint && (
+                             <Button onClick={() => setShowHint(true)} variant="outline" className="mt-4">
+                                <Lightbulb className="mr-2 h-5 w-5" />
+                                Dá-me uma Dica!
+                            </Button>
+                        )}
+                        <Button onClick={handleRestart} variant="outline" className="mt-4">
+                            <RotateCw className="mr-2 h-5 w-5" />
+                            Nova Palavra
+                        </Button>
+                    </div>
                 </>
             )}
         </div>
