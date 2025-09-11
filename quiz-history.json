@@ -1692,11 +1692,11 @@
     "score": 5
   },
   {
-    "timestamp": "2025-09-11T13:04:29.157Z",
     "studentId": "Maria",
     "gradeLevel": 1,
     "subject": "Misto",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-11T13:04:29.157Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -1796,5 +1796,111 @@
       }
     ],
     "score": 4
+  },
+  {
+    "timestamp": "2025-09-11T13:06:41.576Z",
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Misto",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual a letra que falta na palavra C_SA?",
+          "options": [
+            "A",
+            "E",
+            "I",
+            "O"
+          ],
+          "correctAnswer": "A",
+          "topic": "Vocabulário"
+        },
+        {
+          "question": "Observa a imagem. Quantos meses tem um ano?",
+          "options": [
+            "10",
+            "12",
+            "7",
+            "5"
+          ],
+          "correctAnswer": "12",
+          "topic": "Contagem",
+          "imageUrl": "https://pixabay.com/get/g641f1165a97a48bf35ac6c7fcaaea75031e6af8afe080953a184114a87ba4f7296467d29c733133678394663333a6006_640.jpg"
+        },
+        {
+          "question": "Quantos dedos temos numa só mão?",
+          "options": [
+            "2",
+            "5",
+            "10",
+            "1"
+          ],
+          "correctAnswer": "5",
+          "topic": "O Corpo Humano"
+        },
+        {
+          "question": "Coloca as palavras na ordem correta para formar uma frase: bola / a / Maria / tem",
+          "options": [
+            "A bola tem Maria.",
+            "Maria a bola tem.",
+            "A Maria tem bola.",
+            "Tem bola a Maria."
+          ],
+          "correctAnswer": "A Maria tem bola.",
+          "topic": "Formação de Frases"
+        },
+        {
+          "question": "Observa a imagem. O que é importante fazer todos os dias para seres saudável?",
+          "options": [
+            "Comer muitos doces",
+            "Dormir muito tarde",
+            "Brincar ao ar livre",
+            "Passar o dia a ver televisão"
+          ],
+          "correctAnswer": "Brincar ao ar livre",
+          "topic": "Estudo do Meio",
+          "imageUrl": "https://pixabay.com/get/gcda547c7bb8a6919e2504721c3ef956ef408b97903f6f4bc623f5f357520fa6d791617b1887f1fdac2ed9c6e7020a205_640.jpg"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual a letra que falta na palavra C_SA?",
+        "selectedAnswer": "A",
+        "correctAnswer": "A",
+        "isCorrect": true,
+        "topic": "Vocabulário"
+      },
+      {
+        "question": "Observa a imagem. Quantos meses tem um ano?",
+        "selectedAnswer": "12",
+        "correctAnswer": "12",
+        "isCorrect": true,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Quantos dedos temos numa só mão?",
+        "selectedAnswer": "2",
+        "correctAnswer": "5",
+        "isCorrect": false,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Coloca as palavras na ordem correta para formar uma frase: bola / a / Maria / tem",
+        "selectedAnswer": "A bola tem Maria.",
+        "correctAnswer": "A Maria tem bola.",
+        "isCorrect": false,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "Observa a imagem. O que é importante fazer todos os dias para seres saudável?",
+        "selectedAnswer": "Brincar ao ar livre",
+        "correctAnswer": "Brincar ao ar livre",
+        "isCorrect": true,
+        "topic": "Estudo do Meio"
+      }
+    ],
+    "score": 3
   }
 ]

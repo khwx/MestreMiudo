@@ -7,7 +7,7 @@ import type { PersonalizedLearningPathOutput } from '@/ai/schemas';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { Loader2, Volume2, Star, Trophy, RefreshCw, Check, X } from 'lucide-react';
+import { Loader2, Volume2, Star, Trophy, RefreshCw, Check, X, Book, Divide, Leaf } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from "@/hooks/use-toast";
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -176,8 +176,15 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh] gap-4 text-center">
-        <Loader2 className="h-16 w-16 animate-spin text-primary" />
+      <div className="flex flex-col items-center justify-center min-h-[50vh] gap-8 text-center">
+        <div className="relative flex justify-center items-center h-24 w-24">
+            <Loader2 className="h-24 w-24 animate-spin text-primary opacity-50" />
+            <div className="absolute flex justify-center items-center h-full w-full">
+                <Book className="h-10 w-10 text-primary animate-float-up" style={{ animationDelay: '0s' }} />
+                <Divide className="h-10 w-10 text-destructive animate-float-up" style={{ animationDelay: '1s' }} />
+                <Leaf className="h-10 w-10 text-[hsl(var(--chart-2))] animate-float-up" style={{ animationDelay: '2s' }} />
+            </div>
+        </div>
         <p className="text-xl text-muted-foreground font-headline animate-in fade-in duration-500">
             {loadingMessages[loadingMessageIndex]}
         </p>
@@ -262,7 +269,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
                 <Button
                   variant="outline"
                   className={cn(
-                    'min-h-[4rem] py-4 text-lg whitespace-normal justify-start text-left flex-grow h-auto pl-12',
+                    'min-h-[4rem] py-4 text-lg whitespace-normal justify-start text-left flex-grow pl-12',
                     isAnswered && isCorrect && 'border-2 border-[hsl(var(--chart-2))] bg-[hsl(var(--chart-2))]/20 text-foreground',
                     isAnswered && isSelected && !isCorrect && 'border-2 border-destructive bg-destructive/20 text-foreground',
                     isAnswered && !isSelected && 'opacity-60'
