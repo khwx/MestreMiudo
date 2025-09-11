@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
-import { Award, RotateCw, Star, Heart, Cloud, Anchor, Bug, Cake, Sun, Moon, Car, Rocket } from 'lucide-react';
+import { Award, RotateCw, Star, Heart, Cloud, Anchor, Bug, Cake, Sun, Moon } from 'lucide-react';
 
 const icons = [
     { icon: Star, color: 'text-yellow-400' },
@@ -63,7 +63,7 @@ export function MemoryGame() {
     useEffect(() => {
         if (flippedCards.length === 2) {
             setIsChecking(true);
-            setMoves(moves + 1);
+            setMoves(m => m + 1);
             const [firstIndex, secondIndex] = flippedCards;
             const firstCard = board[firstIndex];
             const secondCard = board[secondIndex];
@@ -92,7 +92,7 @@ export function MemoryGame() {
                 }, 1000);
             }
         }
-    }, [flippedCards, board, moves]);
+    }, [flippedCards, board]);
 
     const handleCardClick = (index: number) => {
         if (isChecking || board[index].isFlipped || flippedCards.length === 2) {
