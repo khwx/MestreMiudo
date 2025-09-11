@@ -1,12 +1,13 @@
 
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
-import { Award, RotateCw, X, Circle } from 'lucide-react';
+import { Award, RotateCw, X, Circle, User, BrainCircuit } from 'lucide-react';
 
 type Player = 'X' | 'O';
+type GameMode = 'human' | 'computer' | null;
 
 const Square = ({ value, onSquareClick, isWinning }: { value: Player | null, onSquareClick: () => void, isWinning: boolean }) => (
     <button 
@@ -15,6 +16,7 @@ const Square = ({ value, onSquareClick, isWinning }: { value: Player | null, onS
             isWinning ? 'bg-green-300 border-green-500 scale-110' : 'bg-card border-border hover:bg-muted',
         )}
         onClick={onSquareClick}
+        disabled={!!value}
     >
         {value === 'X' && <X className="h-12 w-12 text-blue-500" />}
         {value === 'O' && <Circle className="h-12 w-12 text-red-500" />}
@@ -39,9 +41,29 @@ const calculateWinner = (squares: (Player | null)[]) => {
 export function TicTacToe() {
   const [squares, setSquares] = useState<(Player | null)[]>(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
+  const [gameMode, setGameMode] = useState<GameMode>(null);
 
   const { winner, line: winningLine } = calculateWinner(squares);
   const isDraw = squares.every(square => square !== null) && !winner;
+  const humanPlayer: Player = 'X';
+  const computerPlayer: Player = 'O';
+
+  useEffect(() => {
+    if (gameMode === 'computer' && !xIsNext && !winner && !isDraw) {
+      const computerMoveTimeout = setTimeout(() => {
+        const emptySquares = squares.map((sq, index) => sq === null ? index : null).filter(val => val !== null);
+        if (emptySquares.length > 0) {
+            const move = emptySquares[0]; // Simple AI: chooses the first available square
+            if (move !== null) {
+                handleClick(move);
+            }
+        }
+      }, 1000); // Wait 1 second before computer moves
+
+      return () => clearTimeout(computerMoveTimeout);
+    }
+  }, [xIsNext, gameMode, winner, isDraw, squares]);
+
 
   let status;
   if (winner) {
@@ -56,6 +78,12 @@ export function TicTacToe() {
     if (squares[i] || winner) {
       return;
     }
+
+    if (gameMode === 'computer' && !xIsNext) {
+        // Prevent human from playing on computer's turn
+        return;
+    }
+
     const nextSquares = squares.slice();
     nextSquares[i] = xIsNext ? 'X' : 'O';
     setSquares(nextSquares);
@@ -65,10 +93,25 @@ export function TicTacToe() {
   const handleRestart = () => {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
+    setGameMode(null); // Go back to mode selection
   };
+  
+  if (!gameMode) {
+    return (
+        <div className="flex flex-col items-center gap-4 animate-in fade-in-50">
+            <h2 className="text-2xl font-bold">Como queres jogar?</h2>
+            <Button onClick={() => setGameMode('human')} size="lg" className="w-full">
+                <User className="mr-2"/> Jogar com um amigo
+            </Button>
+            <Button onClick={() => setGameMode('computer')} size="lg" className="w-full">
+                <BrainCircuit className="mr-2"/> Jogar contra o MestreMiúdo
+            </Button>
+        </div>
+    );
+  }
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-6 animate-in fade-in-50">
       <div className="text-2xl font-bold text-center h-16 flex flex-col items-center">
         <span>{status}</span>
         {winner && (winner === 'X' ? <X className="h-10 w-10 text-blue-500" /> : <Circle className="h-10 w-10 text-red-500" />)}
@@ -90,6 +133,9 @@ export function TicTacToe() {
           Jogar Novamente
         </Button>
       )}
+       <Button onClick={handleRestart} variant="ghost" size="sm" className="mt-4">
+          Mudar de modo
+        </Button>
     </div>
   );
 }
