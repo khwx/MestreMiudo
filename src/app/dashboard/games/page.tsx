@@ -1,17 +1,18 @@
 
 import { MemoryGame } from '@/components/MemoryGame';
 import { TicTacToe } from '@/components/TicTacToe';
+import { HangmanGame } from '@/components/HangmanGame';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Gamepad2, Brain } from 'lucide-react';
+import { Gamepad2, Brain, Skull } from 'lucide-react';
 
 
 export default function GamesPage() {
   return (
     <div className="flex flex-col items-center justify-center">
       <h1 className="text-4xl font-headline font-bold text-primary mb-8">Salão de Jogos</h1>
-      <Tabs defaultValue="memory" className="w-full max-w-2xl">
-        <TabsList className="grid w-full grid-cols-2">
+      <Tabs defaultValue="memory" className="w-full max-w-4xl">
+        <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="memory">
             <Brain className="mr-2 h-5 w-5" />
             Jogo da Memória
@@ -19,6 +20,10 @@ export default function GamesPage() {
           <TabsTrigger value="tictactoe">
             <Gamepad2 className="mr-2 h-5 w-5" />
             Jogo do Galo
+          </TabsTrigger>
+          <TabsTrigger value="hangman">
+            <Skull className="mr-2 h-5 w-5" />
+            Jogo da Forca
           </TabsTrigger>
         </TabsList>
         <TabsContent value="memory">
@@ -43,8 +48,18 @@ export default function GamesPage() {
                 </CardContent>
             </Card>
         </TabsContent>
+        <TabsContent value="hangman">
+            <Card>
+                <CardHeader>
+                    <CardTitle>Jogo da Forca</CardTitle>
+                    <CardDescription>Adivinha a palavra secreta antes que seja tarde demais!</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <HangmanGame />
+                </CardContent>
+            </Card>
+        </TabsContent>
       </Tabs>
     </div>
   );
 }
-
