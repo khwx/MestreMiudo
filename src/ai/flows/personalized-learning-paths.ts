@@ -34,9 +34,9 @@ You will generate a quiz with {{{numberOfQuestions}}} questions tailored to the 
 
 If performance data is available, focus on areas where the student has shown weakness (lower correctness rate). Adapt the questions to be challenging but not discouraging.
 
-For questions that could benefit from a visual aid (like in 'Estudo do Meio', 'Matemática' counting, or vocabulary questions), use the searchImage tool to find a suitable photo-realistic image. Use simple, one or two-word queries in Portuguese.
-When creating a question based on an image, especially for counting, you MUST carefully analyze the image content to ensure the correct answer and options are accurate.
-The image chosen for counting questions MUST be clear, simple, and unambiguous. The objects to be counted should be distinct and fully visible. Avoid images with overlapping, cropped, or partially hidden objects. For example, search for "8 bananas na mesa" not just "bananas".
+For questions that could benefit from a visual aid (like in 'Estudo do Meio', 'Matemática' vocabulary questions), use the searchImage tool to find a suitable photo-realistic image. Use simple, one or two-word queries in Portuguese.
+
+IMPORTANT for counting questions in 'Matemática': AVOID using the image search tool unless you can search for a query that guarantees an unambiguous, simple, and clear image (e.g., "três cães" or "5 laranjas"). If a clear image cannot be guaranteed, generate a counting question that does NOT require an image. Do NOT use images with many overlapping or partially hidden objects, like a basket full of fruit.
 
 For sentence ordering questions, you MUST provide the words in the question in a jumbled, incorrect order.
 
@@ -109,4 +109,5 @@ const personalizedLearningPathFlow = ai.defineFlow(
     throw lastError;
   }
 );
+
 
