@@ -8,6 +8,7 @@ import { Award, RotateCw, X, Circle, User, BrainCircuit } from 'lucide-react';
 
 type Player = 'X' | 'O';
 type GameMode = 'human' | 'computer' | null;
+type Difficulty = 'easy' | 'medium' | 'hard' | null;
 
 const Square = ({ value, onSquareClick, isWinning }: { value: Player | null, onSquareClick: () => void, isWinning: boolean }) => (
     <button 
@@ -38,20 +39,50 @@ const calculateWinner = (squares: (Player | null)[]) => {
   return { winner: null, line: [] };
 };
 
-const findBestMove = (squares: (Player | null)[]): number => {
+const findBestMove = (squares: (Player | null)[], difficulty: Difficulty): number => {
+    const emptyIndexes = squares.map((sq, i) => sq === null ? i : null).filter(i => i !== null) as number[];
+
+    const checkNextMove = (player: Player): number | null => {
+        for (const index of emptyIndexes) {
+            const tempSquares = [...squares];
+            tempSquares[index] = player;
+            const { winner } = calculateWinner(tempSquares);
+            if (winner === player) {
+                return index;
+            }
+        }
+        return null;
+    };
+
+    if (difficulty === 'easy') {
+        return emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
+    }
+
+    if (difficulty === 'medium') {
+        // 1. Can AI win?
+        const winningMove = checkNextMove('O');
+        if (winningMove !== null) return winningMove;
+        
+        // 2. Can Player win? Block them.
+        const blockingMove = checkNextMove('X');
+        if (blockingMove !== null) return blockingMove;
+        
+        // 3. Otherwise, random move
+        return emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
+    }
+    
+    // Difficulty: 'hard' (Minimax)
     let bestMove = -1;
     let bestVal = -Infinity;
 
-    for (let i = 0; i < squares.length; i++) {
-        if (squares[i] === null) {
-            squares[i] = 'O'; // Computer's move
-            const moveVal = minimax(squares, 0, false);
-            squares[i] = null; // Undo the move
+    for (const index of emptyIndexes) {
+        squares[index] = 'O'; // Computer's move
+        const moveVal = minimax(squares, 0, false);
+        squares[index] = null; // Undo the move
 
-            if (moveVal > bestVal) {
-                bestMove = i;
-                bestVal = moveVal;
-            }
+        if (moveVal > bestVal) {
+            bestMove = index;
+            bestVal = moveVal;
         }
     }
     return bestMove;
@@ -63,24 +94,22 @@ const minimax = (board: (Player | null)[], depth: number, isMaximizing: boolean)
     if (winner === 'X') return depth - 10; // Human wins
     if (board.every(s => s !== null)) return 0; // Draw
 
+    const emptyIndexes = board.map((sq, i) => sq === null ? i : null).filter(i => i !== null) as number[];
+
     if (isMaximizing) {
         let bestVal = -Infinity;
-        for (let i = 0; i < board.length; i++) {
-            if (board[i] === null) {
-                board[i] = 'O';
-                bestVal = Math.max(bestVal, minimax(board, depth + 1, false));
-                board[i] = null;
-            }
+        for (const index of emptyIndexes) {
+            board[index] = 'O';
+            bestVal = Math.max(bestVal, minimax(board, depth + 1, false));
+            board[index] = null;
         }
         return bestVal;
     } else {
         let bestVal = Infinity;
-        for (let i = 0; i < board.length; i++) {
-            if (board[i] === null) {
-                board[i] = 'X';
-                bestVal = Math.min(bestVal, minimax(board, depth + 1, true));
-                board[i] = null;
-            }
+        for (const index of emptyIndexes) {
+            board[index] = 'X';
+            bestVal = Math.min(bestVal, minimax(board, depth + 1, true));
+            board[index] = null;
         }
         return bestVal;
     }
@@ -90,25 +119,26 @@ export function TicTacToe() {
   const [squares, setSquares] = useState<(Player | null)[]>(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [gameMode, setGameMode] = useState<GameMode>(null);
+  const [difficulty, setDifficulty] = useState<Difficulty>(null);
 
   const { winner, line: winningLine } = calculateWinner(squares);
   const isDraw = squares.every(square => square !== null) && !winner;
   
   useEffect(() => {
-    if (gameMode === 'computer' && !xIsNext && !winner && !isDraw) {
+    if (gameMode === 'computer' && !xIsNext && !winner && !isDraw && difficulty) {
       const computerMoveTimeout = setTimeout(() => {
-        const move = findBestMove(squares);
+        const move = findBestMove(squares.slice(), difficulty);
         if (move !== -1) {
             const nextSquares = squares.slice();
             nextSquares[move] = 'O';
             setSquares(nextSquares);
             setXIsNext(true);
         }
-      }, 500); // Add a small delay for a more natural feel
+      }, 500);
 
       return () => clearTimeout(computerMoveTimeout);
     }
-  }, [xIsNext, gameMode, winner, isDraw, squares]);
+  }, [xIsNext, gameMode, winner, isDraw, squares, difficulty]);
 
 
   let status;
@@ -125,7 +155,6 @@ export function TicTacToe() {
       return;
     }
     
-    // Allow human move only if it's X's turn
     if (gameMode === 'computer' && !xIsNext) {
         return;
     }
@@ -139,21 +168,41 @@ export function TicTacToe() {
   const handleRestart = () => {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
-    setGameMode(null); // Go back to mode selection
+    setGameMode(null);
+    setDifficulty(null);
   };
   
+  const handleModeSelect = (mode: GameMode) => {
+      setGameMode(mode);
+      if (mode === 'human') {
+          setDifficulty('hard'); // Not used, but set for consistency
+      }
+  }
+
   if (!gameMode) {
     return (
         <div className="flex flex-col items-center gap-4 animate-in fade-in-50">
             <h2 className="text-2xl font-bold">Como queres jogar?</h2>
-            <Button onClick={() => setGameMode('human')} size="lg" className="w-full">
+            <Button onClick={() => handleModeSelect('human')} size="lg" className="w-64">
                 <User className="mr-2"/> Jogar com um amigo
             </Button>
-            <Button onClick={() => setGameMode('computer')} size="lg" className="w-full">
+            <Button onClick={() => handleModeSelect('computer')} size="lg" className="w-64">
                 <BrainCircuit className="mr-2"/> Jogar contra o MestreMiúdo
             </Button>
         </div>
     );
+  }
+
+  if (gameMode === 'computer' && !difficulty) {
+    return (
+        <div className="flex flex-col items-center gap-4 animate-in fade-in-50">
+            <h2 className="text-2xl font-bold">Escolhe o nível de dificuldade</h2>
+            <Button onClick={() => setDifficulty('easy')} size="lg" className="w-64 bg-green-600 hover:bg-green-700">Fácil</Button>
+            <Button onClick={() => setDifficulty('medium')} size="lg" className="w-64 bg-yellow-500 hover:bg-yellow-600">Médio</Button>
+            <Button onClick={() => setDifficulty('hard')} size="lg" className="w-64 bg-red-600 hover:bg-red-700">Difícil</Button>
+            <Button onClick={handleRestart} variant="link" className="mt-4">Voltar</Button>
+        </div>
+    )
   }
 
   return (
@@ -180,7 +229,7 @@ export function TicTacToe() {
         </Button>
       )}
        <Button onClick={handleRestart} variant="ghost" size="sm" className="mt-4">
-          Mudar de modo
+          Recomeçar e Mudar de Modo
         </Button>
     </div>
   );
