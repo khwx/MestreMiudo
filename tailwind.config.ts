@@ -98,9 +98,28 @@ export default {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'float-up': 'float-up 3s ease-in-out infinite',
       },
+      perspective: {
+        '1000': '1000px',
+      },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    require('tailwindcss-animate'),
+    function ({ addUtilities }: { addUtilities: any }) {
+      addUtilities({
+        '.perspective': {
+          perspective: '1000px',
+        },
+        '.transform-style-preserve-3d': {
+          'transform-style': 'preserve-3d',
+        },
+        '.backface-visibility-hidden': {
+          'backface-visibility': 'hidden',
+        },
+        '.transform-rotate-y-180': {
+          transform: 'rotateY(180deg)',
+        },
+      });
+    },
+  ],
 } satisfies Config;
-
-    

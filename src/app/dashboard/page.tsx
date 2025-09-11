@@ -1,9 +1,10 @@
+
 "use client"
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Book, Divide, Leaf, Loader2, Shuffle, Gamepad2 } from 'lucide-react';
+import { Book, Divide, Leaf, Loader2, Shuffle, Gamepad2, Brain } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { useEffect, useState } from 'react';
 import { getFullQuizHistory, type QuizResultEntry } from '@/app/actions';
@@ -135,7 +136,7 @@ export default function DashboardPage() {
             </Link>
           ))}
             <Link key={surpriseChallenge.name} href={`/quiz/${surpriseChallenge.slug}?name=${name}&grade=${grade}`} passHref>
-              <Card className="hover:shadow-xl hover:border-accent transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full md:col-span-2 lg:col-span-1 flex flex-col">
+              <Card className="hover:shadow-xl hover:border-accent transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-2xl font-bold">{surpriseChallenge.name}</CardTitle>
                   <div className={`p-3 rounded-full ${surpriseChallenge.bgColor}`}>
@@ -147,8 +148,21 @@ export default function DashboardPage() {
                 </CardContent>
               </Card>
             </Link>
+            <Link href={`/dashboard/memory-game?name=${name}&grade=${grade}`} passHref>
+              <Card className="hover:shadow-xl hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-blue-500/10">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-2xl font-bold text-blue-700">Jogo da Memória</CardTitle>
+                  <div className="p-3 rounded-full bg-blue-500/20">
+                    <Brain className="h-8 w-8 text-blue-700" />
+                  </div>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  <p className="text-blue-600">Testa a tua memória e encontra os pares!</p>
+                </CardContent>
+              </Card>
+            </Link>
             <Link href={`/dashboard/tic-tac-toe?name=${name}&grade=${grade}`} passHref>
-              <Card className="hover:shadow-xl hover:border-green-500 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full md:col-span-2 lg:col-span-2 flex flex-col bg-green-500/10">
+              <Card className="hover:shadow-xl hover:border-green-500 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-green-500/10">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-2xl font-bold text-green-700">Jogo do Galo</CardTitle>
                   <div className="p-3 rounded-full bg-green-500/20">
