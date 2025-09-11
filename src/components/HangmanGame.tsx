@@ -14,26 +14,14 @@ const words = [
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
 
 const HangmanDrawing = ({ numberOfGuesses }: { numberOfGuesses: number }) => {
-    const head = (
-        <div className="w-16 h-16 rounded-full border-4 border-foreground absolute top-[40px] right-[-24px]" />
-    );
-    const body = (
-        <div className="w-1 h-24 bg-foreground absolute top-[104px] right-0" />
-    );
-    const rightArm = (
-        <div className="w-20 h-1 bg-foreground absolute top-[120px] right-[-80px] rotate-[-30deg] origin-bottom-left" />
-    );
-    const leftArm = (
-        <div className="w-20 h-1 bg-foreground absolute top-[120px] right-[4px] rotate-[30deg] origin-bottom-right" />
-    );
-    const rightLeg = (
-        <div className="w-24 h-1 bg-foreground absolute top-[180px] right-[-92px] rotate-[60deg] origin-bottom-left" />
-    );
-    const leftLeg = (
-         <div className="w-24 h-1 bg-foreground absolute top-[180px] right-[4px] rotate-[-60deg] origin-bottom-right" />
-    );
-    
-    const bodyParts = [head, body, rightArm, leftArm, rightLeg, leftLeg];
+    const bodyParts = [
+        <div key="head" className="w-16 h-16 rounded-full border-4 border-foreground absolute top-[40px] right-[-24px]" />,
+        <div key="body" className="w-1 h-24 bg-foreground absolute top-[104px] right-0" />,
+        <div key="rightArm" className="w-20 h-1 bg-foreground absolute top-[120px] right-[-80px] rotate-[-30deg] origin-bottom-left" />,
+        <div key="leftArm" className="w-20 h-1 bg-foreground absolute top-[120px] right-[4px] rotate-[30deg] origin-bottom-right" />,
+        <div key="rightLeg" className="w-24 h-1 bg-foreground absolute top-[180px] right-[-92px] rotate-[60deg] origin-bottom-left" />,
+        <div key="leftLeg" className="w-24 h-1 bg-foreground absolute top-[180px] right-[4px] rotate-[-60deg] origin-bottom-right" />
+    ];
 
     return (
         <div className="relative h-64">
@@ -156,4 +144,3 @@ export function HangmanGame() {
         </div>
     );
 }
-
