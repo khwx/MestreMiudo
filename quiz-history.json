@@ -1904,11 +1904,11 @@
     "score": 3
   },
   {
-    "timestamp": "2025-09-11T13:10:30.857Z",
     "studentId": "Maria",
     "gradeLevel": 1,
     "subject": "Misto",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-11T13:10:30.857Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -2008,5 +2008,111 @@
       }
     ],
     "score": 3
+  },
+  {
+    "timestamp": "2025-09-11T13:40:56.229Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Misto",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual destas palavras começa com o som da letra 'F'?",
+          "options": [
+            "Bola",
+            "Foca",
+            "Casa",
+            "Dado"
+          ],
+          "correctAnswer": "Foca",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "Coloca as palavras na ordem correta para formar uma frase: 'o', 'come', 'rato', 'queijo'.",
+          "options": [
+            "O rato come queijo.",
+            "Come o rato queijo.",
+            "Queijo o rato come.",
+            "Rato o queijo come."
+          ],
+          "correctAnswer": "O rato come queijo.",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "Um cão tem quantas patas?",
+          "options": [
+            "Duas",
+            "Três",
+            "Quatro",
+            "Cinco"
+          ],
+          "correctAnswer": "Quatro",
+          "topic": "Matemática",
+          "imageUrl": "https://pixabay.com/get/g3edd597219314fe98d797cfb1cc802d6d160467071265d5a5e79b02458f4bea9becd16f953ba11cd9f65443164250c02_640.jpg"
+        },
+        {
+          "question": "Que parte da planta, mostrada na imagem, é responsável por fazer as sementes?",
+          "options": [
+            "Folha",
+            "Caule",
+            "Raiz",
+            "Flor"
+          ],
+          "correctAnswer": "Flor",
+          "topic": "Vocabulário e Natureza",
+          "imageUrl": "https://pixabay.com/get/gb9ef04a10276ff4c28cc4c5360f3feca3455b2f997bf8bc924cbdc8e87c4973a2130c95b7ab0397b5ccf57513a1480c1_640.jpg"
+        },
+        {
+          "question": "Qual destes animais vive na água e tem escamas?",
+          "options": [
+            "Pássaro",
+            "Gato",
+            "Peixe",
+            "Cão"
+          ],
+          "correctAnswer": "Peixe",
+          "topic": "Estudo do Meio"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual destas palavras começa com o som da letra 'F'?",
+        "selectedAnswer": "Foca",
+        "correctAnswer": "Foca",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Coloca as palavras na ordem correta para formar uma frase: 'o', 'come', 'rato', 'queijo'.",
+        "selectedAnswer": "Rato o queijo come.",
+        "correctAnswer": "O rato come queijo.",
+        "isCorrect": false,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "Um cão tem quantas patas?",
+        "selectedAnswer": "Cinco",
+        "correctAnswer": "Quatro",
+        "isCorrect": false,
+        "topic": "Matemática"
+      },
+      {
+        "question": "Que parte da planta, mostrada na imagem, é responsável por fazer as sementes?",
+        "selectedAnswer": "Caule",
+        "correctAnswer": "Flor",
+        "isCorrect": false,
+        "topic": "Vocabulário e Natureza"
+      },
+      {
+        "question": "Qual destes animais vive na água e tem escamas?",
+        "selectedAnswer": "Gato",
+        "correctAnswer": "Peixe",
+        "isCorrect": false,
+        "topic": "Estudo do Meio"
+      }
+    ],
+    "score": 1
   }
 ]
