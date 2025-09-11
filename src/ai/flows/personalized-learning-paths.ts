@@ -76,9 +76,21 @@ const personalizedLearningPathFlow = ai.defineFlow(
             performanceData: input.performanceData ? JSON.stringify(input.performanceData, null, 2) : undefined,
         };
         const {output} = await prompt(flowInput);
-        return output!;
+
+        // Check if output is null or invalid, and retry if so.
+        if (output) {
+          return output;
+        }
+
+        // If output is null, treat it as a retriable error.
+        lastError = new Error("Model returned null output.");
+        retries--;
+        console.log(`Model returned null output, retrying in 2 seconds... (${retries} attempts left)`);
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
       } catch (e: any) {
         lastError = e;
+        // Also retry on overload/availability errors.
         if (e.message.includes('503 Service Unavailable') || e.message.includes('overloaded') || (e.cause && e.cause.message.includes('503'))) {
           retries--;
           if (retries > 0) {
@@ -86,14 +98,13 @@ const personalizedLearningPathFlow = ai.defineFlow(
             await new Promise(resolve => setTimeout(resolve, 2000));
           }
         } else {
-          // It's a different error, so we don't retry.
+          // It's a different, non-retriable error.
           throw e;
         }
       }
     }
-    // If all retries fail, throw the last error.
+    // If all retries fail, throw the last recorded error.
     console.error("All retries failed to generate quiz.");
     throw lastError;
   }
 );
-

@@ -638,11 +638,11 @@
     "score": 4
   },
   {
-    "timestamp": "2025-09-11T11:07:41.218Z",
     "studentId": "Maria",
     "gradeLevel": 3,
     "subject": "Português",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-11T11:07:41.218Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -739,6 +739,111 @@
         "correctAnswer": "Martelo",
         "isCorrect": true,
         "topic": "Rima"
+      }
+    ],
+    "score": 5
+  },
+  {
+    "timestamp": "2025-09-11T11:13:40.089Z",
+    "studentId": "Maria",
+    "gradeLevel": 3,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Observa a imagem. Qual é o nome do objeto que vês?",
+          "options": [
+            "Árvore",
+            "Flor",
+            "Cão",
+            "Casa"
+          ],
+          "correctAnswer": "Flor",
+          "topic": "Vocabulário",
+          "imageUrl": "https://pixabay.com/get/ga54dc3913ec9d660667a40e77421f5921309b2d5202525012583b3b98746672e4afbbfabf0b3d68b49bd0c9bcd3c0f0b_640.jpg"
+        },
+        {
+          "question": "Coloca as palavras na ordem correta para formar uma frase: \"gosta de o cão correr\".",
+          "options": [
+            "De correr o cão gosta.",
+            "O cão gosta de correr.",
+            "Correr o cão gosta de.",
+            "Gosta de correr o cão."
+          ],
+          "correctAnswer": "O cão gosta de correr.",
+          "topic": "Formação de Frases"
+        },
+        {
+          "question": "Reorganiza as palavras para formar uma frase com sentido: \"no o voa céu avião\".",
+          "options": [
+            "O avião no céu voa.",
+            "Voa no céu o avião.",
+            "O avião voa no céu.",
+            "Céu voa o avião no."
+          ],
+          "correctAnswer": "O avião voa no céu.",
+          "topic": "Formação de Frases"
+        },
+        {
+          "question": "Qual destas palavras rima com \"pão\"?",
+          "options": [
+            "Mão",
+            "Gato",
+            "Bola",
+            "Livro"
+          ],
+          "correctAnswer": "Mão",
+          "topic": "Rima"
+        },
+        {
+          "question": "Quantas vogais existem na palavra \"elefante\"?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "4",
+          "topic": "Vogais"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Observa a imagem. Qual é o nome do objeto que vês?",
+        "selectedAnswer": "Flor",
+        "correctAnswer": "Flor",
+        "isCorrect": true,
+        "topic": "Vocabulário"
+      },
+      {
+        "question": "Coloca as palavras na ordem correta para formar uma frase: \"gosta de o cão correr\".",
+        "selectedAnswer": "O cão gosta de correr.",
+        "correctAnswer": "O cão gosta de correr.",
+        "isCorrect": true,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "Reorganiza as palavras para formar uma frase com sentido: \"no o voa céu avião\".",
+        "selectedAnswer": "O avião voa no céu.",
+        "correctAnswer": "O avião voa no céu.",
+        "isCorrect": true,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "Qual destas palavras rima com \"pão\"?",
+        "selectedAnswer": "Mão",
+        "correctAnswer": "Mão",
+        "isCorrect": true,
+        "topic": "Rima"
+      },
+      {
+        "question": "Quantas vogais existem na palavra \"elefante\"?",
+        "selectedAnswer": "4",
+        "correctAnswer": "4",
+        "isCorrect": true,
+        "topic": "Vogais"
       }
     ],
     "score": 5
