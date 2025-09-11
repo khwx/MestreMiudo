@@ -81,13 +81,6 @@ export function HangmanGame() {
             const newWord = newWordData.word.toUpperCase();
             setWordToGuess(newWord);
             setHint(newWordData.hint);
-
-            // Automatically reveal first and last letter as a hint
-            const normalizedWord = normalize(newWord);
-            const firstLetter = normalizedWord[0];
-            const lastLetter = normalizedWord[normalizedWord.length - 1];
-            setGuessedLetters([firstLetter, lastLetter]);
-            
         } catch (error) {
             console.error("Failed to generate word:", error);
             toast({
@@ -98,7 +91,7 @@ export function HangmanGame() {
             // Fallback to a default word in case of API failure
             setWordToGuess("MESTRE");
             setHint("Quem te ensina a jogar");
-            setGuessedLetters(['M', 'E']);
+            setGuessedLetters([]);
         } finally {
             setLoading(false);
         }
