@@ -74,6 +74,7 @@ export function HangmanGame() {
 
     const startNewGame = useCallback(async () => {
         setLoading(true);
+        setGuessedLetters([]);
         setShowHint(false);
         try {
             const newWordData = await generateWord({ category: "Animais", difficulty: "Fácil" });
@@ -204,4 +205,3 @@ export function HangmanGame() {
         </div>
     );
 }
-
