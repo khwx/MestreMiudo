@@ -17,7 +17,8 @@ export const PersonalizedLearningPathInputSchema = z.object({
     .describe('The grade level of the student (1-4).'),
   subject: z
     .enum(['Português', 'Matemática', 'Estudo do Meio'])
-    .describe('The subject for which to generate the learning path.'),
+    .optional()
+    .describe('The subject for which to generate the learning path. If omitted, a mixed quiz will be generated.'),
   performanceData: z
     .record(z.number())
     .nullable()
@@ -54,6 +55,6 @@ export type PersonalizedLearningPathOutput = z.infer<
 export const QuizInputSchema = z.object({
   studentId: z.string(),
   gradeLevel: z.coerce.number().min(1).max(4),
-  subject: z.enum(['Português', 'Matemática', 'Estudo do Meio']),
+  subject: z.enum(['Português', 'Matemática', 'Estudo do Meio', 'Misto']).optional(),
   numberOfQuestions: z.number().min(5).max(20).default(5),
 });

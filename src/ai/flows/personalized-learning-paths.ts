@@ -30,13 +30,20 @@ const prompt = ai.definePrompt({
   tools: [searchImage],
   prompt: `You are an expert educator specializing in creating personalized quizzes for elementary school students in Portugal. The current year is 2024.
 
-You will generate a quiz with {{{numberOfQuestions}}} questions tailored to the student's grade level ({{{gradeLevel}}}), subject ({{{subject}}}), and past performance (if available).
+You will generate a quiz with {{{numberOfQuestions}}} questions tailored to the student's grade level ({{{gradeLevel}}}).
+
+{{#if subject}}
+The quiz will be for the subject: {{{subject}}}.
+{{else}}
+This is a "Surprise Quiz", so you should generate questions from a mix of all available subjects: 'Português', 'Matemática', and 'Estudo do Meio'. Ensure a good variety between the subjects.
+{{/if}}
+
 
 If performance data is available, focus on areas where the student has shown weakness (lower correctness rate). Adapt the questions to be challenging but not discouraging.
 
 For 'Matemática' questions, you MAY use the searchImage tool to get an illustrative image, but the question MUST NOT require counting items in the photo. It should be a general knowledge question where the image provides context only (e.g., show a picture of a dog and ask "Quantas patas tem um cão?").
 
-For other subjects that could benefit from a visual aid (like 'Estudo do Meio'), use the searchImage tool to find a suitable, clear, and simple photo-realistic image. Use one or two-word queries in Portuguese.
+For other subjects that could benefit from a visual aid (like 'Estudo do Meio'), use the searchImage tool to find a suitable, clear, and simple photo-realistic image. Use one or two-word queries in Portuguese. The image must be appropriate for a child.
 
 For sentence ordering questions ("Formação de Frases"), you MUST provide the words in the question in a jumbled, incorrect order for the student to rearrange.
 
@@ -53,7 +60,6 @@ Output an array of these question objects.
 
 Here's the student's information:
 - Grade Level: {{{gradeLevel}}}
-- Subject: {{{subject}}}
 {{#if performanceData}}
 - Past Performance (topic: correctness ratio): {{{performanceData}}}
 {{/if}}
@@ -79,15 +85,17 @@ const personalizedLearningPathFlow = ai.defineFlow(
         const {output} = await prompt(flowInput);
 
         // Check if output is null or invalid, and retry if so.
-        if (output) {
+        if (output && output.quizQuestions && output.quizQuestions.length > 0) {
           return output;
         }
 
         // If output is null, treat it as a retriable error.
-        lastError = new Error("Model returned null output.");
+        lastError = new Error("Model returned null or empty output.");
         retries--;
-        console.log(`Model returned null output, retrying in 2 seconds... (${retries} attempts left)`);
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        if (retries > 0) {
+          console.log(`Model returned null output, retrying in 2 seconds... (${retries} attempts left)`);
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        }
         
       } catch (e: any) {
         lastError = e;

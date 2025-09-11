@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Book, Divide, Leaf, Loader2 } from 'lucide-react';
+import { Book, Divide, Leaf, Loader2, Shuffle } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { useEffect, useState } from 'react';
 import { getFullQuizHistory, type QuizResultEntry } from '@/app/actions';
@@ -13,6 +13,10 @@ const subjects = [
   { name: 'Matemática', icon: Divide, color: 'text-destructive', bgColor: 'bg-destructive/10', slug: 'matematica' },
   { name: 'Estudo do Meio', icon: Leaf, color: 'text-[hsl(var(--chart-2))]', bgColor: 'bg-[hsl(var(--chart-2))]/10', slug: 'estudo-do-meio' },
 ];
+
+const surpriseChallenge = {
+    name: 'Desafio Surpresa', icon: Shuffle, color: 'text-accent', bgColor: 'bg-accent/10', slug: 'misto'
+};
 
 const levelThresholds = [
     { level: 1, points: 0 },
@@ -114,7 +118,7 @@ export default function DashboardPage() {
 
       <div>
         <h3 className="text-2xl font-bold text-center mb-6">Escolhe a tua próxima missão!</h3>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {subjects.map((subject) => (
             <Link key={subject.name} href={`/quiz/${subject.slug}?name=${name}&grade=${grade}`} passHref>
               <Card className="hover:shadow-xl hover:border-primary transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full">
@@ -130,6 +134,19 @@ export default function DashboardPage() {
               </Card>
             </Link>
           ))}
+            <Link key={surpriseChallenge.name} href={`/quiz/${surpriseChallenge.slug}?name=${name}&grade=${grade}`} passHref>
+              <Card className="hover:shadow-xl hover:border-accent transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full md:col-span-2">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-2xl font-bold">{surpriseChallenge.name}</CardTitle>
+                  <div className={`p-3 rounded-full ${surpriseChallenge.bgColor}`}>
+                    <surpriseChallenge.icon className={`h-8 w-8 ${surpriseChallenge.color}`} />
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">Testa os teus conhecimentos em todas as áreas!</p>
+                </CardContent>
+              </Card>
+            </Link>
         </div>
       </div>
     </div>

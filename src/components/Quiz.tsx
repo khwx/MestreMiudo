@@ -16,7 +16,8 @@ import Image from 'next/image';
 type QuizProps = {
   studentId: string;
   gradeLevel: number;
-  subject: 'Português' | 'Matemática' | 'Estudo do Meio';
+  subject: 'Português' | 'Matemática' | 'Estudo do Meio' | 'Misto';
+  title: string;
 };
 
 type Answer = {
@@ -27,7 +28,7 @@ type Answer = {
     topic: string;
 };
 
-export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
+export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   const [quizData, setQuizData] = useState<PersonalizedLearningPathOutput | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -53,7 +54,7 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
         subject,
         numberOfQuestions: 5,
       });
-      if (data.quizQuestions.length === 0) {
+      if (!data || data.quizQuestions.length === 0) {
         setError('Não foi possível gerar perguntas. Tenta novamente mais tarde.');
       } else {
         setQuizData(data);
@@ -205,7 +206,7 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
     <Card className="w-full shadow-lg animate-in fade-in-50">
       <CardHeader>
         <div className="flex justify-between items-center mb-4">
-          <CardTitle className="text-2xl font-bold">{subject}</CardTitle>
+          <CardTitle className="text-2xl font-bold">{title}</CardTitle>
           <div className="flex items-center gap-2 text-lg font-bold text-accent">
             <Star className="h-6 w-6 fill-current" />
             <span>{score * 10} Pontos</span>
@@ -242,7 +243,7 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
                 <Button
                   variant="outline"
                   className={cn(
-                    'min-h-[4rem] py-4 text-lg whitespace-normal justify-start text-left flex-grow',
+                    'min-h-[4rem] py-4 text-lg whitespace-normal justify-start text-left flex-grow h-auto',
                     isAnswered && isCorrect && 'border-2 border-[hsl(var(--chart-2))] bg-[hsl(var(--chart-2))]/20 text-foreground',
                     isAnswered && isSelected && !isCorrect && 'border-2 border-destructive bg-destructive/20 text-foreground',
                     isAnswered && !isSelected && 'opacity-60'
@@ -281,5 +282,3 @@ export function Quiz({ studentId, gradeLevel, subject }: QuizProps) {
     </Card>
   );
 }
-
-    

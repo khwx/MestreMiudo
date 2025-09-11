@@ -18,7 +18,11 @@ const AnswerSchema = z.object({
 });
 
 // This will be the structure for saving the results of a quiz
-const QuizResultSchema = QuizInputSchema.extend({
+const QuizResultSchema = z.object({
+  studentId: z.string(),
+  gradeLevel: z.number(),
+  subject: z.enum(['Português', 'Matemática', 'Estudo do Meio', 'Misto']),
+  numberOfQuestions: z.number(),
   timestamp: z.string(),
   quiz: PersonalizedLearningPathOutputSchema,
   answers: z.array(AnswerSchema),
@@ -49,9 +53,11 @@ async function getQuizHistory(): Promise<QuizResultEntry[]> {
   }
 }
 
-export async function getPerformanceData(studentId: string, subject: string): Promise<Record<string, number> | null> {
+export async function getPerformanceData(studentId: string, subject?: string): Promise<Record<string, number> | null> {
     const history = await getQuizHistory();
-    const studentHistory = history.filter(entry => entry.studentId === studentId && entry.subject === subject);
+    const studentHistory = history.filter(entry => 
+        entry.studentId === studentId && (subject ? entry.subject === subject : true)
+    );
 
     if (studentHistory.length === 0) {
         return null;
@@ -81,7 +87,11 @@ export async function getPerformanceData(studentId: string, subject: string): Pr
     return performanceScores;
 }
 
-const SaveQuizInputSchema = QuizInputSchema.extend({
+const SaveQuizInputSchema = z.object({
+  studentId: z.string(),
+  gradeLevel: z.coerce.number().min(1).max(4),
+  subject: z.enum(['Português', 'Matemática', 'Estudo do Meio', 'Misto']),
+  numberOfQuestions: z.number().min(5).max(20).default(5),
   answers: z.array(AnswerSchema),
   quiz: PersonalizedLearningPathOutputSchema,
   score: z.number(),
@@ -114,10 +124,17 @@ async function saveQuiz(input: SaveQuizInput) {
 export async function generateQuiz(input: QuizInput): Promise<PersonalizedLearningPathOutput> {
   const validatedInput = QuizInputSchema.parse(input);
   
-  // Get performance data to personalize the quiz
-  const performanceData = await getPerformanceData(validatedInput.studentId, validatedInput.subject);
+  // Get performance data to personalize the quiz. If subject is Misto, get overall performance.
+  const performanceData = await getPerformanceData(validatedInput.studentId, validatedInput.subject !== 'Misto' ? validatedInput.subject : undefined);
+
+  // Don't pass "Misto" to the AI, just omit the subject
+  const aiInput = {
+    ...validatedInput,
+    subject: validatedInput.subject === 'Misto' ? undefined : validatedInput.subject,
+    performanceData,
+  };
   
-  const quizOutput = await personalizedLearningPath({ ...validatedInput, performanceData });
+  const quizOutput = await personalizedLearningPath(aiInput);
     
   return quizOutput;
 }
