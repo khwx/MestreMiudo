@@ -1584,11 +1584,11 @@
     "score": 4
   },
   {
-    "timestamp": "2025-09-11T12:58:36.195Z",
     "studentId": "Maria",
     "gradeLevel": 1,
     "subject": "Misto",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-11T12:58:36.195Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -1690,5 +1690,111 @@
       }
     ],
     "score": 5
+  },
+  {
+    "timestamp": "2025-09-11T13:04:29.157Z",
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Misto",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Quantos dedos temos numa só mão?",
+          "options": [
+            "Três",
+            "Quatro",
+            "Cinco",
+            "Seis"
+          ],
+          "correctAnswer": "Cinco",
+          "topic": "O Corpo Humano",
+          "imageUrl": "https://pixabay.com/get/gcc2855b2f9ea07b49af5356ab9b519fe52b9504ea25941f9bb5ef192f88acd741a95f9c81ced8d5482eb051e51618e2c_640.jpg"
+        },
+        {
+          "question": "Se tiveres 3 maçãs e te derem mais 2, com quantas maçãs ficas no total?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Contagem"
+        },
+        {
+          "question": "Qual a palavra que descreve o oposto de 'grande'?",
+          "options": [
+            "Largo",
+            "Pequeno",
+            "Alto",
+            "Forte"
+          ],
+          "correctAnswer": "Pequeno",
+          "topic": "Vocabulário"
+        },
+        {
+          "question": "O macaco é um animal que gosta muito de comer...?",
+          "options": [
+            "Cenouras",
+            "Bananas",
+            "Maçãs",
+            "Peixe"
+          ],
+          "correctAnswer": "Bananas",
+          "topic": "Os Animais",
+          "imageUrl": "https://pixabay.com/get/g0f49d52d32d1d207b3e656f4dc8c0ff320f9b26829ce23f64973b6d37d1c29bec2225bec262e3a16b3074d8487d596a1_640.jpg"
+        },
+        {
+          "question": "Ordena as palavras para formar uma frase: 'gato', 'o', 'leite', 'bebe'.",
+          "options": [
+            "Gato bebe o leite",
+            "O gato bebe leite",
+            "Bebe o leite gato",
+            "Leite o gato bebe"
+          ],
+          "correctAnswer": "O gato bebe leite",
+          "topic": "Formação de Frases"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Quantos dedos temos numa só mão?",
+        "selectedAnswer": "Cinco",
+        "correctAnswer": "Cinco",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Se tiveres 3 maçãs e te derem mais 2, com quantas maçãs ficas no total?",
+        "selectedAnswer": "5",
+        "correctAnswer": "5",
+        "isCorrect": true,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Qual a palavra que descreve o oposto de 'grande'?",
+        "selectedAnswer": "Forte",
+        "correctAnswer": "Pequeno",
+        "isCorrect": false,
+        "topic": "Vocabulário"
+      },
+      {
+        "question": "O macaco é um animal que gosta muito de comer...?",
+        "selectedAnswer": "Bananas",
+        "correctAnswer": "Bananas",
+        "isCorrect": true,
+        "topic": "Os Animais"
+      },
+      {
+        "question": "Ordena as palavras para formar uma frase: 'gato', 'o', 'leite', 'bebe'.",
+        "selectedAnswer": "O gato bebe leite",
+        "correctAnswer": "O gato bebe leite",
+        "isCorrect": true,
+        "topic": "Formação de Frases"
+      }
+    ],
+    "score": 4
   }
 ]

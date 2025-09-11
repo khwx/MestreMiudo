@@ -28,6 +28,13 @@ type Answer = {
     topic: string;
 };
 
+const loadingMessages = [
+    "A conectar com o super-cérebro do MestreMiúdo...",
+    "A escolher as perguntas perfeitas para ti...",
+    "A adicionar um toque de magia...",
+    "Quase a postos! A preparar o desafio...",
+];
+
 export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   const [quizData, setQuizData] = useState<PersonalizedLearningPathOutput | null>(null);
   const [loading, setLoading] = useState(true);
@@ -37,12 +44,22 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   const [isAnswered, setIsAnswered] = useState(false);
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState<Answer[]>([]);
+  const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
   
   const { toast } = useToast();
   const router = useRouter();
   const searchParams = useSearchParams();
   const name = searchParams.get('name');
   const grade = searchParams.get('grade');
+
+  useEffect(() => {
+    if (loading) {
+      const interval = setInterval(() => {
+        setLoadingMessageIndex((prevIndex) => (prevIndex + 1) % loadingMessages.length);
+      }, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [loading]);
 
   const fetchQuiz = useCallback(async () => {
     try {
@@ -161,7 +178,9 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh] gap-4 text-center">
         <Loader2 className="h-16 w-16 animate-spin text-primary" />
-        <p className="text-xl text-muted-foreground font-headline">A preparar um desafio especial para ti...</p>
+        <p className="text-xl text-muted-foreground font-headline animate-in fade-in duration-500">
+            {loadingMessages[loadingMessageIndex]}
+        </p>
       </div>
     );
   }
@@ -291,3 +310,5 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     </Card>
   );
 }
+
+    
