@@ -38,6 +38,54 @@ const calculateWinner = (squares: (Player | null)[]) => {
   return { winner: null, line: [] };
 };
 
+const findBestMove = (squares: (Player | null)[]): number => {
+    let bestMove = -1;
+    let bestVal = -Infinity;
+
+    for (let i = 0; i < squares.length; i++) {
+        if (squares[i] === null) {
+            squares[i] = 'O'; // Computer's move
+            const moveVal = minimax(squares, 0, false);
+            squares[i] = null; // Undo the move
+
+            if (moveVal > bestVal) {
+                bestMove = i;
+                bestVal = moveVal;
+            }
+        }
+    }
+    return bestMove;
+};
+
+const minimax = (board: (Player | null)[], depth: number, isMaximizing: boolean): number => {
+    const { winner } = calculateWinner(board);
+    if (winner === 'O') return 10 - depth; // Computer wins
+    if (winner === 'X') return depth - 10; // Human wins
+    if (board.every(s => s !== null)) return 0; // Draw
+
+    if (isMaximizing) {
+        let bestVal = -Infinity;
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] === null) {
+                board[i] = 'O';
+                bestVal = Math.max(bestVal, minimax(board, depth + 1, false));
+                board[i] = null;
+            }
+        }
+        return bestVal;
+    } else {
+        let bestVal = Infinity;
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] === null) {
+                board[i] = 'X';
+                bestVal = Math.min(bestVal, minimax(board, depth + 1, true));
+                board[i] = null;
+            }
+        }
+        return bestVal;
+    }
+};
+
 export function TicTacToe() {
   const [squares, setSquares] = useState<(Player | null)[]>(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
@@ -49,17 +97,14 @@ export function TicTacToe() {
   useEffect(() => {
     if (gameMode === 'computer' && !xIsNext && !winner && !isDraw) {
       const computerMoveTimeout = setTimeout(() => {
-        const emptySquares = squares.map((sq, index) => sq === null ? index : null).filter(val => val !== null) as number[];
-        
-        if (emptySquares.length > 0) {
-            // Very simple AI: just picks the first available square
-            const move = emptySquares[0];
+        const move = findBestMove(squares);
+        if (move !== -1) {
             const nextSquares = squares.slice();
             nextSquares[move] = 'O';
             setSquares(nextSquares);
             setXIsNext(true);
         }
-      }, 200);
+      }, 500); // Add a small delay for a more natural feel
 
       return () => clearTimeout(computerMoveTimeout);
     }

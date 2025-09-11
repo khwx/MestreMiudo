@@ -2010,11 +2010,11 @@
     "score": 3
   },
   {
-    "timestamp": "2025-09-11T13:40:56.229Z",
     "studentId": "Sara",
     "gradeLevel": 1,
     "subject": "Misto",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-11T13:40:56.229Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -2114,5 +2114,214 @@
       }
     ],
     "score": 1
+  },
+  {
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-11T15:07:42.657Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual destas palavras começa com a letra 'M'?",
+          "options": [
+            "Casa",
+            "Mão",
+            "Sol",
+            "Pato"
+          ],
+          "correctAnswer": "Mão",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "Que letra está em falta na palavra '___ANANA'?",
+          "options": [
+            "P",
+            "B",
+            "M",
+            "N"
+          ],
+          "correctAnswer": "B",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "Organiza as palavras para formar uma frase correta: \"come\" \"O\" \"maçã\" \"menino\".",
+          "options": [
+            "Menino come a maçã O.",
+            "O menino come maçã.",
+            "Come menino a maçã.",
+            "Maçã o menino come."
+          ],
+          "correctAnswer": "O menino come maçã.",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "O que fazes quando tens sede?",
+          "options": [
+            "Comes",
+            "Dormes",
+            "Bebes",
+            "Corres"
+          ],
+          "correctAnswer": "Bebes",
+          "topic": "Leitura e Vocabulário"
+        },
+        {
+          "question": "Qual palavra rima com 'flor'?",
+          "options": [
+            "Sol",
+            "Azul",
+            "Amor",
+            "Pato"
+          ],
+          "correctAnswer": "Amor",
+          "topic": "Rimas e Sons de Palavras"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual destas palavras começa com a letra 'M'?",
+        "selectedAnswer": "Mão",
+        "correctAnswer": "Mão",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Que letra está em falta na palavra '___ANANA'?",
+        "selectedAnswer": "M",
+        "correctAnswer": "B",
+        "isCorrect": false,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Organiza as palavras para formar uma frase correta: \"come\" \"O\" \"maçã\" \"menino\".",
+        "selectedAnswer": "O menino come maçã.",
+        "correctAnswer": "O menino come maçã.",
+        "isCorrect": true,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "O que fazes quando tens sede?",
+        "selectedAnswer": "Comes",
+        "correctAnswer": "Bebes",
+        "isCorrect": false,
+        "topic": "Leitura e Vocabulário"
+      },
+      {
+        "question": "Qual palavra rima com 'flor'?",
+        "selectedAnswer": "Amor",
+        "correctAnswer": "Amor",
+        "isCorrect": true,
+        "topic": "Rimas e Sons de Palavras"
+      }
+    ],
+    "score": 3
+  },
+  {
+    "timestamp": "2025-09-11T15:09:11.280Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual palavra começa com o som de \"M\"?",
+          "options": [
+            "Sol",
+            "Mesa",
+            "Pato",
+            "Gato"
+          ],
+          "correctAnswer": "Mesa",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "Observa a imagem. O que vês?",
+          "options": [
+            "Uma casa",
+            "Uma flor",
+            "Um carro",
+            "Uma bola"
+          ],
+          "correctAnswer": "Uma flor",
+          "topic": "Leitura e Vocabulário",
+          "imageUrl": "https://pixabay.com/get/g3418135f5d2fa6b8f05a45aaabbf87e7f430c1951ef812ccda544b0a7d98256c2412848477bff471ade5182ee9a74409_640.jpg"
+        },
+        {
+          "question": "Qual destas palavras tem a letra \"A\" no meio?",
+          "options": [
+            "Pão",
+            "Mão",
+            "Cama",
+            "Rua"
+          ],
+          "correctAnswer": "Cama",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "Qual palavra significa o oposto de \"grande\"?",
+          "options": [
+            "Largo",
+            "Pequeno",
+            "Alto",
+            "Forte"
+          ],
+          "correctAnswer": "Pequeno",
+          "topic": "Leitura e Vocabulário"
+        },
+        {
+          "question": "Coloca as palavras na ordem correta para formar uma frase: \"come\" \"o\" \"pão\" \"menino\"",
+          "options": [
+            "O pão come o menino.",
+            "O menino come pão.",
+            "Come o menino pão.",
+            "Pão o menino come."
+          ],
+          "correctAnswer": "O menino come pão.",
+          "topic": "Formação de Frases e Verbos Simples"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual palavra começa com o som de \"M\"?",
+        "selectedAnswer": "Mesa",
+        "correctAnswer": "Mesa",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Observa a imagem. O que vês?",
+        "selectedAnswer": "Uma flor",
+        "correctAnswer": "Uma flor",
+        "isCorrect": true,
+        "topic": "Leitura e Vocabulário"
+      },
+      {
+        "question": "Qual destas palavras tem a letra \"A\" no meio?",
+        "selectedAnswer": "Pão",
+        "correctAnswer": "Cama",
+        "isCorrect": false,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Qual palavra significa o oposto de \"grande\"?",
+        "selectedAnswer": "Pequeno",
+        "correctAnswer": "Pequeno",
+        "isCorrect": true,
+        "topic": "Leitura e Vocabulário"
+      },
+      {
+        "question": "Coloca as palavras na ordem correta para formar uma frase: \"come\" \"o\" \"pão\" \"menino\"",
+        "selectedAnswer": "O pão come o menino.",
+        "correctAnswer": "O menino come pão.",
+        "isCorrect": false,
+        "topic": "Formação de Frases e Verbos Simples"
+      }
+    ],
+    "score": 3
   }
 ]
