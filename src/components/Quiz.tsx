@@ -10,7 +10,7 @@ import { Progress } from '@/components/ui/progress';
 import { Loader2, Volume2, Star, Trophy, RefreshCw, Check, X, Book, Divide, Leaf } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from "@/hooks/use-toast";
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 type QuizProps = {
@@ -48,9 +48,6 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   
   const { toast } = useToast();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name');
-  const grade = searchParams.get('grade');
 
   useEffect(() => {
     if (loading) {
@@ -217,7 +214,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
             <Button onClick={handleRestart} variant="outline" size="lg">
               <RefreshCw className="mr-2 h-4 w-4" /> Jogar Novamente
             </Button>
-            <Button onClick={() => router.push(`/dashboard?name=${name}&grade=${grade}`)} size="lg">
+            <Button onClick={() => router.push(`/dashboard?name=${studentId}&grade=${gradeLevel}`)} size="lg">
               Voltar ao Início
             </Button>
           </div>
@@ -317,7 +314,3 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     </Card>
   );
 }
-
-    
-
-    

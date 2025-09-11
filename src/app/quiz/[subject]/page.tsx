@@ -1,9 +1,7 @@
 
-"use client";
-
-import { useSearchParams } from 'next/navigation';
-import { Quiz } from '@/components/Quiz';
-import { use } from 'react';
+import { Suspense } from 'react';
+import { Loader2 } from 'lucide-react';
+import QuizClientPage from './client-page';
 import { notFound } from 'next/navigation';
 
 const subjectMap = {
@@ -15,15 +13,17 @@ const subjectMap = {
 
 type SubjectSlug = keyof typeof subjectMap;
 
-export default function QuizPage({ params: paramsPromise }: { params: Promise<{ subject: string }> }) {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name') || 'Jogador';
-  const grade = searchParams.get('grade');
-  
-  const params = use(paramsPromise);
+export default function QuizPage({ params, searchParams }: { params: { subject: string }, searchParams: { [key: string]: string | string[] | undefined } }) {
   
   const subjectSlug = decodeURIComponent(params.subject) as SubjectSlug;
   const subjectTitle = subjectMap[subjectSlug];
+
+  const name = searchParams?.name as string || 'Jogador';
+  const grade = searchParams?.grade as string;
+
+  if (!subjectTitle) {
+    notFound();
+  }
 
   if (!grade) {
     return (
@@ -32,27 +32,23 @@ export default function QuizPage({ params: paramsPromise }: { params: Promise<{ 
       </div>
     );
   }
-
-  if (!subjectTitle) {
-      // Instead of a full 404, show a user-friendly error.
-      return (
-        <div className="flex items-center justify-center h-full text-center">
-          <p className="text-destructive text-lg">Erro: Disciplina inválida.</p>
-        </div>
-      );
-  }
   
-  // For the AI, we need to pass the specific subject, or 'Misto' for the surprise challenge.
   const quizSubject = subjectSlug === 'misto' ? 'Misto' : subjectTitle;
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
-      <Quiz
-        studentId={name} // Using name as studentId for simplicity
-        gradeLevel={parseInt(grade, 10)}
-        subject={quizSubject}
-        title={subjectTitle}
-      />
-    </div>
+    <Suspense fallback={
+        <div className="flex justify-center items-center h-full">
+            <Loader2 className="h-12 w-12 animate-spin text-primary" />
+        </div>
+    }>
+       <div className="w-full max-w-4xl mx-auto">
+         <QuizClientPage
+            studentId={name}
+            gradeLevel={parseInt(grade, 10)}
+            subject={quizSubject}
+            title={subjectTitle}
+        />
+       </div>
+    </Suspense>
   );
 }
