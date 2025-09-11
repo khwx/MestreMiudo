@@ -744,11 +744,11 @@
     "score": 5
   },
   {
-    "timestamp": "2025-09-11T11:13:40.089Z",
     "studentId": "Maria",
     "gradeLevel": 3,
     "subject": "Português",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-11T11:13:40.089Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -847,5 +847,322 @@
       }
     ],
     "score": 5
+  },
+  {
+    "studentId": "Maria",
+    "gradeLevel": 3,
+    "subject": "Estudo do Meio",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-11T11:21:43.840Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual é a função do órgão do corpo humano que vês na imagem?",
+          "options": [
+            "Ouvir",
+            "Cheirar",
+            "Ver",
+            "Tocar"
+          ],
+          "correctAnswer": "Ver",
+          "topic": "O Corpo Humano",
+          "imageUrl": "https://pixabay.com/get/gf6a84cf569597d60254bce1f7828899bb6d962022d9fd0ddc48628056c229011dad4a0f5d602239c627cc149da08fd86_640.jpg"
+        },
+        {
+          "question": "Que tipo de animal é o que vês na imagem?",
+          "options": [
+            "Ave",
+            "Mamífero",
+            "Peixe",
+            "Réptil"
+          ],
+          "correctAnswer": "Mamífero",
+          "topic": "Os Animais",
+          "imageUrl": "https://pixabay.com/get/g4cc870bcb2858236af3ad68bca76ff92c51d4f9e74154465a2bb1f5459e73e05face9358bcdde0fe59b7a0044b7f1627_640.jpg"
+        },
+        {
+          "question": "Na tua família, quem é geralmente responsável por contar histórias e transmitir tradições antigas?",
+          "options": [
+            "Os vizinhos",
+            "Os amigos",
+            "Os professores",
+            "Os avós"
+          ],
+          "correctAnswer": "Os avós",
+          "topic": "A Família"
+        },
+        {
+          "question": "Qual é o nome do local na escola onde os alunos normalmente almoçam?",
+          "options": [
+            "A biblioteca",
+            "O ginásio",
+            "O refeitório",
+            "A sala de aula"
+          ],
+          "correctAnswer": "O refeitório",
+          "topic": "A Escola"
+        },
+        {
+          "question": "Organiza as palavras para formar uma frase correta sobre a natureza: 'plantas', 'crescem', 'as', 'no', 'jardim'",
+          "options": [
+            "No jardim as plantas crescem.",
+            "As no plantas jardim crescem.",
+            "As plantas crescem no jardim.",
+            "Crescem as no jardim plantas."
+          ],
+          "correctAnswer": "As plantas crescem no jardim.",
+          "topic": "A Natureza"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual é a função do órgão do corpo humano que vês na imagem?",
+        "selectedAnswer": "Ouvir",
+        "correctAnswer": "Ver",
+        "isCorrect": false,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Que tipo de animal é o que vês na imagem?",
+        "selectedAnswer": "Mamífero",
+        "correctAnswer": "Mamífero",
+        "isCorrect": true,
+        "topic": "Os Animais"
+      },
+      {
+        "question": "Na tua família, quem é geralmente responsável por contar histórias e transmitir tradições antigas?",
+        "selectedAnswer": "Os avós",
+        "correctAnswer": "Os avós",
+        "isCorrect": true,
+        "topic": "A Família"
+      },
+      {
+        "question": "Qual é o nome do local na escola onde os alunos normalmente almoçam?",
+        "selectedAnswer": "O refeitório",
+        "correctAnswer": "O refeitório",
+        "isCorrect": true,
+        "topic": "A Escola"
+      },
+      {
+        "question": "Organiza as palavras para formar uma frase correta sobre a natureza: 'plantas', 'crescem', 'as', 'no', 'jardim'",
+        "selectedAnswer": "As plantas crescem no jardim.",
+        "correctAnswer": "As plantas crescem no jardim.",
+        "isCorrect": true,
+        "topic": "A Natureza"
+      }
+    ],
+    "score": 4
+  },
+  {
+    "studentId": "Maria",
+    "gradeLevel": 3,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-11T11:33:13.719Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Observa a imagem. Quantas peças de fruta, no total, consegues contar?",
+          "options": [
+            "10",
+            "11",
+            "12",
+            "13"
+          ],
+          "correctAnswer": "12",
+          "topic": "Contagem",
+          "imageUrl": "https://pixabay.com/get/g0a0e778aef68f79152c1aac6e11748a96152f9f2b460d25020667df5dd12d77a61fd25b489d8bd82ab7bab3493db9ebb_640.jpg"
+        },
+        {
+          "question": "Completa a sequência numérica: 5, 10, ___, 20, 25.",
+          "options": [
+            "12",
+            "15",
+            "18",
+            "22"
+          ],
+          "correctAnswer": "15",
+          "topic": "Sucessão Numérica / Contagem"
+        },
+        {
+          "question": "A Maria tem 4 caixas e em cada caixa há 5 bonecas. Quantas bonecas tem a Maria no total?",
+          "options": [
+            "9",
+            "15",
+            "20",
+            "25"
+          ],
+          "correctAnswer": "20",
+          "topic": "Contagem / Multiplicação"
+        },
+        {
+          "question": "Começando no 3 e contando de 3 em 3, qual é o quarto número que contas?",
+          "options": [
+            "9",
+            "12",
+            "15",
+            "18"
+          ],
+          "correctAnswer": "12",
+          "topic": "Contagem / Padrões"
+        },
+        {
+          "question": "O Pedro tinha 35 lápis. Deu 12 lápis à sua irmã e depois comprou mais 8. Quantos lápis tem o Pedro agora?",
+          "options": [
+            "23",
+            "31",
+            "35",
+            "40"
+          ],
+          "correctAnswer": "31",
+          "topic": "Adição e Subtração / Resolução de Problemas"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Observa a imagem. Quantas peças de fruta, no total, consegues contar?",
+        "selectedAnswer": "11",
+        "correctAnswer": "12",
+        "isCorrect": false,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Completa a sequência numérica: 5, 10, ___, 20, 25.",
+        "selectedAnswer": "15",
+        "correctAnswer": "15",
+        "isCorrect": true,
+        "topic": "Sucessão Numérica / Contagem"
+      },
+      {
+        "question": "A Maria tem 4 caixas e em cada caixa há 5 bonecas. Quantas bonecas tem a Maria no total?",
+        "selectedAnswer": "20",
+        "correctAnswer": "20",
+        "isCorrect": true,
+        "topic": "Contagem / Multiplicação"
+      },
+      {
+        "question": "Começando no 3 e contando de 3 em 3, qual é o quarto número que contas?",
+        "selectedAnswer": "12",
+        "correctAnswer": "12",
+        "isCorrect": true,
+        "topic": "Contagem / Padrões"
+      },
+      {
+        "question": "O Pedro tinha 35 lápis. Deu 12 lápis à sua irmã e depois comprou mais 8. Quantos lápis tem o Pedro agora?",
+        "selectedAnswer": "31",
+        "correctAnswer": "31",
+        "isCorrect": true,
+        "topic": "Adição e Subtração / Resolução de Problemas"
+      }
+    ],
+    "score": 4
+  },
+  {
+    "timestamp": "2025-09-11T12:03:40.854Z",
+    "studentId": "Maria",
+    "gradeLevel": 3,
+    "subject": "Estudo do Meio",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual é o nome do órgão principal que vês nesta imagem e que bombeia o sangue por todo o nosso corpo?",
+          "options": [
+            "Fígado",
+            "Cérebro",
+            "Coração",
+            "Pulmão"
+          ],
+          "correctAnswer": "Coração",
+          "topic": "O Corpo Humano",
+          "imageUrl": "https://pixabay.com/get/g6a7e7d1c3929d26c33eaee5cddcd0651c0a4b1070aafabf7240ada4f6578d3b2b61cd183f627fb89a31b405b7a22c8fb_640.jpg"
+        },
+        {
+          "question": "Coloca as seguintes palavras na ordem correta para formar uma frase sobre o corpo humano: comemos / digerir / o / O / ajuda / corpo / que / alimento.",
+          "options": [
+            "O alimento que ajuda o corpo a digerir comemos.",
+            "O corpo ajuda a digerir o alimento que comemos.",
+            "Ajuda o corpo a digerir que comemos o alimento.",
+            "Comemos o alimento que o corpo ajuda a digerir."
+          ],
+          "correctAnswer": "O corpo ajuda a digerir o alimento que comemos.",
+          "topic": "O Corpo Humano"
+        },
+        {
+          "question": "Observa a imagem. Que tipo de refeição saudável é esta, essencial para começar o dia com energia?",
+          "options": [
+            "Um jantar completo",
+            "Um pequeno-almoço saudável",
+            "Um almoço rápido",
+            "Uma sobremesa doce"
+          ],
+          "correctAnswer": "Um pequeno-almoço saudável",
+          "topic": "O Corpo Humano",
+          "imageUrl": "https://pixabay.com/get/gc3a67950453d1f32a19e2bd6f8936716d0b146d42585eca22e62ee4dbaa7ce301e88511f95fbb40065b94cce3922bf02_640.jpg"
+        },
+        {
+          "question": "Qual destas partes do corpo nos permite ouvir os sons à nossa volta?",
+          "options": [
+            "Os Olhos",
+            "As Mãos",
+            "As Orelhas",
+            "O Nariz"
+          ],
+          "correctAnswer": "As Orelhas",
+          "topic": "O Corpo Humano"
+        },
+        {
+          "question": "Qual é o nome do sistema do corpo humano responsável por transportar o sangue e os nutrientes para todas as partes do corpo?",
+          "options": [
+            "Sistema Respiratório",
+            "Sistema Digestivo",
+            "Sistema Circulatório",
+            "Sistema Nervoso"
+          ],
+          "correctAnswer": "Sistema Circulatório",
+          "topic": "O Corpo Humano"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual é o nome do órgão principal que vês nesta imagem e que bombeia o sangue por todo o nosso corpo?",
+        "selectedAnswer": "Coração",
+        "correctAnswer": "Coração",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Coloca as seguintes palavras na ordem correta para formar uma frase sobre o corpo humano: comemos / digerir / o / O / ajuda / corpo / que / alimento.",
+        "selectedAnswer": "O corpo ajuda a digerir o alimento que comemos.",
+        "correctAnswer": "O corpo ajuda a digerir o alimento que comemos.",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Observa a imagem. Que tipo de refeição saudável é esta, essencial para começar o dia com energia?",
+        "selectedAnswer": "Um pequeno-almoço saudável",
+        "correctAnswer": "Um pequeno-almoço saudável",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Qual destas partes do corpo nos permite ouvir os sons à nossa volta?",
+        "selectedAnswer": "Os Olhos",
+        "correctAnswer": "As Orelhas",
+        "isCorrect": false,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Qual é o nome do sistema do corpo humano responsável por transportar o sangue e os nutrientes para todas as partes do corpo?",
+        "selectedAnswer": "Sistema Circulatório",
+        "correctAnswer": "Sistema Circulatório",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      }
+    ],
+    "score": 4
   }
 ]
