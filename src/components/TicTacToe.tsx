@@ -45,20 +45,21 @@ export function TicTacToe() {
 
   const { winner, line: winningLine } = calculateWinner(squares);
   const isDraw = squares.every(square => square !== null) && !winner;
-  const humanPlayer: Player = 'X';
-  const computerPlayer: Player = 'O';
-
+  
   useEffect(() => {
     if (gameMode === 'computer' && !xIsNext && !winner && !isDraw) {
       const computerMoveTimeout = setTimeout(() => {
-        const emptySquares = squares.map((sq, index) => sq === null ? index : null).filter(val => val !== null);
+        const emptySquares = squares.map((sq, index) => sq === null ? index : null).filter(val => val !== null) as number[];
+        
         if (emptySquares.length > 0) {
-            const move = emptySquares[0]; // Simple AI: chooses the first available square
-            if (move !== null) {
-                handleClick(move);
-            }
+            // Very simple AI: just picks the first available square
+            const move = emptySquares[0];
+            const nextSquares = squares.slice();
+            nextSquares[move] = 'O';
+            setSquares(nextSquares);
+            setXIsNext(true);
         }
-      }, 200); // Reduced wait time for computer move
+      }, 200);
 
       return () => clearTimeout(computerMoveTimeout);
     }
@@ -78,9 +79,9 @@ export function TicTacToe() {
     if (squares[i] || winner) {
       return;
     }
-
+    
+    // Allow human move only if it's X's turn
     if (gameMode === 'computer' && !xIsNext) {
-        // Prevent human from playing on computer's turn
         return;
     }
 
