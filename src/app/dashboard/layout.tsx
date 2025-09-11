@@ -33,7 +33,6 @@ export default function DashboardLayout({
             </Link>
             <div className="text-right hidden sm:block">
               <p className="font-bold text-lg">{name}</p>
-              <p className="text-sm text-muted-foreground">{grade}º Ano</p>
             </div>
             <Avatar className="h-12 w-12 border-2 border-primary">
               <AvatarImage src={avatarUrl} alt={name} />

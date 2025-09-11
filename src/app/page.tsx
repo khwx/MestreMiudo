@@ -8,12 +8,11 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 export default function HomePage() {
   const router = useRouter()
   const [name, setName] = useState('')
-  const [grade, setGrade] = useState('')
+  const [grade, setGrade] = useState('1') // Default to 1, but it's not shown anymore
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -52,21 +51,7 @@ export default function HomePage() {
                 className="text-lg h-12"
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="grade" className="text-md">O teu ano de escolaridade</Label>
-              <Select onValueChange={setGrade} value={grade} required>
-                <SelectTrigger id="grade" className="text-lg h-12">
-                  <SelectValue placeholder="Seleciona o teu ano" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="1">1º Ano</SelectItem>
-                  <SelectItem value="2">2º Ano</SelectItem>
-                  <SelectItem value="3">3º Ano</SelectItem>
-                  <SelectItem value="4">4º Ano</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <Button type="submit" className="w-full text-xl h-14" disabled={!name || !grade}>
+            <Button type="submit" className="w-full text-xl h-14" disabled={!name}>
               Começar a Aprender!
             </Button>
           </form>

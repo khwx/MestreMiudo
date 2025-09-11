@@ -21,6 +21,7 @@ const levelThresholds = [
     { level: 4, points: 600 },
     { level: 5, points: 1000 },
     { level: 6, points: 1500 },
+    // Add more levels as needed
 ];
 
 const calculateLevel = (totalPoints: number) => {
@@ -43,13 +44,13 @@ const calculateLevel = (totalPoints: number) => {
 
     const pointsToNext = pointsForNextLevel - pointsAtCurrentLevel;
     const progressInLevel = totalPoints - pointsAtCurrentLevel;
-    const progressPercentage = pointsToNext > 0 ? (progressInLevel / pointsToNext) * 100 : 100;
+    const progressPercentage = pointsToNext > 0 && pointsToNext !== Infinity ? (progressInLevel / pointsToNext) * 100 : 100;
     
     return {
         level: currentLevel,
         nextLevel: currentLevel + 1,
         progressPercentage,
-        pointsNeeded: pointsToNext - progressInLevel
+        pointsNeeded: pointsToNext === Infinity ? 0 : pointsToNext - progressInLevel,
     };
 };
 
@@ -73,6 +74,7 @@ export default function DashboardPage() {
     }
   }, [name]);
   
+  // Each correct answer gives 10 points
   const totalPoints = history.reduce((acc, entry) => acc + entry.score * 10, 0);
   const { level, nextLevel, progressPercentage, pointsNeeded } = calculateLevel(totalPoints);
 
@@ -86,7 +88,7 @@ export default function DashboardPage() {
       <Card className="max-w-2xl mx-auto">
         <CardHeader>
           <CardTitle>O Teu Progresso Geral</CardTitle>
-          <CardDescription>Completa desafios para subir de nível!</CardDescription>
+          <CardDescription>Ganha pontos e sobe de nível ao completar desafios!</CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
             {loading ? (
@@ -96,12 +98,14 @@ export default function DashboardPage() {
             ) : (
                 <>
                     <div className="flex items-center justify-between text-sm text-muted-foreground">
-                        <span>Nível {level}</span>
-                        <span className="font-bold">Nível {nextLevel}</span>
+                        <span className="font-bold text-lg">Nível {level}</span>
+                        {pointsNeeded > 0 && (
+                            <span className="font-bold text-lg">Nível {nextLevel}</span>
+                        )}
                     </div>
                     <Progress value={progressPercentage} />
                     <p className="text-sm text-muted-foreground text-center pt-2">
-                        {pointsNeeded > 0 ? `Faltam ${pointsNeeded} pontos para o próximo nível!` : "Nível máximo alcançado!"}
+                        {pointsNeeded > 0 ? `Faltam ${pointsNeeded} pontos para o próximo nível!` : "Parabéns! Alcançaste o nível máximo!"}
                     </p>
                 </>
             )}
