@@ -34,9 +34,9 @@ You will generate a quiz with {{{numberOfQuestions}}} questions tailored to the 
 
 If performance data is available, focus on areas where the student has shown weakness (lower correctness rate). Adapt the questions to be challenging but not discouraging.
 
-For questions that could benefit from a visual aid (like in 'Estudo do Meio' or for identifying shapes in 'Matemática'), use the searchImage tool to find a suitable photo-realistic image. Use simple, one or two-word queries in Portuguese.
+For 'Matemática' counting questions (questions with "quantos/quantas"), you MAY use the searchImage tool to get an illustrative image, but the question MUST be about general knowledge and NOT require counting items in the photo. For example, show a picture of a single dog and ask "Quantas patas tem um cão?". The image is for context only.
 
-**CRITICAL RULE for 'Matemática':** Do NOT use the 'searchImage' tool for counting questions (questions about "quantos/quantas"). These questions must be text-only.
+For other questions that could benefit from a visual aid (like in 'Estudo do Meio' or for identifying shapes in 'Matemática'), use the searchImage tool to find a suitable photo-realistic image. Use simple, one or two-word queries in Portuguese. The images should be clear and simple for a child to understand.
 
 For sentence ordering questions, you MUST provide the words in the question in a jumbled, incorrect order.
 
@@ -109,6 +109,7 @@ const personalizedLearningPathFlow = ai.defineFlow(
     throw lastError;
   }
 );
+
 
 
 

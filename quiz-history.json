@@ -1060,11 +1060,11 @@
     "score": 4
   },
   {
-    "timestamp": "2025-09-11T12:03:40.854Z",
     "studentId": "Maria",
     "gradeLevel": 3,
     "subject": "Estudo do Meio",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-11T12:03:40.854Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -1164,5 +1164,109 @@
       }
     ],
     "score": 4
+  },
+  {
+    "timestamp": "2025-09-11T12:11:43.499Z",
+    "studentId": "Maria",
+    "gradeLevel": 3,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Quantas patas tem um cão?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "4",
+          "topic": "Contagem"
+        },
+        {
+          "question": "Se tens 3 maçãs e comes 1, quantas maçãs te restam?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "2",
+          "topic": "Contagem"
+        },
+        {
+          "question": "Quantos dedos tens numa só mão?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "5",
+          "topic": "Contagem"
+        },
+        {
+          "question": "Um autocarro tem 4 rodas. Quantas rodas têm 2 autocarros?",
+          "options": [
+            "4",
+            "6",
+            "8",
+            "10"
+          ],
+          "correctAnswer": "8",
+          "topic": "Contagem"
+        },
+        {
+          "question": "Quantos dias tem uma semana?",
+          "options": [
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "correctAnswer": "7",
+          "topic": "Contagem"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Quantas patas tem um cão?",
+        "selectedAnswer": "4",
+        "correctAnswer": "4",
+        "isCorrect": true,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Se tens 3 maçãs e comes 1, quantas maçãs te restam?",
+        "selectedAnswer": "2",
+        "correctAnswer": "2",
+        "isCorrect": true,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Quantos dedos tens numa só mão?",
+        "selectedAnswer": "5",
+        "correctAnswer": "5",
+        "isCorrect": true,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Um autocarro tem 4 rodas. Quantas rodas têm 2 autocarros?",
+        "selectedAnswer": "8",
+        "correctAnswer": "8",
+        "isCorrect": true,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Quantos dias tem uma semana?",
+        "selectedAnswer": "7",
+        "correctAnswer": "7",
+        "isCorrect": true,
+        "topic": "Contagem"
+      }
+    ],
+    "score": 5
   }
 ]
