@@ -7,7 +7,7 @@ import type { PersonalizedLearningPathOutput } from '@/ai/schemas';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { Loader2, Volume2, Star, Trophy, RefreshCw } from 'lucide-react';
+import { Loader2, Volume2, Star, Trophy, RefreshCw, Check, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from "@/hooks/use-toast";
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -239,11 +239,11 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
             const isSelected = option === selectedAnswer;
             
             return (
-              <div key={i} className="flex gap-2">
+              <div key={i} className="flex gap-2 relative">
                 <Button
                   variant="outline"
                   className={cn(
-                    'min-h-[4rem] py-4 text-lg whitespace-normal justify-start text-left flex-grow h-auto',
+                    'min-h-[4rem] py-4 text-lg whitespace-normal justify-start text-left flex-grow h-auto pl-12',
                     isAnswered && isCorrect && 'border-2 border-[hsl(var(--chart-2))] bg-[hsl(var(--chart-2))]/20 text-foreground',
                     isAnswered && isSelected && !isCorrect && 'border-2 border-destructive bg-destructive/20 text-foreground',
                     isAnswered && !isSelected && 'opacity-60'
@@ -251,9 +251,18 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
                   onClick={() => handleAnswerSelect(option)}
                   disabled={isAnswered}
                 >
-                  <span className="mr-4 font-bold text-primary">{String.fromCharCode(65 + i)}.</span>
+                  <span className="absolute left-4 font-bold text-primary">{String.fromCharCode(65 + i)}.</span>
                   <span className="flex-1">{option}</span>
                 </Button>
+                 {isAnswered && (isSelected || isCorrect) && (
+                  <div className="absolute right-14 top-1/2 -translate-y-1/2">
+                    {isCorrect ? (
+                       <Check className="h-8 w-8 text-[hsl(var(--chart-2))]" />
+                    ) : (
+                       <X className="h-8 w-8 text-destructive" />
+                    )}
+                  </div>
+                )}
                 <Button 
                     variant="outline" 
                     size="icon" 
