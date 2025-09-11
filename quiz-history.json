@@ -1480,11 +1480,11 @@
     "score": 5
   },
   {
-    "timestamp": "2025-09-11T12:44:52.546Z",
     "studentId": "Maria",
     "gradeLevel": 3,
     "subject": "Português",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-11T12:44:52.546Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -1582,5 +1582,113 @@
       }
     ],
     "score": 4
+  },
+  {
+    "timestamp": "2025-09-11T12:58:36.195Z",
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Misto",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "O que usamos para tocar e sentir as coisas?",
+          "options": [
+            "Orelhas",
+            "Olhos",
+            "Mãos",
+            "Pés"
+          ],
+          "correctAnswer": "Mãos",
+          "topic": "O Corpo Humano",
+          "imageUrl": "https://pixabay.com/get/g00baaa3c121571de27feed5e3dd220da631c7ec03bd57a8e8774eaf820d5b1f8c131cc6cef4aa863f1b2b8ddb2ca05cd_640.jpg"
+        },
+        {
+          "question": "A mesa tem quatro ____.",
+          "options": [
+            "Rodas",
+            "Pernas",
+            "Asas",
+            "Caudas"
+          ],
+          "correctAnswer": "Pernas",
+          "topic": "Vocabulário",
+          "imageUrl": "https://pixabay.com/get/g14aea08f486c3f46879f1e3b197cc6ba358c2c19bb22f4e3fa5d1334cab2619b1398abc955561db9ed58d2a44274b201_640.jpg"
+        },
+        {
+          "question": "Um carro tem quantas rodas?",
+          "options": [
+            "Duas",
+            "Três",
+            "Quatro",
+            "Cinco"
+          ],
+          "correctAnswer": "Quatro",
+          "topic": "Contagem",
+          "imageUrl": "https://pixabay.com/get/g8ee3c89f25923c089c6c8cead83b0063cccedf07eee9e739de53c43d2d5e8e59a9eee2284188c2ff29d14e9427c52770_640.jpg"
+        },
+        {
+          "question": "Forma a frase correta: 'nada / O / peixe / no / aquário'.",
+          "options": [
+            "O aquário nada no peixe.",
+            "Peixe no aquário nada o.",
+            "O peixe nada no aquário.",
+            "Nada o peixe no aquário."
+          ],
+          "correctAnswer": "O peixe nada no aquário.",
+          "topic": "Formação de Frases",
+          "imageUrl": "https://pixabay.com/get/g6078c99626ec29d9d8737c37362fdf00218128047d9dd15044c6c221a8d9280fc514166bc9632a6b13af0377569ce818_640.jpg"
+        },
+        {
+          "question": "Qual é a vogal que vem antes do 'E'?",
+          "options": [
+            "I",
+            "A",
+            "O",
+            "U"
+          ],
+          "correctAnswer": "A",
+          "topic": "Vogais"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "O que usamos para tocar e sentir as coisas?",
+        "selectedAnswer": "Mãos",
+        "correctAnswer": "Mãos",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "A mesa tem quatro ____.",
+        "selectedAnswer": "Pernas",
+        "correctAnswer": "Pernas",
+        "isCorrect": true,
+        "topic": "Vocabulário"
+      },
+      {
+        "question": "Um carro tem quantas rodas?",
+        "selectedAnswer": "Quatro",
+        "correctAnswer": "Quatro",
+        "isCorrect": true,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Forma a frase correta: 'nada / O / peixe / no / aquário'.",
+        "selectedAnswer": "O peixe nada no aquário.",
+        "correctAnswer": "O peixe nada no aquário.",
+        "isCorrect": true,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "Qual é a vogal que vem antes do 'E'?",
+        "selectedAnswer": "A",
+        "correctAnswer": "A",
+        "isCorrect": true,
+        "topic": "Vogais"
+      }
+    ],
+    "score": 5
   }
 ]

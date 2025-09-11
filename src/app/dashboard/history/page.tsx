@@ -6,15 +6,16 @@ import { useSearchParams } from 'next/navigation';
 import { getFullQuizHistory, type QuizResultEntry } from '@/app/actions';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Book, Divide, Leaf, Loader2, Check, X } from 'lucide-react';
+import { Book, Divide, Leaf, Loader2, Check, X, Shuffle } from 'lucide-react';
 import { format } from 'date-fns';
 import { pt } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
 
-const subjectIcons = {
+const subjectIcons: Record<string, React.ReactNode> = {
     'Português': <Book className="h-5 w-5" />,
     'Matemática': <Divide className="h-5 w-5" />,
     'Estudo do Meio': <Leaf className="h-5 w-5" />,
+    'Misto': <Shuffle className="h-5 w-5" />,
 };
 
 export default function HistoryPage() {
@@ -62,9 +63,9 @@ export default function HistoryPage() {
                                 <AccordionTrigger className="p-6">
                                     <div className="flex justify-between items-center w-full">
                                         <div className="flex items-center gap-4">
-                                            {subjectIcons[entry.subject]}
+                                            {subjectIcons[entry.subject] || <Book className="h-5 w-5" />}
                                             <div>
-                                                <p className="font-bold text-xl">{entry.subject}</p>
+                                                <p className="font-bold text-xl">{entry.subject === 'Misto' ? 'Desafio Surpresa' : entry.subject}</p>
                                                 <p className="text-sm text-muted-foreground">
                                                     {format(new Date(entry.timestamp), "d 'de' MMMM 'de' yyyy 'às' HH:mm", { locale: pt })}
                                                 </p>
