@@ -10,17 +10,17 @@ import { useToast } from "@/hooks/use-toast";
 
 const HangmanDrawing = ({ numberOfGuesses }: { numberOfGuesses: number }) => {
     const bodyParts = [
-        <div key="head" className="w-16 h-16 rounded-full border-4 border-foreground absolute top-[40px] right-[-24px]" />,
-        <div key="body" className="w-1 h-24 bg-foreground absolute top-[104px] right-0" />,
-        <div key="rightArm" className="w-20 h-1 bg-foreground absolute top-[120px] right-[-80px] rotate-[-30deg] origin-bottom-left" />,
-        <div key="leftArm" className="w-20 h-1 bg-foreground absolute top-[120px] right-[4px] rotate-[30deg] origin-bottom-right" />,
-        <div key="rightLeg" className="w-24 h-1 bg-foreground absolute top-[180px] right-[-92px] rotate-[60deg] origin-bottom-left" />,
-        <div key="leftLeg" className="w-24 h-1 bg-foreground absolute top-[180px] right-[4px] rotate-[-60deg] origin-bottom-right" />
+        { key: "head", part: <div key="head" className="w-16 h-16 rounded-full border-4 border-foreground absolute top-[40px] right-[-24px]" /> },
+        { key: "body", part: <div key="body" className="w-1 h-24 bg-foreground absolute top-[104px] right-0" /> },
+        { key: "rightArm", part: <div key="rightArm" className="w-20 h-1 bg-foreground absolute top-[120px] right-[-80px] rotate-[-30deg] origin-bottom-left" /> },
+        { key: "leftArm", part: <div key="leftArm" className="w-20 h-1 bg-foreground absolute top-[120px] right-[4px] rotate-[30deg] origin-bottom-right" /> },
+        { key: "rightLeg", part: <div key="rightLeg" className="w-24 h-1 bg-foreground absolute top-[180px] right-[-92px] rotate-[60deg] origin-bottom-left" /> },
+        { key: "leftLeg", part: <div key="leftLeg" className="w-24 h-1 bg-foreground absolute top-[180px] right-[4px] rotate-[-60deg] origin-bottom-right" /> },
     ];
 
     return (
         <div className="relative h-64">
-            {bodyParts.slice(0, numberOfGuesses)}
+            {bodyParts.slice(0, numberOfGuesses).map(p => p.part)}
             <div className="h-10 w-1 bg-foreground absolute top-0 right-0" />
             <div className="h-1 w-48 bg-foreground ml-24" />
             <div className="h-64 w-1 bg-foreground ml-24" />
@@ -62,25 +62,31 @@ const Keyboard = ({ activeLetters, inactiveLetters, onSelect, disabled }: {
     )
 }
 
-const normalize = (str: string) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+const normalize = (str: string) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
 
 export function HangmanGame() {
-    const [wordData, setWordData] = useState<{ word: string; hint: string } | null>(null);
+    const [wordToGuess, setWordToGuess] = useState("");
+    const [hint, setHint] = useState("");
     const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
     const [showHint, setShowHint] = useState(false);
     const [loading, setLoading] = useState(true);
     const { toast } = useToast();
 
-    const fetchWord = useCallback(async () => {
+    const startNewGame = useCallback(async () => {
         setLoading(true);
-        setGuessedLetters([]);
         setShowHint(false);
         try {
             const newWordData = await generateWord({ category: "Animais", difficulty: "Fácil" });
-            setWordData({
-                word: newWordData.word.toUpperCase(),
-                hint: newWordData.hint
-            });
+            const newWord = newWordData.word.toUpperCase();
+            setWordToGuess(newWord);
+            setHint(newWordData.hint);
+
+            // Automatically reveal first and last letter as a hint
+            const normalizedWord = normalize(newWord);
+            const firstLetter = normalizedWord[0];
+            const lastLetter = normalizedWord[normalizedWord.length - 1];
+            setGuessedLetters([firstLetter, lastLetter]);
+            
         } catch (error) {
             console.error("Failed to generate word:", error);
             toast({
@@ -89,26 +95,26 @@ export function HangmanGame() {
                 variant: "destructive"
             });
             // Fallback to a default word in case of API failure
-            setWordData({ word: "MESTRE", hint: "Quem te ensina a jogar" });
+            setWordToGuess("MESTRE");
+            setHint("Quem te ensina a jogar");
+            setGuessedLetters(['M', 'E']);
         } finally {
             setLoading(false);
         }
     }, [toast]);
     
     useEffect(() => {
-        fetchWord();
-    }, [fetchWord]);
-    
-    const wordToGuess = wordData?.word || "";
-    const hint = wordData?.hint || "";
+        startNewGame();
+    }, [startNewGame]);
     
     const normalizedWordToGuess = normalize(wordToGuess);
+    const uniqueLettersInWord = [...new Set(normalizedWordToGuess)];
 
-    const incorrectLetters = guessedLetters.filter(letter => !normalizedWordToGuess.includes(letter));
-    const correctLetters = guessedLetters.filter(letter => normalizedWordToGuess.includes(letter));
+    const incorrectLetters = guessedLetters.filter(letter => !uniqueLettersInWord.includes(letter));
+    const correctLetters = guessedLetters.filter(letter => uniqueLettersInWord.includes(letter));
 
     const isLoser = incorrectLetters.length >= 6;
-    const isWinner = wordToGuess.split("").every(letter => guessedLetters.includes(normalize(letter)));
+    const isWinner = uniqueLettersInWord.every(letter => guessedLetters.includes(letter));
     
     const addGuessedLetter = useCallback((letter: string) => {
         if (guessedLetters.includes(letter) || isWinner || isLoser) return;
@@ -131,7 +137,7 @@ export function HangmanGame() {
                     <Award className="h-20 w-20 text-accent mx-auto" />
                     <h2 className="text-3xl font-bold">Parabéns, ganhaste!</h2>
                     <p className="text-xl text-muted-foreground">A palavra era: <span className="font-bold text-primary">{wordToGuess}</span></p>
-                    <Button onClick={fetchWord} size="lg" className="animate-bounce">
+                    <Button onClick={startNewGame} size="lg" className="animate-bounce">
                         <RotateCw className="mr-2 h-5 w-5" />
                         Jogar Novamente
                     </Button>
@@ -142,7 +148,7 @@ export function HangmanGame() {
                     <Skull className="h-20 w-20 text-destructive mx-auto" />
                     <h2 className="text-3xl font-bold">Oh não, perdeste!</h2>
                     <p className="text-xl text-muted-foreground">A palavra correta era: <span className="font-bold text-primary">{wordToGuess}</span></p>
-                    <Button onClick={fetchWord} size="lg">
+                    <Button onClick={startNewGame} size="lg">
                         <RotateCw className="mr-2 h-5 w-5" />
                         Tentar Novamente
                     </Button>
@@ -188,7 +194,7 @@ export function HangmanGame() {
                                 Dá-me uma Dica!
                             </Button>
                         )}
-                        <Button onClick={fetchWord} variant="outline" className="mt-4">
+                        <Button onClick={startNewGame} variant="outline" className="mt-4">
                             <RotateCw className="mr-2 h-5 w-5" />
                             Nova Palavra
                         </Button>
@@ -198,3 +204,4 @@ export function HangmanGame() {
         </div>
     );
 }
+
