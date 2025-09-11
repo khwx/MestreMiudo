@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Book, Divide, Leaf, Loader2, Shuffle } from 'lucide-react';
+import { Book, Divide, Leaf, Loader2, Shuffle, Gamepad2 } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { useEffect, useState } from 'react';
 import { getFullQuizHistory, type QuizResultEntry } from '@/app/actions';
@@ -118,32 +118,45 @@ export default function DashboardPage() {
 
       <div>
         <h3 className="text-2xl font-bold text-center mb-6">Escolhe a tua próxima missão!</h3>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {subjects.map((subject) => (
             <Link key={subject.name} href={`/quiz/${subject.slug}?name=${name}&grade=${grade}`} passHref>
-              <Card className="hover:shadow-xl hover:border-primary transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full">
+              <Card className="hover:shadow-xl hover:border-primary transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-2xl font-bold">{subject.name}</CardTitle>
                   <div className={`p-3 rounded-full ${subject.bgColor}`}>
                     <subject.icon className={`h-8 w-8 ${subject.color}`} />
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex-grow">
                   <p className="text-muted-foreground">Desafios de {subject.name} esperam por ti!</p>
                 </CardContent>
               </Card>
             </Link>
           ))}
             <Link key={surpriseChallenge.name} href={`/quiz/${surpriseChallenge.slug}?name=${name}&grade=${grade}`} passHref>
-              <Card className="hover:shadow-xl hover:border-accent transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full md:col-span-2">
+              <Card className="hover:shadow-xl hover:border-accent transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full md:col-span-2 lg:col-span-1 flex flex-col">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-2xl font-bold">{surpriseChallenge.name}</CardTitle>
                   <div className={`p-3 rounded-full ${surpriseChallenge.bgColor}`}>
                     <surpriseChallenge.icon className={`h-8 w-8 ${surpriseChallenge.color}`} />
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex-grow">
                   <p className="text-muted-foreground">Testa os teus conhecimentos em todas as áreas!</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href={`/dashboard/tic-tac-toe?name=${name}&grade=${grade}`} passHref>
+              <Card className="hover:shadow-xl hover:border-green-500 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full md:col-span-2 lg:col-span-2 flex flex-col bg-green-500/10">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-2xl font-bold text-green-700">Jogo do Galo</CardTitle>
+                  <div className="p-3 rounded-full bg-green-500/20">
+                    <Gamepad2 className="h-8 w-8 text-green-700" />
+                  </div>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  <p className="text-green-600">Faz uma pausa e diverte-te a jogar!</p>
                 </CardContent>
               </Card>
             </Link>

@@ -1798,11 +1798,11 @@
     "score": 4
   },
   {
-    "timestamp": "2025-09-11T13:06:41.576Z",
     "studentId": "Maria",
     "gradeLevel": 1,
     "subject": "Misto",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-11T13:06:41.576Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -1897,6 +1897,112 @@
         "question": "Observa a imagem. O que é importante fazer todos os dias para seres saudável?",
         "selectedAnswer": "Brincar ao ar livre",
         "correctAnswer": "Brincar ao ar livre",
+        "isCorrect": true,
+        "topic": "Estudo do Meio"
+      }
+    ],
+    "score": 3
+  },
+  {
+    "timestamp": "2025-09-11T13:10:30.857Z",
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Misto",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual destes órgãos nos ajuda a ver?",
+          "options": [
+            "Coração",
+            "Olhos",
+            "Pés",
+            "Mãos"
+          ],
+          "correctAnswer": "Olhos",
+          "topic": "O Corpo Humano"
+        },
+        {
+          "question": "Quantas patas tem um cão?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "4",
+          "topic": "Contagem",
+          "imageUrl": "https://pixabay.com/get/g362180128ed697e9bd5bfdbf68ea7ee58868b71637320aab5ce7e97d38db13e7681e440394a886d1607b1f3e24736788_640.jpg"
+        },
+        {
+          "question": "O que é um 'carro'?",
+          "options": [
+            "Um animal que voa",
+            "Um meio de transporte",
+            "Uma fruta",
+            "Uma casa"
+          ],
+          "correctAnswer": "Um meio de transporte",
+          "topic": "Vocabulário"
+        },
+        {
+          "question": "Ordena as palavras para formar uma frase: 'bonita' 'a' 'é' 'flor'",
+          "options": [
+            "A é bonita flor",
+            "Flor a é bonita",
+            "A flor é bonita",
+            "É bonita a flor"
+          ],
+          "correctAnswer": "A flor é bonita",
+          "topic": "Formação de Frases",
+          "imageUrl": "https://pixabay.com/get/g9fc567051af802343342f6158f3a868717dc61893b68db4aaddfc0db78138b0bf47df9425e5cbc45a23ec80316ed2c05_640.jpg"
+        },
+        {
+          "question": "O que precisamos para respirar?",
+          "options": [
+            "Comida",
+            "Água",
+            "Ar",
+            "Brinquedos"
+          ],
+          "correctAnswer": "Ar",
+          "topic": "Estudo do Meio"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual destes órgãos nos ajuda a ver?",
+        "selectedAnswer": "Coração",
+        "correctAnswer": "Olhos",
+        "isCorrect": false,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Quantas patas tem um cão?",
+        "selectedAnswer": "3",
+        "correctAnswer": "4",
+        "isCorrect": false,
+        "topic": "Contagem"
+      },
+      {
+        "question": "O que é um 'carro'?",
+        "selectedAnswer": "Um meio de transporte",
+        "correctAnswer": "Um meio de transporte",
+        "isCorrect": true,
+        "topic": "Vocabulário"
+      },
+      {
+        "question": "Ordena as palavras para formar uma frase: 'bonita' 'a' 'é' 'flor'",
+        "selectedAnswer": "A flor é bonita",
+        "correctAnswer": "A flor é bonita",
+        "isCorrect": true,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "O que precisamos para respirar?",
+        "selectedAnswer": "Ar",
+        "correctAnswer": "Ar",
         "isCorrect": true,
         "topic": "Estudo do Meio"
       }
