@@ -12,8 +12,7 @@ import { generateStoryAction } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
-import type { SpeechMark, StoryGenerationInput } from '@/app/shared-schemas';
-import { StoryGenerationInputSchema } from '@/app/shared-schemas';
+import type { SpeechMark } from '@/app/shared-schemas';
 
 const keywordSuggestions = [
     {
@@ -40,44 +39,75 @@ type StoryResult = {
 
 const StoryDisplay = ({ result }: { result: StoryResult }) => {
     const audioRef = useRef<HTMLAudioElement | null>(null);
-    const [currentWord, setCurrentWord] = useState('');
-    const [currentWordIndex, setCurrentWordIndex] = useState(-1);
+    const storyTextRef = useRef<HTMLParagraphElement | null>(null);
+    const [highlightStyle, setHighlightStyle] = useState<React.CSSProperties>({});
+    const [isPlaying, setIsPlaying] = useState(false);
 
     const handlePlayAudio = () => {
         if (audioRef.current) {
             if (audioRef.current.paused) {
                 audioRef.current.play();
+                setIsPlaying(true);
             } else {
                 audioRef.current.pause();
-                audioRef.current.currentTime = 0;
-                setCurrentWordIndex(-1);
+                setIsPlaying(false);
             }
         }
     };
-
+    
     const handleTimeUpdate = () => {
-        if (!audioRef.current || !result.speechMarks) return;
+        if (!audioRef.current || !result.speechMarks || !storyTextRef.current) return;
 
         const currentTime = audioRef.current.currentTime;
-        const speechMarks = result.speechMarks.filter(mark => mark.type === 'word');
+        const wordMarks = result.speechMarks.filter(mark => mark.type === 'word');
         
-        let activeIndex = -1;
-        for (let i = speechMarks.length - 1; i >= 0; i--) {
-            const markTime = parseFloat(speechMarks[i].time.seconds) + speechMarks[i].time.nanos / 1e9;
-            if (currentTime >= markTime) {
-                activeIndex = i;
-                break;
+        const currentMark = wordMarks.find((mark, i) => {
+            const markTime = parseFloat(mark.time.seconds) + mark.time.nanos / 1e9;
+            const nextMark = wordMarks[i + 1];
+            const nextMarkTime = nextMark ? (parseFloat(nextMark.time.seconds) + nextMark.time.nanos / 1e9) : currentTime + 1;
+            return currentTime >= markTime && currentTime < nextMarkTime;
+        });
+
+        if (currentMark) {
+            const range = document.createRange();
+            const textNode = storyTextRef.current.firstChild;
+            if (textNode) {
+                try {
+                    // Start and end positions of the word in the text content
+                    const start = textNode.textContent?.indexOf(currentMark.value) ?? -1;
+                    if (start > -1) {
+                        range.setStart(textNode, start);
+                        range.setEnd(textNode, start + currentMark.value.length);
+                        const rect = range.getBoundingClientRect();
+                        const containerRect = storyTextRef.current.getBoundingClientRect();
+
+                        setHighlightStyle({
+                            position: 'absolute',
+                            top: `${rect.top - containerRect.top}px`,
+                            left: `${rect.left - containerRect.left}px`,
+                            width: `${rect.width}px`,
+                            height: `${rect.height}px`,
+                            backgroundColor: 'hsl(var(--primary) / 0.3)',
+                            borderRadius: '4px',
+                            transition: 'top 0.1s, left 0.1s, width 0.1s, height 0.1s',
+                            pointerEvents: 'none',
+                        });
+                    }
+                } catch(e) {
+                     // Ignore range errors which can happen with complex text
+                     setHighlightStyle({ display: 'none' });
+                }
             }
         }
-        setCurrentWordIndex(activeIndex);
     };
 
     const handleAudioEnded = () => {
-        setCurrentWordIndex(-1);
-    }
-    
-    // Split story into words, keeping punctuation attached
-    const words = result.story.split(/(\s+)/).filter(w => w.trim().length > 0);
+        setHighlightStyle({});
+        setIsPlaying(false);
+        if (audioRef.current) {
+            audioRef.current.currentTime = 0;
+        }
+    };
 
     return (
         <Card className="animate-in fade-in-50">
@@ -86,15 +116,17 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
                     <CardTitle className="text-3xl font-headline">{result.title}</CardTitle>
                     {result.audioDataUri && (
                         <>
-                            <audio 
+                            <audio
                                 ref={audioRef}
                                 src={result.audioDataUri}
                                 onTimeUpdate={handleTimeUpdate}
                                 onEnded={handleAudioEnded}
+                                onPlay={() => setIsPlaying(true)}
+                                onPause={() => setIsPlaying(false)}
                                 className="hidden"
                             />
                             <Button variant="outline" size="icon" onClick={handlePlayAudio} aria-label="Ouvir a história">
-                                <Volume2 className="h-6 w-6 text-primary" />
+                                <Volume2 className={`h-6 w-6 text-primary ${isPlaying ? 'animate-pulse' : ''}`} />
                             </Button>
                         </>
                     )}
@@ -111,13 +143,12 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
                     </div>
                 )}
                
-                <p className="text-lg/relaxed whitespace-pre-wrap">
-                    {words.map((word, index) => (
-                        <span key={index} className={index === currentWordIndex ? 'bg-yellow-200 rounded-md' : ''}>
-                           {word}{' '}
-                        </span>
-                    ))}
-                </p>
+                <div className="relative">
+                    <p ref={storyTextRef} className="text-lg/relaxed whitespace-pre-wrap">
+                        {result.story}
+                    </p>
+                    {isPlaying && <div style={highlightStyle} />}
+                </div>
             </CardContent>
         </Card>
     );
@@ -200,7 +231,6 @@ export default function StoryCreatorPage() {
                                 onChange={(e) => setKeywords(e.target.value)}
                                 disabled={loading}
                                 className="h-12 text-lg"
-                                suppressHydrationWarning
                             />
                         </div>
 
@@ -248,3 +278,5 @@ export default function StoryCreatorPage() {
         </div>
     );
 }
+
+    
