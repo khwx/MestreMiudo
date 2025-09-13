@@ -10,6 +10,22 @@ import { Label } from '@/components/ui/label';
 import { Loader2, Wand2, Volume2, BookHeart } from 'lucide-react';
 import { generateStoryAction } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
+import { Badge } from '@/components/ui/badge';
+
+const keywordSuggestions = [
+    {
+        category: "Heróis e Heroínas",
+        words: ["Princesa", "Cavaleiro", "Fada", "Robô", "Super-herói", "Sereia"]
+    },
+    {
+        category: "Lugares Mágicos",
+        words: ["Castelo", "Floresta", "Espaço", "Oceano", "Vulcão", "Arco-íris"]
+    },
+    {
+        category: "Aventuras e Objetos",
+        words: ["Tesouro", "Dragão", "Estrela", "Magia", "Chocolate", "Música"]
+    }
+];
 
 export default function StoryCreatorPage() {
     const searchParams = useSearchParams();
@@ -22,12 +38,16 @@ export default function StoryCreatorPage() {
     const { toast } = useToast();
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
 
+    const handleAddKeyword = (word: string) => {
+        setKeywords(prev => prev ? `${prev}, ${word}` : word);
+    };
+
     const handleGenerateStory = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!keywords.trim()) {
             toast({
                 title: "Palavras em falta",
-                description: "Por favor, escreve pelo menos uma palavra-chave para a tua história.",
+                description: "Por favor, escreve ou escolhe pelo menos uma palavra-chave para a tua história.",
                 variant: "destructive"
             });
             return;
@@ -78,28 +98,49 @@ export default function StoryCreatorPage() {
             <div className="text-center">
                 <BookHeart className="h-16 w-16 text-primary mx-auto mb-4" />
                 <h1 className="text-4xl font-headline font-bold">Oficina de Histórias</h1>
-                <p className="text-xl text-muted-foreground mt-2">Dá-me 3 palavras e eu crio uma história mágica para ti!</p>
+                <p className="text-xl text-muted-foreground mt-2">Dá-me algumas palavras e eu crio uma história mágica para ti!</p>
             </div>
 
             <Card>
                 <CardHeader>
                     <CardTitle>Cria a tua Aventura</CardTitle>
-                    <CardDescription>Escreve algumas palavras separadas por vírgulas (por exemplo: "dragão, castelo, princesa") e clica em "Criar História!"</CardDescription>
+                    <CardDescription>Escreve algumas palavras ou clica nas sugestões abaixo. Depois, clica em "Criar História!"</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form onSubmit={handleGenerateStory} className="flex flex-col sm:flex-row gap-4">
+                    <form onSubmit={handleGenerateStory} className="flex flex-col gap-4">
                         <div className="flex-grow space-y-2">
                             <Label htmlFor="keywords" className="sr-only">Palavras-chave</Label>
                             <Input
                                 id="keywords"
-                                placeholder="dragão, castelo, princesa"
+                                placeholder="dragão, castelo, princesa..."
                                 value={keywords}
                                 onChange={(e) => setKeywords(e.target.value)}
                                 disabled={loading}
                                 className="h-12 text-lg"
                             />
                         </div>
-                        <Button type="submit" disabled={loading} className="h-12 text-lg px-8">
+
+                        <div className="space-y-4">
+                            {keywordSuggestions.map((category) => (
+                                <div key={category.category}>
+                                    <h3 className="text-md font-semibold text-muted-foreground mb-2">{category.category}</h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        {category.words.map((word) => (
+                                            <Badge 
+                                                key={word} 
+                                                variant="outline" 
+                                                className="cursor-pointer hover:bg-accent text-base"
+                                                onClick={() => !loading && handleAddKeyword(word)}
+                                            >
+                                                {word}
+                                            </Badge>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        
+                        <Button type="submit" disabled={loading} className="h-12 text-lg px-8 mt-4 self-center">
                             {loading ? (
                                 <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> A criar...</>
                             ) : (
@@ -137,3 +178,4 @@ export default function StoryCreatorPage() {
         </div>
     );
 }
+
