@@ -37,7 +37,7 @@ type StoryResult = {
     images?: string[];
 };
 
-const StoryDisplay = ({ result }: { result: StoryResult }) => {
+const StoryDisplay = ({ result, isGeneratingAudio }: { result: StoryResult, isGeneratingAudio: boolean }) => {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const storyTextRef = useRef<HTMLParagraphElement | null>(null);
     const [highlightStyle, setHighlightStyle] = useState<React.CSSProperties>({});
@@ -93,11 +93,13 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
             const textNode = storyTextRef.current.firstChild;
             if (textNode) {
                 try {
-                    // Start and end positions of the word in the text content
-                    const start = textNode.textContent?.indexOf(currentMark.value) ?? -1;
-                    if (start > -1) {
-                        range.setStart(textNode, start);
-                        range.setEnd(textNode, start + currentMark.value.length);
+                    const fullText = textNode.textContent || '';
+                    const startOffset = (currentMark as any).startOffset;
+                    const endOffset = (currentMark as any).endOffset;
+
+                    if (startOffset !== undefined && endOffset !== undefined && startOffset >= 0 && endOffset <= fullText.length) {
+                        range.setStart(textNode, startOffset);
+                        range.setEnd(textNode, endOffset);
                         const rect = range.getBoundingClientRect();
                         const containerRect = storyTextRef.current.getBoundingClientRect();
 
@@ -112,14 +114,32 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
                             transition: 'top 0.1s, left 0.1s, width 0.1s, height 0.1s',
                             pointerEvents: 'none',
                         });
+                    } else {
+                         setHighlightStyle({ display: 'none' });
                     }
                 } catch(e) {
-                     // Ignore range errors which can happen with complex text
+                     console.error("Range error:", e);
                      setHighlightStyle({ display: 'none' });
                 }
             }
         }
     };
+    
+    useEffect(() => {
+        if (result.story && result.speechMarks) {
+            let currentIndex = 0;
+            result.speechMarks.forEach(mark => {
+                if (mark.type === 'word') {
+                    const wordIndex = result.story.indexOf(mark.value, currentIndex);
+                    if (wordIndex !== -1) {
+                        (mark as any).startOffset = wordIndex;
+                        (mark as any).endOffset = wordIndex + mark.value.length;
+                        currentIndex = wordIndex + mark.value.length;
+                    }
+                }
+            });
+        }
+    }, [result.story, result.speechMarks]);
 
     const handleAudioEnded = () => {
         setHighlightStyle({});
@@ -142,11 +162,20 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
             <CardHeader>
                 <div className="flex justify-between items-start">
                     <CardTitle className="text-3xl font-headline">{result.title}</CardTitle>
-                    {result.audioDataUri && !needsUserInteraction && (
-                        <Button variant="outline" size="icon" onClick={handlePlayAudio} aria-label={isPlaying ? "Pausar a história" : "Ouvir a história"}>
+                    
+                     <Button 
+                        variant="outline" 
+                        size="icon" 
+                        onClick={handlePlayAudio} 
+                        aria-label={isPlaying ? "Pausar a história" : "Ouvir a história"}
+                        disabled={!result.audioDataUri}
+                        >
+                         {isGeneratingAudio && !result.audioDataUri ? (
+                            <Loader2 className="h-6 w-6 text-primary animate-spin" />
+                         ) : (
                             <Volume2 className={`h-6 w-6 text-primary ${isPlaying ? 'animate-pulse' : ''}`} />
-                        </Button>
-                    )}
+                         )}
+                    </Button>
                 </div>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -169,10 +198,10 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
                             </Button>
                         </div>
                     )}
-                    <p ref={storyTextRef} className="text-lg/relaxed whitespace-pre-wrap">
+                    <p ref={storyTextRef} className="text-lg/relaxed whitespace-pre-wrap relative">
+                        {isPlaying && <span style={highlightStyle} />}
                         {result.story}
                     </p>
-                    {isPlaying && <div style={highlightStyle} />}
                 </div>
             </CardContent>
         </Card>
@@ -187,6 +216,7 @@ export default function StoryCreatorPage() {
     const [keywords, setKeywords] = useState('');
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<StoryResult | null>(null);
+    const [isGeneratingAudio, setIsGeneratingAudio] = useState(false);
     const { toast } = useToast();
     const resultRef = useRef<HTMLDivElement>(null);
 
@@ -213,6 +243,7 @@ export default function StoryCreatorPage() {
 
         setLoading(true);
         setResult(null);
+        setIsGeneratingAudio(true);
 
         try {
             const storyResult = await generateStoryAction({
@@ -220,6 +251,13 @@ export default function StoryCreatorPage() {
                 gradeLevel: parseInt(grade, 10),
             });
             setResult(storyResult);
+             if (!storyResult.audioDataUri) {
+                toast({
+                    title: "Erro no áudio",
+                    description: "Não foi possível gerar a narração. Tente novamente.",
+                    variant: "destructive"
+                });
+            }
         } catch (error) {
             console.error("Failed to generate story:", error);
             toast({
@@ -229,6 +267,7 @@ export default function StoryCreatorPage() {
             });
         } finally {
             setLoading(false);
+            setIsGeneratingAudio(false);
         }
     };
     
@@ -256,6 +295,7 @@ export default function StoryCreatorPage() {
                                 onChange={(e) => setKeywords(e.target.value)}
                                 disabled={loading}
                                 className="h-12 text-lg"
+                                suppressHydrationWarning
                             />
                         </div>
 
@@ -298,10 +338,8 @@ export default function StoryCreatorPage() {
             )}
 
             <div ref={resultRef}>
-                {result && <StoryDisplay result={result} />}
+                {result && <StoryDisplay result={result} isGeneratingAudio={isGeneratingAudio} />}
             </div>
         </div>
     );
 }
-
-    
