@@ -9,33 +9,9 @@ import { z } from "zod";
 import fs from 'fs/promises';
 import path from 'path';
 import { ai } from "@/ai/genkit";
+import type { QuizInput, SaveQuizInput, QuizResultEntry, Answer, SpeechMark } from './shared-schemas';
+import { QuizResultSchema, SaveQuizInputSchema } from "./shared-schemas";
 
-// Re-export schemas for client-side usage if needed
-export * from "@/ai/schemas";
-
-type QuizInput = z.infer<typeof QuizInputSchema>;
-
-const AnswerSchema = z.object({
-    question: z.string(),
-    selectedAnswer: z.string(),
-    correctAnswer: z.string(),
-    isCorrect: z.boolean(),
-    topic: z.string(),
-});
-
-// This will be the structure for saving the results of a quiz
-const QuizResultSchema = z.object({
-  studentId: z.string(),
-  gradeLevel: z.number(),
-  subject: z.enum(['Português', 'Matemática', 'Estudo do Meio', 'Misto']),
-  numberOfQuestions: z.number(),
-  timestamp: z.string(),
-  quiz: z.any(), // Keeping this flexible for now
-  answers: z.array(AnswerSchema),
-  score: z.number(),
-});
-
-export type QuizResultEntry = z.infer<typeof QuizResultSchema>;
 
 const historyFilePath = path.join(process.cwd(), 'quiz-history.json');
 
@@ -90,17 +66,6 @@ export async function getPerformanceData(studentId: string, subject?: string): P
     return performanceScores;
 }
 
-const SaveQuizInputSchema = z.object({
-  studentId: z.string(),
-  gradeLevel: z.coerce.number().min(1).max(4),
-  subject: z.enum(['Português', 'Matemática', 'Estudo do Meio', 'Misto']),
-  numberOfQuestions: z.number().min(5).max(20).default(5),
-  answers: z.array(AnswerSchema),
-  quiz: z.any(),
-  score: z.number(),
-});
-
-type SaveQuizInput = z.infer<typeof SaveQuizInputSchema>;
 
 async function saveQuiz(input: SaveQuizInput) {
   const newEntry: QuizResultEntry = {
@@ -156,20 +121,18 @@ export async function getFullQuizHistory(studentId: string): Promise<QuizResultE
 
 
 // New Story Action with Image and Audio generation
-const SpeechMarkSchema = z.object({
-  type: z.string(),
-  value: z.string(),
-  time: z.object({
-    seconds: z.string(),
-    nanos: z.number(),
-  }),
-});
-
 const GenerateStoryActionOutputSchema = z.object({
     title: z.string(),
     story: z.string(),
     audioDataUri: z.string().url().optional(),
-    speechMarks: z.array(SpeechMarkSchema).optional(),
+    speechMarks: z.array(z.object({
+      type: z.string(),
+      value: z.string(),
+      time: z.object({
+        seconds: z.string(),
+        nanos: z.number(),
+      }),
+    })).optional(),
     images: z.array(z.string().url()).optional(),
 });
 

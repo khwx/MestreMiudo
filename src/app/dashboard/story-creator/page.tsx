@@ -12,6 +12,8 @@ import { generateStoryAction } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
+import type { SpeechMark, StoryGenerationInput } from '@/app/shared-schemas';
+import { StoryGenerationInputSchema } from '@/app/shared-schemas';
 
 const keywordSuggestions = [
     {
@@ -28,12 +30,6 @@ const keywordSuggestions = [
     }
 ];
 
-type SpeechMark = {
-    type: string;
-    value: string;
-    time: { seconds: string; nanos: number };
-};
-
 type StoryResult = {
     title: string;
     story: string;
@@ -44,6 +40,7 @@ type StoryResult = {
 
 const StoryDisplay = ({ result }: { result: StoryResult }) => {
     const audioRef = useRef<HTMLAudioElement | null>(null);
+    const [currentWord, setCurrentWord] = useState('');
     const [currentWordIndex, setCurrentWordIndex] = useState(-1);
 
     const handlePlayAudio = () => {
