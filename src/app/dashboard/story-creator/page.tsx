@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Loader2, Wand2, Play, Pause, BookHeart } from 'lucide-react';
+import { Loader2, Wand2, Play, Pause, BookHeart, AlertTriangle } from 'lucide-react';
 import { generateStoryAction } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Badge } from '@/components/ui/badge';
@@ -43,8 +43,39 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
     
     const [isPlaying, setIsPlaying] = useState(false);
     const [isLoadingAudio, setIsLoadingAudio] = useState(true);
+    const [audioError, setAudioError] = useState(false);
     const [highlightStyle, setHighlightStyle] = useState<React.CSSProperties>({});
     
+    useEffect(() => {
+        const audio = audioRef.current;
+        if (!audio || !result.audioDataUri) {
+            setIsLoadingAudio(false);
+            setAudioError(!result.audioDataUri); // Set error if URI is missing
+            return;
+        }
+
+        const handleCanPlay = () => setIsLoadingAudio(false);
+        const handleError = () => {
+            setIsLoadingAudio(false);
+            setAudioError(true);
+        };
+        
+        // Reset states for new story
+        setIsLoadingAudio(true);
+        setAudioError(false);
+        setIsPlaying(false);
+
+        audio.addEventListener('canplaythrough', handleCanPlay);
+        audio.addEventListener('error', handleError);
+        audio.src = result.audioDataUri;
+        audio.load();
+
+        return () => {
+            audio.removeEventListener('canplaythrough', handleCanPlay);
+            audio.removeEventListener('error', handleError);
+        };
+    }, [result.audioDataUri]);
+
     const calculateSpeechMarksOffsets = useCallback(() => {
         if (!result.story || !result.speechMarks || !storyRef.current) return;
 
@@ -63,47 +94,15 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
         });
     }, [result.story, result.speechMarks]);
     
-     useEffect(() => {
-        const audio = audioRef.current;
-        if (!audio || !result.audioDataUri) {
-            setIsLoadingAudio(false);
-            return;
-        }
-
-        const handleCanPlay = () => {
-            setIsLoadingAudio(false);
-        };
-        
-        const currentSrc = audio.src;
-        const newSrc = result.audioDataUri;
-
-        // Only add listeners and load if the source is new
-        if (currentSrc !== newSrc) {
-            audio.addEventListener('canplaythrough', handleCanPlay);
-            audio.src = newSrc;
-            audio.load();
-            setIsLoadingAudio(true);
-        } else if (audio.readyState >= 3) {
-            // Already loaded
-            setIsLoadingAudio(false);
-        }
-
-        // Cleanup function
-        return () => {
-            audio.removeEventListener('canplaythrough', handleCanPlay);
-        };
-    }, [result.audioDataUri]);
-
     useEffect(() => {
         calculateSpeechMarksOffsets();
-        // Recalculate on window resize
         window.addEventListener('resize', calculateSpeechMarksOffsets);
         return () => window.removeEventListener('resize', calculateSpeechMarksOffsets);
     }, [calculateSpeechMarksOffsets]);
 
     const handlePlayPause = () => {
         const audio = audioRef.current;
-        if (!audio || isLoadingAudio) return;
+        if (!audio || isLoadingAudio || audioError) return;
 
         if (isPlaying) {
             audio.pause();
@@ -111,6 +110,7 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
             audio.play().catch(error => {
                 console.error("Playback failed:", error);
                 setIsPlaying(false);
+                setAudioError(true);
             });
         }
     };
@@ -159,6 +159,41 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
         setHighlightStyle({});
     };
 
+    const renderAudioButton = () => {
+        let icon;
+        let disabled = false;
+        let title = "";
+
+        if (isLoadingAudio) {
+            icon = <Loader2 className="h-6 w-6 text-primary animate-spin" />;
+            disabled = true;
+            title = "A preparar o áudio...";
+        } else if (audioError) {
+            icon = <AlertTriangle className="h-6 w-6 text-destructive" />;
+            disabled = true;
+            title = "Narração indisponível";
+        } else if (isPlaying) {
+            icon = <Pause className="h-6 w-6 text-primary" />;
+            title = "Pausar a história";
+        } else {
+            icon = <Play className="h-6 w-6 text-primary" />;
+            title = "Ouvir a história";
+        }
+
+        return (
+            <Button 
+                variant="outline" 
+                size="icon" 
+                onClick={handlePlayPause} 
+                aria-label={title}
+                title={title}
+                disabled={disabled}
+                >
+                {icon}
+            </Button>
+        );
+    };
+
     return (
         <Card className="animate-in fade-in-50">
              <audio
@@ -172,23 +207,7 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
             <CardHeader>
                 <div className="flex justify-between items-start">
                     <CardTitle className="text-3xl font-headline">{result.title}</CardTitle>
-                    {result.audioDataUri && (
-                         <Button 
-                            variant="outline" 
-                            size="icon" 
-                            onClick={handlePlayPause} 
-                            aria-label={isPlaying ? "Pausar a história" : "Ouvir a história"}
-                            disabled={isLoadingAudio}
-                         >
-                             {isLoadingAudio ? (
-                                <Loader2 className="h-6 w-6 text-primary animate-spin" />
-                             ) : isPlaying ? (
-                                <Pause className="h-6 w-6 text-primary" />
-                             ) : (
-                                <Play className="h-6 w-6 text-primary" />
-                             )}
-                        </Button>
-                    )}
+                    {renderAudioButton()}
                 </div>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -261,7 +280,7 @@ export default function StoryCreatorPage() {
              if (!storyResult.audioDataUri) {
                 toast({
                     title: "Aviso sobre o áudio",
-                    description: "Não foi possível gerar a narração para esta história. Pode tentar novamente.",
+                    description: "Não foi possível gerar a narração para esta história. Pode ser um problema temporário.",
                     variant: "default"
                 });
             }

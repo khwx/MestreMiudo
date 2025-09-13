@@ -3598,11 +3598,11 @@
     "score": 4
   },
   {
-    "timestamp": "2025-09-13T18:21:48.269Z",
     "studentId": "Sara",
     "gradeLevel": 1,
     "subject": "Português",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T18:21:48.269Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -3700,5 +3700,330 @@
       }
     ],
     "score": 5
+  },
+  {
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Estudo do Meio",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T18:24:17.346Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Observa a imagem. Quem faz parte de uma família?",
+          "options": [
+            "Apenas os amigos",
+            "Pai, mãe e filhos",
+            "Só os animais",
+            "Apenas os vizinhos"
+          ],
+          "correctAnswer": "Pai, mãe e filhos",
+          "topic": "A Família",
+          "imageUrl": "https://pixabay.com/get/g8abcb485c098af6f1bd4a8a91fe4b770f0732652c5019881f78c85680c4bc0debe4a879b3e45c58df14482224adeafc2_640.jpg"
+        },
+        {
+          "question": "Observa a imagem. Que som faz um cão?",
+          "options": [
+            "Miau",
+            "Au au",
+            "Muuuu",
+            "Piu piu"
+          ],
+          "correctAnswer": "Au au",
+          "topic": "Os Animais",
+          "imageUrl": "https://pixabay.com/get/ge2bdcfe767ba78e0b58a54590562247f8e0ef513e06542f18da8632fed59684dc3ca6a6d579a6a2426d2cd38c3e67cd7_640.jpg"
+        },
+        {
+          "question": "Olha para a imagem. O que nos dá o sol?",
+          "options": [
+            "A chuva e o vento",
+            "O frio e a neve",
+            "A luz e o calor",
+            "A escuridão"
+          ],
+          "correctAnswer": "A luz e o calor",
+          "topic": "A Natureza",
+          "imageUrl": "https://pixabay.com/get/gbd7a80c0e5acf5318d4354a44f751411813d2d901d73e8c87cae7966712a6f4c2ac0bfdef24ff7c8018bcf890006eeea_640.jpg"
+        },
+        {
+          "question": "Observa a imagem. Qual destas partes do corpo usamos para ver?",
+          "options": [
+            "Os pés",
+            "As mãos",
+            "Os olhos",
+            "As orelhas"
+          ],
+          "correctAnswer": "Os olhos",
+          "topic": "O Corpo Humano",
+          "imageUrl": "https://pixabay.com/get/g5265447008239b9a61898fcb901896fc73d7dcbd43daa266736f1b8b18bb5f1d41584d0417bc9b9af439068fa48b9f4d_640.jpg"
+        },
+        {
+          "question": "Olha para a imagem. O que fazemos na escola?",
+          "options": [
+            "Dormir e comer",
+            "Brincar e aprender",
+            "Trabalhar",
+            "Cozinhar"
+          ],
+          "correctAnswer": "Brincar e aprender",
+          "topic": "A Comunidade e a Escola",
+          "imageUrl": "https://pixabay.com/get/gf7e0dfa8bf2951f156e8988a1d518074e0606a8e61aa3524ac201638ff287c57bb1a1f331f24dfc9f53dc5aabdc968a4_640.jpg"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Observa a imagem. Quem faz parte de uma família?",
+        "selectedAnswer": "Pai, mãe e filhos",
+        "correctAnswer": "Pai, mãe e filhos",
+        "isCorrect": true,
+        "topic": "A Família"
+      },
+      {
+        "question": "Observa a imagem. Que som faz um cão?",
+        "selectedAnswer": "Au au",
+        "correctAnswer": "Au au",
+        "isCorrect": true,
+        "topic": "Os Animais"
+      },
+      {
+        "question": "Olha para a imagem. O que nos dá o sol?",
+        "selectedAnswer": "A luz e o calor",
+        "correctAnswer": "A luz e o calor",
+        "isCorrect": true,
+        "topic": "A Natureza"
+      },
+      {
+        "question": "Observa a imagem. Qual destas partes do corpo usamos para ver?",
+        "selectedAnswer": "Os olhos",
+        "correctAnswer": "Os olhos",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Olha para a imagem. O que fazemos na escola?",
+        "selectedAnswer": "Brincar e aprender",
+        "correctAnswer": "Brincar e aprender",
+        "isCorrect": true,
+        "topic": "A Comunidade e a Escola"
+      }
+    ],
+    "score": 5
+  },
+  {
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Estudo do Meio",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T18:27:23.719Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Observa a imagem. Quem faz parte da nossa família?",
+          "options": [
+            "Amigos",
+            "Vizinhos",
+            "Pais e filhos",
+            "Professores"
+          ],
+          "correctAnswer": "Pais e filhos",
+          "topic": "A Família",
+          "imageUrl": "https://pixabay.com/get/g22dfc4b408d1bfd3c87357691fe78290f90ed3034e85dfa75b91dcdf3c4accbfed5aa7a78dc032e39201940d668c63f5_640.jpg"
+        },
+        {
+          "question": "Observa a imagem. O cão é um animal...",
+          "options": [
+            "Selvagem",
+            "Doméstico",
+            "Aquático",
+            "Voador"
+          ],
+          "correctAnswer": "Doméstico",
+          "topic": "Os Animais",
+          "imageUrl": "https://pixabay.com/get/g477477843ac3c18a0c32ed66d6aeb00c52ebcc9e6783c0fe381bbc0e6e9c8e898399333a61f22ec22f961abb3ccc2148_640.jpg"
+        },
+        {
+          "question": "Observa a imagem. O que podemos encontrar na natureza?",
+          "options": [
+            "Carros",
+            "Edifícios",
+            "Árvores e flores",
+            "Computadores"
+          ],
+          "correctAnswer": "Árvores e flores",
+          "topic": "A Natureza",
+          "imageUrl": "https://pixabay.com/get/g48f82ebf2e03ad9071c0311e7869f4f93e6df3606f8188fcf405e07be38db223ebb68a6843cb9d3527558887f827ea79_640.jpg"
+        },
+        {
+          "question": "Observa a imagem. Qual destas partes do corpo usamos para ver?",
+          "options": [
+            "Boca",
+            "Orelhas",
+            "Olhos",
+            "Nariz"
+          ],
+          "correctAnswer": "Olhos",
+          "topic": "O Corpo Humano",
+          "imageUrl": "https://pixabay.com/get/g7c22ecd328b46b12f9a21cee7b64d34f926ffe6e1dbbc5d3f74b721c6dacb85d1b88d5972e5b7032e719f8b6ba1a6723_640.jpg"
+        },
+        {
+          "question": "Observa a imagem. Onde aprendemos a ler e a escrever?",
+          "options": [
+            "No parque",
+            "Na praia",
+            "Na escola",
+            "No supermercado"
+          ],
+          "correctAnswer": "Na escola",
+          "topic": "A Comunidade e a Escola",
+          "imageUrl": "https://pixabay.com/get/ge32c3c6c3281694ce62491f568ed3af8196aa55d2dcd55143509fc8cf8e3fbb8e30020a28e2c791be3638542659727a4_640.jpg"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Observa a imagem. Quem faz parte da nossa família?",
+        "selectedAnswer": "Amigos",
+        "correctAnswer": "Pais e filhos",
+        "isCorrect": false,
+        "topic": "A Família"
+      },
+      {
+        "question": "Observa a imagem. O cão é um animal...",
+        "selectedAnswer": "Doméstico",
+        "correctAnswer": "Doméstico",
+        "isCorrect": true,
+        "topic": "Os Animais"
+      },
+      {
+        "question": "Observa a imagem. O que podemos encontrar na natureza?",
+        "selectedAnswer": "Árvores e flores",
+        "correctAnswer": "Árvores e flores",
+        "isCorrect": true,
+        "topic": "A Natureza"
+      },
+      {
+        "question": "Observa a imagem. Qual destas partes do corpo usamos para ver?",
+        "selectedAnswer": "Olhos",
+        "correctAnswer": "Olhos",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Observa a imagem. Onde aprendemos a ler e a escrever?",
+        "selectedAnswer": "Na escola",
+        "correctAnswer": "Na escola",
+        "isCorrect": true,
+        "topic": "A Comunidade e a Escola"
+      }
+    ],
+    "score": 4
+  },
+  {
+    "timestamp": "2025-09-13T18:35:20.104Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Se tens 3 maçãs e a tua amiga te dá mais 2 maçãs, quantas maçãs tens no total?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Adição",
+          "imageUrl": "https://pixabay.com/get/g5f6885f951ca4b20ee251c679c0bb4478220912251bfdd74b9f5465849100140ea6ef98fef56dcf457a4ab685af46e3d_640.jpg"
+        },
+        {
+          "question": "Tens 5 lápis e dás 1 ao teu amigo. Quantos lápis te sobram?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "4",
+          "topic": "Subtração",
+          "imageUrl": "https://pixabay.com/get/gdb956fae2fb5aea0d99229c9b2d24cbc585d31cb0cb1f006eb4d9347e59a5f5de1a3130a80eabedf711db5d6781088ee_640.jpg"
+        },
+        {
+          "question": "Qual é o número que vem depois do 7?",
+          "options": [
+            "6",
+            "8",
+            "9",
+            "10"
+          ],
+          "correctAnswer": "8",
+          "topic": "Números"
+        },
+        {
+          "question": "Que forma tem a imagem que vês?",
+          "options": [
+            "Círculo",
+            "Triângulo",
+            "Quadrado",
+            "Retângulo"
+          ],
+          "correctAnswer": "Quadrado",
+          "topic": "Formas Geométricas",
+          "imageUrl": "https://pixabay.com/get/g7550e3a83cd94bd8f4773f78df72688a5c66542476a5adfcbf01d6c355664fef7a3aae02dec1fc52ba2f6e0ebd3d4170_640.jpg"
+        },
+        {
+          "question": "A Maria tem 2 flores e o João tem 3 flores. Quantas flores têm os dois juntos?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Resolução de Problemas"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Se tens 3 maçãs e a tua amiga te dá mais 2 maçãs, quantas maçãs tens no total?",
+        "selectedAnswer": "5",
+        "correctAnswer": "5",
+        "isCorrect": true,
+        "topic": "Adição"
+      },
+      {
+        "question": "Tens 5 lápis e dás 1 ao teu amigo. Quantos lápis te sobram?",
+        "selectedAnswer": "6",
+        "correctAnswer": "4",
+        "isCorrect": false,
+        "topic": "Subtração"
+      },
+      {
+        "question": "Qual é o número que vem depois do 7?",
+        "selectedAnswer": "8",
+        "correctAnswer": "8",
+        "isCorrect": true,
+        "topic": "Números"
+      },
+      {
+        "question": "Que forma tem a imagem que vês?",
+        "selectedAnswer": "Retângulo",
+        "correctAnswer": "Quadrado",
+        "isCorrect": false,
+        "topic": "Formas Geométricas"
+      },
+      {
+        "question": "A Maria tem 2 flores e o João tem 3 flores. Quantas flores têm os dois juntos?",
+        "selectedAnswer": "5",
+        "correctAnswer": "5",
+        "isCorrect": true,
+        "topic": "Resolução de Problemas"
+      }
+    ],
+    "score": 3
   }
 ]
