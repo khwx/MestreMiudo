@@ -11,6 +11,7 @@ import { Loader2, Wand2, Volume2, BookHeart } from 'lucide-react';
 import { generateStoryAction } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Badge } from '@/components/ui/badge';
+import Image from 'next/image';
 
 const keywordSuggestions = [
     {
@@ -27,15 +28,113 @@ const keywordSuggestions = [
     }
 ];
 
+type SpeechMark = {
+    type: string;
+    value: string;
+    time: { seconds: string; nanos: number };
+};
+
+type StoryResult = {
+    title: string;
+    story: string;
+    audioDataUri?: string;
+    speechMarks?: SpeechMark[];
+    images?: string[];
+};
+
+const StoryDisplay = ({ result }: { result: StoryResult }) => {
+    const audioRef = useRef<HTMLAudioElement | null>(null);
+    const [currentWordIndex, setCurrentWordIndex] = useState(-1);
+
+    const handlePlayAudio = () => {
+        if (audioRef.current) {
+            if (audioRef.current.paused) {
+                audioRef.current.play();
+            } else {
+                audioRef.current.pause();
+                audioRef.current.currentTime = 0;
+                setCurrentWordIndex(-1);
+            }
+        }
+    };
+
+    const handleTimeUpdate = () => {
+        if (!audioRef.current || !result.speechMarks) return;
+
+        const currentTime = audioRef.current.currentTime;
+        const speechMarks = result.speechMarks.filter(mark => mark.type === 'word');
+        
+        let activeIndex = -1;
+        for (let i = speechMarks.length - 1; i >= 0; i--) {
+            const markTime = parseFloat(speechMarks[i].time.seconds) + speechMarks[i].time.nanos / 1e9;
+            if (currentTime >= markTime) {
+                activeIndex = i;
+                break;
+            }
+        }
+        setCurrentWordIndex(activeIndex);
+    };
+
+    const handleAudioEnded = () => {
+        setCurrentWordIndex(-1);
+    }
+    
+    // Split story into words, keeping punctuation attached
+    const words = result.story.split(/(\s+)/).filter(w => w.trim().length > 0);
+
+    return (
+        <Card className="animate-in fade-in-50">
+            <CardHeader>
+                <div className="flex justify-between items-start">
+                    <CardTitle className="text-3xl font-headline">{result.title}</CardTitle>
+                    {result.audioDataUri && (
+                        <>
+                            <audio 
+                                ref={audioRef}
+                                src={result.audioDataUri}
+                                onTimeUpdate={handleTimeUpdate}
+                                onEnded={handleAudioEnded}
+                                className="hidden"
+                            />
+                            <Button variant="outline" size="icon" onClick={handlePlayAudio} aria-label="Ouvir a história">
+                                <Volume2 className="h-6 w-6 text-primary" />
+                            </Button>
+                        </>
+                    )}
+                </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                {result.images && result.images.length > 0 && (
+                     <div className="grid grid-cols-3 gap-4 my-4">
+                        {result.images.map((src, index) => (
+                             <div key={index} className="relative aspect-square rounded-lg overflow-hidden border-2 border-primary/20">
+                                <Image src={src} alt={`Ilustração da história ${index + 1}`} fill style={{objectFit: 'cover'}} sizes="(max-width: 768px) 30vw, 10vw" />
+                             </div>
+                        ))}
+                    </div>
+                )}
+               
+                <p className="text-lg/relaxed whitespace-pre-wrap">
+                    {words.map((word, index) => (
+                        <span key={index} className={index === currentWordIndex ? 'bg-yellow-200 rounded-md' : ''}>
+                           {word}{' '}
+                        </span>
+                    ))}
+                </p>
+            </CardContent>
+        </Card>
+    );
+};
+
+
 export default function StoryCreatorPage() {
     const searchParams = useSearchParams();
     const grade = searchParams.get('grade') || '1';
 
     const [keywords, setKeywords] = useState('');
     const [loading, setLoading] = useState(false);
-    const [result, setResult] = useState<{ title: string; story: string; audioDataUri?: string } | null>(null);
+    const [result, setResult] = useState<StoryResult | null>(null);
     const { toast } = useToast();
-    const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
     const resultRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -43,7 +142,6 @@ export default function StoryCreatorPage() {
             resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }, [result]);
-    
 
     const handleAddKeyword = (word: string) => {
         setKeywords(prev => prev ? `${prev}, ${word}` : word);
@@ -62,10 +160,6 @@ export default function StoryCreatorPage() {
 
         setLoading(true);
         setResult(null);
-        if (audio) {
-            audio.pause();
-            setAudio(null);
-        }
 
         try {
             const storyResult = await generateStoryAction({
@@ -73,10 +167,6 @@ export default function StoryCreatorPage() {
                 gradeLevel: parseInt(grade, 10),
             });
             setResult(storyResult);
-            if (storyResult.audioDataUri) {
-                const newAudio = new Audio(storyResult.audioDataUri);
-                setAudio(newAudio);
-            }
         } catch (error) {
             console.error("Failed to generate story:", error);
             toast({
@@ -89,17 +179,6 @@ export default function StoryCreatorPage() {
         }
     };
     
-    const handlePlayAudio = () => {
-        if (audio) {
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-                audio.currentTime = 0;
-            }
-        }
-    }
-
     return (
         <div className="w-full max-w-4xl mx-auto space-y-8 animate-in fade-in-50">
             <div className="text-center">
@@ -124,6 +203,7 @@ export default function StoryCreatorPage() {
                                 onChange={(e) => setKeywords(e.target.value)}
                                 disabled={loading}
                                 className="h-12 text-lg"
+                                suppressHydrationWarning
                             />
                         </div>
 
@@ -165,23 +245,9 @@ export default function StoryCreatorPage() {
                 </div>
             )}
 
-            {result && (
-                <Card ref={resultRef} className="animate-in fade-in-50">
-                    <CardHeader>
-                        <div className="flex justify-between items-start">
-                            <CardTitle className="text-3xl font-headline">{result.title}</CardTitle>
-                            {result.audioDataUri && (
-                                <Button variant="outline" size="icon" onClick={handlePlayAudio} aria-label="Ouvir a história">
-                                    <Volume2 className="h-6 w-6 text-primary" />
-                                </Button>
-                            )}
-                        </div>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-lg/relaxed whitespace-pre-wrap">{result.story}</p>
-                    </CardContent>
-                </Card>
-            )}
+            <div ref={resultRef}>
+                {result && <StoryDisplay result={result} />}
+            </div>
         </div>
     );
 }
