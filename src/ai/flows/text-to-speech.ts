@@ -76,7 +76,7 @@ const textToSpeechFlow = ai.defineFlow(
         responseModalities: ['AUDIO'],
         speechConfig: {
           voiceConfig: {
-            languageCode: 'pt-PT',
+            languageCode: 'pt-BR',
           },
           enableTimepoints: true, // Enable speech marks
         },
