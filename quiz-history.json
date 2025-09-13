@@ -3281,11 +3281,11 @@
     "score": 3
   },
   {
-    "timestamp": "2025-09-13T15:12:08.663Z",
     "studentId": "Sara",
     "gradeLevel": 1,
     "subject": "Português",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T15:12:08.663Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -3381,6 +3381,218 @@
         "correctAnswer": "Um objeto para ler histórias.",
         "isCorrect": false,
         "topic": "Leitura e Vocabulário"
+      }
+    ],
+    "score": 4
+  },
+  {
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T17:57:34.311Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual destas palavras começa com a letra 'A'?",
+          "options": [
+            "Bola",
+            "Amor",
+            "Casa",
+            "Dado"
+          ],
+          "correctAnswer": "Amor",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "Observa a imagem. Qual é a primeira letra da palavra que descreve este animal?",
+          "options": [
+            "C",
+            "P",
+            "G",
+            "M"
+          ],
+          "correctAnswer": "G",
+          "topic": "Identificação de Letras e Fonética",
+          "imageUrl": "https://pixabay.com/get/g6501e583b07a91f5a638a4f9f29274186779c1838f8e54c026092b622b63ad683ed660193c23b793bca9d272d2a7be0c_640.jpg"
+        },
+        {
+          "question": "O que usamos para escrever?",
+          "options": [
+            "Tesoura",
+            "Lápis",
+            "Caderno",
+            "Borracha"
+          ],
+          "correctAnswer": "Lápis",
+          "topic": "Leitura e Vocabulário"
+        },
+        {
+          "question": "Ordena as palavras para formar uma frase correta: \"come\" \"o\" \"pão\" \"menino\"",
+          "options": [
+            "O pão come menino",
+            "O menino come pão",
+            "Come pão o menino",
+            "Menino o come pão"
+          ],
+          "correctAnswer": "O menino come pão",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "Qual destas palavras é um nome de uma cor?",
+          "options": [
+            "Mesa",
+            "Livro",
+            "Azul",
+            "Cadeira"
+          ],
+          "correctAnswer": "Azul",
+          "topic": "Leitura e Vocabulário"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual destas palavras começa com a letra 'A'?",
+        "selectedAnswer": "Amor",
+        "correctAnswer": "Amor",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Observa a imagem. Qual é a primeira letra da palavra que descreve este animal?",
+        "selectedAnswer": "G",
+        "correctAnswer": "G",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "O que usamos para escrever?",
+        "selectedAnswer": "Lápis",
+        "correctAnswer": "Lápis",
+        "isCorrect": true,
+        "topic": "Leitura e Vocabulário"
+      },
+      {
+        "question": "Ordena as palavras para formar uma frase correta: \"come\" \"o\" \"pão\" \"menino\"",
+        "selectedAnswer": "Menino o come pão",
+        "correctAnswer": "O menino come pão",
+        "isCorrect": false,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "Qual destas palavras é um nome de uma cor?",
+        "selectedAnswer": "Cadeira",
+        "correctAnswer": "Azul",
+        "isCorrect": false,
+        "topic": "Leitura e Vocabulário"
+      }
+    ],
+    "score": 3
+  },
+  {
+    "timestamp": "2025-09-13T18:01:05.318Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Misto",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Quantas patas tem um cão?",
+          "options": [
+            "2",
+            "4",
+            "6",
+            "8"
+          ],
+          "correctAnswer": "4",
+          "topic": "Matemática",
+          "imageUrl": "https://pixabay.com/get/g7d67e9da453e521b43197ae5f19a49afb0fe61ca6f95c9c0374f437c5cdc59f7c42425654c0c0dca02a32438e0049dbf_640.jpg"
+        },
+        {
+          "question": "Ordena as palavras para formar uma frase: menina, a, come, maçã, uma.",
+          "options": [
+            "Uma maçã come a menina.",
+            "A menina come uma maçã.",
+            "Come a menina uma maçã.",
+            "Maçã uma come a menina."
+          ],
+          "correctAnswer": "A menina come uma maçã.",
+          "topic": "Português"
+        },
+        {
+          "question": "O que precisamos para as flores crescerem bonitas?",
+          "options": [
+            "Sol e água",
+            "Chocolate e doces",
+            "Carros e estradas",
+            "Livros e cadernos"
+          ],
+          "correctAnswer": "Sol e água",
+          "topic": "Estudo do Meio",
+          "imageUrl": "https://pixabay.com/get/gd3e2df4821740956b7709585ec7ec1ee383eb67998ac738dfd5fe76d445823ae98ad63b4cf577768f9139f44fb4560c3_640.jpg"
+        },
+        {
+          "question": "Se tens 5 maçãs e comes 2, quantas maçãs te restam?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "3",
+          "topic": "Matemática"
+        },
+        {
+          "question": "Qual destes animais vive na água e tem barbatanas?",
+          "options": [
+            "Cão",
+            "Gato",
+            "Pássaro",
+            "Peixe"
+          ],
+          "correctAnswer": "Peixe",
+          "topic": "Estudo do Meio",
+          "imageUrl": "https://pixabay.com/get/gbfc7283c733cfedcd8447d56e0afa9d1c2da6a49b6a5ec711a3c33ef25c9231e49438e2ebb02d44a08da60a9e833c32f_640.jpg"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Quantas patas tem um cão?",
+        "selectedAnswer": "4",
+        "correctAnswer": "4",
+        "isCorrect": true,
+        "topic": "Matemática"
+      },
+      {
+        "question": "Ordena as palavras para formar uma frase: menina, a, come, maçã, uma.",
+        "selectedAnswer": "A menina come uma maçã.",
+        "correctAnswer": "A menina come uma maçã.",
+        "isCorrect": true,
+        "topic": "Português"
+      },
+      {
+        "question": "O que precisamos para as flores crescerem bonitas?",
+        "selectedAnswer": "Chocolate e doces",
+        "correctAnswer": "Sol e água",
+        "isCorrect": false,
+        "topic": "Estudo do Meio"
+      },
+      {
+        "question": "Se tens 5 maçãs e comes 2, quantas maçãs te restam?",
+        "selectedAnswer": "3",
+        "correctAnswer": "3",
+        "isCorrect": true,
+        "topic": "Matemática"
+      },
+      {
+        "question": "Qual destes animais vive na água e tem barbatanas?",
+        "selectedAnswer": "Peixe",
+        "correctAnswer": "Peixe",
+        "isCorrect": true,
+        "topic": "Estudo do Meio"
       }
     ],
     "score": 4
