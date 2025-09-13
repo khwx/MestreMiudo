@@ -83,7 +83,7 @@ const personalizedLearningPathFlow = ai.defineFlow(
             performanceData: input.performanceData ? JSON.stringify(input.performanceData, null, 2) : undefined,
         };
         // Get raw output without immediate validation
-        const {output} = await prompt(flowInput, {validate: 'output'});
+        const {output} = await prompt(flowInput);
 
         // Manually validate and check if output is null or invalid, and retry if so.
         if (output && output.quizQuestions && output.quizQuestions.length > 0) {
