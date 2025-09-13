@@ -12,7 +12,9 @@
  */
 
 import { ai } from '@/ai/genkit';
-import { StoryGenerationInputSchema, StoryGenerationOutputSchema, type StoryGenerationInput, type StoryGenerationOutput } from '@/ai/schemas';
+import { StoryGenerationOutputSchema, type StoryGenerationOutput } from '@/ai/schemas';
+import type { StoryGenerationInput } from '@/app/shared-schemas';
+import { StoryGenerationInputSchema } from '@/app/shared-schemas';
 
 
 export async function generateStory(input: StoryGenerationInput): Promise<StoryGenerationOutput> {

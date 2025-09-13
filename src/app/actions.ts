@@ -4,12 +4,12 @@
 import { personalizedLearningPath } from "@/ai/flows/personalized-learning-paths";
 import { generateStory } from "@/ai/flows/story-generator";
 import { textToSpeech } from "@/ai/flows/text-to-speech";
-import { StoryGenerationInputSchema, type StoryGenerationInput } from "@/app/shared-schemas";
+import { StoryGenerationInputSchema } from "@/app/shared-schemas";
 import { z } from "zod";
 import fs from 'fs/promises';
 import path from 'path';
 import { ai } from "@/ai/genkit";
-import type { QuizInput, SaveQuizInput, QuizResultEntry, Answer, SpeechMark } from './shared-schemas';
+import type { QuizInput, SaveQuizInput, QuizResultEntry, Answer, SpeechMark, StoryGenerationInput } from './shared-schemas';
 import { QuizResultSchema, SaveQuizInputSchema } from "./shared-schemas";
 
 
