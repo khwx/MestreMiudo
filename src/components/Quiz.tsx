@@ -59,9 +59,9 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   }, [loading]);
 
   const fetchQuiz = useCallback(async () => {
+    setLoading(true);
+    setError(null);
     try {
-      setLoading(true);
-      setError(null);
       const data = await generateQuiz({
         studentId,
         gradeLevel,
@@ -70,6 +70,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
       });
       if (!data || data.quizQuestions.length === 0) {
         setError('Não foi possível gerar perguntas. Tenta novamente mais tarde.');
+        setQuizData(null);
       } else {
         setQuizData(data);
         setCurrentQuestionIndex(0);
@@ -81,6 +82,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     } catch (e) {
       setError('Não foi possível carregar o quiz. Tenta novamente.');
       console.error(e);
+      setQuizData(null);
     } finally {
       setLoading(false);
     }
@@ -314,3 +316,5 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     </Card>
   );
 }
+
+    

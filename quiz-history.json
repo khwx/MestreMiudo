@@ -2220,11 +2220,11 @@
     "score": 3
   },
   {
-    "timestamp": "2025-09-11T15:09:11.280Z",
     "studentId": "Sara",
     "gradeLevel": 1,
     "subject": "Português",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-11T15:09:11.280Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -2323,5 +2323,645 @@
       }
     ],
     "score": 3
+  },
+  {
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Misto",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T11:37:50.250Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Para que serve o teu braço? (Olha a imagem!)",
+          "options": [
+            "Para ver",
+            "Para ouvir",
+            "Para abraçar",
+            "Para cheirar"
+          ],
+          "correctAnswer": "Para abraçar",
+          "topic": "O Corpo Humano",
+          "imageUrl": "https://pixabay.com/get/g3d32b417b73d6f7cd76bb84f210d9cc0d032364d8827dfe8d66867f02eba5d27ea51eb1870c9298ce70fad48fc5d5974_640.jpg"
+        },
+        {
+          "question": "Quantos dias tem uma semana?",
+          "options": [
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "correctAnswer": "7",
+          "topic": "Contagem",
+          "imageUrl": "https://pixabay.com/get/gb8244dc75d9dd0a708eef0179add9be523bc823e69297b39dad758b31b7268c5d55fbb3708ccba80c8f32622079d598a_640.jpg"
+        },
+        {
+          "question": "Qual destas palavras começa com a letra 'C'?",
+          "options": [
+            "Avião",
+            "Casa",
+            "Elefante",
+            "Uva"
+          ],
+          "correctAnswer": "Casa",
+          "topic": "Vocabulário"
+        },
+        {
+          "question": "Coloca as palavras na ordem correta para formar uma frase: 'gosta o de cão osso'",
+          "options": [
+            "O osso gosta de cão.",
+            "Gosta o cão de osso.",
+            "O cão gosta de osso.",
+            "Osso o cão gosta de."
+          ],
+          "correctAnswer": "O cão gosta de osso.",
+          "topic": "Formação de Frases"
+        },
+        {
+          "question": "O que usamos para escrever no caderno?",
+          "options": [
+            "Tesoura",
+            "Lápis",
+            "Colher",
+            "Martelo"
+          ],
+          "correctAnswer": "Lápis",
+          "topic": "Estudo do Meio"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Para que serve o teu braço? (Olha a imagem!)",
+        "selectedAnswer": "Para abraçar",
+        "correctAnswer": "Para abraçar",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Quantos dias tem uma semana?",
+        "selectedAnswer": "7",
+        "correctAnswer": "7",
+        "isCorrect": true,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Qual destas palavras começa com a letra 'C'?",
+        "selectedAnswer": "Casa",
+        "correctAnswer": "Casa",
+        "isCorrect": true,
+        "topic": "Vocabulário"
+      },
+      {
+        "question": "Coloca as palavras na ordem correta para formar uma frase: 'gosta o de cão osso'",
+        "selectedAnswer": "Gosta o cão de osso.",
+        "correctAnswer": "O cão gosta de osso.",
+        "isCorrect": false,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "O que usamos para escrever no caderno?",
+        "selectedAnswer": "Lápis",
+        "correctAnswer": "Lápis",
+        "isCorrect": true,
+        "topic": "Estudo do Meio"
+      }
+    ],
+    "score": 4
+  },
+  {
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T11:42:40.399Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Um estojo tem 10 lápis. A Carolina tirou 3 lápis. Quantos lápis ficaram no estojo?",
+          "options": [
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "correctAnswer": "7",
+          "topic": "Contagem",
+          "imageUrl": "https://pixabay.com/get/g42eb424622cfe7471f2687579915eaccda62a462846328bd5e1137f554ce4812a4aadbd66f7ded65291a11bcc45f7e95_640.jpg"
+        },
+        {
+          "question": "Qual é o próximo número na sequência: 1, 2, 3, 4, ___?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "5",
+          "topic": "Sucessão Numérica",
+          "imageUrl": "https://pixabay.com/get/gd46ac98a6a44c2e6aa4072076cf4129e9ba7adace7310fd1ce3641a900197527f8a1b1269c6471dc263da012dc3ce834_640.jpg"
+        },
+        {
+          "question": "A Maria tem 5 meias e a Joana tem 2 meias. Quantas meias têm as duas juntas?",
+          "options": [
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "correctAnswer": "7",
+          "topic": "Adição",
+          "imageUrl": "https://pixabay.com/get/g43d738d33e5ac9736cb9fc99b129d825b0127a597dfd6e0516d23b6d9b4f4d9c4e7cb085891b3dde5e15914dc218cc16_640.jpg"
+        },
+        {
+          "question": "O João tinha 8 maçãs e comeu 3. Quantas maçãs sobraram?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Subtração",
+          "imageUrl": "https://pixabay.com/get/gd76c1cd8639fd9a0657b7e1b52bcc0c00271daf93c731f44f7ae1bcd2ef74c99e4faeb16d621574f047c259b9ebd3c6c_640.jpg"
+        },
+        {
+          "question": "Tens 4 balões azuis e 5 balões vermelhos. Quantos balões tens no total?",
+          "options": [
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "correctAnswer": "9",
+          "topic": "Contagem / Resolução de Problemas",
+          "imageUrl": "https://pixabay.com/get/g1e7cb6da1f827f90daa7e551c0346b02517aad84c710442f4eef18a7fc854ec582100b96ebda344faa524b2e46d44c96_640.jpg"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Um estojo tem 10 lápis. A Carolina tirou 3 lápis. Quantos lápis ficaram no estojo?",
+        "selectedAnswer": "7",
+        "correctAnswer": "7",
+        "isCorrect": true,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Qual é o próximo número na sequência: 1, 2, 3, 4, ___?",
+        "selectedAnswer": "5",
+        "correctAnswer": "5",
+        "isCorrect": true,
+        "topic": "Sucessão Numérica"
+      },
+      {
+        "question": "A Maria tem 5 meias e a Joana tem 2 meias. Quantas meias têm as duas juntas?",
+        "selectedAnswer": "7",
+        "correctAnswer": "7",
+        "isCorrect": true,
+        "topic": "Adição"
+      },
+      {
+        "question": "O João tinha 8 maçãs e comeu 3. Quantas maçãs sobraram?",
+        "selectedAnswer": "4",
+        "correctAnswer": "5",
+        "isCorrect": false,
+        "topic": "Subtração"
+      },
+      {
+        "question": "Tens 4 balões azuis e 5 balões vermelhos. Quantos balões tens no total?",
+        "selectedAnswer": "9",
+        "correctAnswer": "9",
+        "isCorrect": true,
+        "topic": "Contagem / Resolução de Problemas"
+      }
+    ],
+    "score": 4
+  },
+  {
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T11:46:06.157Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "O que vês na imagem?",
+          "options": [
+            "Árvore",
+            "Flor",
+            "Cão",
+            "Casa"
+          ],
+          "correctAnswer": "Flor",
+          "topic": "Vocabulário",
+          "imageUrl": "https://pixabay.com/get/gb0340db7a71f1de7dcec54347ec730736a9c0b1b3706e309ebc4eb6b0e623bbc931f38e067e1d4a8f5a0e1e6073f3232_640.jpg"
+        },
+        {
+          "question": "Coloca as palavras na ordem correta para formar uma frase: 'come o pão menino'.",
+          "options": [
+            "O pão come menino.",
+            "Menino o pão come.",
+            "O menino come o pão.",
+            "Come o pão o menino."
+          ],
+          "correctAnswer": "O menino come o pão.",
+          "topic": "Formação de Frases"
+        },
+        {
+          "question": "Qual a palavra que rima com 'gato'?",
+          "options": [
+            "Cão",
+            "Pato",
+            "Mesa",
+            "Livro"
+          ],
+          "correctAnswer": "Pato",
+          "topic": "Vocabulário"
+        },
+        {
+          "question": "Organiza as palavras para formar uma frase: 'ela linda uma flor tem'.",
+          "options": [
+            "Linda ela tem uma flor.",
+            "Ela tem uma flor linda.",
+            "Uma flor linda ela tem.",
+            "Tem ela uma flor linda."
+          ],
+          "correctAnswer": "Ela tem uma flor linda.",
+          "topic": "Formação de Frases"
+        },
+        {
+          "question": "Qual destas palavras significa o oposto de 'grande'?",
+          "options": [
+            "Alto",
+            "Pequeno",
+            "Largo",
+            "Belo"
+          ],
+          "correctAnswer": "Pequeno",
+          "topic": "Vocabulário"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "O que vês na imagem?",
+        "selectedAnswer": "Flor",
+        "correctAnswer": "Flor",
+        "isCorrect": true,
+        "topic": "Vocabulário"
+      },
+      {
+        "question": "Coloca as palavras na ordem correta para formar uma frase: 'come o pão menino'.",
+        "selectedAnswer": "O menino come o pão.",
+        "correctAnswer": "O menino come o pão.",
+        "isCorrect": true,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "Qual a palavra que rima com 'gato'?",
+        "selectedAnswer": "Pato",
+        "correctAnswer": "Pato",
+        "isCorrect": true,
+        "topic": "Vocabulário"
+      },
+      {
+        "question": "Organiza as palavras para formar uma frase: 'ela linda uma flor tem'.",
+        "selectedAnswer": "Ela tem uma flor linda.",
+        "correctAnswer": "Ela tem uma flor linda.",
+        "isCorrect": true,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "Qual destas palavras significa o oposto de 'grande'?",
+        "selectedAnswer": "Pequeno",
+        "correctAnswer": "Pequeno",
+        "isCorrect": true,
+        "topic": "Vocabulário"
+      }
+    ],
+    "score": 5
+  },
+  {
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Estudo do Meio",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T11:48:21.859Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual destas partes do corpo está na nossa cabeça?",
+          "options": [
+            "Pé",
+            "Mão",
+            "Nariz",
+            "Joelhos"
+          ],
+          "correctAnswer": "Nariz",
+          "topic": "O Corpo Humano",
+          "imageUrl": "https://pixabay.com/get/g7590c364b51bd4975d7fca6103fcbcba86b86f24313c5f3dfd95986e73a5e8ff7253a5a1261f85f98f2ff6a33a80cac8_640.jpg"
+        },
+        {
+          "question": "Para que serve o nosso nariz?",
+          "options": [
+            "Para ver",
+            "Para cheirar",
+            "Para ouvir",
+            "Para andar"
+          ],
+          "correctAnswer": "Para cheirar",
+          "topic": "O Corpo Humano",
+          "imageUrl": "https://pixabay.com/get/gfbd962a21cb29ac7e7a057b9ec573a75b0a93e40ba55808f18c2b0edd84646d8a65e1c954930100f0bb1aaa8147029ac_640.jpg"
+        },
+        {
+          "question": "Com que parte do corpo vemos o mundo?",
+          "options": [
+            "Com as mãos",
+            "Com os olhos",
+            "Com a boca",
+            "Com os pés"
+          ],
+          "correctAnswer": "Com os olhos",
+          "topic": "O Corpo Humano",
+          "imageUrl": "https://pixabay.com/get/g47d17177714b6d113ccc7223861bc7741952cd75642ec1eef1e903eebc2d246f718df5eb46159103a7db539d43345368_640.jpg"
+        },
+        {
+          "question": "Qual destas ações fazemos com a boca?",
+          "options": [
+            "Correr",
+            "Saltar",
+            "Comer",
+            "Escrever"
+          ],
+          "correctAnswer": "Comer",
+          "topic": "O Corpo Humano",
+          "imageUrl": "https://pixabay.com/get/g025f6a9e709e602d1b0419ca97f567c3667ce2e0644277448841923e5de07155512514151a4f76521af6d6f3d9bfa8d7_640.jpg"
+        },
+        {
+          "question": "Quantas pernas temos no nosso corpo?",
+          "options": [
+            "Uma",
+            "Duas",
+            "Três",
+            "Quatro"
+          ],
+          "correctAnswer": "Duas",
+          "topic": "O Corpo Humano"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual destas partes do corpo está na nossa cabeça?",
+        "selectedAnswer": "Nariz",
+        "correctAnswer": "Nariz",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Para que serve o nosso nariz?",
+        "selectedAnswer": "Para cheirar",
+        "correctAnswer": "Para cheirar",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Com que parte do corpo vemos o mundo?",
+        "selectedAnswer": "Com os olhos",
+        "correctAnswer": "Com os olhos",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Qual destas ações fazemos com a boca?",
+        "selectedAnswer": "Comer",
+        "correctAnswer": "Comer",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Quantas pernas temos no nosso corpo?",
+        "selectedAnswer": "Duas",
+        "correctAnswer": "Duas",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      }
+    ],
+    "score": 5
+  },
+  {
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T11:58:34.789Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Tens 8 maçãs e comes 3. Quantas maçãs te restam?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Subtração",
+          "imageUrl": "https://pixabay.com/get/gf4d1ac029bd026daf140abc2e8290a1c8ce024ff551f26ecc0e750b87683ab39444eda3e73a4a79f4e49c2b38b460905_640.jpg"
+        },
+        {
+          "question": "Se contares de 2 em 2, quais são os próximos dois números depois do 10?",
+          "options": [
+            "11, 12",
+            "12, 14",
+            "13, 15",
+            "10, 12"
+          ],
+          "correctAnswer": "12, 14",
+          "topic": "Contagem"
+        },
+        {
+          "question": "A Maria tem 5 bonecas e a Joana tem 4 bonecas. Quantas bonecas têm as duas juntas?",
+          "options": [
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "correctAnswer": "9",
+          "topic": "Adição"
+        },
+        {
+          "question": "Completa a sequência de números, como se fossem carruagens de um comboio: 1, 2, 3, __, 5",
+          "options": [
+            "3",
+            "4",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "4",
+          "topic": "Sucessão Numérica / Contagem",
+          "imageUrl": "https://pixabay.com/get/g7bcf766e445b0fabc5c36d584f20e035ad9033780b3d3bf72e6544250ca84b1a3703e1659132c9ced3cec0b0b3ca1b00_640.jpg"
+        },
+        {
+          "question": "Tens 7 lápis e dás 2 ao teu amigo. Quantos lápis te ficam?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Subtração"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Tens 8 maçãs e comes 3. Quantas maçãs te restam?",
+        "selectedAnswer": "6",
+        "correctAnswer": "5",
+        "isCorrect": false,
+        "topic": "Subtração"
+      },
+      {
+        "question": "Se contares de 2 em 2, quais são os próximos dois números depois do 10?",
+        "selectedAnswer": "13, 15",
+        "correctAnswer": "12, 14",
+        "isCorrect": false,
+        "topic": "Contagem"
+      },
+      {
+        "question": "A Maria tem 5 bonecas e a Joana tem 4 bonecas. Quantas bonecas têm as duas juntas?",
+        "selectedAnswer": "9",
+        "correctAnswer": "9",
+        "isCorrect": true,
+        "topic": "Adição"
+      },
+      {
+        "question": "Completa a sequência de números, como se fossem carruagens de um comboio: 1, 2, 3, __, 5",
+        "selectedAnswer": "4",
+        "correctAnswer": "4",
+        "isCorrect": true,
+        "topic": "Sucessão Numérica / Contagem"
+      },
+      {
+        "question": "Tens 7 lápis e dás 2 ao teu amigo. Quantos lápis te ficam?",
+        "selectedAnswer": "7",
+        "correctAnswer": "5",
+        "isCorrect": false,
+        "topic": "Subtração"
+      }
+    ],
+    "score": 2
+  },
+  {
+    "timestamp": "2025-09-13T12:08:57.130Z",
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Misto",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Se tens 5 maçãs e dás 2 a um amigo, quantas maçãs te restam?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "3",
+          "topic": "Subtração",
+          "imageUrl": "https://pixabay.com/get/g35adabeca9b5d98db575317389c8a9b1283c6ad7d5a54cf395c4c9f854d03e4fdf552eb686c8b4a2f3a9e513df2d41cc_640.jpg"
+        },
+        {
+          "question": "Coloca as palavras na ordem correta para formar uma frase: \"gosta de o cão correr\"",
+          "options": [
+            "O cão de gosta correr",
+            "Correr gosta de o cão",
+            "O cão gosta de correr",
+            "De correr o cão gosta"
+          ],
+          "correctAnswer": "O cão gosta de correr",
+          "topic": "Formação de Frases"
+        },
+        {
+          "question": "Qual órgão do corpo humano é responsável por bombear o sangue para todo o corpo?",
+          "options": [
+            "Pulmão",
+            "Estômago",
+            "Coração",
+            "Cérebro"
+          ],
+          "correctAnswer": "Coração",
+          "topic": "O Corpo Humano",
+          "imageUrl": "https://pixabay.com/get/gd61fe3d91d26919d3cd49763132eb4fdad0d9905c777c960d6ac221530e944ece36e9f288671e9899884d74e8a30a15e_640.jpg"
+        },
+        {
+          "question": "Quantos dedos tens em uma mão?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "5",
+          "topic": "Contagem"
+        },
+        {
+          "question": "Qual destas palavras significa o mesmo que \"feliz\"?",
+          "options": [
+            "Triste",
+            "Contente",
+            "Zangado",
+            "Cansado"
+          ],
+          "correctAnswer": "Contente",
+          "topic": "Vocabulário"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Se tens 5 maçãs e dás 2 a um amigo, quantas maçãs te restam?",
+        "selectedAnswer": "3",
+        "correctAnswer": "3",
+        "isCorrect": true,
+        "topic": "Subtração"
+      },
+      {
+        "question": "Coloca as palavras na ordem correta para formar uma frase: \"gosta de o cão correr\"",
+        "selectedAnswer": "Correr gosta de o cão",
+        "correctAnswer": "O cão gosta de correr",
+        "isCorrect": false,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "Qual órgão do corpo humano é responsável por bombear o sangue para todo o corpo?",
+        "selectedAnswer": "Coração",
+        "correctAnswer": "Coração",
+        "isCorrect": true,
+        "topic": "O Corpo Humano"
+      },
+      {
+        "question": "Quantos dedos tens em uma mão?",
+        "selectedAnswer": "5",
+        "correctAnswer": "5",
+        "isCorrect": true,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Qual destas palavras significa o mesmo que \"feliz\"?",
+        "selectedAnswer": "Contente",
+        "correctAnswer": "Contente",
+        "isCorrect": true,
+        "topic": "Vocabulário"
+      }
+    ],
+    "score": 4
   }
 ]
