@@ -4,6 +4,7 @@
 import { personalizedLearningPath } from "@/ai/flows/personalized-learning-paths";
 import { generateStory } from "@/ai/flows/story-generator";
 import { textToSpeech } from "@/ai/flows/text-to-speech";
+import type { StoryGenerationInput } from "@/ai/schemas";
 import { StoryGenerationInputSchema } from "@/ai/schemas";
 import { z } from "zod";
 import fs from 'fs/promises';
@@ -148,16 +149,14 @@ async function generateImage(prompt: string): Promise<string> {
     return media?.url || '';
 }
 
-export async function generateStoryAction(input: z.infer<typeof StoryGenerationInputSchema>): Promise<z.infer<typeof GenerateStoryActionOutputSchema>> {
+export async function generateStoryAction(input: StoryGenerationInput): Promise<z.infer<typeof GenerateStoryActionOutputSchema>> {
     const validatedInput = StoryGenerationInputSchema.parse(input);
     
-    // 1. Generate the story and image prompts
     const storyOutput = await generateStory(validatedInput);
     if (!storyOutput || !storyOutput.story) {
         throw new Error("Failed to generate story text.");
     }
 
-    // 2. Generate audio and images in parallel
     const fullText = `${storyOutput.title}. ${storyOutput.story}`;
 
     const [ttsResult, imagesResult] = await Promise.allSettled([
