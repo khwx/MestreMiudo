@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -29,7 +29,6 @@ const keywordSuggestions = [
 
 export default function StoryCreatorPage() {
     const searchParams = useSearchParams();
-    const name = searchParams.get('name') || 'Amigo';
     const grade = searchParams.get('grade') || '1';
 
     const [keywords, setKeywords] = useState('');
@@ -37,6 +36,14 @@ export default function StoryCreatorPage() {
     const [result, setResult] = useState<{ title: string; story: string; audioDataUri?: string } | null>(null);
     const { toast } = useToast();
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+    const resultRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (result && resultRef.current) {
+            resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [result]);
+    
 
     const handleAddKeyword = (word: string) => {
         setKeywords(prev => prev ? `${prev}, ${word}` : word);
@@ -159,7 +166,7 @@ export default function StoryCreatorPage() {
             )}
 
             {result && (
-                <Card className="animate-in fade-in-50">
+                <Card ref={resultRef} className="animate-in fade-in-50">
                     <CardHeader>
                         <div className="flex justify-between items-start">
                             <CardTitle className="text-3xl font-headline">{result.title}</CardTitle>
@@ -178,4 +185,3 @@ export default function StoryCreatorPage() {
         </div>
     );
 }
-
