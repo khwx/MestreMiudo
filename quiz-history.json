@@ -2859,11 +2859,11 @@
     "score": 2
   },
   {
-    "timestamp": "2025-09-13T12:08:57.130Z",
     "studentId": "Maria",
     "gradeLevel": 1,
     "subject": "Misto",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T12:08:57.130Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -2963,5 +2963,216 @@
       }
     ],
     "score": 4
+  },
+  {
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T14:12:43.224Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual é a primeira letra da palavra 'SOL'?",
+          "options": [
+            "S",
+            "O",
+            "L",
+            "P"
+          ],
+          "correctAnswer": "S",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "Que palavra começa com o mesmo som de 'MESA'?",
+          "options": [
+            "Pato",
+            "Mala",
+            "Casa",
+            "Bola"
+          ],
+          "correctAnswer": "Mala",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "Coloca as palavras na ordem correta para formar uma frase: 'come / O / maçã / João / uma'.",
+          "options": [
+            "O João uma maçã come.",
+            "Come uma maçã o João.",
+            "O João come uma maçã.",
+            "Maçã come o João uma."
+          ],
+          "correctAnswer": "O João come uma maçã.",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "Qual destas palavras começa com a letra 'P'?",
+          "options": [
+            "Gato",
+            "Cão",
+            "Pato",
+            "Rato"
+          ],
+          "correctAnswer": "Pato",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "O que é este animal?",
+          "options": [
+            "Pássaro",
+            "Cão",
+            "Gato",
+            "Peixe"
+          ],
+          "correctAnswer": "Peixe",
+          "topic": "Leitura e Vocabulário",
+          "imageUrl": "https://pixabay.com/get/gbd4249ea00319f2f596c621dde68aa9b6ce372a30cfd2709d5a6c1a0269fe520ce331ddfede29f8c7e26a33acb7fff9e_640.jpg"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual é a primeira letra da palavra 'SOL'?",
+        "selectedAnswer": "S",
+        "correctAnswer": "S",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Que palavra começa com o mesmo som de 'MESA'?",
+        "selectedAnswer": "Mala",
+        "correctAnswer": "Mala",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Coloca as palavras na ordem correta para formar uma frase: 'come / O / maçã / João / uma'.",
+        "selectedAnswer": "O João come uma maçã.",
+        "correctAnswer": "O João come uma maçã.",
+        "isCorrect": true,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "Qual destas palavras começa com a letra 'P'?",
+        "selectedAnswer": "Pato",
+        "correctAnswer": "Pato",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "O que é este animal?",
+        "selectedAnswer": "Peixe",
+        "correctAnswer": "Peixe",
+        "isCorrect": true,
+        "topic": "Leitura e Vocabulário"
+      }
+    ],
+    "score": 5
+  },
+  {
+    "timestamp": "2025-09-13T14:14:09.508Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Misto",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Se tens 2 maçãs e recebes mais 3, quantas maçãs tens no total?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "5",
+          "topic": "Matemática",
+          "imageUrl": "https://pixabay.com/get/g1b425bda4c685e017a0b5dfa06afe6fcf156d9ddfdb51d2a475e7c86f30ae364bf5d519888f71566896e675ee5a85aba_640.jpg"
+        },
+        {
+          "question": "Onde vive o peixe?",
+          "options": [
+            "Na floresta",
+            "No deserto",
+            "Na água",
+            "No ar"
+          ],
+          "correctAnswer": "Na água",
+          "topic": "Estudo do Meio",
+          "imageUrl": "https://pixabay.com/get/g3bea6b34351f5823855ffe41cde6f699af4b72113ae916c923961056ed04a978b3f6ea55848ba76553b3515cdb7a5627_640.jpg"
+        },
+        {
+          "question": "Ordena as palavras para formar uma frase correta: 'o come pão menino'.",
+          "options": [
+            "Menino pão o come.",
+            "O menino come pão.",
+            "Pão come o menino.",
+            "Come o pão menino."
+          ],
+          "correctAnswer": "O menino come pão.",
+          "topic": "Português"
+        },
+        {
+          "question": "Qual é a primeira letra da palavra 'bola'?",
+          "options": [
+            "P",
+            "B",
+            "M",
+            "L"
+          ],
+          "correctAnswer": "B",
+          "topic": "Português"
+        },
+        {
+          "question": "O que usa a árvore para beber água do chão?",
+          "options": [
+            "As folhas",
+            "As flores",
+            "As raízes",
+            "O tronco"
+          ],
+          "correctAnswer": "As raízes",
+          "topic": "Estudo do Meio"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Se tens 2 maçãs e recebes mais 3, quantas maçãs tens no total?",
+        "selectedAnswer": "5",
+        "correctAnswer": "5",
+        "isCorrect": true,
+        "topic": "Matemática"
+      },
+      {
+        "question": "Onde vive o peixe?",
+        "selectedAnswer": "Na água",
+        "correctAnswer": "Na água",
+        "isCorrect": true,
+        "topic": "Estudo do Meio"
+      },
+      {
+        "question": "Ordena as palavras para formar uma frase correta: 'o come pão menino'.",
+        "selectedAnswer": "O menino come pão.",
+        "correctAnswer": "O menino come pão.",
+        "isCorrect": true,
+        "topic": "Português"
+      },
+      {
+        "question": "Qual é a primeira letra da palavra 'bola'?",
+        "selectedAnswer": "B",
+        "correctAnswer": "B",
+        "isCorrect": true,
+        "topic": "Português"
+      },
+      {
+        "question": "O que usa a árvore para beber água do chão?",
+        "selectedAnswer": "As raízes",
+        "correctAnswer": "As raízes",
+        "isCorrect": true,
+        "topic": "Estudo do Meio"
+      }
+    ],
+    "score": 5
   }
 ]

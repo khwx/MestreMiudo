@@ -58,3 +58,17 @@ export const QuizInputSchema = z.object({
   subject: z.enum(['Português', 'Matemática', 'Estudo do Meio', 'Misto']).optional(),
   numberOfQuestions: z.number().min(5).max(20).default(5),
 });
+
+
+// Schema for the Story Generator
+export const StoryGenerationInputSchema = z.object({
+    keywords: z.string().describe('A comma-separated string of keywords provided by the user.'),
+    gradeLevel: z.number().min(1).max(4).describe('The grade level of the student (1-4).'),
+});
+export type StoryGenerationInput = z.infer<typeof StoryGenerationInputSchema>;
+
+export const StoryGenerationOutputSchema = z.object({
+    title: z.string().describe('The generated title of the story.'),
+    story: z.string().describe('The full text of the generated story.'),
+});
+export type StoryGenerationOutput = z.infer<typeof StoryGenerationOutputSchema>;

@@ -5,7 +5,7 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Book, Divide, Leaf, Loader2, Shuffle, Gamepad2, Brain } from 'lucide-react';
+import { Book, Divide, Leaf, Loader2, Shuffle, Gamepad2, Brain, BookHeart } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { useEffect, useState } from 'react';
 import { getFullQuizHistory, type QuizResultEntry } from '@/app/actions';
@@ -18,6 +18,10 @@ const subjects = [
 
 const surpriseChallenge = {
     name: 'Desafio Surpresa', icon: Shuffle, color: 'text-accent', bgColor: 'bg-accent/10', slug: 'misto'
+};
+
+const storyCreator = {
+    name: 'Oficina de Histórias', icon: BookHeart, color: 'text-purple-600', bgColor: 'bg-purple-500/10'
 };
 
 const gamesRoom = {
@@ -155,8 +159,21 @@ export default function DashboardPage() {
             </Link>
         </div>
       </div>
-        <div className="mt-6">
-             <Link href={`/dashboard/games?name=${name}&grade=${grade}`} passHref>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+             <Link href={`/dashboard/story-creator?name=${name}&grade=${grade}`} passHref>
+              <Card className="hover:shadow-xl hover:border-purple-500 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-purple-500/10">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-2xl font-bold text-purple-700">{storyCreator.name}</CardTitle>
+                  <div className={`p-3 rounded-full ${storyCreator.bgColor}`}>
+                    <storyCreator.icon className={`h-8 w-8 ${storyCreator.color}`} />
+                  </div>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  <p className="text-purple-600">Usa a tua imaginação e cria uma história única!</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href={`/dashboard/games?name=${name}&grade=${grade}`} passHref>
               <Card className="hover:shadow-xl hover:border-green-500 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-green-500/10">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-2xl font-bold text-green-700">{gamesRoom.name}</CardTitle>

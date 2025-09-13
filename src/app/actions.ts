@@ -2,7 +2,9 @@
 "use server"
 
 import { personalizedLearningPath } from "@/ai/flows/personalized-learning-paths";
-import { PersonalizedLearningPathOutputSchema, type PersonalizedLearningPathOutput, QuizInputSchema } from "@/ai/schemas";
+import { generateStory } from "@/ai/flows/story-generator";
+import { textToSpeech } from "@/ai/flows/text-to-speech";
+import { PersonalizedLearningPathOutputSchema, type PersonalizedLearningPathOutput, QuizInputSchema, StoryGenerationInputSchema, StoryGenerationOutputSchema } from "@/ai/schemas";
 import { z } from "zod";
 import fs from 'fs/promises';
 import path from 'path';
@@ -148,4 +150,39 @@ export async function saveQuizResults(input: SaveQuizInput): Promise<void> {
 export async function getFullQuizHistory(studentId: string): Promise<QuizResultEntry[]> {
   const allHistory = await getQuizHistory();
   return allHistory.filter(entry => entry.studentId === studentId);
+}
+
+
+const GenerateStoryActionSchema = StoryGenerationInputSchema;
+
+const GenerateStoryActionOutputSchema = z.object({
+    title: z.string(),
+    story: z.string(),
+    audioDataUri: z.string().url().optional(),
+});
+
+export async function generateStoryAction(input: z.infer<typeof GenerateStoryActionSchema>): Promise<z.infer<typeof GenerateStoryActionOutputSchema>> {
+    const validatedInput = GenerateStoryActionSchema.parse(input);
+    const storyOutput = await generateStory(validatedInput);
+
+    if (!storyOutput || !storyOutput.story) {
+        throw new Error("Failed to generate story.");
+    }
+    
+    try {
+        const fullText = `${storyOutput.title}. ${storyOutput.story}`;
+        const ttsOutput = await textToSpeech(fullText);
+        
+        return {
+            ...storyOutput,
+            audioDataUri: ttsOutput.audioDataUri,
+        };
+
+    } catch (error) {
+        console.error("Text-to-speech failed, returning story without audio.", error);
+        return {
+            ...storyOutput,
+            audioDataUri: undefined,
+        };
+    }
 }
