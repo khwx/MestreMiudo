@@ -63,25 +63,27 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
         });
     }, [result.story, result.speechMarks]);
     
-    useEffect(() => {
+     useEffect(() => {
         const audio = audioRef.current;
-        if (result.audioDataUri && audio) {
-            audio.src = result.audioDataUri;
-            setIsLoadingAudio(true);
-            
-            const handleCanPlay = () => {
-                setIsLoadingAudio(false);
-            };
-            
-            audio.addEventListener('canplaythrough', handleCanPlay);
-            audio.load();
-            
-            return () => {
-                audio.removeEventListener('canplaythrough', handleCanPlay);
-            }
-        } else {
-             setIsLoadingAudio(false);
+        if (!audio || !result.audioDataUri) {
+            setIsLoadingAudio(false);
+            return;
         }
+
+        const handleCanPlay = () => {
+            setIsLoadingAudio(false);
+        };
+        
+        // Reset and set up for new audio
+        audio.src = result.audioDataUri;
+        audio.load();
+        setIsLoadingAudio(true);
+        
+        audio.addEventListener('canplaythrough', handleCanPlay);
+        
+        return () => {
+            audio.removeEventListener('canplaythrough', handleCanPlay);
+        };
     }, [result.audioDataUri]);
 
     useEffect(() => {
