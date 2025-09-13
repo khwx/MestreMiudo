@@ -13,8 +13,8 @@
 
 import {ai} from '@/ai/genkit';
 import {searchImage} from '@/ai/tools/image-search';
-import type { PersonalizedLearningPathInput, PersonalizedLearningPathOutput } from '@/ai/schemas';
-import { PersonalizedLearningPathInputSchema, PersonalizedLearningPathOutputSchema } from '@/ai/schemas';
+import type { PersonalizedLearningPathInput, PersonalizedLearningPathOutput } from '@/app/shared-schemas';
+import { PersonalizedLearningPathInputSchema, PersonalizedLearningPathOutputSchema } from '@/app/shared-schemas';
 
 
 export async function personalizedLearningPath(
@@ -82,11 +82,13 @@ const personalizedLearningPathFlow = ai.defineFlow(
             ...input,
             performanceData: input.performanceData ? JSON.stringify(input.performanceData, null, 2) : undefined,
         };
-        const {output} = await prompt(flowInput);
+        // Get raw output without immediate validation
+        const {output} = await prompt(flowInput, {validate: 'output'});
 
-        // Check if output is null or invalid, and retry if so.
+        // Manually validate and check if output is null or invalid, and retry if so.
         if (output && output.quizQuestions && output.quizQuestions.length > 0) {
-          return output;
+          const validatedOutput = PersonalizedLearningPathOutputSchema.parse(output);
+          return validatedOutput;
         }
 
         // If output is null, treat it as a retriable error.
@@ -100,10 +102,10 @@ const personalizedLearningPathFlow = ai.defineFlow(
       } catch (e: any) {
         lastError = e;
         // Also retry on overload/availability errors.
-        if (e.message.includes('503 Service Unavailable') || e.message.includes('overloaded') || (e.cause && e.cause.message.includes('503'))) {
+        if (e.message.includes('503 Service Unavailable') || e.message.includes('overloaded') || (e.cause && e.cause.message.includes('503')) || e.name === 'ZodError') {
           retries--;
           if (retries > 0) {
-            console.log(`Model is overloaded or unavailable, retrying in 2 seconds... (${retries} attempts left)`);
+            console.log(`Model error or validation failed, retrying in 2 seconds... (${retries} attempts left)`, e);
             await new Promise(resolve => setTimeout(resolve, 2000));
           }
         } else {
