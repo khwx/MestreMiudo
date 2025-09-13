@@ -52,14 +52,6 @@ export type PersonalizedLearningPathOutput = z.infer<
   typeof PersonalizedLearningPathOutputSchema
 >;
 
-export const QuizInputSchema = z.object({
-  studentId: z.string(),
-  gradeLevel: z.coerce.number().min(1).max(4),
-  subject: z.enum(['Português', 'Matemática', 'Estudo do Meio', 'Misto']).optional(),
-  numberOfQuestions: z.number().min(5).max(20).default(5),
-});
-
-
 // Schema for the Story Generator
 export const StoryGenerationInputSchema = z.object({
     keywords: z.string().describe('A comma-separated string of keywords provided by the user.'),
@@ -73,3 +65,5 @@ export const StoryGenerationOutputSchema = z.object({
     imagePrompts: z.array(z.string()).describe('An array of 3 short, descriptive prompts for generating illustrations for the story.'),
 });
 export type StoryGenerationOutput = z.infer<typeof StoryGenerationOutputSchema>;
+
+// Note: QuizInputSchema is now in shared-schemas.ts to be used by client and server.

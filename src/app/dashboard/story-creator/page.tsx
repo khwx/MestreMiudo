@@ -12,7 +12,7 @@ import { generateStoryAction } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
-import type { SpeechMark } from '@/app/shared-schemas';
+import type { SpeechMark, StoryGenerationInput } from '@/app/shared-schemas';
 
 const keywordSuggestions = [
     {
@@ -74,17 +74,21 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
             setIsLoadingAudio(false);
         };
         
-        audio.addEventListener('canplaythrough', handleCanPlay);
-        
-        if (audio.src !== result.audioDataUri) {
-            audio.src = result.audioDataUri;
+        const currentSrc = audio.src;
+        const newSrc = result.audioDataUri;
+
+        // Only add listeners and load if the source is new
+        if (currentSrc !== newSrc) {
+            audio.addEventListener('canplaythrough', handleCanPlay);
+            audio.src = newSrc;
             audio.load();
             setIsLoadingAudio(true);
         } else if (audio.readyState >= 3) {
             // Already loaded
-             setIsLoadingAudio(false);
+            setIsLoadingAudio(false);
         }
 
+        // Cleanup function
         return () => {
             audio.removeEventListener('canplaythrough', handleCanPlay);
         };
@@ -109,7 +113,6 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
                 setIsPlaying(false);
             });
         }
-        setIsPlaying(!isPlaying);
     };
 
     const handleTimeUpdate = () => {
@@ -246,12 +249,14 @@ export default function StoryCreatorPage() {
 
         setLoading(true);
         setResult(null);
+        
+        const storyInput: StoryGenerationInput = {
+            keywords,
+            gradeLevel: parseInt(grade, 10),
+        };
 
         try {
-            const storyResult = await generateStoryAction({
-                keywords,
-                gradeLevel: parseInt(grade, 10),
-            });
+            const storyResult = await generateStoryAction(storyInput);
             setResult(storyResult);
              if (!storyResult.audioDataUri) {
                 toast({
@@ -344,5 +349,3 @@ export default function StoryCreatorPage() {
         </div>
     );
 }
-
-    

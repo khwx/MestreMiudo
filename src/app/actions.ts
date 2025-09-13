@@ -4,8 +4,7 @@
 import { personalizedLearningPath } from "@/ai/flows/personalized-learning-paths";
 import { generateStory } from "@/ai/flows/story-generator";
 import { textToSpeech } from "@/ai/flows/text-to-speech";
-import type { StoryGenerationInput } from "@/ai/schemas";
-import { StoryGenerationInputSchema } from "@/ai/schemas";
+import { StoryGenerationInputSchema, type StoryGenerationInput } from "@/app/shared-schemas";
 import { z } from "zod";
 import fs from 'fs/promises';
 import path from 'path';
