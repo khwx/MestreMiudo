@@ -166,7 +166,7 @@ export async function generateStoryAction(input: StoryGenerationInput): Promise<
 
     const audioDataUri = ttsResult.status === 'fulfilled' ? ttsResult.value.audioDataUri : undefined;
     const speechMarks = ttsResult.status === 'fulfilled' ? ttsResult.value.speechMarks : undefined;
-    const images = imagesResult.status === 'fulfilled' ? imagesResult.value.filter(url => url) : undefined;
+    const images = imagesResult.status === 'fulfilled' ? imagesResult.value.filter(url => url) : [];
     
     if (ttsResult.status === 'rejected') {
         console.error("Text-to-speech failed, returning story without audio.", ttsResult.reason);
@@ -175,11 +175,13 @@ export async function generateStoryAction(input: StoryGenerationInput): Promise<
         console.error("Image generation failed.", imagesResult.reason);
     }
 
-    return {
+    const result = {
         title: storyOutput.title,
         story: storyOutput.story,
         audioDataUri,
         speechMarks,
         images
     };
+
+    return GenerateStoryActionOutputSchema.parse(result);
 }

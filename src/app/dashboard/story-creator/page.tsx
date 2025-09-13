@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Loader2, Wand2, Volume2, BookHeart } from 'lucide-react';
+import { Loader2, Wand2, Volume2, BookHeart, PlayCircle } from 'lucide-react';
 import { generateStoryAction } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Badge } from '@/components/ui/badge';
@@ -42,12 +42,32 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
     const storyTextRef = useRef<HTMLParagraphElement | null>(null);
     const [highlightStyle, setHighlightStyle] = useState<React.CSSProperties>({});
     const [isPlaying, setIsPlaying] = useState(false);
+    const [needsUserInteraction, setNeedsUserInteraction] = useState(false);
+    
+    useEffect(() => {
+        const audio = audioRef.current;
+        if (audio && result.audioDataUri) {
+            audio.src = result.audioDataUri;
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    setIsPlaying(true);
+                }).catch(error => {
+                    console.error("Autoplay failed:", error);
+                    setNeedsUserInteraction(true);
+                    setIsPlaying(false);
+                });
+            }
+        }
+    }, [result.audioDataUri]);
+
 
     const handlePlayAudio = () => {
         if (audioRef.current) {
             if (audioRef.current.paused) {
                 audioRef.current.play();
                 setIsPlaying(true);
+                setNeedsUserInteraction(false);
             } else {
                 audioRef.current.pause();
                 setIsPlaying(false);
@@ -111,24 +131,21 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
 
     return (
         <Card className="animate-in fade-in-50">
+             <audio
+                ref={audioRef}
+                onTimeUpdate={handleTimeUpdate}
+                onEnded={handleAudioEnded}
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                className="hidden"
+            />
             <CardHeader>
                 <div className="flex justify-between items-start">
                     <CardTitle className="text-3xl font-headline">{result.title}</CardTitle>
-                    {result.audioDataUri && (
-                        <>
-                            <audio
-                                ref={audioRef}
-                                src={result.audioDataUri}
-                                onTimeUpdate={handleTimeUpdate}
-                                onEnded={handleAudioEnded}
-                                onPlay={() => setIsPlaying(true)}
-                                onPause={() => setIsPlaying(false)}
-                                className="hidden"
-                            />
-                            <Button variant="outline" size="icon" onClick={handlePlayAudio} aria-label="Ouvir a história">
-                                <Volume2 className={`h-6 w-6 text-primary ${isPlaying ? 'animate-pulse' : ''}`} />
-                            </Button>
-                        </>
+                    {result.audioDataUri && !needsUserInteraction && (
+                        <Button variant="outline" size="icon" onClick={handlePlayAudio} aria-label={isPlaying ? "Pausar a história" : "Ouvir a história"}>
+                            <Volume2 className={`h-6 w-6 text-primary ${isPlaying ? 'animate-pulse' : ''}`} />
+                        </Button>
                     )}
                 </div>
             </CardHeader>
@@ -144,6 +161,14 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
                 )}
                
                 <div className="relative">
+                    {needsUserInteraction && (
+                        <div className="absolute inset-0 bg-background/80 flex justify-center items-center z-10 backdrop-blur-sm">
+                            <Button size="lg" onClick={handlePlayAudio}>
+                                <PlayCircle className="mr-2 h-6 w-6" />
+                                Ouvir a História
+                            </Button>
+                        </div>
+                    )}
                     <p ref={storyTextRef} className="text-lg/relaxed whitespace-pre-wrap">
                         {result.story}
                     </p>
