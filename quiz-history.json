@@ -3491,11 +3491,11 @@
     "score": 3
   },
   {
-    "timestamp": "2025-09-13T18:01:05.318Z",
     "studentId": "Sara",
     "gradeLevel": 1,
     "subject": "Misto",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T18:01:05.318Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -3596,5 +3596,109 @@
       }
     ],
     "score": 4
+  },
+  {
+    "timestamp": "2025-09-13T18:21:48.269Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Coloca as palavras na ordem certa para formar uma frase: bola. A Sara tem uma",
+          "options": [
+            "A Sara tem uma bola.",
+            "Tem a Sara uma bola.",
+            "Uma bola tem a Sara.",
+            "Sara tem uma bola a."
+          ],
+          "correctAnswer": "A Sara tem uma bola.",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "Qual destas palavras significa o oposto de 'grande'?",
+          "options": [
+            "pequeno",
+            "alto",
+            "novo",
+            "largo"
+          ],
+          "correctAnswer": "pequeno",
+          "topic": "Leitura e Vocabulário"
+        },
+        {
+          "question": "Qual é a primeira letra da palavra 'elefante'?",
+          "options": [
+            "E",
+            "A",
+            "I",
+            "O"
+          ],
+          "correctAnswer": "E",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "Reorganiza as palavras para formar uma frase: comeu O pão João.",
+          "options": [
+            "O João comeu pão.",
+            "Comeu o pão João.",
+            "Pão comeu o João.",
+            "João o pão comeu."
+          ],
+          "correctAnswer": "O João comeu pão.",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "Qual a palavra que descreve um animal que voa e tem penas?",
+          "options": [
+            "pássaro",
+            "gato",
+            "peixe",
+            "cão"
+          ],
+          "correctAnswer": "pássaro",
+          "topic": "Leitura e Vocabulário"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Coloca as palavras na ordem certa para formar uma frase: bola. A Sara tem uma",
+        "selectedAnswer": "A Sara tem uma bola.",
+        "correctAnswer": "A Sara tem uma bola.",
+        "isCorrect": true,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "Qual destas palavras significa o oposto de 'grande'?",
+        "selectedAnswer": "pequeno",
+        "correctAnswer": "pequeno",
+        "isCorrect": true,
+        "topic": "Leitura e Vocabulário"
+      },
+      {
+        "question": "Qual é a primeira letra da palavra 'elefante'?",
+        "selectedAnswer": "E",
+        "correctAnswer": "E",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Reorganiza as palavras para formar uma frase: comeu O pão João.",
+        "selectedAnswer": "O João comeu pão.",
+        "correctAnswer": "O João comeu pão.",
+        "isCorrect": true,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "Qual a palavra que descreve um animal que voa e tem penas?",
+        "selectedAnswer": "pássaro",
+        "correctAnswer": "pássaro",
+        "isCorrect": true,
+        "topic": "Leitura e Vocabulário"
+      }
+    ],
+    "score": 5
   }
 ]
