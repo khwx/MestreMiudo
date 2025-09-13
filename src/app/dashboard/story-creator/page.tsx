@@ -71,12 +71,6 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
             
             const handleCanPlay = () => {
                 setIsLoadingAudio(false);
-                audio.play().then(() => {
-                    setIsPlaying(true);
-                }).catch(error => {
-                    console.error("Autoplay was prevented:", error);
-                    setIsPlaying(false); // Ensure state is correct if autoplay fails
-                });
             };
             
             audio.addEventListener('canplaythrough', handleCanPlay);
@@ -99,12 +93,15 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
 
     const handlePlayPause = () => {
         const audio = audioRef.current;
-        if (!audio) return;
+        if (!audio || isLoadingAudio) return;
 
         if (isPlaying) {
             audio.pause();
         } else {
-            audio.play();
+            audio.play().catch(error => {
+                console.error("Playback failed:", error);
+                setIsPlaying(false);
+            });
         }
         setIsPlaying(!isPlaying);
     };

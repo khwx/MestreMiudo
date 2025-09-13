@@ -3176,11 +3176,11 @@
     "score": 5
   },
   {
-    "timestamp": "2025-09-13T15:10:10.654Z",
     "studentId": "Sara",
     "gradeLevel": 1,
     "subject": "Português",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T15:10:10.654Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -3279,5 +3279,110 @@
       }
     ],
     "score": 3
+  },
+  {
+    "timestamp": "2025-09-13T15:12:08.663Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual das palavras começa com a letra 'C', como em 'Cadeira'?",
+          "options": [
+            "Mesa",
+            "Cama",
+            "Porta",
+            "Janela"
+          ],
+          "correctAnswer": "Cama",
+          "topic": "Identificação de Letras e Fonética",
+          "imageUrl": "https://pixabay.com/get/ge4ff175515cbc51ed1ff1be058debbe410ebb7cb5be7165edf1d16b58f5d4fabc44037775029ef651bc277b0ef79a037_640.jpg"
+        },
+        {
+          "question": "Coloca as palavras na ordem correta para formar uma frase: \"o - come - cão - osso\"",
+          "options": [
+            "Cão o come osso.",
+            "O cão come osso.",
+            "Come o osso cão.",
+            "Osso come o cão."
+          ],
+          "correctAnswer": "O cão come osso.",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "Qual é a primeira letra da palavra \"Elefante\"?",
+          "options": [
+            "A",
+            "E",
+            "I",
+            "O"
+          ],
+          "correctAnswer": "E",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "Forma uma frase com as seguintes palavras: \"água - bebe - a - menina\"",
+          "options": [
+            "Bebe a menina água.",
+            "A menina bebe água.",
+            "Água a menina bebe.",
+            "Menina bebe a água."
+          ],
+          "correctAnswer": "A menina bebe água.",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "O que é um \"Livro\"?",
+          "options": [
+            "Um objeto para cozinhar.",
+            "Um objeto para guardar roupa.",
+            "Um objeto para ler histórias.",
+            "Um objeto para dormir."
+          ],
+          "correctAnswer": "Um objeto para ler histórias.",
+          "topic": "Leitura e Vocabulário"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual das palavras começa com a letra 'C', como em 'Cadeira'?",
+        "selectedAnswer": "Cama",
+        "correctAnswer": "Cama",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Coloca as palavras na ordem correta para formar uma frase: \"o - come - cão - osso\"",
+        "selectedAnswer": "O cão come osso.",
+        "correctAnswer": "O cão come osso.",
+        "isCorrect": true,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "Qual é a primeira letra da palavra \"Elefante\"?",
+        "selectedAnswer": "E",
+        "correctAnswer": "E",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Forma uma frase com as seguintes palavras: \"água - bebe - a - menina\"",
+        "selectedAnswer": "A menina bebe água.",
+        "correctAnswer": "A menina bebe água.",
+        "isCorrect": true,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "O que é um \"Livro\"?",
+        "selectedAnswer": "Um objeto para guardar roupa.",
+        "correctAnswer": "Um objeto para ler histórias.",
+        "isCorrect": false,
+        "topic": "Leitura e Vocabulário"
+      }
+    ],
+    "score": 4
   }
 ]
