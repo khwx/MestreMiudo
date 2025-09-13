@@ -74,13 +74,17 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
             setIsLoadingAudio(false);
         };
         
-        // Reset and set up for new audio
-        audio.src = result.audioDataUri;
-        audio.load();
-        setIsLoadingAudio(true);
-        
         audio.addEventListener('canplaythrough', handleCanPlay);
         
+        if (audio.src !== result.audioDataUri) {
+            audio.src = result.audioDataUri;
+            audio.load();
+            setIsLoadingAudio(true);
+        } else if (audio.readyState >= 3) {
+            // Already loaded
+             setIsLoadingAudio(false);
+        }
+
         return () => {
             audio.removeEventListener('canplaythrough', handleCanPlay);
         };
