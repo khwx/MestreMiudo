@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { generateQuiz, saveQuizResults } from '@/app/actions';
 import type { PersonalizedLearningPathOutput } from '@/ai/schemas';
 import { Button } from '@/components/ui/button';
@@ -45,6 +45,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
+  const quizStarted = useRef(false);
   
   const { toast } = useToast();
   const router = useRouter();
@@ -61,6 +62,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   const fetchQuiz = useCallback(async () => {
     setLoading(true);
     setError(null);
+    quizStarted.current = true;
     try {
       const data = await generateQuiz({
         studentId,
@@ -89,7 +91,9 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   }, [studentId, gradeLevel, subject]);
 
   useEffect(() => {
-    fetchQuiz();
+    if (!quizStarted.current) {
+        fetchQuiz();
+    }
   }, [fetchQuiz]);
   
   const speakText = (text: string) => {
@@ -170,6 +174,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   };
   
   const handleRestart = () => {
+    quizStarted.current = false;
     fetchQuiz();
   }
 

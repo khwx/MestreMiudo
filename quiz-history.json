@@ -3070,11 +3070,11 @@
     "score": 5
   },
   {
-    "timestamp": "2025-09-13T14:14:09.508Z",
     "studentId": "Sara",
     "gradeLevel": 1,
     "subject": "Misto",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T14:14:09.508Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -3174,5 +3174,110 @@
       }
     ],
     "score": 5
+  },
+  {
+    "timestamp": "2025-09-13T15:10:10.654Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Observa a imagem. Qual é a primeira letra da palavra que representa o animal?",
+          "options": [
+            "G",
+            "C",
+            "P",
+            "T"
+          ],
+          "correctAnswer": "G",
+          "topic": "Identificação de Letras e Fonética",
+          "imageUrl": "https://pixabay.com/get/g6496be9c0b747efe07b30a285ab32821b7dbdcd42c1c6baa9f4978e35d2d788a76756297e44192d5f61b3e0ed175f67a_640.jpg"
+        },
+        {
+          "question": "Qual destas palavras começa com a letra 'S'?",
+          "options": [
+            "Sol",
+            "Bola",
+            "Mesa",
+            "Pato"
+          ],
+          "correctAnswer": "Sol",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "A palavra 'flor' significa o quê?",
+          "options": [
+            "Um animal",
+            "Uma planta com pétalas",
+            "Um brinquedo",
+            "Um alimento"
+          ],
+          "correctAnswer": "Uma planta com pétalas",
+          "topic": "Leitura e Vocabulário"
+        },
+        {
+          "question": "Ordena as palavras para formar uma frase: 'come / O / maçã / menino / uma.'",
+          "options": [
+            "O menino uma maçã come.",
+            "Come o menino uma maçã.",
+            "O menino come uma maçã.",
+            "Uma maçã o menino come."
+          ],
+          "correctAnswer": "O menino come uma maçã.",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "Qual é a letra que vem antes da letra 'C' no alfabeto?",
+          "options": [
+            "A",
+            "B",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "B",
+          "topic": "Identificação de Letras e Fonética"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Observa a imagem. Qual é a primeira letra da palavra que representa o animal?",
+        "selectedAnswer": "G",
+        "correctAnswer": "G",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Qual destas palavras começa com a letra 'S'?",
+        "selectedAnswer": "Sol",
+        "correctAnswer": "Sol",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "A palavra 'flor' significa o quê?",
+        "selectedAnswer": "Uma planta com pétalas",
+        "correctAnswer": "Uma planta com pétalas",
+        "isCorrect": true,
+        "topic": "Leitura e Vocabulário"
+      },
+      {
+        "question": "Ordena as palavras para formar uma frase: 'come / O / maçã / menino / uma.'",
+        "selectedAnswer": "O menino uma maçã come.",
+        "correctAnswer": "O menino come uma maçã.",
+        "isCorrect": false,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "Qual é a letra que vem antes da letra 'C' no alfabeto?",
+        "selectedAnswer": "A",
+        "correctAnswer": "B",
+        "isCorrect": false,
+        "topic": "Identificação de Letras e Fonética"
+      }
+    ],
+    "score": 3
   }
 ]
