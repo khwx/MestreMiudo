@@ -3920,11 +3920,11 @@
     "score": 4
   },
   {
-    "timestamp": "2025-09-13T18:35:20.104Z",
     "studentId": "Sara",
     "gradeLevel": 1,
     "subject": "Matemática",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-13T18:35:20.104Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -4025,5 +4025,318 @@
       }
     ],
     "score": 3
+  },
+  {
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-14T11:46:30.671Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual letra começa a palavra \"bola\"?",
+          "options": [
+            "P",
+            "B",
+            "M",
+            "D"
+          ],
+          "correctAnswer": "B",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "Ordena as palavras para formar uma frase: \"a\", \"come\", \"menina\", \"maçã\"",
+          "options": [
+            "A maçã come a menina.",
+            "Come a menina a maçã.",
+            "A menina come a maçã.",
+            "Maçã a menina come a."
+          ],
+          "correctAnswer": "A menina come a maçã.",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "O que vês nesta imagem?",
+          "options": [
+            "Uma casa",
+            "Uma flor",
+            "Uma árvore",
+            "Um carro"
+          ],
+          "correctAnswer": "Uma árvore",
+          "topic": "Leitura e Vocabulário",
+          "imageUrl": "https://pixabay.com/get/gce77e34bce870a3f96eb601e3f3418b746e5618d5a369872cb99c853bdac8c16111221a98ef51b86c13dbbd22959549e_640.jpg"
+        },
+        {
+          "question": "Que som faz a letra \"F\"?",
+          "options": [
+            "/s/",
+            "/m/",
+            "/f/",
+            "/l/"
+          ],
+          "correctAnswer": "/f/",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "Qual destas palavras é um verbo?",
+          "options": [
+            "Mesa",
+            "Correr",
+            "Azul",
+            "Feliz"
+          ],
+          "correctAnswer": "Correr",
+          "topic": "Formação de Frases e Verbos Simples"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual letra começa a palavra \"bola\"?",
+        "selectedAnswer": "B",
+        "correctAnswer": "B",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Ordena as palavras para formar uma frase: \"a\", \"come\", \"menina\", \"maçã\"",
+        "selectedAnswer": "A maçã come a menina.",
+        "correctAnswer": "A menina come a maçã.",
+        "isCorrect": false,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "O que vês nesta imagem?",
+        "selectedAnswer": "Uma árvore",
+        "correctAnswer": "Uma árvore",
+        "isCorrect": true,
+        "topic": "Leitura e Vocabulário"
+      },
+      {
+        "question": "Que som faz a letra \"F\"?",
+        "selectedAnswer": "/f/",
+        "correctAnswer": "/f/",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Qual destas palavras é um verbo?",
+        "selectedAnswer": "Correr",
+        "correctAnswer": "Correr",
+        "isCorrect": true,
+        "topic": "Formação de Frases e Verbos Simples"
+      }
+    ],
+    "score": 4
+  },
+  {
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-14T12:50:24.452Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Coloca as palavras na ordem certa para formar uma frase: menina come a uma maçã.",
+          "options": [
+            "A maçã come uma menina.",
+            "A menina come uma maçã.",
+            "Come uma maçã a menina.",
+            "Uma maçã a menina come."
+          ],
+          "correctAnswer": "A menina come uma maçã.",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "Na frase 'O cão corre no parque', qual é a palavra que nos diz o que o cão está a fazer?",
+          "options": [
+            "O",
+            "cão",
+            "corre",
+            "parque"
+          ],
+          "correctAnswer": "corre",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "Qual destas palavras começa com o som da letra 'M'?",
+          "options": [
+            "Bola",
+            "Mesa",
+            "Pato",
+            "Gato"
+          ],
+          "correctAnswer": "Mesa",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "Qual é a palavra que usamos para descrever a parte do corpo que usamos para ouvir?",
+          "options": [
+            "Olho",
+            "Nariz",
+            "Orelha",
+            "Boca"
+          ],
+          "correctAnswer": "Orelha",
+          "topic": "Leitura e Vocabulário"
+        },
+        {
+          "question": "Qual destas palavras completa a frase: 'O Sol ____ no céu.'?",
+          "options": [
+            "nada",
+            "brilha",
+            "corre",
+            "dorme"
+          ],
+          "correctAnswer": "brilha",
+          "topic": "Leitura e Vocabulário"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Coloca as palavras na ordem certa para formar uma frase: menina come a uma maçã.",
+        "selectedAnswer": "A maçã come uma menina.",
+        "correctAnswer": "A menina come uma maçã.",
+        "isCorrect": false,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "Na frase 'O cão corre no parque', qual é a palavra que nos diz o que o cão está a fazer?",
+        "selectedAnswer": "cão",
+        "correctAnswer": "corre",
+        "isCorrect": false,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "Qual destas palavras começa com o som da letra 'M'?",
+        "selectedAnswer": "Pato",
+        "correctAnswer": "Mesa",
+        "isCorrect": false,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Qual é a palavra que usamos para descrever a parte do corpo que usamos para ouvir?",
+        "selectedAnswer": "Nariz",
+        "correctAnswer": "Orelha",
+        "isCorrect": false,
+        "topic": "Leitura e Vocabulário"
+      },
+      {
+        "question": "Qual destas palavras completa a frase: 'O Sol ____ no céu.'?",
+        "selectedAnswer": "brilha",
+        "correctAnswer": "brilha",
+        "isCorrect": true,
+        "topic": "Leitura e Vocabulário"
+      }
+    ],
+    "score": 1
+  },
+  {
+    "timestamp": "2025-09-14T15:48:25.945Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Ordena as palavras para formar uma frase correta: 'o come pão cão'",
+          "options": [
+            "O cão come pão.",
+            "Pão come o cão.",
+            "Come o cão pão.",
+            "O pão come cão."
+          ],
+          "correctAnswer": "O cão come pão.",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "Qual é a primeira letra da palavra 'bola'?",
+          "options": [
+            "P",
+            "B",
+            "D",
+            "V"
+          ],
+          "correctAnswer": "B",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "A palavra 'flor' é um nome de...?",
+          "options": [
+            "animal",
+            "pessoa",
+            "planta",
+            "objeto"
+          ],
+          "correctAnswer": "planta",
+          "topic": "Leitura e Vocabulário"
+        },
+        {
+          "question": "Qual a palavra que falta para completar a frase? 'A menina ______ um livro.'",
+          "options": [
+            "corre",
+            "lê",
+            "dorme",
+            "brinca"
+          ],
+          "correctAnswer": "lê",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "Que som faz a letra 'M' como na palavra 'macaco'?",
+          "options": [
+            "/sss/",
+            "/mmm/",
+            "/lll/",
+            "/rrr/"
+          ],
+          "correctAnswer": "/mmm/",
+          "topic": "Identificação de Letras e Fonética"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Ordena as palavras para formar uma frase correta: 'o come pão cão'",
+        "selectedAnswer": "Pão come o cão.",
+        "correctAnswer": "O cão come pão.",
+        "isCorrect": false,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "Qual é a primeira letra da palavra 'bola'?",
+        "selectedAnswer": "V",
+        "correctAnswer": "B",
+        "isCorrect": false,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "A palavra 'flor' é um nome de...?",
+        "selectedAnswer": "pessoa",
+        "correctAnswer": "planta",
+        "isCorrect": false,
+        "topic": "Leitura e Vocabulário"
+      },
+      {
+        "question": "Qual a palavra que falta para completar a frase? 'A menina ______ um livro.'",
+        "selectedAnswer": "lê",
+        "correctAnswer": "lê",
+        "isCorrect": true,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "Que som faz a letra 'M' como na palavra 'macaco'?",
+        "selectedAnswer": "/mmm/",
+        "correctAnswer": "/mmm/",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      }
+    ],
+    "score": 2
   }
 ]

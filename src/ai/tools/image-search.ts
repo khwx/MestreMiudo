@@ -19,7 +19,8 @@ export const searchImage = ai.defineTool(
   async ({query}) => {
     const apiKey = process.env.PIXABAY_API_KEY;
     if (!apiKey) {
-      throw new Error('Pixabay API key is not configured.');
+      console.warn('Pixabay API key is not configured. Returning placeholder image.');
+      return 'https://placehold.co/600x400/EEE/31343C?text=Imagem+indispon%C3%ADvel';
     }
 
     const url = new URL('https://pixabay.com/api/');
@@ -38,7 +39,7 @@ export const searchImage = ai.defineTool(
       if (data.hits && data.hits.length > 0) {
         return data.hits[0].webformatURL;
       }
-      return 'https://placehold.co/600x400/EEE/31343C?text=Imagem+não+encontrada';
+      return 'https://placehold.co/600x400/EEE/31343C?text=Imagem+n%C3%A3o+encontrada';
     } catch (error) {
       console.error('Error searching image on Pixabay:', error);
       return 'https://placehold.co/600x400/EEE/31343C?text=Erro+ao+carregar';
