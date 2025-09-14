@@ -4236,11 +4236,11 @@
     "score": 1
   },
   {
-    "timestamp": "2025-09-14T15:48:25.945Z",
     "studentId": "Sara",
     "gradeLevel": 1,
     "subject": "Português",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-14T15:48:25.945Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -4335,6 +4335,113 @@
         "correctAnswer": "/mmm/",
         "isCorrect": true,
         "topic": "Identificação de Letras e Fonética"
+      }
+    ],
+    "score": 2
+  },
+  {
+    "timestamp": "2025-09-14T15:50:24.166Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Estudo do Meio",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Quem ajuda a cuidar de ti em casa?",
+          "options": [
+            "Amigos",
+            "Pais e Avós",
+            "Vizinhos",
+            "Professores"
+          ],
+          "correctAnswer": "Pais e Avós",
+          "topic": "A Família",
+          "imageUrl": "https://pixabay.com/get/g526cb9dc90ba307625ff9e64627f059dab959ef7704f9dec7cce40640b8d91b52b191dbcbd1463b325ac92b99644d235_640.jpg"
+        },
+        {
+          "question": "Qual destas atividades é comum fazer em família?",
+          "options": [
+            "Ir para a escola sozinho",
+            "Dormir fora de casa sem avisar",
+            "Fazer as refeições juntos",
+            "Trabalhar no escritório"
+          ],
+          "correctAnswer": "Fazer as refeições juntos",
+          "topic": "A Família"
+        },
+        {
+          "question": "Uma família é um grupo de pessoas que geralmente vivem onde?",
+          "options": [
+            "Numa loja",
+            "Numa biblioteca",
+            "Numa casa",
+            "Numa escola"
+          ],
+          "correctAnswer": "Numa casa",
+          "topic": "A Família"
+        },
+        {
+          "question": "Observa a imagem. Quantas patas tem um cão?",
+          "options": [
+            "Duas",
+            "Quatro",
+            "Seis",
+            "Oito"
+          ],
+          "correctAnswer": "Quatro",
+          "topic": "Os Animais",
+          "imageUrl": "https://pixabay.com/get/g582c407425cea8b9d156b4d13e9be710970481d50e795193fd83f66b7748cfbea48ad2c4090d83ad3f5922fe2535d86a_640.jpg"
+        },
+        {
+          "question": "Observa a imagem. O que é que as árvores nos dão?",
+          "options": [
+            "Carros",
+            "Água engarrafada",
+            "Ar puro e sombra",
+            "Brinquedos"
+          ],
+          "correctAnswer": "Ar puro e sombra",
+          "topic": "A Natureza",
+          "imageUrl": "https://pixabay.com/get/g15212b19b6e51b812fb5356a83d2296cf26220752677b2eeaed85f1604c405b7d8c52289aec821843f274d5df71c4394_640.jpg"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Quem ajuda a cuidar de ti em casa?",
+        "selectedAnswer": "Pais e Avós",
+        "correctAnswer": "Pais e Avós",
+        "isCorrect": true,
+        "topic": "A Família"
+      },
+      {
+        "question": "Qual destas atividades é comum fazer em família?",
+        "selectedAnswer": "Dormir fora de casa sem avisar",
+        "correctAnswer": "Fazer as refeições juntos",
+        "isCorrect": false,
+        "topic": "A Família"
+      },
+      {
+        "question": "Uma família é um grupo de pessoas que geralmente vivem onde?",
+        "selectedAnswer": "Numa casa",
+        "correctAnswer": "Numa casa",
+        "isCorrect": true,
+        "topic": "A Família"
+      },
+      {
+        "question": "Observa a imagem. Quantas patas tem um cão?",
+        "selectedAnswer": "Duas",
+        "correctAnswer": "Quatro",
+        "isCorrect": false,
+        "topic": "Os Animais"
+      },
+      {
+        "question": "Observa a imagem. O que é que as árvores nos dão?",
+        "selectedAnswer": "Água engarrafada",
+        "correctAnswer": "Ar puro e sombra",
+        "isCorrect": false,
+        "topic": "A Natureza"
       }
     ],
     "score": 2

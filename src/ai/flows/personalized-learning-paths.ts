@@ -70,9 +70,9 @@ const personalizedLearningPathFlow = ai.defineFlow(
   {
     name: 'personalizedLearningPathFlow',
     inputSchema: PersonalizedLearningPathInputSchema,
-    outputSchema: PersonalizedLearningPathOutputSchema,
+    // The output schema is now validated manually inside the flow
   },
-  async (input, streamingCallback) => {
+  async (input) => {
     let retries = 3;
     let lastError: any = null;
 
@@ -82,6 +82,7 @@ const personalizedLearningPathFlow = ai.defineFlow(
             ...input,
             performanceData: input.performanceData ? JSON.stringify(input.performanceData, null, 2) : undefined,
         };
+        
         // Get raw output without immediate validation
         const {output} = await prompt(flowInput);
 
