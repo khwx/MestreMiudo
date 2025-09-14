@@ -30,6 +30,8 @@ const prompt = ai.definePrompt({
   tools: [searchImage],
   prompt: `You are an expert educator specializing in creating personalized quizzes for elementary school students in Portugal. The current year is 2024.
 
+IMPORTANT: All questions and answers must be in European Portuguese (Português de Portugal). Do not use Brazilian Portuguese terms. For example, use "põe ovos" instead of "bota ovos".
+
 You will generate a quiz with {{{numberOfQuestions}}} questions tailored to the student's grade level ({{{gradeLevel}}}).
 
 {{#if subject}}

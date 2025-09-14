@@ -4340,11 +4340,11 @@
     "score": 2
   },
   {
-    "timestamp": "2025-09-14T15:50:24.166Z",
     "studentId": "Sara",
     "gradeLevel": 1,
     "subject": "Estudo do Meio",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-14T15:50:24.166Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -4445,5 +4445,218 @@
       }
     ],
     "score": 2
+  },
+  {
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-14T15:59:09.387Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "A Maria tinha 5 maçãs e comeu 2. Quantas maçãs sobraram?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "3",
+          "topic": "Subtração",
+          "imageUrl": "https://pixabay.com/get/g6ade9056b6a0ad3b22f9f94e000a929a0134a187ffb74b29d7f7631e9b21fbca77721f3553d8125e830f286e50ef0bfc_640.jpg"
+        },
+        {
+          "question": "Na mesa estavam 7 pratos. Se tirarmos 3 pratos, quantos pratos ficam na mesa?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "4",
+          "topic": "Subtração",
+          "imageUrl": "https://pixabay.com/get/g50df04ff50dadfc820d2ccee816e24f8fa68756ebc2d90f8b017a103ab141efa9bfb3a96d00b239dc85fc0ebafc67369_640.jpg"
+        },
+        {
+          "question": "Qual destas formas tem 3 lados e 3 vértices?",
+          "options": [
+            "Quadrado",
+            "Círculo",
+            "Triângulo",
+            "Retângulo"
+          ],
+          "correctAnswer": "Triângulo",
+          "topic": "Formas Geométricas",
+          "imageUrl": "https://pixabay.com/get/gb8fb8c231cf6cb00ad0e9b22bb503d402de57cdb9eb33c3801b0cce318e3633f7c3190e65f1b6e149bf38cacbb585769_640.jpg"
+        },
+        {
+          "question": "Que forma geométrica é parecida com uma bola?",
+          "options": [
+            "Quadrado",
+            "Círculo",
+            "Triângulo",
+            "Retângulo"
+          ],
+          "correctAnswer": "Círculo",
+          "topic": "Formas Geométricas",
+          "imageUrl": "https://pixabay.com/get/gb8fb8c231cf6cb00ad0e9b22bb503d402de57cdb9eb33c3801b0cce318e3633f7c3190e65f1b6e149bf38cacbb585769_640.jpg"
+        },
+        {
+          "question": "Qual é o número que vem a seguir ao 9?",
+          "options": [
+            "8",
+            "10",
+            "11",
+            "12"
+          ],
+          "correctAnswer": "10",
+          "topic": "Números"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "A Maria tinha 5 maçãs e comeu 2. Quantas maçãs sobraram?",
+        "selectedAnswer": "3",
+        "correctAnswer": "3",
+        "isCorrect": true,
+        "topic": "Subtração"
+      },
+      {
+        "question": "Na mesa estavam 7 pratos. Se tirarmos 3 pratos, quantos pratos ficam na mesa?",
+        "selectedAnswer": "4",
+        "correctAnswer": "4",
+        "isCorrect": true,
+        "topic": "Subtração"
+      },
+      {
+        "question": "Qual destas formas tem 3 lados e 3 vértices?",
+        "selectedAnswer": "Círculo",
+        "correctAnswer": "Triângulo",
+        "isCorrect": false,
+        "topic": "Formas Geométricas"
+      },
+      {
+        "question": "Que forma geométrica é parecida com uma bola?",
+        "selectedAnswer": "Círculo",
+        "correctAnswer": "Círculo",
+        "isCorrect": true,
+        "topic": "Formas Geométricas"
+      },
+      {
+        "question": "Qual é o número que vem a seguir ao 9?",
+        "selectedAnswer": "10",
+        "correctAnswer": "10",
+        "isCorrect": true,
+        "topic": "Números"
+      }
+    ],
+    "score": 4
+  },
+  {
+    "timestamp": "2025-09-14T16:02:55.121Z",
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Ordena as palavras para formar uma frase correta: 'o', 'cão', 'corre', 'no', 'parque'.",
+          "options": [
+            "O cão corre no parque.",
+            "Corre o cão no parque.",
+            "No parque o cão corre.",
+            "Cão corre no parque o."
+          ],
+          "correctAnswer": "O cão corre no parque.",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "Qual destas palavras começa com a letra 'P'?",
+          "options": [
+            "bola",
+            "parque",
+            "mesa",
+            "sol"
+          ],
+          "correctAnswer": "parque",
+          "topic": "Identificação de Letras e Fonética"
+        },
+        {
+          "question": "Qual é o nome da imagem?",
+          "options": [
+            "árvore",
+            "flor",
+            "relva",
+            "fruta"
+          ],
+          "correctAnswer": "flor",
+          "topic": "Leitura e Vocabulário",
+          "imageUrl": "https://pixabay.com/get/gab61d665676945f753800548da2a28639349dac470d4a5800b96567ad4b8c55274f255b279a72ba6ebbb09b611b6de66_640.jpg"
+        },
+        {
+          "question": "Qual das frases está correta?",
+          "options": [
+            "Eu come maçã.",
+            "Eu como maçã.",
+            "Eu comes maçã.",
+            "Eu comer maçã."
+          ],
+          "correctAnswer": "Eu como maçã.",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "O que é um 'livro'?",
+          "options": [
+            "Um brinquedo para saltar.",
+            "Um objeto para ler histórias.",
+            "Uma coisa para cozinhar.",
+            "Um animal de estimação."
+          ],
+          "correctAnswer": "Um objeto para ler histórias.",
+          "topic": "Leitura e Vocabulário"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Ordena as palavras para formar uma frase correta: 'o', 'cão', 'corre', 'no', 'parque'.",
+        "selectedAnswer": "O cão corre no parque.",
+        "correctAnswer": "O cão corre no parque.",
+        "isCorrect": true,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "Qual destas palavras começa com a letra 'P'?",
+        "selectedAnswer": "parque",
+        "correctAnswer": "parque",
+        "isCorrect": true,
+        "topic": "Identificação de Letras e Fonética"
+      },
+      {
+        "question": "Qual é o nome da imagem?",
+        "selectedAnswer": "flor",
+        "correctAnswer": "flor",
+        "isCorrect": true,
+        "topic": "Leitura e Vocabulário"
+      },
+      {
+        "question": "Qual das frases está correta?",
+        "selectedAnswer": "Eu comer maçã.",
+        "correctAnswer": "Eu como maçã.",
+        "isCorrect": false,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "O que é um 'livro'?",
+        "selectedAnswer": "Um objeto para ler histórias.",
+        "correctAnswer": "Um objeto para ler histórias.",
+        "isCorrect": true,
+        "topic": "Leitura e Vocabulário"
+      }
+    ],
+    "score": 4
   }
 ]
