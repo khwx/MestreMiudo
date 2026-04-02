@@ -2,102 +2,45 @@
 'use server';
 
 /**
- * @fileOverview Text-to-Speech (TTS) generator.
+ * @fileOverview Text-to-Speech (TTS) generator using Microsoft Edge TTS.
  *
- * This file defines a Genkit flow that converts a given text string
- * into speech audio and returns it as a WAV data URI. It also returns
- * speech marks for word highlighting.
+ * This file defines a function that converts text to speech audio
+ * using the free Microsoft Edge TTS service (edge-tts package).
+ * Returns audio as an MP3 data URI.
  *
  * - textToSpeech - A function that handles the TTS conversion.
  */
 
-import { ai } from '@/ai/genkit';
-import { z } from 'zod';
-import wav from 'wav';
-import { googleAI } from '@genkit-ai/googleai';
+export type TextToSpeechOutput = {
+  audioDataUri: string;
+  speechMarks: Array<{
+    type: string;
+    value: string;
+    time: { seconds: string; nanos: number };
+  }>;
+};
 
-// Schema for the input of the TTS flow
-const TextToSpeechInputSchema = z.string().describe('The text to convert to speech.');
-export type TextToSpeechInput = z.infer<typeof TextToSpeechInputSchema>;
+export async function textToSpeech(text: string): Promise<TextToSpeechOutput> {
+  try {
+    // Dynamic import to avoid webpack trying to bundle the raw TS source
+    const { tts } = await import('edge-tts/out/index.js');
 
-const SpeechMarkSchema = z.object({
-  type: z.string(),
-  value: z.string(),
-  time: z.object({
-    seconds: z.string(),
-    nanos: z.number(),
-  }),
-});
-
-// Schema for the output of the TTS flow
-const TextToSpeechOutputSchema = z.object({
-    audioDataUri: z.string().url().describe("The generated audio as a data URI in WAV format. Format: 'data:audio/wav;base64,<encoded_data>'"),
-    speechMarks: z.array(SpeechMarkSchema).describe('An array of speech marks with timing information for each word.'),
-});
-export type TextToSpeechOutput = z.infer<typeof TextToSpeechOutputSchema>;
-
-
-export async function textToSpeech(input: TextToSpeechInput): Promise<TextToSpeechOutput> {
-  return textToSpeechFlow(input);
-}
-
-async function toWav(pcmData: Buffer, channels = 1, rate = 24000, sampleWidth = 2): Promise<string> {
-    return new Promise((resolve, reject) => {
-        const writer = new wav.Writer({
-            channels,
-            sampleRate: rate,
-            bitDepth: sampleWidth * 8,
-        });
-
-        const bufs: any[] = [];
-        writer.on('error', reject);
-        writer.on('data', function (d) {
-            bufs.push(d);
-        });
-        writer.on('end', function () {
-            resolve(Buffer.concat(bufs).toString('base64'));
-        });
-
-        writer.write(pcmData);
-        writer.end();
+    // Use Microsoft Edge TTS with Portuguese (Portugal) voice
+    const audioBuffer: Buffer = await tts(text, {
+      voice: 'pt-PT-RaquelNeural',
+      rate: '-10%', // Slightly slower for children
     });
-}
 
-const textToSpeechFlow = ai.defineFlow(
-  {
-    name: 'textToSpeechFlow',
-    inputSchema: TextToSpeechInputSchema,
-    outputSchema: TextToSpeechOutputSchema,
-  },
-  async (text) => {
-    const { media, speechMarks } = await ai.generate({
-      model: googleAI.model('gemini-2.5-flash-preview-tts'),
-      config: {
-        responseModalities: ['AUDIO'],
-        speechConfig: {
-          voiceConfig: {
-            languageCode: 'pt-PT',
-          },
-          enableTimepoints: true, // Enable speech marks
-        },
-      },
-      prompt: text,
-    });
-    
-    if (!media) {
-      throw new Error('No audio media was returned from the TTS model.');
-    }
-
-    const audioBuffer = Buffer.from(
-      media.url.substring(media.url.indexOf(',') + 1),
-      'base64'
-    );
-    
-    const wavBase64 = await toWav(audioBuffer);
+    // Convert buffer to base64 data URI (MP3 format)
+    const base64Audio = Buffer.from(audioBuffer).toString('base64');
+    const audioDataUri = `data:audio/mp3;base64,${base64Audio}`;
 
     return {
-      audioDataUri: `data:audio/wav;base64,${wavBase64}`,
-      speechMarks: speechMarks || [],
+      audioDataUri,
+      speechMarks: [], // Edge TTS doesn't provide speech marks
     };
+  } catch (error) {
+    console.error('Edge TTS failed:', error);
+    throw new Error('Failed to generate speech audio.');
   }
-);
+}

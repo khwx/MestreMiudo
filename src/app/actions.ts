@@ -11,11 +11,16 @@ import path from 'path';
 import { ai } from "@/ai/genkit";
 import type { QuizInput, SaveQuizInput, QuizResultEntry, Answer, SpeechMark, StoryGenerationInput } from './shared-schemas';
 import { QuizResultSchema, SaveQuizInputSchema } from "./shared-schemas";
+import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 
 
 const historyFilePath = path.join(process.cwd(), 'quiz-history.json');
 
-async function getQuizHistory(): Promise<QuizResultEntry[]> {
+// ============================================
+// Quiz History (Supabase with JSON fallback)
+// ============================================
+
+async function getQuizHistoryFromFile(): Promise<QuizResultEntry[]> {
   try {
     const data = await fs.readFile(historyFilePath, 'utf-8');
     const parsed = z.array(QuizResultSchema).safeParse(JSON.parse(data));
@@ -26,11 +31,39 @@ async function getQuizHistory(): Promise<QuizResultEntry[]> {
     return parsed.data;
   } catch (error: any) {
     if (error.code === 'ENOENT') {
-      return []; // File doesn't exist, return empty history
+      return [];
     }
     console.error('Error reading or parsing quiz history:', error);
     return [];
   }
+}
+
+async function getQuizHistory(): Promise<QuizResultEntry[]> {
+  if (isSupabaseConfigured() && supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('quiz_history')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      return (data || []).map((row: any) => ({
+        timestamp: row.created_at,
+        studentId: row.student_id,
+        gradeLevel: row.grade_level,
+        subject: row.subject,
+        numberOfQuestions: row.total_questions,
+        quiz: row.quiz_data,
+        answers: row.answers,
+        score: row.score,
+      }));
+    } catch (error) {
+      console.error('Supabase quiz history fetch failed, falling back to file:', error);
+      return getQuizHistoryFromFile();
+    }
+  }
+  return getQuizHistoryFromFile();
 }
 
 export async function getPerformanceData(studentId: string, subject?: string): Promise<Record<string, number> | null> {
@@ -66,8 +99,7 @@ export async function getPerformanceData(studentId: string, subject?: string): P
     return performanceScores;
 }
 
-
-async function saveQuiz(input: SaveQuizInput) {
+async function saveQuizToFile(input: SaveQuizInput) {
   const newEntry: QuizResultEntry = {
     timestamp: new Date().toISOString(),
     studentId: input.studentId,
@@ -80,13 +112,104 @@ async function saveQuiz(input: SaveQuizInput) {
   };
 
   try {
-    let history = await getQuizHistory();
+    let history = await getQuizHistoryFromFile();
     history.push(newEntry);
     await fs.writeFile(historyFilePath, JSON.stringify(history, null, 2));
   } catch (error) {
-    console.error('Error saving quiz:', error);
+    console.error('Error saving quiz to file:', error);
   }
 }
+
+async function saveQuiz(input: SaveQuizInput) {
+  if (isSupabaseConfigured() && supabase) {
+    try {
+      const { error } = await supabase.from('quiz_history').insert({
+        student_id: input.studentId,
+        grade_level: input.gradeLevel,
+        subject: input.subject,
+        score: input.score,
+        total_questions: input.numberOfQuestions,
+        answers: input.answers,
+        quiz_data: input.quiz,
+      });
+      if (error) throw error;
+      return;
+    } catch (error) {
+      console.error('Supabase save failed, falling back to file:', error);
+    }
+  }
+  await saveQuizToFile(input);
+}
+
+// ============================================
+// Question Caching (Supabase)
+// ============================================
+
+async function getCachedQuestions(gradeLevel: number, subject: string | undefined, count: number) {
+  if (!isSupabaseConfigured() || !supabase) return null;
+
+  try {
+    let query = supabase
+      .from('questions')
+      .select('*')
+      .eq('grade_level', gradeLevel);
+
+    if (subject) {
+      query = query.eq('subject', subject);
+    }
+
+    // Get random questions by ordering randomly and limiting
+    const { data, error } = await query
+      .limit(count * 3); // Get more than needed to allow random selection
+
+    if (error) throw error;
+    if (!data || data.length < count) return null; // Not enough cached questions
+
+    // Shuffle and pick the requested number
+    const shuffled = data.sort(() => Math.random() - 0.5);
+    const selected = shuffled.slice(0, count);
+
+    return {
+      quizQuestions: selected.map((q: any) => ({
+        question: q.question,
+        options: q.options,
+        correctAnswer: q.correct_answer,
+        topic: q.topic,
+        imageUrl: q.image_url || undefined,
+      })),
+    };
+  } catch (error) {
+    console.error('Failed to get cached questions:', error);
+    return null;
+  }
+}
+
+async function cacheQuestions(gradeLevel: number, subject: string | undefined, questions: any[]) {
+  if (!isSupabaseConfigured() || !supabase) return;
+
+  try {
+    const rows = questions.map(q => ({
+      grade_level: gradeLevel,
+      subject: subject || 'Misto',
+      topic: q.topic,
+      question: q.question,
+      options: q.options,
+      correct_answer: q.correctAnswer,
+      image_url: q.imageUrl || null,
+    }));
+
+    const { error } = await supabase.from('questions').insert(rows);
+    if (error) {
+      console.error('Failed to cache questions:', error);
+    }
+  } catch (error) {
+    console.error('Error caching questions:', error);
+  }
+}
+
+// ============================================
+// Quiz Generation (with caching)
+// ============================================
 
 export async function generateQuiz(input: QuizInput) {
   const validatedInput = z.object({
@@ -96,15 +219,37 @@ export async function generateQuiz(input: QuizInput) {
       numberOfQuestions: z.number().min(5).max(20).default(5),
     }).parse(input);
   
-  const performanceData = await getPerformanceData(validatedInput.studentId, validatedInput.subject !== 'Misto' ? validatedInput.subject : undefined);
+  const resolvedSubject = validatedInput.subject === 'Misto' ? undefined : validatedInput.subject;
+  
+  // Try to get questions from cache first
+  const cached = await getCachedQuestions(
+    validatedInput.gradeLevel,
+    resolvedSubject,
+    validatedInput.numberOfQuestions
+  );
+
+  if (cached) {
+    console.log(`[Cache HIT] Serving ${validatedInput.numberOfQuestions} cached questions for grade ${validatedInput.gradeLevel}, subject: ${resolvedSubject || 'Misto'}`);
+    return cached;
+  }
+
+  console.log(`[Cache MISS] Generating new questions via AI for grade ${validatedInput.gradeLevel}, subject: ${resolvedSubject || 'Misto'}`);
+
+  const performanceData = await getPerformanceData(validatedInput.studentId, resolvedSubject);
 
   const aiInput = {
     ...validatedInput,
-    subject: validatedInput.subject === 'Misto' ? undefined : validatedInput.subject,
+    subject: resolvedSubject,
     performanceData,
   };
   
   const quizOutput = await personalizedLearningPath(aiInput);
+
+  // Cache the generated questions for future use (non-blocking)
+  if (quizOutput?.quizQuestions) {
+    cacheQuestions(validatedInput.gradeLevel, resolvedSubject, quizOutput.quizQuestions)
+      .catch(err => console.error('Background caching failed:', err));
+  }
     
   return quizOutput;
 }
@@ -120,11 +265,14 @@ export async function getFullQuizHistory(studentId: string): Promise<QuizResultE
 }
 
 
-// New Story Action with Image and Audio generation
+// ============================================
+// Story Action with Image and Audio generation
+// ============================================
+
 const GenerateStoryActionOutputSchema = z.object({
     title: z.string(),
     story: z.string(),
-    audioDataUri: z.string().url().optional(),
+    audioDataUri: z.string().optional(),
     speechMarks: z.array(z.object({
       type: z.string(),
       value: z.string(),

@@ -6,12 +6,14 @@
  *
  * This file defines a Genkit flow that generates words for games like Hangman,
  * complete with hints, based on specified categories and difficulty levels.
+ * Includes Supabase caching to reduce API usage.
  *
  * - generateWord - A function that generates a word and a hint.
  */
 
 import { ai } from '@/ai/genkit';
 import { z } from 'zod';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 
 // Schema for the input of the word generation flow
 const WordGenerationInputSchema = z.object({
@@ -29,8 +31,74 @@ const WordGenerationOutputSchema = z.object({
 export type WordGenerationOutput = z.infer<typeof WordGenerationOutputSchema>;
 
 
+// Try to get a cached word from Supabase
+async function getCachedWord(category: string, difficulty: string): Promise<WordGenerationOutput | null> {
+  if (!isSupabaseConfigured() || !supabase) return null;
+
+  try {
+    const { data, error } = await supabase
+      .from('words')
+      .select('word, hint')
+      .eq('category', category)
+      .eq('difficulty', difficulty);
+
+    if (error) throw error;
+    if (!data || data.length === 0) return null;
+
+    // Pick a random word from cached options
+    const randomIndex = Math.floor(Math.random() * data.length);
+    return { word: data[randomIndex].word, hint: data[randomIndex].hint };
+  } catch (error) {
+    console.error('Failed to get cached word:', error);
+    return null;
+  }
+}
+
+// Cache a generated word in Supabase
+async function cacheWord(category: string, difficulty: string, word: string, hint: string): Promise<void> {
+  if (!isSupabaseConfigured() || !supabase) return;
+
+  try {
+    // Check for duplicates first
+    const { data: existing } = await supabase
+      .from('words')
+      .select('id')
+      .eq('word', word)
+      .eq('category', category)
+      .limit(1);
+
+    if (existing && existing.length > 0) return; // Already cached
+
+    const { error } = await supabase.from('words').insert({
+      category,
+      difficulty,
+      word,
+      hint,
+    });
+
+    if (error) console.error('Failed to cache word:', error);
+  } catch (error) {
+    console.error('Error caching word:', error);
+  }
+}
+
+
 export async function generateWord(input: WordGenerationInput): Promise<WordGenerationOutput> {
-  return generateWordFlow(input);
+  // Try cache first
+  const cached = await getCachedWord(input.category, input.difficulty);
+  if (cached) {
+    console.log(`[Cache HIT] Word for category=${input.category}, difficulty=${input.difficulty}`);
+    return cached;
+  }
+
+  console.log(`[Cache MISS] Generating word via AI for category=${input.category}, difficulty=${input.difficulty}`);
+  const result = await generateWordFlow(input);
+
+  // Cache the result (non-blocking)
+  cacheWord(input.category, input.difficulty, result.word, result.hint)
+    .catch(err => console.error('Background word caching failed:', err));
+
+  return result;
 }
 
 

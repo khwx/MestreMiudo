@@ -4555,11 +4555,11 @@
     "score": 4
   },
   {
-    "timestamp": "2025-09-14T16:02:55.121Z",
     "studentId": "Sara",
     "gradeLevel": 1,
     "subject": "Português",
     "numberOfQuestions": 5,
+    "timestamp": "2025-09-14T16:02:55.121Z",
     "quiz": {
       "quizQuestions": [
         {
@@ -4658,5 +4658,1063 @@
       }
     ],
     "score": 4
+  },
+  {
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Misto",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-14T16:10:16.688Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Que forma geométrica vês na imagem?",
+          "options": [
+            "Círculo",
+            "Quadrado",
+            "Triângulo",
+            "Retângulo"
+          ],
+          "correctAnswer": "Quadrado",
+          "topic": "Formas Geométricas",
+          "imageUrl": "https://pixabay.com/get/g0d296df8bd86242d1704fd6ecabbe9192fd218db65297822c1bf650debe5965b8dcf7cf3fa4a0e5e5e91219a62cbb114_640.jpg"
+        },
+        {
+          "question": "Põe as palavras por ordem para formar uma frase correta: 'o corre cão.'",
+          "options": [
+            "O cão corre.",
+            "Corre o cão.",
+            "Cão corre o.",
+            "O corre cão."
+          ],
+          "correctAnswer": "O cão corre.",
+          "topic": "Formação de Frases e Verbos Simples"
+        },
+        {
+          "question": "Como se chama o grupo de pessoas com quem vives e que te ama?",
+          "options": [
+            "Os amigos",
+            "A escola",
+            "A família",
+            "Os vizinhos"
+          ],
+          "correctAnswer": "A família",
+          "topic": "A Família",
+          "imageUrl": "https://pixabay.com/get/gb57506d26ec0c3afe05eebff446398279d56b7b13d07f8ae9bf5b0947278c89742e0cdcce5298afbeb678f512e8475bb_640.jpg"
+        },
+        {
+          "question": "Se tens 5 maçãs e comes 2, quantas maçãs te sobram?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "3",
+          "topic": "Subtração"
+        },
+        {
+          "question": "Qual destes animais põe ovos?",
+          "options": [
+            "Gato",
+            "Pássaro",
+            "Cão",
+            "Vaca"
+          ],
+          "correctAnswer": "Pássaro",
+          "topic": "Os Animais",
+          "imageUrl": "https://pixabay.com/get/g28d20e6d573de4bb179d9baa999c30f1f879c183d0d7169c17d59f0f852516dd043fef8716ffea161276a0953a3d3d81_640.jpg"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Que forma geométrica vês na imagem?",
+        "selectedAnswer": "Círculo",
+        "correctAnswer": "Quadrado",
+        "isCorrect": false,
+        "topic": "Formas Geométricas"
+      },
+      {
+        "question": "Põe as palavras por ordem para formar uma frase correta: 'o corre cão.'",
+        "selectedAnswer": "O cão corre.",
+        "correctAnswer": "O cão corre.",
+        "isCorrect": true,
+        "topic": "Formação de Frases e Verbos Simples"
+      },
+      {
+        "question": "Como se chama o grupo de pessoas com quem vives e que te ama?",
+        "selectedAnswer": "A família",
+        "correctAnswer": "A família",
+        "isCorrect": true,
+        "topic": "A Família"
+      },
+      {
+        "question": "Se tens 5 maçãs e comes 2, quantas maçãs te sobram?",
+        "selectedAnswer": "3",
+        "correctAnswer": "3",
+        "isCorrect": true,
+        "topic": "Subtração"
+      },
+      {
+        "question": "Qual destes animais põe ovos?",
+        "selectedAnswer": "Pássaro",
+        "correctAnswer": "Pássaro",
+        "isCorrect": true,
+        "topic": "Os Animais"
+      }
+    ],
+    "score": 4
+  },
+  {
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-14T16:16:44.863Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual é o nome desta forma geométrica?",
+          "options": [
+            "Triângulo",
+            "Círculo",
+            "Quadrado",
+            "Retângulo"
+          ],
+          "correctAnswer": "Quadrado",
+          "topic": "Formas Geométricas",
+          "imageUrl": "https://pixabay.com/get/gdcfe1c285e886645aa0558164842f2bb23d57031762c19e8203b49525eead396005faf321cecf3333d98d7324f1b225a_640.jpg"
+        },
+        {
+          "question": "Se tens 8 lápis e dás 3 ao teu amigo, quantos lápis te sobram?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Subtração"
+        },
+        {
+          "question": "Uma bola de futebol tem a forma de qual destas figuras?",
+          "options": [
+            "Quadrado",
+            "Triângulo",
+            "Círculo",
+            "Retângulo"
+          ],
+          "correctAnswer": "Círculo",
+          "topic": "Formas Geométricas"
+        },
+        {
+          "question": "Quanto é 10 menos 4?",
+          "options": [
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "correctAnswer": "6",
+          "topic": "Subtração"
+        },
+        {
+          "question": "Qual é o número que vem depois do 7?",
+          "options": [
+            "5",
+            "6",
+            "8",
+            "9"
+          ],
+          "correctAnswer": "8",
+          "topic": "Números"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual é o nome desta forma geométrica?",
+        "selectedAnswer": "Círculo",
+        "correctAnswer": "Quadrado",
+        "isCorrect": false,
+        "topic": "Formas Geométricas"
+      },
+      {
+        "question": "Se tens 8 lápis e dás 3 ao teu amigo, quantos lápis te sobram?",
+        "selectedAnswer": "7",
+        "correctAnswer": "5",
+        "isCorrect": false,
+        "topic": "Subtração"
+      },
+      {
+        "question": "Uma bola de futebol tem a forma de qual destas figuras?",
+        "selectedAnswer": "Retângulo",
+        "correctAnswer": "Círculo",
+        "isCorrect": false,
+        "topic": "Formas Geométricas"
+      },
+      {
+        "question": "Quanto é 10 menos 4?",
+        "selectedAnswer": "8",
+        "correctAnswer": "6",
+        "isCorrect": false,
+        "topic": "Subtração"
+      },
+      {
+        "question": "Qual é o número que vem depois do 7?",
+        "selectedAnswer": "9",
+        "correctAnswer": "8",
+        "isCorrect": false,
+        "topic": "Números"
+      }
+    ],
+    "score": 0
+  },
+  {
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Misto",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-14T16:23:02.893Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Que forma geométrica vês na imagem?",
+          "options": [
+            "Círculo",
+            "Triângulo",
+            "Quadrado",
+            "Retângulo"
+          ],
+          "correctAnswer": "Quadrado",
+          "topic": "Matemática",
+          "imageUrl": "https://pixabay.com/get/g84c6f34c734f57df5e043df8a33402fdef891e8fb2da023167bbfe56823ddbaba1bcf5d72ae54f7cf5f1342d31f304db_640.jpg"
+        },
+        {
+          "question": "Ordena as palavras para formares uma frase correta: *comer. gosta. O. pão. coelho. de*",
+          "options": [
+            "O coelho gosta de comer pão.",
+            "Gosta o coelho de comer pão.",
+            "Pão o coelho de gosta comer.",
+            "De comer pão o coelho gosta."
+          ],
+          "correctAnswer": "O coelho gosta de comer pão.",
+          "topic": "Português"
+        },
+        {
+          "question": "Se tens 5 maçãs e dás 2 ao teu amigo, com quantas maçãs ficas?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "3",
+          "topic": "Matemática"
+        },
+        {
+          "question": "Que inseto produz mel?",
+          "options": [
+            "Formiga",
+            "Mosca",
+            "Abelha",
+            "Aranha"
+          ],
+          "correctAnswer": "Abelha",
+          "topic": "Estudo do Meio",
+          "imageUrl": "https://pixabay.com/get/g03e92b8531667dc8d826ac06e1c8c5cfab0262c3aecbabcede7b5ba89b6a03759d19f05270162b166d30b4b1d449a606_640.jpg"
+        },
+        {
+          "question": "Qual destas palavras começa com a letra 'M'?",
+          "options": [
+            "Bola",
+            "Casa",
+            "Mesa",
+            "Pato"
+          ],
+          "correctAnswer": "Mesa",
+          "topic": "Português"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Que forma geométrica vês na imagem?",
+        "selectedAnswer": "Triângulo",
+        "correctAnswer": "Quadrado",
+        "isCorrect": false,
+        "topic": "Matemática"
+      },
+      {
+        "question": "Ordena as palavras para formares uma frase correta: *comer. gosta. O. pão. coelho. de*",
+        "selectedAnswer": "Gosta o coelho de comer pão.",
+        "correctAnswer": "O coelho gosta de comer pão.",
+        "isCorrect": false,
+        "topic": "Português"
+      },
+      {
+        "question": "Se tens 5 maçãs e dás 2 ao teu amigo, com quantas maçãs ficas?",
+        "selectedAnswer": "5",
+        "correctAnswer": "3",
+        "isCorrect": false,
+        "topic": "Matemática"
+      },
+      {
+        "question": "Que inseto produz mel?",
+        "selectedAnswer": "Abelha",
+        "correctAnswer": "Abelha",
+        "isCorrect": true,
+        "topic": "Estudo do Meio"
+      },
+      {
+        "question": "Qual destas palavras começa com a letra 'M'?",
+        "selectedAnswer": "Mesa",
+        "correctAnswer": "Mesa",
+        "isCorrect": true,
+        "topic": "Português"
+      }
+    ],
+    "score": 2
+  },
+  {
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-14T16:27:33.380Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Que forma geométrica te lembra uma bola?",
+          "options": [
+            "Quadrado",
+            "Círculo",
+            "Triângulo",
+            "Retângulo"
+          ],
+          "correctAnswer": "Círculo",
+          "topic": "Formas Geométricas",
+          "imageUrl": "https://pixabay.com/get/g129c4d46df5fe5eedd0bbc3537ca9c376800419f72eb7b8f12ab128b624cb4329b16dc3cc734ea108ff05fefe82d00a9_640.jpg"
+        },
+        {
+          "question": "A Maria tinha 7 maçãs e comeu 3. Quantas maçãs sobraram?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "4",
+          "topic": "Subtração"
+        },
+        {
+          "question": "Qual é o número que vem a seguir ao 12?",
+          "options": [
+            "10",
+            "11",
+            "13",
+            "14"
+          ],
+          "correctAnswer": "13",
+          "topic": "Números"
+        },
+        {
+          "question": "O João tinha 9 lápis e perdeu 2. Com quantos lápis ficou?",
+          "options": [
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "correctAnswer": "7",
+          "topic": "Subtração"
+        },
+        {
+          "question": "Uma janela, na maioria das vezes, tem a forma de qual destas figuras?",
+          "options": [
+            "Círculo",
+            "Triângulo",
+            "Quadrado",
+            "Estrela"
+          ],
+          "correctAnswer": "Quadrado",
+          "topic": "Formas Geométricas"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Que forma geométrica te lembra uma bola?",
+        "selectedAnswer": "Círculo",
+        "correctAnswer": "Círculo",
+        "isCorrect": true,
+        "topic": "Formas Geométricas"
+      },
+      {
+        "question": "A Maria tinha 7 maçãs e comeu 3. Quantas maçãs sobraram?",
+        "selectedAnswer": "4",
+        "correctAnswer": "4",
+        "isCorrect": true,
+        "topic": "Subtração"
+      },
+      {
+        "question": "Qual é o número que vem a seguir ao 12?",
+        "selectedAnswer": "13",
+        "correctAnswer": "13",
+        "isCorrect": true,
+        "topic": "Números"
+      },
+      {
+        "question": "O João tinha 9 lápis e perdeu 2. Com quantos lápis ficou?",
+        "selectedAnswer": "7",
+        "correctAnswer": "7",
+        "isCorrect": true,
+        "topic": "Subtração"
+      },
+      {
+        "question": "Uma janela, na maioria das vezes, tem a forma de qual destas figuras?",
+        "selectedAnswer": "Quadrado",
+        "correctAnswer": "Quadrado",
+        "isCorrect": true,
+        "topic": "Formas Geométricas"
+      }
+    ],
+    "score": 5
+  },
+  {
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Estudo do Meio",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-14T17:02:00.578Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Quem faz parte da tua família mais próxima?",
+          "options": [
+            "Os teus amigos e colegas",
+            "Os teus pais, irmãos e avós",
+            "Os teus vizinhos da rua",
+            "Os teus professores da escola"
+          ],
+          "correctAnswer": "Os teus pais, irmãos e avós",
+          "topic": "A Família",
+          "imageUrl": "https://pixabay.com/get/g82ab1d1bc4828e49c32702601818daf1bc15483545a7aaebcdbe0276f1c88369feeff4a7cc52e30d99f4bcac1ed01c1e_640.jpg"
+        },
+        {
+          "question": "Quantas patas tem um cão?",
+          "options": [
+            "Duas",
+            "Quatro",
+            "Seis",
+            "Oito"
+          ],
+          "correctAnswer": "Quatro",
+          "topic": "Os Animais",
+          "imageUrl": "https://pixabay.com/get/gc30998145e364c3888c4faa6603085358c1a1fc121e98d2c1ff8ab2f5990bc9ce216fd2f555f7bf8bb5c4a019c00b56f_640.jpg"
+        },
+        {
+          "question": "O que nasce na terra, tem folhas, um caule e pode ter flores coloridas?",
+          "options": [
+            "Uma pedra",
+            "Uma flor",
+            "Um carro",
+            "Uma casa"
+          ],
+          "correctAnswer": "Uma flor",
+          "topic": "A Natureza",
+          "imageUrl": "https://pixabay.com/get/g2b3498eb020673d5c117280e646aa7493cc9915c4b808a9d8a4af9bac3f09037e3c78cbbdcfca533620cd674420e2dfd_640.jpg"
+        },
+        {
+          "question": "Qual é a refeição que as famílias costumam fazer à noite?",
+          "options": [
+            "O pequeno-almoço",
+            "O almoço",
+            "O lanche",
+            "O jantar"
+          ],
+          "correctAnswer": "O jantar",
+          "topic": "A Família"
+        },
+        {
+          "question": "Qual destes animais é conhecido por miar?",
+          "options": [
+            "O cão",
+            "A galinha",
+            "O gato",
+            "O porco"
+          ],
+          "correctAnswer": "O gato",
+          "topic": "Os Animais"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Quem faz parte da tua família mais próxima?",
+        "selectedAnswer": "Os teus pais, irmãos e avós",
+        "correctAnswer": "Os teus pais, irmãos e avós",
+        "isCorrect": true,
+        "topic": "A Família"
+      },
+      {
+        "question": "Quantas patas tem um cão?",
+        "selectedAnswer": "Quatro",
+        "correctAnswer": "Quatro",
+        "isCorrect": true,
+        "topic": "Os Animais"
+      },
+      {
+        "question": "O que nasce na terra, tem folhas, um caule e pode ter flores coloridas?",
+        "selectedAnswer": "Uma casa",
+        "correctAnswer": "Uma flor",
+        "isCorrect": false,
+        "topic": "A Natureza"
+      },
+      {
+        "question": "Qual é a refeição que as famílias costumam fazer à noite?",
+        "selectedAnswer": "O jantar",
+        "correctAnswer": "O jantar",
+        "isCorrect": true,
+        "topic": "A Família"
+      },
+      {
+        "question": "Qual destes animais é conhecido por miar?",
+        "selectedAnswer": "A galinha",
+        "correctAnswer": "O gato",
+        "isCorrect": false,
+        "topic": "Os Animais"
+      }
+    ],
+    "score": 3
+  },
+  {
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Misto",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-14T17:03:29.388Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Que forma geométrica vês na imagem?",
+          "options": [
+            "Círculo",
+            "Quadrado",
+            "Triângulo",
+            "Retângulo"
+          ],
+          "correctAnswer": "Triângulo",
+          "topic": "Matemática",
+          "imageUrl": "https://pixabay.com/get/g5238172d31cd2df8c8ce3371681676fe445ed927008f1a99d1385c3fcefc804efb431b91e3a0c5509cfed0cee1ed66cd_640.jpg"
+        },
+        {
+          "question": "Põe as palavras na ordem correta para formar uma frase: \"a\", \"flor\", \"é\", \"amarela\".",
+          "options": [
+            "A flor é amarela.",
+            "É amarela a flor.",
+            "Flor a é amarela.",
+            "Amarela é a flor."
+          ],
+          "correctAnswer": "A flor é amarela.",
+          "topic": "Português"
+        },
+        {
+          "question": "Que alimento saboroso nos dá a abelha?",
+          "options": [
+            "Leite",
+            "Mel",
+            "Ovos",
+            "Pão"
+          ],
+          "correctAnswer": "Mel",
+          "topic": "Estudo do Meio",
+          "imageUrl": "https://pixabay.com/get/g83dec9209f46195f5934e34c45ef2607ea6d32fc895deeb29285a5bbe7418c9d154f86bbfc6528b843311629f09e4249_640.jpg"
+        },
+        {
+          "question": "Se tinhas 7 balões e 3 voaram, quantos balões te sobraram?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "4",
+          "topic": "Matemática"
+        },
+        {
+          "question": "Que animais põem os ovos num ninho?",
+          "options": [
+            "Cães",
+            "Peixes",
+            "Pássaros",
+            "Gatos"
+          ],
+          "correctAnswer": "Pássaros",
+          "topic": "Estudo do Meio",
+          "imageUrl": "https://pixabay.com/get/g20a16b5b0462bdd01af08a7d9b6d8d8ee383b46e3957a1bb8859ac28b8aa39d55473acabc667074cd7f8b0bf456e84b5_640.jpg"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Que forma geométrica vês na imagem?",
+        "selectedAnswer": "Triângulo",
+        "correctAnswer": "Triângulo",
+        "isCorrect": true,
+        "topic": "Matemática"
+      },
+      {
+        "question": "Põe as palavras na ordem correta para formar uma frase: \"a\", \"flor\", \"é\", \"amarela\".",
+        "selectedAnswer": "Amarela é a flor.",
+        "correctAnswer": "A flor é amarela.",
+        "isCorrect": false,
+        "topic": "Português"
+      },
+      {
+        "question": "Que alimento saboroso nos dá a abelha?",
+        "selectedAnswer": "Mel",
+        "correctAnswer": "Mel",
+        "isCorrect": true,
+        "topic": "Estudo do Meio"
+      },
+      {
+        "question": "Se tinhas 7 balões e 3 voaram, quantos balões te sobraram?",
+        "selectedAnswer": "4",
+        "correctAnswer": "4",
+        "isCorrect": true,
+        "topic": "Matemática"
+      },
+      {
+        "question": "Que animais põem os ovos num ninho?",
+        "selectedAnswer": "Pássaros",
+        "correctAnswer": "Pássaros",
+        "isCorrect": true,
+        "topic": "Estudo do Meio"
+      }
+    ],
+    "score": 4
+  },
+  {
+    "studentId": "Sara",
+    "gradeLevel": 1,
+    "subject": "Estudo do Meio",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-09-14T17:12:39.234Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "De que precisa uma planta para crescer forte e saudável?",
+          "options": [
+            "Doces",
+            "Água e Sol",
+            "Brinquedos",
+            "Carros"
+          ],
+          "correctAnswer": "Água e Sol",
+          "topic": "A Natureza",
+          "imageUrl": "https://pixabay.com/get/g8958c8008eae66a27ff71f701df6cb2d9b09429b23f0a27a060eefbefad8c6960a050ca00e427c61378b0a137ed54211_640.jpg"
+        },
+        {
+          "question": "Que animal conhecido põe ovos?",
+          "options": [
+            "Cão",
+            "Gato",
+            "Galinha",
+            "Peixe"
+          ],
+          "correctAnswer": "Galinha",
+          "topic": "Os Animais",
+          "imageUrl": "https://pixabay.com/get/gbff6b16f7eb1c95c7aa402eae996cd2865da83b74d98bed29241b8af76f17c8005df8f0c3519b76c8e1ef0303a1613ee_640.jpg"
+        },
+        {
+          "question": "Quem é a mãe do teu pai ou da tua mãe?",
+          "options": [
+            "O teu irmão",
+            "A tua avó",
+            "O teu primo",
+            "A tua irmã"
+          ],
+          "correctAnswer": "A tua avó",
+          "topic": "A Família"
+        },
+        {
+          "question": "Qual destas palavras descreve um tipo de tempo que vemos na natureza?",
+          "options": [
+            "Casa",
+            "Carro",
+            "Chuva",
+            "Livro"
+          ],
+          "correctAnswer": "Chuva",
+          "topic": "A Natureza"
+        },
+        {
+          "question": "Qual é o som que o cão faz?",
+          "options": [
+            "Miau",
+            "Garrrr",
+            "Au au",
+            "Muuuu"
+          ],
+          "correctAnswer": "Au au",
+          "topic": "Os Animais"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "De que precisa uma planta para crescer forte e saudável?",
+        "selectedAnswer": "Água e Sol",
+        "correctAnswer": "Água e Sol",
+        "isCorrect": true,
+        "topic": "A Natureza"
+      },
+      {
+        "question": "Que animal conhecido põe ovos?",
+        "selectedAnswer": "Galinha",
+        "correctAnswer": "Galinha",
+        "isCorrect": true,
+        "topic": "Os Animais"
+      },
+      {
+        "question": "Quem é a mãe do teu pai ou da tua mãe?",
+        "selectedAnswer": "A tua avó",
+        "correctAnswer": "A tua avó",
+        "isCorrect": true,
+        "topic": "A Família"
+      },
+      {
+        "question": "Qual destas palavras descreve um tipo de tempo que vemos na natureza?",
+        "selectedAnswer": "Chuva",
+        "correctAnswer": "Chuva",
+        "isCorrect": true,
+        "topic": "A Natureza"
+      },
+      {
+        "question": "Qual é o som que o cão faz?",
+        "selectedAnswer": "Au au",
+        "correctAnswer": "Au au",
+        "isCorrect": true,
+        "topic": "Os Animais"
+      }
+    ],
+    "score": 5
+  },
+  {
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-10-14T13:07:34.031Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual é o nome do animal que vês na imagem?",
+          "options": [
+            "Gato",
+            "Cão",
+            "Cavalo",
+            "Pássaro"
+          ],
+          "correctAnswer": "Cão",
+          "topic": "Vocabulário",
+          "imageUrl": "https://pixabay.com/get/g3a080e4b7c54cae0cfcc80746d8df82d52cbe13890e0d1d78e8d3b06ac58172bb7484838aa8c49fec819870f6bdab6be_640.jpg"
+        },
+        {
+          "question": "Ordena as palavras para formares uma frase: 'come', 'o', 'pão', 'menino'.",
+          "options": [
+            "O pão come o menino.",
+            "O menino come pão.",
+            "Come o pão menino.",
+            "Menino o pão come."
+          ],
+          "correctAnswer": "O menino come pão.",
+          "topic": "Formação de Frases"
+        },
+        {
+          "question": "Qual destas palavras significa o mesmo que 'grande'?",
+          "options": [
+            "Pequeno",
+            "Enorme",
+            "Rápido",
+            "Leve"
+          ],
+          "correctAnswer": "Enorme",
+          "topic": "Vocabulário"
+        },
+        {
+          "question": "Ordena as palavras para formares uma frase: 'a', 'verde', 'bola', 'é'.",
+          "options": [
+            "A verde é bola.",
+            "Bola é a verde.",
+            "A bola é verde.",
+            "É a bola verde."
+          ],
+          "correctAnswer": "A bola é verde.",
+          "topic": "Formação de Frases"
+        },
+        {
+          "question": "Qual destas palavras rima com 'flor'?",
+          "options": [
+            "Sol",
+            "Azul",
+            "Amor",
+            "Pão"
+          ],
+          "correctAnswer": "Amor",
+          "topic": "Rima"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual é o nome do animal que vês na imagem?",
+        "selectedAnswer": "Cão",
+        "correctAnswer": "Cão",
+        "isCorrect": true,
+        "topic": "Vocabulário"
+      },
+      {
+        "question": "Ordena as palavras para formares uma frase: 'come', 'o', 'pão', 'menino'.",
+        "selectedAnswer": "O menino come pão.",
+        "correctAnswer": "O menino come pão.",
+        "isCorrect": true,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "Qual destas palavras significa o mesmo que 'grande'?",
+        "selectedAnswer": "Enorme",
+        "correctAnswer": "Enorme",
+        "isCorrect": true,
+        "topic": "Vocabulário"
+      },
+      {
+        "question": "Ordena as palavras para formares uma frase: 'a', 'verde', 'bola', 'é'.",
+        "selectedAnswer": "A bola é verde.",
+        "correctAnswer": "A bola é verde.",
+        "isCorrect": true,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "Qual destas palavras rima com 'flor'?",
+        "selectedAnswer": "Pão",
+        "correctAnswer": "Amor",
+        "isCorrect": false,
+        "topic": "Rima"
+      }
+    ],
+    "score": 4
+  },
+  {
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Português",
+    "numberOfQuestions": 5,
+    "timestamp": "2025-10-14T16:09:57.008Z",
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "Qual destas palavras rima com 'gato'?",
+          "options": [
+            "pato",
+            "cão",
+            "bola",
+            "mesa"
+          ],
+          "correctAnswer": "pato",
+          "topic": "Rima"
+        },
+        {
+          "question": "O que é um 'cão'?",
+          "options": [
+            "Um animal que voa",
+            "Um animal que ladra",
+            "Uma fruta",
+            "Um brinquedo"
+          ],
+          "correctAnswer": "Um animal que ladra",
+          "topic": "Vocabulário",
+          "imageUrl": "https://pixabay.com/get/ge9483f538a147db67ff61a295de773532a658ff0c90ae5d75d0437a4ef4644cd6371cf5fb05593cfde5c8752cf5ba024_640.jpg"
+        },
+        {
+          "question": "Organiza as seguintes palavras para formar uma frase: 'come', 'A', 'maçã', 'menina'.",
+          "options": [
+            "A come menina maçã.",
+            "A menina come maçã.",
+            "Maçã come a menina.",
+            "Come maçã a menina."
+          ],
+          "correctAnswer": "A menina come maçã.",
+          "topic": "Formação de Frases"
+        },
+        {
+          "question": "Qual palavra rima com 'sol'?",
+          "options": [
+            "lua",
+            "flor",
+            "anzol",
+            "céu"
+          ],
+          "correctAnswer": "anzol",
+          "topic": "Rima"
+        },
+        {
+          "question": "Qual é o nome do animal que põe ovos e tem penas?",
+          "options": [
+            "cão",
+            "gato",
+            "galinha",
+            "peixe"
+          ],
+          "correctAnswer": "galinha",
+          "topic": "Vocabulário"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "Qual destas palavras rima com 'gato'?",
+        "selectedAnswer": "pato",
+        "correctAnswer": "pato",
+        "isCorrect": true,
+        "topic": "Rima"
+      },
+      {
+        "question": "O que é um 'cão'?",
+        "selectedAnswer": "Um animal que ladra",
+        "correctAnswer": "Um animal que ladra",
+        "isCorrect": true,
+        "topic": "Vocabulário"
+      },
+      {
+        "question": "Organiza as seguintes palavras para formar uma frase: 'come', 'A', 'maçã', 'menina'.",
+        "selectedAnswer": "A come menina maçã.",
+        "correctAnswer": "A menina come maçã.",
+        "isCorrect": false,
+        "topic": "Formação de Frases"
+      },
+      {
+        "question": "Qual palavra rima com 'sol'?",
+        "selectedAnswer": "flor",
+        "correctAnswer": "anzol",
+        "isCorrect": false,
+        "topic": "Rima"
+      },
+      {
+        "question": "Qual é o nome do animal que põe ovos e tem penas?",
+        "selectedAnswer": "gato",
+        "correctAnswer": "galinha",
+        "isCorrect": false,
+        "topic": "Vocabulário"
+      }
+    ],
+    "score": 2
+  },
+  {
+    "timestamp": "2025-10-14T16:11:26.031Z",
+    "studentId": "Maria",
+    "gradeLevel": 1,
+    "subject": "Matemática",
+    "numberOfQuestions": 5,
+    "quiz": {
+      "quizQuestions": [
+        {
+          "question": "A Maria tinha 5 lápis e deu 2 à Ana. Com quantos lápis ficou a Maria?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "3",
+          "topic": "Subtração",
+          "imageUrl": "https://pixabay.com/get/g3c7f2f8339b9d52193663619e8d861ea5c70df199811198ec22d7553e12ab9ea01eec84ee5cd09615bfc65d9dc7cc1a1_640.jpg"
+        },
+        {
+          "question": "Qual é o número que vem imediatamente depois do 7?",
+          "options": [
+            "6",
+            "8",
+            "9",
+            "10"
+          ],
+          "correctAnswer": "8",
+          "topic": "Contagem / Sucessão Numérica"
+        },
+        {
+          "question": "O João tinha 8 bolachas e comeu 3. Quantas bolachas sobraram?",
+          "options": [
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "correctAnswer": "5",
+          "topic": "Subtração"
+        },
+        {
+          "question": "Se contares a partir do 1, qual é o quarto número?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "4",
+          "topic": "Contagem"
+        },
+        {
+          "question": "Numa árvore estavam 10 pássaros. Voaram 4. Quantos pássaros ficaram na árvore?",
+          "options": [
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "correctAnswer": "6",
+          "topic": "Subtração"
+        }
+      ]
+    },
+    "answers": [
+      {
+        "question": "A Maria tinha 5 lápis e deu 2 à Ana. Com quantos lápis ficou a Maria?",
+        "selectedAnswer": "3",
+        "correctAnswer": "3",
+        "isCorrect": true,
+        "topic": "Subtração"
+      },
+      {
+        "question": "Qual é o número que vem imediatamente depois do 7?",
+        "selectedAnswer": "8",
+        "correctAnswer": "8",
+        "isCorrect": true,
+        "topic": "Contagem / Sucessão Numérica"
+      },
+      {
+        "question": "O João tinha 8 bolachas e comeu 3. Quantas bolachas sobraram?",
+        "selectedAnswer": "5",
+        "correctAnswer": "5",
+        "isCorrect": true,
+        "topic": "Subtração"
+      },
+      {
+        "question": "Se contares a partir do 1, qual é o quarto número?",
+        "selectedAnswer": "4",
+        "correctAnswer": "4",
+        "isCorrect": true,
+        "topic": "Contagem"
+      },
+      {
+        "question": "Numa árvore estavam 10 pássaros. Voaram 4. Quantos pássaros ficaram na árvore?",
+        "selectedAnswer": "6",
+        "correctAnswer": "6",
+        "isCorrect": true,
+        "topic": "Subtração"
+      }
+    ],
+    "score": 5
   }
 ]

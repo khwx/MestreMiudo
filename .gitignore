@@ -43,3 +43,13 @@ next-env.d.ts
 # firebase
 firebase-debug.log
 firestore-debug.log
+
+# project data
+quiz-history.json
+
+# Firebase Studio
+.idx/
+studio.json
+.modified
+*.zip
+*.log

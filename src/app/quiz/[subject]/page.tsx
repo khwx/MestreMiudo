@@ -4,6 +4,8 @@ import { Loader2 } from 'lucide-react';
 import QuizClientPage from './client-page';
 import { notFound } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 const subjectMap = {
   'portugues': 'Português',
   'matematica': 'Matemática',
@@ -33,7 +35,7 @@ export default function QuizPage({ params, searchParams }: { params: { subject: 
     );
   }
   
-  const quizSubject = subjectSlug === 'misto' ? 'Misto' : subjectTitle;
+  const quizSubject = (subjectSlug === 'misto' ? 'Misto' : subjectTitle) as 'Português' | 'Matemática' | 'Estudo do Meio' | 'Misto';
 
   return (
     <Suspense fallback={

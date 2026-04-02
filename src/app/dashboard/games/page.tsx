@@ -3,6 +3,8 @@ import { Suspense } from 'react';
 import { Loader2 } from 'lucide-react';
 import GamesClientPage from './client-page';
 
+export const dynamic = 'force-dynamic';
+
 export default function GamesPage() {
     return (
         <Suspense fallback={
