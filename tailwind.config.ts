@@ -123,3 +123,4 @@ export default {
     },
   ],
 } satisfies Config;
+// Actualização de configuração para limpeza de metadados no GitHub
