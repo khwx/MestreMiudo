@@ -74,7 +74,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
         numberOfQuestions: 5,
       });
       if (!data || data.quizQuestions.length === 0) {
-        setError('Não foi possível gerar perguntas. Tenta novamente mais tarde.');
+        setError('Não foram geradas perguntas. Por favor tenta novamente.');
         setQuizData(null);
       } else {
         setQuizData(data);
@@ -84,9 +84,10 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
         setIsAnswered(false);
         setSelectedAnswer(null);
       }
-    } catch (e) {
-      setError('Não foi possível carregar o quiz. Tenta novamente.');
-      console.error(e);
+    } catch (e: any) {
+      const errorMsg = e?.message || 'Erro desconhecido';
+      console.error('Quiz error:', errorMsg);
+      setError(`Erro: ${errorMsg}`);
       setQuizData(null);
     } finally {
       setLoading(false);
@@ -243,9 +244,11 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
 
   if (error || !quizData || quizData.quizQuestions.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh] text-center gap-4">
-        <p className="text-xl text-destructive">{error || 'Não foram encontradas perguntas.'}</p>
-        <Button onClick={handleRestart}>Tentar Novamente</Button>
+      <div className="flex flex-col items-center justify-center min-h-[50vh] text-center gap-4 p-6">
+        <div className="bg-muted/50 rounded-lg p-4 max-w-md">
+          <p className="text-lg text-muted-foreground">{error || 'Não foram encontradas perguntas.'}</p>
+        </div>
+        <Button onClick={handleRestart} variant="outline">Tentar Novamente</Button>
       </div>
     );
   }

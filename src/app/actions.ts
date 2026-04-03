@@ -263,28 +263,28 @@ async function cacheQuestions(gradeLevel: number, subject: string | undefined, q
 }
 
 // ============================================
-// Quiz Generation (Genkit with Groq fallback)
+// Quiz Generation (Groq first, then Genkit)
 // ============================================
 
 async function generateQuizWithFallback(input: any) {
-  // Try Genkit (Gemini) first
+  // Try Groq first (working!)
   try {
-    console.log('[QUIZ] Trying Genkit (Gemini)...');
-    const result = await personalizedLearningPath(input);
-    console.log('[QUIZ] Genkit succeeded!');
+    console.log('[QUIZ] Trying Groq first...');
+    const result = await generateQuizWithGroq(input);
+    console.log('[QUIZ] Groq succeeded!');
     return result;
-  } catch (genkitError) {
-    console.warn('[QUIZ] Genkit failed:', genkitError);
+  } catch (groqError) {
+    console.warn('[QUIZ] Groq failed:', groqError);
     
-    // Try Groq as fallback
+    // Try Genkit (Gemini) as fallback
     try {
-      console.log('[QUIZ] Trying Groq...');
-      const result = await generateQuizWithGroq(input);
-      console.log('[QUIZ] Groq succeeded!');
+      console.log('[QUIZ] Trying Genkit (Gemini)...');
+      const result = await personalizedLearningPath(input);
+      console.log('[QUIZ] Genkit succeeded!');
       return result;
-    } catch (groqError) {
-      console.error('[QUIZ] Groq also failed:', groqError);
-      throw new Error('Não foi possível gerar o quiz. Por favor tenta novamente.');
+    } catch (genkitError) {
+      console.error('[QUIZ] Genkit also failed:', genkitError);
+      throw new Error('Ambas as APIs falharam. Por favor tenta novamente mais tarde.');
     }
   }
 }
