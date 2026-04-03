@@ -1,7 +1,7 @@
 
 "use server"
 
-import { personalizedLearningPath } from "@/ai/flows/personalized-learning-paths";
+import { generateQuizWithFallback } from "@/ai/flows/quiz-fallback";
 import { generateStory } from "@/ai/flows/story-generator";
 import { textToSpeech } from "@/ai/flows/text-to-speech";
 import { StoryGenerationInputSchema } from "@/app/shared-schemas";
@@ -243,7 +243,8 @@ export async function generateQuiz(input: QuizInput) {
     performanceData,
   };
   
-  const quizOutput = await personalizedLearningPath(aiInput);
+  // Use fallback mechanism: tries Gemini first, then falls back to Groq if rate limited
+  const quizOutput = await generateQuizWithFallback(aiInput);
 
   // Cache the generated questions for future use (non-blocking)
   if (quizOutput?.quizQuestions) {
