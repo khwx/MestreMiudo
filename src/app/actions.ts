@@ -142,79 +142,156 @@ async function saveQuiz(input: SaveQuizInput) {
 // Question Caching (Supabase)
 // ============================================
 
-async function getCachedQuestions(gradeLevel: number, subject: string | undefined, count: number, studentId?: string) {
-  if (!isSupabaseConfigured() || !supabase) return null;
-
+async function getCachedQuestionsFromFile(gradeLevel: number, subject: string | undefined, count: number, studentId?: string) {
   try {
-    let query = supabase
-      .from('questions')
-      .select('*')
-      .eq('grade_level', gradeLevel);
+    const history = await getQuizHistoryFromFile();
+    if (history.length === 0) return null;
 
-    if (subject) {
-      query = query.eq('subject', subject);
-    }
-
-    // Get more questions than needed to allow filtering
-    const { data: allQuestions, error } = await query;
-    
-    if (error) throw error;
-    if (!allQuestions || allQuestions.length === 0) return null;
-
-    // If studentId provided, exclude questions they've seen recently (last 5 quizzes)
+    // Get recently shown questions for this student (last 5 quizzes)
     let excludeQuestions: string[] = [];
     if (studentId) {
-      try {
-        const { data: recentHistory } = await supabase
-          .from('quiz_history')
-          .select('quiz_data')
-          .eq('student_id', studentId)
-          .order('created_at', { ascending: false })
-          .limit(5);
-        
-        if (recentHistory) {
-          recentHistory.forEach((entry: any) => {
-            if (entry.quiz_data?.quizQuestions) {
-              entry.quiz_data.quizQuestions.forEach((q: any) => {
-                excludeQuestions.push(q.question);
-              });
-            }
+      const studentHistory = history
+        .filter(entry => entry.studentId === studentId)
+        .slice(0, 5);
+      
+      studentHistory.forEach(entry => {
+        if (entry.quiz?.quizQuestions) {
+          entry.quiz.quizQuestions.forEach((q: any) => {
+            excludeQuestions.push(q.question);
           });
         }
-      } catch (e) {
-        console.warn('Could not fetch recent history:', e);
+      });
+    }
+
+    // Collect all unique questions, excluding recently shown ones
+    const allQuestionsMap = new Map<string, any>();
+    
+    for (const entry of history) {
+      if (entry.quiz?.quizQuestions) {
+        for (const q of entry.quiz.quizQuestions) {
+          if (!excludeQuestions.includes(q.question) && !allQuestionsMap.has(q.question)) {
+            allQuestionsMap.set(q.question, q);
+          }
+        }
       }
     }
 
-    // Filter out recently shown questions
-    let availableQuestions = allQuestions.filter((q: any) => !excludeQuestions.includes(q.question));
+    let availableQuestions = Array.from(allQuestionsMap.values());
     
-    // If not enough remaining, use all questions
-    if (availableQuestions.length < count) {
-      availableQuestions = allQuestions;
+    if (availableQuestions.length === 0) {
+      // If all questions were excluded, use all questions anyway
+      for (const entry of history) {
+        if (entry.quiz?.quizQuestions) {
+          for (const q of entry.quiz.quizQuestions) {
+            if (!allQuestionsMap.has(q.question)) {
+              allQuestionsMap.set(q.question, q);
+            }
+          }
+        }
+      }
+      availableQuestions = Array.from(allQuestionsMap.values());
     }
+
+    if (availableQuestions.length === 0) return null;
 
     // Shuffle and pick
     const shuffled = availableQuestions.sort(() => Math.random() - 0.5);
     const selected = shuffled.slice(0, count);
 
-    if (selected.length < count) {
-      console.log(`[CACHE] Only ${selected.length} questions available (need ${count})`);
-    }
+    console.log(`[CACHE-FILE] Found ${selected.length} questions from file history (${availableQuestions.length} available)`);
 
     return {
       quizQuestions: selected.map((q: any) => ({
         question: q.question,
         options: q.options,
-        correctAnswer: q.correct_answer,
+        correctAnswer: q.correctAnswer,
         topic: q.topic,
-        imageUrl: q.image_url || undefined,
+        imageUrl: q.imageUrl || undefined,
       })),
     };
   } catch (error) {
-    console.error('Failed to get cached questions:', error);
+    console.error('Failed to get cached questions from file:', error);
     return null;
   }
+}
+
+async function getCachedQuestions(gradeLevel: number, subject: string | undefined, count: number, studentId?: string) {
+  // Try Supabase first
+  if (isSupabaseConfigured() && supabase) {
+    try {
+      let query = supabase
+        .from('questions')
+        .select('*')
+        .eq('grade_level', gradeLevel);
+
+      if (subject) {
+        query = query.eq('subject', subject);
+      }
+
+      // Get more questions than needed to allow filtering
+      const { data: allQuestions, error } = await query;
+      
+      if (error) throw error;
+      if (allQuestions && allQuestions.length > 0) {
+        // If studentId provided, exclude questions they've seen recently (last 5 quizzes)
+        let excludeQuestions: string[] = [];
+        if (studentId) {
+          try {
+            const { data: recentHistory } = await supabase
+              .from('quiz_history')
+              .select('quiz_data')
+              .eq('student_id', studentId)
+              .order('created_at', { ascending: false })
+              .limit(5);
+            
+            if (recentHistory) {
+              recentHistory.forEach((entry: any) => {
+                if (entry.quiz_data?.quizQuestions) {
+                  entry.quiz_data.quizQuestions.forEach((q: any) => {
+                    excludeQuestions.push(q.question);
+                  });
+                }
+              });
+            }
+          } catch (e) {
+            console.warn('Could not fetch recent history:', e);
+          }
+        }
+
+        // Filter out recently shown questions
+        let availableQuestions = allQuestions.filter((q: any) => !excludeQuestions.includes(q.question));
+        
+        // If not enough remaining, use all questions
+        if (availableQuestions.length < count) {
+          availableQuestions = allQuestions;
+        }
+
+        // Shuffle and pick
+        const shuffled = availableQuestions.sort(() => Math.random() - 0.5);
+        const selected = shuffled.slice(0, count);
+
+        if (selected.length < count) {
+          console.log(`[CACHE] Only ${selected.length} questions available (need ${count})`);
+        }
+
+        return {
+          quizQuestions: selected.map((q: any) => ({
+            question: q.question,
+            options: q.options,
+            correctAnswer: q.correct_answer,
+            topic: q.topic,
+            imageUrl: q.image_url || undefined,
+          })),
+        };
+      }
+    } catch (error) {
+      console.error('Failed to get cached questions from Supabase:', error);
+    }
+  }
+
+  // Fallback to file-based cache
+  console.log('[CACHE] Supabase not available or no questions, trying file-based cache...');
+  return getCachedQuestionsFromFile(gradeLevel, subject, count, studentId);
 }
 
 async function cacheQuestions(gradeLevel: number, subject: string | undefined, questions: any[]) {

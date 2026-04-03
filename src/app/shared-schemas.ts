@@ -37,7 +37,7 @@ export const PersonalizedLearningPathOutputSchema = z.object({
       options: z.array(z.string()).describe('The possible answer options.'),
       correctAnswer: z.string().describe('The correct answer to the question.'),
       topic: z.string().describe('The topic of the question'),
-      imageUrl: z.string().url().optional().describe('An optional image URL for the question.'),
+      imageUrl: z.string().url().nullish().describe('An optional image URL for the question.'),
     })
   ).describe('An array of quiz questions tailored to the student.'),
 });

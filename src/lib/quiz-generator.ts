@@ -38,7 +38,7 @@ CRITICAL RULES:
 4. NO boring or generic questions
 
 JSON format:
-[{"question":"text","options":["A","B","C","D"],"correctAnswer":"A","topic":"topic name","imageUrl":null}]`;
+[{"question":"text","options":["A","B","C","D"],"correctAnswer":"A","topic":"topic name"}]`;
 
 async function generateWithGemini(userPrompt: string): Promise<string | null> {
   const apiKey = process.env.GOOGLEAI_API_KEY;
@@ -76,6 +76,47 @@ async function generateWithGemini(userPrompt: string): Promise<string | null> {
     return text;
   } catch (error) {
     console.error('[GEMINI] Request failed:', error);
+    return null;
+  }
+}
+
+async function generateWithOpenRouter(userPrompt: string): Promise<string | null> {
+  const apiKey = process.env.OPENROUTER_API_KEY;
+  if (!apiKey) {
+    console.error('[OPENROUTER] No API key found');
+    return null;
+  }
+
+  try {
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+        'HTTP-Referer': 'https://mestremiudo.com',
+        'X-Title': 'MestreMiudo'
+      },
+      body: JSON.stringify({
+        model: 'meta-llama/llama-3.3-70b-instruct',
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'user', content: userPrompt }
+        ],
+        temperature: 0.8,
+        max_tokens: 4096,
+      })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('[OPENROUTER] API error:', response.status, errorText);
+      return null;
+    }
+
+    const data = await response.json();
+    return data.choices?.[0]?.message?.content || null;
+  } catch (error) {
+    console.error('[OPENROUTER] Request failed:', error);
     return null;
   }
 }
@@ -182,19 +223,26 @@ export async function generateQuizDirect(
   
   const prompt = buildPrompt(input);
   
-  // Try Groq first (working!)
-  console.log('[QUIZ] Trying Groq...');
-  let content = await generateWithGroq(prompt);
+  // Try OpenRouter first (best limits)
+  console.log('[QUIZ] Trying OpenRouter...');
+  let content = await generateWithOpenRouter(prompt);
+  
+  if (!content) {
+    console.log('[QUIZ] OpenRouter failed, trying Groq...');
+    content = await generateWithGroq(prompt);
+  } else {
+    console.log('[QUIZ] OpenRouter succeeded!');
+  }
   
   if (!content) {
     console.log('[QUIZ] Groq failed, trying Gemini...');
     content = await generateWithGemini(prompt);
-  } else {
+  } else if (content) {
     console.log('[QUIZ] Groq succeeded!');
   }
   
   if (!content) {
-    console.error('[QUIZ] Both APIs failed');
+    console.error('[QUIZ] All APIs failed');
     throw new Error('Não foi possível gerar o quiz. Por favor tenta novamente.');
   }
   
