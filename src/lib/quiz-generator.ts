@@ -43,13 +43,14 @@ JSON format:
 async function generateWithGemini(userPrompt: string): Promise<string | null> {
   const apiKey = process.env.GOOGLEAI_API_KEY;
   if (!apiKey) {
-    console.error('[GEMINI] No API key found');
+    console.error('[GEMINI] No GOOGLEAI_API_KEY found');
     return null;
   }
 
   try {
+    console.log('[GEMINI] Calling API with gemini-1.5-flash...');
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -70,7 +71,9 @@ async function generateWithGemini(userPrompt: string): Promise<string | null> {
     }
 
     const data = await response.json();
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || null;
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || null;
+    console.log('[GEMINI] Response received:', text?.substring(0, 100) || 'empty');
+    return text;
   } catch (error) {
     console.error('[GEMINI] Request failed:', error);
     return null;
@@ -176,20 +179,25 @@ export async function generateQuizDirect(
 ): Promise<PersonalizedLearningPathOutput> {
   console.log('[QUIZ] Starting quiz generation...');
   console.log('[QUIZ] Input:', JSON.stringify(input));
+  console.log('[QUIZ] GOOGLEAI_API_KEY exists:', !!process.env.GOOGLEAI_API_KEY);
+  console.log('[QUIZ] GROQ_API_KEY exists:', !!process.env.GROQ_API_KEY);
   
   const prompt = buildPrompt(input);
+  console.log('[QUIZ] Prompt built, length:', prompt.length);
   
   // Try Gemini first
   console.log('[QUIZ] Trying Gemini...');
   let content = await generateWithGemini(prompt);
   
   if (!content) {
-    console.log('[QUIZ] Gemini failed, trying Groq...');
+    console.log('[QUIZ] Gemini failed or returned empty, trying Groq...');
     content = await generateWithGroq(prompt);
+  } else {
+    console.log('[QUIZ] Gemini succeeded!');
   }
   
   if (!content) {
-    console.error('[QUIZ] Both APIs failed');
+    console.error('[QUIZ] Both APIs failed or returned empty');
     throw new Error('Não foi possível gerar o quiz. Por favor tenta novamente.');
   }
   
