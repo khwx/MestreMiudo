@@ -11,6 +11,8 @@ import path from 'path';
 import type { QuizInput, SaveQuizInput, QuizResultEntry, Answer, SpeechMark, StoryGenerationInput } from './shared-schemas';
 import { QuizResultSchema, SaveQuizInputSchema } from "./shared-schemas";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
+import { personalizedLearningPath } from "@/ai/flows/personalized-learning-paths";
+import { generateQuizWithGroq } from "@/ai/flows/groq-fallback";
 
 
 const historyFilePath = path.join(process.cwd(), 'quiz-history.json');
@@ -261,8 +263,31 @@ async function cacheQuestions(gradeLevel: number, subject: string | undefined, q
 }
 
 // ============================================
-// Quiz Generation (AI first, cache as fallback)
+// Quiz Generation (Genkit with Groq fallback)
 // ============================================
+
+async function generateQuizWithFallback(input: any) {
+  // Try Genkit (Gemini) first
+  try {
+    console.log('[QUIZ] Trying Genkit (Gemini)...');
+    const result = await personalizedLearningPath(input);
+    console.log('[QUIZ] Genkit succeeded!');
+    return result;
+  } catch (genkitError) {
+    console.warn('[QUIZ] Genkit failed:', genkitError);
+    
+    // Try Groq as fallback
+    try {
+      console.log('[QUIZ] Trying Groq...');
+      const result = await generateQuizWithGroq(input);
+      console.log('[QUIZ] Groq succeeded!');
+      return result;
+    } catch (groqError) {
+      console.error('[QUIZ] Groq also failed:', groqError);
+      throw new Error('Não foi possível gerar o quiz. Por favor tenta novamente.');
+    }
+  }
+}
 
 export async function generateQuiz(input: QuizInput) {
   const validatedInput = z.object({
@@ -274,19 +299,21 @@ export async function generateQuiz(input: QuizInput) {
   
   const resolvedSubject = validatedInput.subject === 'Misto' ? undefined : validatedInput.subject;
   
-  console.log(`[AI FIRST] Generating quiz for grade ${validatedInput.gradeLevel}, subject: ${resolvedSubject || 'Misto'}`);
+  console.log(`[QUIZ] Generating quiz for grade ${validatedInput.gradeLevel}, subject: ${resolvedSubject || 'Misto'}`);
 
-  // 1. Try AI first (Gemini → Groq)
+  // 1. Try AI (Genkit → Groq)
   try {
     const performanceData = await getPerformanceData(validatedInput.studentId, resolvedSubject);
 
     const aiInput = {
-      ...validatedInput,
+      studentId: validatedInput.studentId,
+      gradeLevel: validatedInput.gradeLevel,
       subject: resolvedSubject,
       performanceData,
+      numberOfQuestions: validatedInput.numberOfQuestions,
     };
     
-    const quizOutput = await generateQuizDirect(aiInput);
+    const quizOutput = await generateQuizWithFallback(aiInput);
 
     // Cache the generated questions for future use (non-blocking)
     if (quizOutput?.quizQuestions) {
@@ -294,13 +321,13 @@ export async function generateQuiz(input: QuizInput) {
         .catch(err => console.error('Background caching failed:', err));
     }
     
-    console.log(`[AI SUCCESS] Quiz generated with ${quizOutput.quizQuestions.length} questions`);
+    console.log(`[QUIZ] Success! Generated ${quizOutput.quizQuestions.length} questions`);
     return quizOutput;
     
   } catch (aiError) {
-    console.warn(`[AI FAILED] Falling back to cache: ${aiError}`);
+    console.warn(`[QUIZ] AI failed, trying cache...`);
     
-    // 2. If AI fails, try cache as fallback (passing studentId to exclude recent questions)
+    // 2. If AI fails, try cache as fallback
     const cached = await getCachedQuestions(
       validatedInput.gradeLevel,
       resolvedSubject,
@@ -309,12 +336,12 @@ export async function generateQuiz(input: QuizInput) {
     );
 
     if (cached) {
-      console.log(`[CACHE FALLBACK] Serving ${cached.quizQuestions.length} cached questions`);
+      console.log(`[QUIZ] Cache fallback: ${cached.quizQuestions.length} questions`);
       return cached;
     }
 
     // 3. If no cache either, throw error
-    console.error(`[ALL FAILED] No AI and no cache available`);
+    console.error(`[QUIZ] All options failed`);
     throw new Error('Serviço temporariamente indisponível. Por favor tenta novamente mais tarde.');
   }
 }
