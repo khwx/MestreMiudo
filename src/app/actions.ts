@@ -208,7 +208,7 @@ async function cacheQuestions(gradeLevel: number, subject: string | undefined, q
 }
 
 // ============================================
-// Quiz Generation (with caching)
+// Quiz Generation (AI first, cache as fallback)
 // ============================================
 
 export async function generateQuiz(input: QuizInput) {
@@ -221,38 +221,48 @@ export async function generateQuiz(input: QuizInput) {
   
   const resolvedSubject = validatedInput.subject === 'Misto' ? undefined : validatedInput.subject;
   
-  // Try to get questions from cache first
-  const cached = await getCachedQuestions(
-    validatedInput.gradeLevel,
-    resolvedSubject,
-    validatedInput.numberOfQuestions
-  );
+  console.log(`[AI FIRST] Generating quiz for grade ${validatedInput.gradeLevel}, subject: ${resolvedSubject || 'Misto'}`);
 
-  if (cached) {
-    console.log(`[Cache HIT] Serving ${validatedInput.numberOfQuestions} cached questions for grade ${validatedInput.gradeLevel}, subject: ${resolvedSubject || 'Misto'}`);
-    return cached;
-  }
+  // 1. Try AI first (Gemini → Groq)
+  try {
+    const performanceData = await getPerformanceData(validatedInput.studentId, resolvedSubject);
 
-  console.log(`[Cache MISS] Generating new questions via AI for grade ${validatedInput.gradeLevel}, subject: ${resolvedSubject || 'Misto'}`);
-
-  const performanceData = await getPerformanceData(validatedInput.studentId, resolvedSubject);
-
-  const aiInput = {
-    ...validatedInput,
-    subject: resolvedSubject,
-    performanceData,
-  };
-  
-  // Use fallback mechanism: tries Gemini first, then falls back to Groq if rate limited
-  const quizOutput = await generateQuizWithFallback(aiInput);
-
-  // Cache the generated questions for future use (non-blocking)
-  if (quizOutput?.quizQuestions) {
-    cacheQuestions(validatedInput.gradeLevel, resolvedSubject, quizOutput.quizQuestions)
-      .catch(err => console.error('Background caching failed:', err));
-  }
+    const aiInput = {
+      ...validatedInput,
+      subject: resolvedSubject,
+      performanceData,
+    };
     
-  return quizOutput;
+    const quizOutput = await generateQuizWithFallback(aiInput);
+
+    // Cache the generated questions for future use (non-blocking)
+    if (quizOutput?.quizQuestions) {
+      cacheQuestions(validatedInput.gradeLevel, resolvedSubject, quizOutput.quizQuestions)
+        .catch(err => console.error('Background caching failed:', err));
+    }
+    
+    console.log(`[AI SUCCESS] Quiz generated with ${quizOutput.quizQuestions.length} questions`);
+    return quizOutput;
+    
+  } catch (aiError) {
+    console.warn(`[AI FAILED] Falling back to cache: ${aiError}`);
+    
+    // 2. If AI fails, try cache as fallback
+    const cached = await getCachedQuestions(
+      validatedInput.gradeLevel,
+      resolvedSubject,
+      validatedInput.numberOfQuestions
+    );
+
+    if (cached) {
+      console.log(`[CACHE FALLBACK] Serving ${cached.quizQuestions.length} cached questions`);
+      return cached;
+    }
+
+    // 3. If no cache either, throw error
+    console.error(`[ALL FAILED] No AI and no cache available`);
+    throw new Error('Serviço temporariamente indisponível. Por favor tenta novamente mais tarde.');
+  }
 }
 
 export async function saveQuizResults(input: SaveQuizInput) {
