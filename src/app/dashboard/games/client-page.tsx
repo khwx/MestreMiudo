@@ -6,12 +6,22 @@ import { TicTacToe } from '@/components/TicTacToe';
 import { HangmanGame } from '@/components/HangmanGame';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
 import { Gamepad2, Brain, Skull } from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 
 export default function GamesClientPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const name = searchParams.get('name') || '';
+  const grade = searchParams.get('grade') || '';
+
   return (
     <div className="flex flex-col items-center justify-center">
+      <Button variant="ghost" size="sm" onClick={() => router.push(`/dashboard?name=${name}&grade=${grade}`)} className="gap-2 self-start mb-4">
+        ← Voltar ao Dashboard
+      </Button>
       <h1 className="text-4xl font-headline font-bold text-primary mb-8">Salão de Jogos</h1>
       <Tabs defaultValue="memory" className="w-full max-w-4xl">
         <TabsList className="grid w-full grid-cols-3">

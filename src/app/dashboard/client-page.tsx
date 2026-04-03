@@ -22,11 +22,11 @@ const surpriseChallenge = {
 };
 
 const storyCreator = {
-    name: 'Oficina de Histórias', icon: BookHeart, color: 'text-purple-600', bgColor: 'bg-purple-500/10'
+    name: 'Oficina de Histórias', icon: BookHeart, color: 'text-[hsl(var(--chart-4))]', bgColor: 'bg-[hsl(var(--chart-4))]/10'
 };
 
 const gamesRoom = {
-    name: 'Salão de Jogos', icon: Gamepad2, color: 'text-green-700', bgColor: 'bg-green-500/10'
+    name: 'Salão de Jogos', icon: Gamepad2, color: 'text-[hsl(var(--chart-3))]', bgColor: 'bg-[hsl(var(--chart-3))]/10'
 };
 
 const levelThresholds = [
@@ -145,7 +145,7 @@ export default function DashboardClientPage() {
             </Link>
           ))}
           <Link key={surpriseChallenge.name} href={`/quiz/${surpriseChallenge.slug}?name=${name}&grade=${grade}`} passHref>
-              <Card className="hover:shadow_xl hover:border-accent transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col">
+              <Card className="hover:shadow-xl hover:border-accent transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-2xl font-bold">{surpriseChallenge.name}</CardTitle>
                   <div className={`p-3 rounded-full ${surpriseChallenge.bgColor}`}>
@@ -161,30 +161,30 @@ export default function DashboardClientPage() {
       </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
              <Link href={`/dashboard/story-creator?name=${name}&grade=${grade}`} passHref>
-              <Card className="hover:shadow-xl hover:border-purple-500 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-purple-500/10">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-2xl font-bold text-purple-700">{storyCreator.name}</CardTitle>
-                  <div className={`p-3 rounded-full ${storyCreator.bgColor}`}>
-                    <storyCreator.icon className={`h-8 w-8 ${storyCreator.color}`} />
-                  </div>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <p className="text-purple-600">Usa a tua imaginação e cria uma história única!</p>
-                </CardContent>
-              </Card>
+               <Card className="hover:shadow-xl hover:border-[hsl(var(--chart-4))] transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-[hsl(var(--chart-4))]/10">
+                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                   <CardTitle className="text-2xl font-bold text-[hsl(var(--chart-4))]">{storyCreator.name}</CardTitle>
+                   <div className={`p-3 rounded-full ${storyCreator.bgColor}`}>
+                     <storyCreator.icon className={`h-8 w-8 ${storyCreator.color}`} />
+                   </div>
+                 </CardHeader>
+                 <CardContent className="flex-grow">
+                   <p className="text-[hsl(var(--chart-4))]">Usa a tua imaginação e cria uma história única!</p>
+                 </CardContent>
+               </Card>
             </Link>
             <Link href={`/dashboard/games?name=${name}&grade=${grade}`} passHref>
-              <Card className="hover:shadow-xl hover:border-green-500 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-green-500/10">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-2xl font-bold text-green-700">{gamesRoom.name}</CardTitle>
-                  <div className={`p-3 rounded-full ${gamesRoom.bgColor}`}>
-                    <gamesRoom.icon className={`h-8 w-8 ${gamesRoom.color}`} />
-                  </div>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <p className="text-green-600">Faz uma pausa e diverte-te a jogar!</p>
-                </CardContent>
-              </Card>
+               <Card className="hover:shadow-xl hover:border-[hsl(var(--chart-3))] transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-[hsl(var(--chart-3))]/10">
+                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                   <CardTitle className="text-2xl font-bold text-[hsl(var(--chart-3))]">{gamesRoom.name}</CardTitle>
+                   <div className={`p-3 rounded-full ${gamesRoom.bgColor}`}>
+                     <gamesRoom.icon className={`h-8 w-8 ${gamesRoom.color}`} />
+                   </div>
+                 </CardHeader>
+                 <CardContent className="flex-grow">
+                   <p className="text-[hsl(var(--chart-3))]">Faz uma pausa e diverte-te a jogar!</p>
+                 </CardContent>
+               </Card>
             </Link>
         </div>
     </div>

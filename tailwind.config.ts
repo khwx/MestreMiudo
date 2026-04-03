@@ -18,8 +18,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['PT Sans', 'sans-serif'],
-        headline: ['Playfair Display', 'serif'],
+        body: ['Nunito', 'sans-serif'],
+        headline: ['Fredoka', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
@@ -123,4 +123,4 @@ export default {
     },
   ],
 } satisfies Config;
-// Actualização de configuração para limpeza de metadados no GitHub
+// Actualizaï¿½ï¿½o de configuraï¿½ï¿½o para limpeza de metadados no GitHub

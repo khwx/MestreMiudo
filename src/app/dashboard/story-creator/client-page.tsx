@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -236,6 +236,8 @@ const StoryDisplay = ({ result }: { result: StoryResult }) => {
 
 export default function StoryCreatorClientPage() {
     const searchParams = useSearchParams();
+    const router = useRouter();
+    const name = searchParams.get('name') || '';
     const grade = searchParams.get('grade') || '1';
 
     const [keywords, setKeywords] = useState('');
@@ -297,6 +299,9 @@ export default function StoryCreatorClientPage() {
     
     return (
         <div className="w-full max-w-4xl mx-auto space-y-8 animate-in fade-in-50">
+            <Button variant="ghost" size="sm" onClick={() => router.push(`/dashboard?name=${name}&grade=${grade}`)} className="gap-2 self-start">
+                ← Voltar ao Dashboard
+            </Button>
             <div className="text-center">
                 <BookHeart className="h-16 w-16 text-primary mx-auto mb-4" />
                 <h1 className="text-4xl font-headline font-bold">Oficina de Histórias</h1>

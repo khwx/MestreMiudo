@@ -48,7 +48,7 @@ const Keyboard = ({ activeLetters, inactiveLetters, onSelect, disabled }: {
                         size="lg"
                         className={cn(
                             'text-xl uppercase font-bold',
-                            isActive && 'bg-green-500 text-white',
+                            isActive && 'bg-[hsl(var(--chart-3))] text-white',
                             isInactive && 'bg-destructive text-white opacity-50',
                         )}
                         onClick={() => onSelect(key)}
@@ -167,7 +167,7 @@ export function HangmanGame() {
                     </div>
                     
                     {showHint && (
-                        <div className="text-center bg-yellow-100 border border-yellow-300 text-yellow-800 p-2 rounded-lg">
+                        <div className="text-center bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-300 dark:border-yellow-700 text-yellow-800 dark:text-yellow-200 p-2 rounded-lg">
                             <p><span className="font-bold">Dica:</span> {hint}</p>
                         </div>
                     )}

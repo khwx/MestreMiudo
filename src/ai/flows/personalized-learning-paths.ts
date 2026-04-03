@@ -80,10 +80,24 @@ const personalizedLearningPathFlow = ai.defineFlow(
 
     while (retries > 0) {
       try {
-        const flowInput = {
-            ...input,
-            performanceData: input.performanceData ? JSON.stringify(input.performanceData, null, 2) : undefined,
-        };
+            // Handle case where performanceData might come back as stringified JSON
+            let parsedPerformanceData = input.performanceData;
+            if (typeof input.performanceData === 'string') {
+              try {
+                parsedPerformanceData = JSON.parse(input.performanceData);
+              } catch (e) {
+                console.warn('Failed to parse performanceData as JSON:', e);
+                parsedPerformanceData = null; // fallback to null on parse error
+              }
+            }
+            
+            const flowInput = {
+              studentId: input.studentId,
+              gradeLevel: input.gradeLevel,
+              numberOfQuestions: input.numberOfQuestions,
+              subject: input.subject,
+              performanceData: parsedPerformanceData,
+            };
         
         // Get raw output without immediate validation
         const {output} = await prompt(flowInput);

@@ -13,18 +13,18 @@ type Difficulty = 'easy' | 'medium' | 'hard' | null;
 const Square = ({ value, onSquareClick, isWinning }: { value: Player | null, onSquareClick: () => void, isWinning: boolean }) => (
     <button 
         className={cn(
-            "flex items-center justify-center w-24 h-24 text-4xl font-bold border-4 rounded-lg transition-all duration-300",
+            "flex items-center justify-center w-16 h-16 md:w-24 md:h-24 text-3xl md:text-4xl font-bold border-4 rounded-lg transition-all duration-300",
             isWinning ? 'bg-green-300 border-green-500 scale-110' : 'bg-card border-border hover:bg-muted',
         )}
         onClick={onSquareClick}
         disabled={!!value}
     >
-        {value === 'X' && <X className="h-12 w-12 text-blue-500" />}
-        {value === 'O' && <Circle className="h-12 w-12 text-red-500" />}
+        {value === 'X' && <X className="h-8 w-8 md:h-12 md:w-12 text-blue-500" />}
+        {value === 'O' && <Circle className="h-8 w-8 md:h-12 md:w-12 text-red-500" />}
     </button>
 );
 
-const calculateWinner = (squares: (Player | null)[]) => {
+const calculateWinner = (squares: (Player | null)[]): { winner: Player | null; line: number[] } => {
   const lines = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
     [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
@@ -197,9 +197,9 @@ export function TicTacToe() {
     return (
         <div className="flex flex-col items-center gap-4 animate-in fade-in-50">
             <h2 className="text-2xl font-bold">Escolhe o nível de dificuldade</h2>
-            <Button onClick={() => setDifficulty('easy')} size="lg" className="w-64 bg-green-600 hover:bg-green-700">Fácil</Button>
-            <Button onClick={() => setDifficulty('medium')} size="lg" className="w-64 bg-yellow-500 hover:bg-yellow-600">Médio</Button>
-            <Button onClick={() => setDifficulty('hard')} size="lg" className="w-64 bg-red-600 hover:bg-red-700">Difícil</Button>
+            <Button onClick={() => setDifficulty('easy')} size="lg" className="w-64 bg-[hsl(var(--chart-3))] hover:bg-[hsl(var(--chart-3))]/90 text-white">Fácil</Button>
+            <Button onClick={() => setDifficulty('medium')} size="lg" className="w-64 bg-[hsl(var(--accent))] hover:bg-[hsl(var(--accent))]/90 text-white">Médio</Button>
+            <Button onClick={() => setDifficulty('hard')} size="lg" className="w-64 bg-destructive hover:bg-destructive/90 text-white">Difícil</Button>
             <Button onClick={handleRestart} variant="link" className="mt-4">Voltar</Button>
         </div>
     )
@@ -214,12 +214,12 @@ export function TicTacToe() {
       </div>
       <div className="grid grid-cols-3 gap-2 p-2 bg-background rounded-lg">
         {squares.map((square, i) => (
-          <Square 
-            key={i} 
-            value={square} 
-            onSquareClick={() => handleClick(i)}
-            isWinning={winningLine.includes(i)}
-          />
+            <Square 
+              key={i} 
+              value={square} 
+              onSquareClick={() => handleClick(i)}
+              isWinning={winningLine.includes(Number(i))}
+            />
         ))}
       </div>
       {(winner || isDraw) && (

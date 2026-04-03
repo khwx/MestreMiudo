@@ -1,10 +1,12 @@
 "use client"
 
+import { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { User, BrainCircuit, History } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { DarkModeToggle } from '@/components/DarkModeToggle';
 
 export default function DashboardLayout({
   children,
@@ -31,6 +33,9 @@ export default function DashboardLayout({
                     Histórico
                 </Button>
             </Link>
+            <div className="flex items-center gap-2">
+              <DarkModeToggle />
+            </div>
             <div className="text-right hidden sm:block">
               <p className="font-bold text-lg">{name}</p>
             </div>
@@ -44,7 +49,9 @@ export default function DashboardLayout({
         </div>
       </header>
       <main className="container mx-auto p-4 md:p-8 flex-1">
-        {children}
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-background p-4 animate-pulse">Carregando...</div>}>
+          {children}
+        </Suspense>
       </main>
     </div>
   );

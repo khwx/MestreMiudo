@@ -3,7 +3,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { generateQuiz, saveQuizResults } from '@/app/actions';
-import type { PersonalizedLearningPathOutput } from '@/ai/schemas';
+import type { PersonalizedLearningPathOutput } from '@/app/shared-schemas';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -12,6 +12,8 @@ import { cn } from '@/lib/utils';
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { useSound } from '@/lib/sounds';
+import confetti from 'canvas-confetti';
 
 type QuizProps = {
   studentId: string;
@@ -46,6 +48,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
   const quizStarted = useRef(false);
+  const { playSuccess, playError, playLevelUp } = useSound();
   
   const { toast } = useToast();
   const router = useRouter();
@@ -130,6 +133,15 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     
     if (isCorrect) {
       setScore(s => s + 1);
+      playSuccess();
+      confetti({
+        particleCount: 50,
+        spread: 60,
+        origin: { y: 0.6 },
+        colors: ['#00d4ff', '#ff6b6b', '#feca57', '#48dbfb']
+      });
+    } else {
+      playError();
     }
 
     setAnswers(prev => [...prev, {
@@ -153,6 +165,39 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
             answers,
             score,
         });
+        
+        const percentage = (score / quizData.quizQuestions.length) * 100;
+        if (percentage >= 80) {
+          playLevelUp();
+          const duration = 2000;
+          const animationEnd = Date.now() + duration;
+          const colors = ['#00d4ff', '#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3'];
+          
+          const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
+          
+          const interval = setInterval(() => {
+            const timeLeft = animationEnd - Date.now();
+            if (timeLeft <= 0) {
+              clearInterval(interval);
+              return;
+            }
+            
+            confetti({
+              particleCount: 10,
+              angle: 60,
+              spread: 55,
+              origin: { x: 0, y: 0.7 },
+              colors: colors
+            });
+            confetti({
+              particleCount: 10,
+              angle: 120,
+              spread: 55,
+              origin: { x: 1, y: 0.7 },
+              colors: colors
+            });
+          }, 250);
+        }
     } catch (error) {
         console.error("Failed to save quiz results:", error);
         toast({
@@ -161,7 +206,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
             variant: "destructive",
         });
     }
-  }, [quizData, studentId, gradeLevel, subject, answers, score, toast]);
+  }, [quizData, studentId, gradeLevel, subject, answers, score, toast, playLevelUp]);
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex >= (quizData?.quizQuestions.length ?? 0) - 1) {
@@ -210,7 +255,11 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
 
   if (isQuizFinished) {
     return (
-      <Card className="text-center shadow-lg animate-in fade-in-50">
+      <div className="space-y-4">
+        <Button variant="ghost" size="sm" onClick={() => router.push(`/dashboard?name=${studentId}&grade=${gradeLevel}`)} className="gap-2">
+          ← Voltar ao Dashboard
+        </Button>
+        <Card className="text-center shadow-lg animate-in fade-in-50">
         <CardHeader>
           <Trophy className="h-20 w-20 text-accent mx-auto" />
           <CardTitle className="text-4xl font-headline mt-4">Desafio Concluído!</CardTitle>
@@ -227,13 +276,18 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
           </div>
         </CardContent>
       </Card>
+      </div>
     );
   }
 
   const currentQuestion = quizData.quizQuestions[currentQuestionIndex];
 
   return (
-    <Card className="w-full shadow-lg animate-in fade-in-50">
+    <div className="space-y-4">
+      <Button variant="ghost" size="sm" onClick={() => router.push(`/dashboard?name=${studentId}&grade=${gradeLevel}`)} className="gap-2">
+        ← Voltar ao Dashboard
+      </Button>
+      <Card className="w-full shadow-lg animate-in fade-in-50">
       <CardHeader>
         <div className="flex justify-between items-center mb-4">
           <CardTitle className="text-2xl font-bold">{title}</CardTitle>
@@ -264,7 +318,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
           </Button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {currentQuestion.options.map((option, i) => {
+          {currentQuestion.options.map((option: string, i: number) => {
             const isCorrect = option === currentQuestion.correctAnswer;
             const isSelected = option === selectedAnswer;
             
@@ -319,6 +373,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
         </CardFooter>
       )}
     </Card>
+    </div>
   );
 }
 

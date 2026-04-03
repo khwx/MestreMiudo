@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { Award, RotateCw, Star, Heart, Cloud, Anchor, Bug, Cake, Sun, Moon } from 'lucide-react';
+import confetti from 'canvas-confetti';
+import { useSound } from '@/lib/sounds';
 
 const icons = [
     { icon: Star, color: 'text-yellow-400' },
@@ -32,7 +34,7 @@ const Card = ({ card, onCardClick, index }: { card: CardType, onCardClick: (inde
     return (
         <div
             className={cn(
-                "w-24 h-24 rounded-lg flex items-center justify-center cursor-pointer transition-transform duration-500 transform-style-preserve-3d",
+                "w-16 h-16 md:w-24 md:h-24 rounded-lg flex items-center justify-center cursor-pointer transition-transform duration-500 transform-style-preserve-3d",
                 card.isFlipped ? 'transform-rotate-y-180' : ''
             )}
             onClick={() => onCardClick(index)}
@@ -57,8 +59,21 @@ export function MemoryGame() {
     const [flippedCards, setFlippedCards] = useState<number[]>([]);
     const [moves, setMoves] = useState(0);
     const [isChecking, setIsChecking] = useState(false);
+    const { playSuccess, playError, playGameWin } = useSound();
 
     const allMatched = board.every(card => card.isMatched);
+
+    useEffect(() => {
+        if (allMatched && moves > 0) {
+            playGameWin();
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#00d4ff', '#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3']
+            });
+        }
+    }, [allMatched, moves, playGameWin]);
 
     useEffect(() => {
         if (flippedCards.length === 2) {
@@ -69,7 +84,7 @@ export function MemoryGame() {
             const secondCard = board[secondIndex];
 
             if (firstCard.icon === secondCard.icon) {
-                // It's a match
+                playSuccess();
                 setBoard(prevBoard => {
                     const newBoard = [...prevBoard];
                     newBoard[firstIndex].isMatched = true;
@@ -79,6 +94,7 @@ export function MemoryGame() {
                 setFlippedCards([]);
                 setIsChecking(false);
             } else {
+                playError();
                 // Not a match, flip back after a delay
                 setTimeout(() => {
                     setBoard(prevBoard => {
@@ -129,7 +145,7 @@ export function MemoryGame() {
             ) : (
                 <>
                     <p className="text-2xl font-bold">Jogadas: {moves}</p>
-                    <div className="grid grid-cols-4 gap-4 perspective-[1000px]">
+                    <div className="grid grid-cols-4 gap-2 md:gap-4 perspective-[1000px]">
                         {board.map((card, i) => (
                             <Card
                                 key={i}
