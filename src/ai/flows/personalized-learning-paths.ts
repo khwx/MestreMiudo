@@ -12,7 +12,6 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {searchImage} from '@/ai/tools/image-search';
 import type { PersonalizedLearningPathInput, PersonalizedLearningPathOutput } from '@/app/shared-schemas';
 import { PersonalizedLearningPathInputSchema, PersonalizedLearningPathOutputSchema } from '@/app/shared-schemas';
 
@@ -27,7 +26,6 @@ const prompt = ai.definePrompt({
   name: 'personalizedLearningPathPrompt',
   input: {schema: PersonalizedLearningPathInputSchema},
   output: {schema: PersonalizedLearningPathOutputSchema},
-  tools: [searchImage],
   prompt: `You are an expert educator creating quizzes for Portuguese elementary students (1º ao 4º ano).
 
 IMPORTANT: All content MUST be in European Portuguese (Português de Portugal).
@@ -68,9 +66,7 @@ Rules:
 - Use European Portuguese ONLY
 - Age-appropriate difficulty
 - Engaging and surprising questions
-
-For Matemática, you MAY use searchImage tool for illustrative images.
-For Estudo do Meio, you MAY use searchImage for photos appropriate for children.
+- NO images required, text only
 
 Output format:
 [
