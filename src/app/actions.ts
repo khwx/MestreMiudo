@@ -1,14 +1,13 @@
 
 "use server"
 
-import { generateQuizWithFallback } from "@/ai/flows/quiz-fallback";
+import { generateQuizDirect } from "@/lib/quiz-generator";
 import { generateStory } from "@/ai/flows/story-generator";
 import { textToSpeech } from "@/ai/flows/text-to-speech";
 import { StoryGenerationInputSchema } from "@/app/shared-schemas";
 import { z } from "zod";
 import fs from 'fs/promises';
 import path from 'path';
-import { ai } from "@/ai/genkit";
 import type { QuizInput, SaveQuizInput, QuizResultEntry, Answer, SpeechMark, StoryGenerationInput } from './shared-schemas';
 import { QuizResultSchema, SaveQuizInputSchema } from "./shared-schemas";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
@@ -287,7 +286,7 @@ export async function generateQuiz(input: QuizInput) {
       performanceData,
     };
     
-    const quizOutput = await generateQuizWithFallback(aiInput);
+    const quizOutput = await generateQuizDirect(aiInput);
 
     // Cache the generated questions for future use (non-blocking)
     if (quizOutput?.quizQuestions) {
