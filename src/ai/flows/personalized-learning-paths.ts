@@ -28,44 +28,60 @@ const prompt = ai.definePrompt({
   input: {schema: PersonalizedLearningPathInputSchema},
   output: {schema: PersonalizedLearningPathOutputSchema},
   tools: [searchImage],
-  prompt: `You are an expert educator specializing in creating personalized quizzes for elementary school students in Portugal. The current year is 2024.
+  prompt: `You are an expert educator creating quizzes for Portuguese elementary students (1º ao 4º ano).
 
-IMPORTANT: All questions and answers must be in European Portuguese (Português de Portugal). Do not use Brazilian Portuguese terms. For example, use "põe ovos" instead of "bota ovos".
+IMPORTANT: All content MUST be in European Portuguese (Português de Portugal).
 
-You will generate a quiz with {{{numberOfQuestions}}} questions tailored to the student's grade level ({{{gradeLevel}}}).
+CURRICULUM TOPICS BY SUBJECT AND YEAR:
+
+Português 1º ano: Consciência fonológica, Rimas, Leitura, Escrita, Singular/Plural, Masculino/Feminino, Artigos, Ditongos, Vogais/Consoantes
+Português 2º ano: Leitura fluente, Substantivos, Adjetivos, Verbos, Pronomes, Sinónimos/Antónimos, Ortografia (r/rr, s/ss)
+Português 3º ano: Tipos de frase, Sujeito/Predicado, Advérbios, Pontuação, Acentuação, Conjugação verbal
+Português 4º ano: Análise sintática, Frase composta, Coordenação, Subordinação, Voz ativa/passiva, Ortografia avançada
+
+Matemática 1º ano: Números 0-100, Contagem, Adição/Subtração, Maior/Menor, Formas geométricas, Dias da semana, Moedas
+Matemática 2º ano: Números até 200, Centena, Tabuadas, Metade/Quarto, Polígonos, Medidas, Relógio
+Matemática 3º ano: Números até 1000, Frações, Ângulos, Perímetro, Medidas de tempo, Média/Moda
+Matemática 4º ano: Números até 10000, Decimais, Percentagens, Áreas, Volumes, Triângulos/Quadriláteros, Escalas
+
+Estudo do Meio 1º ano: Identificação pessoal, Família, Corpo humano, Órgãos dos sentidos, Alimentação, Higiene
+Estudo do Meio 2º ano: Plantas, Animais, Ciclo de vida, Habitat, Reciclagem, Clima
+Estudo do Meio 3º ano: Sistemas corporais, Digestão, Respiração, Circulação, Cadeia alimentar, Energia
+Estudo do Meio 4º ano: Portugal/Europa, Sistemas corporais, Ambiente, Energia, Meios de comunicação, Cidadania
+
+You will generate a quiz with {{{numberOfQuestions}}} questions.
 
 {{#if subject}}
-The quiz will be for the subject: {{{subject}}}.
+Subject: {{{subject}}}
 {{else}}
-This is a "Surprise Quiz", so you should generate questions from a mix of all available subjects: 'Português', 'Matemática', and 'Estudo do Meio'. Ensure a good variety between the subjects.
+Subjects: Mix of Português, Matemática, and Estudo do Meio
 {{/if}}
 
+Grade: {{{gradeLevel}}}º ano
 
-If performance data is available, focus on areas where the student has shown weakness (lower correctness rate). Adapt the questions to be challenging but not discouraging.
-
-For 'Matemática' questions, you MAY use the searchImage tool to get an illustrative image, but the question MUST NOT require counting items in the photo. It should be a general knowledge question where the image provides context only (e.g., show a picture of a dog and ask "Quantas patas tem um cão?").
-
-For other subjects that could benefit from a visual aid (like 'Estudo do Meio'), use the searchImage tool to find a suitable, clear, and simple photo-realistic image. Use one or two-word queries in Portuguese. The image must be appropriate for a child.
-
-For sentence ordering questions ("Formação de Frases"), you MUST provide the words in the question in a jumbled, incorrect order for the student to rearrange.
-
-Structure each question object as follows:
-{
-  "question": "The question text",
-  "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
-  "correctAnswer": "The correct answer",
-  "topic": "The topic of the question",
-  "imageUrl": "(Optional) URL of an image from the tool"
-}
-
-Output an array of these question objects.
-
-Here's the student's information:
-- Grade Level: {{{gradeLevel}}}
 {{#if performanceData}}
-- Past Performance (topic: correctness ratio): {{{performanceData}}}
+Focus on weak areas: {{{performanceData}}}
 {{/if}}
-`,
+
+Rules:
+- Each question on a DIFFERENT topic from the curriculum list
+- Use European Portuguese ONLY
+- Age-appropriate difficulty
+- Engaging and surprising questions
+
+For Matemática, you MAY use searchImage tool for illustrative images.
+For Estudo do Meio, you MAY use searchImage for photos appropriate for children.
+
+Output format:
+[
+  {
+    "question": "Question text",
+    "options": ["A", "B", "C", "D"],
+    "correctAnswer": "The correct answer",
+    "topic": "Curriculum topic",
+    "imageUrl": null
+  }
+]`,
 });
 
 const personalizedLearningPathFlow = ai.defineFlow(
