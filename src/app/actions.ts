@@ -2,8 +2,6 @@
 "use server"
 
 import { generateQuizDirect } from "@/lib/quiz-generator";
-import { generateStory } from "@/ai/flows/story-generator";
-import { textToSpeech } from "@/ai/flows/text-to-speech";
 import { StoryGenerationInputSchema } from "@/app/shared-schemas";
 import { z } from "zod";
 import fs from 'fs/promises';
@@ -11,8 +9,6 @@ import path from 'path';
 import type { QuizInput, SaveQuizInput, QuizResultEntry, Answer, SpeechMark, StoryGenerationInput } from './shared-schemas';
 import { QuizResultSchema, SaveQuizInputSchema } from "./shared-schemas";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
-import { personalizedLearningPath } from "@/ai/flows/personalized-learning-paths";
-import { generateQuizWithGroq } from "@/ai/flows/groq-fallback";
 
 
 const historyFilePath = path.join(process.cwd(), 'quiz-history.json');
@@ -266,29 +262,6 @@ async function cacheQuestions(gradeLevel: number, subject: string | undefined, q
 // Quiz Generation (Groq first, then Genkit)
 // ============================================
 
-async function generateQuizWithFallback(input: any) {
-  // Try Groq first (working!)
-  try {
-    console.log('[QUIZ] Trying Groq first...');
-    const result = await generateQuizWithGroq(input);
-    console.log('[QUIZ] Groq succeeded!');
-    return result;
-  } catch (groqError) {
-    console.warn('[QUIZ] Groq failed:', groqError);
-    
-    // Try Genkit (Gemini) as fallback
-    try {
-      console.log('[QUIZ] Trying Genkit (Gemini)...');
-      const result = await personalizedLearningPath(input);
-      console.log('[QUIZ] Genkit succeeded!');
-      return result;
-    } catch (genkitError) {
-      console.error('[QUIZ] Genkit also failed:', genkitError);
-      throw new Error('Ambas as APIs falharam. Por favor tenta novamente mais tarde.');
-    }
-  }
-}
-
 export async function generateQuiz(input: QuizInput) {
   const validatedInput = z.object({
       studentId: z.string(),
@@ -301,7 +274,7 @@ export async function generateQuiz(input: QuizInput) {
   
   console.log(`[QUIZ] Generating quiz for grade ${validatedInput.gradeLevel}, subject: ${resolvedSubject || 'Misto'}`);
 
-  // 1. Try AI (Genkit → Groq)
+  // Try direct API calls (Groq first, then Gemini)
   try {
     const performanceData = await getPerformanceData(validatedInput.studentId, resolvedSubject);
 
@@ -313,7 +286,7 @@ export async function generateQuiz(input: QuizInput) {
       numberOfQuestions: validatedInput.numberOfQuestions,
     };
     
-    const quizOutput = await generateQuizWithFallback(aiInput);
+    const quizOutput = await generateQuizDirect(aiInput);
 
     // Cache the generated questions for future use (non-blocking)
     if (quizOutput?.quizQuestions) {

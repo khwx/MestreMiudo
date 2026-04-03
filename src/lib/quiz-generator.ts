@@ -179,25 +179,22 @@ export async function generateQuizDirect(
 ): Promise<PersonalizedLearningPathOutput> {
   console.log('[QUIZ] Starting quiz generation...');
   console.log('[QUIZ] Input:', JSON.stringify(input));
-  console.log('[QUIZ] GOOGLEAI_API_KEY exists:', !!process.env.GOOGLEAI_API_KEY);
-  console.log('[QUIZ] GROQ_API_KEY exists:', !!process.env.GROQ_API_KEY);
   
   const prompt = buildPrompt(input);
-  console.log('[QUIZ] Prompt built, length:', prompt.length);
   
-  // Try Gemini first
-  console.log('[QUIZ] Trying Gemini...');
-  let content = await generateWithGemini(prompt);
+  // Try Groq first (working!)
+  console.log('[QUIZ] Trying Groq...');
+  let content = await generateWithGroq(prompt);
   
   if (!content) {
-    console.log('[QUIZ] Gemini failed or returned empty, trying Groq...');
-    content = await generateWithGroq(prompt);
+    console.log('[QUIZ] Groq failed, trying Gemini...');
+    content = await generateWithGemini(prompt);
   } else {
-    console.log('[QUIZ] Gemini succeeded!');
+    console.log('[QUIZ] Groq succeeded!');
   }
   
   if (!content) {
-    console.error('[QUIZ] Both APIs failed or returned empty');
+    console.error('[QUIZ] Both APIs failed');
     throw new Error('Não foi possível gerar o quiz. Por favor tenta novamente.');
   }
   
