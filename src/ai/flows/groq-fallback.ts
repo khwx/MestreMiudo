@@ -11,45 +11,54 @@ import { groq, GROQ_MODEL } from '@/lib/groq';
 import type { PersonalizedLearningPathInput, PersonalizedLearningPathOutput } from '@/app/shared-schemas';
 import { PersonalizedLearningPathOutputSchema } from '@/app/shared-schemas';
 
-const SYSTEM_PROMPT = `You are an expert educator specializing in creating personalized quizzes for elementary school students in Portugal. The current year is 2024.
+const SYSTEM_PROMPT = `You are an expert educator specializing in creating diverse and engaging quizzes for elementary school students in Portugal. The current year is 2024.
 
-IMPORTANT: All questions and answers must be in European Portuguese (Português de Portugal). Do not use Brazilian Portuguese terms.
+CRITICAL RULES:
+1. Generate UNIQUE questions - do NOT repeat common/generic questions like "Qual é a capital de Portugal?" or "Quanto é 2+2?"
+2. Each question MUST be different from typical textbook questions
+3. Use creative, unexpected topics that children find interesting
+4. All content must be in European Portuguese (NOT Brazilian Portuguese)
 
-You will generate a quiz with a specific number of questions tailored to the student's grade level.
+Question structure:
+- "question": Unique, engaging question text
+- "options": 4 answer choices (1 correct, 3 plausible distractors)
+- "correctAnswer": Exactly matches one option
+- "topic": Specific topic name
+- "imageUrl": null (no images needed)
 
-The quiz will be for the subject specified, or a mix of all subjects if not specified.
-
-Structure each question as a JSON object with:
-- "question": The question text in Portuguese
-- "options": Array of 4 answer options (1 correct, 3 plausible wrong)
-- "correctAnswer": The correct answer (must match exactly one of the options)
-- "topic": The topic/subject area
-- "imageUrl": (Optional) Leave as null or omit
-
-Return ONLY a valid JSON array of question objects, no other text or explanation.
-
-Example output:
-[{"question":"Qual é a capital de Portugal?","options":["Lisboa","Porto","Coimbra","Faro"],"correctAnswer":"Lisboa","topic":"Geografia","imageUrl":null}]`;
+Generate diverse questions across DIFFERENT topics. Do not cluster questions on the same topic.`;
 
 export async function generateQuizWithGroq(
   input: PersonalizedLearningPathInput
 ): Promise<PersonalizedLearningPathOutput> {
   const subjectText = input.subject || 'Português, Matemática e Estudo do Meio (misto)';
   
-  const userPrompt = `Generate a quiz with ${input.numberOfQuestions} questions for a student in ${input.gradeLevel}º ano do ensino básico em Portugal.
+  // Topics to avoid (overused)
+  const avoidTopics = [
+    'capital de Portugal', 'Lisboa', 'Porto',
+    'cores da bandeira', 'bandeira portuguesa',
+    '2+2', '1+1', 'tabuada'
+  ];
+  
+  const userPrompt = `Create ${input.numberOfQuestions} UNIQUE quiz questions for a student in ${input.gradeLevel}º ano.
 
 Subject: ${subjectText}
 
 {{#if performanceData}}
-Focus on topics where the student has shown weakness (lower correctness rate).
+Priority topics (student struggles here): ${Object.entries(input.performanceData)
+  .sort((a, b) => a[1] - b[1])
+  .slice(0, 3)
+  .map(([topic]) => topic)
+  .join(', ')}
 {{/if}}
 
-Each question should have:
-- Clear, simple language appropriate for the grade level
-- 4 multiple choice options
-- 1 correct answer
+Requirements:
+- Each question must be on a DIFFERENT topic
+- Avoid: ${avoidTopics.join(', ')}
+- Creative and engaging questions that surprise
+- Questions should be fun, not boring
 
-Return ONLY a valid JSON array of question objects.`;
+Return ONLY a valid JSON array with ${input.numberOfQuestions} question objects.`;
 
   const response = await groq.chat.completions.create({
     messages: [
@@ -57,7 +66,7 @@ Return ONLY a valid JSON array of question objects.`;
       { role: 'user', content: userPrompt }
     ],
     model: GROQ_MODEL,
-    temperature: 0.7,
+    temperature: 1.0, // Higher temperature for more variety
     max_tokens: 4096,
   });
 
@@ -69,7 +78,6 @@ Return ONLY a valid JSON array of question objects.`;
 
   // Parse and validate the response
   try {
-    // Try to extract JSON from the response (in case there's extra text)
     const jsonMatch = content.match(/\[[\s\S]*\]/);
     if (!jsonMatch) {
       throw new Error('No JSON array found in response');

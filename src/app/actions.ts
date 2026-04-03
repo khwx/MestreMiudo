@@ -145,7 +145,7 @@ async function saveQuiz(input: SaveQuizInput) {
 // Question Caching (Supabase)
 // ============================================
 
-async function getCachedQuestions(gradeLevel: number, subject: string | undefined, count: number) {
+async function getCachedQuestions(gradeLevel: number, subject: string | undefined, count: number, studentId?: string) {
   if (!isSupabaseConfigured() || !supabase) return null;
 
   try {
@@ -158,16 +158,52 @@ async function getCachedQuestions(gradeLevel: number, subject: string | undefine
       query = query.eq('subject', subject);
     }
 
-    // Get random questions by ordering randomly and limiting
-    const { data, error } = await query
-      .limit(count * 3); // Get more than needed to allow random selection
-
+    // Get more questions than needed to allow filtering
+    const { data: allQuestions, error } = await query;
+    
     if (error) throw error;
-    if (!data || data.length < count) return null; // Not enough cached questions
+    if (!allQuestions || allQuestions.length === 0) return null;
 
-    // Shuffle and pick the requested number
-    const shuffled = data.sort(() => Math.random() - 0.5);
+    // If studentId provided, exclude questions they've seen recently (last 5 quizzes)
+    let excludeQuestions: string[] = [];
+    if (studentId) {
+      try {
+        const { data: recentHistory } = await supabase
+          .from('quiz_history')
+          .select('quiz_data')
+          .eq('student_id', studentId)
+          .order('created_at', { ascending: false })
+          .limit(5);
+        
+        if (recentHistory) {
+          recentHistory.forEach((entry: any) => {
+            if (entry.quiz_data?.quizQuestions) {
+              entry.quiz_data.quizQuestions.forEach((q: any) => {
+                excludeQuestions.push(q.question);
+              });
+            }
+          });
+        }
+      } catch (e) {
+        console.warn('Could not fetch recent history:', e);
+      }
+    }
+
+    // Filter out recently shown questions
+    let availableQuestions = allQuestions.filter((q: any) => !excludeQuestions.includes(q.question));
+    
+    // If not enough remaining, use all questions
+    if (availableQuestions.length < count) {
+      availableQuestions = allQuestions;
+    }
+
+    // Shuffle and pick
+    const shuffled = availableQuestions.sort(() => Math.random() - 0.5);
     const selected = shuffled.slice(0, count);
+
+    if (selected.length < count) {
+      console.log(`[CACHE] Only ${selected.length} questions available (need ${count})`);
+    }
 
     return {
       quizQuestions: selected.map((q: any) => ({
@@ -188,7 +224,24 @@ async function cacheQuestions(gradeLevel: number, subject: string | undefined, q
   if (!isSupabaseConfigured() || !supabase) return;
 
   try {
-    const rows = questions.map(q => ({
+    // Check which questions already exist to avoid duplicates
+    const existingQuestions = questions.map(q => q.question);
+    const { data: existing } = await supabase
+      .from('questions')
+      .select('question')
+      .in('question', existingQuestions);
+
+    const existingSet = new Set(existing?.map(e => e.question) || []);
+    
+    // Filter out duplicates
+    const newQuestions = questions.filter(q => !existingSet.has(q.question));
+    
+    if (newQuestions.length === 0) {
+      console.log('[CACHE] All questions already exist, skipping insert');
+      return;
+    }
+
+    const rows = newQuestions.map(q => ({
       grade_level: gradeLevel,
       subject: subject || 'Misto',
       topic: q.topic,
@@ -198,6 +251,7 @@ async function cacheQuestions(gradeLevel: number, subject: string | undefined, q
       image_url: q.imageUrl || null,
     }));
 
+    console.log(`[CACHE] Inserting ${rows.length} new questions (${questions.length - rows.length} duplicates skipped)`);
     const { error } = await supabase.from('questions').insert(rows);
     if (error) {
       console.error('Failed to cache questions:', error);
@@ -247,11 +301,12 @@ export async function generateQuiz(input: QuizInput) {
   } catch (aiError) {
     console.warn(`[AI FAILED] Falling back to cache: ${aiError}`);
     
-    // 2. If AI fails, try cache as fallback
+    // 2. If AI fails, try cache as fallback (passing studentId to exclude recent questions)
     const cached = await getCachedQuestions(
       validatedInput.gradeLevel,
       resolvedSubject,
-      validatedInput.numberOfQuestions
+      validatedInput.numberOfQuestions,
+      validatedInput.studentId
     );
 
     if (cached) {
