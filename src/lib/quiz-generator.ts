@@ -1,84 +1,50 @@
 'use server';
 
 /**
- * @fileOverview Quiz generation using direct API calls (no Genkit dependency).
- * This is a simpler, more reliable approach.
+ * @fileOverview Quiz generation using direct API calls.
+ * Uses official DGE curriculum descriptors from Aprendizagens Essenciais.
+ * Generates child-friendly questions with correctAnswer as full text (not letter).
  */
 
 import type { PersonalizedLearningPathInput, PersonalizedLearningPathOutput } from '@/app/shared-schemas';
 import { PersonalizedLearningPathOutputSchema } from '@/app/shared-schemas';
+import curriculumData from './curriculum-topics.json';
 
-const CURRICULUM_TOPICS = {
-  português: {
-    1: ["Consciência fonológica", "Rimas e aliterações", "Leitura de palavras", "Compreensão de textos", "Escrita", "Singular e plural", "Masculino e feminino", "Artigos", "Ditongos", "Vogais e consoantes"],
-    2: ["Leitura fluente", "Compreensão de narrativas", "Escrita de frases", "Substantivos", "Adjetivos", "Verbos", "Pronomes", "Sinónimos e antónimos", "Ortografia"],
-    3: ["Tipos de frase", "Sujeito e predicado", "Advérbios", "Pontuação", "Acentuação", "Conjugação verbal", "Palavras com ç"],
-    4: ["Análise sintática", "Frase composta", "Coordenação", "Subordinação", "Voz ativa e passiva", "Ortografia avançada"]
-  },
-  matemática: {
-    1: ["Números 0-100", "Contagem", "Adição até 20", "Subtração", "Maior menor igual", "Formas geométricas", "Dias da semana", "Moedas", "Números ordinais"],
-    2: ["Números até 200", "Centena", "Tabuadas", "Multiplicação", "Metade e quarto", "Polígonos", "Medidas de comprimento", "Relógio"],
-    3: ["Números até 1000", "Adição e subtração", "Multiplicação", "Divisão", "Frações", "Ângulos", "Perímetro", "Medidas de tempo"],
-    4: ["Números até 10000", "Multiplicação", "Divisão", "Frações equivalentes", "Decimais", "Percentagens", "Áreas", "Volumes"]
-  },
-  "estudo do meio": {
-    1: ["Identificação pessoal", "Família", "Partes do corpo", "Órgãos dos sentidos", "Alimentação saudável", "Higiene", "Dias da semana", "Meses"],
-    2: ["Plantas", "Animais", "Ciclo de vida", "Habitat", "Reciclagem", "Clima", "Localidade", "Transportes"],
-    3: ["Sistema digestivo", "Sistema respiratório", "Sistema circulatório", "Classificação de animais", "Cadeia alimentar", "Energia"],
-    4: ["Portugal na Europa", "Continentes e oceanos", "Corpo humano", "Problemas ambientais", "Meios de comunicação", "Cidadania"]
-  }
-};
+interface CurriculumDomain {
+  name: string;
+  descriptors: string[];
+}
 
-const SYSTEM_PROMPT = `You are an expert educator creating quizzes for Portuguese elementary students (1º ao 4º ano).
+interface CurriculumGrade {
+  domains: CurriculumDomain[];
+}
+
+interface CurriculumSubject {
+  [grade: string]: CurriculumGrade;
+}
+
+interface CurriculumData {
+  [subject: string]: CurriculumSubject;
+}
+
+const CURRICULUM = curriculumData as CurriculumData;
+
+const SYSTEM_PROMPT = `You are an expert elementary school teacher creating fun, engaging quizzes for Portuguese children (1º ao 4º ano).
 
 CRITICAL RULES:
-1. ALL content in European Portuguese (NOT Brazilian)
-2. Questions appropriate for the student's grade level
-3. Each question on a DIFFERENT topic
-4. NO boring or generic questions
+1. ALL content in EUROPEAN Portuguese (Portugal, NOT Brazil)
+2. Questions must be FUN and ENGAGING - use stories, animals, everyday situations
+3. NEVER use academic jargon in the question text
+4. The correctAnswer must be the EXACT TEXT of the correct option (NOT a letter like "A", "B", "C", "D")
+5. All 4 options must be DIFFERENT from each other
+6. Questions should be appropriate for the specific grade level
 
-JSON format:
-[{"question":"text","options":["A","B","C","D"],"correctAnswer":"A","topic":"topic name"}]`;
+IMPORTANT FORMAT:
+- correctAnswer must match EXACTLY one of the options (same text, same capitalization)
+- Example of CORRECT: {"question":"Quanto é 2+3?","options":["4","5","6","7"],"correctAnswer":"5","topic":"Números"}
+- Example of WRONG: {"question":"Quanto é 2+3?","options":["4","5","6","7"],"correctAnswer":"B"} ← DO NOT use letters!
 
-async function generateWithGemini(userPrompt: string): Promise<string | null> {
-  const apiKey = process.env.GOOGLEAI_API_KEY;
-  if (!apiKey) {
-    console.error('[GEMINI] No GOOGLEAI_API_KEY found');
-    return null;
-  }
-
-  try {
-    console.log('[GEMINI] Calling API with gemini-1.5-flash...');
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: `${SYSTEM_PROMPT}\n\n${userPrompt}` }] }],
-          generationConfig: {
-            temperature: 0.8,
-            maxOutputTokens: 4096,
-          }
-        })
-      }
-    );
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('[GEMINI] API error:', response.status, errorText);
-      return null;
-    }
-
-    const data = await response.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || null;
-    console.log('[GEMINI] Response received:', text?.substring(0, 100) || 'empty');
-    return text;
-  } catch (error) {
-    console.error('[GEMINI] Request failed:', error);
-    return null;
-  }
-}
+Return ONLY a valid JSON array.`;
 
 async function generateWithOpenRouter(userPrompt: string): Promise<string | null> {
   const apiKey = process.env.OPENROUTER_API_KEY;
@@ -160,6 +126,46 @@ async function generateWithGroq(userPrompt: string): Promise<string | null> {
   }
 }
 
+async function generateWithGemini(userPrompt: string): Promise<string | null> {
+  const apiKey = process.env.GOOGLEAI_API_KEY;
+  if (!apiKey) {
+    console.error('[GEMINI] No GOOGLEAI_API_KEY found');
+    return null;
+  }
+
+  try {
+    console.log('[GEMINI] Calling API with gemini-1.5-flash...');
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: `${SYSTEM_PROMPT}\n\n${userPrompt}` }] }],
+          generationConfig: {
+            temperature: 0.8,
+            maxOutputTokens: 4096,
+          }
+        })
+      }
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('[GEMINI] API error:', response.status, errorText);
+      return null;
+    }
+
+    const data = await response.json();
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || null;
+    console.log('[GEMINI] Response received:', text?.substring(0, 100) || 'empty');
+    return text;
+  } catch (error) {
+    console.error('[GEMINI] Request failed:', error);
+    return null;
+  }
+}
+
 function buildPrompt(input: PersonalizedLearningPathInput): string {
   const grade = input.gradeLevel as 1 | 2 | 3 | 4;
   const subject = input.subject || 'Misto';
@@ -168,21 +174,33 @@ function buildPrompt(input: PersonalizedLearningPathInput): string {
     ? ['português', 'matemática', 'estudo do meio'] 
     : [subject.toLowerCase()];
   
-  const topics: string[] = [];
+  // Get curriculum descriptors for this grade and subjects
+  const descriptors: { topic: string; descriptor: string }[] = [];
+  
   subjects.forEach(subj => {
-    const topicList = CURRICULUM_TOPICS[subj as keyof typeof CURRICULUM_TOPICS]?.[grade] || [];
-    topics.push(...topicList);
+    const gradeData = CURRICULUM[subj]?.[grade.toString()];
+    if (gradeData && gradeData.domains) {
+      gradeData.domains.forEach(domain => {
+        domain.descriptors.forEach(desc => {
+          descriptors.push({
+            topic: domain.name,
+            descriptor: desc
+          });
+        });
+      });
+    }
   });
 
-  const uniqueTopics = [...new Set(topics)].slice(0, 15);
-  const questionsPerSubject = Math.ceil(input.numberOfQuestions / subjects.length);
+  // Format descriptors for the prompt
+  const descriptorList = descriptors.map(d => `- [${d.topic}] ${d.descriptor.substring(0, 100)}...`).join('\n');
 
-  let prompt = `Create ${input.numberOfQuestions} quiz questions for ${grade}º ano do ensino básico.
+  let prompt = `Create ${input.numberOfQuestions} fun quiz questions for a ${grade}º ano student in Portugal.
 
 Subject: ${subject}
 
-Available topics (use these, one per question):
-${uniqueTopics.join(', ')}
+These are the OFFICIAL curriculum descriptors from the Portuguese Ministry of Education (DGE) that students must learn:
+
+${descriptorList}
 
 `;
 
@@ -191,18 +209,33 @@ ${uniqueTopics.join(', ')}
       .sort((a, b) => a[1] - b[1])
       .slice(0, 3)
       .map(([topic]) => topic);
-    prompt += `\nFocus on these weak areas: ${weakAreas.join(', ')}\n`;
+    prompt += `\nThe student struggles with: ${weakAreas.join(', ')}. Focus more on these areas.\n`;
   }
 
   prompt += `
-Requirements:
-- Each question on a DIFFERENT topic from the list
-- European Portuguese only
-- Age-appropriate for ${grade}º ano
-- Creative and engaging questions
+STYLE GUIDE for ${grade}º ano:
+${grade === 1 ? `- Use very simple words and short sentences
+- Focus on counting, basic addition (1-10), shapes, family, body parts, animals
+- Make it playful: "O gato tem 4 patas. Se chegar mais 1, quantas tem?"` : ''}
+${grade === 2 ? `- Slightly more complex but still fun
+- Include simple word problems, basic multiplication, plants, recycling
+- Example: "A Maria tem 3 maçãs. O João deu-lhe mais 4. Quantas tem agora?"` : ''}
+${grade === 3 ? `- More challenging but still engaging
+- Include division, fractions, body systems, animal classification
+- Example: "Um bolo foi dividido em 4 partes iguais. O Pedro comeu 1 parte. Que fração comeu?"` : ''}
+${grade === 4 ? `- More complex concepts but keep it fun
+- Include decimals, percentages, areas, Portuguese geography
+- Example: "Portugal tem 18 distritos. Se visitaste 9, que percentagem já visitaste?"` : ''}
+
+REQUIREMENTS:
+- Each question on a DIFFERENT topic from the curriculum descriptors above
+- European Portuguese ONLY
+- Creative, fun, and age-appropriate
+- correctAnswer must be the EXACT TEXT of the correct option (not a letter!)
+- No duplicate options within a question
 
 Return ONLY a valid JSON array with ${input.numberOfQuestions} objects.
-Format: [{"question":"...","options":["A","B","C","D"],"correctAnswer":"A","topic":"...","imageUrl":null}]`;
+Format: [{"question":"...","options":["A","B","C","D"],"correctAnswer":"exact text of correct option","topic":"topic name"}]`;
 
   return prompt;
 }
@@ -213,6 +246,36 @@ function parseResponse(content: string): any[] {
     throw new Error('No JSON array found');
   }
   return JSON.parse(jsonMatch[0]);
+}
+
+function normalizeQuestions(questions: any[]): any[] {
+  return questions.map(q => {
+    // Ensure correctAnswer is the text, not a letter
+    if (q.correctAnswer && /^[A-D]$/.test(q.correctAnswer) && q.options) {
+      const index = q.correctAnswer.charCodeAt(0) - 65; // A=0, B=1, C=2, D=3
+      q.correctAnswer = q.options[index] || q.correctAnswer;
+    }
+    
+    // Ensure imageUrl is nullish not undefined
+    if (!q.imageUrl) {
+      q.imageUrl = null;
+    }
+    
+    // Ensure topic exists
+    if (!q.topic) {
+      q.topic = 'Geral';
+    }
+    
+    // Ensure 4 unique options
+    if (q.options && q.options.length === 4) {
+      const uniqueOptions = [...new Set(q.options)];
+      if (uniqueOptions.length < 4) {
+        console.warn('[QUIZ] Question had duplicate options:', q.question);
+      }
+    }
+    
+    return q;
+  });
 }
 
 export async function generateQuizDirect(
@@ -249,7 +312,11 @@ export async function generateQuizDirect(
   console.log('[QUIZ] Response received, parsing...');
   
   try {
-    const questions = parseResponse(content);
+    let questions = parseResponse(content);
+    
+    // Normalize: convert letter answers to text
+    questions = normalizeQuestions(questions);
+    
     const validated = PersonalizedLearningPathOutputSchema.parse({ quizQuestions: questions });
     console.log('[QUIZ] Success! Generated', validated.quizQuestions.length, 'questions');
     return validated;

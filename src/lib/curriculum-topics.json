@@ -1,0 +1,875 @@
+{
+  "português": {
+    "1": {
+      "domains": [
+        {
+          "name": "Oralidade",
+          "descriptors": [
+            "Saber escutar para interagir com adequação ao contexto e a diversas finalidades (nomeadamente, reproduzir pequenas mensagens, cumprir instruções, responder a questões)",
+            "Identificar informação essencial em textos orais sobre temas conhecidos",
+            "Utilizar padrões de entoação e ritmo adequados na formulação de perguntas, de afirmações e de pedidos",
+            "Pedir a palavra e falar na sua vez de forma clara e audível, com uma articulação correta e natural das palavras",
+            "Exprimir opinião partilhando ideias e sentimentos"
+          ]
+        },
+        {
+          "name": "Leitura",
+          "descriptors": [
+            "Pronunciar segmentos fónicos a partir dos respetivos grafemas e dígrafos, incluindo os casos que dependem de diferentes posições dos fonemas ou dos grafemas na palavra",
+            "Identificar as letras do alfabeto, nas formas minúscula e maiúscula, em resposta ao nome da letra",
+            "Nomear, pela sua ordenação convencional, as letras do alfabeto",
+            "Ler palavras isoladas e pequenos textos com articulação correta e prosódia adequada",
+            "Inferir o tema e resumir as ideias centrais de textos associados a diferentes finalidades (lúdicas, estéticas, informativas)"
+          ]
+        },
+        {
+          "name": "Escrita",
+          "descriptors": [
+            "Representar por escrito os fonemas através dos respetivos grafemas e dígrafos, incluindo os casos que dependem de diferentes posições dos fonemas ou dos grafemas na palavra",
+            "Escrever palavras de diferentes níveis de dificuldade e extensão silábica, aplicando regras de correspondência fonema-grafema",
+            "Identificar especificidades gráficas do texto escrito (direcionalidade da escrita, gestão da mancha gráfica e fronteira de palavra)",
+            "Escrever frases simples e textos curtos em escrita cursiva e através de digitação num dispositivo eletrónico, utilizando adequadamente os sinais de pontuação: ponto final, vírgula, ponto de interrogação e ponto de exclamação",
+            "Planificar, redigir e rever textos curtos com a colaboração do professor",
+            "Elaborar respostas escritas a questionários e a instruções, escrever legivelmente com correção (orto)gráfica e com uma gestão correta do espaço da página"
+          ]
+        },
+        {
+          "name": "Educação Literária",
+          "descriptors": [
+            "Manifestar ideias, emoções e apreciações geradas pela escuta ativa de obras literárias e textos da tradição popular",
+            "Revelar curiosidade e emitir juízos valorativos face aos textos ouvidos",
+            "Reconhecer rimas e outras repetições de sons em poemas, trava-línguas e em outros textos ouvidos",
+            "Antecipar o(s) tema(s) com base em noções elementares de género (contos de fada, lengalengas, poemas, etc.), em elementos do paratexto e nos textos visuais (ilustrações)",
+            "Compreender textos narrativos (sequência de acontecimentos, intenções e emoções de personagens, tema e assunto; mudança de espaço) e poemas",
+            "Antecipar o desenvolvimento da história por meio de inferências reveladoras da compreensão de ideias, de eventos e de personagens",
+            "Distinguir ficção de não ficção",
+            "(Re)contar histórias",
+            "Dizer, de modo dramatizado, trava-línguas, lengalengas e poemas memorizados, de modo a incluir treino da voz, dos gestos, das pausas, da entoação e expressão facial"
+          ]
+        },
+        {
+          "name": "Gramática",
+          "descriptors": [
+            "Identificar unidades da língua: palavras, sílabas, fonemas",
+            "Usar regras de flexão em número, com base na descoberta de regularidades do funcionamento do nome e do adjetivo",
+            "Reconhecer o nome próprio",
+            "Fazer concordar o adjetivo com o nome em género",
+            "Descobrir e compreender o significado de palavras pelas múltiplas relações que podem estabelecer entre si",
+            "Descobrir o significado de palavras desconhecidas a partir do contexto verbal e não-verbal",
+            "Usar, com intencionalidade, conectores de tempo, de causa, de maior frequência na formação de frases complexas",
+            "Conhecer regras de correspondência fonema-grafema e de utilização dos sinais de pontuação (frase simples)"
+          ]
+        }
+      ]
+    },
+    "2": {
+      "domains": [
+        {
+          "name": "Oralidade",
+          "descriptors": [
+            "Identificar intenções comunicativas de textos orais, designadamente perguntas, afirmações, exclamações apreciativas, ordens, pedidos",
+            "Selecionar informação relevante em função dos objetivos de escuta e registá-la por meio de técnicas diversas",
+            "Falar com clareza e articular de modo adequado as palavras",
+            "Usar a palavra na sua vez e empregar formas de tratamento adequadas na interação oral, com respeito pelos princípios de cooperação e cortesia",
+            "Variar adequadamente a prosódia e o ritmo discursivo em função da finalidade comunicativa",
+            "Formular perguntas, pedidos e respostas a questões considerando a situação e o interlocutor",
+            "Planear, produzir e avaliar os seus próprios textos",
+            "Recontar histórias e narrar situações vividas e imaginadas",
+            "Representar diferentes papéis comunicativos em jogos de simulação e dramatizações"
+          ]
+        },
+        {
+          "name": "Leitura",
+          "descriptors": [
+            "Associar a cada letra do alfabeto as respetivas formas maiúscula e minúscula",
+            "Compreender o sentido de textos com características narrativas e descritivas, associados a finalidades diferentes (lúdicas, estéticas, informativas)",
+            "Mobilizar as suas experiências e saberes no processo de construção de sentidos do texto",
+            "Identificar informação explícita no texto",
+            "Identificar e referir o essencial de textos lidos",
+            "Ler com articulação correta, entoação e velocidade adequadas ao sentido dos textos",
+            "Recriar pequenos textos em diferentes formas de expressão (verbal, gestual, corporal, musical, plástica)"
+          ]
+        },
+        {
+          "name": "Escrita",
+          "descriptors": [
+            "Representar por escrito os fonemas através dos respetivos grafemas e dígrafos, incluindo os casos que dependem de diferentes posições dos fonemas ou dos grafemas na palavra",
+            "Indicar as possibilidades de representar na escrita as relações fonema-grafema e grafema-fonema mais frequentes",
+            "Escrever corretamente palavras com todos os tipos de sílabas, com utilização correta dos acentos gráficos e do til",
+            "Escrever textos curtos com diversas finalidades (narrar, informar, explicar)",
+            "Redigir textos coerentes e coesos com recurso a elementos como a concordância entre constituintes, a correlação de tempos verbais, a sinonímia e a pronominalização",
+            "Articular segmentos do texto através do emprego de elementos gramaticais que marcam relações de tempo e causa",
+            "Utilizar o ponto final na delimitação de frases e a vírgula em enumerações e em mecanismos de coordenação",
+            "Proceder à revisão de texto, individualmente ou em grupo após discussão de diferentes pontos de vista"
+          ]
+        },
+        {
+          "name": "Educação Literária",
+          "descriptors": [
+            "Ouvir ler obras literárias e textos da tradição popular",
+            "Ler narrativas e poemas adequados à idade, por iniciativa própria ou de outrem",
+            "Antecipar o(s) tema(s) com base em noções elementares de género (contos de fada, lengalengas, poemas, etc.) em elementos do paratexto e nos textos visuais (ilustrações)",
+            "Compreender narrativas literárias (temas, experiências e valores)",
+            "Explicitar o sentido dos poemas escutados ou lidos",
+            "(Re)contar histórias",
+            "Valorizar a diversidade cultural dos textos (ouvidos ou lidos)",
+            "Dizer, de modo dramatizado, trava-línguas, lengalengas e poemas memorizados, de modo a incluir treino da voz, dos gestos, das pausas, da entoação e expressão facial",
+            "Manifestar preferências, de entre textos lidos, e explicar as reações derivadas da leitura",
+            "Selecionar livros para leitura pessoal, apresentando as razões das suas escolhas"
+          ]
+        },
+        {
+          "name": "Gramática",
+          "descriptors": [
+            "Classificar as palavras quanto ao número de sílabas (palavra escrita)",
+            "Identificar e distinguir sílaba tónica de átona",
+            "Identificar a classe das palavras: determinante artigo, nome (próprio e comum), adjetivo, verbo, pronome pessoal e interjeição",
+            "Reconhecer diferentes processos para formar o feminino dos nomes e adjetivos",
+            "Reconhecer a flexão nominal e adjetival quanto ao número",
+            "Conhecer a forma do infinitivo dos verbos",
+            "Conhecer as estruturas de coordenação copulativa e disjuntiva",
+            "Usar de modo intencional e com adequação conectores de tempo, de causa, de explicação e de contraste de maior frequência, em textos narrativos e de opinião",
+            "Depreender o significado de palavras a partir da sua ocorrência nas diferentes áreas disciplinares curriculares",
+            "Associar significados conotativos a palavras e/ou expressões que não correspondam ao sentido literal",
+            "Desenvolver o conhecimento lexical, passivo e ativo",
+            "Mobilizar adequadamente as regras de ortografia, ao nível da correspondência grafema-fonema e da utilização dos sinais de escrita"
+          ]
+        }
+      ]
+    },
+    "3": {
+      "domains": [
+        {
+          "name": "Oralidade",
+          "descriptors": [
+            "Interpretar o essencial de discursos orais sobre temas conhecidos",
+            "Identificar, organizar e registar informação relevante em função dos objetivos de escuta",
+            "Fazer inferências, esclarecer dúvidas, identificar diferentes intencionalidades comunicativas",
+            "Falar com clareza e articular de modo adequado as palavras",
+            "Gerir adequadamente a tomada de vez na comunicação oral, com respeito pelos princípios da cooperação e da cortesia",
+            "Usar a palavra com propriedade para expor conhecimentos e apresentar narrações",
+            "Planear, produzir e avaliar os seus próprios textos orais",
+            "Detetar semelhanças e diferenças entre o texto oral e o texto escrito"
+          ]
+        },
+        {
+          "name": "Leitura",
+          "descriptors": [
+            "Ler textos com características narrativas e descritivas, associados a diferentes finalidades (informativas, lúdicas, estéticas)",
+            "Distinguir nos textos características da notícia, da carta, do convite e da banda desenhada (estruturação, finalidade)",
+            "Ler textos com entoação e ritmo adequados",
+            "Realizar leitura silenciosa e autónoma",
+            "Mobilizar as suas experiências e saberes no processo de construção de sentidos do texto",
+            "Identificar o tema e o assunto do texto ou de partes do texto",
+            "Exprimir uma opinião crítica acerca de aspetos do texto (do conteúdo e/ou da forma)"
+          ]
+        },
+        {
+          "name": "Educação Literária",
+          "descriptors": [
+            "Ouvir ler obras literárias e textos da tradição popular",
+            "Ler integralmente narrativas, poemas e texto dramático, por iniciativa própria ou de outrem",
+            "Antecipar o(s) tema(s) com base em noções elementares de género (contos de fada, lengalengas, poemas, etc.) em elementos do paratexto e em textos visuais (ilustrações)",
+            "Compreender textos narrativos, poéticos e dramáticos, escutados ou lidos",
+            "Ler poemas em público, com segurança",
+            "Fazer a leitura dramatizada de obras literárias",
+            "Manifestar ideias, sentimentos e pontos de vista suscitados pelas histórias ouvidas ou lidas",
+            "Apresentar obras literárias em público, através da leitura de poemas e da representação de textos dramáticos",
+            "Desenvolver um projeto de leitura que implique seleção de obras, a partir de preferências do aluno previamente discutidas em aula"
+          ]
+        },
+        {
+          "name": "Escrita",
+          "descriptors": [
+            "Indicar as diferentes possibilidades de representar graficamente os fonemas para as relações fonema-grafema e grafema-fonema mais frequentes",
+            "Registar e organizar ideias na planificação de textos estruturados com introdução, desenvolvimento e conclusão",
+            "Redigir textos com utilização correta das formas de representação escrita (grafia, pontuação e translineação, configuração gráfica e sinais auxiliares da escrita)",
+            "Avaliar os próprios textos com consequente aperfeiçoamento",
+            "Escrever textos géneros variados, adequados a finalidades como narrar e informar, em diferentes suportes",
+            "Exprimir opiniões e fundamentá-las",
+            "Recriar pequenos textos em diferentes formas de expressão (verbal, gestual, corporal, musical, plástica)"
+          ]
+        },
+        {
+          "name": "Gramática",
+          "descriptors": [
+            "Distinguir sílaba tónica de átona e acento prosódico de acento gráfico",
+            "Identificar a classe das palavras: determinante (possessivo e demonstrativo), quantificador numeral e advérbio",
+            "Conjugar verbos regulares e irregulares no presente, no pretérito perfeito e no futuro do modo indicativo",
+            "Utilizar apropriadamente os tempos verbais para exprimir anterioridade, posterioridade e simultaneidade",
+            "Manipular diferentes processos para expressar noções de grau numa frase, tendo em conta os seus valores",
+            "Reconhecer a frase a partir dos seus grupos constituintes (grupo nominal e grupo verbal) e das funções sintáticas centrais (sujeito e predicado)",
+            "Distinguir tipos de frase e o valor afirmativo ou negativo dos enunciados",
+            "Recorrer de modo intencional e adequado a conectores diversificados, em textos orais e escritos",
+            "Usar frases complexas para exprimir sequências ([tão] que, para que)",
+            "Depreender o significado de palavras a partir da sua análise e a partir das múltiplas relações que podem estabelecer entre si",
+            "Deduzir significados de palavras e/ou expressões que não correspondam ao sentido literal",
+            "Conhecer a família de palavras como modo de organização do léxico",
+            "Mobilizar adequadamente as regras de ortografia"
+          ]
+        }
+      ]
+    },
+    "4": {
+      "domains": [
+        {
+          "name": "Oralidade",
+          "descriptors": [
+            "Selecionar informação relevante em função dos objetivos de escuta e registá-la por meio de técnicas diversas",
+            "Distinguir entre factos e opiniões, informação implícita e explícita, essencial e acessório, denotação e conotação",
+            "Pedir e tomar a palavra e respeitar o tempo de palavra dos outros",
+            "Planear, produzir e avaliar discursos orais breves, com vocabulário variado e frases complexas, individualmente ou em grupo",
+            "Participar com empenho em atividades de expressão oral orientada, respeitando regras e papéis específicos",
+            "Realizar exposições breves, a partir de planificação",
+            "Usar a palavra para exprimir opiniões e partilhar ideias de forma audível, com boa articulação, entoação e ritmo adequados",
+            "Assegurar contacto visual com a audiência (postura corporal, expressão facial, olhar)"
+          ]
+        },
+        {
+          "name": "Leitura",
+          "descriptors": [
+            "Ler textos com características narrativas e descritivas de maior complexidade, associados a finalidades várias e em suportes variados",
+            "Distinguir nos textos características do artigo de enciclopédia, da entrada de dicionário e do aviso (estruturação, finalidade)",
+            "Fazer uma leitura fluente e segura, que evidencie a compreensão do sentido dos textos",
+            "Realizar leitura silenciosa e autónoma",
+            "Mobilizar experiências e saberes no processo de construção de sentidos do texto",
+            "Explicitar ideias-chave do texto",
+            "Identificar o tema e o assunto do texto ou de partes do texto",
+            "Exprimir uma opinião crítica acerca de aspetos do texto (do conteúdo e/ou da forma)"
+          ]
+        },
+        {
+          "name": "Educação Literária",
+          "descriptors": [
+            "Ouvir ler textos literários e expressar reações de leitura de modo criativo",
+            "Ler integralmente narrativas, poemas e textos dramáticos",
+            "Antecipar o(s) tema(s) com base em noções elementares de género (contos de fada, lengalengas, poemas, etc.) em elementos do paratexto e nos textos visuais (ilustrações)",
+            "Compreender a organização interna e externa de textos poéticos, narrativos e dramáticos",
+            "Compreender recursos que enfatizam o sentido do texto (onomatopeias, trocadilhos, interjeições, comparações)",
+            "Dramatizar textos e dizer em público, com expressividade e segurança, poemas memorizados",
+            "Participar, de forma responsável e cooperante, em representações de textos dramáticos literários",
+            "Manifestar ideias, sentimentos e pontos de vista suscitados por histórias ou poemas ouvidos ou lidos",
+            "Desenvolver um projeto de leitura em que se integre compreensão da obra, questionamento e motivação de escrita do autor"
+          ]
+        },
+        {
+          "name": "Escrita",
+          "descriptors": [
+            "Escrever relatos (com situação inicial, peripécias e conclusão), com descrição e relato do discurso das personagens, representado por meio de discurso direto e de discurso indireto",
+            "Utilizar processos de planificação, textualização e revisão, realizados de modo individual e/ou em grupo",
+            "Usar frases complexas para exprimir sequências e relações de consequência e finalidade",
+            "Superar problemas associados ao processo de escrita por meio da revisão com vista ao aperfeiçoamento de texto",
+            "Redigir textos com utilização correta das formas de representação escrita (grafia, pontuação e translineação, configuração gráfica e sinais auxiliares da escrita)",
+            "Escrever textos, organizados em parágrafos, coesos, coerentes e adequados às convenções de representação gráfica"
+          ]
+        },
+        {
+          "name": "Gramática",
+          "descriptors": [
+            "Identificar a classe das palavras: determinante (interrogativo), preposição, pronome (pessoal, nas suas formas tónica e átonas, possessivo e demonstrativo)",
+            "Conjugar verbos regulares e irregulares no pretérito imperfeito do modo indicativo e no modo imperativo",
+            "Reconhecer diferentes processos para formar o feminino dos nomes e adjetivos",
+            "Reconhecer a flexão nominal e adjetival quanto ao número e grau",
+            "Aplicar formas átonas do pronome pessoal em frases afirmativas, em frases com negação e com advérbios pré-verbais",
+            "Recorrer, de modo intencional e adequado, a conectores diversificados, em textos orais e escritos",
+            "Aplicar processos de expansão e redução de frases",
+            "Inferir o significado de palavras desconhecidas a partir da análise da sua estrutura interna (base, radical e afixos)",
+            "Deduzir significados conotativos a palavras e/ou expressões que não correspondam ao sentido literal",
+            "Compreender regras de derivação das palavras e formas de organização do léxico (famílias de palavras)",
+            "Reconhecer onomatopeias",
+            "Explicitar regras de ortografia"
+          ]
+        }
+      ]
+    }
+  },
+  "matemática": {
+    "1": {
+      "domains": [
+        {
+          "name": "Números",
+          "descriptors": [
+            "Identificar números em contextos vários e reconhecer o seu significado como indicador de quantidade, medida, ordenação, identificação e localização",
+            "Contar de 1 em 1, de 2 em 2, de 5 em 5 e de 10 em 10, usando modelos estruturados de contagem",
+            "Ler e representar números, pelo menos até 100, usando uma diversidade de representações, nomeadamente a reta numérica",
+            "Comparar e ordenar números naturais, de forma crescente e decrescente",
+            "Reconhecer os numerais ordinais até ao 10.º, em contextos diversos",
+            "Reconhecer números pares e ímpares",
+            "Estimar o número de objetos de um dado conjunto pelo menos até 50, explicar as suas razões, e verificar a estimativa realizada através de contagem organizada",
+            "Reconhecer e usar o valor posicional de um algarismo no sistema de numeração decimal",
+            "Compor e decompor números naturais até ao 100, de diversas formas, usando diversos recursos e representações",
+            "Relacionar um número com números de referência que lhe sejam próximos",
+            "Compreender e automatizar as possíveis combinações de pares de números naturais que podem ser adicionados para formar o 5 e o 10 e relacionar esses factos básicos com a subtração",
+            "Compreender e usar com fluência estratégias de cálculo mental diversificadas para obter o resultado de adições/subtrações",
+            "Mobilizar os factos básicos da adição/subtração e as propriedades da adição e da subtração para realizar cálculo mental",
+            "Produzir estimativas através do cálculo mental, adequadas às situações em contexto",
+            "Interpretar e modelar situações com adição nos sentidos de acrescentar e juntar e resolver problemas associados",
+            "Interpretar e modelar situações com subtração, nos sentidos de retirar, completar e comparar, e resolver problemas associados",
+            "Relacionar a adição e a subtração, em situações de cálculo e na interpretação e resolução de problemas"
+          ]
+        },
+        {
+          "name": "Álgebra",
+          "descriptors": [
+            "Reconhecer e justificar se uma sequência pictórica tem ou não regularidade",
+            "Identificar e descrever regularidades em sequências variadas em contextos diversos, estabelecendo conexões matemáticas com a realidade próxima",
+            "Continuar uma sequência pictórica respeitando uma regra de formação dada ou regularidades identificadas",
+            "Identificar elementos em falta em sequências dadas e justificar com base em regularidades encontradas",
+            "Reconhecer que cada elemento de uma sequência corresponde a uma ordem nessa sequência",
+            "Interpretar e modelar situações envolvendo sequências de repetição, estabelecendo conexões com outros temas matemáticos",
+            "Criar e modificar sequências, usando materiais manipuláveis e outros recursos",
+            "Reconhecer igualdades aritméticas envolvendo a adição",
+            "Decidir sobre a correção de igualdades aritméticas e justificar as suas ideias",
+            "Completar igualdades aritméticas envolvendo a adição, explicando os seus raciocínios",
+            "Descrever situações que atribuam significado a igualdades aritméticas dadas",
+            "Interpretar e modelar situações que envolvam regularidades numéricas, e resolver problemas associados",
+            "Reconhecer a comutatividade da adição e expressar em linguagem natural o seu significado",
+            "Reconhecer o zero como elemento neutro da adição"
+          ]
+        },
+        {
+          "name": "Dados",
+          "descriptors": [
+            "Participar na formulação de questões estatísticas sobre uma característica qualitativa",
+            "Participar na definição de quais os dados a recolher para responder a uma dada questão estatística e decidir onde observar/inquirir",
+            "Participar criticamente na definição de um método de recolha de dados adequado a um dado estudo",
+            "Recolher dados através de observação ou inquirição",
+            "Usar listas para registar os dados a recolher",
+            "Usar tabelas de contagem para registar e organizar os dados à medida que são recolhidos",
+            "Representar conjuntos de dados através de pictogramas (correspondência um para um), incluindo fonte, título e legenda",
+            "Representar conjuntos de dados através de gráficos de pontos, incluindo fonte, título e legenda",
+            "Participar na decisão sobre qual(is) as representações gráficas a adotar num dado estudo",
+            "Ler, interpretar e discutir a distribuição dos dados, identificando o(s) dado(s) que mais e menos se repete(m)",
+            "Retirar conclusões, fundamentar decisões e colocar novas questões suscitadas pelas conclusões obtidas",
+            "Decidir a quem divulgar um estudo realizado",
+            "Apresentar oralmente os resultados de um estudo realizado, atendendo ao público a quem será divulgado"
+          ]
+        },
+        {
+          "name": "Geometria e Medida",
+          "descriptors": [
+            "Descrever a posição relativa de pessoas e objetos, usando vocabulário próprio",
+            "Reconhecer, em objetos do quotidiano, formas de sólidos comuns (cone, cilindro, esfera, cubo, paralelepípedo retângulo, pirâmide, prisma)",
+            "Identificar superfícies planas e superfícies curvas em objetos comuns e em modelos físicos de sólidos",
+            "Reconhecer triângulos, quadrados, retângulos, pentágonos, hexágonos e círculos em sólidos diversos",
+            "Reconhecer figuras congruentes, usando diferentes estratégias e recursos",
+            "Construir, representar e comparar figuras planas compostas",
+            "Compor e decompor uma dada figura plana, recorrendo a materiais manipuláveis físicos ou virtuais",
+            "Compreender o que é o comprimento de um objeto e comparar e ordenar objetos segundo o seu comprimento",
+            "Medir o comprimento de um objeto, usando unidades de medida não convencionais adequadas",
+            "Estimar a medida de um comprimento, e explicar as razões da sua estimativa",
+            "Resolver problemas que envolvam comprimentos, comparando criticamente diferentes estratégias da resolução",
+            "Reconhecer e ordenar cronologicamente acontecimentos",
+            "Ler o calendário"
+          ]
+        }
+      ]
+    },
+    "2": {
+      "domains": [
+        {
+          "name": "Números",
+          "descriptors": [
+            "Contar de 50 em 50, 100 em 100, e 200 em 200",
+            "Ler e representar números naturais, pelo menos até 1000, usando uma diversidade de representações",
+            "Comparar e ordenar números naturais, de forma crescente e decrescente",
+            "Reconhecer os numerais ordinais até ao 20.º, em contextos diversos",
+            "Arredondar números naturais à dezena ou centena mais próxima",
+            "Estimar o número de objetos de um dado conjunto pelo menos até 100, explicar as suas razões, e verificar a estimativa",
+            "Reconhecer e usar o valor posicional de um algarismo no sistema de numeração decimal",
+            "Usar a estrutura multiplicativa do sistema decimal para compreender a grandeza dos números",
+            "Compor e decompor números naturais até ao 1000 de diversas formas",
+            "Compreender e automatizar os dobros de números até ao dobro de 10",
+            "Compreender e automatizar os factos básicos da multiplicação (tabuadas do 2, 4, 5, 10 e 3) e sua relação com a divisão",
+            "Reconhecer a fração como possibilidade de representar uma quantidade não inteira relativa a uma relação parte-todo",
+            "Representar uma fração de diversas formas, transitando de forma fluente entre as diferentes representações",
+            "Reconhecer frações que representam a metade e quartos da unidade",
+            "Reconhecer que uma fração cujo numerador e denominador são iguais corresponde a uma unidade",
+            "Comparar e ordenar frações unitárias em contextos diversos",
+            "Compreender e usar com fluência estratégias de cálculo mental diversificadas",
+            "Produzir estimativas através do cálculo mental, adequadas à situação em contexto",
+            "Interpretar e modelar situações com a multiplicação no sentido aditivo",
+            "Interpretar e modelar situações com a divisão nos sentidos de partilha equitativa e medida",
+            "Relacionar a multiplicação e a divisão, em situações de cálculo e na interpretação e resolução de problemas"
+          ]
+        },
+        {
+          "name": "Álgebra",
+          "descriptors": [
+            "Identificar e descrever regularidades em sequências de repetição",
+            "Identificar e descrever o grupo de repetição de uma sequência",
+            "Prever um termo não visível de uma sequência de repetição e justificar a previsão",
+            "Identificar e descrever regularidades em sequências de crescimento",
+            "Continuar uma sequência de crescimento, respeitando uma regra de formação dada",
+            "Reconhecer as sequências numéricas dos múltiplos, formulando e testando conjeturas",
+            "Criar e modificar sequências, usando materiais manipuláveis e outros recursos",
+            "Reconhecer igualdades aritméticas envolvendo a adição e a subtração",
+            "Decidir sobre a correção de igualdades aritméticas e justificar as suas ideias",
+            "Completar igualdades aritméticas envolvendo a subtração",
+            "Descrever situações que atribuam significado a igualdades aritméticas",
+            "Investigar, formular e justificar conjeturas sobre relações numéricas em contextos diversos",
+            "Descrever e representar regularidades em tabelas e diagramas",
+            "Reconhecer a associatividade da adição",
+            "Reconhecer a comutatividade da multiplicação",
+            "Reconhecer o um como elemento neutro da multiplicação",
+            "Reconhecer o zero como elemento absorvente da multiplicação"
+          ]
+        },
+        {
+          "name": "Dados",
+          "descriptors": [
+            "Participar na formulação de questões estatísticas sobre diferentes características qualitativas",
+            "Formular conjeturas sobre eventuais relações entre duas características qualitativas",
+            "Participar na definição de quais os dados a recolher num dado estudo e decidir sobre a fonte primária de dados",
+            "Participar criticamente na seleção de um método de recolha dos dados num estudo",
+            "Recolher dados através de um dado método de recolha",
+            "Usar tabelas de frequência absolutas para organizar dados referentes a uma característica qualitativa",
+            "Usar diagramas de Carroll para organizar dados relativos a duas características qualitativas dicotómicas",
+            "Representar através de pictogramas (correspondência um para vários) os dados recolhidos",
+            "Representar através de gráficos de barras os dados recolhidos, incluindo fonte, título e legenda",
+            "Decidir sobre qual(is) as representações gráficas a adotar num dado estudo",
+            "Analisar representações gráficas e discutir criticamente a sua adequabilidade",
+            "Reconhecer a(s) moda(s) e identificá-la(s) num conjunto de dados qualitativos",
+            "Ler, interpretar e discutir a distribuição dos dados, relacionando tabelas, representações gráficas e a moda",
+            "Retirar conclusões, fundamentar decisões e colocar novas questões",
+            "Decidir a quem divulgar um estudo realizado",
+            "Elaborar um poster que apoie a apresentação de um estudo realizado"
+          ]
+        },
+        {
+          "name": "Geometria e Medida",
+          "descriptors": [
+            "Criar, representar e comparar itinerários, usando os termos 'quarto de volta', 'meia volta', 'três quartos de volta' e 'volta completa'",
+            "Desenhar vistas de sólidos simples (vistas de cima, frente e lado)",
+            "Reconhecer vistas de sólidos dados, identificando o ponto de vista correspondente",
+            "Ler, interpretar e esboçar plantas de espaços da proximidade da turma",
+            "Descrever as características de sólidos comuns (cone, cilindro, esfera, cubo, paralelepípedo, pirâmide, prisma)",
+            "Distinguir poliedros de outros sólidos",
+            "Classificar figuras planas com base nas suas características",
+            "Reconhecer polígonos e relacionar a sua designação com o respetivo número de lados",
+            "Reconhecer ângulos retos em polígonos",
+            "Compreender a hierarquia quadrado, retângulo",
+            "Justificar com base nos movimentos de deslizar, rodar e voltar a congruência entre figuras planas",
+            "Interpretar e modelar situações recorrendo ao deslizar, voltar ou rodar",
+            "Reconhecer o metro e o centímetro como unidades de medida convencionais, relacioná-las e fazer medições",
+            "Reconhecer o perímetro de uma figura plana",
+            "Estimar a medida de um comprimento usando unidades de medida convencionais",
+            "Compreender o que é a área de uma figura plana",
+            "Medir a área de figuras planas, usando unidades de medida não convencionais adequadas",
+            "Estimar a medida da área de uma figura plana e explicar as razões da sua estimativa",
+            "Relacionar hora, dia, mês e ano",
+            "Resolver problemas que envolvam o tempo",
+            "Conhecer as diferentes notas e moedas, comparar o seu valor e relacioná-las",
+            "Relacionar o euro com o cêntimo",
+            "Fazer estimativas de quantias de dinheiro, por arredondamento",
+            "Resolver problemas que envolvem dinheiro comparando diferentes estratégias de resolução"
+          ]
+        }
+      ]
+    },
+    "3": {
+      "domains": [
+        {
+          "name": "Números",
+          "descriptors": [
+            "Ler, representar, comparar e ordenar números naturais, pelo menos, até 10 000, em contextos variados",
+            "Arredondar números naturais à dezena, centena ou unidade de milhar mais próxima",
+            "Reconhecer os numerais ordinais até ao 100.º, em contextos variados",
+            "Reconhecer e usar o valor posicional de um algarismo no sistema de numeração decimal",
+            "Usar a estrutura multiplicativa do sistema decimal para compreender a grandeza dos números",
+            "Compor e decompor números naturais até ao 10 000 de diversas formas",
+            "Compreender e usar a regra para calcular o produto de um número por 10, 100 e 1000",
+            "Compreender e automatizar os factos básicos da multiplicação (tabuadas do 8, 6, 9, e 7) e a sua relação com a divisão",
+            "Reconhecer a fração como representação de uma relação parte-todo e de quociente, sendo o todo uma unidade discreta",
+            "Representar uma fração de diversas formas, transitando de forma fluente entre as diferentes representações",
+            "Comparar e ordenar frações com o mesmo denominador em contextos diversos",
+            "Reconhecer a equivalência entre diferentes frações que representem a metade, a quarta parte e a terça parte",
+            "Compreender e usar com fluência estratégias de cálculo mental diversificadas",
+            "Produzir estimativas através do cálculo mental, adequadas à situação em contexto",
+            "Interpretar e modelar situações com a multiplicação no sentido combinatório",
+            "Interpretar e modelar situações com a adição/subtração e multiplicação/divisão e resolver problemas associados",
+            "Decidir qual a estratégia mais adequada para produzir o resultado de uma operação",
+            "Compreender e usar o algoritmo da adição com números naturais até quatro algarismos",
+            "Compreender e usar o algoritmo da subtração com números naturais até quatro algarismos"
+          ]
+        },
+        {
+          "name": "Álgebra",
+          "descriptors": [
+            "Identificar e descrever o grupo de repetição de uma sequência",
+            "Descrever, em linguagem natural, a regra de formação de uma sequência de repetição",
+            "Identificar e descrever regularidades em sequências de crescimento",
+            "Continuar uma sequência de crescimento respeitando uma regra de formação dada",
+            "Estabelecer a correspondência entre a ordem do termo de uma sequência e o termo",
+            "Prever um termo não visível de uma sequência de crescimento, e justificar a previsão",
+            "Criar e modificar sequências, usando materiais manipuláveis e outros recursos",
+            "Formular e testar conjeturas relativas a regularidades nas sequências de múltiplos de números",
+            "Reconhecer expressões numéricas equivalentes, envolvendo a multiplicação",
+            "Completar igualdades aritméticas, envolvendo a multiplicação",
+            "Comparar expressões numéricas, usando a simbologia >, < e =",
+            "Investigar, formular e justificar conjeturas sobre relações numéricas em contextos diversos",
+            "Estabelecer relações entre a paridade das parcelas e a paridade da soma na adição de dois números naturais",
+            "Reconhecer a relação de dependência entre quantidades ou grandezas em contextos diversos",
+            "Interpretar e modelar situações com variação de quantidades ou grandezas e resolver problemas associados",
+            "Reconhecer a propriedade distributiva da multiplicação em relação à adição"
+          ]
+        },
+        {
+          "name": "Dados",
+          "descriptors": [
+            "Formular questões estatísticas sobre uma característica quantitativa discreta",
+            "Definir quais os dados a recolher num estudo e onde devem ser recolhidos, incluindo fontes secundárias",
+            "Selecionar criticamente um método de recolha de dados adequado a um estudo",
+            "Recolher dados através de um dado método de recolha, nomeadamente recorrendo a sítios credíveis na internet",
+            "Usar tabelas de frequência absolutas para organizar dados referentes a uma característica quantitativa discreta",
+            "Representar dados quantitativos discretos através de diagramas de caule e folhas",
+            "Decidir sobre qual(ais) a(s) representação(ões) gráfica(s) a adotar num dado estudo",
+            "Analisar representações gráficas e discutir criticamente a sua adequabilidade",
+            "Identificar a(s) moda(s) num conjunto de dados quantitativos discretos",
+            "Reconhecer o mínimo e o máximo num conjunto de dados quantitativos discretos",
+            "Ler, interpretar e discutir a distribuição dos dados, relacionando tabelas, representações gráficas e medidas",
+            "Retirar conclusões, fundamentar decisões e colocar novas questões",
+            "Decidir a quem divulgar um estudo realizado em contextos exteriores à comunidade escolar",
+            "Elaborar um infográfico que apoie a apresentação de um estudo realizado",
+            "Exprimir a maior ou menor convicção sobre a ocorrência de acontecimentos que resultam de fenómenos aleatórios, usando as ideias de 'impossível', 'possível' e 'certo'",
+            "Usar a convicção sobre a ocorrência de acontecimentos para fazer previsões e tomar decisões informadas"
+          ]
+        },
+        {
+          "name": "Geometria e Medida",
+          "descriptors": [
+            "Descrever posições recorrendo à identificação de coordenadas",
+            "Ler e utilizar mapas ou vistas aéreas, estabelecendo conexões matemáticas com a realidade",
+            "Descrever características dos prismas e das pirâmides regulares e distingui-los",
+            "Formular e testar conjeturas que envolvam relações entre as faces, vértices e arestas de prismas ou de pirâmides regulares",
+            "Compreender o conceito de ângulo e identificar ângulos retos, rasos, agudos, obtusos e giros",
+            "Obter a imagem de uma figura plana simples por reflexão, a partir de eixos de reflexão, horizontais ou verticais",
+            "Obter a imagem de uma figura plana simples por rotação, com centro num ponto exterior à figura, com amplitude de rotação de quartos de volta (90º) ou de meias voltas (180º)",
+            "Reconhecer o quilómetro e o milímetro como unidades de medida convencionais e medir comprimentos",
+            "Estimar a medida de um comprimento usando unidades de medida convencionais",
+            "Resolver problemas que envolvam comprimentos, usando unidades de medida convencionais",
+            "Reconhecer figuras equivalentes",
+            "Estimar a medida de área de uma figura plana por enquadramento",
+            "Interpretar e modelar situações que envolvam a área e resolver problemas associados",
+            "Compreender a que se refere a massa de um objeto e comparar e ordenar objetos segundo a massa",
+            "Medir a massa de um objeto, usando unidades de medida convencionais (quilograma e grama) e relacioná-las",
+            "Reconhecer valores de referência de massa (125 g, 250 g, 500 g, 1 kg) e estabelecer relações entre eles",
+            "Estimar a medida da massa de objetos, usando unidades de medida convencionais",
+            "Resolver problemas que envolvam a massa, usando unidades de medida convencionais",
+            "Ler e escrever a medida do tempo em horas e minutos em relógios analógicos e digitais",
+            "Relacionar horas, minutos e segundos",
+            "Medir o tempo utilizando diferentes instrumentos",
+            "Estimar o tempo de duração de acontecimentos",
+            "Resolver problemas que envolvam o tempo, em diversos contextos",
+            "Elaborar e analisar listas de compras com diferentes fins, incluindo a estimativa dos custos"
+          ]
+        }
+      ]
+    },
+    "4": {
+      "domains": [
+        {
+          "name": "Números",
+          "descriptors": [
+            "Ler, representar, comparar e ordenar números naturais, pelo menos, até 1 000 000, usando uma diversidade de representações",
+            "Arredondar números naturais à dezena, centena ou unidade, dezena ou centena de milhar mais próxima",
+            "Reconhecer e usar o valor posicional de um algarismo no sistema de numeração decimal e interpretar a ordem de grandeza de um número",
+            "Usar a estrutura multiplicativa do sistema decimal para compreender a grandeza dos números",
+            "Compor e decompor números naturais até ao 1 000 000 de diversas formas",
+            "Compreender e automatizar a composição de uma unidade, usando pares de decimais (ordem das décimas) e a sua relação com a subtração",
+            "Compreender e usar a regra para calcular o quociente de um número natural por 10, 100 e 1000",
+            "Comparar e ordenar frações com o mesmo numerador, em contextos diversos",
+            "Reconhecer o numeral decimal como possibilidade de representar uma quantidade não inteira",
+            "Ler, representar, comparar e ordenar decimais, em contextos variados e resolver problemas associados",
+            "Usar de forma fluente diferentes representações simbólicas de valores de referência envolvendo decimais (0,50, 1/2 e 50%; 0,25, 1/4 e 25%; 0,75, 3/4 e 75%; 0,1, 1/10 e 10%; 0,01, 1/100 e 1%)",
+            "Compreender e usar com fluência estratégias de cálculo mental diversificadas, para produzir o resultado de um cálculo que envolva decimais",
+            "Produzir estimativas que envolvam decimais através do cálculo mental",
+            "Interpretar e modelar situações com as operações e resolver problemas associados",
+            "Compreender e usar algoritmos para a adição e subtração envolvendo decimais com números até quatro algarismos",
+            "Compreender e usar o algoritmo da multiplicação e aplicá-lo com números até três algarismos no multiplicando e dois algarismos no multiplicador",
+            "Compreender e usar o algoritmo da divisão e aplicá-lo com números até três algarismos no dividendo e dois algarismos no divisor",
+            "Interpretar o resto da divisão obtida no algoritmo da divisão, nomeadamente no contexto da resolução de problemas"
+          ]
+        },
+        {
+          "name": "Álgebra",
+          "descriptors": [
+            "Formular conjeturas sobre a estrutura de uma sequência de crescimento e testar essas conjeturas",
+            "Identificar e descrever regularidades em sequências de crescimento",
+            "Continuar uma sequência de crescimento respeitando uma regra de formação dada ou regularidades identificadas",
+            "Estabelecer a correspondência entre a ordem do termo de uma sequência e o termo",
+            "Prever um termo não visível de uma sequência pictórica de crescimento e justificar a previsão",
+            "Descrever em linguagem natural a regra de formação de uma sequência de crescimento",
+            "Criar e modificar sequências, revelando criatividade e flexibilidade",
+            "Reconhecer expressões numéricas equivalentes, envolvendo a divisão",
+            "Completar igualdades aritméticas envolvendo a divisão, justificando",
+            "Comparar expressões numéricas, usando a simbologia >, < ou = para exprimir o resultado dessa comparação",
+            "Investigar, formular e justificar conjeturas sobre relações numéricas em contextos diversos",
+            "Interpretar e modelar situações com variação de quantidades ou grandezas e resolver problemas associados, usando representações múltiplas, em particular letras",
+            "Reconhecer a utilização das propriedades das operações em algoritmos alternativos e descrever os seus processos de construção"
+          ]
+        },
+        {
+          "name": "Dados",
+          "descriptors": [
+            "Formular questões sobre características qualitativas e quantitativas discretas que contribuam para um mesmo estudo",
+            "Definir quais os dados a recolher num estudo e onde devem ser recolhidos (fontes primárias ou secundárias)",
+            "Selecionar criticamente um método de recolha de dados adequado a um estudo",
+            "Recolher dados através de um dado método de recolha, recorrendo a fontes primárias ou sítios credíveis na internet",
+            "Representar conjuntos de dados quantitativos sobre a mesma característica através de diagramas de caule-e-folhas (duplos)",
+            "Representar dois conjuntos de dados sobre a mesma característica através de gráficos de barras justapostas (frequências absolutas)",
+            "Decidir sobre qual(is) a(s) representação(ões) gráfica(s) a adotar num dado estudo",
+            "Analisar representações gráficas presentes nos media e discutir criticamente a sua adequabilidade",
+            "Ler, interpretar e discutir a distribuição dos dados, salientando criticamente os aspetos mais relevantes",
+            "Retirar conclusões, fundamentar decisões e colocar novas questões suscitadas pelas conclusões obtidas",
+            "Decidir a quem divulgar um estudo realizado, em contextos exteriores à comunidade escolar",
+            "Elaborar recursos que apoiem a apresentação de um estudo realizado, de forma rigorosa, eficaz, apelativa e não enganadora",
+            "Exprimir a maior ou menor convicção sobre a ocorrência de acontecimentos que resultam de fenómenos aleatórios, usando as ideias de 'impossível', 'improvável', 'igualmente provável', 'provável' e 'certo'",
+            "Usar a convicção sobre a ocorrência de acontecimentos para fazer previsões e tomar decisões informadas"
+          ]
+        },
+        {
+          "name": "Geometria e Medida",
+          "descriptors": [
+            "Construir planificações de prismas e pirâmides, utilizando diferentes tipos de recursos",
+            "Classificar hierarquicamente quadriláteros (quadrado, retângulo, losango e paralelogramo) com base nas suas propriedades",
+            "Identificar retas paralelas e perpendiculares",
+            "Compreender que os pontos de uma circunferência estão à mesma distância do seu centro e identificar esta distância com a medida do raio",
+            "Relacionar a medida do raio com a medida do diâmetro",
+            "Distinguir círculo de circunferência",
+            "Reconhecer se uma figura plana tem simetria de reflexão e identificar os eixos de simetria",
+            "Reconhecer se uma figura plana tem simetria de rotação e identificar a amplitude das rotações associadas",
+            "Interpretar e modelar situações recorrendo à simetria de reflexão e à simetria de rotação",
+            "Reconhecer o cm2 e o m2 como unidades convencionais de medida da área e relacioná-las",
+            "Generalizar a expressão para o cálculo da medida da área do retângulo",
+            "Generalizar a expressão para o cálculo da medida da área do quadrado",
+            "Estimar a medida da área de uma figura usando o cm2 e o m2",
+            "Interpretar e modelar situações que envolvam área, expressa em m2 ou cm2, e resolver problemas associados",
+            "Compreender o que é a capacidade de um recipiente e comparar e ordenar recipientes segundo a sua capacidade",
+            "Medir a capacidade de um recipiente, usando unidades de medida convencionais (litro, centilitro e mililitro) e relacioná-las",
+            "Reconhecer valores de referência de capacidade (1l, 50 cl, 33 cl, 200 ml) e estabelecer relações entre eles",
+            "Estimar a medida da capacidade de recipientes, usando unidades de medida convencionais",
+            "Resolver problemas que envolvam a capacidade, usando unidades de medida convencionais",
+            "Elaborar orçamentos simples, identificando receitas e despesas, e compreender o que é o saldo",
+            "Discutir criticamente informações públicas que envolvam o dinheiro"
+          ]
+        }
+      ]
+    }
+  },
+  "estudo do meio": {
+    "1": {
+      "domains": [
+        {
+          "name": "Sociedade",
+          "descriptors": [
+            "Conhecer datas e factos significativos da sua história individual que concorram para a construção do conhecimento de si próprio",
+            "Estabelecer relações de anterioridade, posterioridade e simultaneidade na descrição de situações do quotidiano e ou da sua história pessoal, numa linha do tempo",
+            "Estabelecer relações de parentesco através de uma árvore genealógica simples, ou outros processos, até à terceira geração",
+            "Relacionar as atividades exercidas por alguns membros da comunidade familiar ou local com as respetivas profissões",
+            "Associar os principais símbolos nacionais (hino e bandeira) à sua nacionalidade, desenvolvendo o sentido de pertença"
+          ]
+        },
+        {
+          "name": "Natureza",
+          "descriptors": [
+            "Verificar alterações morfológicas que se vão operando ao longo das etapas da vida humana, comparando aspetos decorrentes de parâmetros como: sexo, idade, dentição, etc.",
+            "Identificar situações e comportamentos de risco para a saúde e segurança individual e coletiva em diversos contextos – casa, rua, escola e meio aquático - e propor medidas de proteção adequadas",
+            "Identificar os fatores que concorrem para o bem-estar físico e psicológico, individual e coletivo, desenvolvendo rotinas diárias de higiene pessoal, alimentar, do vestuário e dos espaços de uso coletivo",
+            "Reconhecer as implicações das condições atmosféricas diárias, no seu quotidiano",
+            "Reconhecer a desigual repartição entre os continentes e os oceanos, localizando no globo terrestre as áreas emersas (continentes) e imersas (oceanos)",
+            "Localizar em mapas, por exemplo digitais, o local de nascimento, de residência, a sua escola e o itinerário entre ambas",
+            "Comunicar ideias e conhecimentos relativos a lugares, regiões e acontecimentos, utilizando linguagem icónica e verbal",
+            "Reconhecer a existência de diversidade entre seres vivos de grupos diferentes e distingui-los de formas não vivas",
+            "Reconhecer a importância do Sol para a existência de vida na Terra",
+            "Reconhecer que os seres vivos têm necessidades básicas, distintas, em diferentes fases do seu desenvolvimento"
+          ]
+        },
+        {
+          "name": "Tecnologia",
+          "descriptors": [
+            "Reconhecer que a tecnologia responde a necessidades e a problemas do quotidiano (rede elétrica, canalização de água, telecomunicações, etc.)",
+            "Realizar experiências em condições de segurança, seguindo os procedimentos experimentais",
+            "Saber manusear materiais e objetos do quotidiano, em segurança, explorando relações lógicas de forma e de função (tesoura, agrafador, furador, espremedor, saca-rolhas, talheres, etc.)",
+            "Identificar as propriedades de diferentes materiais (forma, textura, cor, sabor, cheiro, brilho, flutuabilidade, solubilidade), agrupando-os de acordo com as suas características",
+            "Agrupar, montar, desmontar, ligar, sobrepor etc., explorando objetos livremente",
+            "Identificar atividades humanas que envolvem transformações tecnológicas no mundo que o rodeia"
+          ]
+        },
+        {
+          "name": "Sociedade/Natureza/Tecnologia",
+          "descriptors": [
+            "Desenhar mapas e itinerários simples de espaços do seu quotidiano, utilizando símbolos, cores ou imagens na identificação de elementos de referência",
+            "Relacionar espaços da sua vivência com diferentes funções, estabelecendo relações de identidade com o espaço",
+            "Localizar, com base na observação direta e indireta, elementos naturais e humanos da paisagem do local onde vive",
+            "Saber colocar questões, levantar hipóteses, fazer inferências, comprovar resultados e saber comunicar, reconhecendo como se constrói o conhecimento",
+            "Manifestar atitudes de respeito, de solidariedade, de cooperação, de responsabilidade, na relação com os que lhe são próximos",
+            "Saber atuar em situações de emergência, recorrendo ao número europeu de emergência médica (112)",
+            "Manifestar atitudes positivas conducentes à preservação do ambiente próximo sendo capaz de apresentar propostas de intervenção, nomeadamente comportamentos que visem os três 'R'"
+          ]
+        }
+      ]
+    },
+    "2": {
+      "domains": [
+        {
+          "name": "Sociedade",
+          "descriptors": [
+            "Reconhecer a importância de fontes documentais na construção do conhecimento do seu passado pessoal e familiar (Registo de Nascimento, Cartão de Cidadão, Boletim Individual de Saúde, Registo de Vacinações, fotografias pessoais, álbuns, etc.)",
+            "Reconhecer datas, factos e locais significativos para a história pessoal ou das pessoas que lhe são próximas, localizando-os em mapas ou plantas e numa linha de tempo",
+            "Relacionar instituições e serviços que contribuem para o bem-estar das populações com as respetivas atividades e funções",
+            "Reconhecer a importância do diálogo, da negociação e do compromisso na resolução pacífica de situações de conflito",
+            "Reconhecer as múltiplas pertenças de cada pessoa a diferentes grupos e comunidades",
+            "Reconhecer influências de outros países e culturas em diversos aspetos do seu dia a dia (alimentação, vestuário, música, comunicação, etc.)",
+            "Valorizar a aplicação dos direitos consagrados na Convenção sobre os Direitos da Criança"
+          ]
+        },
+        {
+          "name": "Natureza",
+          "descriptors": [
+            "Distinguir os principais órgãos - coração, pulmões, estômago e rins – em representações do corpo humano, associando-os à sua principal função vital",
+            "Associar os ossos e os músculos à posição, ao movimento e ao equilíbrio, reconhecendo que o seu bom funcionamento implica cuidados específicos (postura e atividade física)",
+            "Refletir sobre comportamentos e atitudes, vivenciados ou observados, que concorrem para o bem-estar físico e psicológico, individual e coletivo",
+            "Reconhecer a importância da vacinação e do uso correto dos medicamentos, nomeadamente dos antibióticos",
+            "Identificar situações e comportamentos de risco para a saúde e a segurança individual e coletiva, propondo medidas de prevenção e proteção adequadas",
+            "Identificar símbolos informativos fundamentais para o consumidor, relacionados com a produção e a utilização de bens",
+            "Localizar Portugal, na Europa e no Mundo, em diferentes representações cartográficas, reconhecendo as suas fronteiras",
+            "Caracterizar os estados de tempo típicos das estações do ano em Portugal e a sua variabilidade",
+            "Estabelecer a correspondência entre as mudanças de estado físico (evaporação, condensação, solidificação, fusão) e as condições que as originam, com o ciclo da água",
+            "Categorizar os seres vivos de acordo com semelhanças e diferenças observáveis (animais: tipos de revestimento, alimentação, locomoção e reprodução; plantas: tipo de raiz, tipo de caule, forma da folha, etc.)",
+            "Relacionar as características dos seres vivos (animais e plantas), com o seu habitat",
+            "Relacionar ameaças à biodiversidade dos seres vivos com a necessidade de desenvolvimento de atitudes responsáveis face à Natureza"
+          ]
+        },
+        {
+          "name": "Tecnologia",
+          "descriptors": [
+            "Distinguir vantagens e desvantagens da utilização de recursos tecnológicos (analógicos e digitais) do seu quotidiano",
+            "Prever as transformações causadas pelo aquecimento e arrefecimento de materiais"
+          ]
+        },
+        {
+          "name": "Sociedade/Natureza/Tecnologia",
+          "descriptors": [
+            "Elaborar itinerários do quotidiano, em plantas simplificadas do seu meio, assinalando diferentes elementos naturais e humanos",
+            "Descrever elementos naturais e humanos do lugar onde vive através da recolha de informação em várias fontes documentais",
+            "Comunicar conhecimentos relativos a lugares, regiões e acontecimentos",
+            "Representar lugares reais que lhes estão próximos no tempo e no espaço",
+            "Reconhecer a existência de bens comuns à humanidade (água, ar, solo, etc.) e a necessidade da sua preservação",
+            "Saber colocar questões sobre problemas ambientais existentes na localidade onde vive, nomeadamente relacionados com a água, a energia, os resíduos, o ar, os solos, apresentando propostas de intervenção",
+            "Saber colocar questões, levantar hipóteses, fazer inferências, comprovar resultados e saber comunicar, reconhecendo como se constrói o conhecimento",
+            "Comparar meios de comunicação e informação, atribuindo-lhes relevância pessoal e social"
+          ]
+        }
+      ]
+    },
+    "3": {
+      "domains": [
+        {
+          "name": "Sociedade",
+          "descriptors": [
+            "Reconhecer as unidades de tempo: década, século e milénio e as referências temporais a.C. e d.C.",
+            "Relacionar datas e factos importantes para a compreensão da história local (origem da povoação, batalhas, lendas históricas, personagens/personalidades históricas, feriado municipal)",
+            "Reconhecer vestígios do passado local: construções, instrumentos antigos e atividades a que estavam ligados, costumes e tradições",
+            "Reconstituir o passado de uma instituição local (escola, autarquia, instituições religiosas, associações, etc.), recorrendo a fontes orais e documentais",
+            "Reconhecer e valorizar a diversidade de etnias e culturas existentes na sua comunidade",
+            "Identificar alguns Estados Europeus, localizando-os no mapa da Europa",
+            "Reconhecer a existência de semelhanças e diferenças entre os diversos povos europeus, valorizando a sua diversidade",
+            "Reconhecer casos de desrespeito dos direitos consagrados na Convenção sobre os Direitos da Criança, sabendo como atuar em algumas situações"
+          ]
+        },
+        {
+          "name": "Natureza",
+          "descriptors": [
+            "Conhecer procedimentos adequados em situação de queimaduras, hemorragias, distensões, fraturas, mordeduras de animais e hematomas",
+            "Relacionar hábitos quotidianos com estilos de vida saudável, reconhecendo que o consumo de álcool, de tabaco e de outras drogas é prejudicial para a saúde",
+            "Compreender que os seres vivos dependem uns dos outros, nomeadamente através de relações alimentares, e do meio físico, reconhecendo a importância da preservação da Natureza",
+            "Reconhecer que os seres vivos se reproduzem e que os seus descendentes apresentam características semelhantes aos progenitores, mas também diferem em algumas delas",
+            "Relacionar fatores do ambiente (ar, luz, temperatura, água, solo) com condições indispensáveis a diferentes etapas da vida das plantas e dos animais",
+            "Localizar, no planisfério ou no globo terrestre, as principais formas físicas da superfície da Terra (continentes, oceanos, cadeias montanhosas, rios, florestas, desertos)",
+            "Distinguir formas de relevo (diferentes elevações, vales e planícies) e recursos hídricos (cursos de água, oceano, lagos, lagoas, etc.), do meio local",
+            "Identificar os diferentes agentes erosivos (vento, águas correntes, ondas, precipitação, etc.), reconhecendo que dão origem a diferentes paisagens à superfície da Terra",
+            "Relacionar os movimentos de rotação e translação da Terra com a sucessão do dia e da noite e a existência de estações do ano",
+            "Compreender, recorrendo a um modelo, que as fases da Lua resultam do seu movimento em torno da Terra",
+            "Utilizar instrumentos de medida para orientação e localização no espaço de elementos naturais e humanos do meio local e da região onde vive, tendo como referência os pontos cardeais",
+            "Distinguir as diferenças existentes entre sólidos, líquidos e gases",
+            "Identificar a existência de transformações reversíveis (condensação, evaporação, solidificação, dissolução, fusão)"
+          ]
+        },
+        {
+          "name": "Tecnologia",
+          "descriptors": [
+            "Comparar o comportamento da luz no que respeita à linearidade da sua propagação em diferentes materiais (transparentes, translúcidos e opacos)",
+            "Estabelecer uma relação de causa-efeito decorrente da aplicação de uma força sobre um objeto e do movimento exercido sobre o mesmo em diferentes superfícies",
+            "Manusear operadores tecnológicos (elásticos, molas, interruptor, alavanca, roldana, etc.) de acordo com as suas funções, princípios e relações",
+            "Reconhecer o efeito das forças de atração e repulsão na interação entre magnetes",
+            "Utilizar informações e simbologias como linguagem específica da tecnologia"
+          ]
+        },
+        {
+          "name": "Sociedade/Natureza/Tecnologia",
+          "descriptors": [
+            "Distinguir diferentes formas de interferência do Oceano na vida humana (clima, saúde, alimentação, etc.)",
+            "Reconhecer o modo como as modificações ambientais (desflorestação, incêndios, assoreamento, poluição) provocam desequilíbrios nos ecossistemas e influenciam a vida dos seres vivos e da sociedade",
+            "Identificar um problema ambiental ou social existente na sua comunidade (resíduos sólidos urbanos, poluição, pobreza, desemprego, exclusão social, etc.), propondo soluções de resolução",
+            "Identificar diferenças e semelhanças entre o passado e o presente de um lugar quanto a aspetos naturais, sociais, culturais e tecnológicos",
+            "Reconhecer as potencialidades da internet, utilizando as tecnologias de informação e da comunicação com segurança e respeito, mantendo as informações pessoais em sigilo",
+            "Reconhecer o papel dos media na informação sobre o mundo atual",
+            "Saber colocar questões, levantar hipóteses, fazer inferências, comprovar resultados e saber comunicá-los, reconhecendo como se constrói o conhecimento"
+          ]
+        }
+      ]
+    },
+    "4": {
+      "domains": [
+        {
+          "name": "Sociedade",
+          "descriptors": [
+            "Construir um friso cronológico com os factos e as datas relevantes da História de Portugal, destacando a formação de Portugal, a época da expansão marítima, o período filipino e a Restauração, a implantação da República e o 25 de Abril",
+            "Conhecer personagens e aspetos da vida em sociedade relacionados com os factos relevantes da história de Portugal, com recurso a fontes documentais",
+            "Relacionar a Revolução do 25 de Abril de 1974 com a obtenção de liberdades e direitos",
+            "Reconhecer a importância da Declaração Universal dos Direitos Humanos para a construção de uma sociedade mais justa",
+            "Conhecer o número de Estados pertencentes à União Europeia, localizando alguns estados-membros num mapa da Europa",
+            "Reconhecer a existência de fluxos migratórios, temporários ou de longa duração, identificando causas e consequências para os territórios envolvidos"
+          ]
+        },
+        {
+          "name": "Natureza",
+          "descriptors": [
+            "Descrever, de forma simplificada, e com recurso a representações, os sistemas digestivo, respiratório, circulatório, excretor e reprodutivo, reconhecendo que o seu bom funcionamento implica cuidados específicos",
+            "Conhecer algumas modificações biológicas e comportamentais que ocorrem na adolescência",
+            "Reconhecer mecanismos simples de defesa do organismo, por exemplo, a pele como primeira barreira de proteção e de prevenção de doenças",
+            "Identificar plantas e animais em vias de extinção ou mesmo extintos, investigando as razões que conduziram a essa situação",
+            "Localizar o planeta Terra no Sistema Solar, representando-o de diversas formas",
+            "Utilizar representações cartográficas, a diferentes escalas, para localizar formas de relevo, rios, lagos e lagoas em Portugal",
+            "Comparar diferentes formas de relevo de Portugal, através de observação direta ou indireta, de esquemas e de mapas hipsométricos, utilizando vocabulário geográfico adequado",
+            "Utilizar diversos processos para referenciar os pontos cardeais (posição do Sol, bússola, estrela polar), na orientação, localização e deslocação à superfície da Terra",
+            "Reconhecer alguns fenómenos naturais (sismos, vulcões, etc.) como manifestações da dinâmica e da estrutura interna da Terra e como agentes modificadores da paisagem",
+            "Recolher amostras de rochas e de solos agrupando-as de acordo com as suas propriedades (cor, textura, dureza, cheiro, permeabilidade) e exemplificar a sua aplicabilidade",
+            "Descrever diversos tipos de uso do solo da sua região (áreas agrícolas, florestais, industriais ou turísticas), comparando com os de outras regiões",
+            "Reconhecer de que forma a atividade humana interfere no oceano (poluição, alterações nas zonas costeiras e rios, etc.)"
+          ]
+        },
+        {
+          "name": "Tecnologia",
+          "descriptors": [
+            "Comparar diversos materiais, por exemplo, através dos circuitos elétricos, indicando se são isoladores ou condutores elétricos, e discutir as suas aplicações, bem como as regras de segurança na sua utilização",
+            "Identificar objetos tecnológicos (analógicos e digitais), utilizados no passado e no presente, relacionando-os com os materiais utilizados no seu fabrico, para constatar permanências e evoluções",
+            "Reconhecer a importância da evolução tecnológica para a evolução da sociedade, relacionando objetos, equipamentos e soluções tecnológicas com diferentes necessidades e problemas do quotidiano",
+            "Produzir soluções tecnológicas através da reutilização ou reciclagem de materiais (catavento, forno solar, etc.)"
+          ]
+        },
+        {
+          "name": "Sociedade/Natureza/Tecnologia",
+          "descriptors": [
+            "Reconhecer e valorizar o património natural e cultural - local, nacional, etc. - identificando na paisagem elementos naturais e vestígios materiais do passado, costumes, tradições, símbolos e efemérides",
+            "Relacionar a distribuição espacial de alguns fenómenos físicos (relevo, clima, rede hidrográfica, etc.) com a distribuição espacial de fenómenos humanos (população, atividades económicas, etc.) a diferentes escalas",
+            "Relacionar o aumento da população mundial e do consumo de bens com alterações na qualidade do ambiente (destruição de florestas, poluição, esgotamento de recursos, extinção de espécies, etc.), reconhecendo a necessidade de adotar medidas individuais e coletivas que minimizem o impacto negativo",
+            "Utilizar as tecnologias de informação e comunicação com segurança, respeito e responsabilidade, tomando consciência de que o seu uso abusivo gera dependência",
+            "Saber colocar questões, levantar hipóteses, fazer inferências, comprovar resultados e saber comunicá-los, reconhecendo como se constrói o conhecimento"
+          ]
+        }
+      ]
+    }
+  }
+}

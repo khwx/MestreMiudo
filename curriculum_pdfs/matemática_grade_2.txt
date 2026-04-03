@@ -1,0 +1,1991 @@
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  2.º ANO | 1.º CICLO DO ENSINO BÁSICO 
+MATEMÁTICA  
+  INTRODUÇÃO 
+  Este documento curricular apresenta as aprendizagens matemáticas a que os alunos do Ensino Básico devem ter acesso e o racion al que as 
+justifica. Foi elaborado por uma equipa pluridisciplinar, composta por especialistas em Didática da Matemática e em Matemática (Álgebra, 
+Geometria e Estatística e Probabilidades) e por professores experientes dos diversos níveis de ensino: Ana Paula Canavarro (c oordenadora), 
+Célia Mestre, Dulce Gomes, Elvira Santos, Leonor Santos, Lina Brunheira, Manuela Vicente, Maria João Gouveia, Paulo Correia, Pedro Macias 
+Marques e Rui Gonçalo Espadeiro. 
+A Introdução do documento é composta por duas secções distintas. A primeira secção é comum a todo o Ensin o Básico e define ideias-chave 
+que abrangem todo este nível de ensino. A segunda secção diz respeito ao 1.º Ciclo e explicita os principais focos dos conteúdos de 
+aprendizagem, organizados pelos diferentes temas. 
+Por simplificação do texto, este documento não adota linguagem sensível ao género mas assume, naturalmente, uma perspetiva inclusiva.   
+ 
+
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 2 
+1. Matemática na Educação Básica 
+ 
+Porque devem todos aprender Matemática?  
+A Matemática tem um lugar privilegiado no currículo de inúmeros países, que se justifica  por dois argumentos diferentes:  
+● Nenhum ser humano pode ficar privado de conhecer e tirar partido do património ímpar, científico e cultural, que a Matemática  
+constitui. Uma experiência matemática adequada proporciona às crianças e jovens a possibilidade de desenvolvimento pessoal cognitivo 
+e dota-os de ferramentas intelectuais relevantes para melhor conhecer, compreender e atuar no mundo em que vivem, prosseguir 
+estudos, aceder a uma profissão e exercer uma cidadania democrática.  
+● Nenhuma sociedade pode dispensar a preparação dos seus futuros cidadãos para os desafios que enfrenta, nomeadamente científicos e 
+tecnológicos, num mundo em que é preciso mobilizar múltiplas literacias para responder às exigências destes tempos de 
+imprevisibilidade e de mudanças aceleradas. A ideia de “literacia matemática”, em que a OCDE (https://www.oecd.org/pisa/) destaca 
+a capacidade de raciocinar matematicamente e interpretar e usar a Matemática na resolução de problemas de contextos  diversos do 
+mundo real, é crucial para que cada pessoa possa viver e atuar socialmente de modo inf ormado, contributivo, autónomo e responsável.  
+Neste contexto, “Matemática para todos” é um princípio essencial que este documento curricular assume. Dirige -se a todos os alunos, 
+afirmando inequivocamente que ninguém pode ficar excluído da Matemática e que cada um deve ter oportunidade de ser sujeito de 
+experiências de aprendizagem matematicamente ricas e desafiantes.  
+Outro princípio que se assume é “A Matemática é única, mas não é a única”, que perspetiva a Matemática no quadro de uma educação 
+global e integral do indivíduo, na qual a Matemática contribui, a par com as outras áreas curriculares e em diálogo com elas,  para o 
+desenvolvimento das áreas de competências transversais indicadas no Perfil dos Alunos à Saída da Escolaridade Obrigatória. 
+O terceiro princípio assumido é “Matemática para o século XXI”, que corresponde à focagem das aprendizagens matemáticas dos alunos no 
+que é efetivamente relevante nos tempos atuais, com desafios claramente distintos dos do século passado, acompanhando as tendências 
+internacionais no que diz respeito a uma seleção criteriosa do que os alunos devem aprender e como.   
+A consideração destes três princípios teve implicações que se refletem na definição dos objetivos e conteúdos de aprendizagem, das 
+orientações metodológicas e das orientações para a avaliação. 
+ 
+Para quê aprender Matemática no século XXI? 
+Este documento curricular define um conjunto de objetivos gerais para a aprendizagem da Matemática, valorizando uma perspetiva de 
+literacia matemática. Define oito objetivos que todos os alunos devem conseguir atingir e que envolvem, de forma integrada, 
+conhecimentos, capacidades e atitudes relativas a esta área do saber: 
+1. Desenvolver uma predisposição positiva para aprender Matemática e relacionar-se de forma produtiva com esta disciplina nos diversos 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 3 
+contextos em que surge como necessária. Isto pressupõe a possibilidade de crianças e jovens aprenderem Matemática usufruindo dela 
+com gosto e acompanhadas de um sentimento crescente de autoconfiança na sua capacidade de lidar de modo autónomo com a 
+Matemática. O gosto e a autoconfiança são ambos fatores essenciais que interferem positivamente com a predisposição para a 
+aprendizagem, pelo que o seu desenvolvimento deve ser estrategicamente cuidado, de forma continuada, no desenrolar do processo de 
+ensino da Matemática.  
+2. Compreender e usar, de forma fluente e rigorosa, com significado e em situações diversas, conhecimentos matemáticos (conceitos, 
+procedimentos e métodos) relativos aos temas Números, Álgebra, Dados e Probabilidades, e Geometria e Medida. Os conhecimentos 
+matemáticos constituem ferramentas fundamentais a mobilizar no trabalho em Matemática e na sua interação com outras áreas  do 
+saber ou da realidade. Os alunos devem ter oportunidade de aceder a estes conhecimentos e de reconhecer o seu valor, 
+compreendendo o que significam, como se relacionam, que potencialidades oferecem para interpretar e modelar o mundo e resolve r 
+problemas. 
+3. Desenvolver a capacidade de resolver problemas recorrendo aos seus conhecimentos matemáticos, de diversos tipos e em diversos 
+contextos, confiando na sua capacidade de desenvolver estratégias apropriadas e obter soluções válidas. A resolução de proble mas é 
+uma atividade central da Matemática, na qual todos os alunos devem poder tornar -se, progressivamente, mais eficazes.   
+4. Desenvolver a capacidade de raciocinar matematicamente, de forma a compreender o porquê de relações estabelecidas serem 
+matematicamente válidas. O raciocínio matemático é uma atividade central da Matemática que inclui a formulação de conjeturas, a 
+justificação da sua validade ou refutação e a análise crítica de raciocínios produzidos por outros. Todos os alunos devem ter  
+oportunidade de desenvolver progressivamente raciocínios abstratos, usando linguagem matemática com a sofisticação adequada.  
+5. Desenvolver e mobilizar o pensamento computacional, capacidade que tem vindo a assumir relevância nos currículos de Matemática de 
+diversos países. O pensamento computacional pressupõe o desenvolvimento, de forma integrada, de práticas como a abstração, a 
+decomposição, o reconhecimento de padrões, a análise e definição de algoritmos, e o desenvolvimento de hábitos de depuração e  
+otimização dos processos. Estas práticas são imprescindíveis na atividade matemática e dotam os alunos de ferramentas que lhes 
+permitem resolver problemas, em especial relacionados com a programação.  
+6. Desenvolver a capacidade de comunicar matematicamente, de modo a partilhar e discutir ideias matemáticas, formulando e 
+respondendo a questões diferenciadas, ouvindo os outros e fazendo-se ouvir, negociando a construção de ideias coletivas em 
+colaboração. Comunicar de forma clara aos outros requer a organização e consolidação prévia  das ideias e processos matemáticos, o 
+que potencia a compreensão matemática e proporciona oportunidade para o uso progressivo de linguagem matemática como estratég ia 
+de comunicar com maior precisão.  
+7. Desenvolver a capacidade de usar representações múltiplas, como ferramentas de apoio ao raciocínio e à comunicação matemática, e 
+como possibilidade de apropriação da informação veiculada nos diversos meios de comunicação, nomeadamente digitais, onde surg e em 
+formatos em constante evolução. As ideias matemáticas são especialmente clarificadas pela conjugação de diferentes tipos de 
+representação, e a compreensão plena depende da familiaridade e fluência que os alunos têm com as várias formas de representa ção. A 
+tecnologia desempenha um papel especialmente relevante por facilitar a transição entre diferentes tipos de representação e análises 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 4 
+com maior detalhe ou magnitude, inacessíveis sem os recursos tecnológicos.   
+8. Desenvolver a capacidade de estabelecer conexões matemáticas, internas e externas, que lhes permitam entender esta disciplina 
+como coerente, articulada, útil e poderosa. As conexões internas ampliam a compreensão das ideias e dos conceitos matemáticos  que 
+nelas estão envolvidos, e estabelece relações entre os diversos temas da Matemática. As conexões ext ernas da Matemática com 
+distintas áreas do conhecimento, como as Artes, as Ciências ou as Humanidades, ou com situações diversas dos contextos da rea lidade, 
+possibilitam que os conhecimentos matemáticos sejam usados para compreender, modelar e atuar em vár ias áreas ou disciplinas. A 
+exploração de conexões matemáticas pelos alunos é uma condição indispensável para o reconhecimento da relevância da Matemátic a.  
+ 
+O que aprender em Matemática?   
+Neste documento curricular assumem centralidade enquanto conteúdos de aprendizagem na área curricular de Matemática, tanto 
+capacidades matemáticas transversais, como conhecimentos matemáticos, de acordo com o esquema (Figura 1), que relaciona os di versos 
+conteúdos a serem contemplados nas aprendizagens dos alunos. 
+ 
+Figura 1: Conteúdos de aprendizagem em Matemática no Ensino Básico. 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 5 
+ 
+As capacidades matemáticas transversais consideradas em todo o Ensino Básico são seis. Às capacidades de resolução de problemas, 
+raciocínio matemático, comunicação matemática, representações matemáticas e conexões matemáticas (internas e externas), junta-se 
+agora o pensamento computacional, ampliando-se assim o conjunto das que eram valorizadas em anteriores documentos curriculares.  Pela 
+sua importância, estas capacidades são valorizadas como objetivos de aprendizagem e surgem contempladas como um tema de 
+aprendizagem em todos os anos de escolaridade, salientando-se que este destaque enquanto tema não sugere o seu tratamento isolado, 
+mas sim a sua presença permanente e integrada em todos os temas matemáticos. 
+Os conhecimentos matemáticos contemplados em todo o Ensino Básico inscrevem-se nos quatro temas expectáveis, adotando-se tópicos e 
+abordagens adequadas às necessidades da atual sociedade para lidar com questões que envolvem quantidade, rela ções e variação, dados e 
+incerteza, espaço e forma, em contextos diversos. Valorizando-se uma abordagem em espiral, os conhecimentos dos diferentes temas são 
+abordados em todos os anos de escolaridade, com graus sucessivos de aprofundamento e completamento  e com progressivos níveis de 
+formalismo. A segunda secção desta Introdução explicita o entendimento a dar a cada um dos temas matemáticos neste ciclo de 
+escolaridade.  
+Este documento curricular valoriza ainda algumas capacidades e atitudes gerais transversais, decorrentes das áreas de competências 
+previstas no Perfil dos Alunos à Saída da Escolaridade Obrigatória. Estas contribuem para uma educação matemática mais articulada com 
+uma educação global e, no sentido inverso, para que a Matemática ofereça conte xto ao desenvolvimento integral dos alunos. A seleção 
+recai, sem prejuízo de que todas sejam contempladas quando pertinente, naquelas que mais diretamente se relacionam com a Mate mática, 
+considerando-se as capacidades de pensamento crítico, criatividade, colaboração e autorregulação, e as atitudes de autoconfiança, 
+perseverança, iniciativa e autonomia e valorização do papel do conhecimento, aqui concretizado na Matemática.  Estas capacidades e 
+atitudes gerais devem ser alvo de desenvolvimento continuado ao longo dos anos de escolaridade, aplicando-se transversalmente em todos 
+ostemas de aprendizagem. 
+ 
+Como promover a aprendizagem da Matemática? 
+Este documento curricular considera um conjunto de orientações metodológicas que refletem os princípios orientadores  adotados, em 
+especial no que diz respeito ao princípio do direito à aprendizagem da Matemática por todos os alunos. Valorizam -se por isso práticas de 
+ensino promotoras das aprendizagens matemáticas dos alunos que simultaneamente potenciam o alcançar dos o bjetivos de aprendizagem 
+definidos. Estas orientações metodológicas aplicam-se a todos os anos de escolaridade e temas de aprendizagem, destacando-se as 
+seguintes ideias-chave:  
+• Abordagem em espiral — É importante que os alunos tenham múltiplas oportunidades de contactar com os diversos conteúdos 
+matemáticos, em diferentes tempos, proporcionando-se o amadurecimento da compreensão e a consolidação progressiva das diversas 
+aprendizagens. Esta opção permite aprofundar as aprendizagens de acordo com a maturidad e intelectual dos alunos, bem como criar 
+novas possibilidades de aprendizagem aos alunos que ainda não a tenham realizado.  
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 6 
+• Articulação de conteúdos — É importante que os alunos trabalhem de forma intencionalmente explícita com conhecimentos de 
+diferentes temas na abordagem de uma mesma situação/tarefa, mobilizando conexões internas da Matemática. Só assim o aluno pode 
+desenvolver uma visão coerente e integrada, não compartimentada, desta área do saber, o que releva para a qualidade das 
+aprendizagens e está em relação com a abordagem em espiral.  
+• Papel do aluno — É da maior importância implicar os alunos no processo de aprendizagem, numa perspetiva de abordagem dialógica na 
+construção de conhecimento. Proporcionar aos alunos o exercício da sua agência (inicia tiva e autonomia) é essencial para a 
+autorregulação da sua capacidade de aprender. O desenvolvimento do sentimento de pertença ou integração na comunidade de 
+aprendizagem que é a turma cria condições favoráveis à aprendizagem de todos.    
+• Dinâmica da aula — É essencial proporcionar oportunidade e tempo para que os alunos pensem, partilhem e discutam entre si as 
+produções matemáticas que realizam durante a exploração de uma tarefa, e para que sistematizem coletivamente as aprendizagens  
+matemáticas que emergem. Estas práticas contribuem decisivamente para a aquisição de conhecimentos e o desenvolvimento das 
+capacidades matemáticas transversais consideradas, como o raciocínio ou a comunicação matemática, bem como para o 
+desenvolvimento das capacidades e atitudes gerais transversais, a estar presentes na abordagem e exploração das tarefas, qualquer que 
+seja o tema. 
+• Tarefas — A experiência matemática dos alunos desenrola-se a partir de tarefas, sendo essencial que estas sejam poderosas e 
+desafiantes, com vista a cativar os alunos e impulsionar as suas aprendizagens. Importa considerar tarefas de natureza distinta, 
+selecionadas/adaptadas ou criadas de acordo com os objetivos a atingir, destacando -se as propostas que possibilitam que os alunos 
+reconheçam a relevância da Matemática, focando-se na articulação com outras áreas de conhecimento ou com a realidade, usando a 
+Matemática para compreender e modelar situações de diversos contextos, e tomar decisões informadas e fundamentadas.  
+• Modos de trabalho — As modalidades de trabalho a adotar com os alunos devem ser diversificadas e escolhidas em função do objetivo 
+de aprendizagem e da tarefa a realizar. Atendendo à necessidade de promover a colaboração, o documento curricular valoriza os  modos 
+de trabalho em que os alunos interagem uns com os outros, e também formas de organização em que os alunos trabalham de forma 
+independente do professor (embora com a sua monitorização), individualmente ou em pequenos grupos, seguidos de uma discussão 
+coletiva, o que potencia o desenvolvimento da autonomia dos alunos. 
+• Recursos/tecnologia — A aprendizagem da Matemática beneficia do uso de recursos diversos que possibilitem, entre outros, o uso e 
+exploração de representações múltiplas de forma eficiente. Os materiais manipuláveis devem ser utilizados sempre que favoreçam a 
+compreensão de conhecimentos matemáticos e a conexão entre diferentes representações matemáticas. As ferramentas tecnológicas 
+devem ser consideradas como recursos incontornáveis e potentes para o ensino e a aprendizagem da Matemática.  A literacia digital dos 
+alunos deve incluir a realização de cálculos, a construção de gráficos, a realização de simulações, a recolha, organização e análise de 
+dados, a experimentação matemática, a investigação e a modelação, a partilha de ide ias. Todos os alunos devem poder aceder 
+livremente a calculadoras, robôs, aplicações disponíveis na Internet e software para tratamento estatístico, geometria, funções, 
+modelação, e ambientes de programação visual. A Internet deve constituir-se como fonte importante de acesso à informação ao serviço 
+do ensino e da aprendizagem da Matemática. A utilização da calculadora contempla tanto o objeto tradicional como as aplicações 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 7 
+instaladas em dispositivos móveis com funcionalidades semelhantes ou ampliadas e apl icações disponíveis na Internet. A integração da 
+tecnologia na atividade matemática deve ser entendida com um caráter instrumental, não como um fim em si mesmo, para promover  
+aprendizagens mais significativas e ampliar os contextos em que se desenvolve a a ção do aluno e a diversidade de perspetivas sobre 
+objetos matemáticos estudados, com influência determinante na natureza das propostas apresentadas pelo professor.  
+ 
+Como avaliar as aprendizagens em Matemática?  
+A avaliação é uma dimensão incontornável em qualquer documento curricular pela importância com que se reveste na aprendizagem dos 
+alunos. Duas razões principais são de destacar: 
+• Uma prática de avaliação formativa continuada contribui de forma muito expressiva para as aprendizagens dos alunos, pelo qu e é 
+imperioso o seu desenvolvimento na aula de Matemática; 
+• O foco da avaliação sumativa, o que é testado em cada momento formal, transmite o que é realmente importante saber, pelo que a sua 
+prática deve respeitar e estar em consonância com as restantes componentes curriculares. 
+Este documento curricular assume a importância da avaliação formativa. De forma a garantir a coerência com o propósito fundamental da 
+avaliação formativa, o de regular as aprendizagens matemáticas dos alunos (e o ensino do professor) , devem ser criados ambientes de 
+aprendizagem matemática onde errar seja visto como fazendo parte do processo de aprendizagem. Acresce que, para que a avaliaç ão, 
+enquanto atividade de comunicação, realmente aconteça, é imprescindível discutir e negociar co m os alunos os critérios de avaliação, as 
+lentes que vão ser usadas para decidir se houve aprendizagem e o que falta melhorar, desenvolver, para que esta atinja o níve l esperado. 
+Se é certo que todo o professor tem critérios de avaliação, não é tão certo q ue estes sejam claros para os alunos. Assim, há que trabalhar 
+com os alunos os critérios de avaliação para cada tipologia de aprendizagens ou de tarefas a realizar (por exemplo, o que é i mportante na 
+resolução de problemas? O que os alunos têm de evidenciar para revelarem ter capacidade de resolver problemas?). A apropriação dos 
+critérios de avaliação por parte dos alunos constitui um importante contributo para o desenvolvimento da sua capacidade de 
+autorregulação, fim último da avaliação formativa. A forma como a avaliação formativa se concretiza no trabalho quotidiano com os alunos 
+é muito variada, podendo ter uma natureza formal ou informal. Contudo, dificilmente se conseguem encontrar estratégias de ava liação 
+formativa eficazes que não incluam o feedback, seja ele oral ou escrito. Mas para que o feedback possa realmente contribuir para a 
+aprendizagem, para além de deve ser dado em tempo útil (depois do aluno ter tido oportunidade de trabalhar a tarefa e poder c ontinuar a 
+desenvolvê-la após receber os comentários do professor ou dos seus pares), deverá ainda ser compreensível, promover a sua reflexão sobre 
+o que já fez, e apontar pistas que o oriente a prosseguir o seu trabalho.   
+No que respeita à avaliação sumativa, é imperioso que esta se operacionalize de forma coerente com as restantes componentes 
+curriculares, isto é, tenha em conta os conhecimentos e as capacidades constantes na aprendizagem matemática. Uma vez que não  existe 
+um único instrumento que seja simultaneamente adequado a todo o tipo de aprendizagens matemáticas que se espera que os alunos 
+desenvolvam, há que diversificar os instrumentos de avaliação para recolha de informação. Por exemplo, se o foco for a aquisi ção de 
+conhecimentos de factos ou procedimentos matemáticos, um instrumento a ser respondido na forma escrita, individual e em tempo 
+limitado, como sejam uma questão de aula ou um teste, pode ser adequado. Mas se o objeto de avaliação for a capacidade de res olução de 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 8 
+problemas ou de raciocínio matemático, a realização de uma tarefa, em tempo alargado, que faça apelo a uma destas capacidades, poderá 
+ser mais adequado. A apresentação e discussão oral desta resolução poderá ser uma forma de avaliar a capacidade de comunicaçã o 
+matemática dos alunos. Já a realização de um pequeno projeto, a pares ou em grupo, poderá fornecer ao professor e aos alunos evidências 
+da sua capacidade de estabelecer conexões matemáticas com outras disciplinas ou da sua literacia estatística. Ao não respeita r esta 
+orientação corre-se o risco de reduzir o currículo às aprendizagens de nível cognitivo mais baixo, por serem estas as que são vistas como 
+sendo mais fáceis de mensurar.  
+ 
+Como é que este documento apoia a gestão curricular em Matemática? 
+O professor é um elemento-chave mediador das aprendizagens matemáticas dos alunos, sendo fundamentais as suas escolhas relativamente 
+à abordagem dos conteúdos de aprendizagem e às orientações metodológicas que integram o documento curricular. Expresso no for mato de 
+Aprendizagens Essenciais, este documento curricular apresenta-se organizado em quatro colunas, que importa distinguir: 
+• Temas e tópicos matemáticos [Coluna 1] — Identifica os conceitos matemáticos a abordar ao longo do ano de escolaridade, sem 
+pretender estabelecer uma ordem sequencial. Por incidir num ano de escolar idade específico, detalha os conteúdos a introduzir nesse 
+ano, pressupondo necessariamente que o que foi abordado nos anos anteriores precisa de ser retomado. A explicitação por ciclo , 
+incluída na segunda secção desta Introdução, indica os principais focos dos conteúdos de aprendizagem, organizados pelos diferentes 
+temas; 
+• Objetivos de aprendizagem [Coluna 2] — Explicita as aprendizagens que o aluno deve revelar relativamente a cada tópico e subtópico 
+em cada um dos cinco temas de aprendizagem (Capacidades matemáticas transversais, Números, Álgebra, Dados e Probabilidades, 
+Geometria e Medida); 
+• Ações estratégicas de ensino do professor [Coluna 3] — Fornece indicações metodológicas que se consideram adequadas para a 
+promoção dos objetivos de aprendizagem definidos, relativos aos conhecimentos e capacidades matemáticas e também às capacidades 
+e atitudes gerais ancoradas no Perfil dos Alunos à Saída da Escolaridade Obrigatória. Inclui também exemplos de abordagens aos 
+conhecimentos, tarefas a propor aos alunos e o modo de as explorar, para clarificação e ilustração das orientações metodológicas. 
+Destaca-se a inclusão de exemplos que sublinham a intenção de, através da mesma tarefa, serem trabalhados objetivos de diversos 
+subtópicos matemáticos e/ou capacidades matemáticas, numa lógica de articulação de aprendizagens e de racionalização do tempo;   
+• Áreas de competências do Perfil dos Alunos [Coluna 4] — Indica as áreas de competências definidas no Perfil dos Alunos à Saída da 
+Escolaridade Obrigatória cujo desenvolvimento é promovido, de forma explícita, pelas ações estratégicas do professor que são 
+indicadas.  
+Assim, este documento curricular estabelece uma ligação entre as aprendizagens matemáticas visadas, as indicações metodológic as e as 
+áreas de competências, conhecimentos, capacidades e atitudes, definidas no Perfil dos Alunos à Saída da Escolaridade Obrigatória.  
+O professor encontra neste documento um recurso de trabalho que lhe permitirá delinear o seu ensino, que necessariamente terá  de 
+adequar aos contextos e às características das suas turmas. Reconhecer que aprender Matemática é um direito universal de todos os alunos 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 9 
+implica desenvolver práticas que promovam a inclusão, querendo isto dizer que a diferenciação é uma ideia -chave a estar presente nas 
+preocupações do professor relativamente ao quotidiano da sala de aula. Caberá ao professor promover a diferenciação pedagógica por 
+diferentes estratégias. Poderá abordar de diversos modos um mesmo conceito matemático (por exemplo, recorrendo ao uso de dife rentes 
+tipos de representações); propor diversos níveis de desenvolvimento de uma mesma tarefa (por exemplo, desafiando alguns alunos a  
+resolver uma extensão da tarefa em exploração na aula); estabelecer conexões externas da Matemática com outras áreas, conquis tando a 
+mobilização para a Matemática de alunos que se sintam mais familiarizados ou confiantes nessas outras áreas.  
+ 
+2. Matemática no 1.º Ciclo 
+ 
+Que conteúdos importam neste ciclo de escolaridade?  
+Nesta secção indicam-se os principais focos dos conteúdos de aprendizagem, organizados pelos diferentes temas. 
+ 
+Capacidades matemáticas 
+No 1.º ciclo inicia-se o desenvolvimento sistemático das seis capacidades matemáticas transversais, com situações que simultaneamente 
+sejam adequadas à idade dos alunos e lhes proporcionem oportunidades desafiantes de desenvolver o seu raciocínio matemático, 
+valorizando-se neste ciclo sobretudo o raciocínio indutivo. A resolução de problemas deve ser uma constante e apoiar tanto a abordagem 
+aos conhecimentos matemáticos como oferecer oportunidades para a sua aplicação. Importa explicitar as diferentes estratégias de 
+resolução de problemas que vão sendo mobilizadas, nomeadamente as que estão associadas ao pensamento computacional, a ser exp lorado 
+de forma simples e em estreita ligação com o uso de tecnologia. Aprender a usar representações múltiplas em Matemática é essencial, 
+valorizando-se a expressão verbal das ideias, bem como as representações que envolvem materiais manipuláveis ou elaboração de 
+diagramas, sem dispensar o investimento progressivo no uso fluente da linguagem simbólica. Incentiva-se o desenvolvimento da 
+comunicação matemática, nomeadamente da capacidade de questionar, explicar e argumentar em diálogo com os colegas. Promove -se o 
+estabelecimento de conexões internas e externas da Matemática com outras áreas do currículo, em especial o Estudo do Meio. As situações 
+que envolvem o desenvolvimento das capacidades matemáticas oferecem oportunidades acrescidas para o desenvolvimento das capac idades 
+e atitudes gerais. 
+ 
+Números 
+No 1.º Ciclo, importa que os alunos desenvolvam uma compreensão do sentido de número, em relação com a forma como os números s ão 
+usados no dia a dia e usem esse conhecimento e o das operações para resolver problemas que envolvam a ideia de quantidade em 
+contextos diversos, em especial do mundo real, onde importam as estimativas e valores aproximados. Destaca -se a importância do cálculo 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 10 
+mental, a desenvolver desde os primeiros dias de escola e a  perseguir ao longo dos anos, ampliando-se progressivamente o leque das 
+estratégias que os alunos podem mobilizar e o universo numérico da sua aplicação. Os algoritmos das operações são abordados a  partir do 
+3.º ano, após a construção com compreensão. As diferentes representações dos números racionais não negativos são  introduzidas de forma 
+faseada, iniciando-se o trabalho com frações no 2.º ano e com decimais no 4.º, altura em que é também introduzida, em articulação, a 
+notação de percentagem. 
+Importa mobilizar para a sala de aula os conhecimentos que as crianças trazem das suas vivências pessoais, em particular da Educação Pré-
+escolar. No tema dos Números, os seus conhecimentos prévios poderão eventualmente sobrepor -se a alguns dos conhecimentos 
+matemáticos propostos no 1.º ano de escolaridade, em função das oportunidades que as crianças tenham tido antes de ingressar no 1º ciclo. 
+ 
+Álgebra 
+No 1.º Ciclo, assume-se pela primeira vez a Álgebra enquanto tema matemático autónomo, reconhecendo -se a sua transversalidade e 
+facilidade de articulação interna com os outros temas matemáticos, em especial com Números, enfatizando-se uma abordagem à aritmética 
+generalizada. Valoriza-se que os alunos desenvolvam desde cedo e progressivamente o pensamento algébrico, denotando compreensão da  
+variação em situações diversas e desenvolvendo a capacidade de conjeturar, reconhecer e exprimir relações e generalizações, numéricas 
+e algébricas, através de representações adequadas às suas idades, com as quais possam dar sentido ao que pensam, sendo de esp ecial 
+relevância neste tema o uso de diagramas e tabelas. Valoriza-se também que as crianças desenvolvam a capacidade de usar e/ou construir 
+modelos matemáticos associados a situações da sua realidade e os usem para descrever e fazer previsões, contribuindo para val orizar o 
+papel e relevância da Matemática. 
+Importa também aqui mobilizar para a sala de aula os conhecimentos que as crianças trazem das suas vivências pessoais, em par ticular da 
+Educação Pré-escolar. Neste contexto, a exploração de padrões com recurso a materiais manipuláveis, proporcion a frequentes 
+oportunidades para as crianças reconhecerem e trabalharem com regularidades.  
+ 
+Dados e Probabilidades 
+No 1.º Ciclo, investe-se no desenvolvimento da capacidade das crianças lidarem com dados, com o objetivo de melhor conhecerem o que as 
+rodeia, fundamentar decisões, interrogar-se sobre novas questões e abordar a incerteza. Importa que as crianças tenham oportunidade de 
+desenvolver dois tipos de trabalho distintos mas igualmente relevantes numa perspetiva de valorização da literacia estatístic a. Um deles 
+consiste no estudo de situações concretas reais de interesse, a fazer regularmente e em conexão com outras áreas curriculares , implicando-
+se a criança em todas as fases de uma investigação estatística. A formulação de questões incide inicialmente em características 
+qualitativas, ampliando-se no 4.º ano a características quantitativas discretas. A recolha de dados envolve decidir acerca da fonte e dos 
+métodos a usar, públicos ou privados, e a análise de dados apoia-se na produção de gráficos diversos, incluindo os de barras, a ser 
+produzidos com recurso a tecnologia. O outro tipo de trabalho consiste na análise de gráficos e infográficos reais que se enc ontram em 
+publicações ou na comunicação social difundida por vários meios e que as crianças devem ser capazes de ler e, progressivamente, apreciar 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 11 
+criticamente. Destaca-se ainda a valorização do raciocínio probabilístico a partir do 3.º ano.  
+Sublinha-se que também neste tema as crianças podem ter usufruído de experiências significativas na Educação Pré -escolar, nomeadamente 
+no contexto da exploração dos mapas de recolha de dados diversos que frequentemente se encontram nas salas dos jardins de inf ância.  
+ 
+Geometria e Medida 
+No 1.º Ciclo, importa que os alunos iniciem o desenvolvimento do raciocínio espa cial, com ênfase na visualização e na orientação espacial, 
+essenciais para a compreensão do espaço em que se movem, tendo acesso a diversas experiências físicas (itinerários, vistas, plantas) e/ou 
+com recurso a materiais que sustentem a construção das suas perceções espaciais, em especial com recurso a tecnologia. Os alunos 
+contactam com um conjunto alargado de formas, relativas a figuras no espaço e no plano, com as quais produzem diversas operaç ões, 
+compondo e decompondo, estabelecendo relações espaciais. As isometrias começam a ser abordadas informalmente, através de deslizar, 
+rodar e voltar, sistematizando-se de seguida a reflexão e rotação (quartos de volta e meias voltas) para apoiar a posterior abordagem das 
+simetrias de reflexão e de rotação no 4.º ano. Estas constituem ferramentas para analisar a realidade em redor, proporcionando 
+oportunidades aos alunos de reconhecerem a relevância da Geometria na criação e construção de objetos de contextos diversos. No que diz 
+respeito à Medida, os alunos podem comparar, estimar e determinar medidas de diversas grandezas em vários contextos e, relativamente 
+ao dinheiro, propõem-se algumas incursões pela educação financeira, estreitamente relacionada com a cidadania.   
+No que diz respeito a este tema, é expectável que as crianças tenham tido acesso a materiais diversos com os quais tenham feito 
+construções, no plano e no espaço, e conheçam o nome de algumas figuras geométricas que tenham aprendido no contexto de exper iências 
+diversas, nomeadamente na Educação Pré-escolar. Convém também atender a que poderão ter tido oportunidade de explorar itinerários, no 
+âmbito de saídas das instituições, potenciando o desenvolvimento do seu sentido espacial.  
+ 
+ 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 12 
+ 
+ 
+ÁREAS DE 
+COMPETÊNCIAS 
+DO PERFIL DOS 
+ALUNOS (ACPA) 
+ 
+ 
+Informação e 
+comunicação 
+ 
+Pensamento crítico e 
+pensamento criativo 
+ 
+Desenvolvimento pessoal 
+e autonomia 
+ 
+Sensibilidade estética e 
+artística 
+ 
+Consciência e domínio 
+do corpo 
+Linguagens e textos 
+Raciocínio e resolução 
+de problemas 
+Relacionamento 
+interpessoal 
+Bem-estar, saúde e 
+ambiente 
+Saber científico, técnico 
+e tecnológico 
+     
+ 
+J H F D B 
+I G E C A 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 13 
+ 
+  
+OPERACIONALIZAÇÃO DAS APRENDIZAGENS ESSENCIAIS (AE) 
+TEMAS, Tópicos e 
+Subtópicos  
+OBJETIVOS DE APRENDIZAGEM: 
+Conhecimentos, Capacidades e Atitudes 
+AÇÕES ESTRATÉGICAS DE ENSINO DO PROFESSOR 
+ 
+Áreas de 
+Competência do 
+Perfil dos 
+Alunos 
+CAPACIDADES 
+MATEMÁTICAS 
+   
+Resolução de 
+problemas 
+  C, D, E, F, I 
+Processo Reconhecer e aplicar as etapas do processo 
+de resolução de problemas. 
+ 
+ 
+Solicitar, de forma sistemática, que os alunos percorram e reconheçam 
+as diferentes etapas de resolução de um problema (interpretar o 
+problema, selecionar e executar uma estratégia, e avaliar o resultado 
+no contexto da situação problemática), incentivando a sua 
+perseverança no trabalho em Matemática. 
+Propor problemas com excesso de dados ou com dados insuficientes.  
+ 
+ Formular problemas a partir de uma situação 
+dada, em contextos diversos (matemáticos e 
+não matemáticos). 
+Formular problemas a partir de uma situação dada, em contextos 
+diversos (matemáticos e não matemáticos). 
+ 
+Estratégias 
+ 
+Aplicar e adaptar estratégias diversas de 
+resolução de problemas, em diversos 
+contextos, nomeadamente com recurso à 
+tecnologia. 
+Acolher resoluções criativas propostas pelos alunos, valorizando o seu 
+espírito de iniciativa e autonomia, e analisar, de forma sistemática, 
+com toda a turma, a diversidade de resoluções relativas aos problemas 
+resolvidos, de modo a proporcionar o conhecimento coletivo de 
+estratégias que podem ser mobilizadas em outras situações: fazer uma 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 14 
+ 
+Reconhecer a correção, a diferença e a 
+eficácia de diferentes estratégias da 
+resolução de um problema. 
+simulação, por tentativa e erro, começar por um problema mais 
+simples, usar casos particulares, criar um diagrama, começar do fim 
+para o princípio [Exemplo: O autocarro onde ia  o André partiu da 
+estação com alguns passageiros. Na primeira paragem entraram sete 
+passageiros; na segunda saíram cinco passageiros e na terceira entrou 
+apenas um, tendo chegado ao destino com 20 passageiros. Quantos 
+passageiros iniciaram a viagem?] 
+Orquestrar discussões com toda a turma que envolvam não só a 
+discussão das diferentes estratégias da resolução de problemas e 
+representações usadas, mas também a comparação entre a sua 
+eficácia, valorizando o espírito crítico dos alunos e promovendo a 
+apresentação de argumentos e a tomada de posições fundamentadas e 
+a capacidade de negociar e aceitar diferentes pontos de vista.  
+Raciocínio 
+matemático  
+  A, C, D, E, F, I 
+Conjeturar e 
+generalizar 
+ 
+Formular e testar conjeturas/generalizações, 
+a partir da identificação de regularidades 
+comuns a objetos em estudo, nomeadamente 
+recorrendo à tecnologia. 
+Proporcionar o desenvolvimento do raciocínio matemático dos alunos 
+solicitando, de forma explícita, processos como conjeturar, generalizar 
+e justificar [Exemplo: Será que a soma de dois números pares é um 
+número par? Justifica a tua resposta]. 
+Apoiar os alunos na procura e reconhecimento de regularidades em 
+objetos em estudo, proporcionando tempo suficiente de trabalho para 
+que os alunos não desistam prematuramente, e valorizando a sua 
+criatividade. 
+ 
+Classificar 
+ 
+Classificar objetos atendendo às suas 
+características. 
+Incentivar a identificação de semelhanças e diferenças entre objetos 
+matemáticos agrupando-os com base em características matemáticas 
+[Exemplo: Apresentar um conjunto diversificado de figuras que inclua 
+polígonos e outras figuras que não sejam polígonos. Separar as figuras 
+nos dois conjuntos e pedir aos alunos para descobrirem a regra em que 
+pensou o professor quando organizou os dois grupos, conduzindo-os a 
+identificar as características dos polígonos, sem preocupação de obter 
+uma definição]. 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 15 
+Justificar 
+ 
+Distinguir entre testar e validar uma 
+conjetura. 
+ 
+Justificar que uma conjetura/generalização é 
+verdadeira ou falsa, usando progressivamente 
+a linguagem simbólica. 
+ 
+Reconhecer a correção, diferença e 
+adequação de diversas formas de justificar 
+uma conjetura/generalização. 
+Promover a comparação pelos alunos, a partir da análise das suas 
+resoluções, entre testar e validar uma conjetura, destacando a 
+diferença entre os dois processos, e desenvolvendo o seu sentido crítico 
+[Exemplo: A Teresa diz que a soma de três números consecutivos é 
+sempre par e, para mostrar que está correta, usou os seguintes casos: 
+3+4+5 e 5+6+7. Achas que a Teresa tem razão?] 
+Favorecer, através da resolução de diversas tarefas, o conhecimento de 
+diferentes formas de justificar, como seja, por coerência lógica, pelo 
+uso de exemplos genéricos ou de contraexemplos e por exaustão. Após 
+familiarização com estas diferentes formas, orquestrar uma discussão 
+com toda a turma sobre as suas diferenças e sua adequação, 
+promovendo o sentido crítico dos alunos. 
+Proporcionar a análise, a pares ou em grupo, de justificações feitas por 
+outros, incentivando o fornecimento de feedback aos colegas, 
+valorizando a aceitação de diferentes pontos de vista e promovendo a 
+autorregulação pelos alunos.  
+ 
+Pensamento 
+computacional 
+  C, D, E, F, I 
+Abstração 
+ 
+Extrair a informação essencial de um 
+problema. 
+ 
+Criar oportunidades para que os alunos representem problemas de 
+forma simplificada, concentrando-se na informação mais importante. 
+Realçar processos relevantes e secundarizar detalhes e especificidades 
+particulares [Exemplo: Na exploração do jogo seguinte, o objetivo é 
+conduzir o robô ao objeto vermelho. Assim, os alunos devem centrar a 
+atenção no objeto a atingir, considerar os obstáculos e desconsiderar 
+todos os outros objetos. 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 16 
+]. 
+Fonte: https://www.mathplayground.com/code_builder.html 
+Decomposição 
+ 
+Estruturar a resolução de problemas por 
+etapas de menor complexidade de modo a 
+reduzir a dificuldade do problema. 
+Incentivar a identificação de elementos importantes e a sua ordenação 
+na execução de uma tarefa, criando oportunidades para os alunos 
+decomporem a tarefa em partes mais simples, diminuindo desta forma 
+a sua complexidade [Exemplo: Propor a construção/composição de uma 
+figura dada usando blocos padrão, conduzindo os alunos a centrarem-se 
+em partes da figura de modo a reconhecerem quais as peças por onde 
+poderão iniciar a construção. Na figura seguinte, os alunos poderão 
+começar por colocar os triângulos: 
+ 
+         
+ ]. 
+ 
+Reconhecimento 
+de padrões 
+ 
+Reconhecer ou identificar padrões no 
+processo de resolução de um problema e 
+aplicar os que se revelam eficazes na 
+resolução de outros problemas semelhantes. 
+Incentivar a identificação de padrões durante a resolução de 
+problemas, solicitando que os alunos os descrevam e realizem previsões 
+com base nos padrões identificados.  
+Incentivar a procura de semelhanças e a identificação de padrões 
+comuns a outros problemas já resolvidos de modo a aplicar, a um 
+problema em resolução, os processos que anteriormente se tenham 
+revelado úteis. 
+ 
+Algoritmia 
+ 
+Desenvolver um procedimento passo a passo 
+(algoritmo) para solucionar um problema de 
+modo a que este possa ser implementado em 
+recursos tecnológicos, sem necessariamente o 
+Promover o desenvolvimento de práticas que visem estruturar, passo a 
+passo, o processo de resolução de um problema, incentivando os alunos 
+a criarem algoritmos que possam descrever essas etapas 
+nomeadamente com recurso à tecnologia, promovendo a criatividade e 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 17 
+ser. valorizando uma diversidade de resoluções e representações que 
+favoreçam a inclusão de todos [Exemplo: Na exploração de jogos que 
+envolvam relações numéricas e as propriedades das operações, 
+conduzir os alunos a definirem o algoritmo (sequência de instruções 
+passo a passo) que permite perceber como funciona o jogo]. 
+Propor a discussão com toda a turma sobre algoritmos familiares aos 
+alunos, de forma a conduzir à sua compreensão [Exemplo: Na 
+construção de algoritmos das operações, apoiar os alunos a definirem 
+os processos usados, passo a passo, e a compreenderem por que razão 
+cada algoritmo funciona]. 
+Depuração Procurar e corrigir erros, testar, refinar e 
+otimizar uma dada resolução apresentada. 
+Incentivar os alunos a definirem estratégias de testagem e "depuração" 
+(ou correção) quando algo não funciona da forma esperada ou tem 
+alguma “imprecisão”, com o intuito de encontrarem erros e 
+melhorarem os seus processos, incentivando a sua perseverança no 
+trabalho em Matemática e promovendo progressivamente a construção 
+da sua autoconfiança [Exemplo: Na construção dos 12 pentaminós 
+possíveis, os alunos poderão sistematicamente sobrepor as figuras de 
+forma a descobrirem as que são congruentes e eliminarem as repetidas, 
+corrigindo eventuais duplicações]. 
+[Exemplo: Usando um ambiente de programação visual [Exemplo: 
+Scratch], os alunos poderão otimizar as instruções (algoritmo) para a 
+construção de um quadrado através do recurso aos ciclos de repetição:  
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 18 
+]. 
+Comunicação 
+matemática  
+  A, C, E, F  
+Expressão de 
+ideias 
+ 
+Descrever a sua forma de pensar acerca de 
+ideias e processos matemáticos, oralmente e 
+por escrito. 
+Reconhecer e valorizar os alunos como agentes da comunicação 
+matemática, usando expressões dos alunos e criando intencionalmente 
+oportunidades para falarem, questionarem, esclarecerem os seus 
+colegas, promovendo progressivamente a construção da sua 
+autoconfiança.  
+Criar oportunidades para aperfeiçoamento da comunicação escrita, 
+propondo a construção, em colaboração, de frases que sistematizem o 
+conhecimento matemático institucionalizado sobre ideias matemáticas 
+relevantes. 
+Colocar questões com diferentes propósitos, para incentivar a 
+comunicação matemática pelos alunos: obter informação sobre o que 
+aluno já sabe; apoiar o desenvolvimento do raciocínio do aluno, 
+focando-o no que é relevante; encorajar a explicação e reflexão sobre 
+raciocínios produzidos, favorecendo a autorregulação dos alunos 
+[Exemplos: Questão para obter informação: Que informação tiras do 
+gráfico?; Questão para apoiar o raciocínio: Porque é que é sempre mais 
+4?; Questão para encorajar a reflexão: O que existe de diferente entre 
+estas duas resoluções?]. 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 19 
+Discussão de 
+ideias 
+Ouvir os outros, questionar e discutir as ideias 
+de forma fundamentada, e contrapor 
+argumentos. 
+Incentivar a partilha e a discussão de ideias (conceitos e propriedades) 
+e de processos matemáticos (resolver problemas, raciocinar, investigar, 
+…), oralmente, entre os alunos e entre o aluno e o professor, 
+solicitando que fundamentem o que afirmam, valorizando a 
+apresentação de argumentos e tomada de posições fundamentadas e 
+capacidade de negociar e aceitar diferentes pontos de vista. 
+ 
+Representações 
+matemáticas  
+  A, C, D, E, F, I 
+Representações 
+múltiplas 
+ 
+Ler e interpretar ideias e processos 
+matemáticos expressos por representações 
+diversas. 
+ 
+Usar representações múltiplas para 
+demonstrar compreensão, raciocinar e 
+exprimir ideias e processos matemáticos, em 
+especial linguagem verbal e diagramas. 
+Adotar representações físicas diversas para simular situações 
+matemáticas, não só com recurso a materiais manipuláveis [Exemplo: 
+materiais estruturados como os colares de contas, cubos de encaixe, 
+tangrans, MAB, modelos físicos de sólidos, polígonos encaixáveis, 
+círculos de frações, entre outros; e materiais não estruturados que 
+podem ser recolhidos do ambiente dos alunos, como embalagens, 
+sementes, etc.], mas também com a dramatização de processos 
+durante a resolução de problemas.  
+Solicitar aos alunos que recorram a representações visuais, seja com 
+papel e lápis ou em versão digital, para explicar aos outros a forma 
+como pensam na resolução de um problema ou como pensam sobre um 
+conceito [Exemplo: Usar um ambiente de geometria dinâmica, como o 
+GeoGebra, para mostrar que um retângulo pode estar em qualquer 
+posição ou pode ter tão “fininho” ou tão “largo” quanto quisermos]. 
+Valorizar novas ideias criativas individuais ou resultantes da interação 
+com os outros e a consideração de uma diversidade de resoluções e 
+representações que favoreçam a inclusão dos alunos. 
+Orquestrar a discussão, com toda a turma, de diferentes resoluções de 
+uma dada tarefa que mobilizem representações distintas, comparar 
+coletivamente a sua eficácia e concluir sobre o papel que podem ter na 
+resolução de tarefas com características semelhantes, valorizando uma 
+diversidade de resoluções e representações que favoreçam a inclusão 
+dos alunos e reconhecendo o seu espírito de iniciativa e autonomia 
+[Exemplos: Valorizar o papel dos diagramas para evidenciar as relações 
+e estrutura matemática de um problema; Valorizar as tabelas para 
+organizar e sistematizar casos particulares em busca de uma 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 20 
+regularidade]. 
+Proporcionar recursos que agilizem a partilha das diferentes 
+representações feitas pelos alunos na resolução das tarefas [Exemplo: 
+Fornecer a cada grupo folhas A3 e canetas grossas de cor, para registar 
+a resolução de um problema; fotografar a resolução de um grupo e 
+partilhá-la digitalmente, projetada para toda a turma]. 
+Conexões entre 
+representações 
+ 
+Estabelecer conexões e conversões entre 
+diferentes representações relativas às 
+mesmas ideias/processos matemáticos, 
+nomeadamente recorrendo à tecnologia. 
+Promover a análise de diferentes representações sobre a mesma 
+situação, considerando as representações verbal, visual, física, 
+contextual e simbólica, e explicitar as relações entre elas, 
+evidenciando o papel das conexões entre representações para promover 
+a compreensão matemática [Exemplo: A representação visual da 
+sequência dos números quadrados permite compreender porque 
+resultam de adições dos números ímpares consecutivos].  
+ 
+ 
+Linguagem 
+simbólica 
+matemática 
+ 
+Usar a linguagem simbólica matemática e 
+reconhecer o seu valor para comunicar 
+sinteticamente e com precisão. 
+Incentivar o uso progressivo de linguagem simbólica matemática.  
+Confrontar os alunos com descrições de uma mesma situação através de 
+representações múltiplas e identificar as vantagens da linguagem 
+simbólica.  
+ 
+Conexões 
+matemáticas 
+  C, D, E, F, H 
+Conexões internas 
+ 
+Reconhecer e usar conexões entre ideias 
+matemáticas de diferentes temas, e 
+compreender esta ciência como coerente e 
+articulada. 
+Explorar as conexões matemáticas em tarefas que façam uso de 
+conhecimentos matemáticos de diferentes temas e explicitar essas 
+conexões de modo a que os alunos as reconheçam [Exemplo: No 
+exemplo acima, evidenciar as conexões internas pela explicitação das 
+relações entre os números e os quadrados]. 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 21 
+Conexões 
+externas 
+ 
+Aplicar ideias matemáticas na resolução de 
+problemas de contextos diversos (outras áreas 
+do saber, realidade, profissões). 
+Selecionar, em conjunto com os alunos, situações da realidade que 
+permitam compreender melhor o mundo em redor [Exemplo: Existem 
+máquinas de recolha de garrafas de plástico que convertem o valor que 
+atribuem aos depósitos, em doações a instituições de solidariedade 
+social ou sem fins lucrativos. Estudar a quantidade de garrafas 
+necessárias para perfazer um dado montante, tendo em conta os 
+valores reais que a máquina atribui a garrafas com diferentes 
+capacidades]. 
+Convidar profissionais que usem a Matemática na sua profissão para que 
+os alunos os possam entrevistar a esse propósito, promovendo a 
+concretização do trabalho com sentido de responsabilidade e 
+autonomia. 
+ 
+ Identificar a presença da Matemática em 
+contextos externos e compreender o seu 
+papel na criação e construção da realidade. 
+Realizar visitas de estudo, reais ou virtuais, para observar a presença 
+da Matemática no mundo que nos rodeia e sonhar com a sua 
+transformação, reconhecendo o papel da Matemática na criação e 
+construção da realidade, e incentivando novas ideias criativas 
+individuais ou resultantes da interação com os outros [Exemplo: 
+Convidar os alunos a observar fachadas de edifícios comuns, identificar 
+como a Matemática foi usada nessa construção, e incentivá-los a propor 
+novas fachadas renovadas]. 
+ 
+Modelos 
+matemáticos  
+ 
+Interpretar matematicamente situações do 
+mundo real, construir modelos matemáticos 
+adequados, e reconhecer a utilidade e poder 
+da Matemática na previsão e intervenção 
+nessas situações. 
+ 
+Mobilizar situações da vida dos alunos para serem alvo de estudo 
+matemático na turma, ouvindo os seus interesses e ideias, e cruzando-
+as com outras áreas do saber, encorajando, para exploração 
+matemática, ideias propostas pelos alunos e reconhecendo a utilidade e 
+o poder da Matemática na previsão e intervenção na realidade 
+[Exemplo: Alunos que façam dança, poderão ver interesse em marcar o 
+chão, para definir posições de referência dos bailarinos em 
+determinadas coreografias, resultando as marcações como um modelo 
+matemático]. 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 22 
+ 
+ 
+TEMAS, Tópicos 
+e Subtópicos  
+OBJETIVOS DE APRENDIZAGEM: 
+Conhecimentos, Capacidades e 
+Atitudes  
+AÇÕES ESTRATÉGICAS DE ENSINO DO PROFESSOR 
+ 
+Áreas de 
+Competência 
+do Perfil dos 
+Alunos 
+NÚMEROS 
+   
+Números naturais    A, C, D, F 
+Usos do número 
+natural 
+Contar de 50 em 50, 100 em 100, e 200 em 
+200. 
+  
+ Ler e representar números naturais, pelo 
+menos até 1000, usando uma diversidade 
+de representações, nomeadamente a reta 
+numérica. 
+Convidar os alunos a referir números que conhecem do seu dia a dia, em 
+diversos contextos, e discutir com a turma os seus significados, valorizando 
+as suas ideias e autoconfiança. 
+Apresentar situações do quotidiano onde surgem os diferentes significados 
+dos números [Exemplos: número de páginas num dicionário, número de 
+metros da nova ponte sobre o rio Paiva (concelho de Arouca), os números de 
+telemóvel]. 
+ 
+ Comparar e ordenar números naturais, de 
+forma crescente e decrescente. 
+  
+ Reconhecer os numerais ordinais até ao 
+20.º, em contextos diversos. 
+Propor a exploração dos números ordinais a partir de situações da realidade 
+próxima dos alunos [Exemplo: Ordem dos alunos na fila da cantina; andar em 
+que habitam; ordem dos passageiros na fila do autocarro]. 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 23 
+ Arredondar números naturais à dezena ou 
+centena mais próxima, de acordo com a 
+adequação à situação.  
+  
+ Estimar o número de objetos de um dado 
+conjunto pelo menos até 100, explicar as 
+suas razões, e verificar a estimativa 
+realizada através de uma contagem 
+organizada. 
+Promover a discussão em torno de diferentes formas de organização dos 
+objetos enquanto estratégias facilitadoras de contagem, evidenciando a 
+eficácia das estruturas retangulares para a verificação das estimativas 
+realizadas, valorizando a criatividade dos alunos [Exemplo: Estimar qual o 
+número de pessoas numa foto coletiva dos atletas que representam Portugal 
+nos Jogos Olímpicos]. 
+ 
+Sistema de 
+numeração 
+decimal 
+  A, C 
+Valor posicional Reconhecer e usar o valor posicional de 
+um algarismo no sistema de numeração 
+decimal para descrever e representar 
+números, nomeadamente com recursos a 
+materiais manipuláveis de base 10. 
+ 
+Usar a estrutura multiplicativa do sistema 
+decimal para compreender a grandeza dos 
+números. 
+Mobilizar a compreensão da estrutura multiplicativa do sistema decimal 
+através da exploração de números particulares e do recurso ao MAB 
+[Exemplo: Conduzir os alunos a compreenderem que 325 pode ser 
+representado por 3x100+2x10+5x1 ou por 32x10+5x1, relacionando cada 
+algarismo com o valor da sua ordem posicional].  
+Solicitar tarefas de formação de números a partir de três algarismos dados e 
+discutir o valor posicional de cada algarismo, em cada número formado. 
+ 
+Relações 
+numéricas 
+  A, C, E, F 
+Composição e 
+decomposição 
+Compor e decompor números naturais até 
+ao 1000 de diversas formas, usando 
+diversos recursos e representações. 
+Promover a utilização de materiais estruturados de base 10 [Exemplo: MAB] 
+para representar, compor e decompor números.  
+Explorar a composição e decomposição de números usando partes iguais 
+[Exemplo: 36=18+18], partes diferentes [Exemplo: 36= 24+12] e a 
+decomposição decimal [Exemplo:157=100+50+7]. 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 24 
+Factos básicos da 
+multiplicação e 
+sua relação com a 
+divisão 
+Compreender e automatizar os dobros de 
+números até ao dobro de 10. 
+Propor situações para que os alunos compreendam e memorizem os dobros, 
+até ao dobro de 10, recorrendo a molduras de 10, e/ou colares de contas.   
+ 
+ Compreender e automatizar os factos 
+básicos da multiplicação (tabuadas do 2, 
+4, 5, 10 e 3) e sua relação com a divisão. 
+Propor a construção das tabuadas a partir da adição sucessiva do mesmo 
+número, respeitando o sentido da operação na escrita da multiplicação 
+[Exemplo: Na tabuada do 3: 3+3+3+3+3=5x3; na tabuada do 5: 5+5+5=3x5]. 
+Promover a construção das tabuadas coletivamente. Iniciar com a tabuada 
+do 2, seguindo-se a tabuada do 4, com a qual existe uma relação de dobro. 
+Seguidamente, propor a construção da tabuada do 5 e do 10, com recursos 
+de cálculo da criança, valorizando a perseverança dos alunos no trabalho em 
+Matemática. 
+Relacionar a escrita da tabuada com os primeiros múltiplos de um número.  
+Evidenciar a relação entre as tabuadas da multiplicação trabalhadas e a 
+divisão [Exemplo: 3x4=12, 4x3=12 então 12:4=3 e 12:3=4]. 
+ 
+Frações    A, C, E 
+Significado de 
+fração 
+Reconhecer a fração como possibilidade de 
+representar uma quantidade não inteira 
+relativa a uma relação parte-todo, sendo o 
+todo uma unidade contínua, e explicar o 
+significado do numerador e do 
+denominador, no contexto da resolução de 
+problemas. 
+Propor a exploração, em pequenos grupos, de situações do quotidiano que 
+envolvam a divisão da unidade em partes iguais (partilha equitativa), que 
+originem frações próprias.  
+Discutir situações de partilha não equitativa para melhor clarificar o sentido 
+de fração [Exemplo: “O pai do Pedro e da Maria preparou uma baguete para 
+os irmãos partilharem ao lanche. Que parte da baguete comeu cada um dos 
+irmãos?”  
+Distinguir com os alunos entre partilha equitativa e não equitativa, 
+recorrendo a desenhos como os seguintes, e esclarecer que apenas no 
+primeiro caso a unidade está dividida em duas partes iguais, sendo cada uma 
+delas uma metade, que se representa simbolicamente por: 
+  ]. 
+ 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 25 
+Começar por envolver os alunos na divisão da unidade em 2 e 4 partes 
+iguais, avançando depois para outro número de partes.  
+Escolher, para denominadores, números que se apoiem nas relações 
+numéricas [Exemplo: 2, 4, 8, e 5, 10, e 3, 6], usando preferencialmente 
+denominadores até ao dez, a não ser em situações contextualizadas em que 
+se justifique valores superiores [Exemplo: Partilha do bolo de aniversário por 
+uma turma com 24 alunos. A cada aluno caberá uma de 24 partes iguais, ou 
+seja:
+ ]. 
+ Representar uma fração de diversas 
+formas, transitando de forma fluente 
+entre as diferentes representações. 
+Propor representações múltiplas adequadas para explorar o significado das 
+fraçõesem cada situação, recorrendo a materiais manipuláveis estruturados 
+[Exemplo: Círculos ou barras de fração, cubos de encaixe] ou não 
+estruturados [Exemplo: Cordel, folha ou figuras de papel]. O uso do papel 
+permite dobragens para divisão rápida da unidade, facilitando a 
+compreensão, a comparação entre frações e as operações com frações, de 
+modo informal. 
+Solicitar a representação das situações exploradas através de esquemas, 
+palavras, e simbolicamente, interpretando e relacionando o sentido das 
+diferentes representações [Exemplo: 
+ , uma de duas partes iguais, uma 
+metade, um meio; 
+ , duas de cinco partes iguais, dois quintos]. 
+ 
+Relações entre 
+frações 
+Reconhecer frações que representama 
+metade e quartos da unidade, no contexto 
+de problemas de partilha equitativa. 
+Envolver os alunos na exploração de situações em que a mesma unidade seja 
+partida em diferente número de partes iguais, de modo a ajudar os alunos a 
+reconhecer diversas representações da metade e da quarta parte da 
+unidade, tais como 
+  e 
+ .  
+ 
+ Reconhecer que uma fração cujo 
+numerador e denominador são iguais 
+corresponde a uma unidade. 
+  
+ Comparar e ordenar frações unitárias em 
+contextos diversos e recorrendo a 
+Promover a comparação e ordenação de frações unitárias recorrendo a 
+materiais manipuláveis ou applets. 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 26 
+representações múltiplas. 
+Cálculo mental   A, B, C, D, E, F 
+Estratégias de 
+cálculo mental 
+Compreender e usar com fluência 
+estratégias de cálculo mental 
+diversificadas para produzir o resultado de 
+um cálculo. 
+Trabalhar regularmente o cálculo mental, com o apoio de registos escritos, 
+de modo a desenvolver rotinas de cálculo [Exemplo: Cálculo mental em que 
+se recorre a relações de triplo:   
+60+59+58=?          60+60+60=180          180—1—2=177] 
+ 
+ Mobilizar os factos básicos da 
+adição/subtração e da 
+multiplicação/divisão e as propriedades 
+das operações para realizar cálculo 
+mental. 
+Explorar estratégias de cálculo mental que envolvam a partição, a 
+compensação, a decomposição decimal, o recurso aos factos básicos e às 
+propriedades das operações [Exemplo: Adicionar decompondo a segunda 
+parcela para chegar à dezena mais próxima:  
+36+27= ? 
+36+4=40 
+40+23=63 
+ 
+ 
+Subtrair compensando:  
+154—18= ? 
+154—20=134 
+134+2=136 
+ 
+ Representar, de forma eficaz, as 
+estratégias de cálculo mental usadas, 
+transitando entre as diferentes 
+representações. 
+ 
+Apoiar a transição progressiva do cálculo mental estruturado com recurso a 
+modelos [Exemplo: Quadro dos 100, reta numérica] para o cálculo mental 
+formal, registado apenas em linguagem matemática, relacionando as 
+diferentes representações. 
+[Exemplo:  215+67=? 
+215+5=220 
+ 
+
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 27 
+220+60=280 
+280+2=282 
+ Descrever oralmente, os processos de 
+cálculo mental usados por si e pelos 
+colegas, explicando as suas ideias. 
+Proporcionar aos alunos feedback individual sobre as estratégias que usam e 
+a sua adequação de modo a favorecer a sua autorregulação. 
+ 
+ 
+ Comparar e apreciar, em situações 
+concretas, a eficácia de diferentes 
+estratégias de cálculo mental. 
+Promover o confronto entre diferentes estratégias de cálculo e orientar a 
+discussão no sentido de serem selecionadas as estratégias mais eficientes, 
+incentivando a apresentação de argumentos e tomada de posições 
+fundamentadas. 
+ 
+Estimativas de 
+cálculo 
+Produzir estimativas através do cálculo 
+mental, adequadas à situação em 
+contexto.  
+ 
+Solicitar a formulação de estimativas de somas e diferenças na resolução de 
+problemas e suscitar a sua comparação com os resultados após os cálculos, 
+focando a atenção dos alunos na razoabilidade e adequação das estimativas 
+formuladas, promovendo o seu sentido crítico. 
+Propor estimativas aproximando os números envolvidos às dezenas ou 
+centenas mais próximas. 
+ 
+Multiplicação/ 
+divisão 
+  A, B, C, D, E 
+Significado e usos 
+da multiplicação e 
+divisão 
+Interpretar e modelar situações com a 
+multiplicação no sentido aditivo, e 
+resolver problemas associados. 
+ 
+Propor a resolução de problemas que mobilizem a compreensão do sentido 
+aditivo da multiplicação, evidenciando a relação entre a multiplicação e a 
+adição através da representação em arranjos retangulares, de preferência 
+associados a situações reais [Exemplo: Número de retângulos numa tablete 
+de chocolate, número de cadeiras de uma sala grande da escola, número de 
+azulejos de uma parede]. 
+Valorizar a utilização de múltiplas representações (desenhos/esquemas, 
+tabelas e símbolos) na resolução de problemas e promover a apresentação e 
+discussão com toda a turma, valorizando o sentido crítico dos alunos. 
+ 
+ Interpretar e modelar situações com a 
+divisão nos sentidos de partilha equitativa 
+Propor a resolução de problemas em situações que mobilizem a 
+compreensão dos sentidos da divisão: sentido de partilha equitativa 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 28 
+e medida, e resolver problemas 
+associados. 
+[Exemplo: O Manuel levou para a escola uma caixa com 30 morangos 
+silvestres, produzidos por si, para partilhar igualmente com 5 amigos. Com 
+quantos morangos fica cada um?] e sentido de medida [Exemplo: Em cada 
+mica cabem 12 cromos. De quantas micas vai a Maria precisar para arrumar 
+48 cromos?]. 
+Relação entre a 
+multiplicação e a 
+divisão  
+Relacionar a multiplicação e a divisão, em 
+situações de cálculo e na interpretação e 
+resolução de problemas, comparando 
+diferentes estratégias da resolução. 
+ 
+Encorajar a resolução de problemas de divisão através de estratégias 
+diferentes com recurso às outras operações (adição, subtração ou 
+multiplicação) e discutir com toda a turma as resoluções dos alunos, 
+concluindo sobre a eficácia de usar a relação entre a multiplicação e a 
+divisão. Mobilizar progressivamente a representação simbólica para 
+sistematizar o registo da operação de divisão. 
+ 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 29 
+ 
+TEMAS, 
+Tópicos e 
+Subtópicos  
+OBJETIVOS DE APRENDIZAGEM: 
+Conhecimentos, Capacidades e 
+Atitudes  
+AÇÕES ESTRATÉGICAS DE ENSINO DO PROFESSOR 
+ 
+Áreas de 
+Competência do 
+Perfil dos Alunos 
+ÁLGEBRA    
+Regularidades 
+em sequências 
+  B, C, D, E, I 
+Sequências de 
+repetição 
+Identificar e descrever 
+regularidades em sequências de 
+repetição. 
+ 
+Identificar e descrever o grupo de 
+repetição de uma sequência. 
+ 
+Prever um termo não visível de 
+uma sequência de repetição e 
+justificar a previsão. 
+Propor a exploração de sequências de repetição e solicitar aos alunos termos não 
+visíveis da sequência  
+[Exemplo: Solicitar o 10.º e o 25.º termo da sequência que começa assim: 
+ 
+Os alunos deverão reconhecer que os termos de ordem par são triângulos e que os 
+termos de ordem ímpar são círculos, relacionando as figuras com a ordem que 
+ocupam na sequência e mobilizando as noções de números pares e números 
+ímpares]. 
+ 
+Sequências de 
+crescimento 
+Identificar e descrever 
+regularidades em sequências de 
+crescimento, explicando as suas 
+ideias. 
+Propor a exploração de sequências pictóricas de crescimento, centrando a atenção 
+dos alunos na forma como a sequência cresce e conduzindo os alunos a desenhar e 
+descrever os termos seguintes. 
+ 
+ Continuar uma sequência de 
+crescimento, respeitando uma 
+regra de formação dada ou 
+regularidades identificadas. 
+ 
+Propor a exploração de sequências numéricas, em conexão com o tema Números, 
+nomeadamente as contagens de 50 em 50, de 100 em 100, as noções de dobro e as 
+tabuadas [Exemplo: Explorar sequências como 0, 50, 100, 150, 200, 250... ou 500, 
+450, 400, 350, 300... onde se exploram as contagens crescentes e decrescentes de 
+50 em 50; explorar sequências como 2, 4, 8, 16, 32... em que cada termo é o dobro 
+do termo anterior]. 
+Propor tarefas de completamento de sequências numéricas de crescimento 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 30 
+[Exemplo: Completar os elementos em falta na sequência dos múltiplos de 5: 
+] ou de identificação de um elemento intruso 
+numa sequência numérica de crescimento [Exemplo: Identificar o intruso na 
+sequência de múltiplos de 4: 0 – 4 – 8 – 10 – 12 - 16 – 20...]. 
+ Reconhecer as sequências 
+numéricas dos múltiplos, 
+formulando e testando conjeturas. 
+Propor a exploração de quadros de números e solicitar aos alunos que pintem de 
+cores diferentes os múltiplos de 2, 4, 5 e 10. Discutir com toda a turma as 
+regularidades encontradas, conduzindo os alunos a formularem as suas conclusões. 
+[Exemplo: Os alunos poderão referir que os múltiplos de 4 são também múltiplos de 
+2 e que os múltiplos de 10 são também múltiplos de 5 e de 2].  
+ 
+ Criar e modificar sequências, 
+usando materiais manipuláveis e 
+outros recursos, desenvolvendo o 
+pensamento computacional. 
+Propor a criação de sequências, recorrendo a materiais manipuláveis, applets ou a 
+ambientes de programação visual [Exemplo: Scratch], promovendo a criatividade 
+dos alunos. 
+ 
+Expressões e 
+relações 
+  A, C, E, F, I 
+Igualdades 
+aritméticas  
+Reconhecer igualdades aritméticas 
+envolvendo a adição e a subtração. 
+ 
+Decidir sobre a correção de 
+igualdades aritméticas e justificar 
+as suas ideias. 
+Orquestrar discussões com toda a turma onde se apresentem igualdades 
+(verdadeiras e falsas), envolvendo a adição e a subtração e solicitar aos alunos que 
+se manifestem sobre a sua veracidade e justifiquem as suas ideias, proporcionando 
+feedback individual aos alunos de modo a favorecer a sua autorregulação. 
+ 
+ Completar igualdades aritméticas 
+envolvendo a subtração.  
+Propor tarefas de completar igualdades aritméticas, envolvendo a subtração, com 
+dois objetivos principais:  
+1) Igualdades onde se pretende que os alunos resolvam a subtração, mas que são 
+apresentadas de diferentes formas, tais como nº— __ =nº,  __—nº=nº, nº=__—nº 
+[Exemplo: 12—__=8; __—3=16; 25=___—11]. 
+2) Situações onde se pretende que os alunos não realizem o cálculo, mas se foquem 
+nas relações entre os números e usem a compensação aritmética, tais como n.º —
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 31 
+n.º= __—n.º  
+[Exemplo: Na resolução de 9—4=__—3, conduzir os alunos a verificarem que não 
+precisam efetuar o cálculo e que podem usar a compensação aritmética:  
+.  
+Propor situações análogas com números maiores, promovendo o não recurso ao 
+cálculo e o focar a atenção na relação de compensação aritmética]. 
+ Descrever situações que atribuam 
+significado a igualdades 
+aritméticas e que envolvam a 
+adição e a subtração, explicando 
+as suas ideias. 
+Propor situações que possam traduzir igualdades dadas, atribuindo-lhes significado. 
+[Exemplo: Para a igualdade 8—2=5+1, os alunos podem descrever oralmente 
+situações tais como: O João e o Pedro têm o mesmo número de cromos, o João 
+tinha 8 e deu 2 e o Pedro tinha 5 e deram-lhe um]. 
+ 
+Relações 
+numéricas e 
+algébricas 
+Investigar, formular e justificar 
+conjeturas sobre relações 
+numéricas em contextos diversos. 
+Promover a exploração de jogos numéricos para a descoberta de regularidades 
+relacionadas com os conteúdos lecionados no tema Números, nomeadamente com 
+as estratégias de cálculo mental. [Exemplo: A pares, propor a um dos alunos que 
+pense num número e ao outro aluno que descubra o número em que pensou o 
+colega. Para descobrir o número, o segundo colega dá instruções ao primeiro, tais 
+como adicionar 10 ao número em que pensou. Com esta instrução, o segundo colega 
+subtrai 10 ao número referido pelo primeiro colega e descobre o número em que ele 
+pensou. Na discussão com toda a turma conduzir os alunos a explicarem e 
+justificarem a estratégia que usaram]. 
+Propor jogos numéricos onde se reconheçam regularidades e solicitar que 
+descrevam a sequência de passos necessários para construir o jogo, usando a 
+linguagem natural, pseudocódigo [Exemplo: Com símbolos criados pelos alunos e 
+usando as operações] e recorrendo a ambientes de programação visual [Exemplo: 
+Scratch], desenvolvendo o pensamento computacional. 
+ 
+ Descrever e representar 
+regularidades em tabelas e 
+diagramas, transitando de forma 
+fluente entre diferentes 
+representações. 
+Propor a exploração e construção de tabelas e diagramas para representar relações 
+numéricas encontradas e dinamizar discussões com toda a turma, proporcionando, 
+sempre que possível, feedbacks valorativos das ideias e estratégias dos alunos.  
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 32 
+Propriedades das 
+operações 
+Reconhecer a associatividade da 
+adição. 
+Explorar a associatividade em situações que não requeiram a comutatividade e em 
+que se perceba a vantagem de fazer associações diversas [Exemplo: 
+15+12+18=15+30=45 tem vantagem sobre 27+18=45]. Conduzir os alunos a 
+verificarem a propriedade, em vários casos particulares, de forma a evidenciarem a 
+sua generalidade e a expressarem o seu significado em linguagem natural, 
+encorajando os alunos a perseguirem as suas ideias e integrando-as nas discussões 
+coletivas. 
+ 
+ Reconhecer a comutatividade da 
+multiplicação. 
+Explorar a comutatividade da multiplicação, em casos particulares, através da 
+representação retangular e da leitura por linhas e colunas [Exemplo: O número total 
+de quadrículas pode obter-se fazendo 3x5 (3 linhas com 5 quadrículas cada) ou 5x3 
+(5 colunas com 3 quadrículas cada), conduzindo à conclusão que 3x5=5x3].   
+   
+ 
+ Reconhecer o um como elemento 
+neutro da multiplicação. 
+ 
+Reconhecer o zero como elemento 
+absorvente da multiplicação. 
+Propor aos alunos a observação sistemática de vários exemplos de produtos 
+resultantes da multiplicação por 1 ou por zero e o reconhecimento do que acontece 
+em cada caso, conduzindo à sua generalidade. 
+ 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 33 
+ 
+TEMAS, Tópicos e 
+Subtópicos  
+OBJETIVOS DE 
+APRENDIZAGEM: 
+Conhecimentos, 
+Capacidades e Atitudes  
+AÇÕES ESTRATÉGICAS DE ENSINO DO PROFESSOR 
+ 
+Áreas de 
+Competência 
+do Perfil dos 
+Alunos 
+DADOS    
+Questões 
+estatísticas, 
+recolha e 
+organização de 
+dados   
+  A, B, C, D, E, 
+F, G 
+ 
+Questões 
+estatísticas  
+ 
+Participar na formulação de 
+questões estatísticas sobre 
+diferentes características 
+qualitativas. 
+ 
+ 
+ 
+Propor, sem prejuízo da realização de outras tarefas mais curtas e focadas que 
+promovem a literacia estatística dos alunos, a realização de estudos simples que 
+envolvam todas as fases de uma investigação estatística, desde a formulação da questão 
+à divulgação dos resultados. 
+Encorajar os alunos a definir questões que gostariam de estudar, nomeadamente sobre 
+assuntos de interesse relacionados com a turma, a escola e outras áreas do saber, 
+aproveitando as suas ideias para fazer emergir questões estatísticas relativas  a 
+características qualitativas dos mesmos respondentes, dotadas de variabilidade e 
+passíveis de recolha de dados pelos alunos, valorizando a sua iniciativa [Exemplo: Vamos 
+estudar o sono desta turma? As crianças têm ou não pesadelos? As crianças adormecem  
+com facilidade ou não? As crianças dormem o tempo adequado, mais ou menos?].   
+ 
+ Formular conjeturas sobre 
+eventuais relações entre duas 
+características qualitativas. 
+Suscitar a discussão de situações que originem a exploração de eventuais relações entre 
+duas características qualitativas relativas aos mesmos respondentes, valorizando a 
+criatividade e espírito crítico dos alunos e a sua iniciativa e autonomia [Exemplo: Será 
+que nesta turma todas as crianças colaboram nas tarefas domésticas em casa? Será que  
+existem diferenças entre as meninas e os meninos?]. 
+ 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 34 
+Recolha de dados 
+(fontes primárias e 
+métodos) 
+ 
+Participar na definição de quais 
+os dados a recolher num dado 
+estudo e decidir sobre a fonte 
+primária de dados. 
+ 
+Participar criticamente na 
+seleção de um método de 
+recolha dos dados num estudo, 
+decidindo como observar ou 
+inquirir (pergunta direta) e 
+como responder (de modo 
+público/secreto). 
+ 
+Recolher dados através de um 
+dado método de recolha.  
+Propor tarefas que impliquem que os alunos discutam aspetos cruciais de uma recolha 
+de dados, nomeadamente sobre consequências das escolhas relativas a fontes de dados 
+ou métodos de recolha num estudo (independentemente de este vir ou não a ser 
+realizado pela turma), promovendo o sentido crítico dos alunos [Exemplo: Se pretender 
+conhecer-se a modalidade de desporto preferida das pessoas de uma cidade, devem 
+inquirir-se as pessoas que entram e saem da piscina municipal?]. 
+Apoiar os alunos a definir uma recolha de dados no contexto da realização de um estudo 
+a realizar pela turma, discutindo qual o melhor processo para obter os dados 
+(observação por parte dos alunos ou inquirição por pergunta direta, oralmente ou por 
+escrito) e a forma de resposta (responder publicamente, pondo o braço no ar ou dizendo 
+alto a resposta, por exemplo, ou responder secretamente, escrevendo o seu dado num 
+papel anónimo). 
+Suscitar nos alunos a interrogação sobre eventuais consequências de optar por métodos 
+públicos ou privados de obter dados, analisando a possibilidade de se obterem respostas 
+não fidedignas no caso de respostas públicas (é possível obter respostas por simpatia, 
+alteradas por vergonha ou para evitar exposição, por exemplo). 
+Valorizar propostas idiossincráticas imaginadas por alunos para recolha de dados, e 
+discutir com a turma a sua adequação e eficácia, valorizando a criatividade e o espírito 
+crítico dos alunos e a sua iniciativa e autonomia. 
+ 
+Tabela de 
+frequências 
+absolutas 
+Usar tabelas de frequência 
+absolutas para organizar dados 
+referentes a uma característica 
+qualitativa, e indicar o 
+respetivo título. 
+Introduzir a ideia de tabela de frequências absolutas a partir da sistematização da 
+tabela de contagem usada no registo de dados recolhidos através de listas ou tabelas de 
+contagem realizadas pelos alunos para responder a uma questão estatística definida 
+pela turma. 
+Sensibilizar para a importância da organização dos dados para a compreensão dos 
+mesmos.  
+Alertar para a importância de observar criticamente os dados e limpá-los de gralhas 
+detetadas. 
+ 
+Diagramas de 
+Carroll 
+Usar diagramas de Carroll para 
+organizar dados relativos a 
+duas características 
+qualitativas dicotómicas. 
+Propor aos alunos que organizem diagramas de Carrol a partir de uma recolha de dados 
+realizada na turma e discutam as suas eventuais conjeturas a partir da anál ise do 
+diagrama [Exemplo: “Será que nesta turma todas as crianças colaboram nas tarefas 
+domésticas em casa? Será que existem diferenças entre as meninas e os meninos? Será 
+que as meninas ajudam mais do que os meninos? Será ao contrário?” Recolhidos e 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 35 
+organizados os dados, incentivar as crianças a confrontar as suas expectativas com os 
+resultados obtidos e estender o horizonte da discussão — neste caso, a questões de 
+igualdade de género. 
+Colaboração das crianças da turma nas tarefas domésticas em casa 
+] 
+Representações 
+gráficas 
+  A, B, C,  
+D, E, F, I 
+Pictogramas 
+(correspondência 
+um para vários) 
+Representar através de 
+pictogramas (correspondência 
+um para vários) os dados 
+recolhidos, incluindo fonte, 
+título e legenda. 
+Explorar a construção coletiva de pictogramas, usando uma imagem para representar 
+um mesmo número de dados (correspondência uma imagem para vários dados). Propor 
+preferencialmente situações em que se possam aplicar as tabuadas introduzidas no 2.º 
+ano, ou seja, situações em que as imagens representem 2, 3, 4, 5 ou 10 unidades.  
+Explorar, em discussão com toda a turma, a ideia de que os pictogramas podem não 
+representar rigorosamente os dados, ocasionando, por vezes, a perceção de resultados 
+menos precisos.  
+ 
+Gráficos de barras Representar através de gráficos 
+de barras os dados recolhidos, 
+incluindo fonte, título e 
+legenda. 
+Explorar a transição entre gráficos de pontos e gráficos de barras.  
+Apoiar os alunos a usar recursos tecnológicos para produzir gráficos de barras rigorosos 
+e com boa apresentação [Exemplo: Recorrer a uma folha de cálculo, apllets ou sites 
+como www.rapidtables.com/]. 
+ 
+Análise crítica de 
+gráficos 
+Decidir sobre qual(is) as 
+representações gráficas a 
+adotar num dado estudo e 
+justificar a(s) escolha(s). 
+ 
+Promover a discussão sobre as vantagens/desvantagens da adoção de diferentes gráficos 
+a produzir pelos alunos para responder a uma questão estatística definida pela turma 
+[Exemplo: Na escola da professora Dulce, as crianças foram chamadas a votar nos jogos  
+que gostariam de ver instalados no recreio da escola. Serão escolhidos os dois jogos 
+mais votados. Qual dos dois gráficos te parece mais adequado nesta situação? Porquê? 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 36 
+ 
+Fonte: Escola da Professora Dulce] 
+Explorar representações gráficas inovadoras que consigam “contar”, de forma honesta, 
+a história por detrás dos dados, valorizando a criatividade e o espírito crítico dos alunos 
+e a sua iniciativa e autonomia. 
+ Analisar representações 
+gráficas e discutir criticamente 
+a sua adequabilidade, 
+desenvolvendo a literacia 
+estatística. 
+ 
+Propor aos alunos a análise, em grupo, de gráficos/infográficos reais relativos a 
+situações relacionadas com outras áreas do saber ou o dia a dia, encorajando a 
+discussão do que o gráfico mostra/não mostra, incentivando o espírito crítico.  
+ 
+Fonte: Eu e o Mundo — Uma história infográfica, MireiaTrius e Joana Casals, Edicare Ed. 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 37 
+Análise de dados   C, D, E, F 
+Resumo dos dados 
+(Moda) 
+ 
+Reconhecer a(s) moda(s) e 
+identificá-la(s) num conjunto 
+de dados qualitativos. 
+Sensibilizar os alunos para o interesse de ter indicadores numéricos que nos 
+proporcionam, de forma resumida, informações importantes sobre o conjunto dos 
+dados, como é o caso da(s) moda(s). 
+ 
+Interpretação e 
+conclusão 
+ 
+Ler, interpretar e discutir a 
+distribuição dos dados, 
+relacionando tabelas, 
+representações gráficas e a 
+moda, salientando 
+criticamente os aspetos mais 
+relevantes, ouvindo os outros e 
+discutindo de forma 
+fundamentada. 
+ 
+Retirar conclusões, 
+fundamentar decisões e colocar 
+novas questões suscitadas pelas 
+conclusões obtidas, a perseguir 
+em eventuais futuros estudos. 
+Apoiar os alunos na identificação de aspetos importantes que se revelam na análise de 
+dados relacionados com a sua distribuição, fazer comparações e evidenciar situações 
+atípicas. 
+ 
+Suscitar nos alunos na formulação de novas questões que as conclusões de um estudo 
+possam suscitar, nomeadamente estabelecendo conexões com outras áreas, mobilizando 
+a curiosidade e valorizando a criatividade e o espírito crítico, e a iniciativa e 
+autonomia. 
+ 
+ 
+Comunicação e 
+divulgação de um 
+estudo 
+  A, B, E, F, H 
+Público-alvo  Decidir a quem divulgar um 
+estudo realizado. 
+Suscitar, relativamente a alguns estudos realizados pela turma que se considerem mais 
+relevantes, a discussão sobre a quem importa divulgar esse estudo, salientando a 
+importância e a responsabilidade de dar a conhecer aos outros as descobertas 
+realizadas, e incentivando a autoconfiança e iniciativa [Exemplo: outras turmas, direção 
+do agrupamento, comunidade escolar, ...]. 
+ 
+Recursos para a 
+comunicação 
+Elaborar um poster que apoie a 
+apresentação de um estudo 
+Promover a discussão coletiva sobre os elementos indispensáveis a considerar na 
+comunicação de um estudo, ouvindo as ideias dos alunos e valorizando o espírito de 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 38 
+(posters) 
+ 
+realizado, de forma rigorosa, 
+eficaz, apelativa e não 
+enganadora, atendendo ao 
+público a quem será divulgado, 
+comunicando de forma fluente. 
+síntese e o rigor para uma boa comunicação [Exemplo: O que incluir num poster? Um 
+título? A questão do estudo? A tabela de frequências absolutas? Um gráfico? A moda? 
+Uma frase de conclusão? Um desenho ilustrativo? ...]. 
+Apoiar os grupos, em aula, na elaboração de um poster. 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 39 
+ 
+TEMAS, 
+Tópicos e 
+Subtópicos  
+OBJETIVOS DE APRENDIZAGEM: 
+Conhecimentos, Capacidades e 
+Atitudes  
+AÇÕES ESTRATÉGICAS DE ENSINO DO PROFESSOR 
+ 
+Áreas de 
+Competência 
+do Perfil dos 
+Alunos 
+GEOMETRIA E 
+MEDIDA 
+   
+Orientação 
+espacial 
+  A, C, E, F, J, I  
+Itinerários Criar, representar e comparar 
+itinerários, usando os termos “quarto 
+de volta”, “meia volta”, “três quartos 
+de volta” e “volta completa” para 
+explicar as suas ideias. 
+Propor a construção, em pequenos grupos, de itinerários diferentes entre dois 
+pontos dados, recorrendo a recursos diversos como geoplano, papel quadriculado, 
+papel ponteado, applets, ambientes de programação visual [Exemplo: ScratchJr] ou 
+objetos tangíveis [Exemplo: Robôs simples]. Propor a descrição dos itinerários 
+usando a linguagem natural e pseudocódigo [Exemplo: Uso de setas que indicam 
+direções], desenvolvendo o pensamento computacional. 
+Scratch Jr 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+https://www.mathplayground.com/code_builder.html 
+Fomentar a exploração dos termos “volta completa”, “meia volta”, “quarto de 
+volta” e “três quartos de volta” em conexão com a área de Educação Física na 
+realização de jogos ou itinerários onde se descrevam os movimentos efetuados. 
+ 
+
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 40 
+Vistas e plantas Desenhar vistas de sólidos simples 
+(vistas de cima, frente e lado). 
+Propor a construção de objetos simples com peças encaixáveis [Exemplo: Blocos de 
+construções] e desenhar as vistas, proporcionando oportunidades para que os alunos, 
+individualmente, analisem criticamente as resoluções realizadas por si e as 
+melhorem. 
+Propor a realização de construções com cubos a partir de uma só vista. Discutir com 
+toda a turma os resultados obtidos. [Exemplo: Desafiar a turma a descobrir a 
+construção elaborada por um aluno a partir da vista de cima. Depois de 
+apresentadas as propostas, discutir se todas são possíveis. Acrescentar a vista de 
+frente e repetir a discussão. Durante a discussão, tirar partido da cor para 
+comunicar a posição relativa dos cubos]. 
+  
+  
+ 
+ Reconhecer vistas de sólidos dados, 
+identificando o ponto de vista 
+correspondente e compará-las, 
+explicando as suas ideias. 
+Desafiar os alunos a desenharem um objeto assimétrico sentados em diferentes 
+posições e discutir coletivamente onde estava sentado o autor de cada desenho, 
+incentivando a autorregulação pelos alunos. 
+ 
+ Ler, interpretar e esboçar plantas de 
+espaços da proximidade da turma, 
+estabelecendo conexões matemáticas 
+com a realidade. 
+Promover a consulta de mapas interativos disponíveis na Internet, para localizar a 
+escola ou outras instituições próximas e desenhar a vista aérea das mesmas.  
+Propor a identificação de elementos numa planta da sala de aula.  
+Propor a exploração de plantas já desenhadas em papel de cenário usando objetos 
+tangíveis [Exemplo: Robôs simples], descrevendo ou ditando trajetos como ir de um 
+local ao outro, passando por um outro local [Exemplo: Ir da biblioteca ao refeitório, 
+passando pela sala dos professores], desenvolvendo o pensamento computacional. 
+ 
+Sólidos   C, D, E 
+Características 
+dos sólidos 
+Descrever as características 
+(existência de superfícies planas ou 
+curvas, vértices, arestas e forma das 
+faces planas) de sólidos comuns (cone, 
+Disponibilizar um conjunto de modelos de sólidos, a cada par de alunos e propor que 
+façam o jogo “Qual é o sólido?”: um aluno descreve as características de um sólido 
+que escolhe do conjunto e o par indica qual é esse sólido a partir das características 
+indicadas. Encorajar os alunos a usar uma linguagem rigorosa, que transmita 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 41 
+cilindro, esfera, cubo, paralelepípedo, 
+pirâmide, prisma). 
+informações inequívocas ao par, promovendo a autorregulação. 
+Propor a construção dos diversos sólidos, usando plasticina ou massa de moldar, de 
+modo a que os alunos se apropriem das respetivas formas e potenciando o uso destes 
+sólidos em trabalhos futuros. 
+ Distinguir poliedros de outros sólidos. Solicitar aos alunos que organizem os diferentes sólidos comuns, a partir da análise 
+de modelos, e explicitem os critérios que adotaram para a organização. Em 
+discussão, com toda a turma, das diferentes formas de organização propostas pelos 
+alunos, orientar o aparecimento da classificação com base no critério de existência 
+ou não de superfícies curvas. 
+Propor a construção das estruturas de poliedros, usando palitos e plasticina. 
+ 
+Figuras planas   A, B, C, D, E 
+Polígonos  
+ 
+Classificar figuras planas com base nas 
+suas características (linhas retas ou 
+curvas, número de lados, número de 
+vértices, igualdade dos lados), 
+apresentando e explicando as suas 
+ideias. 
+Apresentar à turma um conjunto diversificado de figuras (côncavas e convexas), 
+limitadas por segmentos de reta e por linhas curvas, e propor, em grupos, a 
+classificação das figuras segundo critérios a decidir pelos alunos. Em discussão com 
+toda a turma, solicitar a identificação do critério usado por cada grupo, valorizando 
+a capacidade de negociar e aceitar diferentes pontos de vista.   
+ 
+ Reconhecer polígonos e relacionar a 
+sua designação (triângulos, 
+quadriláteros, pentágonos e 
+hexágonos) com o respetivo número 
+de lados.   
+  
+ 
+ 
+ 
+Reconhecer ângulos retos em 
+polígonos. 
+ 
+ 
+Orientar a observação do espaço entre dois lados com vértice comum de um 
+polígono e identificar se o polígono tem ângulos retos, através do uso de um 
+“detetor de ângulos retos”. O detetor de ângulos retos pode ser construído 
+facilmente em cartolina, como se vê na imagem. 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 42 
+ 
+Fomentar a exploração da relação entre o ângulo reto e o “quarto de volta”.  
+ Compreender a hierarquia quadrado, 
+retângulo. 
+Orientar a observação de que o quadrado é um caso particular do retângulo, 
+destacando a característica de que os ângulos são retos, recorrendo ao “detetor de 
+ângulos retos”. 
+Propor a construção de retângulos de dimensões diversas no geoplano e, mantendo 
+uma das dimensões fixando dois vértices, alterar a outra dimensão, manipulando os 
+elásticos de modo a obter o caso particular do quadrado.  
+ 
+Operações com 
+figuras 
+  B, C, D, E, F, I 
+Deslizar, rodar 
+e voltar 
+Justificar com base nos movimentos 
+de deslizar, rodar e voltar a 
+congruência entre figuras planas, 
+utilizado e apresentando e explicando 
+ideias e raciocínios. 
+  
+ Interpretar e modelar situações 
+recorrendo ao deslizar, voltar ou 
+rodar (meias voltas ou quartos de 
+volta) de um motivo para construir 
+figuras compostas, reconhecendo o 
+papel da matemática na criação e 
+construção de objetos da realidade. 
+ 
+Dinamizar, em conexão com a área de Artes Visuais, a construção de um painel em 
+papel de cenário ou azulejos, recorrendo a um motivo que se possa reproduzir em 
+diversas posições relacionadas umas com as outras e gerando distintos efeitos, como 
+é o caso do azulejo de Eduardo Nery. 
+ 
+ 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 43 
+Comprimento    B, C, D, E, F 
+Medição e 
+unidades de 
+medida  
+Reconhecer o metro e o centímetro 
+como unidades de medida 
+convencionais, relacioná-las e fazer 
+medições usando estas unidades. 
+Promover a discussão acerca dos inconvenientes de determinar medidas de 
+comprimentos usando unidades de medida não padronizadas e as vantagens de usar 
+unidades de medida convencionais, como o centímetro presente nas réguas dos 
+alunos [Exemplo: Com o pretexto de comprar novas cortinas para as janelas da sala, 
+pedir a diferentes alunos que efetuem a medição do comprimento das janelas com o 
+respetivo palmo, observar as diferenças obtidas e discutir como decidir quanto 
+tecido comprar. Perante a constatação da ambiguidade, discutir a necessidade de 
+unidades de medida estandardizadas. Repetir a medição usando fitas métricas 
+graduadas em centímetros e observar que o valor obtido por diferentes alunos é o 
+mesmo, podendo existir pequenas flutuações dependentes de imprecisões do 
+processo de medir]. 
+Promover a utilização de diversos instrumentos de medida do comprimento, tais 
+como a régua e a fita métrica, fomentando rigor nas medições efetuadas.  
+Permitir a utilização de outras unidades de medida convencionais que os alunos 
+eventualmente conheçam sempre que surjam como proposta destes e se adequam às 
+situações a medir. 
+ 
+Perímetro Reconhecer o perímetro de uma figura 
+plana. 
+Propor, numa fase inicial de apropriação do significado de perímetro, a construção 
+de polígonos no geoplano físico ou digital e determinar a medida do seu perímetro, 
+usando como unidade de medida a distância entre dois pregos na horizontal ou na 
+vertical.  
+ 
+Usos do 
+comprimento 
+ 
+Estimar a medida de um comprimento 
+usando unidades de medida 
+convencionais e explicar as razões da 
+sua estimativa. 
+ 
+Interpretar e modelar situações 
+relacionadas com o comprimento, 
+nomeadamente com o perímetro, 
+usando unidades de medida 
+convencionais, e resolver problemas 
+Estimar medidas de comprimentos de objetos da sala de aula ou de partes do seu 
+corpo, usando o centímetro [Exemplos: Altura da porta da sala, comprimento do 
+lápis, comprimento do palmo]. 
+Propor a resolução de problemas reais que envolvam a necessidade de estimativas 
+ou medições que envolvam o perímetro [Exemplo: Quantos metros de fita isoladora 
+são necessários para isolar a porta da sala de aula?]. 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 44 
+associados, comparando criticamente 
+diferentes estratégias da resolução. 
+Área    C, D, E, F 
+Significado Compreender o que é a área de uma 
+figura plana. 
+  
+Medição e 
+Unidades de 
+medida 
+Medir a área de figuras planas, usando 
+unidades de medida não convencionais 
+adequadas. 
+Propor situações que envolvam a medição da área utilizando unidades de medida  
+não convencionais [Exemplo: Descobrir quantas folhas A4 são necessárias para cobrir 
+o tampo da sua mesa de trabalho, repetir a medição com folhas A5, e discutir as 
+razões de se obterem valores diferentes, promovendo o espírito crítico dos alunos]. 
+ 
+Usos da área Estimar a medida da área de uma 
+figura plana e explicar as razões da 
+sua estimativa. 
+Propor a estimação de medidas de áreas de diversas figuras por comparação com 
+medições já efetuadas, usando diferentes unidades de medida, promovendo o 
+sentido crítico dos alunos e a sua autorregulação. 
+ 
+ Interpretar e modelar situações que 
+envolvam área e resolver problemas 
+associados, comparando criticamente 
+diferentes estratégias da resolução. 
+Propor atividades de investigação, em pequenos grupos, em que os alunos tenham 
+de descobrir diferentes figuras com uma dada medida de perímetro e diferentes 
+figuras com uma dada medida de área.  
+Propor a resolução de problemas reais que envolvam a necessidade de estimativa ou 
+medição de área [Exemplo: Que quantidade de desenhos feitos em folhas A4 cabem 
+no placard da sala?]. 
+ 
+Tempo    C, E 
+Medição e 
+unidades de 
+medida 
+ 
+ 
+Relacionar hora, dia, mês e ano. 
+ 
+ 
+ 
+ 
+Propor a análise do calendário anual para estabelecer relações entre ano, mês e dia.  
+Possibilitar, a cada grupo de alunos, o manuseamento de um relógio analógico com 
+calendário, para que possam descobrir quantas horas é que o ponteiro das horas terá 
+de avançar para que o calendário avance um dia. Discutir e sistematizar com toda a 
+turma as descobertas feitas, evidenciando a utilidade da Matemática para a 
+compreensão de situações da realidade. 
+ 
+ 
+ APRENDIZAGENS ESSENCIAIS | ARTICULAÇÃO COM O PERFIL DOS ALUNOS 2.º ANO | 1.º CICLO | MATEMÁTICA 
+ 
+PÁG. 45 
+Usos do tempo Resolver problemas que envolvam o 
+tempo, comparando criticamente 
+diferentes estratégias de resolução. 
+Propor problemas relacionados com os horários das rotinas da escola e das vivências 
+diárias. [Exemplo: Os alunos saem das aulas para almoçar às 12h. Regressam às 14h. 
+Quanto tempo durou o período de almoço?]. 
+ 
+Dinheiro   C, D, F 
+Unidades de 
+medida 
+Conhecer as diferentes notas e 
+moedas, comparar o seu valor e 
+relacioná-las. 
+Propor situações que exijam a contagem de diferentes quantias de dinheiro de modo 
+a que os alunos se familiarizem com as notas e moedas. 
+ 
+ Relacionar o euro com o cêntimo. 
+ 
+Propor situações em que os alunos tenham de relacionar euros e cêntimos [Exemplo: 
+Cinco moedas de 20 cêntimos correspondem a 1 euro]. 
+ 
+Usos do dinheiro Fazer estimativas de quantias de 
+dinheiro, por arredondamento. 
+Desafiar os alunos a estimar valores de dinheiro necessário para fazer compras, 
+conhecendo o valor aproximado dos objetos a comprar [Exemplo: Quanto dinheiro 
+preciso de levar para comprar três gelados?]. 
+ 
+ Resolver problemas que envolvem 
+dinheiro comparando diferentes 
+estratégias de resolução. 
+Propor a resolução de problemas, em pequenos grupos, relacionados com a aquisição 
+de objetos, disponibilizando modelos de notas e moedas, e usando valores inteiros 
+para cada uma das unidades [Exemplo: Tenho 10 euros para gastar em material 
+escolar. Na loja os cadernos custam 1 euro e 40 cêntimos, os lápis 50 cêntimos, os 
+dossiês 2 euros e 10 cêntimos. O que posso comprar?].  
+Disponibilizar tempo suficiente de trabalho para que os alunos não desistam 
+prematuramente e proporcionar feedback valorativo das ideias e estratégias dos 
+alunos. 
+ 
+ 
+ 
