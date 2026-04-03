@@ -52,4 +52,5 @@ quiz-history.json
 studio.json
 .modified
 *.zip
-*.log
+*.log.github_token
+.gitremote
