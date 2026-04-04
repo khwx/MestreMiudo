@@ -9,6 +9,8 @@
 import type { PersonalizedLearningPathInput, PersonalizedLearningPathOutput } from '@/app/shared-schemas';
 import { PersonalizedLearningPathOutputSchema } from '@/app/shared-schemas';
 import curriculumData from './curriculum-topics.json';
+import { fetchImageForTopic } from './pixabay';
+import { buildAdaptivePromptInstructions } from './adaptive-learning';
 
 interface CurriculumDomain {
   name: string;
@@ -33,16 +35,29 @@ const SYSTEM_PROMPT = `You are an expert elementary school teacher creating fun,
 
 CRITICAL RULES:
 1. ALL content in EUROPEAN Portuguese (Portugal, NOT Brazil)
-2. Questions must be FUN and ENGAGING - use stories, animals, everyday situations
+2. Questions must be FUN and ENGAGING - use stories, animals, everyday situations, humor
 3. NEVER use academic jargon in the question text
 4. The correctAnswer must be the EXACT TEXT of the correct option (NOT a letter like "A", "B", "C", "D")
 5. All 4 options must be DIFFERENT from each other
-6. Questions should be appropriate for the specific grade level
+6. Questions should be age-appropriate for the specific grade level
+
+LANGUAGE COMPLEXITY BY GRADE:
+- 1º ano: 3-5 words/sentence, simple present tense, concrete objects, animals, numbers 1-20
+- 2º ano: 5-7 words/sentence, simple past/future, counting to 100, basic shapes
+- 3º ano: 7-9 words/sentence, multiple verb tenses, problem-solving, abstract concepts
+- 4º ano: 8-10 words/sentence, complex structures, reasoning questions, cause/effect
+
+ENGAGEMENT TECHNIQUES:
+- Use character names and familiar situations (e.g., "O João encontrou 5 maçãs...")
+- Include dialogue and playful language
+- Ask "Why?" and "What would happen if...?" questions (especially grades 3-4)
+- Use comparisons and humor appropriate for age
+- Celebrate Portuguese culture (food, traditions, animals, holidays)
 
 IMPORTANT FORMAT:
 - correctAnswer must match EXACTLY one of the options (same text, same capitalization)
-- Example of CORRECT: {"question":"Quanto é 2+3?","options":["4","5","6","7"],"correctAnswer":"5","topic":"Números"}
-- Example of WRONG: {"question":"Quanto é 2+3?","options":["4","5","6","7"],"correctAnswer":"B"} ← DO NOT use letters!
+- Example CORRECT: {"question":"Quanto é 2+3?","options":["4","5","6","7"],"correctAnswer":"5","topic":"Números"}
+- Example WRONG: {"question":"Quanto é 2+3?","options":["4","5","6","7"],"correctAnswer":"B"} ← DO NOT use letters!
 
 Return ONLY a valid JSON array.`;
 
@@ -204,12 +219,10 @@ ${descriptorList}
 
 `;
 
+  // Add adaptive learning instructions if performance data exists
   if (input.performanceData) {
-    const weakAreas = Object.entries(input.performanceData)
-      .sort((a, b) => a[1] - b[1])
-      .slice(0, 3)
-      .map(([topic]) => topic);
-    prompt += `\nThe student struggles with: ${weakAreas.join(', ')}. Focus more on these areas.\n`;
+    const adaptiveInstructions = buildAdaptivePromptInstructions(input.performanceData);
+    prompt += adaptiveInstructions;
   }
 
   // Subject-specific instructions
@@ -219,34 +232,67 @@ SUBJECT RULES for Português:
 - Questions must be about LANGUAGE skills: reading, writing, grammar, oral expression, literature
 - Examples: identify letters, syllables, rhyming words, correct spelling, sentence structure
 - DO NOT include math calculations or science facts
-- Example question: "Qual palavra rima com 'gato'?" (not "Quanto é 2+3?")`,
+- Example question: "Qual palavra rima com 'gato'?" (not "Quanto é 2+3?")
+- For grade 1-2: focus on letter recognition, syllables, short words
+- For grade 3-4: add vocabulary, comprehension, story elements`,
     'matemática': `
 SUBJECT RULES for Matemática:
 - Questions must be about NUMBERS, OPERATIONS, GEOMETRY, DATA
 - Examples: counting, addition, subtraction, shapes, patterns, measurements
 - DO NOT include grammar questions or history facts
-- Example question: "Se tens 3 maçãs e comes 1, quantas ficam?" (not "Qual é o feminino de 'menino'?")`,
+- Example question: "Se tens 3 maçãs e comes 1, quantas ficam?" (not "Qual é o feminino de 'menino'?")
+- For grade 1-2: focus on numbers to 20, basic addition/subtraction
+- For grade 3-4: add multiplication/division, geometry, word problems`,
     'estudo do meio': `
 SUBJECT RULES for Estudo do Meio:
 - Questions must be about SOCIETY, NATURE, TECHNOLOGY, environment, body, family, community
 - Examples: body parts, family members, animals, plants, weather, safety, daily routines
 - DO NOT include math calculations or grammar exercises
-- Example question: "O que faz o Sol?" (not "Quanto é 2+3?")`
+- Example question: "O que faz o Sol?" (not "Quanto é 2+3?")
+- For grade 1-2: focus on immediate environment, animals, family, seasons
+- For grade 3-4: add communities, jobs, healthy living, technology, safety`
   };
 
   prompt += `
 ${subjectInstructions[subject.toLowerCase()] || ''}
 
 STYLE GUIDE for ${grade}º ano:
-${grade === 1 ? `- Use very simple words and short sentences
-- Make it playful with animals, family, everyday situations` : ''}
-${grade === 2 ? `- Slightly more complex but still fun and relatable` : ''}
-${grade === 3 ? `- More challenging but still engaging with real-world connections` : ''}
-${grade === 4 ? `- More complex concepts but keep it fun and accessible` : ''}
+${grade === 1 ? `
+- Use VERY simple words (2-4 letters, common objects: gato, cão, sol, lua, casa, árvore)
+- Short sentences: 3-5 words maximum
+- Focus on: animals, colors, numbers 1-20, family, body parts, daily routines
+- Questions about: "Qual é...?" "Quantos...?" "Que cor...?"
+- Use concrete examples and familiar situations (A Maria tem um cão...)
+- Make questions playful and fun! Include animal sounds, colors, movement
+- Avoid: past tense, complex sentences, abstract concepts, big numbers` : ''}
+${grade === 2 ? `
+- Use simple words (3-6 letters, familiar topics from 1º ano)
+- Sentences: 5-7 words, can use simple past and future
+- Focus on: counting to 100, simple addition/subtraction, favorite foods, seasons, animals
+- Question types: comparisons ("Qual é maior?"), sequences ("O que vem a seguir?")
+- Include relatable scenarios (O João tem 3 livros, a Maria tem 2...)
+- Still playful but slightly more structured
+- Avoid: complex grammar, difficult vocabulary, abstract reasoning` : ''}
+${grade === 3 ? `
+- Use moderately complex words (4-8 letters, varied vocabulary)
+- Sentences: 7-9 words, multiple verb tenses (present, past, future)
+- Focus on: multiplication/division, geometry, problem-solving, reading comprehension
+- Question types: "Why...?" "What would happen if...?" "How do you...?"
+- Incorporate cause-and-effect, ordering, categorization
+- Make connections to real-world situations (shopping, time, distances)
+- Include some challenges but keep it achievable` : ''}
+${grade === 4 ? `
+- Use advanced vocabulary (5-10 letters, diverse topics)
+- Sentences: 8-10 words, complex structures with conjunctions (because, but, so)
+- Focus on: division/fractions, geometry, comprehension, reasoning, scientific thinking
+- Question types: "Why...?" "Compare and contrast" "Explain..." "What is the effect of...?"
+- Require multi-step thinking and justification
+- Connect to real-world applications (science, health, environment, technology)
+- Challenge students while remaining age-appropriate and fun` : ''}
 
-REQUIREMENTS:
+SPECIFIC REQUIREMENTS:
 - Each question on a DIFFERENT topic from the curriculum descriptors above
-- European Portuguese ONLY
+- European Portuguese ONLY - NO BRAZILIAN PORTUGUESE
 - Creative, fun, and age-appropriate
 - correctAnswer must be the EXACT TEXT of the correct option (not a letter!)
 - No duplicate options within a question
@@ -296,6 +342,27 @@ function normalizeQuestions(questions: any[]): any[] {
   });
 }
 
+async function addImagesToQuestions(questions: any[]): Promise<any[]> {
+  console.log('[PIXABAY] Fetching images for questions...');
+  
+  const enrichedQuestions = [];
+  
+  for (const question of questions) {
+    try {
+      const imageUrl = await fetchImageForTopic(question.topic);
+      if (imageUrl) {
+        question.imageUrl = imageUrl;
+        console.log(`[PIXABAY] Added image for topic: ${question.topic}`);
+      }
+    } catch (error) {
+      console.warn(`[PIXABAY] Failed to fetch image for topic ${question.topic}:`, error);
+    }
+    enrichedQuestions.push(question);
+  }
+  
+  return enrichedQuestions;
+}
+
 export async function generateQuizDirect(
   input: PersonalizedLearningPathInput
 ): Promise<PersonalizedLearningPathOutput> {
@@ -334,6 +401,11 @@ export async function generateQuizDirect(
     
     // Normalize: convert letter answers to text
     questions = normalizeQuestions(questions);
+    
+    // Add images from Pixabay (non-blocking, runs in background)
+    addImagesToQuestions(questions).catch(err => 
+      console.error('[PIXABAY] Background image fetching failed:', err)
+    );
     
     const validated = PersonalizedLearningPathOutputSchema.parse({ quizQuestions: questions });
     console.log('[QUIZ] Success! Generated', validated.quizQuestions.length, 'questions');

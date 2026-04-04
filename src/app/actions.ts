@@ -2,6 +2,15 @@
 "use server"
 
 import { generateQuizDirect } from "@/lib/quiz-generator";
+import { generateDiagnosticTest, calculateDiagnosticResults, shouldTakeDiagnosticTest } from "@/lib/diagnostic-test";
+import { 
+  calculateQuizPoints, 
+  getCurrentTier, 
+  getNextTierProgress, 
+  checkBadges, 
+  generateCelebrationMessage,
+  getDailyBonus 
+} from "@/lib/rewards";
 import { generateStory } from "@/ai/flows/story-generator";
 import { textToSpeech } from "@/ai/flows/text-to-speech";
 import { ai } from "@/ai/genkit";
@@ -476,4 +485,154 @@ export async function generateStoryAction(input: StoryGenerationInput): Promise<
     };
 
     return GenerateStoryActionOutputSchema.parse(result);
+}
+
+// ============================================
+// Diagnostic Test (Learning Level Detection)
+// ============================================
+
+export async function generateDiagnostic(gradeLevel: 1 | 2 | 3 | 4) {
+  console.log('[DIAGNOSTIC] Generating diagnostic test...');
+  return generateDiagnosticTest(gradeLevel);
+}
+
+export async function saveDiagnosticResults(
+  studentId: string,
+  gradeLevel: 1 | 2 | 3 | 4,
+  answers: Array<{ questionIndex: number; selectedAnswer: string }>,
+  correctAnswers: string[]
+) {
+  const results = calculateDiagnosticResults(answers, correctAnswers);
+  
+  console.log('[DIAGNOSTIC] Results:', results);
+  
+  // Save to Supabase if configured
+  if (isSupabaseConfigured() && supabase) {
+    try {
+      const { error } = await supabase.from('diagnostic_tests').insert({
+        student_id: studentId,
+        grade_level: gradeLevel,
+        score: results.score,
+        percentage: results.percentage,
+        learning_level: results.learningLevel,
+        recommendations: results.recommendations,
+        created_at: new Date().toISOString(),
+      });
+      
+      if (error) console.error('Failed to save diagnostic results:', error);
+    } catch (error) {
+      console.error('Error saving diagnostic results:', error);
+    }
+  }
+  
+  return results;
+}
+
+export async function checkDiagnosticNeeded(lastDiagnosticDate?: string): Promise<boolean> {
+  return shouldTakeDiagnosticTest(lastDiagnosticDate);
+}
+
+// ============================================
+// Student Rewards System
+// ============================================
+
+export async function awardQuizPoints(
+  studentId: string,
+  score: number,
+  total: number,
+  gradeLevel: number
+) {
+  const points = calculateQuizPoints(score, total, gradeLevel);
+  
+  console.log('[REWARDS] Awarding', points, 'points to', studentId);
+  
+  if (!isSupabaseConfigured() || !supabase) {
+    console.warn('[REWARDS] Supabase not configured, skipping reward save');
+    return { points, message: generateCelebrationMessage(score, total, points) };
+  }
+  
+  try {
+    // Get or create student reward record
+    const { data: existing } = await supabase
+      .from('student_rewards')
+      .select('*')
+      .eq('student_id', studentId)
+      .single();
+    
+    if (!existing) {
+      // Create new reward record
+      await supabase.from('student_rewards').insert({
+        student_id: studentId,
+        total_points: points,
+        current_tier: 1,
+        badges: [],
+        day_streak: 1,
+        last_quiz_date: new Date().toISOString(),
+      });
+    } else {
+      // Update existing record
+      const dailyBonus = getDailyBonus(existing.day_streak || 0);
+      const newTotal = (existing.total_points || 0) + points + dailyBonus;
+      const newTier = getCurrentTier(newTotal).level;
+      
+      await supabase
+        .from('student_rewards')
+        .update({
+          total_points: newTotal,
+          current_tier: newTier,
+          last_quiz_date: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        })
+        .eq('student_id', studentId);
+    }
+    
+    const tier = getCurrentTier(points);
+    const nextProgress = getNextTierProgress(points);
+    
+    return {
+      points,
+      totalPoints: (existing?.total_points || 0) + points,
+      tier: tier.name,
+      message: generateCelebrationMessage(score, total, points),
+      nextTier: nextProgress.nextTier?.name,
+      progressPercentage: nextProgress.percentage,
+    };
+  } catch (error) {
+    console.error('[REWARDS] Failed to award points:', error);
+    return {
+      points,
+      message: generateCelebrationMessage(score, total, points),
+      error: true,
+    };
+  }
+}
+
+export async function getStudentRewards(studentId: string) {
+  if (!isSupabaseConfigured() || !supabase) {
+    return null;
+  }
+  
+  try {
+    const { data } = await supabase
+      .from('student_rewards')
+      .select('*')
+      .eq('student_id', studentId)
+      .single();
+    
+    if (data) {
+      const tier = getCurrentTier(data.total_points || 0);
+      const nextProgress = getNextTierProgress(data.total_points || 0);
+      
+      return {
+        ...data,
+        tier,
+        nextTier: nextProgress.nextTier,
+        progressPercentage: nextProgress.percentage,
+      };
+    }
+  } catch (error) {
+    console.error('[REWARDS] Failed to get student rewards:', error);
+  }
+  
+  return null;
 }

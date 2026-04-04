@@ -60,14 +60,54 @@ CREATE INDEX IF NOT EXISTS idx_words_category_difficulty
   ON words(category, difficulty);
 
 -- ============================================
+-- Table: diagnostic_tests (learning level detection)
+-- ============================================
+CREATE TABLE IF NOT EXISTS diagnostic_tests (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  student_id TEXT NOT NULL,
+  grade_level INT NOT NULL,
+  score INT NOT NULL,
+  percentage INT NOT NULL,
+  learning_level TEXT NOT NULL,
+  recommendations JSONB,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Index for fast student lookups
+CREATE INDEX IF NOT EXISTS idx_diagnostic_tests_student 
+  ON diagnostic_tests(student_id);
+
+-- ============================================
+-- Table: student_rewards (points, badges, tiers)
+-- ============================================
+CREATE TABLE IF NOT EXISTS student_rewards (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  student_id TEXT NOT NULL UNIQUE,
+  total_points INT DEFAULT 0,
+  current_tier INT DEFAULT 1,
+  badges JSONB DEFAULT '[]',
+  day_streak INT DEFAULT 0,
+  last_quiz_date TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Index for fast student lookups
+CREATE INDEX IF NOT EXISTS idx_student_rewards_student 
+  ON student_rewards(student_id);
+
+-- ============================================
 -- Enable Row Level Security (RLS)
 -- For now, allow all operations (public app for kids)
 -- ============================================
 ALTER TABLE questions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE quiz_history ENABLE ROW LEVEL SECURITY;
 ALTER TABLE words ENABLE ROW LEVEL SECURITY;
+ALTER TABLE diagnostic_tests ENABLE ROW LEVEL SECURITY;
 
 -- Allow anonymous read/write for all tables
 CREATE POLICY "Allow all for questions" ON questions FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow all for quiz_history" ON quiz_history FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow all for words" ON words FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow all for diagnostic_tests" ON diagnostic_tests FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow all for student_rewards" ON student_rewards FOR ALL USING (true) WITH CHECK (true);
