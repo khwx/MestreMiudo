@@ -1,0 +1,38 @@
+
+> nextn@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.14
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 3.9s
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+   Generating static pages (0/6) ...
+   Generating static pages (1/6) 
+   Generating static pages (2/6) 
+   Generating static pages (4/6) 
+ ✓ Generating static pages (6/6)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                    46.7 kB         156 kB
+├ ○ /_not-found                            994 B         103 kB
+├ ƒ /dashboard                           4.21 kB         118 kB
+├ ƒ /dashboard/games                       12 kB         129 kB
+├ ƒ /dashboard/history                     13 kB         125 kB
+├ ƒ /dashboard/story-creator             5.46 kB         122 kB
+├ ○ /not-found                           2.98 kB         112 kB
+└ ƒ /quiz/[subject]                      7.09 kB         128 kB
++ First Load JS shared by all             102 kB
+  ├ chunks/255-f7044090becd1cfb.js       45.5 kB
+  ├ chunks/4bd1b696-21f374d1156f834a.js  54.2 kB
+  └ other shared chunks (total)          1.87 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

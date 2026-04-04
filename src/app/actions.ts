@@ -2,6 +2,9 @@
 "use server"
 
 import { generateQuizDirect } from "@/lib/quiz-generator";
+import { generateStory } from "@/ai/flows/story-generator";
+import { textToSpeech } from "@/ai/flows/text-to-speech";
+import { ai } from "@/ai/genkit";
 import { StoryGenerationInputSchema } from "@/app/shared-schemas";
 import { z } from "zod";
 import fs from 'fs/promises';
@@ -453,9 +456,9 @@ export async function generateStoryAction(input: StoryGenerationInput): Promise<
         storyOutput.imagePrompts ? Promise.all(storyOutput.imagePrompts.map(generateImage)) : Promise.resolve([])
     ]);
 
-    const audioDataUri = ttsResult.status === 'fulfilled' ? ttsResult.value.audioDataUri : undefined;
-    const speechMarks = ttsResult.status === 'fulfilled' ? ttsResult.value.speechMarks : undefined;
-    const images = imagesResult.status === 'fulfilled' ? imagesResult.value.filter(url => url) : [];
+     const audioDataUri = ttsResult.status === 'fulfilled' ? ttsResult.value.audioDataUri : undefined;
+     const speechMarks = ttsResult.status === 'fulfilled' ? ttsResult.value.speechMarks : undefined;
+     const images = imagesResult.status === 'fulfilled' ? imagesResult.value.filter((url: string) => url) : [];
     
     if (ttsResult.status === 'rejected') {
         console.error("Text-to-speech failed, returning story without audio.", ttsResult.reason);

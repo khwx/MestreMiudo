@@ -15,13 +15,15 @@ const subjectMap = {
 
 type SubjectSlug = keyof typeof subjectMap;
 
-export default function QuizPage({ params, searchParams }: { params: { subject: string }, searchParams: { [key: string]: string | string[] | undefined } }) {
+export default async function QuizPage({ params, searchParams }: { params: Promise<{ subject: string }>, searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
   
-  const subjectSlug = decodeURIComponent(params.subject) as SubjectSlug;
+  const subjectSlug = decodeURIComponent(resolvedParams.subject) as SubjectSlug;
   const subjectTitle = subjectMap[subjectSlug];
 
-  const name = searchParams?.name as string || 'Jogador';
-  const grade = searchParams?.grade as string;
+  const name = resolvedSearchParams?.name as string || 'Jogador';
+  const grade = resolvedSearchParams?.grade as string;
 
   if (!subjectTitle) {
     notFound();

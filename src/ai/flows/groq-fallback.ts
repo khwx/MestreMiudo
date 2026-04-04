@@ -56,17 +56,17 @@ export async function generateQuizWithGroq(
   input: PersonalizedLearningPathInput
 ): Promise<PersonalizedLearningPathOutput> {
   const grade = input.gradeLevel as 1 | 2 | 3 | 4;
-  const subject = input.subject || 'misto';
+  const subject = input.subject;
   
   // Get curriculum topics for this grade
-  const getTopicsForSubject = (subj: string, yr: number): string[] => {
+  const getTopicsForSubject = (subj: string | undefined, yr: 1 | 2 | 3 | 4): string[] => {
     if (subj === 'Português') return CURRICULUM_TOPICS.português[yr] || [];
-    if (subj === 'Matemática') return CURRICULUM_TOPICS.matematica[yr] || [];
+    if (subj === 'Matemática') return CURRICULUM_TOPICS.matemática[yr] || [];
     if (subj === 'Estudo do Meio') return CURRICULUM_TOPICS["estudo do meio"][yr] || [];
     return [];
   };
 
-  const subjects = subject === 'Misto' 
+  const subjects = !subject 
     ? ['Português', 'Matemática', 'Estudo do Meio'] 
     : [subject];
   
@@ -87,13 +87,11 @@ ${Object.entries(topicsPerSubject).map(([subj, topics]) =>
   `${subj}: ${topics.slice(0, 10).join(', ')}`
 ).join('\n')}
 
-{{#if performanceData}}
-FOCUS ON weak areas: ${Object.entries(input.performanceData)
-  .sort((a, b) => a[1] - b[1])
+${input.performanceData ? `FOCUS ON weak areas: ${Object.entries(input.performanceData)
+  .sort((a, b) => (a[1] ?? 0) - (b[1] ?? 0))
   .slice(0, 5)
   .map(([topic]) => topic)
-  .join(', ')}
-{{/if}}
+  .join(', ')}` : ''}
 
 Requirements:
 - Generate ${questionsPerSubject} questions per subject
