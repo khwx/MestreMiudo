@@ -1,35 +1,24 @@
-
 'use server';
 
 /**
- * @fileOverview Word generation for games.
- *
- * This file defines a Genkit flow that generates words for games like Hangman,
- * complete with hints, based on specified categories and difficulty levels.
- * Includes Supabase caching to reduce API usage.
- *
- * - generateWord - A function that generates a word and a hint.
+ * @fileOverview Word generation for hangman game using OpenRouter.
+ * No longer uses Genkit - direct API call to OpenRouter.
  */
 
-import { ai } from '@/ai/genkit';
 import { z } from 'zod';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 
-// Schema for the input of the word generation flow
 const WordGenerationInputSchema = z.object({
   category: z.string().describe('The category for the word (e.g., Animais, Frutas, Países).'),
-  difficulty: z.enum(['Fácil', 'Médio', 'Difícil']).describe('The difficulty level, which influences word length and complexity.'),
+  difficulty: z.enum(['Fácil', 'Médio', 'Difícil']).describe('The difficulty level.'),
 });
 export type WordGenerationInput = z.infer<typeof WordGenerationInputSchema>;
 
-
-// Schema for the output of the word generation flow
 const WordGenerationOutputSchema = z.object({
   word: z.string().describe('The generated word in Portuguese.'),
   hint: z.string().describe('A simple hint for the generated word.'),
 });
 export type WordGenerationOutput = z.infer<typeof WordGenerationOutputSchema>;
-
 
 // Try to get a cached word from Supabase
 async function getCachedWord(category: string, difficulty: string): Promise<WordGenerationOutput | null> {
@@ -59,7 +48,6 @@ async function cacheWord(category: string, difficulty: string, word: string, hin
   if (!isSupabaseConfigured() || !supabase) return;
 
   try {
-    // Check for duplicates first
     const { data: existing } = await supabase
       .from('words')
       .select('id')
@@ -67,7 +55,7 @@ async function cacheWord(category: string, difficulty: string, word: string, hin
       .eq('category', category)
       .limit(1);
 
-    if (existing && existing.length > 0) return; // Already cached
+    if (existing && existing.length > 0) return;
 
     const { error } = await supabase.from('words').insert({
       category,
@@ -82,89 +70,176 @@ async function cacheWord(category: string, difficulty: string, word: string, hin
   }
 }
 
+// Direct OpenRouter API call
+async function generateWordViaAPI(category: string, difficulty: string): Promise<WordGenerationOutput | null> {
+  const apiKey = process.env.OPENROUTER_API_KEY;
+  if (!apiKey) return null;
+
+  try {
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+        'HTTP-Referer': 'https://mestremiudo.com',
+        'X-Title': 'MestreMiudo'
+      },
+      body: JSON.stringify({
+        model: 'meta-llama/llama-3.3-70b-instruct',
+        messages: [
+          {
+            role: 'system',
+            content: `You generate single Portuguese words for a children's hangman game.
+Return ONLY a JSON object with "word" and "hint".
+Rules: 
+- Single word only (no spaces, no numbers, no special chars except Portuguese accents)
+- European Portuguese
+- Word length based on difficulty: Fácil=4-6 letters, Médio=7-9 letters, Difícil=10+ letters
+- Hint should be short and fun for children`
+          },
+          {
+            role: 'user',
+            content: `Category: ${category}, Difficulty: ${difficulty}`
+          }
+        ],
+        temperature: 0.9,
+        max_tokens: 100
+      })
+    });
+
+    if (!response.ok) {
+      console.error('[WORD] OpenRouter error:', response.status);
+      return null;
+    }
+
+    const data = await response.json();
+    const content = data.choices?.[0]?.message?.content;
+    if (!content) return null;
+
+    // Parse JSON from response
+    const jsonMatch = content.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) return null;
+    
+    const result = JSON.parse(jsonMatch[0]);
+    if (result.word && result.hint) {
+      return { word: result.word.toUpperCase(), hint: result.hint };
+    }
+    return null;
+  } catch (error) {
+    console.error('[WORD] API call failed:', error);
+    return null;
+  }
+}
+
+// Fallback word list (organized by category)
+const FALLBACK_WORDS: Record<string, { word: string; hint: string }[]> = {
+  'Animais': [
+    { word: 'GATO', hint: 'Animal que mia' },
+    { word: 'CÃO', hint: 'Melhor amigo do homem' },
+    { word: 'PATO', hint: 'Animal que faz "quá quá"' },
+    { word: 'RATO', hint: 'Animal pequeno que gosta de queijo' },
+    { word: 'SAPO', hint: 'Animal que faz "croac" e salta' },
+    { word: 'URSO', hint: 'Animal grande que hiberna' },
+    { word: 'LOBO', hint: 'Animal que uiva para a lua' },
+    { word: 'TIGRE', hint: 'Gato grande com riscas' },
+    { word: 'ZEBRA', hint: 'Cavalo com riscas pretas e brancas' },
+    { word: 'COELHO', hint: 'Animal de orelhas compridas que come cenouras' },
+    { word: 'MACACO', hint: 'Animal que sobe às árvores e faz caretas' },
+    { word: 'GIRAFA', hint: 'Animal com pescoço muito comprido' },
+    { word: 'ELEFANTE', hint: 'Animal grande com tromba' },
+    { word: 'BORBOLETA', hint: 'Inseto colorido que voa entre flores' },
+    { word: 'CROCODILO', hint: 'Réptil grande que vive em rios' },
+  ],
+  'Frutas': [
+    { word: 'MAÇÃ', hint: 'Fruta vermelha ou verde' },
+    { word: 'PÊRA', hint: 'Fruta em forma de gota' },
+    { word: 'UVA', hint: 'Fruta pequena em cachos' },
+    { word: 'LIMÃO', hint: 'Fruta amarela e ácida' },
+    { word: 'MELÃO', hint: 'Fruta grande e doce por dentro' },
+    { word: 'MORANGO', hint: 'Fruta vermelha com pintinhas' },
+    { word: 'BANANA', hint: 'Fruta amarela e comprida' },
+    { word: 'LARANJA', hint: 'Fruta laranja cheia de sumo' },
+    { word: 'CEREJA', hint: 'Fruitinha vermelha com pé' },
+    { word: 'ABACAXI', hint: 'Fruta tropical com coroa' },
+    { word: 'MANGA', hint: 'Fruta tropical doce' },
+    { word: 'MELANCIA', hint: 'Fruta verde enorme por fora e vermelha por dentro' },
+  ],
+  'Cores': [
+    { word: 'AZUL', hint: 'Cor do céu' },
+    { word: 'VERDE', hint: 'Cor da relva' },
+    { word: 'ROSA', hint: 'Cor de uma flor bonita' },
+    { word: 'AMARELO', hint: 'Cor do sol' },
+    { word: 'VERMELHO', hint: 'Cor do sangue e dos bombeiros' },
+    { word: 'BRANCO', hint: 'Cor da neve' },
+    { word: 'PRETO', hint: 'Cor da noite' },
+    { word: 'CASTANHO', hint: 'Cor da terra e do chocolate' },
+    { word: 'LARANJA', hint: 'Cor que tem o nome de uma fruta' },
+    { word: 'ROXO', hint: 'Cor entre o azul e o vermelho' },
+  ],
+  'Corpo': [
+    { word: 'MÃO', hint: 'Usamos para agarrar coisas' },
+    { word: 'PÉ', hint: 'Usamos para andar' },
+    { word: 'BOCA', hint: 'Usamos para falar e comer' },
+    { word: 'NARIZ', hint: 'Usamos para cheirar' },
+    { word: 'OLHO', hint: 'Usamos para ver' },
+    { word: 'ORELHA', hint: 'Usamos para ouvir' },
+    { word: 'CABELO', hint: 'Cresce na cabeça' },
+    { word: 'DENTE', hint: 'Usamos para mastigar' },
+    { word: 'CORACAO', hint: 'Órgão que bate no peito' },
+    { word: 'ESTOMAGO', hint: 'Onde vai a comida depois de engolir' },
+  ],
+  'Escola': [
+    { word: 'LÁPIS', hint: 'Usamos para escrever' },
+    { word: 'LIVRO', hint: 'Tem páginas com histórias' },
+    { word: 'MESA', hint: 'Onde nos sentamos para trabalhar' },
+    { word: 'CANETA', hint: 'Escreve a tinta' },
+    { word: 'REGUA', hint: 'Usamos para medir e traçar linhas' },
+    { word: 'BORRACHA', hint: 'Usamos para apagar' },
+    { word: 'MOCHILA', hint: 'Onde guardamos os materiais' },
+    { word: 'CADERNO', hint: 'Onde escrevemos os trabalhos' },
+    { word: 'PROFESSOR', hint: 'Quem nos ensina na escola' },
+    { word: 'ESCOLA', hint: 'Onde vamos aprender' },
+  ],
+  'Natureza': [
+    { word: 'SOL', hint: 'Brilha no céu durante o dia' },
+    { word: 'LUAR', hint: 'Luz da lua à noite' },
+    { word: 'MAR', hint: 'Grande massa de água salgada' },
+    { word: 'RIO', hint: 'Água doce que corre para o mar' },
+    { word: 'FLOR', hint: 'Parte bonita da planta' },
+    { word: 'ÁRVORE', hint: 'Planta grande com tronco e folhas' },
+    { word: 'NUVEM', hint: 'Algo branco que flutua no céu' },
+    { word: 'CHUVA', hint: 'Água que cai do céu' },
+    { word: 'VENTO', hint: 'Ar que se move e faz as folhas dançar' },
+    { word: 'MONTANHA', hint: 'Grande elevação de terra' },
+    { word: 'FLORESTA', hint: 'Lugar com muitas árvores' },
+    { word: 'JARDIM', hint: 'Lugar com flores e relva' },
+  ],
+};
 
 export async function generateWord(input: WordGenerationInput): Promise<WordGenerationOutput> {
   // Try cache first
   const cached = await getCachedWord(input.category, input.difficulty);
   if (cached) {
-    console.log(`[Cache HIT] Word for category=${input.category}, difficulty=${input.difficulty}`);
+    console.log(`[WORD] Cache HIT: ${cached.word} (${input.category}/${input.difficulty})`);
     return cached;
   }
 
-  console.log(`[Cache MISS] Generating word via AI for category=${input.category}, difficulty=${input.difficulty}`);
-  const result = await generateWordFlow(input);
-
-  // Cache the result (non-blocking)
-  cacheWord(input.category, input.difficulty, result.word, result.hint)
-    .catch(err => console.error('Background word caching failed:', err));
-
-  return result;
-}
-
-
-const prompt = ai.definePrompt({
-  name: 'wordGenerationPrompt',
-  input: { schema: WordGenerationInputSchema },
-  output: { schema: WordGenerationOutputSchema },
-  prompt: `You are an AI that generates single words in Portuguese for a children's hangman game.
-
-The current year is 2024.
-
-Generate a single, appropriate word and a corresponding simple hint based on the following criteria:
-- Category: {{{category}}}
-- Difficulty: {{{difficulty}}}
-
-The word must not contain numbers or special characters, other than Portuguese accents. It should be a single word.
-The hint should be short and easy for a child to understand.
-
-Example:
-Input: { category: "Animais", difficulty: "Fácil" }
-Output: { word: "GATO", hint: "É um animal que mia e gosta de caçar ratos." }
-
-Input: { category: "Frutas", difficulty: "Fácil" }
-Output: { word: "MAÇÃ", hint: "É uma fruta vermelha ou verde que a Branca de Neve comeu." }
-`,
-});
-
-const generateWordFlow = ai.defineFlow(
-  {
-    name: 'generateWordFlow',
-    inputSchema: WordGenerationInputSchema,
-    outputSchema: WordGenerationOutputSchema,
-  },
-  async (input) => {
-    let retries = 3;
-    let lastError: any = null;
-
-    while (retries > 0) {
-      try {
-        const { output } = await prompt(input);
-        
-        if (output?.word && output.hint) {
-          // Basic validation to ensure it's a single word without spaces
-          if (output.word.trim().split(' ').length === 1) {
-            return output;
-          }
-        }
-
-        lastError = new Error("Model returned invalid output (e.g., multiple words).");
-        retries--;
-        
-      } catch (e: any) {
-        lastError = e;
-        if (e.message.includes('503 Service Unavailable') || e.message.includes('overloaded')) {
-          retries--;
-          if (retries > 0) {
-            console.log(`Word generation model is overloaded, retrying in 2 seconds... (${retries} attempts left)`);
-            await new Promise(resolve => setTimeout(resolve, 2000));
-          }
-        } else {
-          // Non-retriable error
-          throw e;
-        }
-      }
-    }
-    console.error("All retries failed to generate a word.");
-    throw lastError;
+  console.log(`[WORD] Cache MISS, generating word for ${input.category}/${input.difficulty}`);
+  
+  // Try OpenRouter API
+  const apiResult = await generateWordViaAPI(input.category, input.difficulty);
+  if (apiResult) {
+    console.log(`[WORD] API generated: ${apiResult.word}`);
+    cacheWord(input.category, input.difficulty, apiResult.word, apiResult.hint)
+      .catch(err => console.error('Background caching failed:', err));
+    return apiResult;
   }
-);
+
+  // Fallback to built-in word list
+  const fallbackList = FALLBACK_WORDS[input.category] || FALLBACK_WORDS['Animais'];
+  const randomIndex = Math.floor(Math.random() * fallbackList.length);
+  const fallback = fallbackList[randomIndex];
+  
+  console.log(`[WORD] Using fallback: ${fallback.word}`);
+  return { word: fallback.word, hint: fallback.hint };
+}

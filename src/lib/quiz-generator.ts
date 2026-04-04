@@ -212,20 +212,37 @@ ${descriptorList}
     prompt += `\nThe student struggles with: ${weakAreas.join(', ')}. Focus more on these areas.\n`;
   }
 
+  // Subject-specific instructions
+  const subjectInstructions: Record<string, string> = {
+    'português': `
+SUBJECT RULES for Português:
+- Questions must be about LANGUAGE skills: reading, writing, grammar, oral expression, literature
+- Examples: identify letters, syllables, rhyming words, correct spelling, sentence structure
+- DO NOT include math calculations or science facts
+- Example question: "Qual palavra rima com 'gato'?" (not "Quanto é 2+3?")`,
+    'matemática': `
+SUBJECT RULES for Matemática:
+- Questions must be about NUMBERS, OPERATIONS, GEOMETRY, DATA
+- Examples: counting, addition, subtraction, shapes, patterns, measurements
+- DO NOT include grammar questions or history facts
+- Example question: "Se tens 3 maçãs e comes 1, quantas ficam?" (not "Qual é o feminino de 'menino'?")`,
+    'estudo do meio': `
+SUBJECT RULES for Estudo do Meio:
+- Questions must be about SOCIETY, NATURE, TECHNOLOGY, environment, body, family, community
+- Examples: body parts, family members, animals, plants, weather, safety, daily routines
+- DO NOT include math calculations or grammar exercises
+- Example question: "O que faz o Sol?" (not "Quanto é 2+3?")`
+  };
+
   prompt += `
+${subjectInstructions[subject.toLowerCase()] || ''}
+
 STYLE GUIDE for ${grade}º ano:
 ${grade === 1 ? `- Use very simple words and short sentences
-- Focus on counting, basic addition (1-10), shapes, family, body parts, animals
-- Make it playful: "O gato tem 4 patas. Se chegar mais 1, quantas tem?"` : ''}
-${grade === 2 ? `- Slightly more complex but still fun
-- Include simple word problems, basic multiplication, plants, recycling
-- Example: "A Maria tem 3 maçãs. O João deu-lhe mais 4. Quantas tem agora?"` : ''}
-${grade === 3 ? `- More challenging but still engaging
-- Include division, fractions, body systems, animal classification
-- Example: "Um bolo foi dividido em 4 partes iguais. O Pedro comeu 1 parte. Que fração comeu?"` : ''}
-${grade === 4 ? `- More complex concepts but keep it fun
-- Include decimals, percentages, areas, Portuguese geography
-- Example: "Portugal tem 18 distritos. Se visitaste 9, que percentagem já visitaste?"` : ''}
+- Make it playful with animals, family, everyday situations` : ''}
+${grade === 2 ? `- Slightly more complex but still fun and relatable` : ''}
+${grade === 3 ? `- More challenging but still engaging with real-world connections` : ''}
+${grade === 4 ? `- More complex concepts but keep it fun and accessible` : ''}
 
 REQUIREMENTS:
 - Each question on a DIFFERENT topic from the curriculum descriptors above
@@ -233,6 +250,7 @@ REQUIREMENTS:
 - Creative, fun, and age-appropriate
 - correctAnswer must be the EXACT TEXT of the correct option (not a letter!)
 - No duplicate options within a question
+- STAY STRICTLY within the subject area defined above
 
 Return ONLY a valid JSON array with ${input.numberOfQuestions} objects.
 Format: [{"question":"...","options":["A","B","C","D"],"correctAnswer":"exact text of correct option","topic":"topic name"}]`;
