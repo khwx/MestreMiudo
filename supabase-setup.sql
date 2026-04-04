@@ -97,6 +97,52 @@ CREATE INDEX IF NOT EXISTS idx_student_rewards_student
   ON student_rewards(student_id);
 
 -- ============================================
+-- Table: daily_challenges (daily challenge tracking)
+-- ============================================
+CREATE TABLE IF NOT EXISTS daily_challenges (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  student_id TEXT NOT NULL,
+  challenge_date DATE NOT NULL,
+  subject TEXT NOT NULL,
+  difficulty TEXT NOT NULL,
+  question_id UUID REFERENCES questions(id),
+  completed BOOLEAN DEFAULT FALSE,
+  correct BOOLEAN,
+  bonus_points INT DEFAULT 50,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(student_id, challenge_date)
+);
+
+-- Index for fast lookups
+CREATE INDEX IF NOT EXISTS idx_daily_challenges_student 
+  ON daily_challenges(student_id);
+CREATE INDEX IF NOT EXISTS idx_daily_challenges_date
+  ON daily_challenges(challenge_date);
+
+-- ============================================
+-- Table: leaderboards (global and friend rankings)
+-- ============================================
+CREATE TABLE IF NOT EXISTS leaderboards (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  student_id TEXT NOT NULL,
+  student_name TEXT NOT NULL,
+  grade_level INT,
+  total_points INT DEFAULT 0,
+  total_quizzes INT DEFAULT 0,
+  average_score DECIMAL(5,2) DEFAULT 0,
+  rank INT,
+  rank_period TEXT DEFAULT 'global', -- 'global', 'weekly', 'monthly'
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(student_id, rank_period)
+);
+
+-- Index for fast lookups
+CREATE INDEX IF NOT EXISTS idx_leaderboards_rank
+  ON leaderboards(rank, rank_period);
+
+-- ============================================
 -- Enable Row Level Security (RLS)
 -- For now, allow all operations (public app for kids)
 -- ============================================
@@ -104,6 +150,9 @@ ALTER TABLE questions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE quiz_history ENABLE ROW LEVEL SECURITY;
 ALTER TABLE words ENABLE ROW LEVEL SECURITY;
 ALTER TABLE diagnostic_tests ENABLE ROW LEVEL SECURITY;
+ALTER TABLE student_rewards ENABLE ROW LEVEL SECURITY;
+ALTER TABLE daily_challenges ENABLE ROW LEVEL SECURITY;
+ALTER TABLE leaderboards ENABLE ROW LEVEL SECURITY;
 
 -- Allow anonymous read/write for all tables
 CREATE POLICY "Allow all for questions" ON questions FOR ALL USING (true) WITH CHECK (true);
@@ -111,3 +160,5 @@ CREATE POLICY "Allow all for quiz_history" ON quiz_history FOR ALL USING (true) 
 CREATE POLICY "Allow all for words" ON words FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow all for diagnostic_tests" ON diagnostic_tests FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow all for student_rewards" ON student_rewards FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow all for daily_challenges" ON daily_challenges FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow all for leaderboards" ON leaderboards FOR ALL USING (true) WITH CHECK (true);

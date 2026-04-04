@@ -3,7 +3,7 @@
 
 import { MemoryGame } from '@/components/MemoryGame';
 import { TicTacToe } from '@/components/TicTacToe';
-import { HangmanGame } from '@/components/HangmanGame';
+import { HangmanGame } from '@/components/HangmanGameImproved';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';

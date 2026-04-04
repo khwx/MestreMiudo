@@ -440,51 +440,71 @@ const GenerateStoryActionOutputSchema = z.object({
 
 
 async function generateImage(prompt: string): Promise<string> {
-    const { media } = await ai.generate({
-        model: 'googleai/imagen-4.0-fast-generate-001',
-        prompt,
-        config: {
-            aspectRatio: "1:1",
+    try {
+        console.log(`[IMAGE] Generating image with prompt: ${prompt.substring(0, 100)}...`);
+        const { media } = await ai.generate({
+            model: 'googleai/imagen-4.0-fast-generate-001',
+            prompt,
+            config: {
+                aspectRatio: "1:1",
+            }
+        });
+        const url = media?.url || '';
+        if (url) {
+            console.log(`[IMAGE] Successfully generated image`);
+        } else {
+            console.warn(`[IMAGE] No media URL returned`);
         }
-    });
-    return media?.url || '';
+        return url;
+    } catch (error) {
+        console.error(`[IMAGE] Failed to generate image:`, error);
+        return ''; // Return empty string instead of failing
+    }
 }
 
 export async function generateStoryAction(input: StoryGenerationInput): Promise<z.infer<typeof GenerateStoryActionOutputSchema>> {
     const validatedInput = StoryGenerationInputSchema.parse(input);
     
-    const storyOutput = await generateStory(validatedInput);
-    if (!storyOutput || !storyOutput.story) {
-        throw new Error("Failed to generate story text.");
+    try {
+        console.log(`[STORY_ACTION] Starting story generation for grade ${input.gradeLevel}`);
+        const storyOutput = await generateStory(validatedInput);
+        if (!storyOutput || !storyOutput.story) {
+            throw new Error("Failed to generate story text - empty response from Genkit flow.");
+        }
+
+        console.log(`[STORY_ACTION] Story generated: "${storyOutput.title}"`);
+        const fullText = `${storyOutput.title}. ${storyOutput.story}`;
+
+        const [ttsResult, imagesResult] = await Promise.allSettled([
+            textToSpeech(fullText),
+            storyOutput.imagePrompts ? Promise.all(storyOutput.imagePrompts.map(generateImage)) : Promise.resolve([])
+        ]);
+
+        const audioDataUri = ttsResult.status === 'fulfilled' ? ttsResult.value.audioDataUri : undefined;
+        const speechMarks = ttsResult.status === 'fulfilled' ? ttsResult.value.speechMarks : undefined;
+        const images = imagesResult.status === 'fulfilled' ? imagesResult.value.filter((url: string) => url) : [];
+        
+        if (ttsResult.status === 'rejected') {
+            console.error("[STORY_ACTION] Text-to-speech failed, returning story without audio.", ttsResult.reason);
+        }
+        if (imagesResult.status === 'rejected') {
+            console.error("[STORY_ACTION] Image generation failed.", imagesResult.reason);
+        }
+
+        const result = {
+            title: storyOutput.title,
+            story: storyOutput.story,
+            audioDataUri,
+            speechMarks,
+            images
+        };
+
+        console.log(`[STORY_ACTION] Story action complete: audio=${!!audioDataUri}, images=${images.length}`);
+        return GenerateStoryActionOutputSchema.parse(result);
+    } catch (error: any) {
+        console.error("[STORY_ACTION] Failed to generate story:", error.message || error);
+        throw error;
     }
-
-    const fullText = `${storyOutput.title}. ${storyOutput.story}`;
-
-    const [ttsResult, imagesResult] = await Promise.allSettled([
-        textToSpeech(fullText),
-        storyOutput.imagePrompts ? Promise.all(storyOutput.imagePrompts.map(generateImage)) : Promise.resolve([])
-    ]);
-
-     const audioDataUri = ttsResult.status === 'fulfilled' ? ttsResult.value.audioDataUri : undefined;
-     const speechMarks = ttsResult.status === 'fulfilled' ? ttsResult.value.speechMarks : undefined;
-     const images = imagesResult.status === 'fulfilled' ? imagesResult.value.filter((url: string) => url) : [];
-    
-    if (ttsResult.status === 'rejected') {
-        console.error("Text-to-speech failed, returning story without audio.", ttsResult.reason);
-    }
-    if (imagesResult.status === 'rejected') {
-        console.error("Image generation failed.", imagesResult.reason);
-    }
-
-    const result = {
-        title: storyOutput.title,
-        story: storyOutput.story,
-        audioDataUri,
-        speechMarks,
-        images
-    };
-
-    return GenerateStoryActionOutputSchema.parse(result);
 }
 
 // ============================================

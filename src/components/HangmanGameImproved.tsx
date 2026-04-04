@@ -10,12 +10,14 @@ import { useToast } from "@/hooks/use-toast";
 const CATEGORIES = [
   "Animais",
   "Frutas",
-  "Cidades",
-  "Profissões",
   "Cores",
-  "Números",
   "Partes do Corpo",
+  "Escola",
+  "Natureza",
   "Transportes",
+  "Profissões",
+  "Desportos",
+  "Objetos Comuns",
 ];
 
 const DIFFICULTIES = ["Fácil", "Normal", "Difícil"];

@@ -64,30 +64,35 @@ const storyGeneratorFlow = ai.defineFlow(
 
     while (retries > 0) {
       try {
+        console.log(`[STORY] Generating story for grade ${input.gradeLevel} with keywords: ${input.keywords}`);
         const { output } = await prompt(input);
         
         if (output?.title && output.story && output.imagePrompts && output.imagePrompts.length === 3) {
+          console.log(`[STORY] Successfully generated story: "${output.title}"`);
           return output;
         }
 
         lastError = new Error("Model returned invalid output (e.g., missing title, story, or 3 image prompts).");
+        console.warn(`[STORY] Invalid output from model:`, output);
         retries--;
         
       } catch (e: any) {
         lastError = e;
+        console.error(`[STORY] Error generating story (attempt ${4 - retries}/3):`, e.message);
         if (e.message.includes('503 Service Unavailable') || e.message.includes('overloaded')) {
           retries--;
           if (retries > 0) {
-            console.log(`Story generation model is overloaded, retrying in 2 seconds... (${retries} attempts left)`);
+            console.log(`[STORY] Model is overloaded, retrying in 2 seconds... (${retries} attempts left)`);
             await new Promise(resolve => setTimeout(resolve, 2000));
           }
         } else {
           // Non-retriable error
+          console.error(`[STORY] Non-retriable error, giving up:`, e.message);
           throw e;
         }
       }
     }
-    console.error("All retries failed to generate a story.");
+    console.error("[STORY] All retries failed to generate a story.", lastError?.message);
     throw lastError;
   }
 );
