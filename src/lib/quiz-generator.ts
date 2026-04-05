@@ -11,6 +11,7 @@ import { PersonalizedLearningPathOutputSchema } from '@/app/shared-schemas';
 import curriculumData from './curriculum-topics.json';
 import { fetchImageForTopic } from './pixabay';
 import { buildAdaptivePromptInstructions } from './adaptive-learning';
+import { validateQuestionForCurriculum } from './curriculum-validator';
 
 interface CurriculumDomain {
   name: string;
@@ -401,6 +402,27 @@ export async function generateQuizDirect(
     
     // Normalize: convert letter answers to text
     questions = normalizeQuestions(questions);
+    
+    // ⚠️ CURRICULUM VALIDATION - Ensure questions are age-appropriate
+    console.log('[CURRICULUM] Validating questions for Grade', input.gradeLevel);
+    for (const q of questions) {
+      const validationResult = validateQuestionForCurriculum(
+        q.question,
+        input.gradeLevel,
+        input.subject
+      );
+      
+      if (!validationResult.isValid) {
+        console.warn(`[CURRICULUM] Question out of alignment for Grade ${input.gradeLevel}:`);
+        console.warn(`  Question: "${q.question}"`);
+        console.warn(`  Issues: ${validationResult.issues.join('; ')}`);
+      }
+      
+      if (validationResult.warnings.length > 0) {
+        console.warn(`[CURRICULUM] Warnings for Grade ${input.gradeLevel}:`);
+        validationResult.warnings.forEach(w => console.warn(`  - ${w}`));
+      }
+    }
     
     // Add images from Pixabay (non-blocking, runs in background)
     addImagesToQuestions(questions).catch(err => 
