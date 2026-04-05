@@ -74,6 +74,7 @@
     "@types/wav": "^1.0.3",
     "genkit-cli": "^1.31.0",
     "postcss": "^8",
+    "supabase": "^2.84.10",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.9.3"
   }

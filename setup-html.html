@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <title>MestreMiudo - Setup SQL</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+    .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; }
+    h1 { color: #333; border-bottom: 3px solid #007bff; padding-bottom: 10px; }
+    .code { background: #f8f9fa; padding: 15px; border-left: 4px solid #007bff; overflow-x: auto; }
+    pre { margin: 0; font-family: 'Courier New', monospace; }
+    .button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+    .button:hover { background: #0056b3; }
+    .step { margin: 20px 0; padding: 15px; background: #e7f3ff; border-radius: 4px; }
+    .step h3 { margin-top: 0; color: #0056b3; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎓 MestreMiudo - Setup da Base de Dados</h1>
+    
+    <div class="step">
+      <h3>Passo 1: Abrir Supabase Dashboard</h3>
+      <p><a href="https://supabase.com/dashboard" target="_blank">Ir para Supabase Dashboard</a></p>
+    </div>
+    
+    <div class="step">
+      <h3>Passo 2: SQL Editor → New Query</h3>
+      <p>Selecione o projeto MestreMiudo, depois vá a SQL Editor e clique em New Query</p>
+    </div>
+    
+    <div class="step">
+      <h3>Passo 3: Cole e Execute o SQL</h3>
+      <div class="code">
+        <pre id="sql-content"></pre>
+      </div>
+      <button class="button" onclick="copiarSQL()">📋 Copiar SQL</button>
+    </div>
+    
+    <div class="step">
+      <h3>Passo 4: Clique em Run</h3>
+      <p>Depois de colar o SQL no Supabase, clique em "Run" (botão verde) para executar.</p>
+    </div>
+    
+    <div class="step">
+      <h3>Passo 5: Importar Lições</h3>
+      <p>Quando ver a mensagem de sucesso, abra o terminal e execute:</p>
+      <div class="code">
+        <pre>node import-lessons.mjs</pre>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Carregar conteúdo SQL
+    fetch('supabase-setup.sql')
+      .then(r => r.text())
+      .then(sql => {
+        document.getElementById('sql-content').textContent = sql;
+      });
+    
+    function copiarSQL() {
+      const sql = document.getElementById('sql-content').textContent;
+      navigator.clipboard.writeText(sql).then(() => {
+        alert('SQL copiado para a área de transferência!');
+      });
+    }
+  </script>
+</body>
+</html>
