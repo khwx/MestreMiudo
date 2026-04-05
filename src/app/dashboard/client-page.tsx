@@ -5,7 +5,7 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Book, Divide, Leaf, Loader2, Shuffle, Gamepad2, Brain, BookHeart } from 'lucide-react';
+import { Book, Divide, Leaf, Loader2, Shuffle, Gamepad2, Brain, BookHeart, Lightbulb } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { useEffect, useState } from 'react';
 import { getFullQuizHistory } from '@/app/actions';
@@ -128,7 +128,20 @@ export default function DashboardClientPage() {
 
       <div>
         <h3 className="text-2xl font-bold text-center mb-6">Escolhe a tua próxima missão!</h3>
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Link key="learn" href={`/dashboard/learn?name=${name}&grade=${grade}`} passHref>
+            <Card className="hover:shadow-xl hover:border-green-500 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-green-50 dark:bg-green-900/20">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-2xl font-bold text-green-700 dark:text-green-200">Aprender a Brincar</CardTitle>
+                <div className="p-3 rounded-full bg-green-100 dark:bg-green-900/40">
+                  <Lightbulb className="h-8 w-8 text-green-600" />
+                </div>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-green-700 dark:text-green-300">Segue lições estruturadas com histórias e desafios divertidos!</p>
+              </CardContent>
+            </Card>
+          </Link>
           {subjects.map((subject) => (
             <Link key={subject.name} href={`/quiz/${subject.slug}?name=${name}&grade=${grade}`} passHref>
               <Card className="hover:shadow-xl hover:border-primary transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col">

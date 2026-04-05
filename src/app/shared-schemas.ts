@@ -101,3 +101,44 @@ export const SpeechMarkSchema = z.object({
   }),
 });
 export type SpeechMark = z.infer<typeof SpeechMarkSchema>;
+
+// ============================================
+// Lesson-related schemas
+// ============================================
+
+export const LessonChallengeSchema = z.object({
+  id: z.string().uuid().optional(),
+  challenge_type: z.enum(['multiple_choice', 'fill_blank', 'word_order', 'matching']),
+  question: z.string(),
+  content: z.record(z.any()),
+  hint: z.string().optional(),
+  challenge_index: z.number().optional(),
+});
+export type LessonChallenge = z.infer<typeof LessonChallengeSchema>;
+
+export const LessonSchema = z.object({
+  id: z.string().uuid().optional(),
+  subject: z.enum(['Português', 'Matemática', 'Estudo do Meio']),
+  grade_level: z.number().min(1).max(4),
+  title: z.string(),
+  description: z.string().optional(),
+  learning_objective: z.string().optional(),
+  story_context: z.string().optional(),
+  lesson_index: z.number(),
+  difficulty: z.enum(['easy', 'normal', 'hard']).default('normal'),
+  challenges: z.array(LessonChallengeSchema).optional(),
+});
+export type Lesson = z.infer<typeof LessonSchema>;
+
+export const LessonCompletionSchema = z.object({
+  id: z.string().uuid().optional(),
+  student_id: z.string(),
+  lesson_id: z.string().uuid(),
+  completed: z.boolean().default(false),
+  stars: z.number().min(0).max(3).default(0),
+  coins_earned: z.number().default(0),
+  score: z.number().min(0).max(100).optional(),
+  answers: z.record(z.any()).optional(),
+  completed_at: z.string().datetime().optional(),
+});
+export type LessonCompletion = z.infer<typeof LessonCompletionSchema>;

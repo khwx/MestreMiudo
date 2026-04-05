@@ -153,6 +153,71 @@ ALTER TABLE diagnostic_tests ENABLE ROW LEVEL SECURITY;
 ALTER TABLE student_rewards ENABLE ROW LEVEL SECURITY;
 ALTER TABLE daily_challenges ENABLE ROW LEVEL SECURITY;
 ALTER TABLE leaderboards ENABLE ROW LEVEL SECURITY;
+ALTER TABLE lessons ENABLE ROW LEVEL SECURITY;
+ALTER TABLE lesson_challenges ENABLE ROW LEVEL SECURITY;
+ALTER TABLE lesson_completion ENABLE ROW LEVEL SECURITY;
+
+-- ============================================
+-- Table: lessons (learning content by subject)
+-- ============================================
+CREATE TABLE IF NOT EXISTS lessons (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  subject TEXT NOT NULL,
+  grade_level INT NOT NULL,
+  title TEXT NOT NULL,
+  description TEXT,
+  learning_objective TEXT,
+  story_context TEXT,
+  lesson_index INT NOT NULL,
+  difficulty TEXT DEFAULT 'normal',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Index for fast lookups by subject + grade
+CREATE INDEX IF NOT EXISTS idx_lessons_subject_grade 
+  ON lessons(subject, grade_level);
+
+-- ============================================
+-- Table: lesson_challenges (challenges within lessons)
+-- ============================================
+CREATE TABLE IF NOT EXISTS lesson_challenges (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  lesson_id UUID NOT NULL REFERENCES lessons(id) ON DELETE CASCADE,
+  challenge_index INT NOT NULL,
+  challenge_type TEXT NOT NULL, -- 'multiple_choice', 'fill_blank', 'word_order', 'matching'
+  question TEXT NOT NULL,
+  content JSONB NOT NULL, -- Varies by challenge type
+  hint TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Index for fast lookups by lesson
+CREATE INDEX IF NOT EXISTS idx_lesson_challenges_lesson 
+  ON lesson_challenges(lesson_id);
+
+-- ============================================
+-- Table: lesson_completion (student progress)
+-- ============================================
+CREATE TABLE IF NOT EXISTS lesson_completion (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  student_id TEXT NOT NULL,
+  lesson_id UUID NOT NULL REFERENCES lessons(id) ON DELETE CASCADE,
+  completed BOOLEAN DEFAULT FALSE,
+  stars INT DEFAULT 0, -- 0-3 stars (0=incomplete, 1-3=star rating)
+  coins_earned INT DEFAULT 0,
+  answers JSONB, -- Student's answers
+  score INT, -- Percentage score
+  completed_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(student_id, lesson_id)
+);
+
+-- Index for fast lookups
+CREATE INDEX IF NOT EXISTS idx_lesson_completion_student 
+  ON lesson_completion(student_id);
+CREATE INDEX IF NOT EXISTS idx_lesson_completion_lesson 
+  ON lesson_completion(lesson_id);
 
 -- Allow anonymous read/write for all tables
 CREATE POLICY "Allow all for questions" ON questions FOR ALL USING (true) WITH CHECK (true);
@@ -162,3 +227,6 @@ CREATE POLICY "Allow all for diagnostic_tests" ON diagnostic_tests FOR ALL USING
 CREATE POLICY "Allow all for student_rewards" ON student_rewards FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow all for daily_challenges" ON daily_challenges FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow all for leaderboards" ON leaderboards FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow all for lessons" ON lessons FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow all for lesson_challenges" ON lesson_challenges FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow all for lesson_completion" ON lesson_completion FOR ALL USING (true) WITH CHECK (true);
