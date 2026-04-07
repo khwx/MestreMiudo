@@ -36,6 +36,10 @@ export default function HomePage() {
     localStorage.setItem('hasSeenOnboarding', 'true')
   }
 
+  const handleIconLogin = () => {
+    router.push('/login')
+  }
+
   return (
     <>
       {showOnboarding && <OnboardingTutorial />}
@@ -56,38 +60,54 @@ export default function HomePage() {
             <CardDescription className="text-lg pt-2">Vamos aprender a brincar!</CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="name" className="text-md">O teu nome</Label>
-            <Input
-              id="name"
-              type="text"
-              placeholder="Escreve o teu nome"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              className="text-lg h-12"
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="grade" className="text-md">Ano escolar</Label>
-            <select
-              id="grade"
-              value={grade}
-              onChange={(e) => setGrade(e.target.value)}
-              required
-              className="bg-white border border-gray-300 rounded-md px-3 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
-            >
-              <option value="1">1º ano</option>
-              <option value="2">2º ano</option>
-              <option value="3">3º ano</option>
-              <option value="4">4º ano</option>
-            </select>
-          </div>
-              <Button type="submit" className="w-full text-xl h-14" disabled={!name}>
-                Começar a Aprender!
+            <div className="space-y-6">
+              <Button 
+                onClick={handleIconLogin} 
+                className="w-full text-lg h-14 bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500"
+              >
+                🌻 Escolhe o teu Icon!
               </Button>
-            </form>
+              
+              <div className="relative flex items-center justify-center">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t" />
+                </div>
+                <span className="relative z-10 bg-card px-4 text-sm text-muted-foreground">ou</span>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="text-md">O teu nome</Label>
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="Escreve o teu nome"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    className="text-lg h-12"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="grade" className="text-md">Ano escolar</Label>
+                  <select
+                    id="grade"
+                    value={grade}
+                    onChange={(e) => setGrade(e.target.value)}
+                    required
+                    className="bg-white border border-gray-300 rounded-md px-3 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-primary w-full h-12"
+                  >
+                    <option value="1">1º ano</option>
+                    <option value="2">2º ano</option>
+                    <option value="3">3º ano</option>
+                    <option value="4">4º ano</option>
+                  </select>
+                </div>
+                <Button type="submit" className="w-full text-xl h-14" disabled={!name}>
+                  Começar a Aprender!
+                </Button>
+              </form>
+            </div>
           </CardContent>
         </Card>
       </div>
