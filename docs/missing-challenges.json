@@ -1,0 +1,489 @@
+{
+  "description": "Desafios para todas as lições pendentes (13 lições)",
+  "challenges": [
+    {
+      "lesson_title": "Consoantes B, C, D",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Qual palavra começa com a consoante B?",
+          "content": {
+            "options": ["Casa", "Bola", "Dedo"],
+            "correct_answer": "Bola"
+          },
+          "hint": "Pensa numa coisa redonda que usamos para brincar"
+        },
+        {
+          "challenge_index": 2,
+          "challenge_type": "multiple_choice",
+          "question": "Qual palavra começa com a consoante C?",
+          "content": {
+            "options": ["Cão", "Bola", "Dedo"],
+            "correct_answer": "Cão"
+          },
+          "hint": "Animal de quatro patas que é amigo do homem"
+        },
+        {
+          "challenge_index": 3,
+          "challenge_type": "fill_blank",
+          "question": "Completa: _ato (começa com D)",
+          "content": {
+            "correct_answers": ["d", "D"]
+          },
+          "hint": "Animal que mia e gosta de leite"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Palavras Simples",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Qual é esta palavra: S _ L?",
+          "content": {
+            "options": ["SAL", "SOL", "SIL"],
+            "correct_answer": "SOL"
+          },
+          "hint": "Estrela que brilha no céu durante o dia"
+        },
+        {
+          "challenge_index": 2,
+          "challenge_type": "fill_blank",
+          "question": "Escreve a palavra: M Ã O",
+          "content": {
+            "correct_answers": ["mão", "MÃO", "Mão"]
+          },
+          "hint": "Parte do corpo com 5 dedos"
+        },
+        {
+          "challenge_index": 3,
+          "challenge_type": "matching",
+          "question": "Liga as sílabas para formar palavras:",
+          "content": {
+            "pairs": [
+              {
+                "left": "PA",
+                "options": ["TO", "LO", "TA"],
+                "correct": "TO"
+              },
+              {
+                "left": "MA",
+                "options": ["TO", "LO", "MA"],
+                "correct": "LO"
+              }
+            ]
+          },
+          "hint": "Pato é um animal que sabe nadar"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Sílabas e Ritmo",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Quantas sílabas tem a palavra 'BANANA'?",
+          "content": {
+            "options": ["2", "3", "4"],
+            "correct_answer": "3"
+          },
+          "hint": "Ba-na-na"
+        },
+        {
+          "challenge_index": 2,
+          "challenge_type": "multiple_choice",
+          "question": "Qual palavra tem 2 sílabas?",
+          "content": {
+            "options": ["Casa", "Escola", "Abacate"],
+            "correct_answer": "Casa"
+          },
+          "hint": "Ca-sa"
+        },
+        {
+          "challenge_index": 3,
+          "challenge_type": "fill_blank",
+          "question": "Divide em sílabas: ESCOLA",
+          "content": {
+            "correct_answers": ["es-co-la", "ES-CO-LA", "Es-Co-La"]
+          },
+          "hint": "Onde vais aprender"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Sons Complexos",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Qual palavra tem o som 'ch'?",
+          "content": {
+            "options": ["Chapéu", "Casa", "Cão"],
+            "correct_answer": "Chapéu"
+          },
+          "hint": "Usamos na cabeça quando está sol"
+        },
+        {
+          "challenge_index": 2,
+          "challenge_type": "multiple_choice",
+          "question": "Qual palavra tem o som 'nh'?",
+          "content": {
+            "options": ["Banana", "Laranja", "Laranja"],
+            "correct_answer": "Laranja"
+          },
+          "hint": "Fruta laranja com sementes"
+        },
+        {
+          "challenge_index": 3,
+          "challenge_type": "fill_blank",
+          "question": "Completa: _ho_ada (som lh)",
+          "content": {
+            "correct_answers": ["folhada", "FOLHADA", "Folhada"]
+          },
+          "hint": "Bolo folhado"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Histórias Curtas",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Quem é o personagem principal da Chapeuzinho Vermelho?",
+          "content": {
+            "options": ["Um lobo", "Uma menina", "Uma avó"],
+            "correct_answer": "Uma menina"
+          },
+          "hint": "Leva um capuz vermelho"
+        },
+        {
+          "challenge_index": 2,
+          "challenge_type": "multiple_choice",
+          "question": "O que acontece no final da história?",
+          "content": {
+            "options": ["O lobo come a avó", "O caçador salva todos", "A menina foge"],
+            "correct_answer": "O caçador salva todos"
+          },
+          "hint": "Feliz para sempre"
+        },
+        {
+          "challenge_index": 3,
+          "challenge_type": "fill_blank",
+          "question": "Qual é a moral da história: Não falar com ___?",
+          "content": {
+            "correct_answers": ["estranhos", "ESTRANHOS", "Estranhos", "desconhecidos"]
+          },
+          "hint": "Pessoas que não conhecemos"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Números de 6 a 10",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Qual número vem depois do 6?",
+          "content": {
+            "options": ["5", "7", "8"],
+            "correct_answer": "7"
+          },
+          "hint": "Conta: 6, 7, 8..."
+        },
+        {
+          "challenge_index": 2,
+          "challenge_type": "matching",
+          "question": "Liga o número à quantidade:",
+          "content": {
+            "pairs": [
+              {
+                "left": "6",
+                "options": ["Seis", "Sete", "Oito"],
+                "correct": "Seis"
+              },
+              {
+                "left": "10",
+                "options": ["Nove", "Dez", "Oito"],
+                "correct": "Dez"
+              }
+            ]
+          },
+          "hint": "6 é seis, 10 é dez"
+        },
+        {
+          "challenge_index": 3,
+          "challenge_type": "fill_blank",
+          "question": "Completa a sequência: 7, 8, __, 10",
+          "content": {
+            "correct_answers": ["9", "nove", "NOVE"]
+          },
+          "hint": "7, 8, depois 9, depois 10"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Adição Simples",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Quanto é 3 + 4?",
+          "content": {
+            "options": ["6", "7", "8"],
+            "correct_answer": "7"
+          },
+          "hint": "Conta 3 dedos e depois mais 4"
+        },
+        {
+          "challenge_index": 2,
+          "challenge_type": "fill_blank",
+          "question": "5 + __ = 9",
+          "content": {
+            "correct_answers": ["4", "quatro", "QUATRO"]
+          },
+          "hint": "9 menos 5 é igual a?"
+        },
+        {
+          "challenge_index": 3,
+          "challenge_type": "multiple_choice",
+          "question": "Maria tem 2 maçãs. O João dá-lhe 3. Quantas tem agora?",
+          "content": {
+            "options": ["4", "5", "6"],
+            "correct_answer": "5"
+          },
+          "hint": "2 + 3 = ?"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Subtração Simples",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Quanto é 7 - 3?",
+          "content": {
+            "options": ["3", "4", "5"],
+            "correct_answer": "4"
+          },
+          "hint": "Tira 3 de 7"
+        },
+        {
+          "challenge_index": 2,
+          "challenge_type": "fill_blank",
+          "question": "__ - 2 = 3",
+          "content": {
+            "correct_answers": ["5", "cinco", "CINCO"]
+          },
+          "hint": "3 mais 2 é igual a?"
+        },
+        {
+          "challenge_index": 3,
+          "challenge_type": "multiple_choice",
+          "question": "Tenho 8 chocolates. Comi 3. Quantos sobram?",
+          "content": {
+            "options": ["4", "5", "6"],
+            "correct_answer": "5"
+          },
+          "hint": "8 menos 3"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Dezenas e Unidades",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "No número 23, qual é a dezena?",
+          "content": {
+            "options": ["2", "3", "20"],
+            "correct_answer": "2"
+          },
+          "hint": "O primeiro número (à esquerda)"
+        },
+        {
+          "challenge_index": 2,
+          "challenge_type": "multiple_choice",
+          "question": "Quantas unidades tem o número 45?",
+          "content": {
+            "options": ["4", "5", "45"],
+            "correct_answer": "5"
+          },
+          "hint": "O último número (à direita)"
+        },
+        {
+          "challenge_index": 3,
+          "challenge_type": "fill_blank",
+          "question": "Decompõe: 36 = __ dezenas e __ unidades",
+          "content": {
+            "correct_answers": ["3 e 6", "3,6", "3 e6", "3 dezenas e 6 unidades"]
+          },
+          "hint": "36 = 30 + 6"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Adição com Números Maiores",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Quanto é 24 + 15?",
+          "content": {
+            "options": ["38", "39", "40"],
+            "correct_answer": "39"
+          },
+          "hint": "20 + 10 = 30, 4 + 5 = 9, 30 + 9 = 39"
+        },
+        {
+          "challenge_index": 2,
+          "challenge_type": "fill_blank",
+          "question": "36 + __ = 52",
+          "content": {
+            "correct_answers": ["16", "dezasseis", "DEZASSEIS"]
+          },
+          "hint": "52 menos 36"
+        },
+        {
+          "challenge_index": 3,
+          "challenge_type": "multiple_choice",
+          "question": "Uma caixa tem 28 lápis. Outra tem 17. Quantos lápis no total?",
+          "content": {
+            "options": ["44", "45", "46"],
+            "correct_answer": "45"
+          },
+          "hint": "28 + 17 = ?"
+        }
+      ]
+    },
+    {
+      "lesson_title": "As Plantas",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Qual parte da planta fica debaixo da terra?",
+          "content": {
+            "options": ["Folha", "Riz", "Flor"],
+            "correct_answer": "Riz"
+          },
+          "hint": "Serve para a planta se agarrar à terra"
+        },
+        {
+          "challenge_index": 2,
+          "challenge_type": "multiple_choice",
+          "question": "Que parte da planta faz fotossíntese?",
+          "content": {
+            "options": ["Raiz", "Caule", "Folha"],
+            "correct_answer": "Folha"
+          },
+          "hint": "Parte verde que apanha o sol"
+        },
+        {
+          "challenge_index": 3,
+          "challenge_type": "matching",
+          "question": "Liga as partes da planta à sua função:",
+          "content": {
+            "pairs": [
+              {
+                "left": "Raiz",
+                "options": ["Absorver água", "Fazer sombra", "Produzir sementes"],
+                "correct": "Absorver água"
+              },
+              {
+                "left": "Flor",
+                "options": ["Absorver água", "Fazer sombra", "Produzir sementes"],
+                "correct": "Produzir sementes"
+              }
+            ]
+          },
+          "hint": "A raiz bebe água, a flor faz sementes"
+        }
+      ]
+    },
+    {
+      "lesson_title": "As Estações do Ano",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Em que estação faz mais calor?",
+          "content": {
+            "options": ["Inverno", "Primavera", "Verão"],
+            "correct_answer": "Verão"
+          },
+          "hint": "Podemos ir à praia"
+        },
+        {
+          "challenge_index": 2,
+          "challenge_type": "multiple_choice",
+          "question": "Em que estação caem as folhas das árvores?",
+          "content": {
+            "options": ["Primavera", "Outono", "Verão"],
+            "correct_answer": "Outono"
+          },
+          "hint": "Fica tudo amarelo e laranja"
+        },
+        {
+          "challenge_index": 3,
+          "challenge_type": "fill_blank",
+          "question": "Completa: No Inverno faz ___ e pode ___",
+          "content": {
+            "correct_answers": ["frio nevar", "frio, nevar", "frio e nevar", "muito frio nevar"]
+          },
+          "hint": "Temperatura baixa e precipitação branca"
+        }
+      ]
+    },
+    {
+      "lesson_title": "O Corpo Humano",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Quantos sentidos temos?",
+          "content": {
+            "options": ["4", "5", "6"],
+            "correct_answer": "5"
+          },
+          "hint": "Vista, audição, paladar, olfato, tato"
+        },
+        {
+          "challenge_index": 2,
+          "challenge_type": "multiple_choice",
+          "question": "Qual órgão usamos para respirar?",
+          "content": {
+            "options": ["Coração", "Pulmões", "Estômago"],
+            "correct_answer": "Pulmões"
+          },
+          "hint": "Fica dentro do peito e enche de ar"
+        },
+        {
+          "challenge_index": 3,
+          "challenge_type": "matching",
+          "question": "Liga o sentido ao órgão:",
+          "content": {
+            "pairs": [
+              {
+                "left": "Ver",
+                "options": ["Olhos", "Orelhas", "Mão"],
+                "correct": "Olhos"
+              },
+              {
+                "left": "Ouvir",
+                "options": ["Olhos", "Orelhas", "Língua"],
+                "correct": "Orelhas"
+              }
+            ]
+          },
+          "hint": "Olhos para ver, orelhas para ouvir"
+        }
+      ]
+    }
+  ]
+}

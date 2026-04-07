@@ -34,9 +34,10 @@ async function getCachedWord(category: string, difficulty: string): Promise<Word
     if (error) throw error;
     if (!data || data.length === 0) return null;
 
-    // Pick a random word from cached options
-    const randomIndex = Math.floor(Math.random() * data.length);
-    return { word: data[randomIndex].word, hint: data[randomIndex].hint };
+    // Pick a random word from cached options (limit to 10 most recent to ensure variety)
+    const shuffled = data.sort(() => Math.random() - 0.5);
+    const randomIndex = Math.floor(Math.random() * Math.min(shuffled.length, 10));
+    return { word: shuffled[randomIndex].word, hint: shuffled[randomIndex].hint };
   } catch (error) {
     console.error('Failed to get cached word:', error);
     return null;
