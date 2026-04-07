@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Book, Divide, Leaf, Loader2, Shuffle, Gamepad2, Brain, BookHeart, Lightbulb } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { useEffect, useState } from 'react';
-import { getFullQuizHistory } from '@/app/actions';
+import { getFullQuizHistory, getStudentLessonHistoryAction, getStudentRewards } from '@/app/actions';
 import type { QuizResultEntry } from '@/app/shared-schemas';
 
 const subjects = [
@@ -75,12 +75,22 @@ export default function DashboardClientPage() {
   const grade = searchParams.get('grade');
 
   const [history, setHistory] = useState<QuizResultEntry[]>([]);
+  const [lessonHistory, setLessonHistory] = useState<any[]>([]);
+  const [rewards, setRewards] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (name) {
-      getFullQuizHistory(name)
-        .then(setHistory)
+      Promise.all([
+        getFullQuizHistory(name),
+        getStudentLessonHistoryAction(name),
+        getStudentRewards(name),
+      ])
+        .then(([quizHistory, lessons, studentRewards]) => {
+          setHistory(quizHistory);
+          setLessonHistory(lessons);
+          setRewards(studentRewards);
+        })
         .catch(console.error)
         .finally(() => setLoading(false));
     } else {
@@ -88,8 +98,11 @@ export default function DashboardClientPage() {
     }
   }, [name]);
   
-  // Each correct answer gives 10 points
-  const totalPoints = history.reduce((acc, entry) => acc + entry.score * 10, 0);
+  // Points from quizzes + lessons
+  const quizPoints = history.reduce((acc, entry) => acc + entry.score * 10, 0);
+  const lessonPoints = lessonHistory.reduce((acc, lesson) => acc + (lesson.coins_earned || 0), 0);
+  const rewardPoints = rewards?.total_points || 0;
+  const totalPoints = Math.max(quizPoints + lessonPoints, rewardPoints);
   const { level, nextLevel, progressPercentage, pointsNeeded } = calculateLevel(totalPoints);
 
   return (
