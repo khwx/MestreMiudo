@@ -1,0 +1,148 @@
+{
+  "description": "Conteúdo para o 3º Ano - Alinhado com DGE",
+  "lessons": [
+    {
+      "subject": "Matemática",
+      "grade_level": 3,
+      "title": "A Magia da Multiplicação",
+      "description": "Descobre como somar grupos iguais rapidamente!",
+      "learning_objective": "Compreender a multiplicação como adição repetida",
+      "story_context": "O Coelho Saltitão quer organizar as suas cenouras em grupos!",
+      "lesson_index": 1,
+      "difficulty": "easy"
+    },
+    {
+      "subject": "Matemática",
+      "grade_level": 3,
+      "title": "Partilhar é Viver: a Divisão",
+      "description": "Aprende a dividir quantidades em partes iguais",
+      "learning_objective": "Compreender a divisão como repartição equitativa",
+      "story_context": "A formiga Mimi quer dividir as sementes com as suas amigas!",
+      "lesson_index": 2,
+      "difficulty": "normal"
+    },
+    {
+      "subject": "Matemática",
+      "grade_level": 3,
+      "title": "O Mundo das Frações",
+      "description": "Descobre o que acontece quando dividimos a unidade",
+      "learning_objective": "Reconhecer a metade, a terça parte e a quarta parte",
+      "story_context": "O Chef Pizza quer dividir a sua pizza em fatias iguais!",
+      "lesson_index": 3,
+      "difficulty": "normal"
+    },
+    {
+      "subject": "Português",
+      "grade_level": 3,
+      "title": "Aventuras da Gramática: O Nome",
+      "description": "Diferença entre nomes próprios e comuns",
+      "learning_objective": "Distinguir nomes próprios de comuns",
+      "story_context": "O detetive das palavras procura nomes secretos!",
+      "lesson_index": 1,
+      "difficulty": "easy"
+    },
+    {
+      "subject": "Português",
+      "grade_level": 3,
+      "title": "O Ritmo da Frase",
+      "description": "Tipos de frases: Afirmativas e Interrogativas",
+      "learning_objective": "Identificar a intenção comunicativa das frases",
+      "story_context": "A coruja sábia faz perguntas curiosas!",
+      "//": "Index 2",
+      "lesson_index": 2,
+      "difficulty": "normal"
+    },
+    {
+      "subject": "Estudo do Meio",
+      "grade_level": 3,
+      "title": "O Meu Corpo por Dentro",
+      "description": "Conhecer os sistemas do corpo humano",
+      "learning_objective": "Identificar as funções básicas do sistema digestivo e respiratório",
+      "story_context": "Vamos fazer uma viagem microscópica dentro do corpo humano!",
+      "lesson_index": 1,
+      "difficulty": "normal"
+    },
+    {
+      "subject": "Estudo do Meio",
+      "grade_level": 3,
+      "title": "A Terra e o Espaço",
+      "description": "O sol, a lua e as estrelas",
+      "learning_objective": "Compreender a rotação da terra e as fases da lua",
+      "story_context": "O astronauta Leo viaja pelo sistema solar!",
+      "lesson_index": 2,
+      "difficulty": "normal"
+    }
+  ],
+  "challenges": [
+    {
+      "lesson_title": "A Magia da Multiplicação",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Se tivermos 3 cestos com 4 maçãs cada, quantas maçãs temos no total?",
+          "content": {
+            "options": ["7", "12", "15"],
+            "correct_answer": "12"
+          },
+          "hint": "Faz 4 + 4 + 4"
+        },
+        {
+          "challenge_index": 2,
+          "challenge_type": "fill_blank",
+          "question": "2 x 5 = __",
+          "content": {
+            "correct_answers": ["10", "dez"]
+          },
+          "hint": "Soma 5 duas vezes"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Partilhar é Viver: a Divisão",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Temos 12 bolachas para dividir por 3 crianças. Quantas bolachas recebe cada uma?",
+          "content": {
+            "options": ["3", "4", "6"],
+            "correct_//": "answer",
+            "correct_answer": "4"
+          },
+          "hint": "Que número vezes 3 dá 12?"
+        }
+      ]
+    },
+    {
+      "lesson_title": "O Mundo das Frações",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Se dividires uma maçã em 2 partes iguais, cada parte chama-se...?",
+          "content": {
+            "options": ["Um terço", "Uma metade", "Um quarto"],
+            "correct_answer": "Uma metade"
+          },
+          "hint": "Divide em 2"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Aventuras da Gramática: O Nome",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Qual destas palavras é um NOME PRÓPRIO?",
+          "content": {
+            "options": ["Criança", "Portugal", "Cidade"],
+            "correct_answer": "Portugal"
+          },
+          "hint": "Lembra-te que nomes próprios começam com letra maiúscula!"
+        }
+      ]
+    }
+  ]
+}
