@@ -44,13 +44,12 @@
     {
       "subject": "Português",
       "grade_level": 3,
-      "title": "O Ritmo da Frase",
-      "description": "Tipos de frases: Afirmativas e Interrogativas",
-      "learning_objective": "Identificar a intenção comunicativa das frases",
-      "story_context": "A coruja sábia faz perguntas curiosas!",
-      "//": "Index 2",
-      "lesson_index": 2,
-      "difficulty": "normal"
+       "title": "O Ritmo da Frase",
+       "description": "Tipos de frases: Afirmativas e Interrogativas",
+       "learning_objective": "Identificar a intenção comunicativa das frases",
+       "story_context": "A coruja sábia faz perguntas curiosas!",
+       "lesson_index": 2,
+       "difficulty": "normal"
     },
     {
       "subject": "Estudo do Meio",
@@ -105,11 +104,10 @@
           "challenge_index": 1,
           "challenge_type": "multiple_choice",
           "question": "Temos 12 bolachas para dividir por 3 crianças. Quantas bolachas recebe cada uma?",
-          "content": {
-            "options": ["3", "4", "6"],
-            "correct_//": "answer",
-            "correct_answer": "4"
-          },
+           "content": {
+             "options": ["3", "4", "6"],
+             "correct_answer": "4"
+           },
           "hint": "Que número vezes 3 dá 12?"
         }
       ]

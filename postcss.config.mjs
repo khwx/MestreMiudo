@@ -6,4 +6,3 @@ const config = {
 };
 
 export default config;
-// Ficheiro de configuração do PostCSS

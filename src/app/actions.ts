@@ -627,6 +627,26 @@ export async function awardQuizPoints(
   }
 }
 
+export async function getStudentLessonHistoryAction(studentId: string) {
+  try {
+    if (!isSupabaseConfigured() || !supabase) {
+      return [];
+    }
+
+    const { data, error } = await supabase
+      .from('lesson_completion')
+      .select('*')
+      .eq('student_id', studentId)
+      .order('completed_at', { ascending: false });
+
+    if (error && error.code !== 'PGRST116') throw error;
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching student lesson history:', error);
+    return [];
+  }
+}
+
 export async function getStudentRewards(studentId: string) {
   if (!isSupabaseConfigured() || !supabase) {
     return null;

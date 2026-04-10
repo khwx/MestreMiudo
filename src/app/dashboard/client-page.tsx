@@ -87,11 +87,16 @@ export default function DashboardClientPage() {
         getStudentRewards(name),
       ])
         .then(([quizHistory, lessons, studentRewards]) => {
-          setHistory(quizHistory);
-          setLessonHistory(lessons);
-          setRewards(studentRewards);
+          setHistory(quizHistory || []);
+          setLessonHistory(lessons || []);
+          setRewards(studentRewards || null);
         })
-        .catch(console.error)
+        .catch((err) => {
+          console.error('Error loading dashboard:', err);
+          setHistory([]);
+          setLessonHistory([]);
+          setRewards(null);
+        })
         .finally(() => setLoading(false));
     } else {
         setLoading(false);
@@ -112,32 +117,32 @@ export default function DashboardClientPage() {
         <p className="text-muted-foreground text-xl">Pronto para uma nova aventura do conhecimento?</p>
       </div>
       
-      <Card className="max-w-2xl mx-auto">
-        <CardHeader>
-          <CardTitle>O Teu Progresso Geral</CardTitle>
-          <CardDescription>Ganha pontos e sobe de nível ao completar desafios!</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-2">
-            {loading ? (
-                <div className="flex justify-center items-center p-4">
-                    <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                </div>
-            ) : (
-                <>
-                    <div className="flex items-center justify-between text-sm text-muted-foreground">
-                        <span className="font-bold text-lg">Nível {level}</span>
-                        {pointsNeeded > 0 && (
-                            <span className="font-bold text-lg">Nível {nextLevel}</span>
-                        )}
-                    </div>
-                    <Progress value={progressPercentage} />
-                    <p className="text-sm text-muted-foreground text-center pt-2">
-                        {pointsNeeded > 0 ? `Faltam ${pointsNeeded} pontos para o próximo nível!` : "Parabéns! Alcançaste o nível máximo!"}
-                    </p>
-                </>
-            )}
-        </CardContent>
-      </Card>
+<Card className="max-w-2xl mx-auto">
+         <CardHeader>
+           <CardTitle>O Teu Progresso Geral</CardTitle>
+           <CardDescription>Ganha pontos e sobe de nível ao completar desafios!</CardDescription>
+         </CardHeader>
+         <CardContent className="space-y-2">
+             {loading ? (
+                 <div className="flex justify-center items-center p-4">
+                     <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                 </div>
+             ) : (
+                 <>
+                     <div className="flex items-center justify-between text-sm text-muted-foreground">
+                         <span className="font-bold text-lg">Nível {level}</span>
+                         {pointsNeeded > 0 && (
+                             <span className="font-bold text-lg">Nível {nextLevel}</span>
+                         )}
+                     </div>
+                     <Progress value={progressPercentage} />
+                     <p className="text-sm text-muted-foreground text-center pt-2">
+                         {pointsNeeded > 0 ? `Faltam ${pointsNeeded} pontos para o próximo nível!` : "Parabéns! Alcançaste o nível máximo!"}
+                     </p>
+                 </>
+             )}
+         </CardContent>
+       </Card>
 
       <div>
         <h3 className="text-2xl font-bold text-center mb-6">Escolhe a tua próxima missão!</h3>

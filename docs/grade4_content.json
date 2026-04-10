@@ -1,0 +1,195 @@
+{
+  "description": "Conteúdo para o 4º Ano - Alinhado com DGE",
+  "lessons": [
+    {
+      "subject": "Matemática",
+      "grade_level": 4,
+      "title": "Multiplicação e Divisão com Números Maiores",
+      "description": "Aprende a multiplicar e dividir números de 2 e 3 dígitos",
+      "learning_objective": "Resolver operações de multiplicação e divisão com números maiores",
+      "story_context": "O explorador precisa calcular os suprimentos para a expedição!",
+      "lesson_index": 1,
+      "difficulty": "normal"
+    },
+    {
+      "subject": "Matemática",
+      "grade_level": 4,
+      "title": "Frações Equivalentes e Simplificação",
+      "description": "Descobre frações que representam a mesma quantidade",
+      "learning_objective": "Identificar e criar frações equivalentes",
+      "story_context": "O padeiro precisa ajustar as receitas para diferentes tamanhos de bolos!",
+      "lesson_index": 2,
+      "difficulty": "normal"
+    },
+    {
+      "subject": "Matemática",
+      "grade_level": 4,
+      "title": "Introdução aos Números Decimais",
+      "description": "Aprende a representar partes de unidade com decimais",
+      "learning_objective": "Compreender a notação decimal e sua relação com frações",
+      "story_context": "O cientista precisa medir com precisão os seus experimentos!",
+      "lesson_index": 3,
+      "difficulty": "normal"
+    },
+    {
+      "subject": "Português",
+      "grade_level": 4,
+      "title": "Classes de Palavras: Verbos",
+      "description": "Aprende a identificar e conjugar os verbos",
+      "learning_objective": "Reconhecer o verbo na frase e suas diferentes formas",
+      "story_context": "O super-herói precisa descrever as suas ações para salvar o dia!",
+      "lesson_index": 1,
+      "difficulty": "easy"
+    },
+    {
+      "subject": "Português",
+      "grade_level": 4,
+      "title": "Pontuação: Vírgula e Ponto",
+      "description": "Aprende a usar a vírgula e o ponto correctamente",
+      "learning_objective": "Aplicar as regras de pontuação em textos",
+      "story_context": "O jornalista precisa escrever uma notícia clara e bem pontuada!",
+      "lesson_index": 2,
+      "difficulty": "normal"
+    },
+    {
+      "subject": "Estudo do Meio",
+      "grade_level": 4,
+      "title": "Os Ecossistemas",
+      "description": "Conhecer as cadeias alimentares e os ecossistemas",
+      "learning_objective": "Compreender as interrelações entre os seres vivos",
+      "story_context": "O jovem naturalista vai explorar a floresta e descobrir os seus segredos!",
+      "lesson_index": 1,
+      "difficulty": "normal"
+    },
+    {
+      "subject": "Estudo do Meio",
+      "grade_level": 4,
+      "title": "O Ciclo da Água",
+      "description": "Aprende sobre a evaporação, condensação e precipitação",
+      "learning_objective": "Compreender o ciclo contínuo da água na natureza",
+      "story_context": "A gotinha de água vai fazer uma incrível viagem pelo mundo!",
+      "lesson_index": 2,
+      "difficulty": "normal"
+    }
+  ],
+  "challenges": [
+    {
+      "lesson_title": "Multiplicação e Divisão com Números Maiores",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Se uma caixa tem 24 lápis e temos 5 caixas, quantos lápis temos no total?",
+          "content": {
+            "options": ["100", "120", "140"]
+          },
+          "correct_answer": "120",
+          "hint": "Faz 24 × 5"
+        },
+        {
+          "challenge_index": 2,
+          "challenge_type": "fill_blank",
+          "question": "84 ÷ 7 = __",
+          "content": {
+            "correct_answers": ["12", "doze"]
+          },
+          "hint": "Que número vezes 7 dá 84?"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Frações Equivalentes e Simplificação",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Qual destas frações é equivalente a 1/2?",
+          "content": {
+            "options": ["2/3", "2/4", "3/4"]
+          },
+          "correct_answer": "2/4",
+          "hint": "Multiplica o numerador e denominador por 2"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Introdução aos Números Decimais",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Como se escreve 'tres unidades e cinco décimos' em forma decimal?",
+          "content": {
+            "options": ["3.5", "0.35", "35"]
+          },
+          "correct_answer": "3.5",
+          "hint": "O ponto separa as unidades dos décimos"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Classes de Palavras: Verbos",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Qual destas palavras é um VERBO?",
+          "content": {
+            "options": ["Casa", "Correr", "Feliz"]
+          },
+          "correct_answer": "Correr",
+          "hint": "O verbo indica uma ação ou estado"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Pontuação: Vírgula e Ponto",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Onde se coloca a vírgula nesta frase: 'Eu gosto de maças bananas e laranjas'",
+          "content": {
+            "options": [
+              "Eu gosto de maças, bananas e laranjas",
+              "Eu gosto de maças bananas, e laranjas",
+              "Eu gosto de maças bananas e laranjas,"
+            ]
+          },
+          "correct_answer": "Eu gosto de maças, bananas e laranjas",
+          "hint": "A vírgula separa os itens de uma lista"
+        }
+      ]
+    },
+    {
+      "lesson_title": "Os Ecossistemas",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "Num ecossistema de lago, o que comes o inseto?",
+          "content": {
+            "options": ["O peixe", "A planta", "O sol"]
+          },
+          "correct_answer": "O peixe",
+          "hint": "Pensa na cadeia alimentar: planta → inseto → peixe"
+        }
+      ]
+    },
+    {
+      "lesson_title": "O Ciclo da Água",
+      "challenges": [
+        {
+          "challenge_index": 1,
+          "challenge_type": "multiple_choice",
+          "question": "O que acontece com a água do mar quando o sol aquece a superfície?",
+          "content": {
+            "options": ["Congela", "Evapora", "Vira gelo"]
+          },
+          "correct_answer": "Evapora",
+          "hint": "O calor transforma líquido em vapor"
+        }
+      ]
+    }
+  ]
+}
