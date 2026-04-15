@@ -1,4 +1,3 @@
-
 import { z } from 'zod';
 
 export const PersonalizedLearningPathInputSchema = z.object({
@@ -142,3 +141,27 @@ export const LessonCompletionSchema = z.object({
   completed_at: z.string().datetime().optional(),
 });
 export type LessonCompletion = z.infer<typeof LessonCompletionSchema>;
+
+// ============================================
+// Shop & Avatar schemas
+// ============================================
+
+export const ShopItemSchema = z.object({
+  id: z.string().uuid().optional(),
+  name: z.string(),
+  description: z.string().optional(),
+  price: z.number().int().nonnegative(),
+  item_type: z.enum(['hat', 'pet', 'background', 'animation']),
+  image_url: z.string().url().optional(),
+  is_available: z.boolean().default(true),
+});
+export type ShopItem = z.infer<typeof ShopItemSchema>;
+
+export const UserInventorySchema = z.object({
+  id: z.string().uuid().optional(),
+  student_id: z.string(),
+  item_id: z.string().uuid(),
+  equipped: z.boolean().default(false),
+  acquired_at: z.string().datetime().optional(),
+});
+export type UserInventory = z.infer<typeof UserInventorySchema>;
