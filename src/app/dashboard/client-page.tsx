@@ -5,10 +5,10 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Book, Divide, Leaf, Loader2, Shuffle, Gamepad2, Brain, BookHeart, Lightbulb } from 'lucide-react';
+import { Book, Divide, Leaf, Loader2, Shuffle, Gamepad2, Brain, BookHeart, Lightbulb, Flame } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { useEffect, useState } from 'react';
-import { getFullQuizHistory, getStudentLessonHistoryAction, getStudentRewards } from '@/app/actions';
+import { getFullQuizHistory, getStudentLessonHistoryAction, getStudentRewards, getStudentStreak } from '@/app/actions';
 import type { QuizResultEntry } from '@/app/shared-schemas';
 
 const subjects = [
@@ -77,6 +77,7 @@ export default function DashboardClientPage() {
   const [history, setHistory] = useState<QuizResultEntry[]>([]);
   const [lessonHistory, setLessonHistory] = useState<any[]>([]);
   const [rewards, setRewards] = useState<any>(null);
+  const [streak, setStreak] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -85,17 +86,20 @@ export default function DashboardClientPage() {
         getFullQuizHistory(name),
         getStudentLessonHistoryAction(name),
         getStudentRewards(name),
+        getStudentStreak(name),
       ])
-        .then(([quizHistory, lessons, studentRewards]) => {
+        .then(([quizHistory, lessons, studentRewards, studentStreak]) => {
           setHistory(quizHistory || []);
           setLessonHistory(lessons || []);
           setRewards(studentRewards || null);
+          setStreak(studentStreak || null);
         })
         .catch((err) => {
           console.error('Error loading dashboard:', err);
           setHistory([]);
           setLessonHistory([]);
           setRewards(null);
+          setStreak(null);
         })
         .finally(() => setLoading(false));
     } else {
@@ -129,12 +133,18 @@ export default function DashboardClientPage() {
                  </div>
              ) : (
                  <>
-                     <div className="flex items-center justify-between text-sm text-muted-foreground">
-                         <span className="font-bold text-lg">Nível {level}</span>
-                         {pointsNeeded > 0 && (
-                             <span className="font-bold text-lg">Nível {nextLevel}</span>
-                         )}
-                     </div>
+                      <div className="flex items-center justify-between text-sm text-muted-foreground">
+                          <div className="flex items-center gap-2">
+                            <div className="bg-orange-100 dark:bg-orange-900/30 p-1 px-2 rounded-full flex items-center gap-1">
+                              <Flame className="h-4 w-4 text-orange-500 fill-current" />
+                              <span className="font-bold text-orange-600 dark:text-orange-400 text-xs">{streak?.current_streak || 0} dias</span>
+                            </div>
+                            <span className="font-bold text-lg">Nível {level}</span>
+                          </div>
+                          {pointsNeeded > 0 && (
+                              <span className="font-bold text-lg">Nível {nextLevel}</span>
+                          )}
+                      </div>
                      <Progress value={progressPercentage} />
                      <p className="text-sm text-muted-foreground text-center pt-2">
                          {pointsNeeded > 0 ? `Faltam ${pointsNeeded} pontos para o próximo nível!` : "Parabéns! Alcançaste o nível máximo!"}

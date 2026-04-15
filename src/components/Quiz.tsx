@@ -123,6 +123,9 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     }
   };
 
+  const [feedbackMessage, setFeedbackMessage] = useState('');
+  const [feedbackColor, setFeedbackColor] = useState<'success' | 'error'>('success');
+
   const handleAnswerSelect = (option: string) => {
     if (isAnswered || !quizData) return;
     
@@ -134,6 +137,8 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     
     if (isCorrect) {
       setScore(s => s + 1);
+      setFeedbackMessage('Muito bem! Estás a ir lindamente! 🌟');
+      setFeedbackColor('success');
       playSuccess();
       confetti({
         particleCount: 50,
@@ -142,9 +147,11 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
         colors: ['#00d4ff', '#ff6b6b', '#feca57', '#48dbfb']
       });
     } else {
+      setFeedbackMessage(`Ops! A resposta correta era: ${currentQuestion.correctAnswer}`);
+      setFeedbackColor('error');
       playError();
     }
-
+    
     setAnswers(prev => [...prev, {
         question: currentQuestion.question,
         selectedAnswer: option,
@@ -369,13 +376,40 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
         </div>
       </CardContent>
       {isAnswered && (
-        <CardFooter className="justify-end">
-          <Button onClick={handleNextQuestion} className="text-lg px-8 py-6 animate-pulse">
-            {currentQuestionIndex < quizData.quizQuestions.length - 1 ? 'Próxima Pergunta' : 'Finalizar Quiz'}
-          </Button>
-        </CardFooter>
+        <div className={cn(
+          "fixed bottom-0 left-0 right-0 p-6 animate-in slide-in-from-bottom duration-300 border-t-4",
+          feedbackColor === 'success' ? "bg-[hsl(var(--chart-2))]/20 border-[hsl(var(--chart-2))]" : "bg-destructive/20 border-destructive"
+        )}>
+          <div className="container mx-auto flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              {feedbackColor === 'success' ? (
+                <div className="bg-[hsl(var(--chart-2))] p-2 rounded-full">
+                  <Check className="h-6 w-6 text-white" />
+                </div>
+              ) : (
+                <div className="bg-destructive p-2 rounded-full">
+                  <X className="h-6 w-6 text-white" />
+                </div>
+              )}
+              <p className={cn(
+                "text-xl font-bold",
+                feedbackColor === 'success' ? "text-[hsl(var(--chart-2))]" : "text-destructive"
+              )}>
+                {feedbackMessage}
+              </p>
+            </div>
+            <Button 
+              onClick={handleNextQuestion} 
+              className={cn(
+                "text-lg px-8 py-6 font-bold",
+                feedbackColor === 'success' ? "bg-[hsl(var(--chart-2))] hover:bg-[hsl(var(--chart-2))]/90" : "bg-destructive hover:bg-destructive/90"
+              )}
+            >
+              {currentQuestionIndex < quizData.quizQuestions.length - 1 ? 'Continuar' : 'Ver Resultados'}
+            </Button>
+          </div>
+        </div>
       )}
-    </Card>
     </div>
   );
 }

@@ -6,19 +6,33 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { updateStudentStreak } from '@/app/actions';
+import { Loader2 } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
   const [name, setName] = useState('');
   const [code, setCode] = useState('');
   const [grade, setGrade] = useState('1');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (name.trim() && code.trim()) {
-      // Create a unique identifier combining name and code
-      const uniqueId = `${name.trim()}_${code.trim()}`;
-      router.push(`/dashboard?name=${encodeURIComponent(uniqueId)}&grade=${grade}`);
+      setIsSubmitting(true);
+      try {
+        // Create a unique identifier combining name and code
+        const uniqueId = `${name.trim()}_${code.trim()}`;
+        
+        // Update student streak upon login
+        await updateStudentStreak(uniqueId);
+        
+        router.push(`/dashboard?name=${encodeURIComponent(uniqueId)}&grade=${grade}`);
+      } catch (error) {
+        console.error('Login error:', error);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -76,8 +90,12 @@ export default function LoginPage() {
                   <option value="4">4º ano</option>
                 </select>
               </div>
-              <Button type="submit" className="w-full text-xl h-14">
-                Entrar! 🚀
+              <Button type="submit" className="w-full text-xl h-14" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> A carregar...</>
+                ) : (
+                  'Entrar! 🚀'
+                )}
               </Button>
             </form>
           </CardContent>
