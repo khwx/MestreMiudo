@@ -963,3 +963,107 @@ export async function updateStudentRewardsWithCoinsAction(
     return false;
   }
 }
+
+// ============================================
+// Shop System
+// ============================================
+
+export async function getShopItems() {
+  if (!isSupabaseConfigured() || !supabase) {
+    return [];
+  }
+  try {
+    const { data, error } = await supabase
+      .from('shop_items')
+      .select('*')
+      .eq('available', true)
+      .order('price', { ascending: true });
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching shop items:', error);
+    return [];
+  }
+}
+
+export async function buyShopItem(studentId: string, itemId: string) {
+  if (!isSupabaseConfigured() || !supabase) {
+    return { success: false, error: 'Base de dados não disponível' };
+  }
+  try {
+    const item = await supabase
+      .from('shop_items')
+      .select('*')
+      .eq('id', itemId)
+      .single();
+    if (!item.data) return { success: false, error: 'Item não encontrado' };
+
+    const rewards = await supabase
+      .from('student_rewards')
+      .select('*')
+      .eq('student_id', studentId)
+      .single();
+    if (!rewards.data) return { success: false, error: 'Recompensas não encontradas' };
+
+    if (rewards.data.total_points < item.data.price) {
+      return { success: false, error: 'Moedas insuficientes' };
+    }
+
+    await supabase
+      .from('student_rewards')
+      .update({
+        total_points: rewards.data.total_points - item.data.price,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('student_id', studentId);
+
+    await supabase.from('user_inventory').insert({
+      student_id: studentId,
+      item_id: itemId,
+      equipped: false,
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error('Error buying shop item:', error);
+    return { success: false, error: 'Erro ao comprar item' };
+  }
+}
+
+export async function getUserInventory(studentId: string) {
+  if (!isSupabaseConfigured() || !supabase) {
+    return [];
+  }
+  try {
+    const { data, error } = await supabase
+      .from('user_inventory')
+      .select('*, shop_items(*)')
+      .eq('student_id', studentId);
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching inventory:', error);
+    return [];
+  }
+}
+
+export async function equipInventoryItem(studentId: string, itemId: string) {
+  if (!isSupabaseConfigured() || !supabase) {
+    return { success: false, error: 'Base de dados não disponível' };
+  }
+  try {
+    await supabase
+      .from('user_inventory')
+      .update({ equipped: false })
+      .eq('student_id', studentId);
+    await supabase
+      .from('user_inventory')
+      .update({ equipped: true })
+      .eq('student_id', studentId)
+      .eq('item_id', itemId);
+    return { success: true };
+  } catch (error) {
+    console.error('Error equipping item:', error);
+    return { success: false, error: 'Erro ao equipar item' };
+  }
+}

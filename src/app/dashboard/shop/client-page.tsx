@@ -1,28 +1,31 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Loader2, ShoppingBag, Star, Coins, CheckCircle2 } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
+import { cn } from '@/lib/utils';
 import { 
   getShopItems, 
   buyShopItem, 
   getUserInventory, 
-  equipInventoryItem, 
   getStudentRewards 
 } from '@/app/actions';
-import { ShopItem, UserInventory } from '@/app/shared-schemas';
+import type { ShopItem, UserInventory } from '@/app/shared-schemas';
 
 export default function ShopClientPage() {
   const searchParams = useSearchParams();
   const name = searchParams.get('name');
+  const grade = searchParams.get('grade');
+  const router = useRouter();
+  const { toast } = useToast();
+
   const [items, setItems] = useState<ShopItem[]>([]);
   const [inventory, setInventory] = useState<UserInventory[]>([]);
   const [rewards, setRewards] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const { toast } = useToast();
 
   useEffect(() => {
     async function loadShop() {
@@ -34,8 +37,8 @@ export default function ShopClientPage() {
           getUserInventory(name),
           getStudentRewards(name)
         ]);
-        setItems(shopItems);
-        setInventory(userInv);
+        setItems(shopItems || []);
+        setInventory(userInv || []);
         setRewards(studentRewards);
       } catch (error) {
         toast({
@@ -51,17 +54,28 @@ export default function ShopClientPage() {
   }, [name, toast]);
 
   const handleBuy = async (item: ShopItem) => {
+    if (!name || !rewards || rewards.total_points < item.price) {
+      toast({
+        title: "Moedas insuficientes! 💰",
+        description: `Precisas de mais ${item.price - (rewards?.total_points || 0)} moedas.`,
+        variant: "destructive"
+      });
+      return;
+    }
+
     try {
-      const result = await buyShopItem(name!, item.id!);
+      const result = await buyShopItem(name, item.id!);
       if (result.success) {
         toast({
-          title: "Compra realizada!",
+          title: "Compra realizada! 🎉",
           description: `Parabéns! Agora tens o(a) ${item.name}.`,
         });
-        // Refresh inventory and rewards
-        const updatedInv = await getUserInventory(name!);
-        const updatedRewards = await getStudentRewards(name!);
-        setInventory(updatedInv);
+        // Refresh
+        const [updatedInv, updatedRewards] = await Promise.all([
+          getUserInventory(name),
+          getStudentRewards(name)
+        ]);
+        setInventory(updatedInv || []);
         setRewards(updatedRewards);
       } else {
         toast({
@@ -79,150 +93,110 @@ export default function ShopClientPage() {
     }
   };
 
-  const handleEquip = async (itemId: string) => {
-    try {
-      const result = await equipInventoryItem(name!, itemId);
-      if (result.success) {
-        toast({
-          title: "Equipado!",
-          description: "O item foi equipado com sucesso.",
-        });
-        const updatedInv = await getUserInventory(name!);
-        setInventory(updatedInv);
-      } else {
-        toast({
-          title: "Erro ao equipar",
-          description: result.error || "Erro desconhecido",
-          variant: "destructive"
-        });
-      }
-    } catch (error) {
-      toast({
-        title: "Erro",
-        description: "Ocorreu um erro inesperado.",
-        variant: "destructive"
-      });
-    }
+  const isOwned = (itemId: string) => {
+    return inventory.some(inv => inv.item_id === itemId);
   };
 
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[50vh]">
-        <Loader2 className="h-12 w-12 animate-spin text-primary" />
+        <Loader2 className="h-12 w-12 animate-spin text-yellow-500" />
       </div>
     );
   }
 
   return (
-    <div className="space-y-8 p-4">
-      <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-        <div>
-          <h1 className="text-4xl font-headline font-bold text-primary">Loja do MestreMiúdo</h1>
-          <p className="text-muted-foreground">Gasta as tuas moedas em itens fantásticos!</p>
-        </div>
-        <div className="flex items-center gap-3 bg-card border p-3 rounded-full shadow-sm">
-          <Coins className="h-6 w-6 text-yellow-500" />
-          <span className="text-xl font-bold">{rewards?.total_points || 0} Moedas</span>
+    <div className="space-y-8 p-4 md:p-8 max-w-6xl mx-auto">
+      {/* Header */}
+      <div className="text-center space-y-4 py-6">
+        <div className="text-6xl animate-bounce">🛍️</div>
+        <h2 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-yellow-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
+          Loja Mágica
+        </h2>
+        <div className="flex items-center justify-center gap-2 bg-yellow-100 dark:bg-yellow-900/40 px-6 py-3 rounded-full inline-block">
+          <Coins className="h-8 w-8 text-yellow-600" />
+          <span className="text-3xl font-black text-yellow-700">
+            {rewards?.total_points || 0}
+          </span>
+          <span className="text-yellow-600 font-bold">moedas</span>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Shop Items */}
-        <div className="lg:col-span-2 space-y-6">
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <ShoppingBag className="h-6 w-6" /> Itens Disponíveis
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {items.length === 0 ? (
-              <p className="text-muted-foreground">Nenhum item disponível no momento.</p>
-            ) : (
-              items.map(item => {
-                const isOwned = inventory.some(inv => inv.item_id === item.id);
-                return (
-                  <Card key={item.id} className={cn("overflow-hidden transition-all hover:shadow-md", isOwned && "border-green-500 bg-green-50/30")}>
-                    <div className="aspect-square bg-muted relative">
-                      {item.image_url ? (
-                        <img src={item.image_url} alt={item.name} className="object-cover w-full h-full" />
-                      ) : (
-                        <div className="flex items-center justify-center h-full text-muted-foreground italic">
-                          Sem Imagem
-                        </div>
-                      )}
-                    </div>
-                    <CardHeader className="p-4">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <CardTitle className="text-lg">{item.name}</CardTitle>
-                          <CardDescription className="text-xs">{item.description}</CardDescription>
-                        </div>
-                        <div className="flex items-center gap-1 font-bold text-yellow-600">
-                          <Coins className="h-4 w-4" />
-                          {item.price}
-                        </div>
+      {/* Items Grid */}
+      {items.length === 0 ? (
+        <div className="card-kid border-4 border-yellow-300 bg-white shadow-2xl max-w-2xl mx-auto">
+          <div className="p-8 text-center">
+            <p className="text-xl text-gray-500">Nenhum item disponível ainda. Volta em breve! 🚀</p>
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {items.map((item) => {
+            const owned = isOwned(item.id!);
+            return (
+              <div 
+                key={item.id} 
+                className={`card-kid bg-white shadow-xl transition-all duration-300 ${
+                  owned ? 'border-green-300' : 'border-yellow-300'
+                }`}
+              >
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <span className="text-4xl">{item.icon || '🎁'}</span>
+                      <div>
+                        <h3 className="text-xl font-black text-gray-800">{item.name}</h3>
+                        <p className="text-sm text-gray-500">{item.description}</p>
                       </div>
-                    </CardHeader>
-                    <CardContent className="p-4 pt-0">
-                      <Button 
-                        className="w-full" 
-                        variant={isOwned ? "outline" : "default"}
-                        onClick={() => isOwned ? null : handleBuy(item)}
-                        disabled={isOwned}
-                      >
-                        {isOwned ? (
-                          <><CheckCircle2 className="mr-2 h-4 w-4" /> Já tens!</>
-                        ) : (
-                          'Comprar'
-                        )}
-                      </Button>
-                    </CardContent>
-                  </Card>
-                );
-              })
-            )}
-          </div>
-        </div>
-
-        {/* User Inventory */}
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <Star className="h-6 w-6 text-yellow-500" /> O Teu Inventário
-          </h2>
-          <div className="grid grid-cols-1 gap-4">
-            {inventory.length === 0 ? (
-              <p className="text-muted-foreground">Ainda não tens itens. Compra alguns na loja!</p>
-            ) : (
-              inventory.map(inv => (
-                <Card key={inv.id} className={cn("p-4 flex items-center justify-between transition-all", inv.equipped && "border-primary bg-primary/10")}>
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-muted overflow-hidden">
-                      {inv.shop_items?.image_url ? (
-                        <img src={inv.shop_items.image_url} alt={inv.shop_items.name} className="object-cover w-full h-full" />
-                      ) : (
-                        <div className="flex items-center justify-center h-full w-full text-xs italic">?</div>
-                      )}
                     </div>
-                    <div>
-                      <p className="font-bold text-sm">{inv.shop_items?.name}</p>
-                      <p className="text-xs text-muted-foreground">{inv.shop_items?.item_type}</p>
-                    </div>
+                    {owned && (
+                      <div className="bg-green-100 p-2 rounded-full">
+                        <CheckCircle2 className="h-6 w-6 text-green-600" />
+                      </div>
+                    )}
                   </div>
-                  <Button 
-                    size="sm" 
-                    variant={inv.equipped ? "default" : "outline"}
-                    onClick={() => handleEquip(inv.item_id)}
-                  >
-                    {inv.equipped ? 'Equipado' : 'Equipar'}
-                  </Button>
-                </Card>
-              ))
-            )}
-          </div>
+
+                  <div className="flex items-center justify-between pt-4 border-t-2 border-gray-100">
+                    <div className="flex items-center gap-2">
+                      <Coins className="h-5 w-5 text-yellow-500" />
+                      <span className={`text-xl font-black ${
+                        (rewards?.total_points || 0) >= item.price ? 'text-green-600' : 'text-red-500'
+                      }`}>
+                        {item.price}
+                      </span>
+                    </div>
+
+                    {owned ? (
+                      <div className="bg-green-50 px-4 py-2 rounded-full">
+                        <span className="text-green-700 font-bold">✅ Já tens!</span>
+                      </div>
+                    ) : (
+                      <Button
+                        onClick={() => handleBuy(item)}
+                        className="btn-kid bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white font-bold"
+                        disabled={(rewards?.total_points || 0) < item.price}
+                      >
+                        Comprar! 🛒
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
+      )}
+
+      {/* Back Button */}
+      <div className="text-center pt-6">
+        <Button 
+          onClick={() => router.push(`/dashboard?name=${name}&grade=${grade}`)}
+          size="lg"
+          className="btn-kid bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xl"
+        >
+          ← Voltar ao Dashboard
+        </Button>
       </div>
     </div>
   );
-}
-
-function cn(...inputs: any[]) {
-  return inputs.filter(Boolean).join(' ');
 }

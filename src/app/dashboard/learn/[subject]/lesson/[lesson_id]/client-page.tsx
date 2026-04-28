@@ -29,6 +29,9 @@ export default function LessonDetailClient() {
   const [score, setScore] = useState(0);
   const [stars, setStars] = useState(0);
   const [coins, setCoins] = useState(0);
+  // Track which answers have been submitted and their correctness
+  const [submittedAnswers, setSubmittedAnswers] = useState<string[]>([]);
+  const [answerCorrectness, setAnswerCorrectness] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const fetchLesson = async () => {
@@ -69,34 +72,49 @@ export default function LessonDetailClient() {
     }));
   };
 
-  const handleSubmitChallenge = async () => {
-    if (!currentChallenge) return;
+   const handleSubmitChallenge = async () => {
+     if (!currentChallenge) return;
 
-    const isCorrect = validateAnswer(currentChallenge, answers[currentChallenge.id || '']);
+     const isCorrect = validateAnswer(currentChallenge, answers[currentChallenge.id || '']);
+     
+     // Mark this answer as submitted and store its correctness
+     setSubmittedAnswers(prev => [...prev, currentChallenge.id || '']);
+     setAnswerCorrectness(prev => ({
+       ...prev,
+       [currentChallenge.id || '']: isCorrect
+     }));
 
-    if (isLastChallenge) {
-      // Calculate final score
-      const totalAnswers = challenges.length;
-      const correctAnswers = challenges.filter((challenge) =>
-        validateAnswer(challenge, answers[challenge.id || ''])
-      ).length;
-      const finalScore = (correctAnswers / totalAnswers) * 100;
-      const finalStars = calculateStars(finalScore);
-      const finalCoins = calculateCoins(finalStars);
+     if (isLastChallenge) {
+       // Calculate final score
+       const totalAnswers = challenges.length;
+       const correctAnswers = challenges.filter((challenge) =>
+         validateAnswer(challenge, answers[challenge.id || ''])
+       ).length;
+       const finalScore = (correctAnswers / totalAnswers) * 100;
+       const finalStars = calculateStars(finalScore);
+       const finalCoins = calculateCoins(finalStars);
 
-      setScore(finalScore);
-      setStars(finalStars);
-      setCoins(finalCoins);
+       setScore(finalScore);
+       setStars(finalStars);
+       setCoins(finalCoins);
 
-      // Save completion
-      setSubmitting(true);
-      await saveLessonCompletion(name, lessonId, answers, Math.round(finalScore));
-      setSubmitting(false);
-      setCompleted(true);
-    } else {
-      // Move to next challenge
-      setCurrentChallengeIndex((prev) => prev + 1);
-    }
+       // Save completion
+       setSubmitting(true);
+       await saveLessonCompletion(name, lessonId, answers, Math.round(finalScore));
+       setSubmitting(false);
+       setCompleted(true);
+     } else {
+       // Move to next challenge
+       setCurrentChallengeIndex((prev) => prev + 1);
+     }
+   };
+
+  const normalizeText = (text: string) => {
+    return text
+      .toLowerCase()
+      .trim()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
   };
 
   const validateAnswer = (challenge: LessonChallenge, answer: string | string[] | undefined) => {
@@ -108,7 +126,8 @@ export default function LessonDetailClient() {
 
     if (challenge.challenge_type === 'fill_blank') {
       const correctAnswers = challenge.content.correct_answers || [challenge.content.correct_answer];
-      return correctAnswers.includes((answer as string).toLowerCase().trim());
+      const normalizedAnswer = normalizeText(answer as string);
+      return correctAnswers.some(ca => normalizeText(ca) === normalizedAnswer);
     }
 
     if (challenge.challenge_type === 'word_order') {
@@ -122,6 +141,29 @@ export default function LessonDetailClient() {
     }
 
     return false;
+  };
+
+  const getCorrectAnswerText = (challenge: LessonChallenge): string => {
+    if (challenge.challenge_type === 'multiple_choice') {
+      return challenge.content.correct_answer;
+    }
+
+    if (challenge.challenge_type === 'fill_blank') {
+      const correctAnswers = challenge.content.correct_answers || [challenge.content.correct_answer];
+      return correctAnswers.join(' ou ');
+    }
+
+    if (challenge.challenge_type === 'word_order') {
+      const correctOrder = challenge.content.correct_order;
+      return correctOrder ? correctOrder.join(' ') : 'ordem correta';
+    }
+
+    if (challenge.challenge_type === 'matching') {
+      const correctMatches = challenge.content.correct_matches;
+      return Object.entries(correctMatches || {}).map(([key, value]) => `${key} -> ${value}`).join(', ');
+    }
+
+    return 'resposta correta';
   };
 
   if (completed) {
@@ -187,21 +229,64 @@ export default function LessonDetailClient() {
                 💪 Bem feito! Continua a praticar!
               </p>
             )}
-            {score < 60 && (
-              <p className="text-lg text-orange-600 dark:text-orange-400">
-                📚 Não desanimes! Tenta novamente para melhorar!
-              </p>
-            )}
+         {score < 60 && (
+               <p className="text-lg text-orange-600 dark:text-orange-400">
+                 📚 Não desanimes! Tenta novamente para melhorar!
+               </p>
+             )}
 
-            {/* Action buttons */}
-            <div className="flex gap-4 justify-center pt-4">
-              <Link href={`/dashboard/learn/${subject}?name=${name}&grade=${gradeParam}`}>
-                <Button>Voltar às Lições</Button>
-              </Link>
-              <Link href={`/dashboard?name=${name}&grade=${gradeParam}`}>
-                <Button variant="outline">Ir para Dashboard</Button>
-              </Link>
-            </div>
+             {/* Detailed challenge review */}
+             <div className="space-y-4">
+               <h3 className="text-lg font-semibold text-center">Revisão dos Desafios</h3>
+               <div className="space-y-3">
+                 {challenges.map((challenge, index) => {
+                   const challengeId = challenge.id || '';
+                   const isCorrect = answerCorrectness[challengeId];
+                   const studentAnswer = answers[challengeId];
+                   
+                   return (
+                     <div key={index} className={`border-l-4 pl-3 ${
+                       isCorrect === true 
+                         ? 'border-success' 
+                         : isCorrect === false 
+                           ? 'border-destructive' 
+                           : 'border-muted'
+                     }`}>
+                       <div className="flex justify-between items-start mb-1">
+                         <span className="font-medium">Desafio {index + 1}:</span>
+                         <span className={`text-sm ${
+                           isCorrect === true 
+                             ? 'text-success' 
+                             : isCorrect === false 
+                               ? 'text-destructive' 
+                               : 'text-muted'
+                         }`}>
+                           {isCorrect === true ? 'Correto' : isCorrect === false ? 'Incorreto' : 'Aguardando resposta'}
+                         </span>
+                       </div>
+                       <p className="text-sm text-muted-foreground">{challenge.question}</p>
+                       {isCorrect !== undefined && (
+                         <div className="mt-1 text-xs">
+                           {isCorrect === true 
+                             ? '✓ Resposta correta!' 
+                             : '✗ Resposta incorreta. A resposta correta era: ' + getCorrectAnswerText(challenge)}
+                           </div>
+                       )}
+                     </div>
+                   );
+                 })}
+               </div>
+             </div>
+
+             {/* Action buttons */}
+             <div className="flex gap-4 justify-center pt-4">
+               <Link href={`/dashboard/learn/${subject}?name=${name}&grade=${gradeParam}`}>
+                 <Button>Voltar às Lições</Button>
+               </Link>
+               <Link href={`/dashboard?name=${name}&grade=${gradeParam}`}>
+                 <Button variant="outline">Ir para Dashboard</Button>
+               </Link>
+             </div>
           </CardContent>
         </Card>
       </div>
@@ -246,33 +331,40 @@ export default function LessonDetailClient() {
       )}
 
       {/* Challenge card */}
-      {currentChallenge && (
-        <Card className="max-w-2xl mx-auto">
-          <CardHeader>
-            <CardTitle>{currentChallenge.question}</CardTitle>
-            {currentChallenge.hint && (
-              <CardDescription>💡 Dica: {currentChallenge.hint}</CardDescription>
-            )}
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <ChallengeRenderer
-              challenge={currentChallenge}
-              answer={answers[currentChallenge.id || '']}
-              onChange={(value) =>
-                handleAnswerChange(currentChallenge.id || '', value)
-              }
-            />
+       {currentChallenge && (
+         <Card className="max-w-2xl mx-auto">
+           <CardHeader>
+             <CardTitle>{currentChallenge.question}</CardTitle>
+             {currentChallenge.hint && (
+               <CardDescription>💡 Dica: {currentChallenge.hint}</CardDescription>
+             )}
+           </CardHeader>
+           <CardContent className="space-y-6">
+             <ChallengeRenderer
+               challenge={currentChallenge}
+               answer={answers[currentChallenge.id || '']}
+               isSubmitted={submittedAnswers.includes(currentChallenge.id || '')}
+               isCorrect={answerCorrectness[currentChallenge.id || '']}
+               onChange={(value) => {
+                 handleAnswerChange(currentChallenge.id || '', value);
+                 // Reset correctness when answer changes
+                 setAnswerCorrectness(prev => ({
+                   ...prev,
+                   [currentChallenge.id || '']: null
+                 }));
+               }}
+             />
 
-            <Button
-              onClick={handleSubmitChallenge}
-              disabled={submitting || !answers[currentChallenge.id || '']}
-              className="w-full"
-            >
-              {isLastChallenge ? 'Terminar Lição' : 'Próximo Desafio'}
-            </Button>
-          </CardContent>
-        </Card>
-      )}
+             <Button
+               onClick={handleSubmitChallenge}
+               disabled={submitting || !answers[currentChallenge.id || '']}
+               className="w-full"
+             >
+               {isLastChallenge ? 'Terminar Lição' : 'Próximo Desafio'}
+             </Button>
+           </CardContent>
+         </Card>
+       )}
     </div>
   );
 }
@@ -282,91 +374,184 @@ function ChallengeRenderer({
   challenge,
   answer,
   onChange,
+  isSubmitted,
+  isCorrect,
 }: {
   challenge: LessonChallenge;
   answer: string | string[] | undefined;
   onChange: (value: string | string[]) => void;
+  isSubmitted?: boolean;
+  isCorrect?: boolean;
 }) {
-  if (challenge.challenge_type === 'multiple_choice') {
-    return (
-      <div className="space-y-3">
-        {challenge.content.options?.map((option: string) => (
-          <button
-            key={option}
-            onClick={() => onChange(option)}
-            className={`w-full p-3 text-left rounded-lg border-2 transition ${
-              answer === option
-                ? 'border-primary bg-primary/10'
-                : 'border-muted hover:border-primary'
-            }`}
-          >
-            {option}
-          </button>
-        ))}
-      </div>
-    );
-  }
+   if (challenge.challenge_type === 'multiple_choice') {
+     return (
+       <div className="space-y-3">
+         {challenge.content.options?.map((option: string) => {
+           const isSelected = answer === option;
+           const isCorrectOption = isSubmitted && isCorrect !== undefined && 
+                                 isCorrect && challenge.content.correct_answer === option;
+           const isWrongOption = isSubmitted && isCorrect !== undefined && 
+                               !isCorrect && challenge.content.correct_answer === option;
+           
+           return (
+             <button
+               key={option}
+               onClick={!isSubmitted ? () => onChange(option) : undefined}
+               className={`w-full p-3 text-left rounded-lg border-2 transition ${
+                 isSelected
+                   ? 'border-primary bg-primary/10'
+                   : isCorrectOption
+                     ? 'border-success bg-success/10'
+                     : isWrongOption
+                       ? 'border-destructive bg-destructive/10'
+                       : 'border-muted hover:border-primary'
+               } ${
+                 !isSubmitted && isSelected && 'hover:border-primary'
+               }`}
+               disabled={isSubmitted}
+             >
+               {isSubmitted && isCorrect !== undefined && (
+                 isCorrectOption ? '✓ ' : isWrongOption ? '✗ ' : ''
+               )}
+               {option}
+             </button>
+           );
+         })}
+       </div>
+     );
+   }
 
-  if (challenge.challenge_type === 'fill_blank') {
-    return (
-      <input
-        type="text"
-        value={answer || ''}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder="Escreve a resposta..."
-        className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-      />
-    );
-  }
+   if (challenge.challenge_type === 'fill_blank') {
+     const isCorrectAnswer = isSubmitted && isCorrect !== undefined && isCorrect;
+     const isWrongAnswer = isSubmitted && isCorrect !== undefined && !isCorrect;
+     
+     return (
+       <input
+         type="text"
+         value={answer || ''}
+         onChange={!isSubmitted ? (e) => onChange(e.target.value) : undefined}
+         placeholder="Escreve a resposta..."
+         className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
+           isCorrectAnswer
+             ? 'border-success'
+             : isWrongAnswer
+               ? 'border-destructive'
+               : isSubmitted
+                 ? 'border-muted'
+                 : 'focus:ring-primary'
+         }`}
+         disabled={isSubmitted}
+       />
+     );
+   }
 
-  if (challenge.challenge_type === 'word_order') {
-    const words = challenge.content.words || [];
-    return (
-      <div className="space-y-4">
-        <p className="text-sm text-muted-foreground">Arrasta as palavras para a ordem correta:</p>
-        <div className="flex flex-wrap gap-2">
-          {words.map((word: string, index: number) => (
-            <div
-              key={index}
-              className="px-3 py-2 bg-primary/20 text-primary rounded-full text-sm font-semibold cursor-move"
-            >
-              {word}
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
+   if (challenge.challenge_type === 'word_order') {
+     const isCorrectAnswer = isSubmitted && isCorrect !== undefined && isCorrect;
+     const isWrongAnswer = isSubmitted && isCorrect !== undefined && !isCorrect;
+     
+     return (
+       <div className={`space-y-4 ${isSubmitted && isCorrect !== undefined ? (
+         isCorrectAnswer 
+           ? 'border-success bg-success/50 p-4 rounded-lg' 
+           : isWrongAnswer
+             ? 'border-destructive bg-destructive/50 p-4 rounded-lg'
+             : ''
+       ) : ''}`}>
+         <p className="text-sm text-muted-foreground">Arrasta as palavras para a ordem correta:</p>
+         <div className="flex flex-wrap gap-2">
+           {words.map((word: string, index: number) => (
+             <div
+               key={index}
+               className="px-3 py-2 bg-primary/20 text-primary rounded-full text-sm font-semibold cursor-move"
+               style={{ userSelect: 'none' }}
+               draggable={!isSubmitted}
+             >
+               {word}
+             </div>
+           ))}
+         </div>
+         {isSubmitted && isCorrect !== undefined && (
+           <p className={`mt-2 text-sm ${
+             isCorrectAnswer 
+               ? 'text-success' 
+               : isWrongAnswer
+                 ? 'text-destructive'
+                 : 'text-muted-foreground'
+           }`}>
+             {isCorrectAnswer ? '✓ Ordem correta!' : '✗ Ordem incorreta. Tenta novamente!'}
+           </p>
+         )}
+       </div>
+     );
+   }
 
-  if (challenge.challenge_type === 'matching') {
-    const pairs = challenge.content.pairs || [];
-    return (
-      <div className="space-y-3">
-        {pairs.map((pair: any, index: number) => (
-          <div key={index} className="flex gap-3 items-center">
-            <div className="flex-1 p-3 bg-secondary rounded-lg">{pair.left}</div>
-            <select
-              value={(answer as any)?.[pair.left] || ''}
-              onChange={(e) =>
-                onChange({
-                  ...((answer as any) || {}),
-                  [pair.left]: e.target.value,
-                })
-              }
-              className="flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-            >
-              <option value="">Seleciona...</option>
-              {pair.options?.map((option: string) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
-        ))}
-      </div>
-    );
-  }
+   if (challenge.challenge_type === 'matching') {
+     const pairs = challenge.content.pairs || [];
+     const isCorrectAnswer = isSubmitted && isCorrect !== undefined && isCorrect;
+     const isWrongAnswer = isSubmitted && isCorrect !== undefined && !isCorrect;
+     
+     return (
+       <div className={`space-y-3 ${isSubmitted && isCorrect !== undefined ? (
+         isCorrectAnswer 
+           ? 'border-success bg-success/50 p-4 rounded-lg' 
+           : isWrongAnswer
+             ? 'border-destructive bg-destructive/50 p-4 rounded-lg'
+             : ''
+       ) : ''}`}>
+         {pairs.map((pair: any, index: number) => {
+           const userAnswer = (answer as any)?.[pair.left];
+           const correctAnswer = pair.correct_matches?.[pair.left];
+           const isPairCorrect = userAnswer === correctAnswer;
+           
+           return (
+             <div key={index} className="flex gap-3 items-center">
+               <div className="flex-1 p-3 bg-secondary rounded-lg">{pair.left}</div>
+               <select
+                 value={userAnswer || ''}
+                 onChange={!isSubmitted ? (e) => {
+                   onChange({
+                     ...((answer as any) || {}),
+                     [pair.left]: e.target.value,
+                   });
+                 } : undefined}
+                 disabled={isSubmitted}
+                 className={`flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 ${
+                   isSubmitted && isCorrect !== undefined
+                     ? isPairCorrect
+                       ? 'border-success'
+                       : 'border-destructive'
+                     : 'focus:ring-primary'
+                 }`}
+               >
+                 <option value="">Seleciona...</option>
+                 {pair.options?.map((option: string) => (
+                   <option key={option} value={option}>
+                     {option}
+                   </option>
+                 ))}
+               </select>
+               {isSubmitted && isCorrect !== undefined && (
+                 <span className="ml-2 text-xs">
+                   {isPairCorrect ? '✓' : '✗'}
+                 </span>
+               )}
+             </div>
+           );
+         })}
+         {isSubmitted && isCorrect !== undefined && (
+           <p className={`mt-2 text-sm ${
+             isCorrectAnswer 
+               ? 'text-success' 
+               : isWrongAnswer
+                 ? 'text-destructive'
+                 : 'text-muted-foreground'
+           }`}>
+             {isCorrectAnswer ? '✓ Todas as correspondências corretas!' : '✗ Algumas correspondências estão incorretas. Tenta novamente!'}
+           </p>
+         )}
+       </div>
+     );
+   }
 
   return <p className="text-muted-foreground">Tipo de desafio não suportado</p>;
 }

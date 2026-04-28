@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline - MestreMiúdo</title>
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    p { font-size: 1.2rem; opacity: 0.9; }
+    .emoji { font-size: 4rem; margin-bottom: 1rem; }
+    button {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 50px;
+      background: white;
+      color: #667eea;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover { transform: scale(1.05); }
+  </style>
+</head>
+<body>
+  <div class="emoji">📡</div>
+  <h1>Oops! Sem internet</h1>
+  <p>Parece que perdeste a ligação à internet.</p>
+  <p>Aguarda e tenta novamente!</p>
+  <button onclick="window.location.reload()">Tentar Novamente</button>
+</body>
+</html>

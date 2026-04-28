@@ -7,110 +7,24 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Trophy, Medal, Zap, Loader2 } from 'lucide-react';
-import { getGlobalLeaderboard, getGradeLeaderboard } from '@/lib/leaderboards';
+import { getGlobalLeaderboard, getGradeLeaderboard, getStudentRankContext } from '@/lib/leaderboards';
 
-// Mock data - em produção viria do servidor
-const mockGlobalLeaderboard = [
-  {
-    rank: 1,
-    name: 'João Silva',
-    grade: 3,
-    points: 4850,
-    quizzes: 48,
-    averageScore: 94.5,
-  },
-  {
-    rank: 2,
-    name: 'Maria Santos',
-    grade: 4,
-    points: 4620,
-    quizzes: 45,
-    averageScore: 92.3,
-  },
-  {
-    rank: 3,
-    name: 'Pedro Oliveira',
-    grade: 2,
-    points: 4380,
-    quizzes: 42,
-    averageScore: 91.8,
-  },
-  {
-    rank: 4,
-    name: 'Ana Costa',
-    grade: 3,
-    points: 4150,
-    quizzes: 40,
-    averageScore: 90.1,
-  },
-  {
-    rank: 5,
-    name: 'TU', // Current user
-    grade: 3,
-    points: 3920,
-    quizzes: 38,
-    averageScore: 89.5,
-    isCurrentUser: true,
-  },
-  {
-    rank: 6,
-    name: 'Carlos Martins',
-    grade: 1,
-    points: 3650,
-    quizzes: 35,
-    averageScore: 88.2,
-  },
-  {
-    rank: 7,
-    name: 'Sofia Pereira',
-    grade: 2,
-    points: 3420,
-    quizzes: 32,
-    averageScore: 87.5,
-  },
-  {
-    rank: 8,
-    name: 'Tiago Ferreira',
-    grade: 4,
-    points: 3180,
-    quizzes: 30,
-    averageScore: 86.7,
-  },
-];
-
-const mockGrade3Leaderboard = [
-  {
-    rank: 1,
-    name: 'João Silva',
-    grade: 3,
-    points: 4850,
-    quizzes: 48,
-    averageScore: 94.5,
-  },
-  {
-    rank: 2,
-    name: 'Ana Costa',
-    grade: 3,
-    points: 4150,
-    quizzes: 40,
-    averageScore: 90.1,
-  },
-  {
-    rank: 3,
-    name: 'TU',
-    grade: 3,
-    points: 3920,
-    quizzes: 38,
-    averageScore: 89.5,
-    isCurrentUser: true,
-  },
-];
-
-interface LeaderboardRowProps {
-  entry: (typeof mockGlobalLeaderboard)[0];
+interface LeaderboardEntry {
+  studentId: string;
+  studentName: string;
+  gradeLevel?: number;
+  totalPoints: number;
+  totalQuizzes: number;
+  averageScore: number;
+  rank: number;
 }
 
-function LeaderboardRow({ entry }: LeaderboardRowProps) {
+interface LeaderboardRowProps {
+  entry: LeaderboardEntry;
+  currentUserId?: string;
+}
+
+function LeaderboardRow({ entry, currentUserId }: LeaderboardRowProps) {
   const getMedalColor = (rank: number) => {
     switch (rank) {
       case 1:
@@ -137,10 +51,12 @@ function LeaderboardRow({ entry }: LeaderboardRowProps) {
     }
   };
 
+  const isCurrentUser = entry.studentId === currentUserId;
+
   return (
     <div
       className={`flex items-center gap-4 p-4 rounded-lg border-2 transition-all ${
-        entry.isCurrentUser
+        isCurrentUser
           ? 'bg-blue-50 border-blue-300 shadow-md'
           : 'bg-white border-gray-200 hover:border-gray-300'
       }`}
@@ -151,21 +67,21 @@ function LeaderboardRow({ entry }: LeaderboardRowProps) {
 
       <div className="flex-grow">
         <div className="flex items-center gap-2">
-          <p className="text-lg font-bold">{entry.name}</p>
-          {entry.isCurrentUser && (
+          <p className="text-lg font-bold">{entry.studentName}</p>
+          {isCurrentUser && (
             <Badge className="bg-blue-600">Eu</Badge>
           )}
           <Badge variant="outline" className="text-xs">
-            {entry.grade}º ano
+            {entry.gradeLevel}º ano
           </Badge>
         </div>
         <p className="text-sm text-gray-600">
-          {entry.quizzes} quizzes • Média: {entry.averageScore}%
+          {entry.totalQuizzes} quizzes • Média: {entry.averageScore.toFixed(1)}%
         </p>
       </div>
 
       <div className="text-right">
-        <p className="text-2xl font-bold text-purple-600">{entry.points}</p>
+        <p className="text-2xl font-bold text-purple-600">{entry.totalPoints}</p>
         <p className="text-xs text-gray-500">pontos</p>
       </div>
     </div>
@@ -178,15 +94,36 @@ function LeaderboardPageContent() {
   const gradeStr = searchParams.get('grade') || '1';
   const gradeLevel = parseInt(gradeStr);
   
-  const [globalLeaderboard, setGlobalLeaderboard] = useState<typeof mockGlobalLeaderboard>([]);
-  const [gradeLeaderboard, setGradeLeaderboard] = useState<typeof mockGrade3Leaderboard>([]);
+  const [globalLeaderboard, setGlobalLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [gradeLeaderboard, setGradeLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [studentRankContext, setStudentRankContext] = useState<LeaderboardEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Load real leaderboards
-    setGlobalLeaderboard(mockGlobalLeaderboard);
-    setGradeLeaderboard(mockGrade3Leaderboard);
-    setLoading(false);
+    const loadLeaderboards = async () => {
+      try {
+        // Load real leaderboards from Supabase
+        const [globalData, gradeData, rankContext] = await Promise.all([
+          getGlobalLeaderboard(50), // Get top 50 for global leaderboard
+          getGradeLeaderboard(gradeLevel, 10), // Get top 10 for grade leaderboard
+          getStudentRankContext(studentName, 2) // Get context around current student
+        ]);
+        
+        setGlobalLeaderboard(globalData);
+        setGradeLeaderboard(gradeData);
+        setStudentRankContext(rankContext);
+      } catch (error) {
+        console.error('Failed to load leaderboards:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (studentName) {
+      loadLeaderboards();
+    } else {
+      setLoading(false);
+    }
   }, [studentName, gradeLevel]);
 
   if (loading) {
@@ -197,7 +134,18 @@ function LeaderboardPageContent() {
     );
   }
 
-  const currentUserRank = globalLeaderboard.find((e) => e.isCurrentUser);
+  // Find current user in global leaderboard for the position card
+  const currentUserInGlobal = globalLeaderboard.find(
+    entry => entry.studentName === studentName
+  );
+
+  // Create a local "current user rank" for display
+  const currentUserRank = currentUserInGlobal || {
+    rank: studentRankContext.length > 0 ? studentRankContext[0].rank : 0,
+    points: 0,
+    quizzes: 0,
+    averageScore: 0
+  };
 
   return (
     <div className="w-full space-y-8 p-6 max-w-4xl mx-auto">
@@ -217,7 +165,7 @@ function LeaderboardPageContent() {
       </div>
 
       {/* Tua Posição */}
-      {currentUserRank && (
+      {currentUserRank && currentUserRank.rank > 0 && (
         <Card className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
           <CardHeader>
             <CardTitle>A Tua Posição</CardTitle>
@@ -228,15 +176,15 @@ function LeaderboardPageContent() {
               <p className="text-sm opacity-90">Posição</p>
             </div>
             <div>
-              <p className="text-3xl font-bold">{currentUserRank.points}</p>
+              <p className="text-3xl font-bold">{currentUserInGlobal?.totalPoints || 0}</p>
               <p className="text-sm opacity-90">Pontos</p>
             </div>
             <div>
-              <p className="text-3xl font-bold">{currentUserRank.quizzes}</p>
+              <p className="text-3xl font-bold">{currentUserInGlobal?.totalQuizzes || 0}</p>
               <p className="text-sm opacity-90">Quizzes</p>
             </div>
             <div>
-              <p className="text-3xl font-bold">{currentUserRank.averageScore}%</p>
+              <p className="text-3xl font-bold">{currentUserInGlobal?.averageScore.toFixed(0) || 0}%</p>
               <p className="text-sm opacity-90">Média</p>
             </div>
           </CardContent>
