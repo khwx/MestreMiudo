@@ -1,8 +1,11 @@
-const CACHE_NAME = 'mestremiudo-v1';
+const CACHE_NAME = 'mestremiudo-v2';
 const STATIC_ASSETS = [
   '/',
   '/login',
   '/manifest.json',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/offline.html',
 ];
 
 self.addEventListener('install', (event) => {

@@ -53,6 +53,7 @@
     "genkit": "^1.31.0",
     "groq-sdk": "^1.1.2",
     "handlebars": "^4.7.8",
+    "jspdf": "^4.2.1",
     "lucide-react": "^0.475.0",
     "next": "^15.5.14",
     "patch-package": "^8.0.0",

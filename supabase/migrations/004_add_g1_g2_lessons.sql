@@ -34,3 +34,43 @@ VALUES
   ('Estudo do Meio', 2, 'Os Animais da Floresta', 'Descobre os animais que vivem na floresta!', 'Identificar animais e habitats', 'O Ranger vai fazer um safari na floresta!', 1, 'easy'),
   ('Estudo do Meio', 2, 'As Estações do Ano', 'Aprende sobre a Primavera, Verão, Outono e Inverno!', 'Identificar as 4 estações', 'A Sofia vai vestir-se para cada estação!', 2, 'easy'),
   ('Estudo do Meio', 2, 'Partes da Planta', 'Descobre as partes de uma planta: raiz, caule, folhas!', 'Identificar partes básicas das plantas', 'Vamos plantar uma semente mágica!', 3, 'medium');
+
+-- ===== GRADE 3 =====
+
+-- GRADE 3 - PORTUGUÊS
+INSERT INTO lessons (subject, grade_level, title, description, learning_objective, story_context, lesson_index, difficulty)
+VALUES
+  ('Português', 3, 'Sinónimos e Antónimos', 'Descobre palavras com significados iguais ou opostos!', 'Distinguir sinónimos de antónimos', 'O detetive das palavras vai investigar!', 2, 'easy'),
+  ('Português', 3, 'Acentuação e Ortografia', 'Aprende a usar acentos corretamente!', 'Aplicar regras de acentuação', 'O Chapéu Mágico dos Acentos!', 3, 'normal');
+
+-- GRADE 3 - MATEMÁTICA
+INSERT INTO lessons (subject, grade_level, title, description, learning_objective, story_context, lesson_index, difficulty)
+VALUES
+  ('Matemática', 3, 'Números até 1000', 'Domina números grandes até 1000!', 'Ler e escrever números até 1000', 'O Explorador dos Números Grandes!', 1, 'easy'),
+  ('Matemática', 3, 'Multiplicação e Divisão', 'Aprende a multiplicar e dividir números!', 'Realizar operações de multiplicação e divisão', 'O Mágico das Tabuadas!', 2, 'normal'),
+  ('Matemática', 3, 'Frações Simples', 'Descobre as partes de um todo!', 'Identificar frações simples', 'A Pizza Mágica das Frações!', 3, 'normal');
+
+-- GRADE 3 - ESTUDO DO MEIO
+INSERT INTO lessons (subject, grade_level, title, description, learning_objective, story_context, lesson_index, difficulty)
+VALUES
+  ('Estudo do Meio', 3, 'O Sistema Solar', 'Explora os planetas do nosso sistema solar!', 'Identificar os planetas do sistema solar', 'O Astronauta vai viajar pelo espaço!', 1, 'easy'),
+  ('Estudo do Meio', 3, 'Os Oceanos e Rios', 'Descobre a importância da água no planeta!', 'Conhecer oceanos e rios de Portugal', 'O Mergulhador vai explorar o fundo do mar!', 2, 'normal');
+
+-- ===== GRADE 4 =====
+
+-- GRADE 4 - PORTUGUÊS
+INSERT INTO lessons (subject, grade_level, title, description, learning_objective, story_context, lesson_index, difficulty)
+VALUES
+  ('Português', 4, 'Tipos de Frase', 'Aprende declarativas, interrogativas, exclamativas e imperativas!', 'Identificar tipos de frase', 'O Detetive das Frases!', 1, 'normal'),
+  ('Português', 4, 'Classes de Palavras', 'Descobre nomes, adjetivos, verbos e mais!', 'Classificar palavras por categoria gramatical', 'O Classificador de Palavras!', 2, 'normal');
+
+-- GRADE 4 - MATEMÁTICA
+INSERT INTO lessons (subject, grade_level, title, description, learning_objective, story_context, lesson_index, difficulty)
+VALUES
+  ('Matemática', 4, 'Divisão com Resto', 'Aprende a dividir e a lidar com restos!', 'Efetuar divisões com e sem resto', 'A Fada da Partilha!', 2, 'hard');
+
+-- GRADE 4 - ESTUDO DO MEIO
+INSERT INTO lessons (subject, grade_level, title, description, learning_objective, story_context, lesson_index, difficulty)
+VALUES
+  ('Estudo do Meio', 4, 'O Corpo Humano', 'Descobre como funciona o nosso corpo!', 'Identificar principais órgãos e funções', 'O Dr. Miúdo vai explorar o corpo humano!', 1, 'normal'),
+  ('Estudo do Meio', 4, 'Os Direitos das Crianças', 'Aprende sobre os teus direitos!', 'Conhecer a Convenção dos Direitos da Criança', 'O Guardião dos Direitos!', 2, 'normal');

@@ -138,3 +138,51 @@ body.keyboard-nav *:focus {
   animation-iteration-count: 1 !important;
   transition-duration: 0.01ms !important;
 }
+
+[data-high-contrast="true"] {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 0%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 0%;
+  --primary: 240 100% 33%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 90%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 0 0% 85%;
+  --muted-foreground: 0 0% 10%;
+  --accent: 240 100% 33%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 80% 40%;
+  --border: 0 0% 0%;
+  --ring: 240 100% 33%;
+}
+
+[data-high-contrast="true"] .card-kid {
+  border-width: 3px !important;
+  border-color: #000 !important;
+  background: #fff !important;
+  color: #000 !important;
+}
+
+[data-high-contrast="true"] .btn-kid {
+  border: 3px solid #000 !important;
+  font-weight: 900 !important;
+}
+
+[data-high-contrast="true"] .progress-kid {
+  border: 2px solid #000 !important;
+}
+
+[data-high-contrast="true"] .progress-kid-bar {
+  background: #000 !important;
+}
+
+[data-high-contrast="true"] .stat-card {
+  border-color: #000 !important;
+  background: #fff !important;
+}
+
+[data-high-contrast="true"] a,
+[data-high-contrast="true"] button {
+  text-decoration: underline !important;
+}

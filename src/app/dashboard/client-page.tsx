@@ -8,8 +8,9 @@ import { Progress } from "@/components/ui/progress"
 import { useEffect, useState } from "react"
 import { getFullQuizHistory, getStudentLessonHistoryAction, getStudentRewards, getStudentStreak } from "@/app/actions"
 import { getDailyChallenge, getDailyChallengeStats } from "@/lib/daily-challenges"
+import { getItemsForReview, getStudentStats as getSpacedRepetitionStats } from "@/lib/spaced-repetition"
 import type { QuizResultEntry } from "@/app/shared-schemas"
-import { Trophy, Target, Zap, Calendar, TrendingUp, Medal } from "lucide-react"
+import { Trophy, Target, Zap, Calendar, TrendingUp, Medal, Brain, RefreshCw } from "lucide-react"
 
 const subjects = [
   { name: "Português", icon: Book, color: "text-green-600", slug: "portugues" },
@@ -66,6 +67,7 @@ export default function DashboardClientPage() {
   const [rewards, setRewards] = useState<any>(null)
   const [streak, setStreak] = useState<any>(null)
   const [dailyChallengeStats, setDailyChallengeStats] = useState<any>(null)
+  const [spacedStats, setSpacedStats] = useState<{ total: number; mastered: number; learning: number; due: number } | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -96,6 +98,10 @@ export default function DashboardClientPage() {
           setDailyChallengeStats(null)
         })
         .finally(() => setLoading(false))
+
+      getSpacedRepetitionStats(name).then((sr) => {
+        if (sr) setSpacedStats(sr)
+      })
     } else {
       setLoading(false)
     }
@@ -330,54 +336,85 @@ export default function DashboardClientPage() {
             </Link>
           </div>
 
-          {/* Linha 3: Desafio Diário + Rankings + Histórico */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Desafio Diário */}
-            <Link href={`/dashboard/daily-challenge?name=${name}&grade=${grade}`} className="md:col-span-1">
-              <div className="card-kid hover:shadow-2xl transition-all duration-300 cursor-pointer border-4 border-orange-300 bg-gradient-to-r from-orange-100 to-yellow-100 dark:from-orange-900/30 dark:to-yellow-900/30 h-full">
-                <div className="p-6 text-center">
-                  <div className="flex items-center justify-center gap-3 mb-4">
-                    <Flame className="h-8 w-8 text-orange-500 fill-orange-500" />
-                    <h4 className="text-xl font-black text-orange-700 dark:text-orange-300">🔥 Desafio Diário</h4>
-                  </div>
-                  <p className="text-orange-700 dark:text-orange-300 mb-3">Ganha pontos todos os dias!</p>
-                  {dailyChallengeStats?.streak ? (
-                    <div className="bg-orange-200 dark:bg-orange-800/40 rounded-full px-4 py-2 inline-block">
-                      <p className="text-orange-700 dark:text-orange-300 font-bold">
-                        🎯 Sequência: {dailyChallengeStats.streak} dias
-                      </p>
-                    </div>
-                  ) : (
-                    <p className="text-orange-600 dark:text-orange-400 font-semibold">
-                      Começa hoje!
-                    </p>
-                  )}
+      {/* Linha 3: Revisão + Desafio Diário + Rankings + Histórico */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {/* Revisão Espaçada */}
+        <div className="card-kid hover:shadow-2xl transition-all duration-300 cursor-pointer border-4 border-indigo-300 bg-gradient-to-r from-indigo-100 to-violet-100 dark:from-indigo-900/30 dark:to-violet-900/30">
+          <div className="p-6 text-center">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Brain className="h-8 w-8 text-indigo-500" />
+              <h4 className="text-xl font-black text-indigo-700 dark:text-indigo-300">🧠 Revisão</h4>
+            </div>
+            {spacedStats && spacedStats.due > 0 ? (
+              <>
+                <p className="text-indigo-700 dark:text-indigo-300 mb-2 font-bold">
+                  {spacedStats.due} itens para rever!
+                </p>
+                <div className="bg-indigo-200 dark:bg-indigo-800/40 rounded-full px-4 py-2 inline-block">
+                  <p className="text-indigo-700 dark:text-indigo-300 font-bold">
+                    <RefreshCw className="h-4 w-4 inline mr-1" />
+                    Rever agora
+                  </p>
                 </div>
-              </div>
-            </Link>
-
-            {/* Rankings */}
-            <Link href={`/dashboard/leaderboard?name=${name}&grade=${grade}`} className="md:col-span-1">
-              <div className="card-kid hover:shadow-2xl transition-all duration-300 cursor-pointer border-4 border-purple-300 bg-gradient-to-br from-purple-50 to-violet-100 dark:from-purple-900/30 dark:to-violet-800/30 h-full">
-                <div className="p-6 text-center">
-                  <TrendingUp className="h-12 w-12 mx-auto mb-3 text-purple-600" />
-                  <h4 className="text-xl font-black text-purple-700 dark:text-purple-300">📊 Rankings</h4>
-                  <p className="text-purple-600 dark:text-purple-400 mt-2">Compara-te com outros!</p>
-                </div>
-              </div>
-            </Link>
-
-            {/* Histórico */}
-            <Link href={`/dashboard/history?name=${name}&grade=${grade}`} className="md:col-span-1">
-              <div className="card-kid hover:shadow-2xl transition-all duration-300 cursor-pointer border-4 border-blue-300 bg-gradient-to-br from-blue-50 to-sky-100 dark:from-blue-900/30 dark:to-sky-800/30 h-full">
-                <div className="p-6 text-center">
-                  <Calendar className="h-12 w-12 mx-auto mb-3 text-blue-600" />
-                  <h4 className="text-xl font-black text-blue-700 dark:text-blue-300">📋 Histórico</h4>
-                  <p className="text-blue-600 dark:text-blue-400 mt-2">Vê o que já fizeste!</p>
-                </div>
-              </div>
-            </Link>
+              </>
+            ) : spacedStats && spacedStats.total > 0 ? (
+              <p className="text-indigo-600 dark:text-indigo-400 font-semibold">
+                ✅ Tudo em dia! {spacedStats.mastered} dominados
+              </p>
+            ) : (
+              <p className="text-indigo-600 dark:text-indigo-400 font-semibold">
+                Faz lições para criar revisões!
+              </p>
+            )}
           </div>
+        </div>
+
+        {/* Desafio Diário */}
+        <Link href={`/dashboard/daily-challenge?name=${name}&grade=${grade}`} className="md:col-span-1">
+        <div className="card-kid hover:shadow-2xl transition-all duration-300 cursor-pointer border-4 border-orange-300 bg-gradient-to-r from-orange-100 to-yellow-100 dark:from-orange-900/30 dark:to-yellow-900/30 h-full">
+          <div className="p-6 text-center">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Flame className="h-8 w-8 text-orange-500 fill-orange-500" />
+              <h4 className="text-xl font-black text-orange-700 dark:text-orange-300">🔥 Desafio Diário</h4>
+            </div>
+            <p className="text-orange-700 dark:text-orange-300 mb-3">Ganha pontos todos os dias!</p>
+            {dailyChallengeStats?.streak ? (
+              <div className="bg-orange-200 dark:bg-orange-800/40 rounded-full px-4 py-2 inline-block">
+                <p className="text-orange-700 dark:text-orange-300 font-bold">
+                  🎯 {dailyChallengeStats.streak} dias
+                </p>
+              </div>
+            ) : (
+              <p className="text-orange-600 dark:text-orange-400 font-semibold">
+                Começa hoje!
+              </p>
+            )}
+          </div>
+        </div>
+        </Link>
+
+        {/* Rankings */}
+        <Link href={`/dashboard/leaderboard?name=${name}&grade=${grade}`} className="md:col-span-1">
+        <div className="card-kid hover:shadow-2xl transition-all duration-300 cursor-pointer border-4 border-purple-300 bg-gradient-to-br from-purple-50 to-violet-100 dark:from-purple-900/30 dark:to-violet-800/30 h-full">
+          <div className="p-6 text-center">
+            <TrendingUp className="h-12 w-12 mx-auto mb-3 text-purple-600" />
+            <h4 className="text-xl font-black text-purple-700 dark:text-purple-300">📊 Rankings</h4>
+            <p className="text-purple-600 dark:text-purple-400 mt-2">Compara-te com outros!</p>
+          </div>
+        </div>
+        </Link>
+
+        {/* Histórico */}
+        <Link href={`/dashboard/history?name=${name}&grade=${grade}`} className="md:col-span-1">
+        <div className="card-kid hover:shadow-2xl transition-all duration-300 cursor-pointer border-4 border-blue-300 bg-gradient-to-br from-blue-50 to-sky-100 dark:from-blue-900/30 dark:to-sky-800/30 h-full">
+          <div className="p-6 text-center">
+            <Calendar className="h-12 w-12 mx-auto mb-3 text-blue-600" />
+            <h4 className="text-xl font-black text-blue-700 dark:text-blue-300">📋 Histórico</h4>
+            <p className="text-blue-600 dark:text-blue-400 mt-2">Vê o que já fizeste!</p>
+          </div>
+        </div>
+        </Link>
+      </div>
         </div>
       </div>
     </div>

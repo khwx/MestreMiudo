@@ -371,7 +371,7 @@ export async function initializeSampleLessons() {
       difficulty: 'easy',
     },
 
-    // ===== GRADE 3 (já existem) =====
+    // ===== GRADE 3 - PORTUGUÊS =====
     {
       subject: 'Português',
       grade_level: 3,
@@ -382,8 +382,104 @@ export async function initializeSampleLessons() {
       lesson_index: 1,
       difficulty: 'easy',
     },
+    {
+      subject: 'Português',
+      grade_level: 3,
+      title: 'Sinónimos e Antónimos',
+      description: 'Descobre palavras com significados iguais ou opostos!',
+      learning_objective: 'Distinguir sinónimos de antónimos',
+      story_context: 'O detetive das palavras vai investigar!',
+      lesson_index: 2,
+      difficulty: 'easy',
+    },
+    {
+      subject: 'Português',
+      grade_level: 3,
+      title: 'Acentuação e Ortografia',
+      description: 'Aprende a usar acentos corretamente!',
+      learning_objective: 'Aplicar regras de acentuação',
+      story_context: 'O Chapéu Mágico dos Acentos!',
+      lesson_index: 3,
+      difficulty: 'normal',
+    },
 
-    // ===== GRADE 4 (já existem) =====
+    // ===== GRADE 3 - MATEMÁTICA =====
+    {
+      subject: 'Matemática',
+      grade_level: 3,
+      title: 'Números até 1000',
+      description: 'Domina números grandes até 1000!',
+      learning_objective: 'Ler e escrever números até 1000',
+      story_context: 'O Explorador dos Números Grandes!',
+      lesson_index: 1,
+      difficulty: 'easy',
+    },
+    {
+      subject: 'Matemática',
+      grade_level: 3,
+      title: 'Multiplicação e Divisão',
+      description: 'Aprende a multiplicar e dividir números!',
+      learning_objective: 'Realizar operações de multiplicação e divisão',
+      story_context: 'O Mágico das Tabuadas!',
+      lesson_index: 2,
+      difficulty: 'normal',
+    },
+    {
+      subject: 'Matemática',
+      grade_level: 3,
+      title: 'Frações Simples',
+      description: 'Descobre as partes de um todo!',
+      learning_objective: 'Identificar frações simples',
+      story_context: 'A Pizza Mágica das Frações!',
+      lesson_index: 3,
+      difficulty: 'normal',
+    },
+
+    // ===== GRADE 3 - ESTUDO DO MEIO =====
+    {
+      subject: 'Estudo do Meio',
+      grade_level: 3,
+      title: 'O Sistema Solar',
+      description: 'Explora os planetas do nosso sistema solar!',
+      learning_objective: 'Identificar os planetas do sistema solar',
+      story_context: 'O Astronauta vai viajar pelo espaço!',
+      lesson_index: 1,
+      difficulty: 'easy',
+    },
+    {
+      subject: 'Estudo do Meio',
+      grade_level: 3,
+      title: 'Os Oceanos e Rios',
+      description: 'Descobre a importância da água no planeta!',
+      learning_objective: 'Conhecer oceanos e rios de Portugal',
+      story_context: 'O Mergulhador vai explorar o fundo do mar!',
+      lesson_index: 2,
+      difficulty: 'normal',
+    },
+
+    // ===== GRADE 4 - PORTUGUÊS =====
+    {
+      subject: 'Português',
+      grade_level: 4,
+      title: 'Tipos de Frase',
+      description: 'Aprende declarativas, interrogativas, exclamativas e imperativas!',
+      learning_objective: 'Identificar tipos de frase',
+      story_context: 'O Detetive das Frases!',
+      lesson_index: 1,
+      difficulty: 'normal',
+    },
+    {
+      subject: 'Português',
+      grade_level: 4,
+      title: 'Classes de Palavras',
+      description: 'Descobre nomes, adjetivos, verbos e mais!',
+      learning_objective: 'Classificar palavras por categoria gramatical',
+      story_context: 'O Classificador de Palavras!',
+      lesson_index: 2,
+      difficulty: 'normal',
+    },
+
+    // ===== GRADE 4 - MATEMÁTICA =====
     {
       subject: 'Matemática',
       grade_level: 4,
@@ -393,6 +489,38 @@ export async function initializeSampleLessons() {
       story_context: 'O Mágico dos Números vai ensinar truques!',
       lesson_index: 1,
       difficulty: 'hard',
+    },
+    {
+      subject: 'Matemática',
+      grade_level: 4,
+      title: 'Divisão com Resto',
+      description: 'Aprende a dividir e a lidar com restos!',
+      learning_objective: 'Efetuar divisões com e sem resto',
+      story_context: 'A Fada da Partilha!',
+      lesson_index: 2,
+      difficulty: 'hard',
+    },
+
+    // ===== GRADE 4 - ESTUDO DO MEIO =====
+    {
+      subject: 'Estudo do Meio',
+      grade_level: 4,
+      title: 'O Corpo Humano',
+      description: 'Descobre como funciona o nosso corpo!',
+      learning_objective: 'Identificar principais órgãos e funções',
+      story_context: 'O Dr. Miúdo vai explorar o corpo humano!',
+      lesson_index: 1,
+      difficulty: 'normal',
+    },
+    {
+      subject: 'Estudo do Meio',
+      grade_level: 4,
+      title: 'Os Direitos das Crianças',
+      description: 'Aprende sobre os teus direitos!',
+      learning_objective: 'Conhecer a Convenção dos Direitos da Criança',
+      story_context: 'O Guardião dos Direitos!',
+      lesson_index: 2,
+      difficulty: 'normal',
     },
   ];
 

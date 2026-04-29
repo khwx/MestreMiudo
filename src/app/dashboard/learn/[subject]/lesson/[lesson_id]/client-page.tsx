@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, Star, Coins, CheckCircle, AlertCircle } from 'lucide-react';
 import { getLesson, saveLessonCompletion, calculateStars, calculateCoins } from '@/lib/lessons';
+import { addToSpacedRepetition } from '@/lib/spaced-repetition';
 import type { Lesson, LessonChallenge } from '@/app/shared-schemas';
 
 type ChallengeAnswer = Record<string, string | string[]>;
@@ -98,11 +99,31 @@ export default function LessonDetailClient() {
        setStars(finalStars);
        setCoins(finalCoins);
 
-       // Save completion
-       setSubmitting(true);
-       await saveLessonCompletion(name, lessonId, answers, Math.round(finalScore));
-       setSubmitting(false);
-       setCompleted(true);
+        // Save completion
+        setSubmitting(true);
+        await saveLessonCompletion(name, lessonId, answers, Math.round(finalScore));
+
+        // Add missed questions to spaced repetition for future review
+        const missedChallenges = challenges.filter(
+          (challenge) => !validateAnswer(challenge, answers[challenge.id || ''])
+        );
+        if (missedChallenges.length > 0 && lesson.subject) {
+          try {
+            await addToSpacedRepetition(
+              name,
+              missedChallenges.map((c) => ({
+                question: c.question,
+                correctAnswer: getCorrectAnswerText(c),
+                topic: `${lesson.subject} - ${lesson.title}`,
+              }))
+            );
+          } catch (e) {
+            console.error('[SPACED] Failed to add review items:', e);
+          }
+        }
+
+        setSubmitting(false);
+        setCompleted(true);
      } else {
        // Move to next challenge
        setCurrentChallengeIndex((prev) => prev + 1);
