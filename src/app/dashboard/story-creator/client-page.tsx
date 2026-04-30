@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Wand2, BookHeart, Loader2, AlertTriangle } from 'lucide-react';
+import { Wand2, BookHeart, Loader2, AlertTriangle, Play, Pause } from 'lucide-react';
 import { generateStoryAction } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 
@@ -20,11 +19,19 @@ export default function StoryCreatorClientPage() {
   const [keywords, setKeywords] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [story, setStory] = useState<{ title: string; story: string; audioDataUri?: string; images?: string[] } | null>(null);
+  const [story, setStory] = useState<{ title: string; story: string; audioDataUri?: string; images?: string[]; warnings?: string[] } | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!keywords.trim()) return;
+
+    const parsedGrade = parseInt(grade, 10);
+    if (isNaN(parsedGrade) || parsedGrade < 1 || parsedGrade > 4) {
+      setError('Ano de escolaridade inválido. Precisas de estar no 1º ao 4º ano.');
+      return;
+    }
 
     setLoading(true);
     setError(null);
@@ -33,8 +40,8 @@ export default function StoryCreatorClientPage() {
     try {
       const data = await generateStoryAction({
         studentId: name,
-        gradeLevel: parseInt(grade, 10) as 1 | 2 | 3 | 4,
-        keywords: keywords.split(',').map(k => k.trim()).filter(k => k),
+        gradeLevel: parsedGrade as 1 | 2 | 3 | 4,
+        keywords: keywords.trim(),
       });
 
       if (!data || !data.story) {
@@ -45,6 +52,7 @@ export default function StoryCreatorClientPage() {
           story: data.story,
           audioDataUri: data.audioDataUri,
           images: data.images,
+          warnings: data.warnings,
         });
         toast({
           title: "🎉 História Criada!",
@@ -63,6 +71,22 @@ export default function StoryCreatorClientPage() {
     setStory(null);
     setKeywords('');
     setError(null);
+    setIsPlaying(false);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  };
+
+  const toggleAudio = () => {
+    if (!audioRef.current || !story?.audioDataUri) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play().catch(() => setIsPlaying(false));
+      setIsPlaying(true);
+    }
   };
 
   return (
@@ -101,8 +125,8 @@ export default function StoryCreatorClientPage() {
               </p>
             </div>
 
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full text-xl h-16 btn-kid bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold"
               disabled={loading || !keywords.trim()}
             >
@@ -155,11 +179,45 @@ export default function StoryCreatorClientPage() {
           {/* Story Card */}
           <div className="card-kid card-kid-primary border-4 border-purple-300 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
             <div className="p-8">
+              {/* Audio Player */}
+              {story.audioDataUri && (
+                <div className="mb-6">
+                  <audio
+                    ref={audioRef}
+                    src={story.audioDataUri}
+                    onEnded={() => setIsPlaying(false)}
+                    onPause={() => setIsPlaying(false)}
+                    onPlay={() => setIsPlaying(true)}
+                  />
+                  <Button
+                    onClick={toggleAudio}
+                    className="btn-kid bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg w-full"
+                    size="lg"
+                  >
+                    {isPlaying ? (
+                      <><Pause className="mr-2 h-5 w-5" /> Parar Áudio</>
+                    ) : (
+                      <><Play className="mr-2 h-5 w-5" /> Ouvir História 🔊</>
+                    )}
+                  </Button>
+                </div>
+              )}
               <p className="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
                 {story.story}
               </p>
             </div>
           </div>
+
+          {/* Warnings */}
+          {story.warnings && story.warnings.length > 0 && (
+            <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-4 space-y-1">
+              {story.warnings.map((w, i) => (
+                <p key={i} className="text-sm text-amber-700 flex items-center gap-2">
+                  ⚠️ {w}
+                </p>
+              ))}
+            </div>
+          )}
 
           {/* Images */}
           {story.images && story.images.length > 0 && (
@@ -168,12 +226,12 @@ export default function StoryCreatorClientPage() {
                 <h4 className="text-2xl font-bold text-purple-700 mb-4 flex items-center gap-2">
                   🖼️ Imagens da História
                 </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {story.images.map((url, i) => (
-                    <div key={i} className="relative w-full aspect-video rounded-xl overflow-hidden border-2 border-purple-200">
-                      <img 
-                        src={url} 
-                        alt={`Imagem ${i + 1} da história`}
+                    <div key={i} className="relative w-full aspect-square rounded-xl overflow-hidden border-2 border-purple-200">
+                      <img
+                        src={url}
+                        alt={`Ilustração ${i + 1} da história`}
                         className="object-cover w-full h-full"
                       />
                     </div>
@@ -183,18 +241,24 @@ export default function StoryCreatorClientPage() {
             </div>
           )}
 
+          {/* No images fallback message */}
+          {(!story.images || story.images.length === 0) && (
+            <div className="text-center text-gray-400 text-sm py-2">
+              🎨 As imagens não estão disponíveis de momento. A história está completa na mesma!
+            </div>
+          )}
+
           {/* Action Buttons */}
           <div className="flex gap-4">
-            <Button 
+            <Button
               onClick={handleRestart}
               variant="outline"
               size="lg"
               className="flex-1 btn-kid border-2 border-purple-300 text-lg"
             >
-              <Wand2 className="mr-2 h-5 w-5" />
-              Nova História
+              <Wand2 className="mr-2 h-5 w-5" /> Nova História
             </Button>
-            <Button 
+            <Button
               onClick={() => router.push(`/dashboard?name=${name}&grade=${grade}`)}
               size="lg"
               className="flex-1 btn-kid bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg"

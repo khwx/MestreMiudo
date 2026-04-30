@@ -28,8 +28,6 @@ const prompt = ai.definePrompt({
   output: { schema: StoryGenerationOutputSchema },
   prompt: `You are a master storyteller for children in Portugal.
 
-The current year is 2024.
-
 Write a short, creative, and engaging story for a child in grade {{{gradeLevel}}}. The story must be in Portuguese and appropriate for their age.
 
 The story should be based on these keywords: {{{keywords}}}.
@@ -67,14 +65,20 @@ const storyGeneratorFlow = ai.defineFlow(
         console.log(`[STORY] Generating story for grade ${input.gradeLevel} with keywords: ${input.keywords}`);
         const { output } = await prompt(input);
         
-        if (output?.title && output.story && output.imagePrompts && output.imagePrompts.length === 3) {
-          console.log(`[STORY] Successfully generated story: "${output.title}"`);
-          return output;
+      if (output?.title && output.story) {
+        if (!output.imagePrompts || output.imagePrompts.length === 0) {
+          output.imagePrompts = [];
         }
+        console.log(`[STORY] Successfully generated story: "${output.title}"`);
+        return output;
+      }
 
-        lastError = new Error("Model returned invalid output (e.g., missing title, story, or 3 image prompts).");
-        console.warn(`[STORY] Invalid output from model:`, output);
-        retries--;
+          lastError = new Error("Model returned invalid output (e.g., missing title, story, or 3 image prompts).");
+          console.warn(`[STORY] Invalid output from model:`, output);
+          retries--;
+          if (retries > 0) {
+            await new Promise(resolve => setTimeout(resolve, 1500));
+          }
         
       } catch (e: any) {
         lastError = e;

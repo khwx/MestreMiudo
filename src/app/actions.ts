@@ -18,7 +18,7 @@ import { StoryGenerationInputSchema } from "@/app/shared-schemas";
 import { z } from "zod";
 import fs from 'fs/promises';
 import path from 'path';
-import type { QuizInput, SaveQuizInput, QuizResultEntry, Answer, SpeechMark, StoryGenerationInput } from './shared-schemas';
+import type { QuizInput, SaveQuizInput, QuizResultEntry, Answer, StoryGenerationInput } from './shared-schemas';
 import { QuizResultSchema, SaveQuizInputSchema } from "./shared-schemas";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 
@@ -523,92 +523,131 @@ export async function getFullQuizHistory(studentId: string): Promise<QuizResultE
 // ============================================
 
 const GenerateStoryActionOutputSchema = z.object({
-    title: z.string(),
-    story: z.string(),
-    audioDataUri: z.string().optional(),
-    speechMarks: z.array(z.object({
-      type: z.string(),
-      value: z.string(),
-      time: z.object({
-        seconds: z.string(),
-        nanos: z.number(),
-      }),
-    })).optional(),
-    images: z.array(z.string().url()).optional(),
+  title: z.string(),
+  story: z.string(),
+  audioDataUri: z.string().optional(),
+  images: z.array(z.string()).optional(),
+  warnings: z.array(z.string()).optional(),
 });
 
 
 async function generateImage(prompt: string): Promise<string> {
-    try {
-        console.log(`[IMAGE] Generating image with prompt: ${prompt.substring(0, 100)}...`);
-        const { media } = await ai.generate({
-            model: 'googleai/imagen-4.0-fast-generate-001',
-            prompt,
-            config: {
-                aspectRatio: "1:1",
-            }
-        });
-        const url = media?.url || '';
-        if (url) {
-            console.log(`[IMAGE] Successfully generated image`);
-        } else {
-            console.warn(`[IMAGE] No media URL returned`);
-        }
-        return url;
-    } catch (error) {
-        console.error(`[IMAGE] Failed to generate image:`, error);
-        return ''; // Return empty string instead of failing
+  try {
+    console.log(`[IMAGE] Generating image with prompt: ${prompt.substring(0, 100)}...`);
+    const { media } = await ai.generate({
+      model: 'googleai/imagen-4.0-fast-generate-001',
+      prompt,
+      config: {
+        aspectRatio: "3:4",
+      }
+    });
+    const url = media?.url || '';
+    if (url) {
+      console.log(`[IMAGE] Successfully generated image`);
+    } else {
+      console.warn(`[IMAGE] No media URL returned`);
     }
+    return url;
+  } catch (error) {
+    console.error(`[IMAGE] Failed to generate image:`, error);
+    return '';
+  }
 }
 
 export async function generateStoryAction(input: StoryGenerationInput): Promise<z.infer<typeof GenerateStoryActionOutputSchema>> {
-    const validatedInput = StoryGenerationInputSchema.parse(input);
-    
-    try {
-        console.log(`[STORY_ACTION] Starting story generation for grade ${input.gradeLevel}`);
-        const storyOutput = await generateStory(validatedInput);
-        if (!storyOutput || !storyOutput.story) {
-            throw new Error("Failed to generate story text - empty response from Genkit flow.");
-        }
+  const validatedInput = StoryGenerationInputSchema.parse(input);
+  const warnings: string[] = [];
 
-        console.log(`[STORY_ACTION] Story generated: "${storyOutput.title}"`);
-        const fullText = `${storyOutput.title}. ${storyOutput.story}`;
-
-        const [ttsResult, imagesResult] = await Promise.allSettled([
-            textToSpeech(fullText),
-            storyOutput.imagePrompts ? Promise.all(storyOutput.imagePrompts.map(generateImage)) : Promise.resolve([])
-        ]);
-
-        const audioDataUri = ttsResult.status === 'fulfilled' ? ttsResult.value.audioDataUri : undefined;
-        const speechMarks = ttsResult.status === 'fulfilled' ? ttsResult.value.speechMarks : undefined;
-        const images = imagesResult.status === 'fulfilled' ? imagesResult.value.filter((url: string) => url) : [];
-        
-        if (ttsResult.status === 'rejected') {
-            console.error("[STORY_ACTION] Text-to-speech failed, returning story without audio.", ttsResult.reason);
-        }
-        if (imagesResult.status === 'rejected') {
-            console.error("[STORY_ACTION] Image generation failed.", imagesResult.reason);
-        }
-
-        const result = {
-            title: storyOutput.title,
-            story: storyOutput.story,
-            audioDataUri,
-            speechMarks,
-            images
-        };
-
-        console.log(`[STORY_ACTION] Story action complete: audio=${!!audioDataUri}, images=${images.length}`);
-        return GenerateStoryActionOutputSchema.parse(result);
-    } catch (error: any) {
-        console.error("[STORY_ACTION] Failed to generate story:", error.message || error);
-        throw error;
+  try {
+    console.log(`[STORY_ACTION] Starting story generation for grade ${input.gradeLevel}`);
+    const storyOutput = await generateStory(validatedInput);
+    if (!storyOutput || !storyOutput.story) {
+      throw new Error("Failed to generate story text - empty response from Genkit flow.");
     }
+
+    console.log(`[STORY_ACTION] Story generated: "${storyOutput.title}"`);
+    const fullText = `${storyOutput.title}. ${storyOutput.story}`;
+
+    const [ttsResult, imagesResult] = await Promise.allSettled([
+      textToSpeech(fullText),
+      storyOutput.imagePrompts ? Promise.all(storyOutput.imagePrompts.map(generateImage)) : Promise.resolve([])
+    ]);
+
+    let audioDataUri: string | undefined;
+    let images: string[] = [];
+
+    if (ttsResult.status === 'fulfilled' && ttsResult.value?.audioDataUri) {
+      audioDataUri = ttsResult.value.audioDataUri;
+    } else {
+      warnings.push('O áudio não está disponível de momento.');
+      if (ttsResult.status === 'rejected') {
+        console.error("[STORY_ACTION] Text-to-speech failed:", ttsResult.reason);
+      }
+    }
+
+    if (imagesResult.status === 'fulfilled') {
+      images = imagesResult.value.filter((url: string) => url);
+      if (images.length === 0 && storyOutput.imagePrompts?.length > 0) {
+        warnings.push('As imagens não estão disponíveis de momento.');
+      }
+    } else {
+      warnings.push('As imagens não estão disponíveis de momento.');
+      console.error("[STORY_ACTION] Image generation failed:", imagesResult.reason);
+    }
+
+    const result = {
+      title: storyOutput.title,
+      story: storyOutput.story,
+      audioDataUri,
+      images,
+      warnings: warnings.length > 0 ? warnings : undefined,
+    };
+
+    console.log(`[STORY_ACTION] Story action complete: audio=${!!audioDataUri}, images=${images.length}, warnings=${warnings.length}`);
+
+    // Save story to DB (non-blocking)
+    if (isSupabaseConfigured() && supabase) {
+      supabase.from('stories').insert({
+        student_id: validatedInput.studentId,
+        title: storyOutput.title,
+        content: storyOutput.story,
+        keywords: validatedInput.keywords.split(',').map(k => k.trim()).filter(k => k),
+        grade_level: validatedInput.gradeLevel,
+        image_urls: images,
+        has_audio: !!audioDataUri,
+      }).then(({ error }) => {
+        if (error) console.error('[STORY_ACTION] Failed to save story:', error);
+        else console.log('[STORY_ACTION] Story saved to DB');
+      });
+    }
+
+    return GenerateStoryActionOutputSchema.parse(result);
+  } catch (error: any) {
+    console.error("[STORY_ACTION] Failed to generate story:", error.message || error);
+    throw error;
+  }
 }
 
 // ============================================
 // Diagnostic Test (Learning Level Detection)
 // ============================================
+
+export async function getStudentStories(studentId: string, limit = 10) {
+  if (!isSupabaseConfigured() || !supabase) return [];
+  try {
+    const { data, error } = await supabase
+      .from('stories')
+      .select('*')
+      .eq('student_id', studentId)
+      .order('created_at', { ascending: false })
+      .limit(limit);
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching stories:', error);
+    return [];
+  }
+}
 
 export async function generateDiagnostic(gradeLevel: 1 | 2 | 3 | 4) {
   console.log('[DIAGNOSTIC] Generating diagnostic test...');

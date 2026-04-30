@@ -86,8 +86,9 @@ export const SaveQuizInputSchema = z.object({
 export type SaveQuizInput = z.infer<typeof SaveQuizInputSchema>;
 
 export const StoryGenerationInputSchema = z.object({
-    keywords: z.string().describe('A comma-separated string of keywords provided by the user.'),
-    gradeLevel: z.number().min(1).max(4).describe('The grade level of the student (1-4).'),
+  studentId: z.string().describe('Unique identifier for the student.'),
+  keywords: z.string().describe('A comma-separated string of keywords provided by the user.'),
+  gradeLevel: z.number().min(1).max(4).describe('The grade level of the student (1-4).'),
 });
 export type StoryGenerationInput = z.infer<typeof StoryGenerationInputSchema>;
 
