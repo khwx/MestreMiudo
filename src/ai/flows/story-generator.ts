@@ -1,16 +1,4 @@
 
-'use server';
-
-/**
- * @fileOverview Story generator for kids.
- *
- * This file defines a Genkit flow that generates a short story
- * for children based on a few keywords they provide. It also
- * generates a title for the story and prompts for illustrations.
- *
- * - generateStory - A function that generates a story.
- */
-
 import { ai } from '@/ai/genkit';
 import { StoryGenerationOutputSchema, type StoryGenerationOutput } from '@/ai/schemas';
 import type { StoryGenerationInput } from '@/app/shared-schemas';

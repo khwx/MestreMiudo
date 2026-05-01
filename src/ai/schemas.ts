@@ -19,9 +19,9 @@ export const StoryGenerationInputSchema = z.object({
 
 
 export const StoryGenerationOutputSchema = z.object({
-    title: z.string().describe('The generated title of the story.'),
-    story: z.string().describe('The full text of the generated story.'),
-    imagePrompts: z.array(z.string()).describe('An array of 3 short, descriptive prompts for generating illustrations for the story.'),
+  title: z.string().describe('The generated title of the story.'),
+  story: z.string().describe('The full text of the generated story.'),
+  imagePrompts: z.array(z.string()).min(0).max(3).optional().describe('An array of 0-3 short, descriptive prompts for generating illustrations for the story.'),
 });
 export type StoryGenerationOutput = z.infer<typeof StoryGenerationOutputSchema>;
 

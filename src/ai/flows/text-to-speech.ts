@@ -1,46 +1,27 @@
-
-'use server';
-
-/**
- * @fileOverview Text-to-Speech (TTS) generator using Microsoft Edge TTS.
- *
- * This file defines a function that converts text to speech audio
- * using the free Microsoft Edge TTS service (edge-tts package).
- * Returns audio as an MP3 data URI.
- *
- * - textToSpeech - A function that handles the TTS conversion.
- */
-
 export type TextToSpeechOutput = {
   audioDataUri: string;
-  speechMarks: Array<{
-    type: string;
-    value: string;
-    time: { seconds: string; nanos: number };
-  }>;
 };
 
 export async function textToSpeech(text: string): Promise<TextToSpeechOutput> {
   try {
-    // Dynamic import to avoid webpack trying to bundle the raw TS source
-    const { tts } = await import('edge-tts/out/index.js');
+    const edgeTts = require('edge-tts/index.js');
+    const ttsFn = edgeTts.tts || edgeTts.default?.tts;
 
-    // Use Microsoft Edge TTS with Portuguese (Portugal) voice
-    const audioBuffer: Buffer = await tts(text, {
+    if (!ttsFn || typeof ttsFn !== 'function') {
+      throw new Error('TTS function not found in edge-tts');
+    }
+
+    const audioBuffer: Buffer = await ttsFn(text, {
       voice: 'pt-PT-RaquelNeural',
-      rate: '-10%', // Slightly slower for children
+      rate: '-10%',
     });
 
-    // Convert buffer to base64 data URI (MP3 format)
     const base64Audio = Buffer.from(audioBuffer).toString('base64');
     const audioDataUri = `data:audio/mp3;base64,${base64Audio}`;
 
-    return {
-      audioDataUri,
-      speechMarks: [], // Edge TTS doesn't provide speech marks
-    };
+    return { audioDataUri };
   } catch (error) {
-    console.error('Edge TTS failed:', error);
+    console.error('[TTS] Failed:', error);
     throw new Error('Failed to generate speech audio.');
   }
 }

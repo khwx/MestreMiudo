@@ -94,6 +94,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
 
   const handleAnswerSelect = (answer: string) => {
     if (isAnswered) return;
+    window.speechSynthesis.cancel();
     
     setSelectedAnswer(answer);
     setIsAnswered(true);
@@ -123,6 +124,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   };
 
   const handleNext = () => {
+    window.speechSynthesis.cancel();
     if (currentQuestionIndex < quizData!.quizQuestions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
       setSelectedAnswer(null);
@@ -169,8 +171,15 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
 
   const handleAudioPlayback = () => {
     if (!quizData) return;
-    const utterance = new SpeechSynthesisUtterance(quizData.quizQuestions[currentQuestionIndex].question);
+    window.speechSynthesis.cancel();
+
+    const q = quizData.quizQuestions[currentQuestionIndex];
+    const parts = [q.question, ...q.options.map((opt: string, i: number) => `${String.fromCharCode(65 + i)}. ${opt}`)];
+    const fullText = parts.join('. ');
+
+    const utterance = new SpeechSynthesisUtterance(fullText);
     utterance.lang = 'pt-PT';
+    utterance.rate = 0.85;
     window.speechSynthesis.speak(utterance);
   };
 
@@ -318,15 +327,15 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
             <p className="text-2xl font-bold flex-1 text-gray-800 dark:text-gray-100">
               {currentQuestion.question}
             </p>
-            <Button 
-              variant="outline" 
-              size="icon" 
-              onClick={handleAudioPlayback}
-              aria-label="Ouvir a pergunta"
-              className="shrink-0 hover:scale-110 transition-transform"
-            >
-              <Volume2 className="h-6 w-6 text-blue-600" />
-            </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={handleAudioPlayback}
+          aria-label="Ouvir a pergunta e as respostas"
+          className="shrink-0 hover:scale-110 transition-transform"
+        >
+          <Volume2 className="h-6 w-6 text-blue-600" />
+        </Button>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

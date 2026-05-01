@@ -624,7 +624,20 @@ export async function generateStoryAction(input: StoryGenerationInput): Promise<
     return GenerateStoryActionOutputSchema.parse(result);
   } catch (error: any) {
     console.error("[STORY_ACTION] Failed to generate story:", error.message || error);
-    throw error;
+    const msg = error?.message || '';
+    if (msg.includes('API_KEY') || msg.includes('api key') || msg.includes('401') || msg.includes('403')) {
+      throw new Error('A chave da API não está configurada corretamente. Contacta um adulto para resolver.');
+    }
+    if (msg.includes('429') || msg.includes('rate') || msg.includes('quota') || msg.includes('RESOURCE_EXHAUSTED')) {
+      throw new Error('Demasiados pedidos! Espera um minuto e tenta novamente.');
+    }
+    if (msg.includes('503') || msg.includes('overloaded') || msg.includes('UNAVAILABLE')) {
+      throw new Error('O serviço está sobrecarregado. Tenta novamente dentro de uns minutos.');
+    }
+    if (msg.includes('ECONNREFUSED') || msg.includes('ENOTFOUND') || msg.includes('fetch failed')) {
+      throw new Error('Sem ligação ao servidor. Verifica a tua internet e tenta novamente.');
+    }
+    throw new Error('Não foi possível gerar a história. Tenta novamente!');
   }
 }
 
