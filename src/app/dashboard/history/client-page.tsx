@@ -179,11 +179,11 @@ export default function HistoryClientPage() {
                                                 </p>
                                             </div>
                                             {!answer.isCorrect && (
-                                                <p className="text-sm text-gray-600 mt-1">
+                                                <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
                                                     Resposta Correta: {answer.correctAnswer}
                                                 </p>
                                             )}
-                                            <p className="text-xs text-gray-500 mt-1">Tópico: {answer.topic}</p>
+                                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Tópico: {answer.topic}</p>
                                         </li>
                                     ));
                                 })()}

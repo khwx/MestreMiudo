@@ -150,14 +150,14 @@ function AchievementCard({ achievement, unlocked, unlockedDate }: AchievementCar
     >
       <div className="mb-3 text-5xl">{achievement.icon}</div>
       <h3 className="mb-2 text-lg font-bold">{achievement.title}</h3>
-      <p className="mb-4 text-sm text-gray-600">{achievement.description}</p>
+       <p className="mb-4 text-sm text-gray-600 dark:text-gray-300">{achievement.description}</p>
 
       {unlocked && unlockedDate && (
         <div className="mb-4">
           <Badge className="bg-green-500">Desbloqueado</Badge>
-          <p className="mt-2 text-xs text-gray-500">
-            {new Date(unlockedDate).toLocaleDateString('pt-PT')}
-          </p>
+           <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+             {new Date(unlockedDate).toLocaleDateString('pt-PT')}
+           </p>
         </div>
       )}
 
@@ -183,7 +183,7 @@ function AchievementCard({ achievement, unlocked, unlockedDate }: AchievementCar
       )}
 
       {!unlocked && (
-        <p className="text-xs font-semibold text-gray-500">Bloqueado</p>
+         <p className="text-xs font-semibold text-gray-500 dark:text-gray-400">Bloqueado</p>
       )}
     </div>
   );
@@ -228,9 +228,9 @@ function AchievementsPageContent() {
       {/* Header */}
       <div className="text-center space-y-4">
         <h1 className="text-5xl font-bold">🏆 As Minhas Conquistas</h1>
-        <p className="text-xl text-gray-600">
-          Coleciona badges enquanto aprendes e joga no MestreMiudo!
-        </p>
+         <p className="text-xl text-gray-600 dark:text-gray-300">
+           Coleciona badges enquanto aprendes e jogas no MestreMiudo!
+         </p>
       </div>
 
       {/* Progress Bar */}

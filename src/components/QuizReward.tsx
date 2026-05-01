@@ -67,8 +67,8 @@ export function QuizReward({
 
             {/* Score Text */}
             <div className="text-center">
-              <p className="text-4xl font-bold text-gray-800">{score}</p>
-              <p className="text-sm text-gray-600">/ {total}</p>
+               <p className="text-4xl font-bold text-gray-800 dark:text-gray-200">{score}</p>
+               <p className="text-sm text-gray-600 dark:text-gray-300">/ {total}</p>
             </div>
           </div>
         </div>
@@ -95,26 +95,26 @@ export function QuizReward({
 
         {/* Message */}
         <div className="text-center mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-          <p className="text-lg font-semibold text-gray-800 whitespace-pre-line">{message}</p>
+           <p className="text-lg font-semibold text-gray-800 dark:text-gray-200 whitespace-pre-line">{message}</p>
         </div>
 
         {/* Points and Tier */}
         <div className="space-y-4 mb-6">
           <div className="bg-gradient-to-r from-blue-100 to-blue-50 p-4 rounded-lg">
-            <p className="text-sm text-gray-600">Pontos Ganhos</p>
+               <p className="text-sm text-gray-600 dark:text-gray-300">Pontos Ganhos</p>
             <p className="text-3xl font-bold text-blue-600">+{points}</p>
           </div>
 
           {tier && (
             <div className="bg-gradient-to-r from-purple-100 to-purple-50 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Nível Atual</p>
+               <p className="text-sm text-gray-600 dark:text-gray-300">Nível Atual</p>
               <p className="text-xl font-bold text-purple-600">{tier}</p>
             </div>
           )}
 
           {nextTier && progressPercentage > 0 && (
             <div className="bg-gradient-to-r from-orange-100 to-orange-50 p-4 rounded-lg">
-              <p className="text-sm text-gray-600 mb-2">Progresso para {nextTier}</p>
+               <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">Progresso para {nextTier}</p>
               <div className="w-full bg-orange-200 rounded-full h-2">
                 <div
                   className="bg-orange-500 h-2 rounded-full transition-all duration-500"

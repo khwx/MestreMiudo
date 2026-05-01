@@ -155,7 +155,7 @@ export default function DailyChallengePage() {
       <div className="min-h-[50vh] flex items-center justify-center">
         <div className="text-center space-y-4">
           <Loader2 className="h-12 w-12 animate-spin text-orange-500 mx-auto" />
-          <p className="text-xl font-bold text-gray-600">A carregar o teu desafio diário...</p>
+          <p className="text-xl font-bold text-gray-600 dark:text-gray-300">A carregar o teu desafio diário...</p>
         </div>
       </div>
     );
@@ -167,8 +167,8 @@ export default function DailyChallengePage() {
         <div className="card-kid border-4 border-gray-300 bg-white shadow-2xl max-w-lg">
           <div className="p-8 text-center space-y-4">
             <div className="text-6xl">😕</div>
-            <h2 className="text-2xl font-black text-gray-800">Sem Desafio Hoje</h2>
-            <p className="text-gray-600">Não foi possível carregar o desafio de hoje.</p>
+            <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200">Sem Desafio Hoje</h2>
+            <p className="text-gray-600 dark:text-gray-300">Não foi possível carregar o desafio de hoje.</p>
             <Link href={`/dashboard?name=${name}&grade=${grade}`}>
               <Button variant="outline" className="btn-kid border-2 border-gray-300">← Voltar</Button>
             </Link>
@@ -184,10 +184,10 @@ export default function DailyChallengePage() {
         <div className="card-kid border-4 border-orange-300 bg-white shadow-2xl">
           <div className="p-8 text-center space-y-6">
             <div className="text-6xl">{dailyChallenge.correct ? '🎉' : '💪'}</div>
-            <h2 className="text-3xl font-black text-gray-800">
+            <h2 className="text-3xl font-black text-gray-800 dark:text-gray-200">
               {dailyChallenge.correct ? 'Desafio Completado!' : 'Já Tentaste!'}
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-600 dark:text-gray-300">
               {dailyChallenge.correct
                 ? 'Parabéns! Completaste o desafio diário com sucesso!'
                 : 'Continua a praticar para melhorares!'}
@@ -204,7 +204,7 @@ export default function DailyChallengePage() {
                 <p className="text-sm font-semibold text-yellow-600">Pontos</p>
               </div>
             </div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               {dailyChallenge.subject} ({dailyChallenge.difficulty}) • {new Date(dailyChallenge.challengeDate).toLocaleDateString('pt-PT')}
             </p>
             <Link href={`/dashboard?name=${name}&grade=${grade}`}>
@@ -226,7 +226,7 @@ export default function DailyChallengePage() {
         <h2 className="text-4xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
           Desafio Diário
         </h2>
-        <p className="text-lg text-gray-600">
+        <p className="text-lg text-gray-600 dark:text-gray-300">
           Completa para ganhar pontos de bónus!
         </p>
       </div>
@@ -249,7 +249,7 @@ export default function DailyChallengePage() {
       {question && !quizCompleted && (
         <div className="card-kid border-4 border-orange-300 bg-white shadow-2xl">
           <div className="p-8 space-y-6">
-            <h3 className="text-xl font-black text-gray-800">{question.question}</h3>
+            <h3 className="text-xl font-black text-gray-800 dark:text-gray-200">{question.question}</h3>
 
             <div className="space-y-3">
               {question.options.map((option, index) => (
@@ -309,7 +309,7 @@ export default function DailyChallengePage() {
                     {isCorrect ? 'Correto! 🎉' : 'Errado! 😅'}
                   </span>
                 </div>
-                <p className="text-gray-700">{question.explanation}</p>
+                <p className="text-gray-700 dark:text-gray-300">{question.explanation}</p>
               </div>
             )}
 
@@ -342,7 +342,7 @@ export default function DailyChallengePage() {
         <div className="card-kid border-4 border-orange-300 bg-white shadow-xl">
           <div className="p-8 text-center space-y-4">
             <div className="text-6xl">🚧</div>
-            <p className="text-xl text-gray-600">Sem pergunta disponível para este nível. Tenta o quiz!</p>
+            <p className="text-xl text-gray-600 dark:text-gray-300">Sem pergunta disponível para este nível. Tenta o quiz!</p>
             <Link href={`/quiz/misto?name=${name}&grade=${grade}`}>
               <Button className="btn-kid bg-gradient-to-r from-orange-500 to-amber-500 text-white">
                 Ir ao Quiz 🎯

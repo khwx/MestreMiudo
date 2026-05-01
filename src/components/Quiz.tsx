@@ -240,7 +240,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
             {[1, 2, 3].map((star) => (
               <Star 
                 key={star}
-                className={`h-12 w-12 ${star <= stars ? 'text-yellow-500 fill-yellow-500' : 'text-gray-300'}`}
+                className={`h-12 w-12 ${star <= stars ? 'text-yellow-500 fill-yellow-500' : 'text-gray-400 dark:text-gray-600'}`}
               />
             ))}
           </div>
@@ -295,7 +295,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
           
           <div className="space-y-2">
             <Progress value={progress} className="h-4 progress-kid" />
-            <p className="text-md text-gray-500 text-center">
+            <p className="text-md text-gray-500 dark:text-gray-400 text-center">
               Pergunta {currentQuestionIndex + 1} de {quizData.quizQuestions.length}
             </p>
           </div>

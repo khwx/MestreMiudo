@@ -117,10 +117,10 @@ export default function SubjectPage() {
       <div className={`card-kid border-4 ${config.borderColor} bg-white shadow-2xl`}>
         <div className="p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-black text-gray-800">📚 O Teu Progresso</h2>
+            <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200">📚 O Teu Progresso</h2>
             <div className="bg-white px-4 py-2 rounded-full border-2 border-gray-200">
               <span className="font-black text-lg">{completedCount}</span>
-              <span className="text-gray-500"> / {lessons.length}</span>
+              <span className="text-gray-500 dark:text-gray-400"> / {lessons.length}</span>
             </div>
           </div>
           <div className="progress-kid">
@@ -142,14 +142,14 @@ export default function SubjectPage() {
         <div className="flex justify-center items-center p-12">
           <div className="text-center">
             <div className="text-6xl mb-4">📖</div>
-            <p className="text-xl text-gray-500">A carregar lições...</p>
+            <p className="text-xl text-gray-500 dark:text-gray-400">A carregar lições...</p>
           </div>
         </div>
       ) : lessons.length === 0 ? (
         <div className="card-kid border-4 border-gray-300 bg-white shadow-xl max-w-2xl mx-auto">
           <div className="p-8 text-center">
             <div className="text-6xl mb-4">🚧</div>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               Nenhuma lição disponível ainda. Volta em breve! 🚀
             </p>
           </div>
@@ -167,15 +167,15 @@ export default function SubjectPage() {
                     <div className="p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-grow">
-                          <h3 className="text-xl font-black text-gray-400">{lesson.title}</h3>
-                          <p className="text-sm text-gray-400 mt-1">{lesson.difficulty}</p>
+                           <h3 className="text-xl font-black text-gray-400 dark:text-gray-500">{lesson.title}</h3>
+                           <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">{lesson.difficulty}</p>
                         </div>
-                        <Lock className="h-8 w-8 text-gray-400" />
+                         <Lock className="h-8 w-8 text-gray-400 dark:text-gray-500" />
                       </div>
-                      <p className="text-gray-400">{lesson.description}</p>
-                      <div className="mt-4 flex items-center gap-2 text-gray-400">
-                        <span className="text-sm">🔒 Completa a lição anterior</span>
-                      </div>
+                       <p className="text-gray-400 dark:text-gray-500">{lesson.description}</p>
+                       <div className="mt-4 flex items-center gap-2 text-gray-400 dark:text-gray-500">
+                         <span className="text-sm">🔒 Completa a lição anterior</span>
+                       </div>
                     </div>
                   </div>
                 ) : (
@@ -186,7 +186,7 @@ export default function SubjectPage() {
                       <div className="p-6">
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex-grow">
-                            <h3 className="text-xl font-black text-gray-800">{lesson.title}</h3>
+                             <h3 className="text-xl font-black text-gray-800 dark:text-gray-200">{lesson.title}</h3>
                             <div className="flex items-center gap-2 mt-1">
                               <span className={`text-sm font-semibold ${config.color}`}>{lesson.difficulty}</span>
                               {lessonCompleted && (

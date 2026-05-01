@@ -56,7 +56,7 @@ export default function LoginPage() {
               <h2 className="text-3xl font-black text-blue-700 dark:text-blue-300">
                 Entrar na Aventura
               </h2>
-              <p className="text-gray-500 mt-2">
+              <p className="text-gray-500 dark:text-gray-400 mt-2">
                 Digita o teu nome e código de acesso!
               </p>
             </div>
@@ -64,7 +64,7 @@ export default function LoginPage() {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Nome */}
               <div className="space-y-3">
-                <Label htmlFor="name" className="text-lg font-bold text-gray-700">
+                <Label htmlFor="name" className="text-lg font-bold text-gray-700 dark:text-gray-300">
                   📝 O Teu Nome
                 </Label>
                 <Input
@@ -80,7 +80,7 @@ export default function LoginPage() {
 
               {/* Código de Acesso */}
               <div className="space-y-3">
-                <Label htmlFor="code" className="text-lg font-bold text-gray-700">
+                <Label htmlFor="code" className="text-lg font-bold text-gray-700 dark:text-gray-300">
                   🔐 Código de Acesso
                 </Label>
                 <Input
@@ -96,7 +96,7 @@ export default function LoginPage() {
 
               {/* Ano Escolar */}
               <div className="space-y-3">
-                <Label htmlFor="grade" className="text-lg font-bold text-gray-700">
+                <Label htmlFor="grade" className="text-lg font-bold text-gray-700 dark:text-gray-300">
                   🎒 Ano Escolar
                 </Label>
                 <div className="grid grid-cols-4 gap-3">

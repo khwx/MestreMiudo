@@ -191,7 +191,7 @@ export default function ParentDashboardPage() {
           <div className="p-8 text-center space-y-4">
             <div className="text-6xl">🔒</div>
             <h2 className="text-3xl font-black text-red-600">Acesso Restrito</h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-600 dark:text-gray-300">
               Usa o código de acesso fornecido pelo professor/encarregado.
             </p>
             <Button onClick={() => window.history.back()} variant="outline" className="btn-kid border-2 border-gray-300">
@@ -221,9 +221,9 @@ export default function ParentDashboardPage() {
         <div className="card-kid border-4 border-gray-300 bg-white shadow-2xl max-w-lg mx-auto">
           <div className="p-8 text-center space-y-4">
             <div className="text-6xl">😕</div>
-            <p className="text-xl text-gray-600">
-              Código de acesso inválido ou sem alunos associados.
-            </p>
+              <p className="text-xl text-gray-600 dark:text-gray-300">
+               Código de acesso inválido ou sem alunos associados.
+             </p>
           </div>
         </div>
       ) : (
@@ -241,7 +241,7 @@ export default function ParentDashboardPage() {
                       <div className="p-3 rounded-full bg-gradient-to-br from-teal-100 to-blue-100">
                         <Users className="h-6 w-6 text-teal-600" />
                       </div>
-                      <h3 className="text-2xl font-black text-gray-800">{student.studentName}</h3>
+                       <h3 className="text-2xl font-black text-gray-800 dark:text-gray-200">{student.studentName}</h3>
                     </div>
                     {student.averageScore >= 80 && (
                       <div className="text-3xl">🌟</div>
@@ -249,7 +249,7 @@ export default function ParentDashboardPage() {
                   </div>
 
                   {/* Last Activity */}
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                   <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                     <Calendar className="h-4 w-4" />
                     <span>
                       Última atividade: {student.lastActivity
@@ -261,7 +261,7 @@ export default function ParentDashboardPage() {
                   {/* Score Progress */}
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm font-bold text-gray-700">Média de acertos</span>
+                       <span className="text-sm font-bold text-gray-700 dark:text-gray-300">Média de acertos</span>
                       <span className="text-lg font-black text-teal-600">{student.averageScore}%</span>
                     </div>
                     <div className="progress-kid">

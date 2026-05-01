@@ -75,14 +75,14 @@ function LeaderboardRow({ entry, currentUserId }: LeaderboardRowProps) {
             {entry.gradeLevel}º ano
           </Badge>
         </div>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-gray-600 dark:text-gray-300">
           {entry.totalQuizzes} quizzes • Média: {entry.averageScore.toFixed(1)}%
         </p>
       </div>
 
       <div className="text-right">
         <p className="text-2xl font-bold text-purple-600">{entry.totalPoints}</p>
-        <p className="text-xs text-gray-500">pontos</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">pontos</p>
       </div>
     </div>
   );
@@ -161,7 +161,7 @@ function LeaderboardPageContent() {
       <div className="text-center space-y-4">
         <div className="text-6xl">🏆</div>
         <h1 className="text-5xl font-bold">Classificações</h1>
-        <p className="text-xl text-gray-600">Vê como te compara com outros estudantes!</p>
+        <p className="text-xl text-gray-600 dark:text-gray-300">Vê como te compara com outros estudantes!</p>
       </div>
 
       {/* Tua Posição */}

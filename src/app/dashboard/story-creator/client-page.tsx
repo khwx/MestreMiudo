@@ -59,9 +59,14 @@ export default function StoryCreatorClientPage() {
           description: "A tua história mágica está pronta!",
         });
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error('Story generation error:', err);
-      setError('Ocorreu um erro ao gerar a história. Tenta novamente!');
+      const serverMsg = err?.message || '';
+      if (serverMsg && serverMsg !== 'Não foi possível gerar a história. Tenta novamente!') {
+        setError(serverMsg);
+      } else {
+        setError('Ocorreu um erro ao gerar a história. Tenta novamente!');
+      }
     } finally {
       setLoading(false);
     }
@@ -120,7 +125,7 @@ export default function StoryCreatorClientPage() {
                 className="text-xl h-14 rounded-xl border-3 border-purple-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-200"
                 disabled={loading}
               />
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 💡 Escreve palavras e a IA criará uma história única!
               </p>
             </div>
@@ -159,7 +164,7 @@ export default function StoryCreatorClientPage() {
               <BookHeart className="h-16 w-16 text-purple-600 animate-float" />
             </div>
           </div>
-          <p className="text-xl text-gray-600 animate-pulse">
+          <p className="text-xl text-gray-600 dark:text-gray-300 animate-pulse">
             🧠 A tecer a história mágica...
           </p>
         </div>
