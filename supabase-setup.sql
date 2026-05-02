@@ -220,15 +220,37 @@ CREATE INDEX IF NOT EXISTS idx_lesson_completion_lesson
   ON lesson_completion(lesson_id);
 
 -- Allow anonymous read for curriculum tables
+DROP POLICY IF EXISTS "Allow all for questions" ON questions;
+DROP POLICY IF EXISTS "Allow read for questions" ON questions;
 CREATE POLICY "Allow read for questions" ON questions FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Allow all for words" ON words;
+DROP POLICY IF EXISTS "Allow read for words" ON words;
 CREATE POLICY "Allow read for words" ON words FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Allow all for lessons" ON lessons;
+DROP POLICY IF EXISTS "Allow read for lessons" ON lessons;
 CREATE POLICY "Allow read for lessons" ON lessons FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Allow all for lesson_challenges" ON lesson_challenges;
+DROP POLICY IF EXISTS "Allow read for lesson_challenges" ON lesson_challenges;
 CREATE POLICY "Allow read for lesson_challenges" ON lesson_challenges FOR SELECT USING (true);
 
 -- User data tables remain Allow All until Supabase Auth is implemented
+DROP POLICY IF EXISTS "Allow all for quiz_history" ON quiz_history;
 CREATE POLICY "Allow all for quiz_history" ON quiz_history FOR ALL USING (true) WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Allow all for diagnostic_tests" ON diagnostic_tests;
 CREATE POLICY "Allow all for diagnostic_tests" ON diagnostic_tests FOR ALL USING (true) WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Allow all for student_rewards" ON student_rewards;
 CREATE POLICY "Allow all for student_rewards" ON student_rewards FOR ALL USING (true) WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Allow all for daily_challenges" ON daily_challenges;
 CREATE POLICY "Allow all for daily_challenges" ON daily_challenges FOR ALL USING (true) WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Allow all for leaderboards" ON leaderboards;
 CREATE POLICY "Allow all for leaderboards" ON leaderboards FOR ALL USING (true) WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Allow all for lesson_completion" ON lesson_completion;
 CREATE POLICY "Allow all for lesson_completion" ON lesson_completion FOR ALL USING (true) WITH CHECK (true);
