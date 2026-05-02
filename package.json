@@ -8,7 +8,7 @@
     "genkit:watch": "genkit start -- tsx --watch src/ai/dev.ts",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint src/",
+    "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "postinstall": "patch-package"
   },
@@ -74,7 +74,7 @@
     "@types/react-dom": "^18",
     "@types/wav": "^1.0.3",
     "eslint": "^8.57.0",
-    "eslint-config-next": "16.2.4",
+    "eslint-config-next": "^15.5.14",
     "genkit-cli": "^1.31.0",
     "postcss": "^8",
     "supabase": "^2.84.10",

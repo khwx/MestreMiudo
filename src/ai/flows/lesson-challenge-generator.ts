@@ -57,7 +57,13 @@ export const generateLessonChallengesFlow = ai.defineFlow(
 
     while (retries > 0) {
       try {
-        const { output } = await prompt(input);
+        const { output } = await prompt.generate({
+          input,
+          config: {
+            temperature: 0.7,
+            maxOutputTokens: 2000,
+          },
+        });
 
         if (!output || !output.challenges || output.challenges.length === 0) {
           throw new Error('Invalid or empty challenge generation output');
