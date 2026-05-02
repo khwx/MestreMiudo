@@ -108,7 +108,7 @@ export default function StoryCreatorClientPage() {
       </div>
 
       {/* Creation Card */}
-      <div className="card-kid border-4 border-purple-300 bg-white shadow-2xl">
+      <div className="card-kid border-4 border-purple-300 bg-white dark:bg-gray-800 shadow-2xl">
         <div className="p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-3">
@@ -226,7 +226,7 @@ export default function StoryCreatorClientPage() {
 
           {/* Images */}
           {story.images && story.images.length > 0 && (
-            <div className="card-kid border-4 border-purple-300 bg-white shadow-xl">
+            <div className="card-kid border-4 border-purple-300 bg-white dark:bg-gray-800 shadow-xl">
               <div className="p-6">
                 <h4 className="text-2xl font-bold text-purple-700 mb-4 flex items-center gap-2">
                   🖼️ Imagens da História

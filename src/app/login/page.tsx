@@ -49,7 +49,7 @@ export default function LoginPage() {
         </div>
 
         {/* Card de Login */}
-        <div className="card-kid card-kid-primary border-4 border-blue-300 bg-white shadow-2xl">
+        <div className="card-kid card-kid-primary border-4 border-blue-300 bg-white dark:bg-gray-800 shadow-2xl">
           <div className="p-8">
             <div className="text-center mb-6">
               <div className="text-4xl mb-2">👋</div>
@@ -109,7 +109,7 @@ export default function LoginPage() {
                         h-14 rounded-xl border-3 font-bold text-lg transition-all duration-200
                         ${grade === g 
                           ? 'bg-blue-500 text-white border-blue-500 shadow-lg scale-105' 
-                          : 'bg-white text-gray-600 border-gray-300 hover:border-blue-300'
+                          : 'bg-white dark:bg-gray-800 text-gray-600 border-gray-300 hover:border-blue-300'
                         }
                       `}
                     >
@@ -136,7 +136,7 @@ export default function LoginPage() {
         </div>
 
         {/* Info */}
-        <div className="text-center text-md text-gray-500 dark:text-gray-400 bg-white/50 rounded-xl p-4 border-2 border-blue-100">
+        <div className="text-center text-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800/50 rounded-xl p-4 border-2 border-blue-100">
           <p>💡 O teu código de acesso foi fornecido pelo teu professor ou responsável.</p>
         </div>
       </div>

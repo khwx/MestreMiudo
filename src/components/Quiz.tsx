@@ -291,7 +291,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
         ← Voltar ao Dashboard
       </Button>
       
-      <div className="card-kid card-kid-primary bg-white shadow-2xl">
+      <div className="card-kid card-kid-primary bg-white dark:bg-gray-800 shadow-2xl">
         <CardHeader className="pb-4">
           <div className="flex justify-between items-center mb-4">
             <CardTitle className="text-3xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">

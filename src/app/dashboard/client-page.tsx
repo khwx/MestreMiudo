@@ -213,7 +213,7 @@ export default function DashboardClientPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Aprender a Brincar */}
             <Link href={`/dashboard/learn?name=${name}&grade=${grade}`}>
-              <div className="card-kid card-kid-success hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white border-green-300">
+              <div className="card-kid card-kid-success hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white dark:bg-gray-800 border-green-300">
                 <div className="p-6 flex flex-row items-center justify-between pb-2">
                   <h4 className="text-2xl font-black text-green-700 dark:text-green-200">📚 Aprender a Brincar</h4>
                   <div className="p-4 rounded-full bg-green-200 dark:bg-green-800/40 animate-float">
@@ -235,7 +235,7 @@ export default function DashboardClientPage() {
             {/* Quizzes por Disciplina */}
             {subjects.map((subject) => (
               <Link key={subject.name} href={`/quiz/${subject.slug}?name=${name}&grade=${grade}`}>
-                <div className={`card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white border-4 ${
+                <div className={`card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white dark:bg-gray-800 border-4 ${
                   subject.name === 'Português' ? 'border-green-300' :
                   subject.name === 'Matemática' ? 'border-blue-300' :
                   'border-orange-300'
@@ -269,7 +269,7 @@ export default function DashboardClientPage() {
 
             {/* Desafio Surpresa */}
             <Link href={`/quiz/misto?name=${name}&grade=${grade}`}>
-              <div className="card-kid card-kid-accent hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white border-4 border-yellow-300">
+              <div className="card-kid card-kid-accent hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white dark:bg-gray-800 border-4 border-yellow-300">
                 <div className="p-6 flex flex-row items-center justify-between pb-2">
                   <h4 className="text-2xl font-black text-yellow-700">🎲 Desafio Surpresa</h4>
                   <div className="p-4 rounded-full bg-yellow-100">
@@ -293,7 +293,7 @@ export default function DashboardClientPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {/* Loja */}
             <Link href={`/dashboard/shop?name=${name}&grade=${grade}`}>
-              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white border-4 border-yellow-300">
+              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white dark:bg-gray-800 border-4 border-yellow-300">
                 <div className="p-6 text-center flex-grow">
                   <ShoppingBag className="h-12 w-12 mx-auto mb-3 text-yellow-600" />
                   <h4 className="text-xl font-black text-yellow-700">🛍️ Loja</h4>
@@ -304,7 +304,7 @@ export default function DashboardClientPage() {
 
             {/* Oficina de Histórias */}
             <Link href={`/dashboard/story-creator?name=${name}&grade=${grade}`}>
-              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white border-4 border-purple-300">
+              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white dark:bg-gray-800 border-4 border-purple-300">
                 <div className="p-6 text-center flex-grow">
                   <BookHeart className="h-12 w-12 mx-auto mb-3 text-purple-600" />
                   <h4 className="text-xl font-black text-purple-700">📖 Histórias</h4>
@@ -315,7 +315,7 @@ export default function DashboardClientPage() {
 
             {/* Salão de Jogos */}
             <Link href={`/dashboard/games?name=${name}&grade=${grade}`}>
-              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white border-4 border-blue-300">
+              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white dark:bg-gray-800 border-4 border-blue-300">
                 <div className="p-6 text-center flex-grow">
                   <Gamepad2 className="h-12 w-12 mx-auto mb-3 text-blue-600" />
                   <h4 className="text-xl font-black text-blue-700">🎮 Jogos</h4>
@@ -326,7 +326,7 @@ export default function DashboardClientPage() {
 
             {/* Conquistas */}
             <Link href={`/dashboard/achievements?name=${name}&grade=${grade}`}>
-              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white border-4 border-amber-300">
+              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white dark:bg-gray-800 border-4 border-amber-300">
                 <div className="p-6 text-center flex-grow">
                   <Trophy className="h-12 w-12 mx-auto mb-3 text-amber-600" />
                   <h4 className="text-xl font-black text-amber-700">🏆 Conquistas</h4>

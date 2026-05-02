@@ -20,7 +20,7 @@ export function BadgeShowcase({ badges, maxDisplay = 12 }: BadgeShowcaseProps) {
   const displayedBadges = [...unlockedBadges, ...lockedBadges].slice(0, maxDisplay);
 
   return (
-    <div className="w-full bg-white rounded-lg shadow p-6 border-2 border-purple-100">
+    <div className="w-full bg-white dark:bg-gray-800 rounded-lg shadow p-6 border-2 border-purple-100">
       <div className="mb-6">
         <h3 className="text-2xl font-bold text-gray-800 mb-2">Conquistas 🏆</h3>
         <p className="text-sm text-gray-600">

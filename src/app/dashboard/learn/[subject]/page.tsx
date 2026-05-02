@@ -96,7 +96,7 @@ export default function SubjectPage() {
       {/* Header */}
       <div className="flex items-center gap-4">
         <Link href={`/dashboard/learn?name=${name}&grade=${gradeParam}`}>
-          <button className="p-3 hover:bg-white/50 rounded-xl transition-all duration-300">
+          <button className="p-3 hover:bg-white dark:bg-gray-800/50 rounded-xl transition-all duration-300">
             <ArrowLeft className="h-6 w-6" />
           </button>
         </Link>
@@ -114,11 +114,11 @@ export default function SubjectPage() {
       </div>
 
       {/* Progress Card */}
-      <div className={`card-kid border-4 ${config.borderColor} bg-white shadow-2xl`}>
+      <div className={`card-kid border-4 ${config.borderColor} bg-white dark:bg-gray-800 shadow-2xl`}>
         <div className="p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200">📚 O Teu Progresso</h2>
-            <div className="bg-white px-4 py-2 rounded-full border-2 border-gray-200">
+            <div className="bg-white dark:bg-gray-800 px-4 py-2 rounded-full border-2 border-gray-200">
               <span className="font-black text-lg">{completedCount}</span>
               <span className="text-gray-500 dark:text-gray-400"> / {lessons.length}</span>
             </div>
@@ -146,7 +146,7 @@ export default function SubjectPage() {
           </div>
         </div>
       ) : lessons.length === 0 ? (
-        <div className="card-kid border-4 border-gray-300 bg-white shadow-xl max-w-2xl mx-auto">
+        <div className="card-kid border-4 border-gray-300 bg-white dark:bg-gray-800 shadow-xl max-w-2xl mx-auto">
           <div className="p-8 text-center">
             <div className="text-6xl mb-4">🚧</div>
             <p className="text-xl text-gray-600 dark:text-gray-300">
@@ -182,7 +182,7 @@ export default function SubjectPage() {
                   <Link
                     href={`/dashboard/learn/${subject}/lesson/${lesson.id}?name=${name}&grade=${gradeParam}`}
                   >
-                    <div className={`card-kid border-4 bg-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${config.borderColor}`}>
+                    <div className={`card-kid border-4 bg-white dark:bg-gray-800 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${config.borderColor}`}>
                       <div className="p-6">
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex-grow">
