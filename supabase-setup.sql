@@ -236,6 +236,53 @@ DROP POLICY IF EXISTS "Allow all for lesson_challenges" ON lesson_challenges;
 DROP POLICY IF EXISTS "Allow read for lesson_challenges" ON lesson_challenges;
 CREATE POLICY "Allow read for lesson_challenges" ON lesson_challenges FOR SELECT USING (true);
 
+-- ============================================
+-- Table: shop_items (items available in the store)
+-- ============================================
+CREATE TABLE IF NOT EXISTS shop_items (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  description TEXT,
+  price INT NOT NULL,
+  item_type TEXT NOT NULL, -- 'hat', 'pet', 'background', 'animation'
+  image_url TEXT,
+  available BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ============================================
+-- Table: user_inventory (items owned by users)
+-- ============================================
+CREATE TABLE IF NOT EXISTS user_inventory (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  student_id TEXT NOT NULL,
+  item_id UUID NOT NULL REFERENCES shop_items(id) ON DELETE CASCADE,
+  equipped BOOLEAN DEFAULT FALSE,
+  acquired_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(student_id, item_id)
+);
+
+-- Index for fast lookups
+CREATE INDEX IF NOT EXISTS idx_user_inventory_student 
+  ON user_inventory(student_id);
+
+ALTER TABLE shop_items ENABLE ROW LEVEL SECURITY;
+ALTER TABLE user_inventory ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Allow read for shop_items" ON shop_items;
+CREATE POLICY "Allow read for shop_items" ON shop_items FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Allow all for user_inventory" ON user_inventory;
+CREATE POLICY "Allow all for user_inventory" ON user_inventory FOR ALL USING (true) WITH CHECK (true);
+
+-- Insert some default shop items
+INSERT INTO shop_items (name, description, price, item_type) VALUES
+  ('Boné Fixe', 'Um boné muito fixe para o teu avatar', 100, 'hat'),
+  ('Cãozinho Fiel', 'Um cãozinho que te acompanha', 250, 'pet'),
+  ('Fundo Espacial', 'Um fundo com estrelas e planetas', 500, 'background'),
+  ('Dança da Vitória', 'Uma animação especial quando ganhas', 1000, 'animation')
+ON CONFLICT DO NOTHING;
+
 -- User data tables remain Allow All until Supabase Auth is implemented
 DROP POLICY IF EXISTS "Allow all for quiz_history" ON quiz_history;
 CREATE POLICY "Allow all for quiz_history" ON quiz_history FOR ALL USING (true) WITH CHECK (true);
