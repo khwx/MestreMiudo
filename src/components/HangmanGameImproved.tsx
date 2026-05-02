@@ -20,7 +20,7 @@ const CATEGORIES = [
   "Objetos Comuns",
 ];
 
-const DIFFICULTIES = ["Fácil", "Normal", "Difícil"];
+const DIFFICULTIES = ["Fácil", "Médio", "Difícil"] as const;
 
 const HangmanDrawing = ({ numberOfGuesses }: { numberOfGuesses: number }) => {
     const bodyParts = [

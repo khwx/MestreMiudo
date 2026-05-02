@@ -219,14 +219,16 @@ CREATE INDEX IF NOT EXISTS idx_lesson_completion_student
 CREATE INDEX IF NOT EXISTS idx_lesson_completion_lesson 
   ON lesson_completion(lesson_id);
 
--- Allow anonymous read/write for all tables
-CREATE POLICY "Allow all for questions" ON questions FOR ALL USING (true) WITH CHECK (true);
+-- Allow anonymous read for curriculum tables
+CREATE POLICY "Allow read for questions" ON questions FOR SELECT USING (true);
+CREATE POLICY "Allow read for words" ON words FOR SELECT USING (true);
+CREATE POLICY "Allow read for lessons" ON lessons FOR SELECT USING (true);
+CREATE POLICY "Allow read for lesson_challenges" ON lesson_challenges FOR SELECT USING (true);
+
+-- User data tables remain Allow All until Supabase Auth is implemented
 CREATE POLICY "Allow all for quiz_history" ON quiz_history FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all for words" ON words FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow all for diagnostic_tests" ON diagnostic_tests FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow all for student_rewards" ON student_rewards FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow all for daily_challenges" ON daily_challenges FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow all for leaderboards" ON leaderboards FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all for lessons" ON lessons FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all for lesson_challenges" ON lesson_challenges FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow all for lesson_completion" ON lesson_completion FOR ALL USING (true) WITH CHECK (true);

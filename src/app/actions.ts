@@ -595,7 +595,7 @@ export async function generateStoryAction(input: StoryGenerationInput): Promise<
 
     if (imagesResult.status === 'fulfilled') {
       images = imagesResult.value.filter((url: string) => url);
-      if (images.length === 0 && storyOutput.imagePrompts?.length > 0) {
+      if (images.length === 0 && (storyOutput.imagePrompts?.length || 0) > 0) {
         warnings.push('As imagens não estão disponíveis de momento.');
       }
     } else {
