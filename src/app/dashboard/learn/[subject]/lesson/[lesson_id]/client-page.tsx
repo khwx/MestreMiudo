@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { ArrowLeft, Star, Coins, CheckCircle, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Star, Coins, CheckCircle, AlertCircle, BookOpen } from 'lucide-react';
 import { getLesson, saveLessonCompletion, calculateStars, calculateCoins } from '@/lib/lessons';
 import { addToSpacedRepetition } from '@/lib/spaced-repetition';
 import { generateLessonChallengesAction } from '@/app/actions';
@@ -357,7 +357,10 @@ export default function LessonDetailClient() {
           </button>
         </Link>
         <div className="flex-grow">
-          <h1 className="text-3xl font-headline font-bold">{lesson.title}</h1>
+          <div className="flex items-center gap-2">
+            <BookOpen className="h-6 w-6 text-primary" />
+            <h1 className="text-3xl font-headline font-bold">{lesson.title}</h1>
+          </div>
           <p className="text-muted-foreground">
             Desafio {currentChallengeIndex + 1} de {challenges.length}
           </p>
@@ -365,61 +368,73 @@ export default function LessonDetailClient() {
       </div>
 
       {/* Progress bar */}
-      <div className="space-y-2">
-        <Progress value={progressPercentage} />
-        <p className="text-sm text-muted-foreground text-right">
+      <div className="space-y-2 bg-muted p-4 rounded-xl">
+        <Progress value={progressPercentage} className="h-3 rounded-full" />
+        <p className="text-sm text-muted-foreground text-right font-medium">
           {Math.round(progressPercentage)}% completo
         </p>
       </div>
 
-      {/* Story context and learning objective */}
-      {currentChallengeIndex === 0 && (
-        <Card className="bg-blue-50 dark:bg-blue-900/20">
-          <CardHeader>
-            <CardTitle className="text-lg">📖 {lesson.learning_objective}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground italic">{lesson.story_context}</p>
-          </CardContent>
-        </Card>
-      )}
-
       {/* Challenge card */}
        {currentChallenge && (
-         <Card className="max-w-2xl mx-auto">
-           <CardHeader>
-             <CardTitle>{currentChallenge.question}</CardTitle>
-             {currentChallenge.hint && (
-               <CardDescription>💡 Dica: {currentChallenge.hint}</CardDescription>
-             )}
-           </CardHeader>
-           <CardContent className="space-y-6">
-        <ChallengeRenderer
-          challenge={currentChallenge}
-          answer={answers[currentChallenge.id || '']}
-          isSubmitted={submittedAnswers.includes(currentChallenge.id || '')}
-          isCorrect={answerCorrectness[currentChallenge.id || '']}
-          shuffledWordOrders={shuffledWordOrders}
-          setShuffledWordOrders={setShuffledWordOrders}
-          onChange={(value) => {
-            handleAnswerChange(currentChallenge.id || '', value);
-            // Reset correctness when answer changes
-            setAnswerCorrectness(prev => ({
-              ...prev,
-              [currentChallenge.id || '']: null
-            }));
-          }}
-        />
-
-             <Button
-               onClick={handleSubmitChallenge}
-               disabled={submitting || !answers[currentChallenge.id || '']}
-               className="w-full"
-             >
-               {isLastChallenge ? 'Terminar Lição' : 'Próximo Desafio'}
-             </Button>
-           </CardContent>
-         </Card>
+         <div className="grid md:grid-cols-3 gap-8">
+           {/* Info panel on the left */}
+           <div className="md:col-span-1 space-y-6">
+             <Card className="bg-blue-50 dark:bg-blue-900/20">
+               <CardHeader>
+                 <CardTitle className="text-lg">📖 {lesson.learning_objective}</CardTitle>
+               </CardHeader>
+               <CardContent>
+                 <p className="text-muted-foreground italic">{lesson.story_context}</p>
+               </CardContent>
+             </Card>
+             
+             {/* Additional decorative or info elements can go here */}
+             <div className="bg-muted p-6 rounded-2xl text-center flex flex-col items-center">
+                <Star className="h-16 w-16 text-yellow-400 mb-4" />
+                <p className="font-semibold">Resolve desafios e ganha estrelas!</p>
+                <p className="text-sm text-muted-foreground mt-1">Consegues as 3 estrelas nesta lição?</p>
+             </div>
+           </div>
+           
+           {/* Challenge itself on the right */}
+           <div className="md:col-span-2">
+             <Card className="w-full">
+               <CardHeader>
+                 <CardTitle>{currentChallenge.question}</CardTitle>
+                 {currentChallenge.hint && (
+                   <CardDescription>💡 Dica: {currentChallenge.hint}</CardDescription>
+                 )}
+               </CardHeader>
+               <CardContent className="space-y-6">
+                 <ChallengeRenderer
+                   challenge={currentChallenge}
+                   answer={answers[currentChallenge.id || '']}
+                   isSubmitted={submittedAnswers.includes(currentChallenge.id || '')}
+                   isCorrect={answerCorrectness[currentChallenge.id || '']}
+                   shuffledWordOrders={shuffledWordOrders}
+                   setShuffledWordOrders={setShuffledWordOrders}
+                   onChange={(value) => {
+                     handleAnswerChange(currentChallenge.id || '', value);
+                     // Reset correctness when answer changes
+                     setAnswerCorrectness(prev => ({
+                       ...prev,
+                       [currentChallenge.id || '']: null
+                     }));
+                   }}
+                 />
+    
+                 <Button
+                   onClick={handleSubmitChallenge}
+                   disabled={submitting || !answers[currentChallenge.id || '']}
+                   className="w-full"
+                 >
+                   {isLastChallenge ? 'Terminar Lição' : 'Próximo Desafio'}
+                 </Button>
+               </CardContent>
+             </Card>
+           </div>
+         </div>
        )}
     </div>
   );
@@ -491,7 +506,7 @@ function ChallengeRenderer({
          value={answer || ''}
          onChange={!isSubmitted ? (e) => onChange(e.target.value) : undefined}
          placeholder="Escreve a resposta..."
-         className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 ${
+         className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
            isCorrectAnswer
              ? 'border-success'
              : isWrongAnswer
@@ -560,10 +575,10 @@ function ChallengeRenderer({
                 key={index}
                 type="button"
                 onClick={() => handleRemoveWord(index)}
-                className="px-3 py-2 bg-primary text-primary-foreground rounded-full text-sm font-semibold"
+                className="px-2 py-1 bg-primary text-primary-foreground rounded-full text-xs font-semibold hover:bg-primary/90 transition"
                 disabled={isSubmitted}
               >
-                {word}
+                {word} x
               </button>
             ))}
           </div>
@@ -618,7 +633,7 @@ function ChallengeRenderer({
            
            return (
              <div key={index} className="flex gap-3 items-center">
-               <div className="flex-1 p-3 bg-secondary text-secondary-foreground font-semibold rounded-lg">{pair.left}</div>
+               <div className="flex-1 p-3 bg-secondary rounded-lg">{pair.left}</div>
                <select
                  value={userAnswer || ''}
                  onChange={!isSubmitted ? (e) => {
@@ -628,7 +643,7 @@ function ChallengeRenderer({
                    });
                  } : undefined}
                  disabled={isSubmitted}
-                 className={`flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 ${
+                 className={`flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 ${
                    isSubmitted && isCorrect != null
                      ? isPairCorrect
                        ? 'border-success'

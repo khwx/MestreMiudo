@@ -20,7 +20,7 @@ const CATEGORIES = [
   "Objetos Comuns",
 ];
 
-const DIFFICULTIES = ["Fácil", "Médio", "Difícil"] as const;
+const DIFFICULTIES = ["Fácil", "Normal", "Difícil"];
 
 const HangmanDrawing = ({ numberOfGuesses }: { numberOfGuesses: number }) => {
     const bodyParts = [
@@ -85,7 +85,7 @@ export function HangmanGame() {
     const [showHint, setShowHint] = useState(false);
     const [loading, setLoading] = useState(true);
     const [category, setCategory] = useState("Animais");
-    const [difficulty, setDifficulty] = useState<"Fácil" | "Médio" | "Difícil">("Fácil");
+    const [difficulty, setDifficulty] = useState("Fácil");
     const [showSettings, setShowSettings] = useState(false);
     const [wins, setWins] = useState(0);
     const [losses, setLosses] = useState(0);

@@ -33,7 +33,7 @@ Este documento serve para acompanhar o progresso do desenvolvimento, o que já f
 ## 🛠️ Em Desenvolvimento / A Melhorar (Próximos Passos)
 
 ### 🛡️ Segurança e Robustez (Prioridade Alta)
-- [x] **Refinar RLS do Supabase:** Currículo passado a Read Only. NOTA: "Owner Only" no progresso requer implementação do Supabase Auth (atualmente o login é apenas frontend).
+- [ ] **Refinar RLS do Supabase:** Alterar as políticas de "Allow All" para "Read Only" nas lições e "Owner Only" no progresso.
 - [ ] **Validação de Input:** Garantir que as respostas enviadas são validadas no servidor.
 
 ### 📈 Gamificação Avançada (Prioridade Média)

@@ -5,7 +5,7 @@
  * Generates achievement cards and social sharing URLs
  */
 
-export interface Achievement {
+interface Achievement {
   id: string;
   title: string;
   description: string;

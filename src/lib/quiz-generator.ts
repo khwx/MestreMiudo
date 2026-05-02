@@ -409,7 +409,7 @@ export async function generateQuizDirect(
       const validationResult = validateQuestionForCurriculum(
         q.question,
         input.gradeLevel,
-        input.subject || 'Misto'
+        input.subject
       );
       
       if (!validationResult.isValid) {
