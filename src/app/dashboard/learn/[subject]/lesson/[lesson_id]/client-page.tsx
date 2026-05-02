@@ -32,7 +32,8 @@ export default function LessonDetailClient() {
   const [coins, setCoins] = useState(0);
   // Track which answers have been submitted and their correctness
   const [submittedAnswers, setSubmittedAnswers] = useState<string[]>([]);
-  const [answerCorrectness, setAnswerCorrectness] = useState<Record<string, boolean>>({});
+  const [answerCorrectness, setAnswerCorrectness] = useState<Record<string, boolean | null>>({});
+  const [shuffledWordOrders, setShuffledWordOrders] = useState<Record<string, string[]>>({});
 
   useEffect(() => {
     const fetchLesson = async () => {
@@ -148,7 +149,7 @@ export default function LessonDetailClient() {
     if (challenge.challenge_type === 'fill_blank') {
       const correctAnswers = challenge.content.correct_answers || [challenge.content.correct_answer];
       const normalizedAnswer = normalizeText(answer as string);
-      return correctAnswers.some(ca => normalizeText(ca) === normalizedAnswer);
+      return correctAnswers.some((ca: string) => normalizeText(ca) === normalizedAnswer);
     }
 
     if (challenge.challenge_type === 'word_order') {
@@ -286,7 +287,7 @@ export default function LessonDetailClient() {
                          </span>
                        </div>
                        <p className="text-sm text-muted-foreground">{challenge.question}</p>
-                       {isCorrect !== undefined && (
+                       {isCorrect != null && (
                          <div className="mt-1 text-xs">
                            {isCorrect === true 
                              ? '✓ Resposta correta!' 
@@ -361,20 +362,22 @@ export default function LessonDetailClient() {
              )}
            </CardHeader>
            <CardContent className="space-y-6">
-             <ChallengeRenderer
-               challenge={currentChallenge}
-               answer={answers[currentChallenge.id || '']}
-               isSubmitted={submittedAnswers.includes(currentChallenge.id || '')}
-               isCorrect={answerCorrectness[currentChallenge.id || '']}
-               onChange={(value) => {
-                 handleAnswerChange(currentChallenge.id || '', value);
-                 // Reset correctness when answer changes
-                 setAnswerCorrectness(prev => ({
-                   ...prev,
-                   [currentChallenge.id || '']: null
-                 }));
-               }}
-             />
+        <ChallengeRenderer
+          challenge={currentChallenge}
+          answer={answers[currentChallenge.id || '']}
+          isSubmitted={submittedAnswers.includes(currentChallenge.id || '')}
+          isCorrect={answerCorrectness[currentChallenge.id || '']}
+          shuffledWordOrders={shuffledWordOrders}
+          setShuffledWordOrders={setShuffledWordOrders}
+          onChange={(value) => {
+            handleAnswerChange(currentChallenge.id || '', value);
+            // Reset correctness when answer changes
+            setAnswerCorrectness(prev => ({
+              ...prev,
+              [currentChallenge.id || '']: null
+            }));
+          }}
+        />
 
              <Button
                onClick={handleSubmitChallenge}
@@ -397,21 +400,25 @@ function ChallengeRenderer({
   onChange,
   isSubmitted,
   isCorrect,
+  shuffledWordOrders,
+  setShuffledWordOrders,
 }: {
   challenge: LessonChallenge;
   answer: string | string[] | undefined;
   onChange: (value: string | string[]) => void;
   isSubmitted?: boolean;
-  isCorrect?: boolean;
+  isCorrect?: boolean | null;
+  shuffledWordOrders: Record<string, string[]>;
+  setShuffledWordOrders: React.Dispatch<React.SetStateAction<Record<string, string[]>>>;
 }) {
    if (challenge.challenge_type === 'multiple_choice') {
      return (
        <div className="space-y-3">
          {challenge.content.options?.map((option: string) => {
            const isSelected = answer === option;
-           const isCorrectOption = isSubmitted && isCorrect !== undefined && 
+           const isCorrectOption = isSubmitted && isCorrect != null && 
                                  isCorrect && challenge.content.correct_answer === option;
-           const isWrongOption = isSubmitted && isCorrect !== undefined && 
+           const isWrongOption = isSubmitted && isCorrect != null && 
                                !isCorrect && challenge.content.correct_answer === option;
            
            return (
@@ -431,7 +438,7 @@ function ChallengeRenderer({
                }`}
                disabled={isSubmitted}
              >
-               {isSubmitted && isCorrect !== undefined && (
+               {isSubmitted && isCorrect != null && (
                  isCorrectOption ? '✓ ' : isWrongOption ? '✗ ' : ''
                )}
                {option}
@@ -443,8 +450,8 @@ function ChallengeRenderer({
    }
 
    if (challenge.challenge_type === 'fill_blank') {
-     const isCorrectAnswer = isSubmitted && isCorrect !== undefined && isCorrect;
-     const isWrongAnswer = isSubmitted && isCorrect !== undefined && !isCorrect;
+     const isCorrectAnswer = isSubmitted && isCorrect != null && isCorrect;
+     const isWrongAnswer = isSubmitted && isCorrect != null && !isCorrect;
      
      return (
        <input
@@ -466,53 +473,106 @@ function ChallengeRenderer({
      );
    }
 
-   if (challenge.challenge_type === 'word_order') {
-     const isCorrectAnswer = isSubmitted && isCorrect !== undefined && isCorrect;
-     const isWrongAnswer = isSubmitted && isCorrect !== undefined && !isCorrect;
-     
-     return (
-       <div className={`space-y-4 ${isSubmitted && isCorrect !== undefined ? (
-         isCorrectAnswer 
-           ? 'border-success bg-success/50 p-4 rounded-lg' 
-           : isWrongAnswer
-             ? 'border-destructive bg-destructive/50 p-4 rounded-lg'
-             : ''
-       ) : ''}`}>
-         <p className="text-sm text-muted-foreground">Arrasta as palavras para a ordem correta:</p>
-         <div className="flex flex-wrap gap-2">
-           {words.map((word: string, index: number) => (
-             <div
-               key={index}
-               className="px-3 py-2 bg-primary/20 text-primary rounded-full text-sm font-semibold cursor-move"
-               style={{ userSelect: 'none' }}
-               draggable={!isSubmitted}
-             >
-               {word}
-             </div>
-           ))}
-         </div>
-         {isSubmitted && isCorrect !== undefined && (
-           <p className={`mt-2 text-sm ${
-             isCorrectAnswer 
-               ? 'text-success' 
-               : isWrongAnswer
-                 ? 'text-destructive'
-                 : 'text-muted-foreground'
-           }`}>
-             {isCorrectAnswer ? '✓ Ordem correta!' : '✗ Ordem incorreta. Tenta novamente!'}
-           </p>
-         )}
-       </div>
-     );
-   }
+  if (challenge.challenge_type === 'word_order') {
+    const isCorrectAnswer = isSubmitted && isCorrect != null && isCorrect;
+    const isWrongAnswer = isSubmitted && isCorrect != null && !isCorrect;
+    const correctOrder: string[] = challenge.content.correct_order || [];
+    const selectedWords: string[] = (answer as string[]) || [];
+
+    const availableWords = (() => {
+      if (!shuffledWordOrders[challenge.id || '']) {
+        const shuffled = [...correctOrder].sort(() => Math.random() - 0.5);
+        setShuffledWordOrders(prev => ({ ...prev, [challenge.id || '']: shuffled }));
+        return shuffled;
+      }
+      const base = shuffledWordOrders[challenge.id || ''];
+      const unselected: string[] = [];
+      const used = [...selectedWords];
+      for (const w of base) {
+        const idx = used.indexOf(w);
+        if (idx !== -1) {
+          used.splice(idx, 1);
+        } else {
+          unselected.push(w);
+        }
+      }
+      return unselected;
+    })();
+
+    const handleWordClick = (word: string) => {
+      if (isSubmitted) return;
+      const newSelected = [...selectedWords, word];
+      onChange(newSelected);
+    };
+
+    const handleRemoveWord = (index: number) => {
+      if (isSubmitted) return;
+      const newSelected = [...selectedWords];
+      newSelected.splice(index, 1);
+      onChange(newSelected);
+    };
+
+    return (
+      <div className={`space-y-4 ${isSubmitted && isCorrect != null ? (
+        isCorrectAnswer
+        ? 'border-success bg-success/50 p-4 rounded-lg'
+        : isWrongAnswer
+        ? 'border-destructive bg-destructive/50 p-4 rounded-lg'
+        : ''
+      ) : ''}`}>
+        <p className="text-sm text-muted-foreground">Clica nas palavras pela ordem correta:</p>
+        {selectedWords.length > 0 && (
+          <div className="flex flex-wrap gap-2 p-3 bg-muted rounded-lg min-h-[48px]">
+            {selectedWords.map((word: string, index: number) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => handleRemoveWord(index)}
+                className="px-3 py-2 bg-primary text-primary-foreground rounded-full text-sm font-semibold"
+                disabled={isSubmitted}
+              >
+                {word}
+              </button>
+            ))}
+          </div>
+        )}
+        {availableWords.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {availableWords.map((word: string, index: number) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => handleWordClick(word)}
+                className="px-3 py-2 bg-primary/20 text-primary rounded-full text-sm font-semibold hover:bg-primary/30 active:bg-primary/40 transition-colors"
+                disabled={isSubmitted}
+              >
+                {word}
+              </button>
+            ))}
+          </div>
+        )}
+        {isSubmitted && isCorrect != null && (
+          <p className={`mt-2 text-sm ${
+            isCorrectAnswer
+            ? 'text-success'
+            : isWrongAnswer
+            ? 'text-destructive'
+            : 'text-muted-foreground'
+          }`}>
+            {isCorrectAnswer ? '✓ Ordem correta!' : '✗ Ordem incorreta. A ordem certa é: ' + correctOrder.join(' ')}
+          </p>
+        )}
+      </div>
+    );
+  }
 
    if (challenge.challenge_type === 'matching') {
      const pairs = challenge.content.pairs || [];
-     const isCorrectAnswer = isSubmitted && isCorrect !== undefined && isCorrect;
-     const isWrongAnswer = isSubmitted && isCorrect !== undefined && !isCorrect;
+     const isCorrectAnswer = isSubmitted && isCorrect != null && isCorrect;
+     const isWrongAnswer = isSubmitted && isCorrect != null && !isCorrect;
      
      return (
-       <div className={`space-y-3 ${isSubmitted && isCorrect !== undefined ? (
+       <div className={`space-y-3 ${isSubmitted && isCorrect != null ? (
          isCorrectAnswer 
            ? 'border-success bg-success/50 p-4 rounded-lg' 
            : isWrongAnswer
@@ -537,7 +597,7 @@ function ChallengeRenderer({
                  } : undefined}
                  disabled={isSubmitted}
                  className={`flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 ${
-                   isSubmitted && isCorrect !== undefined
+                   isSubmitted && isCorrect != null
                      ? isPairCorrect
                        ? 'border-success'
                        : 'border-destructive'
@@ -551,7 +611,7 @@ function ChallengeRenderer({
                    </option>
                  ))}
                </select>
-               {isSubmitted && isCorrect !== undefined && (
+               {isSubmitted && isCorrect != null && (
                  <span className="ml-2 text-xs">
                    {isPairCorrect ? '✓' : '✗'}
                  </span>
@@ -559,7 +619,7 @@ function ChallengeRenderer({
              </div>
            );
          })}
-         {isSubmitted && isCorrect !== undefined && (
+         {isSubmitted && isCorrect != null && (
            <p className={`mt-2 text-sm ${
              isCorrectAnswer 
                ? 'text-success' 

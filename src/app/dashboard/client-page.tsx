@@ -60,7 +60,7 @@ const calculateLevel = (totalPoints: number) => {
 export default function DashboardClientPage() {
   const searchParams = useSearchParams()
   const name = searchParams.get("name") || "Amigo"
-  const grade = searchParams.get("grade")
+  const grade = searchParams.get("grade") || "1"
 
   const [history, setHistory] = useState<QuizResultEntry[]>([])
   const [lessonHistory, setLessonHistory] = useState<any[]>([])
@@ -72,7 +72,7 @@ export default function DashboardClientPage() {
 
   useEffect(() => {
     if (name) {
-      const gradeLevel = grade ? parseInt(grade, 10) as 1 | 2 | 3 | 4 : 2
+      const gradeLevel = parseInt(grade, 10) as 1 | 2 | 3 | 4
 
       Promise.all([
         getFullQuizHistory(name),

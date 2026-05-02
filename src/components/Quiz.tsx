@@ -129,9 +129,10 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
       setCurrentQuestionIndex(prev => prev + 1);
       setSelectedAnswer(null);
       setIsAnswered(false);
-    } else {
-      finishQuiz();
-    }
+  } else {
+    setCurrentQuestionIndex(prev => prev + 1);
+    finishQuiz();
+  }
   };
 
   const finishQuiz = async () => {
