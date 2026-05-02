@@ -143,7 +143,11 @@ export default function ShopClientPage() {
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
-                      <span className="text-4xl">{item.icon || '🎁'}</span>
+                      <span className="text-4xl">
+                        {item.item_type === 'hat' ? '🧢' : 
+                         item.item_type === 'pet' ? '🐶' : 
+                         item.item_type === 'background' ? '🖼️' : '🎁'}
+                      </span>
                       <div>
                         <h3 className="text-xl font-black text-gray-800">{item.name}</h3>
                         <p className="text-sm text-gray-500">{item.description}</p>

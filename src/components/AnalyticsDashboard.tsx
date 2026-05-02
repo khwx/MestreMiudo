@@ -167,7 +167,7 @@ export function AnalyticsDashboard({
                 <XAxis dataKey="date" fontSize={12} />
                 <YAxis domain={[0, 100]} />
                 <Tooltip
-                  formatter={(value) => `${Math.round(value)}%`}
+                  formatter={(value) => `${Math.round(Number(value))}%`}
                   labelFormatter={(label) => `${label}`}
                 />
                 <Legend />

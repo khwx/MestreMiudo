@@ -85,7 +85,7 @@ export function HangmanGame() {
     const [showHint, setShowHint] = useState(false);
     const [loading, setLoading] = useState(true);
     const [category, setCategory] = useState("Animais");
-    const [difficulty, setDifficulty] = useState("Fácil");
+    const [difficulty, setDifficulty] = useState<"Fácil" | "Médio" | "Difícil">("Fácil");
     const [showSettings, setShowSettings] = useState(false);
     const [wins, setWins] = useState(0);
     const [losses, setLosses] = useState(0);

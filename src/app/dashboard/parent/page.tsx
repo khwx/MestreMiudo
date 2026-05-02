@@ -54,7 +54,7 @@ export default function ParentDashboardPage() {
           .in('student_id', studentIds);
 
         const progressMap = new Map<string, StudentProgress>();
-        studentIds.forEach(id => {
+        studentIds.forEach((id: string) => {
           progressMap.set(id, {
             studentId: id,
             studentName: id,

@@ -491,7 +491,7 @@ function ChallengeRenderer({
          value={answer || ''}
          onChange={!isSubmitted ? (e) => onChange(e.target.value) : undefined}
          placeholder="Escreve a resposta..."
-         className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
+         className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 ${
            isCorrectAnswer
              ? 'border-success'
              : isWrongAnswer
@@ -618,7 +618,7 @@ function ChallengeRenderer({
            
            return (
              <div key={index} className="flex gap-3 items-center">
-               <div className="flex-1 p-3 bg-secondary rounded-lg">{pair.left}</div>
+               <div className="flex-1 p-3 bg-secondary text-secondary-foreground font-semibold rounded-lg">{pair.left}</div>
                <select
                  value={userAnswer || ''}
                  onChange={!isSubmitted ? (e) => {
@@ -628,7 +628,7 @@ function ChallengeRenderer({
                    });
                  } : undefined}
                  disabled={isSubmitted}
-                 className={`flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 ${
+                 className={`flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 ${
                    isSubmitted && isCorrect != null
                      ? isPairCorrect
                        ? 'border-success'

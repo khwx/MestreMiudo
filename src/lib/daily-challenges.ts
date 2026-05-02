@@ -21,7 +21,7 @@ interface DailyChallenge {
   bonusPoints: number;
 }
 
-const SUBJECTS = ['Português', 'Matemática', 'Estudo do Meio'];
+const SUBJECTS: Array<'Português' | 'Matemática' | 'Estudo do Meio'> = ['Português', 'Matemática', 'Estudo do Meio'];
 const DIFFICULTIES = ['Fácil', 'Normal', 'Difícil'];
 
 /**
@@ -91,6 +91,7 @@ async function createDailyChallenge(
 
     // Generate a question
     const input: PersonalizedLearningPathInput = {
+      studentId,
       gradeLevel,
       subject,
       numberOfQuestions: 1,
@@ -106,7 +107,7 @@ async function createDailyChallenge(
     const question = result.quizQuestions[0];
 
     // Save to database
-    const { data: challenge, error } = await supabase
+    const { data: challenge, error } = await supabase!
       .from('daily_challenges')
       .insert({
         student_id: studentId,

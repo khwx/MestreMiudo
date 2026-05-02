@@ -24,6 +24,7 @@ export async function generateDiagnosticTest(gradeLevel: 1 | 2 | 3 | 4): Promise
   
   // Use the standard quiz generator with specific prompt
   const diagnosticInput: PersonalizedLearningPathInput = {
+    studentId: 'diagnostic-test',
     gradeLevel,
     subject: 'Português', // Start with one subject, then cycle through others
     numberOfQuestions: 7,

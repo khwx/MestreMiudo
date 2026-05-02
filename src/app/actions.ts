@@ -14,13 +14,20 @@ import {
 import { generateStory } from "@/ai/flows/story-generator";
 import { textToSpeech } from "@/ai/flows/text-to-speech";
 import { ai } from "@/ai/genkit";
-import { StoryGenerationInputSchema } from "@/app/shared-schemas";
+import { 
+  StoryGenerationInputSchema, 
+  type StoryGenerationInput,
+  QuizResultSchema, 
+  type QuizResultEntry,
+  SaveQuizInputSchema, 
+  type SaveQuizInput,
+  type QuizInput,
+  type GenerateChallengesInput 
+} from "@/app/shared-schemas";
 import { z } from "zod";
 import fs from 'fs/promises';
 import path from 'path';
 import { generateLessonChallenges } from "@/ai/flows/lesson-challenge-generator";
-import type { GenerateChallengesInput } from './shared-schemas';
-import { QuizResultSchema, SaveQuizInputSchema } from "./shared-schemas";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 
 
