@@ -23,7 +23,7 @@ interface TierProgressProps {
 
 export function TierProgress({ currentTier, nextTier, totalPoints, progressPercentage }: TierProgressProps) {
   return (
-    <div className="w-full bg-white dark:bg-gray-800 rounded-lg shadow p-6 border-2 border-blue-100">
+    <div className="w-full bg-white rounded-lg shadow p-6 border-2 border-blue-100">
       {/* Current Tier Display */}
       <div className="flex items-center gap-4 mb-6">
         <div className="text-5xl">{currentTier.emoji}</div>

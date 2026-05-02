@@ -9,6 +9,7 @@ import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, Star, Coins, CheckCircle, AlertCircle } from 'lucide-react';
 import { getLesson, saveLessonCompletion, calculateStars, calculateCoins } from '@/lib/lessons';
 import { addToSpacedRepetition } from '@/lib/spaced-repetition';
+import { generateLessonChallengesAction } from '@/app/actions';
 import type { Lesson, LessonChallenge } from '@/app/shared-schemas';
 
 type ChallengeAnswer = Record<string, string | string[]>;
@@ -25,6 +26,7 @@ export default function LessonDetailClient() {
   const [currentChallengeIndex, setCurrentChallengeIndex] = useState(0);
   const [answers, setAnswers] = useState<ChallengeAnswer>({});
   const [loading, setLoading] = useState(true);
+  const [generating, setGenerating] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [score, setScore] = useState(0);
@@ -37,7 +39,31 @@ export default function LessonDetailClient() {
 
   useEffect(() => {
     const fetchLesson = async () => {
-      const lessonData = await getLesson(lessonId);
+      let lessonData = await getLesson(lessonId);
+      
+      // If lesson exists but has no challenges, generate them!
+      if (lessonData && (!lessonData.challenges || lessonData.challenges.length === 0)) {
+        setGenerating(true);
+        try {
+          const result = await generateLessonChallengesAction({
+            lessonId: lessonId,
+            subject: lessonData.subject,
+            gradeLevel: lessonData.grade_level,
+            title: lessonData.title,
+            learningObjective: lessonData.learning_objective || '',
+            storyContext: lessonData.story_context || ''
+          });
+          
+          if (result && result.challenges) {
+            lessonData.challenges = result.challenges;
+          }
+        } catch (error) {
+          console.error("Failed to generate challenges automatically:", error);
+        } finally {
+          setGenerating(false);
+        }
+      }
+      
       setLesson(lessonData);
       setLoading(false);
     };
@@ -45,10 +71,16 @@ export default function LessonDetailClient() {
     fetchLesson();
   }, [lessonId]);
 
-  if (loading) {
+  if (loading || generating) {
     return (
-      <div className="flex justify-center items-center min-h-[400px]">
-        <p className="text-muted-foreground">A carregar lição...</p>
+      <div className="flex flex-col justify-center items-center min-h-[400px] space-y-4">
+        <div className="relative flex justify-center items-center h-24 w-24">
+          <div className="absolute inset-0 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+          <Star className="h-10 w-10 text-primary animate-pulse" />
+        </div>
+        <p className="text-xl text-primary font-bold animate-pulse">
+          {generating ? 'A criar desafios fantásticos para ti! ✨' : 'A carregar lição...'}
+        </p>
       </div>
     );
   }

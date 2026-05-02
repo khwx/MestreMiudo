@@ -17,7 +17,7 @@ export default function ErrorBoundary({
 
   return (
     <div className="min-h-[50vh] flex items-center justify-center p-8">
-      <div className="card-kid border-4 border-red-300 bg-white dark:bg-gray-800 shadow-2xl max-w-lg w-full">
+      <div className="card-kid border-4 border-red-300 bg-white shadow-2xl max-w-lg w-full">
         <div className="p-8 text-center space-y-6">
           <div className="text-6xl">😵</div>
           <h2 className="text-3xl font-black text-red-600">

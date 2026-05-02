@@ -61,7 +61,7 @@ export function StudentDashboard({
       </div>
 
       {/* Performance by Subject */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border-2 border-gray-100">
+      <div className="bg-white rounded-lg shadow p-6 border-2 border-gray-100">
         <h3 className="text-xl font-bold text-gray-800 mb-4">Desempenho por Disciplina</h3>
 
         <div className="space-y-4">

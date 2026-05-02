@@ -109,12 +109,27 @@ export type SpeechMark = z.infer<typeof SpeechMarkSchema>;
 export const LessonChallengeSchema = z.object({
   id: z.string().uuid().optional(),
   challenge_type: z.enum(['multiple_choice', 'fill_blank', 'word_order', 'matching']),
-  question: z.string(),
-  content: z.record(z.any()),
-  hint: z.string().optional(),
+  question: z.string().describe('The question or instruction for the challenge'),
+  content: z.record(z.any()).describe('The content of the challenge depending on the type'),
+  hint: z.string().optional().describe('A helpful hint for the child'),
   challenge_index: z.number().optional(),
 });
 export type LessonChallenge = z.infer<typeof LessonChallengeSchema>;
+
+export const GenerateChallengesInputSchema = z.object({
+  lessonId: z.string(),
+  subject: z.string(),
+  gradeLevel: z.number(),
+  title: z.string(),
+  learningObjective: z.string(),
+  storyContext: z.string()
+});
+export type GenerateChallengesInput = z.infer<typeof GenerateChallengesInputSchema>;
+
+export const GenerateChallengesOutputSchema = z.object({
+  challenges: z.array(LessonChallengeSchema).describe('Array of 3 to 5 interactive challenges for the lesson.')
+});
+export type GenerateChallengesOutput = z.infer<typeof GenerateChallengesOutputSchema>;
 
 export const LessonSchema = z.object({
   id: z.string().uuid().optional(),

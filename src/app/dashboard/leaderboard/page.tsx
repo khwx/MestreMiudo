@@ -58,7 +58,7 @@ function LeaderboardRow({ entry, currentUserId }: LeaderboardRowProps) {
       className={`flex items-center gap-4 p-4 rounded-lg border-2 transition-all ${
         isCurrentUser
           ? 'bg-blue-50 border-blue-300 shadow-md'
-          : 'bg-white dark:bg-gray-800 border-gray-200 hover:border-gray-300'
+          : 'bg-white border-gray-200 hover:border-gray-300'
       }`}
     >
       <div className={`text-3xl font-bold w-12 text-center ${getMedalColor(entry.rank)}`}>

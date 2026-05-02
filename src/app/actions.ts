@@ -18,7 +18,8 @@ import { StoryGenerationInputSchema } from "@/app/shared-schemas";
 import { z } from "zod";
 import fs from 'fs/promises';
 import path from 'path';
-import type { QuizInput, SaveQuizInput, QuizResultEntry, Answer, StoryGenerationInput } from './shared-schemas';
+import { generateLessonChallenges } from "@/ai/flows/lesson-challenge-generator";
+import type { GenerateChallengesInput } from './shared-schemas';
 import { QuizResultSchema, SaveQuizInputSchema } from "./shared-schemas";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 
@@ -1117,5 +1118,36 @@ export async function equipInventoryItem(studentId: string, itemId: string) {
   } catch (error) {
     console.error('Error equipping item:', error);
     return { success: false, error: 'Erro ao equipar item' };
+  }
+}
+
+// ============================================
+// Generate Lesson Challenges
+// ============================================
+
+export async function generateLessonChallengesAction(input: GenerateChallengesInput) {
+  try {
+    const result = await generateLessonChallenges(input);
+    
+    // Save to database if configured
+    if (isSupabaseConfigured() && supabase && result.challenges) {
+      for (const challenge of result.challenges) {
+        await supabase
+          .from('lesson_challenges')
+          .insert({
+            lesson_id: input.lessonId,
+            challenge_type: challenge.challenge_type,
+            question: challenge.question,
+            content: challenge.content,
+            hint: challenge.hint,
+            challenge_index: challenge.challenge_index,
+          });
+      }
+    }
+    
+    return result;
+  } catch (error) {
+    console.error('Failed to generate lesson challenges:', error);
+    throw error;
   }
 }

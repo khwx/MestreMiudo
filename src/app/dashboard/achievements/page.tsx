@@ -144,7 +144,7 @@ function AchievementCard({ achievement, unlocked, unlockedDate }: AchievementCar
     <div
       className={`rounded-lg border-2 p-6 text-center transition-all duration-300 ${
         unlocked
-          ? 'bg-white dark:bg-gray-800 border-gray-200 shadow-md hover:shadow-lg'
+          ? 'bg-white border-gray-200 shadow-md hover:shadow-lg'
           : 'bg-gray-100 border-gray-300 opacity-60'
       }`}
     >

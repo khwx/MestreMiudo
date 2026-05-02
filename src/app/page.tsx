@@ -95,7 +95,7 @@ export default function HomePage() {
                     value={grade}
                     onChange={(e) => setGrade(e.target.value)}
                     required
-                    className="bg-white dark:bg-gray-800 border border-gray-300 rounded-md px-3 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-primary w-full h-12"
+                    className="bg-white border border-gray-300 rounded-md px-3 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-primary w-full h-12"
                   >
                     <option value="1">1º ano</option>
                     <option value="2">2º ano</option>

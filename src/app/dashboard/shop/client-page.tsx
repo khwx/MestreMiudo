@@ -124,7 +124,7 @@ export default function ShopClientPage() {
 
       {/* Items Grid */}
       {items.length === 0 ? (
-        <div className="card-kid border-4 border-yellow-300 bg-white dark:bg-gray-800 shadow-2xl max-w-2xl mx-auto">
+        <div className="card-kid border-4 border-yellow-300 bg-white shadow-2xl max-w-2xl mx-auto">
           <div className="p-8 text-center">
             <p className="text-xl text-gray-500">Nenhum item disponível ainda. Volta em breve! 🚀</p>
           </div>
@@ -136,7 +136,7 @@ export default function ShopClientPage() {
             return (
               <div 
                 key={item.id} 
-                className={`card-kid bg-white dark:bg-gray-800 shadow-xl transition-all duration-300 ${
+                className={`card-kid bg-white shadow-xl transition-all duration-300 ${
                   owned ? 'border-green-300' : 'border-yellow-300'
                 }`}
               >

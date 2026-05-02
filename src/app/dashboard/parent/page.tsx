@@ -187,7 +187,7 @@ export default function ParentDashboardPage() {
   if (!accessCode) {
     return (
       <div className="min-h-[50vh] flex items-center justify-center p-8">
-        <div className="card-kid border-4 border-red-300 bg-white dark:bg-gray-800 shadow-2xl max-w-lg">
+        <div className="card-kid border-4 border-red-300 bg-white shadow-2xl max-w-lg">
           <div className="p-8 text-center space-y-4">
             <div className="text-6xl">🔒</div>
             <h2 className="text-3xl font-black text-red-600">Acesso Restrito</h2>
@@ -218,7 +218,7 @@ export default function ParentDashboardPage() {
       </div>
 
       {students.length === 0 ? (
-        <div className="card-kid border-4 border-gray-300 bg-white dark:bg-gray-800 shadow-2xl max-w-lg mx-auto">
+        <div className="card-kid border-4 border-gray-300 bg-white shadow-2xl max-w-lg mx-auto">
           <div className="p-8 text-center space-y-4">
             <div className="text-6xl">😕</div>
               <p className="text-xl text-gray-600 dark:text-gray-300">
@@ -232,7 +232,7 @@ export default function ParentDashboardPage() {
             {students.map(student => (
               <div
                 key={student.studentId}
-                className="card-kid border-4 border-teal-300 bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl transition-all duration-300"
+                className="card-kid border-4 border-teal-300 bg-white shadow-xl hover:shadow-2xl transition-all duration-300"
               >
                 <div className="p-6 space-y-4">
                   {/* Student Header */}
