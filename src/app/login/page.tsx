@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { updateStudentStreak } from '@/app/actions';
+import { updateStudentStreak, initializeStudent } from '@/app/actions';
 import { Loader2 } from 'lucide-react';
 
 export default function LoginPage() {
@@ -15,6 +15,7 @@ export default function LoginPage() {
   const [code, setCode] = useState('');
   const [grade, setGrade] = useState('1');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [welcomeBonus, setWelcomeBonus] = useState<number | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,7 +24,15 @@ export default function LoginPage() {
       try {
         const uniqueId = `${name.trim()}_${code.trim()}`;
         
-        await updateStudentStreak(uniqueId);
+        const [streakResult, initResult] = await Promise.all([
+          updateStudentStreak(uniqueId),
+          initializeStudent(uniqueId)
+        ]);
+        
+        if (initResult.welcomeBonus) {
+          setWelcomeBonus(initResult.welcomeBonus);
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        }
         
         router.push(`/dashboard?name=${encodeURIComponent(uniqueId)}&grade=${grade}`);
       } catch (error) {
@@ -36,6 +45,20 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
+      {welcomeBonus !== null && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 animate-in fade-in duration-300">
+          <div className="bg-white rounded-3xl p-8 text-center shadow-2xl animate-in zoom-in-100 duration-500">
+            <div className="text-8xl mb-4 animate-bounce">🎁</div>
+            <h2 className="text-4xl font-black text-purple-600 mb-2">Bem-vindo ao MestreMiúdo!</h2>
+            <p className="text-2xl text-gray-600 mb-4">Aqui está o teu presente de boas-vindas!</p>
+            <div className="flex items-center justify-center gap-2 bg-yellow-100 rounded-full px-6 py-4 mb-4">
+              <span className="text-5xl">🪙</span>
+              <span className="text-5xl font-black text-yellow-600">+{welcomeBonus}</span>
+            </div>
+            <p className="text-lg text-gray-500">Usa as moedas para comprar itens na Loja Mágica!</p>
+          </div>
+        </div>
+      )}
       <div className="w-full max-w-lg space-y-8">
         {/* Logo e Header */}
         <div className="text-center space-y-4">

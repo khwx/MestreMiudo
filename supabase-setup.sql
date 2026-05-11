@@ -97,6 +97,22 @@ CREATE INDEX IF NOT EXISTS idx_student_rewards_student
   ON student_rewards(student_id);
 
 -- ============================================
+-- Table: user_streaks (daily streak tracking)
+-- ============================================
+CREATE TABLE IF NOT EXISTS user_streaks (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  student_id TEXT NOT NULL UNIQUE,
+  last_activity_date DATE NOT NULL,
+  current_streak INT DEFAULT 1,
+  longest_streak INT DEFAULT 1,
+  streak_freezes INT DEFAULT 0,
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_user_streaks_student 
+  ON user_streaks(student_id);
+
+-- ============================================
 -- Table: daily_challenges (daily challenge tracking)
 -- ============================================
 CREATE TABLE IF NOT EXISTS daily_challenges (
@@ -151,6 +167,7 @@ ALTER TABLE quiz_history ENABLE ROW LEVEL SECURITY;
 ALTER TABLE words ENABLE ROW LEVEL SECURITY;
 ALTER TABLE diagnostic_tests ENABLE ROW LEVEL SECURITY;
 ALTER TABLE student_rewards ENABLE ROW LEVEL SECURITY;
+ALTER TABLE user_streaks ENABLE ROW LEVEL SECURITY;
 ALTER TABLE daily_challenges ENABLE ROW LEVEL SECURITY;
 ALTER TABLE leaderboards ENABLE ROW LEVEL SECURITY;
 ALTER TABLE lessons ENABLE ROW LEVEL SECURITY;
@@ -277,10 +294,21 @@ CREATE POLICY "Allow all for user_inventory" ON user_inventory FOR ALL USING (tr
 
 -- Insert some default shop items
 INSERT INTO shop_items (name, description, price, item_type) VALUES
-  ('Boné Fixe', 'Um boné muito fixe para o teu avatar', 100, 'hat'),
-  ('Cãozinho Fiel', 'Um cãozinho que te acompanha', 250, 'pet'),
-  ('Fundo Espacial', 'Um fundo com estrelas e planetas', 500, 'background'),
-  ('Dança da Vitória', 'Uma animação especial quando ganhas', 1000, 'animation')
+  ('Boné Fixe', 'Um boné muito fixe para o teu avatar', 50, 'hat'),
+  ('Chapéu de Feiticeiro', 'Um chapéu mágico para crianças especiais', 150, 'hat'),
+  ('Coroa de Ouro', 'Uma coroa para o melhor aprendiz', 300, 'hat'),
+  ('Gato Fofo', 'Um gato que ronrona de feliz', 100, 'pet'),
+  ('Coelho Saltitante', 'Um coelhinho branco muito fofo', 150, 'pet'),
+  ('Dragão Pequeno', 'Um dragão verde que cospe fumo', 400, 'pet'),
+  ('Unicórnio Mágico', 'Um unicórnio brilhante e colorido', 600, 'pet'),
+  ('Fundo Floresta', 'Uma floresta encantada com árvores', 200, 'background'),
+  ('Fundo Espaço', 'Um fundo com estrelas e planetas', 350, 'background'),
+  ('Fundo Praia', 'Uma praia ensolarada com mar azul', 400, 'background'),
+  ('Fundo Castelo', 'Um castelo medieval numa montanha', 500, 'background'),
+  ('Dança Estrelas', 'Efeitos de estrelas quando ganhas', 150, 'animation'),
+  ('Confetti Festivo', 'Confetti colorido nas vitórias', 250, 'animation'),
+  ('Fogo de Artifício', 'Fogos de artifício animados', 400, 'animation'),
+  ('Super Sparkle', 'Many sparkle effects on your score', 800, 'animation')
 ON CONFLICT DO NOTHING;
 
 -- User data tables remain Allow All until Supabase Auth is implemented
@@ -292,6 +320,9 @@ CREATE POLICY "Allow all for diagnostic_tests" ON diagnostic_tests FOR ALL USING
 
 DROP POLICY IF EXISTS "Allow all for student_rewards" ON student_rewards;
 CREATE POLICY "Allow all for student_rewards" ON student_rewards FOR ALL USING (true) WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Allow all for user_streaks" ON user_streaks;
+CREATE POLICY "Allow all for user_streaks" ON user_streaks FOR ALL USING (true) WITH CHECK (true);
 
 DROP POLICY IF EXISTS "Allow all for daily_challenges" ON daily_challenges;
 CREATE POLICY "Allow all for daily_challenges" ON daily_challenges FOR ALL USING (true) WITH CHECK (true);

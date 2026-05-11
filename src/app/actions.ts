@@ -1018,6 +1018,46 @@ export async function updateStudentRewardsWithCoinsAction(
 }
 
 // ============================================
+// Student Initialization (Welcome Bonus)
+// ============================================
+
+export async function initializeStudent(studentId: string): Promise<{ success: boolean; welcomeBonus?: number }> {
+  if (!isSupabaseConfigured() || !supabase) {
+    return { success: false };
+  }
+
+  try {
+    const WELCOME_BONUS = 100;
+
+    const { data: existing } = await supabase
+      .from('student_rewards')
+      .select('id')
+      .eq('student_id', studentId)
+      .single();
+
+    if (existing) {
+      return { success: true };
+    }
+
+    const { error } = await supabase.from('student_rewards').insert({
+      student_id: studentId,
+      total_points: WELCOME_BONUS,
+      current_tier: 1,
+      badges: [],
+      day_streak: 1,
+      last_quiz_date: new Date().toISOString(),
+    });
+
+    if (error) throw error;
+
+    return { success: true, welcomeBonus: WELCOME_BONUS };
+  } catch (error) {
+    console.error('[INIT] Failed to initialize student:', error);
+    return { success: false };
+  }
+}
+
+// ============================================
 // Shop System
 // ============================================
 
