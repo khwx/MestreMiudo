@@ -4,7 +4,7 @@ export type TextToSpeechOutput = {
 
 export async function textToSpeech(text: string): Promise<TextToSpeechOutput> {
   try {
-    const edgeTts = require('edge-tts/index.js');
+    const edgeTts = require('edge-tts');
     const ttsFn = edgeTts.tts || edgeTts.default?.tts;
 
     if (!ttsFn || typeof ttsFn !== 'function') {

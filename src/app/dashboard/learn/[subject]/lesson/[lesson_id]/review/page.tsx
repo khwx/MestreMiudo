@@ -33,11 +33,12 @@ export default function LessonReviewPage() {
       setCompletion(completionData);
       
       // Calculate correctness for each challenge
-      if (lessonData && completionData?.answers) {
+      if (lessonData && completionData && completionData.answers) {
         const correctnessMap: Record<string, boolean> = {};
+        const answers = completionData.answers;
         lessonData.challenges?.forEach((challenge) => {
           const challengeId = challenge.id || '';
-          const studentAnswer = completionData.answers[challengeId];
+          const studentAnswer = answers[challengeId];
           if (studentAnswer !== undefined) {
             correctnessMap[challengeId] = validateAnswer(challenge, studentAnswer);
           }
@@ -184,7 +185,7 @@ export default function LessonReviewPage() {
           {lesson.challenges?.map((challenge, index) => {
             const challengeId = challenge.id || '';
             const isCorrect = correctness[challengeId];
-            const studentAnswer = completion.answers[challengeId];
+            const studentAnswer = completion.answers?.[challengeId];
 
             return (
               <div

@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  serverExternalPackages: ['edge-tts'],
+  transpilePackages: ['edge-tts'],
   images: {
     remotePatterns: [
       {

@@ -16,6 +16,7 @@ import { textToSpeech } from "@/ai/flows/text-to-speech";
 import { ai } from "@/ai/genkit";
 import { StoryGenerationInputSchema } from "@/app/shared-schemas";
 import { z } from "zod";
+import type { QuizResultEntry, SaveQuizInput, QuizInput, StoryGenerationInput } from './shared-schemas';
 import fs from 'fs/promises';
 import path from 'path';
 import { generateLessonChallenges } from "@/ai/flows/lesson-challenge-generator";
@@ -588,7 +589,7 @@ export async function generateStoryAction(input: StoryGenerationInput): Promise<
 
     if (imagesResult.status === 'fulfilled') {
       images = imagesResult.value.filter((url: string) => url);
-      if (images.length === 0 && storyOutput.imagePrompts?.length > 0) {
+      if (images.length === 0 && (storyOutput.imagePrompts?.length || 0) > 0) {
         warnings.push('As imagens não estão disponíveis de momento.');
       }
     } else {
