@@ -125,7 +125,7 @@ export function validateQuestionForCurriculum(
 
   // Verificar complexidade geral
   const wordCount = question.split(' ').length;
-  const maxWordsGrade = {
+  const maxWordsGrade: Record<number, number> = {
     1: 10,
     2: 12,
     3: 15,
@@ -197,11 +197,14 @@ export function getRecommendedTopicsForGrade(
   grade: number,
   subject: string,
 ): string[] {
-  if (!curriculumData[subject] || !curriculumData[subject][grade]) {
+  const subjectKey = subject.toLowerCase() as keyof typeof curriculumData;
+  const gradeKey = String(grade) as keyof typeof curriculumData[typeof subjectKey];
+  
+  if (!curriculumData[subjectKey] || !curriculumData[subjectKey][gradeKey]) {
     return [];
   }
 
-  const domains = curriculumData[subject][grade].domains || [];
+  const domains = curriculumData[subjectKey][gradeKey].domains || [];
   const topics: string[] = [];
 
   for (const domain of domains) {

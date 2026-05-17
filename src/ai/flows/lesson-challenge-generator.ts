@@ -2,7 +2,7 @@
 
 import { ai } from '@/ai/genkit';
 import { GenerateChallengesInputSchema, GenerateChallengesOutputSchema } from '@/app/shared-schemas';
-import type { GenerateChallengesInput, GenerateChallengesOutput, LessonChallenge } from '@/app/shared-schemas';
+import type { GenerateChallengesInput, GenerateChallengesOutput } from '@/app/shared-schemas';
 
 const prompt = ai.definePrompt({
   name: 'lessonChallengeGeneratorPrompt',
@@ -53,24 +53,18 @@ export const generateLessonChallengesFlow = ai.defineFlow(
   },
   async (input) => {
     let retries = 3;
-    let lastError: any = null;
+    let lastError: Error | null = null;
 
     while (retries > 0) {
       try {
-        const { output } = await prompt.generate({
-          input,
-          config: {
-            temperature: 0.7,
-            maxOutputTokens: 2000,
-          },
-        });
+        const { output } = await prompt(input);
 
         if (!output || !output.challenges || output.challenges.length === 0) {
           throw new Error('Invalid or empty challenge generation output');
         }
 
         // Add indices
-        const formattedChallenges = output.challenges.map((c: any, index: number) => ({
+        const formattedChallenges = output.challenges.map((c: GenerateChallengesOutput['challenges'][number], index: number) => ({
           ...c,
           challenge_index: index,
         }));
@@ -78,16 +72,16 @@ export const generateLessonChallengesFlow = ai.defineFlow(
         return { challenges: formattedChallenges };
       } catch (error) {
         console.error(`Challenge generation attempt failed (${retries} retries left):`, error);
-        lastError = error;
+        lastError = error instanceof Error ? error : new Error(String(error));
         retries--;
         
         if (retries === 0) {
-          throw new Error(`Failed to generate challenges after 3 attempts. Last error: ${lastError.message}`);
+          throw new Error(`Failed to generate challenges after 3 attempts. Last error: ${lastError?.message}`);
         }
       }
     }
     
-    throw lastError;
+    throw lastError || new Error('Unknown error');
   }
 );
 

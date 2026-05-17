@@ -71,6 +71,7 @@ async function generateQuestionsForGradeSubject(
       try {
         // Generate questions
         const input: PersonalizedLearningPathInput = {
+          studentId: 'bulk-generator',
           gradeLevel: config.gradeLevel,
           subject: config.subject,
           numberOfQuestions: Math.min(batchSize, 10), // API limit

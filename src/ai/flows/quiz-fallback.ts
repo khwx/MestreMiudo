@@ -23,8 +23,9 @@ export async function generateQuizWithFallback(
     const result = await personalizedLearningPath(input);
     console.log('[FALLBACK] Quiz generated successfully with Gemini');
     return result;
-  } catch (geminiError: any) {
-    console.warn('[FALLBACK] Gemini failed, error:', geminiError?.message || geminiError);
+  } catch (geminiError: unknown) {
+    const error = geminiError instanceof Error ? geminiError : new Error(String(geminiError));
+    console.warn('[FALLBACK] Gemini failed, error:', error.message || geminiError);
     
     // Check if Groq API key is available
     if (!process.env.GROQ_API_KEY) {
@@ -38,7 +39,7 @@ export async function generateQuizWithFallback(
       const groqResult = await generateQuizWithGroq(input);
       console.log('[FALLBACK] Quiz generated successfully with Groq');
       return groqResult;
-    } catch (groqError: any) {
+    } catch (groqError: unknown) {
       console.error('[FALLBACK] Groq also failed:', groqError);
       throw new Error('Serviço temporariamente indisponível. Por favor tenta novamente mais tarde.');
     }

@@ -169,6 +169,7 @@ export const ShopItemSchema = z.object({
   price: z.number().int().nonnegative(),
   item_type: z.enum(['hat', 'pet', 'background', 'animation']),
   image_url: z.string().url().optional(),
+  icon: z.string().optional(),
   is_available: z.boolean().default(true),
 });
 export type ShopItem = z.infer<typeof ShopItemSchema>;

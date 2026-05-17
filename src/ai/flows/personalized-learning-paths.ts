@@ -88,7 +88,7 @@ const personalizedLearningPathFlow = ai.defineFlow(
   },
   async (input) => {
     let retries = 3;
-    let lastError: any = null;
+    let lastError: Error | null = null;
 
     while (retries > 0) {
       try {
@@ -128,23 +128,24 @@ const personalizedLearningPathFlow = ai.defineFlow(
           await new Promise(resolve => setTimeout(resolve, 2000));
         }
         
-      } catch (e: any) {
-        lastError = e;
+      } catch (e: unknown) {
+        const error = e instanceof Error ? e : new Error(String(e));
+        lastError = error;
         // Also retry on overload/availability errors.
-        if (e.message.includes('503 Service Unavailable') || e.message.includes('overloaded') || (e.cause && e.cause.message.includes('503')) || e.name === 'ZodError') {
+        if (error.message.includes('503 Service Unavailable') || error.message.includes('overloaded') || (error.cause && String(error.cause).includes('503')) || error.name === 'ZodError') {
           retries--;
           if (retries > 0) {
-            console.log(`Model error or validation failed, retrying in 2 seconds... (${retries} attempts left)`, e);
+            console.log(`Model error or validation failed, retrying in 2 seconds... (${retries} attempts left)`, error);
             await new Promise(resolve => setTimeout(resolve, 2000));
           }
         } else {
           // It's a different, non-retriable error.
-          throw e;
+          throw error;
         }
       }
     }
     // If all retries fail, throw the last recorded error.
     console.error("All retries failed to generate quiz.");
-    throw lastError;
+    throw lastError || new Error('Unknown error');
   }
 );

@@ -139,8 +139,9 @@ async function getQuizHistoryFromFile(): Promise<QuizResultEntry[]> {
         return [];
     }
     return parsed.data;
-  } catch (error: any) {
-    if (error.code === 'ENOENT') {
+  } catch (error: unknown) {
+    const err = error instanceof Error ? error : new Error(String(error));
+    if ((err as any).code === 'ENOENT') {
       return [];
     }
     console.error('Error reading or parsing quiz history:', error);

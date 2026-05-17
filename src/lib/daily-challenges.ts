@@ -84,13 +84,20 @@ async function createDailyChallenge(
   date: string,
   gradeLevel: 1 | 2 | 3 | 4
 ): Promise<DailyChallenge | null> {
-  try {
+  if (!isSupabaseConfigured() || !supabase) {
+    console.warn('[DAILY] Supabase not configured');
+    return null;
+  }
+
+try {
     // Select random subject and difficulty
-    const subject = SUBJECTS[Math.floor(Math.random() * SUBJECTS.length)];
+    const subjectOptions: ("Matemática" | "Português" | "Estudo do Meio")[] = ['Português', 'Matemática', 'Estudo do Meio'];
+    const subject = subjectOptions[Math.floor(Math.random() * subjectOptions.length)];
     const difficulty = DIFFICULTIES[Math.floor(Math.random() * DIFFICULTIES.length)];
 
     // Generate a question
     const input: PersonalizedLearningPathInput = {
+      studentId: 'daily-challenge',
       gradeLevel,
       subject,
       numberOfQuestions: 1,

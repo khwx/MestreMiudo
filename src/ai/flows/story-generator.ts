@@ -46,7 +46,7 @@ const storyGeneratorFlow = ai.defineFlow(
   },
   async (input) => {
     let retries = 3;
-    let lastError: any = null;
+    let lastError: Error | null = null;
 
     while (retries > 0) {
       try {
@@ -68,10 +68,11 @@ const storyGeneratorFlow = ai.defineFlow(
             await new Promise(resolve => setTimeout(resolve, 1500));
           }
         
-      } catch (e: any) {
-        lastError = e;
-        console.error(`[STORY] Error generating story (attempt ${4 - retries}/3):`, e.message);
-        if (e.message.includes('503 Service Unavailable') || e.message.includes('overloaded')) {
+      } catch (e: unknown) {
+        const error = e instanceof Error ? e : new Error(String(e));
+        lastError = error;
+        console.error(`[STORY] Error generating story (attempt ${4 - retries}/3):`, error.message);
+        if (error.message.includes('503 Service Unavailable') || error.message.includes('overloaded')) {
           retries--;
           if (retries > 0) {
             console.log(`[STORY] Model is overloaded, retrying in 2 seconds... (${retries} attempts left)`);
@@ -79,12 +80,12 @@ const storyGeneratorFlow = ai.defineFlow(
           }
         } else {
           // Non-retriable error
-          console.error(`[STORY] Non-retriable error, giving up:`, e.message);
-          throw e;
+          console.error(`[STORY] Non-retriable error, giving up:`, error.message);
+          throw error;
         }
       }
     }
     console.error("[STORY] All retries failed to generate a story.", lastError?.message);
-    throw lastError;
+    throw lastError || new Error('Unknown error');
   }
 );
