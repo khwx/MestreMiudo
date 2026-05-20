@@ -155,10 +155,10 @@ export function calculateQuizPoints(
   const percentage = (score / total) * 100;
   
   // Base points: 10 per question
-  let basePoints = total * 10;
+  const basePoints = total * 10;
   
   // Bonus for correct answers: 5 extra points per correct
-  let correctBonus = score * 5;
+  const correctBonus = score * 5;
   
   // Grade multiplier (higher grades = more challenge)
   const gradeMultiplier = 1 + (gradeLevel - 1) * 0.1;

@@ -44,6 +44,14 @@ export type PersonalizedLearningPathOutput = z.infer<
   typeof PersonalizedLearningPathOutputSchema
 >;
 
+export type QuizQuestion = {
+  question: string;
+  options: string[];
+  correctAnswer: string;
+  topic: string;
+  imageUrl?: string | null;
+};
+
 
 export const QuizInputSchema = z.object({
   studentId: z.string(),

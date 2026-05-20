@@ -161,7 +161,7 @@ export function calculateCoins(stars: number, isDailyBonus: boolean = false): nu
 export async function saveLessonCompletion(
   studentId: string,
   lessonId: string,
-  answers: Record<string, any>,
+  answers: Record<string, unknown>,
   score: number
 ): Promise<LessonCompletion | null> {
   if (!isSupabaseConfigured() || !supabase) return null;

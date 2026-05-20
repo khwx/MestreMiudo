@@ -89,7 +89,7 @@ export default function DashboardClientPage() {
 
   const [history, setHistory] = useState<QuizResultEntry[]>([])
   const [lessonHistory, setLessonHistory] = useState<LessonHistoryItem[]>([])
-  const [rewards, setRewards] = useState<StudentRewards | null>(null)
+  const [rewards, setRewards] = useState<Record<string, unknown> | null>(null)
   const [streak, setStreak] = useState<StudentStreak | null>(null)
   const [dailyChallengeStats, setDailyChallengeStats] = useState<DailyChallengeStats | null>(null)
   const [spacedStats, setSpacedStats] = useState<{ total: number; mastered: number; learning: number; due: number } | null>(null)
@@ -134,7 +134,7 @@ export default function DashboardClientPage() {
 
   const quizPoints = history.reduce((acc, entry) => acc + entry.score * 10, 0)
   const lessonPoints = lessonHistory.reduce((acc, lesson) => acc + (lesson.coins_earned || 0), 0)
-  const rewardPoints = rewards?.total_points || 0
+  const rewardPoints = (rewards?.total_points as number) || 0
   const totalPoints = Math.max(quizPoints + lessonPoints, rewardPoints)
   const { level, nextLevel, progressPercentage, pointsNeeded } = calculateLevel(totalPoints)
 

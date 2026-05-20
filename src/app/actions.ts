@@ -16,7 +16,7 @@ import { textToSpeech } from "@/ai/flows/text-to-speech";
 import { ai } from "@/ai/genkit";
 import { StoryGenerationInputSchema } from "@/app/shared-schemas";
 import { z } from "zod";
-import type { QuizResultEntry, SaveQuizInput, QuizInput, StoryGenerationInput } from './shared-schemas';
+import type { QuizResultEntry, SaveQuizInput, QuizInput, StoryGenerationInput, QuizQuestion } from './shared-schemas';
 import fs from 'fs/promises';
 import path from 'path';
 import { generateLessonChallenges } from "@/ai/flows/lesson-challenge-generator";
@@ -141,6 +141,7 @@ async function getQuizHistoryFromFile(): Promise<QuizResultEntry[]> {
     return parsed.data;
   } catch (error: unknown) {
     const err = error instanceof Error ? error : new Error(String(error));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((err as any).code === 'ENOENT') {
       return [];
     }
@@ -159,15 +160,15 @@ async function getQuizHistory(): Promise<QuizResultEntry[]> {
 
       if (error) throw error;
 
-      return (data || []).map((row: any) => ({
-        timestamp: row.created_at,
-        studentId: row.student_id,
-        gradeLevel: row.grade_level,
-        subject: row.subject,
-        numberOfQuestions: row.total_questions,
+      return (data || []).map((row) => ({
+        timestamp: row.created_at as string,
+        studentId: row.student_id as string,
+        gradeLevel: row.grade_level as number,
+        subject: row.subject as "Português" | "Matemática" | "Estudo do Meio" | "Misto",
+        numberOfQuestions: row.total_questions as number,
         quiz: row.quiz_data,
         answers: row.answers,
-        score: row.score,
+        score: row.score as number,
       }));
     } catch (error) {
       console.error('Supabase quiz history fetch failed, falling back to file:', error);
@@ -223,7 +224,7 @@ async function saveQuizToFile(input: SaveQuizInput) {
   };
 
   try {
-    let history = await getQuizHistoryFromFile();
+    const history = await getQuizHistoryFromFile();
     history.push(newEntry);
     await fs.writeFile(historyFilePath, JSON.stringify(history, null, 2));
   } catch (error) {
@@ -262,7 +263,7 @@ async function getCachedQuestionsFromFile(gradeLevel: number, subject: string | 
     if (history.length === 0) return null;
 
     // Get recently shown questions for this student (last 5 quizzes)
-    let excludeQuestions: string[] = [];
+    const excludeQuestions: string[] = [];
     if (studentId) {
       const studentHistory = history
         .filter(entry => entry.studentId === studentId)
@@ -270,7 +271,7 @@ async function getCachedQuestionsFromFile(gradeLevel: number, subject: string | 
       
       studentHistory.forEach(entry => {
         if (entry.quiz?.quizQuestions) {
-          entry.quiz.quizQuestions.forEach((q: any) => {
+          entry.quiz.quizQuestions.forEach((q: QuizQuestion) => {
             excludeQuestions.push(q.question);
           });
         }
@@ -278,7 +279,7 @@ async function getCachedQuestionsFromFile(gradeLevel: number, subject: string | 
     }
 
     // Collect all unique questions, excluding recently shown ones
-    const allQuestionsMap = new Map<string, any>();
+    const allQuestionsMap = new Map<string, QuizQuestion>();
     
     for (const entry of history) {
       if (entry.quiz?.quizQuestions) {
@@ -315,7 +316,7 @@ async function getCachedQuestionsFromFile(gradeLevel: number, subject: string | 
     console.log(`[CACHE-FILE] Found ${selected.length} questions from file history (${availableQuestions.length} available)`);
 
     return {
-      quizQuestions: selected.map((q: any) => ({
+      quizQuestions: selected.map((q) => ({
         question: q.question,
         options: q.options,
         correctAnswer: q.correctAnswer,
@@ -348,7 +349,7 @@ async function getCachedQuestions(gradeLevel: number, subject: string | undefine
       if (error) throw error;
       if (allQuestions && allQuestions.length > 0) {
         // If studentId provided, exclude questions they've seen recently (last 5 quizzes)
-        let excludeQuestions: string[] = [];
+        const excludeQuestions: string[] = [];
         if (studentId) {
           try {
             const { data: recentHistory } = await supabase
@@ -359,9 +360,9 @@ async function getCachedQuestions(gradeLevel: number, subject: string | undefine
               .limit(5);
             
             if (recentHistory) {
-              recentHistory.forEach((entry: any) => {
+              recentHistory.forEach((entry) => {
                 if (entry.quiz_data?.quizQuestions) {
-                  entry.quiz_data.quizQuestions.forEach((q: any) => {
+                  entry.quiz_data.quizQuestions.forEach((q: QuizQuestion) => {
                     excludeQuestions.push(q.question);
                   });
                 }
@@ -373,7 +374,7 @@ async function getCachedQuestions(gradeLevel: number, subject: string | undefine
         }
 
         // Filter out recently shown questions
-        let availableQuestions = allQuestions.filter((q: any) => !excludeQuestions.includes(q.question));
+        let availableQuestions = allQuestions.filter((q) => !excludeQuestions.includes(q.question));
         
         // If not enough remaining, use all questions
         if (availableQuestions.length < count) {
@@ -389,7 +390,7 @@ async function getCachedQuestions(gradeLevel: number, subject: string | undefine
         }
 
         return {
-          quizQuestions: selected.map((q: any) => ({
+          quizQuestions: selected.map((q) => ({
             question: q.question,
             options: q.options,
             correctAnswer: q.correct_answer,
@@ -408,7 +409,7 @@ async function getCachedQuestions(gradeLevel: number, subject: string | undefine
   return getCachedQuestionsFromFile(gradeLevel, subject, count, studentId);
 }
 
-async function cacheQuestions(gradeLevel: number, subject: string | undefined, questions: any[]) {
+async function cacheQuestions(gradeLevel: number, subject: string | undefined, questions: QuizQuestion[]) {
   if (!isSupabaseConfigured() || !supabase) return;
 
   try {
@@ -625,9 +626,10 @@ export async function generateStoryAction(input: StoryGenerationInput): Promise<
     }
 
     return GenerateStoryActionOutputSchema.parse(result);
-  } catch (error: any) {
-    console.error("[STORY_ACTION] Failed to generate story:", error.message || error);
-    const msg = error?.message || '';
+  } catch (error: unknown) {
+    const err = error instanceof Error ? error : new Error(String(error));
+    console.error("[STORY_ACTION] Failed to generate story:", err.message || error);
+    const msg = err.message || '';
     if (msg.includes('API_KEY') || msg.includes('api key') || msg.includes('401') || msg.includes('403')) {
       throw new Error('A chave da API não está configurada corretamente. Contacta um adulto para resolver.');
     }
@@ -818,7 +820,7 @@ export async function getStudentRewards(studentId: string) {
       const nextProgress = getNextTierProgress(data.total_points || 0);
       
       return {
-        ...data,
+        ...(data as Record<string, unknown>),
         tier,
         nextTier: nextProgress.nextTier,
         progressPercentage: nextProgress.percentage,
@@ -919,7 +921,7 @@ export async function getStudentLessonProgressAction(
 export async function saveLessonCompletionAction(
   studentId: string,
   lessonId: string,
-  answers: Record<string, any>,
+  answers: Record<string, unknown>,
   score: number
 ) {
   try {

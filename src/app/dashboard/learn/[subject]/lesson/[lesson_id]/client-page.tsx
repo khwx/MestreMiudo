@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useParams } from 'next/navigation';
+import type React from 'react';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -12,7 +13,7 @@ import { addToSpacedRepetition } from '@/lib/spaced-repetition';
 import { generateLessonChallengesAction } from '@/app/actions';
 import type { Lesson, LessonChallenge } from '@/app/shared-schemas';
 
-type ChallengeAnswer = Record<string, unknown>;
+type ChallengeAnswer = Record<string, string | string[] | Record<string, string>>;
 
 export default function LessonDetailClient() {
   const params = useParams();
@@ -99,10 +100,10 @@ export default function LessonDetailClient() {
   const progressPercentage =
     challenges.length > 0 ? ((currentChallengeIndex + 1) / challenges.length) * 100 : 0;
 
-  const handleAnswerChange = (challengeId: string, value: string | string[]) => {
+  const handleAnswerChange = (challengeId: string, value: unknown) => {
     setAnswers((prev) => ({
       ...prev,
-      [challengeId]: value,
+      [challengeId]: value as ChallengeAnswer[string],
     }));
   };
 
@@ -171,26 +172,29 @@ export default function LessonDetailClient() {
       .replace(/[\u0300-\u036f]/g, '');
   };
 
-  const validateAnswer = (challenge: LessonChallenge, answer: string | string[] | undefined) => {
-    if (!answer) return false;
+  const validateAnswer = (challenge: LessonChallenge, answer: unknown) => {
+    if (!answer || (typeof answer === 'object' && Object.keys(answer).length === 0)) return false;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const content = challenge.content as any;
+    
     if (challenge.challenge_type === 'multiple_choice') {
-      return answer === challenge.content.correct_answer;
+      return answer === content.correct_answer;
     }
 
     if (challenge.challenge_type === 'fill_blank') {
-      const correctAnswers = challenge.content.correct_answers || [challenge.content.correct_answer];
+      const correctAnswers = content.correct_answers || [content.correct_answer];
       const normalizedAnswer = normalizeText(answer as string);
       return correctAnswers.some((ca: string) => normalizeText(ca) === normalizedAnswer);
     }
 
     if (challenge.challenge_type === 'word_order') {
-      const correctOrder = challenge.content.correct_order;
+      const correctOrder = content.correct_order;
       return JSON.stringify(answer) === JSON.stringify(correctOrder);
     }
 
     if (challenge.challenge_type === 'matching') {
-      const correctMatches = challenge.content.correct_matches;
+      const correctMatches = content.correct_matches;
       return JSON.stringify(answer) === JSON.stringify(correctMatches);
     }
 
@@ -406,16 +410,16 @@ export default function LessonDetailClient() {
                    <CardDescription>💡 Dica: {currentChallenge.hint}</CardDescription>
                  )}
                </CardHeader>
-               <CardContent className="space-y-6">
-                 <ChallengeRenderer
-                   challenge={currentChallenge}
-                   answer={answers[currentChallenge.id || '']}
-                   isSubmitted={submittedAnswers.includes(currentChallenge.id || '')}
-                   isCorrect={answerCorrectness[currentChallenge.id || '']}
-                   shuffledWordOrders={shuffledWordOrders}
-                   setShuffledWordOrders={setShuffledWordOrders}
-                   onChange={(value) => {
-                     handleAnswerChange(currentChallenge.id || '', value);
+<CardContent className="space-y-6">
+                  <ChallengeRenderer
+                    challenge={currentChallenge}
+                    answer={answers[currentChallenge.id || ''] as string | string[] | undefined}
+                    isSubmitted={submittedAnswers.includes(currentChallenge.id || '')}
+                    isCorrect={answerCorrectness[currentChallenge.id || '']}
+                    shuffledWordOrders={shuffledWordOrders}
+setShuffledWordOrders={setShuffledWordOrders}
+                    onChange={(value: unknown) => {
+                      handleAnswerChange(currentChallenge.id || '', value);
                      // Reset correctness when answer changes
                      setAnswerCorrectness(prev => ({
                        ...prev,
@@ -451,8 +455,8 @@ function ChallengeRenderer({
   setShuffledWordOrders,
 }: {
   challenge: LessonChallenge;
-  answer: string | string[] | undefined;
-  onChange: (value: string | string[]) => void;
+  answer: unknown;
+  onChange: (value: unknown) => void;
   isSubmitted?: boolean;
   isCorrect?: boolean | null;
   shuffledWordOrders: Record<string, string[]>;
@@ -501,10 +505,10 @@ function ChallengeRenderer({
      const isWrongAnswer = isSubmitted && isCorrect != null && !isCorrect;
      
      return (
-       <input
-         type="text"
-         value={answer || ''}
-         onChange={!isSubmitted ? (e) => onChange(e.target.value) : undefined}
+<input
+          type="text"
+          value={(answer as string) || ''}
+          onChange={!isSubmitted ? (e) => onChange(e.target.value) : undefined}
          placeholder="Escreve a resposta..."
          className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
            isCorrectAnswer
@@ -614,7 +618,9 @@ function ChallengeRenderer({
   }
 
 if (challenge.challenge_type === 'matching') {
-      const pairs = (challenge.content as any).pairs || [];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const content = challenge.content as any;
+      const pairs = content.pairs || [];
       const isCorrectAnswer = isSubmitted && isCorrect != null && isCorrect;
       const isWrongAnswer = isSubmitted && isCorrect != null && !isCorrect;
       
@@ -626,6 +632,7 @@ if (challenge.challenge_type === 'matching') {
               ? 'border-destructive bg-destructive/50 p-4 rounded-lg'
               : ''
         ) : ''}`}>
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
 {pairs.map((pair: any, index: number) => {
             const answerRecord = (typeof answer === 'object' && answer !== null && !Array.isArray(answer)) ? answer as Record<string, string> : {};
             const userAnswer = answerRecord[pair.left];
@@ -637,7 +644,7 @@ if (challenge.challenge_type === 'matching') {
                 <div className="flex-1 p-3 bg-secondary rounded-lg">{pair.left}</div>
                 <select
                   value={userAnswer || ''}
-                  onChange={!isSubmitted ? (e) => {
+                  onChange={!isSubmitted ? (e: React.ChangeEvent<HTMLSelectElement>) => {
                     onChange({
                       ...answerRecord,
                       [pair.left]: e.target.value,

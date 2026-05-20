@@ -24,7 +24,7 @@ export default function ShopClientPage() {
 
   const [items, setItems] = useState<ShopItem[]>([]);
   const [inventory, setInventory] = useState<UserInventory[]>([]);
-  const [rewards, setRewards] = useState<any>(null);
+  const [rewards, setRewards] = useState<Record<string, unknown> | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -54,10 +54,11 @@ export default function ShopClientPage() {
   }, [name, toast]);
 
   const handleBuy = async (item: ShopItem) => {
-    if (!name || !rewards || rewards.total_points < item.price) {
+    const points = rewards?.total_points as number | undefined;
+    if (!name || (points ?? 0) < item.price) {
       toast({
-        title: "Moedas insuficientes! 💰",
-        description: `Precisas de mais ${item.price - (rewards?.total_points || 0)} moedas.`,
+        title: "Moedas insuficientes!",
+        description: `Precisas de mais ${item.price - (points ?? 0)} moedas.`,
         variant: "destructive"
       });
       return;
@@ -116,7 +117,7 @@ export default function ShopClientPage() {
         <div className="flex items-center justify-center gap-2 bg-yellow-100 dark:bg-yellow-900/40 px-6 py-3 rounded-full inline-block">
           <Coins className="h-8 w-8 text-yellow-600" />
           <span className="text-3xl font-black text-yellow-700">
-            {rewards?.total_points || 0}
+            {(rewards?.total_points as number) || 0}
           </span>
           <span className="text-yellow-600 font-bold">moedas</span>
         </div>
@@ -160,7 +161,7 @@ export default function ShopClientPage() {
                     <div className="flex items-center gap-2">
                       <Coins className="h-5 w-5 text-yellow-500" />
                       <span className={`text-xl font-black ${
-                        (rewards?.total_points || 0) >= item.price ? 'text-green-600' : 'text-red-500'
+                        ((rewards?.total_points as number) || 0) >= item.price ? 'text-green-600' : 'text-red-500'
                       }`}>
                         {item.price}
                       </span>
@@ -174,9 +175,9 @@ export default function ShopClientPage() {
                       <Button
                         onClick={() => handleBuy(item)}
                         className="btn-kid bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white font-bold"
-                        disabled={(rewards?.total_points || 0) < item.price}
+                        disabled={((rewards?.total_points as number) || 0) < item.price}
                       >
-                        Comprar! 🛒
+                        Comprar!
                       </Button>
                     )}
                   </div>

@@ -6,7 +6,7 @@
  * Generates child-friendly questions with correctAnswer as full text (not letter).
  */
 
-import type { PersonalizedLearningPathInput, PersonalizedLearningPathOutput } from '@/app/shared-schemas';
+import type { PersonalizedLearningPathInput, PersonalizedLearningPathOutput, QuizQuestion } from '@/app/shared-schemas';
 import { PersonalizedLearningPathOutputSchema } from '@/app/shared-schemas';
 import curriculumData from './curriculum-topics.json';
 import { fetchImageForTopic } from './pixabay';
@@ -305,25 +305,27 @@ Format: [{"question":"...","options":["A","B","C","D"],"correctAnswer":"exact te
   return prompt;
 }
 
-function parseResponse(content: string): any[] {
+function parseResponse(content: string): QuizQuestion[] {
   const jsonMatch = content.match(/\[[\s\S]*\]/);
   if (!jsonMatch) {
     throw new Error('No JSON array found');
   }
-  return JSON.parse(jsonMatch[0]);
+  return JSON.parse(jsonMatch[0]) as QuizQuestion[];
 }
 
-function normalizeQuestions(questions: any[]): any[] {
+function normalizeQuestions(questions: QuizQuestion[]): QuizQuestion[] {
   return questions.map(q => {
     // Ensure correctAnswer is the text, not a letter
     if (q.correctAnswer && /^[A-D]$/.test(q.correctAnswer) && q.options) {
       const index = q.correctAnswer.charCodeAt(0) - 65; // A=0, B=1, C=2, D=3
-      q.correctAnswer = q.options[index] || q.correctAnswer;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (q as any).correctAnswer = q.options[index] || q.correctAnswer;
     }
     
     // Ensure imageUrl is nullish not undefined
     if (!q.imageUrl) {
-      q.imageUrl = null;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (q as any).imageUrl = null;
     }
     
     // Ensure topic exists
@@ -343,10 +345,10 @@ function normalizeQuestions(questions: any[]): any[] {
   });
 }
 
-async function addImagesToQuestions(questions: any[]): Promise<any[]> {
+async function addImagesToQuestions(questions: QuizQuestion[]): Promise<QuizQuestion[]> {
   console.log('[PIXABAY] Fetching images for questions...');
   
-  const enrichedQuestions = [];
+  const enrichedQuestions: QuizQuestion[] = [];
   
   for (const question of questions) {
     try {

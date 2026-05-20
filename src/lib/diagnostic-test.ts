@@ -19,6 +19,7 @@ interface DiagnosticQuestion {
  * Generate a diagnostic test for a specific grade
  * Test focuses on fundamental concepts to establish baseline
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function generateDiagnosticTest(gradeLevel: 1 | 2 | 3 | 4): Promise<any> {
   console.log(`[DIAGNOSTIC] Generating diagnostic test for grade ${gradeLevel}...`);
   
