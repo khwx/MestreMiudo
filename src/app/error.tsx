@@ -17,18 +17,18 @@ export default function ErrorBoundary({
 
   return (
     <div className="min-h-[50vh] flex items-center justify-center p-8">
-      <div className="card-kid border-4 border-red-300 bg-white shadow-2xl max-w-lg w-full">
+      <div className="card-kid border-4 border-red-300 dark:border-red-700 shadow-2xl max-w-lg w-full">
         <div className="p-8 text-center space-y-6">
           <div className="text-6xl">😵</div>
-          <h2 className="text-3xl font-black text-red-600">
+          <h2 className="text-3xl font-black text-red-600 dark:text-red-400">
             Oops! Algo correu mal...
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-600 dark:text-gray-300">
             Não te preocupes! Podes tentar novamente ou voltar ao início.
           </p>
           {error.message && (
-            <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4">
-              <p className="text-sm text-red-700 font-mono">
+            <div className="bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-700 rounded-xl p-4">
+              <p className="text-sm text-red-700 dark:text-red-300 font-mono">
                 <AlertTriangle className="h-4 w-4 inline mr-2" />
                 {error.message}
               </p>

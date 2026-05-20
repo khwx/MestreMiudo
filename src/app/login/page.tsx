@@ -47,15 +47,15 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
       {welcomeBonus !== null && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 animate-in fade-in duration-300">
-          <div className="bg-white rounded-3xl p-8 text-center shadow-2xl animate-in zoom-in-100 duration-500">
+          <div className="bg-card rounded-3xl p-8 text-center shadow-2xl animate-in zoom-in-100 duration-500">
             <div className="text-8xl mb-4 animate-bounce">🎁</div>
-            <h2 className="text-4xl font-black text-purple-600 mb-2">Bem-vindo ao MestreMiúdo!</h2>
-            <p className="text-2xl text-gray-600 mb-4">Aqui está o teu presente de boas-vindas!</p>
-            <div className="flex items-center justify-center gap-2 bg-yellow-100 rounded-full px-6 py-4 mb-4">
+            <h2 className="text-4xl font-black text-purple-600 dark:text-purple-400 mb-2">Bem-vindo ao MestreMiúdo!</h2>
+            <p className="text-2xl text-gray-600 dark:text-gray-300 mb-4">Aqui está o teu presente de boas-vindas!</p>
+            <div className="flex items-center justify-center gap-2 bg-yellow-100 dark:bg-yellow-900/30 rounded-full px-6 py-4 mb-4">
               <span className="text-5xl">🪙</span>
-              <span className="text-5xl font-black text-yellow-600">+{welcomeBonus}</span>
+              <span className="text-5xl font-black text-yellow-600 dark:text-yellow-400">+{welcomeBonus}</span>
             </div>
-            <p className="text-lg text-gray-500">Usa as moedas para comprar itens na Loja Mágica!</p>
+            <p className="text-lg text-gray-500 dark:text-gray-400">Usa as moedas para comprar itens na Loja Mágica!</p>
           </div>
         </div>
       )}
@@ -72,7 +72,7 @@ export default function LoginPage() {
         </div>
 
         {/* Card de Login */}
-        <div className="card-kid card-kid-primary border-4 border-blue-300 bg-white shadow-2xl">
+        <div className="card-kid card-kid-primary border-4 border-blue-300 dark:border-blue-700 shadow-2xl">
           <div className="p-8">
             <div className="text-center mb-6">
               <div className="text-4xl mb-2">👋</div>
@@ -132,7 +132,7 @@ export default function LoginPage() {
                         h-14 rounded-xl border-3 font-bold text-lg transition-all duration-200
                         ${grade === g 
                           ? 'bg-blue-500 text-white border-blue-500 shadow-lg scale-105' 
-                          : 'bg-white text-gray-600 border-gray-300 hover:border-blue-300'
+                          : 'bg-card text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-700'
                         }
                       `}
                     >
@@ -159,7 +159,7 @@ export default function LoginPage() {
         </div>
 
         {/* Info */}
-        <div className="text-center text-md text-gray-500 dark:text-gray-400 bg-white/50 rounded-xl p-4 border-2 border-blue-100">
+        <div className="text-center text-md text-gray-500 dark:text-gray-400 bg-white/50 dark:bg-gray-800/50 rounded-xl p-4 border-2 border-blue-100 dark:border-gray-700">
           <p>💡 O teu código de acesso foi fornecido pelo teu professor ou responsável.</p>
         </div>
       </div>

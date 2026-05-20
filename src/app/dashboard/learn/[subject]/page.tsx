@@ -14,31 +14,31 @@ const subjectConfig = {
     name: 'Português',
     description: 'Aprende português é uma aventura de palavras e histórias!',
     icon: Book,
-    color: 'text-green-600',
-    bgColor: 'bg-green-100',
-    borderColor: 'border-green-300',
-    gradientFrom: 'from-green-100',
-    gradientTo: 'to-emerald-200',
+    color: 'text-green-600 dark:text-green-400',
+    bgColor: 'bg-green-100 dark:bg-green-900/40',
+    borderColor: 'border-green-300 dark:border-green-700',
+    gradientFrom: 'from-green-100 dark:from-green-900/30',
+    gradientTo: 'to-emerald-200 dark:to-emerald-800/30',
   },
   matematica: {
     name: 'Matemática',
     description: 'Desvenda os mistérios dos números e do cálculo!',
     icon: Divide,
-    color: 'text-blue-600',
-    bgColor: 'bg-blue-100',
-    borderColor: 'border-blue-300',
-    gradientFrom: 'from-blue-100',
-    gradientTo: 'to-sky-200',
+    color: 'text-blue-600 dark:text-blue-400',
+    bgColor: 'bg-blue-100 dark:bg-blue-900/40',
+    borderColor: 'border-blue-300 dark:border-blue-700',
+    gradientFrom: 'from-blue-100 dark:from-blue-900/30',
+    gradientTo: 'to-sky-200 dark:to-sky-800/30',
   },
   'estudo-do-meio': {
     name: 'Estudo do Meio',
     description: 'Explora o mundo ao teu redor!',
     icon: Leaf,
-    color: 'text-orange-600',
-    bgColor: 'bg-orange-100',
-    borderColor: 'border-orange-300',
-    gradientFrom: 'from-orange-100',
-    gradientTo: 'to-amber-200',
+    color: 'text-orange-600 dark:text-orange-400',
+    bgColor: 'bg-orange-100 dark:bg-orange-900/40',
+    borderColor: 'border-orange-300 dark:border-orange-700',
+    gradientFrom: 'from-orange-100 dark:from-orange-900/30',
+    gradientTo: 'to-amber-200 dark:to-amber-800/30',
   },
 };
 
@@ -114,11 +114,11 @@ export default function SubjectPage() {
       </div>
 
       {/* Progress Card */}
-      <div className={`card-kid border-4 ${config.borderColor} bg-white shadow-2xl`}>
+      <div className={`card-kid border-4 ${config.borderColor} shadow-2xl`}>
         <div className="p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200">📚 O Teu Progresso</h2>
-            <div className="bg-white px-4 py-2 rounded-full border-2 border-gray-200">
+            <div className="bg-card px-4 py-2 rounded-full border-2 border-gray-200 dark:border-gray-700">
               <span className="font-black text-lg">{completedCount}</span>
               <span className="text-gray-500 dark:text-gray-400"> / {lessons.length}</span>
             </div>
@@ -146,7 +146,7 @@ export default function SubjectPage() {
           </div>
         </div>
       ) : lessons.length === 0 ? (
-        <div className="card-kid border-4 border-gray-300 bg-white shadow-xl max-w-2xl mx-auto">
+        <div className="card-kid border-4 border-gray-300 dark:border-gray-700 shadow-xl max-w-2xl mx-auto">
           <div className="p-8 text-center">
             <div className="text-6xl mb-4">🚧</div>
             <p className="text-xl text-gray-600 dark:text-gray-300">
@@ -163,7 +163,7 @@ export default function SubjectPage() {
             return (
               <div key={lesson.id}>
                 {isLocked ? (
-                  <div className={`card-kid border-4 bg-gray-100 opacity-60 cursor-not-allowed ${config.borderColor}`}>
+                  <div className={`card-kid border-4 bg-muted/50 opacity-60 cursor-not-allowed ${config.borderColor}`}>
                     <div className="p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-grow">
@@ -182,7 +182,7 @@ export default function SubjectPage() {
                   <Link
                     href={`/dashboard/learn/${subject}/lesson/${lesson.id}?name=${name}&grade=${gradeParam}`}
                   >
-                    <div className={`card-kid border-4 bg-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${config.borderColor}`}>
+                    <div className={`card-kid border-4 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${config.borderColor}`}>
                       <div className="p-6">
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex-grow">
@@ -211,25 +211,25 @@ export default function SubjectPage() {
                         <p className="text-gray-600 mb-4">{lesson.description}</p>
                         
                         {lesson.story_context && (
-                          <div className="bg-purple-50 border-2 border-purple-200 rounded-xl p-3 mb-4">
-                            <p className="text-sm italic text-purple-700">
+                          <div className="bg-purple-50 dark:bg-purple-900/30 border-2 border-purple-200 dark:border-purple-700 rounded-xl p-3 mb-4">
+                            <p className="text-sm italic text-purple-700 dark:text-purple-300">
                               📖 {lesson.story_context}
                             </p>
                           </div>
                         )}
                         
                         {lessonCompleted && (
-                          <div className="flex items-center justify-between pt-4 border-t-2 border-gray-100">
+                          <div className="flex items-center justify-between pt-4 border-t-2 border-gray-100 dark:border-gray-700">
                             <div className="flex items-center gap-2">
                               {[...Array(lessonCompleted.stars)].map((_, i) => (
                                 <Star key={i} className="h-6 w-6 text-yellow-500 fill-yellow-500" />
                               ))}
                               {[...Array(3 - lessonCompleted.stars)].map((_, i) => (
-                                <Star key={i} className="h-6 w-6 text-gray-300" />
+                                <Star key={i} className="h-6 w-6 text-gray-300 dark:text-gray-600" />
                               ))}
                             </div>
-                            <div className="flex items-center gap-2 bg-yellow-100 px-3 py-1 rounded-full">
-                              <span className="text-sm font-bold text-yellow-700">
+                            <div className="flex items-center gap-2 bg-yellow-100 dark:bg-yellow-900/40 px-3 py-1 rounded-full">
+                              <span className="text-sm font-bold text-yellow-700 dark:text-yellow-300">
                                 +{lessonCompleted.coins_earned} 💰
                               </span>
                             </div>
@@ -237,7 +237,7 @@ export default function SubjectPage() {
                         )}
                         
                         {!lessonCompleted && (
-                          <div className="flex items-center gap-2 pt-4 border-t-2 border-gray-100">
+                          <div className="flex items-center gap-2 pt-4 border-t-2 border-gray-100 dark:border-gray-700">
                             <div className={`${config.bgColor} px-3 py-2 rounded-full`}>
                               <span className={`text-sm font-bold ${config.color}`}>
                                 Clica para começar →

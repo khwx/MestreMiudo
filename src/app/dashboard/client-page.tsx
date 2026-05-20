@@ -4,13 +4,38 @@ import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Book, Divide, Leaf, Loader2, Shuffle, Gamepad2, BookHeart, Lightbulb, Flame, ShoppingBag } from "lucide-react"
-import { Progress } from "@/components/ui/progress"
 import { useEffect, useState } from "react"
 import { getFullQuizHistory, getStudentLessonHistoryAction, getStudentRewards, getStudentStreak } from "@/app/actions"
 import { getDailyChallenge, getDailyChallengeStats } from "@/lib/daily-challenges"
 import { getItemsForReview, getStudentStats as getSpacedRepetitionStats } from "@/lib/spaced-repetition"
 import type { QuizResultEntry } from "@/app/shared-schemas"
 import { Trophy, Target, Zap, Calendar, TrendingUp, Medal, Brain, RefreshCw } from "lucide-react"
+
+interface LessonHistoryItem {
+  lessonId: string;
+  completedAt: string;
+  score: number;
+  subject: string;
+  stars: number;
+  coins_earned: number;
+}
+
+interface StudentRewards {
+  total_points: number;
+  current_streak: number;
+  tier: string;
+}
+
+interface StudentStreak {
+  current_streak: number;
+  longest_streak: number;
+}
+
+interface DailyChallengeStats {
+  completed: number;
+  correctAnswers: number;
+  streak: number;
+}
 
 const subjects = [
   { name: "Português", icon: Book, color: "text-green-600", slug: "portugues" },
@@ -63,10 +88,10 @@ export default function DashboardClientPage() {
   const grade = searchParams.get("grade") || "1"
 
   const [history, setHistory] = useState<QuizResultEntry[]>([])
-  const [lessonHistory, setLessonHistory] = useState<any[]>([])
-  const [rewards, setRewards] = useState<any>(null)
-  const [streak, setStreak] = useState<any>(null)
-  const [dailyChallengeStats, setDailyChallengeStats] = useState<any>(null)
+  const [lessonHistory, setLessonHistory] = useState<LessonHistoryItem[]>([])
+  const [rewards, setRewards] = useState<StudentRewards | null>(null)
+  const [streak, setStreak] = useState<StudentStreak | null>(null)
+  const [dailyChallengeStats, setDailyChallengeStats] = useState<DailyChallengeStats | null>(null)
   const [spacedStats, setSpacedStats] = useState<{ total: number; mastered: number; learning: number; due: number } | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -213,7 +238,7 @@ export default function DashboardClientPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Aprender a Brincar */}
             <Link href={`/dashboard/learn?name=${name}&grade=${grade}`}>
-              <div className="card-kid card-kid-success hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white border-green-300">
+              <div className="card-kid card-kid-success hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col border-green-300 dark:border-green-700">
                 <div className="p-6 flex flex-row items-center justify-between pb-2">
                   <h4 className="text-2xl font-black text-green-700 dark:text-green-200">📚 Aprender a Brincar</h4>
                   <div className="p-4 rounded-full bg-green-200 dark:bg-green-800/40 animate-float">
@@ -235,30 +260,30 @@ export default function DashboardClientPage() {
             {/* Quizzes por Disciplina */}
             {subjects.map((subject) => (
               <Link key={subject.name} href={`/quiz/${subject.slug}?name=${name}&grade=${grade}`}>
-                <div className={`card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white border-4 ${
-                  subject.name === 'Português' ? 'border-green-300' :
-                  subject.name === 'Matemática' ? 'border-blue-300' :
-                  'border-orange-300'
+                <div className={`card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col border-4 ${
+                  subject.name === 'Português' ? 'border-green-300 dark:border-green-700' :
+                  subject.name === 'Matemática' ? 'border-blue-300 dark:border-blue-700' :
+                  'border-orange-300 dark:border-orange-700'
                 }`}>
                   <div className="p-6 flex flex-row items-center justify-between pb-2">
                     <h4 className="text-2xl font-black">{subject.name}</h4>
                     <div className={`p-4 rounded-full ${
-                      subject.name === 'Português' ? 'bg-green-100' :
-                      subject.name === 'Matemática' ? 'bg-blue-100' :
-                      'bg-orange-100'
+                      subject.name === 'Português' ? 'bg-green-100 dark:bg-green-900/40' :
+                      subject.name === 'Matemática' ? 'bg-blue-100 dark:bg-blue-900/40' :
+                      'bg-orange-100 dark:bg-orange-900/40'
                     }`}>
                       <subject.icon className={`h-10 w-10 ${
-                        subject.name === 'Português' ? 'text-green-600' :
-                        subject.name === 'Matemática' ? 'text-blue-600' :
-                        'text-orange-600'
+                        subject.name === 'Português' ? 'text-green-600 dark:text-green-400' :
+                        subject.name === 'Matemática' ? 'text-blue-600 dark:text-blue-400' :
+                        'text-orange-600 dark:text-orange-400'
                       }`} />
                     </div>
                   </div>
                   <div className="p-6 pt-0 flex-grow">
-                    <p className="text-gray-600">Desafios de {subject.name} esperam por ti!</p>
+                    <p className="text-gray-600 dark:text-gray-300">Desafios de {subject.name} esperam por ti!</p>
                   </div>
                   <div className="p-4 pt-0">
-                    <div className="flex items-center gap-2 text-gray-500">
+                    <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
                       <span className="text-xl">🎯</span>
                       <span className="font-semibold">Quiz Challenge</span>
                     </div>
@@ -269,15 +294,15 @@ export default function DashboardClientPage() {
 
             {/* Desafio Surpresa */}
             <Link href={`/quiz/misto?name=${name}&grade=${grade}`}>
-              <div className="card-kid card-kid-accent hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white border-4 border-yellow-300">
+              <div className="card-kid card-kid-accent hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col border-4 border-yellow-300 dark:border-yellow-700">
                 <div className="p-6 flex flex-row items-center justify-between pb-2">
-                  <h4 className="text-2xl font-black text-yellow-700">🎲 Desafio Surpresa</h4>
-                  <div className="p-4 rounded-full bg-yellow-100">
-                    <Shuffle className="h-10 w-10 text-yellow-600" />
+                  <h4 className="text-2xl font-black text-yellow-700 dark:text-yellow-300">🎲 Desafio Surpresa</h4>
+                  <div className="p-4 rounded-full bg-yellow-100 dark:bg-yellow-900/40">
+                    <Shuffle className="h-10 w-10 text-yellow-600 dark:text-yellow-400" />
                   </div>
                 </div>
                 <div className="p-6 pt-0 flex-grow">
-                  <p className="text-gray-600">Testa os teus conhecimentos em todas as áreas!</p>
+                  <p className="text-gray-600 dark:text-gray-300">Testa os teus conhecimentos em todas as áreas!</p>
                 </div>
                 <div className="p-4 pt-0">
                   <div className="flex items-center gap-2 text-yellow-600">
@@ -293,44 +318,44 @@ export default function DashboardClientPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {/* Loja */}
             <Link href={`/dashboard/shop?name=${name}&grade=${grade}`}>
-              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white border-4 border-yellow-300">
+              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col border-4 border-yellow-300 dark:border-yellow-700">
                 <div className="p-6 text-center flex-grow">
-                  <ShoppingBag className="h-12 w-12 mx-auto mb-3 text-yellow-600" />
-                  <h4 className="text-xl font-black text-yellow-700">🛍️ Loja</h4>
-                  <p className="text-yellow-600 mt-2">Gasta as tuas moedas!</p>
+                  <ShoppingBag className="h-12 w-12 mx-auto mb-3 text-yellow-600 dark:text-yellow-400" />
+                  <h4 className="text-xl font-black text-yellow-700 dark:text-yellow-300">🛍️ Loja</h4>
+                  <p className="text-yellow-600 dark:text-yellow-400 mt-2">Gasta as tuas moedas!</p>
                 </div>
               </div>
             </Link>
 
             {/* Oficina de Histórias */}
             <Link href={`/dashboard/story-creator?name=${name}&grade=${grade}`}>
-              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white border-4 border-purple-300">
+              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col border-4 border-purple-300 dark:border-purple-700">
                 <div className="p-6 text-center flex-grow">
-                  <BookHeart className="h-12 w-12 mx-auto mb-3 text-purple-600" />
-                  <h4 className="text-xl font-black text-purple-700">📖 Histórias</h4>
-                  <p className="text-purple-600 mt-2">Cria histórias únicas!</p>
+                  <BookHeart className="h-12 w-12 mx-auto mb-3 text-purple-600 dark:text-purple-400" />
+                  <h4 className="text-xl font-black text-purple-700 dark:text-purple-300">📖 Histórias</h4>
+                  <p className="text-purple-600 dark:text-purple-400 mt-2">Cria histórias únicas!</p>
                 </div>
               </div>
             </Link>
 
             {/* Salão de Jogos */}
             <Link href={`/dashboard/games?name=${name}&grade=${grade}`}>
-              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white border-4 border-blue-300">
+              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col border-4 border-blue-300 dark:border-blue-700">
                 <div className="p-6 text-center flex-grow">
-                  <Gamepad2 className="h-12 w-12 mx-auto mb-3 text-blue-600" />
-                  <h4 className="text-xl font-black text-blue-700">🎮 Jogos</h4>
-                  <p className="text-blue-600 mt-2">Diverte-te a jogar!</p>
+                  <Gamepad2 className="h-12 w-12 mx-auto mb-3 text-blue-600 dark:text-blue-400" />
+                  <h4 className="text-xl font-black text-blue-700 dark:text-blue-300">🎮 Jogos</h4>
+                  <p className="text-blue-600 dark:text-blue-400 mt-2">Diverte-te a jogar!</p>
                 </div>
               </div>
             </Link>
 
             {/* Conquistas */}
             <Link href={`/dashboard/achievements?name=${name}&grade=${grade}`}>
-              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col bg-white border-4 border-amber-300">
+              <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col border-4 border-amber-300 dark:border-amber-700">
                 <div className="p-6 text-center flex-grow">
-                  <Trophy className="h-12 w-12 mx-auto mb-3 text-amber-600" />
-                  <h4 className="text-xl font-black text-amber-700">🏆 Conquistas</h4>
-                  <p className="text-amber-600 mt-2">Desbloqueia prémios!</p>
+                  <Trophy className="h-12 w-12 mx-auto mb-3 text-amber-600 dark:text-amber-400" />
+                  <h4 className="text-xl font-black text-amber-700 dark:text-amber-300">🏆 Conquistas</h4>
+                  <p className="text-amber-600 dark:text-amber-400 mt-2">Desbloqueia prémios!</p>
                 </div>
               </div>
             </Link>

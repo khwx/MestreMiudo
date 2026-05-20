@@ -55,13 +55,14 @@ export default function StoryCreatorClientPage() {
           warnings: data.warnings,
         });
         toast({
-          title: "🎉 História Criada!",
+          title: "História Criada!",
           description: "A tua história mágica está pronta!",
         });
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Story generation error:', err);
-      const serverMsg = err?.message || '';
+      const error = err instanceof Error ? err : new Error(String(err));
+      const serverMsg = error.message || '';
       if (serverMsg && serverMsg !== 'Não foi possível gerar a história. Tenta novamente!') {
         setError(serverMsg);
       } else {
@@ -108,7 +109,7 @@ export default function StoryCreatorClientPage() {
       </div>
 
       {/* Creation Card */}
-      <div className="card-kid border-4 border-purple-300 bg-white shadow-2xl">
+      <div className="card-kid border-4 border-purple-300 dark:border-purple-700 shadow-2xl">
         <div className="p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-3">

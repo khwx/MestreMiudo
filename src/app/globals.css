@@ -50,7 +50,7 @@
     --secondary: 160 60% 50%;
     --secondary-foreground: 0 0% 100%;
     --muted: 220 15% 20%;
-    --muted-foreground: 220 15% 75%;
+    --muted-foreground: 215 20% 80%;
     --accent: 38 92% 60%;
     --accent-foreground: 35 100% 15%;
     --destructive: 0 75% 55%;
@@ -72,7 +72,7 @@
 
 /* Cards com rebordo e sombra */
 .card-kid {
-  @apply rounded-2xl border-4 shadow-lg transition-all duration-300;
+  @apply rounded-2xl border-4 shadow-lg transition-all duration-300 bg-card;
 }
 
 .card-kid:hover {
@@ -115,7 +115,7 @@
 
 /* Progress Bar Animada */
 .progress-kid {
-  @apply h-3 rounded-full bg-gray-200 overflow-hidden;
+  @apply h-3 rounded-full bg-muted overflow-hidden;
 }
 
 .progress-kid-bar {

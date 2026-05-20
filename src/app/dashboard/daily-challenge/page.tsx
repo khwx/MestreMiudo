@@ -164,7 +164,7 @@ export default function DailyChallengePage() {
   if (!dailyChallenge) {
     return (
       <div className="min-h-[50vh] flex items-center justify-center p-8">
-        <div className="card-kid border-4 border-gray-300 bg-white shadow-2xl max-w-lg">
+        <div className="card-kid border-4 border-gray-300 dark:border-gray-700 shadow-2xl max-w-lg">
           <div className="p-8 text-center space-y-4">
             <div className="text-6xl">😕</div>
             <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200">Sem Desafio Hoje</h2>
@@ -181,9 +181,9 @@ export default function DailyChallengePage() {
   if (dailyChallenge.completed) {
     return (
       <div className="space-y-8 p-4 md:p-8 max-w-2xl mx-auto">
-        <div className="card-kid border-4 border-orange-300 bg-white shadow-2xl">
-          <div className="p-8 text-center space-y-6">
-            <div className="text-6xl">{dailyChallenge.correct ? '🎉' : '💪'}</div>
+      <div className="card-kid border-4 border-orange-300 dark:border-orange-700 shadow-2xl">
+        <div className="p-8 text-center space-y-6">
+          <div className="text-6xl">{dailyChallenge.correct ? '🎉' : '💪'}</div>
             <h2 className="text-3xl font-black text-gray-800 dark:text-gray-200">
               {dailyChallenge.correct ? 'Desafio Completado!' : 'Já Tentaste!'}
             </h2>
@@ -247,7 +247,7 @@ export default function DailyChallengePage() {
 
       {/* Question Card */}
       {question && !quizCompleted && (
-        <div className="card-kid border-4 border-orange-300 bg-white shadow-2xl">
+        <div className="card-kid border-4 border-orange-300 dark:border-orange-700 shadow-2xl">
           <div className="p-8 space-y-6">
             <h3 className="text-xl font-black text-gray-800 dark:text-gray-200">{question.question}</h3>
 
@@ -264,7 +264,7 @@ export default function DailyChallengePage() {
                       ? 'border-green-400 bg-green-50 dark:bg-green-900/20'
                       : showResult && selectedAnswer === index && !isCorrect
                       ? 'border-red-400 bg-red-50 dark:bg-red-900/20'
-                      : 'border-gray-200 hover:border-orange-300 hover:bg-orange-50/50'
+                      : 'border-gray-200 dark:border-gray-700 hover:border-orange-300 hover:bg-orange-50/50 dark:hover:bg-orange-900/10'
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -339,7 +339,7 @@ export default function DailyChallengePage() {
       )}
 
       {!question && !dailyChallenge.completed && (
-        <div className="card-kid border-4 border-orange-300 bg-white shadow-xl">
+        <div className="card-kid border-4 border-orange-300 dark:border-orange-700 shadow-xl">
           <div className="p-8 text-center space-y-4">
             <div className="text-6xl">🚧</div>
             <p className="text-xl text-gray-600 dark:text-gray-300">Sem pergunta disponível para este nível. Tenta o quiz!</p>

@@ -12,7 +12,7 @@ import { addToSpacedRepetition } from '@/lib/spaced-repetition';
 import { generateLessonChallengesAction } from '@/app/actions';
 import type { Lesson, LessonChallenge } from '@/app/shared-schemas';
 
-type ChallengeAnswer = Record<string, string | string[]>;
+type ChallengeAnswer = Record<string, unknown>;
 
 export default function LessonDetailClient() {
   const params = useParams();
@@ -39,7 +39,7 @@ export default function LessonDetailClient() {
 
   useEffect(() => {
     const fetchLesson = async () => {
-      let lessonData = await getLesson(lessonId);
+      const lessonData = await getLesson(lessonId);
       
       // If lesson exists but has no challenges, generate them!
       if (lessonData && (!lessonData.challenges || lessonData.challenges.length === 0)) {
@@ -262,8 +262,8 @@ export default function LessonDetailClient() {
             <div className="bg-amber-50 dark:bg-amber-900/20 p-4 rounded-lg space-y-2">
               <p className="text-muted-foreground">Moedas ganhas</p>
               <div className="flex justify-center items-center gap-2">
-                <Coins className="h-8 w-8 text-amber-500" />
-                <p className="text-3xl font-bold text-amber-600">+{coins}</p>
+                <Coins className="h-8 w-8 text-amber-500 dark:text-amber-400" />
+                <p className="text-3xl font-bold text-amber-600 dark:text-amber-400">+{coins}</p>
               </div>
             </div>
 
@@ -613,35 +613,36 @@ function ChallengeRenderer({
     );
   }
 
-   if (challenge.challenge_type === 'matching') {
-     const pairs = challenge.content.pairs || [];
-     const isCorrectAnswer = isSubmitted && isCorrect != null && isCorrect;
-     const isWrongAnswer = isSubmitted && isCorrect != null && !isCorrect;
-     
-     return (
-       <div className={`space-y-3 ${isSubmitted && isCorrect != null ? (
-         isCorrectAnswer 
-           ? 'border-success bg-success/50 p-4 rounded-lg' 
-           : isWrongAnswer
-             ? 'border-destructive bg-destructive/50 p-4 rounded-lg'
-             : ''
-       ) : ''}`}>
-         {pairs.map((pair: any, index: number) => {
-           const userAnswer = (answer as any)?.[pair.left];
-           const correctAnswer = pair.correct_matches?.[pair.left];
-           const isPairCorrect = userAnswer === correctAnswer;
-           
-           return (
-             <div key={index} className="flex gap-3 items-center">
-               <div className="flex-1 p-3 bg-secondary rounded-lg">{pair.left}</div>
-               <select
-                 value={userAnswer || ''}
-                 onChange={!isSubmitted ? (e) => {
-                   onChange({
-                     ...((answer as any) || {}),
-                     [pair.left]: e.target.value,
-                   });
-                 } : undefined}
+if (challenge.challenge_type === 'matching') {
+      const pairs = (challenge.content as any).pairs || [];
+      const isCorrectAnswer = isSubmitted && isCorrect != null && isCorrect;
+      const isWrongAnswer = isSubmitted && isCorrect != null && !isCorrect;
+      
+      return (
+        <div className={`space-y-3 ${isSubmitted && isCorrect != null ? (
+          isCorrectAnswer 
+            ? 'border-success bg-success/50 p-4 rounded-lg' 
+            : isWrongAnswer
+              ? 'border-destructive bg-destructive/50 p-4 rounded-lg'
+              : ''
+        ) : ''}`}>
+{pairs.map((pair: any, index: number) => {
+            const answerRecord = (typeof answer === 'object' && answer !== null && !Array.isArray(answer)) ? answer as Record<string, string> : {};
+            const userAnswer = answerRecord[pair.left];
+            const correctAnswer = pair.correct_matches?.[pair.left];
+            const isPairCorrect = userAnswer === correctAnswer;
+            
+            return (
+              <div key={index} className="flex gap-3 items-center">
+                <div className="flex-1 p-3 bg-secondary rounded-lg">{pair.left}</div>
+                <select
+                  value={userAnswer || ''}
+                  onChange={!isSubmitted ? (e) => {
+                    onChange({
+                      ...answerRecord,
+                      [pair.left]: e.target.value,
+                    });
+                  } : undefined}
                  disabled={isSubmitted}
                  className={`flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 ${
                    isSubmitted && isCorrect != null

@@ -124,9 +124,9 @@ export default function ShopClientPage() {
 
       {/* Items Grid */}
       {items.length === 0 ? (
-        <div className="card-kid border-4 border-yellow-300 bg-white shadow-2xl max-w-2xl mx-auto">
+        <div className="card-kid border-4 border-yellow-300 dark:border-yellow-700 shadow-2xl max-w-2xl mx-auto">
           <div className="p-8 text-center">
-            <p className="text-xl text-gray-500">Nenhum item disponível ainda. Volta em breve! 🚀</p>
+            <p className="text-xl text-gray-500 dark:text-gray-400">Nenhum item disponível ainda. Volta em breve! </p>
           </div>
         </div>
       ) : (
@@ -136,8 +136,8 @@ export default function ShopClientPage() {
             return (
               <div 
                 key={item.id} 
-                className={`card-kid bg-white shadow-xl transition-all duration-300 ${
-                  owned ? 'border-green-300' : 'border-yellow-300'
+                className={`card-kid shadow-xl transition-all duration-300 ${
+                  owned ? 'border-green-300 dark:border-green-700' : 'border-yellow-300 dark:border-yellow-700'
                 }`}
               >
                 <div className="p-6">
@@ -145,8 +145,8 @@ export default function ShopClientPage() {
                     <div className="flex items-center gap-2">
                       <span className="text-4xl">{item.icon || '🎁'}</span>
                       <div>
-                        <h3 className="text-xl font-black text-gray-800">{item.name}</h3>
-                        <p className="text-sm text-gray-500">{item.description}</p>
+                        <h3 className="text-xl font-black text-gray-800 dark:text-gray-200">{item.name}</h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">{item.description}</p>
                       </div>
                     </div>
                     {owned && (
@@ -156,7 +156,7 @@ export default function ShopClientPage() {
                     )}
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t-2 border-gray-100">
+                  <div className="flex items-center justify-between pt-4 border-t-2 border-gray-100 dark:border-gray-700">
                     <div className="flex items-center gap-2">
                       <Coins className="h-5 w-5 text-yellow-500" />
                       <span className={`text-xl font-black ${
