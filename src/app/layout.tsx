@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { Analytics } from '@vercel/analytics/react';
 import { AccessibilitySettings } from '@/components/AccessibilitySettings';
+import { AccessibilityProvider } from '@/components/AccessibilityProvider';
 
 export const metadata: Metadata = {
   title: 'MestreMiúdo',
@@ -26,10 +27,12 @@ export default function RootLayout({
         <meta name="theme-color" content="#3b82f6" />
       </head>
       <body className="font-body antialiased">
-        {children}
+        <AccessibilityProvider>
+          {children}
+          <AccessibilitySettings />
+        </AccessibilityProvider>
         <Toaster />
         <Analytics />
-        <AccessibilitySettings />
         <script
           dangerouslySetInnerHTML={{
             __html: `

@@ -86,7 +86,7 @@ export const curriculum = {
       tema: "Consolidação da Literacia",
       topicos: [
         // Leitura
-        "Leitura expressiveiva",
+        "Leitura expressiva",
         "Compreensão de textos variados",
         "Identificar intenções do autor",
         "Fazer previsões",

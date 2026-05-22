@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Loader2, Download, Users, BookOpen, Trophy, TrendingUp, Calendar, ArrowLeft } from 'lucide-react';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
-import jsPDF from 'jspdf';
 
 interface StudentProgress {
   studentId: string;
@@ -110,7 +109,8 @@ export default function ParentDashboardPage() {
     setGeneratingPdf(true);
 
     try {
-      const doc = new jsPDF();
+      const { default: jsPDF } = await import('jspdf');
+    const doc = new jsPDF();
       const pageWidth = doc.internal.pageSize.getWidth();
 
       doc.setFontSize(22);

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mestremiudo-v2';
+const CACHE_NAME = 'mestremiudo-v3';
 const STATIC_ASSETS = [
   '/',
   '/login',
@@ -7,6 +7,12 @@ const STATIC_ASSETS = [
   '/icons/icon-512.png',
   '/offline.html',
 ];
+
+const API_HOSTS = ['supabase.co', 'supabase.net'];
+
+function isApiRequest(url) {
+  return API_HOSTS.some(host => url.includes(host));
+}
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -32,6 +38,27 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+
+  const url = event.request.url;
+
+  if (isApiRequest(url)) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+          }
+          return response;
+        })
+        .catch(() => {
+          return caches.match(event.request);
+        })
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {

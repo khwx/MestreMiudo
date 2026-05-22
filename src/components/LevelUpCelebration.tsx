@@ -1,43 +1,45 @@
 "use client"
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { Trophy, Star, Sparkles, ArrowUp, RefreshCw } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { Trophy, Star, Sparkles, ArrowUp } from 'lucide-react';
+import { getStudentRewards } from '@/app/actions';
 
 export function LevelUpCelebration() {
   const [showCelebration, setShowCelebration] = useState(false);
   const [currentLevel, setCurrentLevel] = useState(1);
   const [progress, setProgress] = useState(0);
   const [celebrating, setCelebrating] = useState(false);
-  const containerRef = useRef(null);
 
   useEffect(() => {
     const checkLevelUp = async () => {
       const searchParams = new URLSearchParams(window.location.search);
       const name = searchParams.get('name') || '';
-      const grade = searchParams.get('grade') || '1';
-
       if (!name) return;
 
       try {
-        const response = await fetch(`/api/level?name=${encodeURIComponent(name)}`);
-        const data = await response.json();
-        
-        if (data.levelUp) {
-          setCurrentLevel(data.level);
-          setProgress(data.progress);
-          setShowCelebration(true);
-          setCelebrating(true);
-          
-          // Auto-hide after 5 seconds
-          setTimeout(() => {
-            setCelebrating(false);
-            setShowCelebration(false);
-          }, 5000);
+        const rewards = await getStudentRewards(name);
+        if (rewards && rewards.tier) {
+          const tierName = rewards.tier.name as string;
+          const storedTier = sessionStorage.getItem('lastTier');
+
+          if (storedTier && storedTier !== tierName) {
+            const level = (rewards as Record<string, unknown>).current_tier as number || 1;
+            setCurrentLevel(level);
+            setProgress(rewards.progressPercentage as number || 0);
+            setShowCelebration(true);
+            setCelebrating(true);
+
+            setTimeout(() => {
+              setCelebrating(false);
+              setShowCelebration(false);
+            }, 5000);
+          }
+
+          sessionStorage.setItem('lastTier', tierName);
         }
       } catch (error) {
         console.error('Failed to check level up:', error);
@@ -47,7 +49,7 @@ export function LevelUpCelebration() {
     checkLevelUp();
   }, []);
 
-  const handleRestart = () => {
+  const handleDismiss = () => {
     setCelebrating(false);
     setShowCelebration(false);
   };
@@ -56,7 +58,6 @@ export function LevelUpCelebration() {
     <AnimatePresence>
       {showCelebration && (
         <motion.div
-          ref={containerRef}
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
@@ -73,7 +74,7 @@ export function LevelUpCelebration() {
                 <Trophy className="h-16 w-16 text-accent" />
               </motion.div>
               <CardTitle className="text-3xl font-bold text-primary">
-                Parabéns, {celebrating ? '🎉' : '🎊'}!
+                Parabéns! 🎉
               </CardTitle>
               {celebrating && (
                 <motion.p
@@ -85,7 +86,7 @@ export function LevelUpCelebration() {
                 </motion.p>
               )}
             </CardHeader>
-            
+
             {celebrating && (
               <CardContent className="text-center space-y-6">
                 <div className="relative">
@@ -100,7 +101,7 @@ export function LevelUpCelebration() {
                     </motion.div>
                   </div>
                 </div>
-                
+
                 <motion.div
                   className="grid grid-cols-3 gap-2"
                   animate={{ opacity: [0, 1] }}
@@ -112,34 +113,28 @@ export function LevelUpCelebration() {
                     className="bg-primary/10 p-3 rounded-lg"
                   >
                     <Star className="h-8 w-8 text-yellow-400 mx-auto" />
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {celebrating ? '⭐ Nova conquista' : '⭐ Pontos acumulados'}
-                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">⭐ Nova conquista</p>
                   </motion.div>
-                  
+
                   <motion.div
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     className="bg-primary/10 p-3 rounded-lg"
                   >
                     <Sparkles className="h-8 w-8 text-accent mx-auto" />
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {celebrating ? '✨ Celebrar' : '✨ Progresso'}
-                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">✨ Celebrar</p>
                   </motion.div>
-                  
+
                   <motion.div
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     className="bg-primary/10 p-3 rounded-lg"
                   >
                     <ArrowUp className="h-8 w-8 text-green-500 mx-auto" />
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {celebrating ? '⬆️ Próximo nível' : '⬆️ Desafios'}
-                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">⬆️ Próximo nível</p>
                   </motion.div>
                 </motion.div>
-                
+
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 1, repeat: Infinity, repeatType: 'reverse' }}
@@ -155,7 +150,7 @@ export function LevelUpCelebration() {
                 </motion.div>
               </CardContent>
             )}
-            
+
             <CardContent className="text-center space-y-4">
               <motion.div
                 animate={{ opacity: [0, 1] }}
@@ -165,12 +160,12 @@ export function LevelUpCelebration() {
                   Continue a jogar e a aprender para alcançar novos patamares!
                 </p>
               </motion.div>
-              
+
               <motion.div
                 animate={{ opacity: [0, 1] }}
                 transition={{ duration: 0.5, delay: 1 }}
               >
-                <Button onClick={handleRestart} className="w-full">
+                <Button onClick={handleDismiss} className="w-full">
                   Continuar Aprendendo
                 </Button>
               </motion.div>
