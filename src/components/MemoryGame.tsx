@@ -108,7 +108,7 @@ export function MemoryGame() {
                 }, 1000);
             }
         }
-    }, [flippedCards, board]);
+    }, [flippedCards, board, playSuccess, playError]);
 
     const handleCardClick = (index: number) => {
         if (isChecking || board[index].isFlipped || flippedCards.length === 2) {

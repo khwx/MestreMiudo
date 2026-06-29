@@ -5,7 +5,7 @@ export type TextToSpeechOutput = {
 export async function textToSpeech(text: string): Promise<TextToSpeechOutput> {
   try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const edgeTts = require('edge-tts');
+    const edgeTts = require('edge-tts/index.js');
     const ttsFn = edgeTts.tts || edgeTts.default?.tts;
 
     if (!ttsFn || typeof ttsFn !== 'function') {

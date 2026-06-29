@@ -7,44 +7,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Share2, Copy, Check, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { checkAchievementUnlock, getAllAchievements } from '@/lib/achievements';
+import { getAllAchievements } from '@/lib/achievements';
 import type { Achievement } from '@/lib/achievements';
-
-// Mock data - em produção viria do servidor
-const mockUnlockedAchievements = [
-  {
-    id: 'first_quiz',
-    title: '🚀 Primeiro Passo',
-    description: 'Completou o primeiro quiz',
-    icon: '🚀',
-    color: '#3b82f6',
-    unlockDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    id: 'five_quizzes',
-    title: '📚 Aprendiz',
-    description: 'Completou 5 quizzes',
-    icon: '📚',
-    color: '#8b5cf6',
-    unlockDate: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    id: 'perfect_score',
-    title: '💯 Perfeição!',
-    description: 'Acertou um quiz com 100%',
-    icon: '💯',
-    color: '#10b981',
-    unlockDate: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    id: 'week_streak',
-    title: '🔥 Uma Semana de Fogo',
-    description: 'Manteve uma streak de 7 dias',
-    icon: '🔥',
-    color: '#ef4444',
-    unlockDate: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
-  },
-];
+import { getStudentAchievements } from '@/app/actions';
 
 const allAchievements = [
   {
@@ -156,8 +121,8 @@ function AchievementCard({ achievement, unlocked, unlockedDate }: AchievementCar
         <div className="mb-4">
           <Badge className="bg-green-500">Desbloqueado</Badge>
            <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-             {new Date(unlockedDate).toLocaleDateString('pt-PT')}
-           </p>
+            {new Date(unlockedDate).toLocaleDateString('pt-PT')}
+          </p>
         </div>
       )}
 
@@ -193,13 +158,24 @@ function AchievementsPageContent() {
   const searchParams = useSearchParams();
   const name = searchParams.get('name') || 'Jogador';
   
-  const [unlockedAchievements, setUnlockedAchievements] = useState<typeof mockUnlockedAchievements>([]);
+  const [unlockedAchievements, setUnlockedAchievements] = useState<Array<{id: string, unlockDate: string}>>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Load real achievements based on student name
-    setUnlockedAchievements(mockUnlockedAchievements);
-    setLoading(false);
+    const loadAchievements = async () => {
+      try {
+        const achievements = await getStudentAchievements(name);
+        setUnlockedAchievements(achievements.map(a => ({ 
+          id: a.achievement_id, 
+          unlockDate: a.unlocked_at 
+        })));
+      } catch (error) {
+        console.error('Error loading achievements:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadAchievements();
   }, [name]);
 
   const unlockedIds = new Set(unlockedAchievements.map((a) => a.id));
@@ -258,14 +234,16 @@ function AchievementsPageContent() {
       <div className="space-y-4">
         <h2 className="text-3xl font-bold">✨ Desbloqueadas</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {unlockedAchievements.map((achievement) => (
-            <AchievementCard
-              key={achievement.id}
-              achievement={achievement}
-              unlocked={true}
-              unlockedDate={achievement.unlockDate}
-            />
-          ))}
+          {allAchievements
+            .filter((a) => unlockedIds.has(a.id))
+            .map((achievement) => (
+              <AchievementCard
+                key={achievement.id}
+                achievement={achievement}
+                unlocked={true}
+                unlockedDate={unlockedMap.get(achievement.id)?.unlockDate}
+              />
+            ))}
         </div>
       </div>
 
@@ -293,10 +271,10 @@ function AchievementsPageContent() {
         <CardContent className="text-sm text-blue-800 space-y-2">
           <p>Completa quizzes regularmente para desbloquear badges de progresso</p>
           <p>Mantém uma streak diária para ganhar badges de consistência</p>
-          <p>Consegue 100% num quiz para desbloquear a conquista &quot;Perfeição&quot;</p>
+          <p>Consegue 100% num quiz para desbloquear a conquista "Perfeição"</p>
           <p>Atinge 90% de média em todas as disciplinas para ser um Mestre Completo</p>
           <p>Completa 30 desafios diários para te tornares um Campeão</p>
-          <p>Sobe no ranking para desbloquear &quot;Melhor da Classe&quot;</p>
+          <p>Sobe no ranking para desbloquear "Melhor da Classe"</p>
         </CardContent>
       </Card>
     </div>

@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, CheckCircle, XCircle, Flame, Coins, Loader2 } from 'lucide-react';
+import { ArrowLeft, CheckCircle, XCircle, Flame, Coins, Loader2, AlertTriangle } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { getDailyChallenge, completeDailyChallenge } from '@/lib/daily-challenges';
+import { getDailyChallenge, completeDailyChallenge, getDailyChallengeQuestion } from '@/lib/daily-challenges';
+import { Input } from '@/components/ui/input';
 
 interface DailyChallengeData {
   id: string;
@@ -19,71 +20,13 @@ interface DailyChallengeData {
   bonusPoints: number;
 }
 
-interface DailyQuestion {
+interface ChallengeQuestion {
+  id: string;
   question: string;
-  options: string[];
-  correctAnswer: number;
-  explanation: string;
+  challenge_type: 'multiple_choice' | 'fill_blank' | 'word_order' | 'matching';
+  content: Record<string, unknown>;
+  hint: string | null;
 }
-
-const gradeQuestions: Record<number, Record<string, DailyQuestion[]>> = {
-  1: {
-    'Português': [
-      { question: 'Qual destas palavras tem mais sílabas?', options: ['Sol', 'Ca-sa', 'Bo-la', 'A-ve'], correctAnswer: 1, explanation: '"Casa" tem 2 sílabas: ca-sa!' },
-      { question: 'Qual é a vogal que falta em "c_sa"?', options: ['b', 'o', 'r', 't'], correctAnswer: 1, explanation: 'A palavra é "cosa" ou "casa" - a vogal é "o" ou "a"!' },
-    ],
-    'Matemática': [
-      { question: 'Se tens 3 maçãs e comes 1, quantas ficam?', options: ['1', '2', '3', '4'], correctAnswer: 1, explanation: '3 - 1 = 2 maçãs!' },
-      { question: 'Quantos dedos tens nas duas mãos?', options: ['5', '8', '10', '12'], correctAnswer: 2, explanation: '5 + 5 = 10 dedos!' },
-    ],
-    'Estudo do Meio': [
-      { question: 'Em que estação do ano faz mais calor?', options: ['Inverno', 'Verão', 'Outono', 'Primavera'], correctAnswer: 1, explanation: 'No Verão faz mais calor!' },
-      { question: 'Qual animal faz "miau"?', options: ['Cão', 'Gato', 'Pássaro', 'Peixe'], correctAnswer: 1, explanation: 'O gato faz "miau"!' },
-    ],
-  },
-  2: {
-    'Português': [
-      { question: 'Qual palavra se escreve com "ss"?', options: ['paço', 'pássaro', 'começar', 'caça'], correctAnswer: 1, explanation: '"Pássaro" escreve-se com ss entre vogais!' },
-      { question: 'O feminino de "ator" é:', options: ['atora', 'atriz', 'atoria', 'atorinha'], correctAnswer: 1, explanation: '"Atriz" é o feminino de "ator"!' },
-    ],
-    'Matemática': [
-      { question: '8 + 7 = ?', options: ['13', '14', '15', '16'], correctAnswer: 2, explanation: '8 + 7 = 15!' },
-      { question: '15 - 9 = ?', options: ['5', '6', '7', '8'], correctAnswer: 1, explanation: '15 - 9 = 6!' },
-    ],
-    'Estudo do Meio': [
-      { question: 'Qual é o maior órgão do corpo humano?', options: ['Coração', 'Pele', 'Fígado', 'Pulmão'], correctAnswer: 1, explanation: 'A pele é o maior órgão do corpo!' },
-      { question: 'Qual animal é herbívoro?', options: ['Leão', 'Coelho', 'Águia', 'Tubarão'], correctAnswer: 1, explanation: 'O coelho come plantas - é herbívoro!' },
-    ],
-  },
-  3: {
-    'Português': [
-      { question: 'Qual é o sinónimo de "feliz"?', options: ['Triste', 'Contente', 'Zangado', 'Cansado'], correctAnswer: 1, explanation: '"Contente" é sinónimo de "feliz"!' },
-      { question: 'Numa narrativa, o clímax é:', options: ['O início', 'O ponto mais tenso', 'O final', 'A descrição'], correctAnswer: 1, explanation: 'O clímax é o momento de maior tensão!' },
-    ],
-    'Matemática': [
-      { question: '4 × 6 = ?', options: ['20', '22', '24', '28'], correctAnswer: 2, explanation: '4 × 6 = 24!' },
-      { question: 'Qual fração representa metade?', options: ['1/3', '1/2', '1/4', '2/3'], correctAnswer: 1, explanation: '1/2 é metade!' },
-    ],
-    'Estudo do Meio': [
-      { question: 'Qual é o planeta mais próximo do Sol?', options: ['Vénus', 'Terra', 'Mercúrio', 'Marte'], correctAnswer: 2, explanation: 'Mercúrio é o mais próximo do Sol!' },
-      { question: 'Qual é o maior oceano da Terra?', options: ['Atlântico', 'Pacífico', 'Índico', 'Ártico'], correctAnswer: 1, explanation: 'O Pacífico é o maior oceano!' },
-    ],
-  },
-  4: {
-    'Português': [
-      { question: '"Fecha a janela!" é uma frase:', options: ['Declarativa', 'Interrogativa', 'Imperativa', 'Exclamativa'], correctAnswer: 2, explanation: 'Dá uma ordem - é imperativa!' },
-      { question: 'Qual é o plural de "papél"?', options: ['papelis', 'papéis', 'papeles', 'papéis'], correctAnswer: 1, explanation: 'O plural de "papél" é "papéis"!' },
-    ],
-    'Matemática': [
-      { question: '17 ÷ 5 tem que resultado?', options: ['3 resto 2', '2 resto 7', '4 resto 1', '3 resto 1'], correctAnswer: 0, explanation: '5 × 3 = 15, e 17 - 15 = 2!' },
-      { question: 'Qual é a área de um retângulo 4×6?', options: ['10', '20', '24', '48'], correctAnswer: 2, explanation: 'Área = 4 × 6 = 24!' },
-    ],
-    'Estudo do Meio': [
-      { question: 'Qual órgão bombeia o sangue?', options: ['Pulmão', 'Fígado', 'Coração', 'Rins'], correctAnswer: 2, explanation: 'O coração bombeia o sangue!' },
-      { question: 'A Convenção dos Direitos da Criança foi adotada em:', options: ['1959', '1989', '1999', '2009'], correctAnswer: 1, explanation: 'Foi em 1989 pela ONU!' },
-    ],
-  },
-};
 
 export default function DailyChallengePage() {
   const searchParams = useSearchParams();
@@ -91,8 +34,8 @@ export default function DailyChallengePage() {
   const grade = searchParams.get('grade') || '1';
 
   const [dailyChallenge, setDailyChallenge] = useState<DailyChallengeData | null>(null);
-  const [question, setQuestion] = useState<DailyQuestion | null>(null);
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [question, setQuestion] = useState<ChallengeQuestion | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | number | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
@@ -107,12 +50,9 @@ export default function DailyChallengePage() {
         const challenge = await getDailyChallenge(name, gradeLevel);
         setDailyChallenge(challenge);
 
-        if (challenge && !challenge.completed) {
-          const subjectQuestions = gradeQuestions[gradeLevel]?.[challenge.subject];
-          if (subjectQuestions && subjectQuestions.length > 0) {
-            const randomIndex = Math.floor(Math.random() * subjectQuestions.length);
-            setQuestion(subjectQuestions[randomIndex]);
-          }
+        if (challenge && !challenge.completed && challenge.questionId) {
+          const questionData = await getDailyChallengeQuestion(challenge.id);
+          setQuestion(questionData);
         }
       } catch (error) {
         console.error('Error loading daily challenge:', error);
@@ -124,14 +64,36 @@ export default function DailyChallengePage() {
     loadDailyChallenge();
   }, [name, gradeLevel]);
 
-  const handleAnswerSelect = (answerIndex: number) => {
+  const handleAnswerSelect = (answer: string | number) => {
     if (showResult) return;
-    setSelectedAnswer(answerIndex);
+    setSelectedAnswer(answer);
   };
 
   const handleSubmitAnswer = () => {
     if (selectedAnswer === null || !question) return;
-    const correct = selectedAnswer === question.correctAnswer;
+    
+    let correct = false;
+    const content = question.content as Record<string, unknown>;
+    
+    if (question.challenge_type === 'multiple_choice') {
+      correct = selectedAnswer === content.correct_answer;
+    } else if (question.challenge_type === 'fill_blank') {
+      const correctAnswers = content.correct_answers as string[] || [content.correct_answer as string];
+      correct = correctAnswers.map(a => a.toLowerCase().trim()).includes(
+        String(selectedAnswer).toLowerCase().trim()
+      );
+    } else if (question.challenge_type === 'matching') {
+      const correctMatches = content.correct_matches as Record<string, string>;
+      const selected = selectedAnswer as Record<string, string>;
+      correct = Object.keys(correctMatches).every(
+        key => selected[key] === correctMatches[key]
+      );
+    } else if (question.challenge_type === 'word_order') {
+      const correctOrder = content.correct_order as string[];
+      const selectedOrder = selectedAnswer as string[];
+      correct = JSON.stringify(correctOrder) === JSON.stringify(selectedOrder);
+    }
+    
     setIsCorrect(correct);
     setShowResult(true);
   };
@@ -148,6 +110,189 @@ export default function DailyChallengePage() {
     } finally {
       setCompleting(false);
     }
+  };
+
+  const renderChallenge = () => {
+    if (!question) return null;
+
+    const content = question.content as Record<string, unknown>;
+
+    if (question.challenge_type === 'multiple_choice') {
+      const options = content.options as string[];
+      return (
+        <div className="space-y-3">
+          {options.map((option, index) => (
+            <button
+              key={index}
+              onClick={() => handleAnswerSelect(option)}
+              disabled={showResult}
+              className={`w-full p-4 text-left rounded-xl border-3 transition-all duration-200 text-lg font-semibold ${
+                selectedAnswer === option && !showResult
+                  ? 'border-orange-400 bg-orange-50 dark:bg-orange-900/20 scale-105'
+                  : showResult && option === content.correct_answer
+                  ? 'border-green-400 bg-green-50 dark:bg-green-900/20'
+                  : showResult && selectedAnswer === option && !isCorrect
+                  ? 'border-red-400 bg-red-50 dark:bg-red-900/20'
+                  : 'border-gray-200 dark:border-gray-700 hover:border-orange-300 hover:bg-orange-50/50 dark:hover:bg-orange-900/10'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <div className={`w-6 h-6 rounded-full border-3 flex items-center justify-center ${
+                  selectedAnswer === option && !showResult
+                    ? 'border-orange-500 bg-orange-500'
+                    : showResult && option === content.correct_answer
+                    ? 'border-green-500 bg-green-500'
+                    : showResult && selectedAnswer === option && !isCorrect
+                    ? 'border-red-500 bg-red-500'
+                    : 'border-gray-300'
+                }`}>
+                  {(selectedAnswer === option || (showResult && option === content.correct_answer)) && (
+                    <div className="w-3 h-3 bg-white rounded-full" />
+                  )}
+                </div>
+                <span>{option}</span>
+                {showResult && option === content.correct_answer && (
+                  <CheckCircle className="h-5 w-5 text-green-500 ml-auto" />
+                )}
+                {showResult && selectedAnswer === option && !isCorrect && (
+                  <XCircle className="h-5 w-5 text-red-500 ml-auto" />
+                )}
+              </div>
+            </button>
+          ))}
+        </div>
+      );
+    }
+
+    if (question.challenge_type === 'fill_blank') {
+      return (
+        <div className="space-y-4">
+          <Input
+            value={selectedAnswer as string || ''}
+            onChange={(e) => handleAnswerSelect(e.target.value)}
+            disabled={showResult}
+            placeholder="Escreve a resposta..."
+            className="text-lg text-center font-semibold border-3 border-gray-200 dark:border-gray-700 rounded-xl p-4"
+          />
+          {showResult && (
+            <p className={`text-center text-lg font-bold ${
+              isCorrect ? 'text-green-600' : 'text-red-600'
+            }`}>
+              Resposta correta: {Array.isArray(content.correct_answers) 
+                ? content.correct_answers.join(' ou ') 
+                : content.correct_answer}
+            </p>
+          )}
+        </div>
+      );
+    }
+
+    if (question.challenge_type === 'matching') {
+      const pairs = content.pairs as Array<{ left: string; options: string[] }>;
+      const correctMatches = content.correct_matches as Record<string, string>;
+      const [matches, setMatches] = useState<Record<string, string>>({});
+
+      const handleMatchChange = (left: string, value: string) => {
+        if (showResult) return;
+        setMatches(prev => ({ ...prev, [left]: value }));
+        handleAnswerSelect({ ...matches, [left]: value });
+      };
+
+      return (
+        <div className="space-y-4">
+          {pairs.map((pair, index) => (
+            <div key={index} className="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border-2 border-gray-200 dark:border-gray-700">
+              <p className="font-semibold mb-2">{pair.left}</p>
+              <select
+                value={matches[pair.left] || ''}
+                onChange={(e) => handleMatchChange(pair.left, e.target.value)}
+                disabled={showResult}
+                className="w-full p-3 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-lg"
+              >
+                <option value="">Seleciona...</option>
+                {pair.options.map((opt, i) => (
+                  <option key={i} value={opt}>{opt}</option>
+                ))}
+              </select>
+              {showResult && (
+                <p className={`mt-2 text-sm ${
+                  matches[pair.left] === correctMatches[pair.left] 
+                    ? 'text-green-600' 
+                    : 'text-red-600'
+                }`}>
+                  {matches[pair.left] === correctMatches[pair.left] ? '✅' : '❌'} 
+                  Correto: {correctMatches[pair.left]}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    if (question.challenge_type === 'word_order') {
+      const correctOrder = content.correct_order as string[];
+      const [order, setOrder] = useState<string[]>(() => {
+        // Shuffle initially
+        return [...correctOrder].sort(() => Math.random() - 0.5);
+      });
+
+      const moveUp = (index: number) => {
+        if (showResult || index === 0) return;
+        const newOrder = [...order];
+        [newOrder[index - 1], newOrder[index]] = [newOrder[index], newOrder[index - 1]];
+        setOrder(newOrder);
+        handleAnswerSelect(newOrder);
+      };
+
+      const moveDown = (index: number) => {
+        if (showResult || index === order.length - 1) return;
+        const newOrder = [...order];
+        [newOrder[index], newOrder[index + 1]] = [newOrder[index + 1], newOrder[index]];
+        setOrder(newOrder);
+        handleAnswerSelect(newOrder);
+      };
+
+      return (
+        <div className="space-y-3">
+          <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
+            Ordena as palavras arrastando (usa as setas ↑↓)
+          </p>
+          <div className="space-y-2">
+            {order.map((word, index) => (
+              <div key={index} className="flex items-center gap-3 p-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl">
+                <span className="text-2xl font-bold flex-1 text-center">{word}</span>
+                <div className="flex flex-col">
+                  <button
+                    onClick={() => moveUp(index)}
+                    disabled={showResult || index === 0}
+                    className="text-orange-500 hover:text-orange-700 disabled:opacity-50"
+                  >
+                    ↑
+                  </button>
+                  <button
+                    onClick={() => moveDown(index)}
+                    disabled={showResult || index === order.length - 1}
+                    className="text-orange-500 hover:text-orange-700 disabled:opacity-50"
+                  >
+                    ↓
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          {showResult && (
+            <p className={`text-center text-lg font-bold ${
+              isCorrect ? 'text-green-600' : 'text-red-600'
+            }`}>
+              Ordem correta: {correctOrder.join(' → ')}
+            </p>
+          )}
+        </div>
+      );
+    }
+
+    return <p>Tipo de desafio não suportado</p>;
   };
 
   if (loading) {
@@ -250,48 +395,18 @@ export default function DailyChallengePage() {
         <div className="card-kid border-4 border-orange-300 dark:border-orange-700 shadow-2xl">
           <div className="p-8 space-y-6">
             <h3 className="text-xl font-black text-gray-800 dark:text-gray-200">{question.question}</h3>
+            
+            {question.hint && (
+              <div className="bg-yellow-50 dark:bg-yellow-900/30 border-2 border-yellow-200 dark:border-yellow-800 rounded-xl p-4">
+                <div className="flex items-center gap-2">
+                  <AlertTriangle className="h-5 w-5 text-yellow-600" />
+                  <span className="text-yellow-800 dark:text-yellow-200 font-semibold">Dica:</span>
+                  <span className="text-yellow-700 dark:text-yellow-300">{question.hint}</span>
+                </div>
+              </div>
+            )}
 
-            <div className="space-y-3">
-              {question.options.map((option, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleAnswerSelect(index)}
-                  disabled={showResult}
-                  className={`w-full p-4 text-left rounded-xl border-3 transition-all duration-200 text-lg font-semibold ${
-                    selectedAnswer === index && !showResult
-                      ? 'border-orange-400 bg-orange-50 dark:bg-orange-900/20 scale-105'
-                      : showResult && index === question.correctAnswer
-                      ? 'border-green-400 bg-green-50 dark:bg-green-900/20'
-                      : showResult && selectedAnswer === index && !isCorrect
-                      ? 'border-red-400 bg-red-50 dark:bg-red-900/20'
-                      : 'border-gray-200 dark:border-gray-700 hover:border-orange-300 hover:bg-orange-50/50 dark:hover:bg-orange-900/10'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-6 h-6 rounded-full border-3 flex items-center justify-center ${
-                      selectedAnswer === index && !showResult
-                        ? 'border-orange-500 bg-orange-500'
-                        : showResult && index === question.correctAnswer
-                        ? 'border-green-500 bg-green-500'
-                        : showResult && selectedAnswer === index && !isCorrect
-                        ? 'border-red-500 bg-red-500'
-                        : 'border-gray-300'
-                    }`}>
-                      {(selectedAnswer === index || (showResult && index === question.correctAnswer)) && (
-                        <div className="w-3 h-3 bg-white rounded-full" />
-                      )}
-                    </div>
-                    <span>{option}</span>
-                    {showResult && index === question.correctAnswer && (
-                      <CheckCircle className="h-5 w-5 text-green-500 ml-auto" />
-                    )}
-                    {showResult && selectedAnswer === index && !isCorrect && (
-                      <XCircle className="h-5 w-5 text-red-500 ml-auto" />
-                    )}
-                  </div>
-                </button>
-              ))}
-            </div>
+            {renderChallenge()}
 
             {showResult && (
               <div className={`p-4 rounded-xl border-2 ${
@@ -309,7 +424,6 @@ export default function DailyChallengePage() {
                     {isCorrect ? 'Correto! 🎉' : 'Errado! 😅'}
                   </span>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300">{question.explanation}</p>
               </div>
             )}
 

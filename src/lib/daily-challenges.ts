@@ -6,8 +6,6 @@
  */
 
 import { supabase, isSupabaseConfigured } from './supabase';
-import type { PersonalizedLearningPathInput } from '@/app/shared-schemas';
-import { generateQuizDirect } from './quiz-generator';
 
 interface DailyChallenge {
   id: string;
@@ -21,8 +19,61 @@ interface DailyChallenge {
   bonusPoints: number;
 }
 
+interface ChallengeQuestion {
+  id: string;
+  question: string;
+  challenge_type: 'multiple_choice' | 'fill_blank' | 'word_order' | 'matching';
+  content: Record<string, unknown>;
+  hint: string | null;
+}
+
 const SUBJECTS = ['Português', 'Matemática', 'Estudo do Meio'];
 const DIFFICULTIES = ['Fácil', 'Normal', 'Difícil'];
+
+/**
+ * Get a random challenge question from lesson_challenges for the given subject and grade
+ */
+async function getRandomLessonChallenge(
+  gradeLevel: 1 | 2 | 3 | 4,
+  subject: string
+): Promise<ChallengeQuestion | null> {
+  if (!isSupabaseConfigured() || !supabase) {
+    return null;
+  }
+
+  try {
+    // Get lesson IDs for this subject and grade
+    const { data: lessons, error: lessonsError } = await supabase
+      .from('lessons')
+      .select('id')
+      .eq('subject', subject)
+      .eq('grade_level', gradeLevel);
+
+    if (lessonsError || !lessons || lessons.length === 0) {
+      return null;
+    }
+
+    const lessonIds = lessons.map(l => l.id);
+
+    // Get a random challenge from those lessons
+    const { data: challenges, error: challengesError } = await supabase
+      .from('lesson_challenges')
+      .select('*')
+      .in('lesson_id', lessonIds)
+      .order('challenge_index', { ascending: true });
+
+    if (challengesError || !challenges || challenges.length === 0) {
+      return null;
+    }
+
+    // Pick a random challenge
+    const randomIndex = Math.floor(Math.random() * challenges.length);
+    return challenges[randomIndex];
+  } catch (error) {
+    console.error('[DAILY] Error fetching lesson challenge:', error);
+    return null;
+  }
+}
 
 /**
  * Get or create today's daily challenge for a student
@@ -48,12 +99,10 @@ export async function getDailyChallenge(
       .single();
 
     if (fetchError && fetchError.code !== 'PGRST116') {
-      // PGRST116 = no rows found (expected)
       throw fetchError;
     }
 
     if (existing) {
-      console.log(`[DAILY] Found existing challenge for ${studentId} on ${today}`);
       return {
         id: existing.id,
         studentId: existing.student_id,
@@ -68,7 +117,6 @@ export async function getDailyChallenge(
     }
 
     // Create a new challenge
-    console.log(`[DAILY] Creating new challenge for ${studentId} on ${today}`);
     return createDailyChallenge(studentId, today, gradeLevel);
   } catch (error) {
     console.error('[DAILY] Error getting daily challenge:', error);
@@ -77,7 +125,7 @@ export async function getDailyChallenge(
 }
 
 /**
- * Create a new daily challenge for a student
+ * Create a new daily challenge for a student using lesson_challenges
  */
 async function createDailyChallenge(
   studentId: string,
@@ -85,42 +133,31 @@ async function createDailyChallenge(
   gradeLevel: 1 | 2 | 3 | 4
 ): Promise<DailyChallenge | null> {
   if (!isSupabaseConfigured() || !supabase) {
-    console.warn('[DAILY] Supabase not configured');
     return null;
   }
 
-try {
-    // Select random subject and difficulty
-    const subjectOptions: ("Matemática" | "Português" | "Estudo do Meio")[] = ['Português', 'Matemática', 'Estudo do Meio'];
-    const subject = subjectOptions[Math.floor(Math.random() * subjectOptions.length)];
+  try {
+    // Select random subject
+    const subject = SUBJECTS[Math.floor(Math.random() * SUBJECTS.length)];
     const difficulty = DIFFICULTIES[Math.floor(Math.random() * DIFFICULTIES.length)];
 
-    // Generate a question
-    const input: PersonalizedLearningPathInput = {
-      studentId: 'daily-challenge',
-      gradeLevel,
-      subject,
-      numberOfQuestions: 1,
-      performanceData: undefined,
-    };
+    // Get a random challenge from lesson_challenges
+    const challenge = await getRandomLessonChallenge(gradeLevel, subject);
 
-    const result = await generateQuizDirect(input);
-
-    if (!result || !result.quizQuestions || result.quizQuestions.length === 0) {
-      throw new Error('Failed to generate question for daily challenge');
+    if (!challenge) {
+      // Fallback: create a simple challenge
+      return createFallbackChallenge(studentId, date, subject, difficulty);
     }
 
-    const question = result.quizQuestions[0];
-
     // Save to database
-    const { data: challenge, error } = await supabase
+    const { data: newChallenge, error } = await supabase
       .from('daily_challenges')
       .insert({
         student_id: studentId,
         challenge_date: date,
         subject,
         difficulty,
-        question_id: null, // We store the full question in the response
+        question_id: challenge.id,
         completed: false,
         bonus_points: 50,
       })
@@ -129,7 +166,50 @@ try {
 
     if (error) throw error;
 
-    console.log(`[DAILY] Created challenge: ${subject} (${difficulty}) for ${studentId}`);
+    return {
+      id: newChallenge.id,
+      studentId: newChallenge.student_id,
+      challengeDate: newChallenge.challenge_date,
+      subject: newChallenge.subject,
+      difficulty: newChallenge.difficulty,
+      questionId: newChallenge.question_id,
+      completed: newChallenge.completed,
+      correct: newChallenge.correct,
+      bonusPoints: newChallenge.bonus_points,
+    };
+  } catch (error) {
+    console.error('[DAILY] Error creating daily challenge:', error);
+    return null;
+  }
+}
+
+/**
+ * Fallback challenge if no lesson_challenges available
+ */
+async function createFallbackChallenge(
+  studentId: string,
+  date: string,
+  subject: string,
+  difficulty: string
+): Promise<DailyChallenge | null> {
+  if (!isSupabaseConfigured() || !supabase) return null;
+
+  try {
+    const { data: challenge, error } = await supabase
+      .from('daily_challenges')
+      .insert({
+        student_id: studentId,
+        challenge_date: date,
+        subject,
+        difficulty,
+        question_id: null,
+        completed: false,
+        bonus_points: 50,
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
 
     return {
       id: challenge.id,
@@ -143,7 +223,53 @@ try {
       bonusPoints: challenge.bonus_points,
     };
   } catch (error) {
-    console.error('[DAILY] Error creating daily challenge:', error);
+    console.error('[DAILY] Error creating fallback challenge:', error);
+    return null;
+  }
+}
+
+/**
+ * Get the challenge question for a daily challenge
+ */
+export async function getDailyChallengeQuestion(
+  challengeId: string
+): Promise<ChallengeQuestion | null> {
+  if (!isSupabaseConfigured() || !supabase) {
+    return null;
+  }
+
+  try {
+    // Get the challenge to find its question_id
+    const { data: challenge, error: challengeError } = await supabase
+      .from('daily_challenges')
+      .select('question_id, subject, difficulty')
+      .eq('id', challengeId)
+      .single();
+
+    if (challengeError || !challenge || !challenge.question_id) {
+      return null;
+    }
+
+    // Get the actual question from lesson_challenges
+    const { data: question, error: questionError } = await supabase
+      .from('lesson_challenges')
+      .select('*')
+      .eq('id', challenge.question_id)
+      .single();
+
+    if (questionError || !question) {
+      return null;
+    }
+
+    return {
+      id: question.id,
+      question: question.question,
+      challenge_type: question.challenge_type,
+      content: question.content,
+      hint: question.hint,
+    };
+  } catch (error) {
+    console.error('[DAILY] Error getting challenge question:', error);
     return null;
   }
 }
@@ -157,7 +283,6 @@ export async function completeDailyChallenge(
   bonusPointsEarned: number = 50
 ): Promise<boolean> {
   if (!isSupabaseConfigured() || !supabase) {
-    console.warn('[DAILY] Supabase not configured');
     return false;
   }
 
@@ -176,9 +301,6 @@ export async function completeDailyChallenge(
 
     if (error) throw error;
 
-    console.log(
-      `[DAILY] Completed challenge for ${studentId}: ${correct ? 'CORRECT' : 'INCORRECT'}`
-    );
     return true;
   } catch (error) {
     console.error('[DAILY] Error completing daily challenge:', error);
@@ -193,12 +315,10 @@ export async function getDailyChallengeStats(
   studentId: string
 ): Promise<{ completed: number; correctAnswers: number; streak: number } | null> {
   if (!isSupabaseConfigured() || !supabase) {
-    console.warn('[DAILY] Supabase not configured');
     return null;
   }
 
   try {
-    // Get last 30 days of challenges
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
     const fromDate = thirtyDaysAgo.toISOString().split('T')[0];

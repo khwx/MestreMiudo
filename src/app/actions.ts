@@ -1195,3 +1195,65 @@ export async function generateLessonChallengesAction(input: GenerateChallengesIn
     throw error;
   }
 }
+
+// ============================================
+// Achievements
+// ============================================
+
+export async function getStudentAchievements(studentId: string) {
+  if (!isSupabaseConfigured() || !supabase) {
+    return [];
+  }
+  try {
+    const { data, error } = await supabase
+      .from('student_achievements')
+      .select('*')
+      .eq('student_id', studentId);
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching student achievements:', error);
+    return [];
+  }
+}
+
+export async function unlockAchievement(studentId: string, achievementId: string) {
+  if (!isSupabaseConfigured() || !supabase) {
+    return { success: false };
+  }
+  try {
+    const { error } = await supabase
+      .from('student_achievements')
+      .upsert({
+        student_id: studentId,
+        achievement_id: achievementId,
+      }, { onConflict: 'student_id,achievement_id' });
+    if (error) throw error;
+    return { success: true };
+  } catch (error) {
+    console.error('Error unlocking achievement:', error);
+    return { success: false };
+  }
+}
+
+// ============================================
+// Shop Items
+// ============================================
+
+export async function getShopItems() {
+  if (!isSupabaseConfigured() || !supabase) {
+    return [];
+  }
+  try {
+    const { data, error } = await supabase
+      .from('shop_items')
+      .select('*')
+      .eq('is_available', true)
+      .order('price', { ascending: true });
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching shop items:', error);
+    return [];
+  }
+}

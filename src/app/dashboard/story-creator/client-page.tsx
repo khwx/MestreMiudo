@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -235,10 +236,12 @@ export default function StoryCreatorClientPage() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {story.images.map((url, i) => (
                     <div key={i} className="relative w-full aspect-square rounded-xl overflow-hidden border-2 border-purple-200">
-                      <img
+                      <Image
                         src={url}
                         alt={`Ilustração ${i + 1} da história`}
-                        className="object-cover w-full h-full"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     </div>
                   ))}
