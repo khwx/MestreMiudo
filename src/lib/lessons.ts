@@ -1,5 +1,5 @@
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
-import type { Lesson, LessonCompletion, LessonChallenge } from '@/app/shared-schemas';
+import type { Lesson, LessonCompletion } from '@/app/shared-schemas';
 
 // ============================================
 // Lesson Management Functions

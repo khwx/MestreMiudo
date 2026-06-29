@@ -271,10 +271,10 @@ function AchievementsPageContent() {
         <CardContent className="text-sm text-blue-800 space-y-2">
           <p>Completa quizzes regularmente para desbloquear badges de progresso</p>
           <p>Mantém uma streak diária para ganhar badges de consistência</p>
-          <p>Consegue 100% num quiz para desbloquear a conquista "Perfeição"</p>
+          <p>Consegue 100% num quiz para desbloquear a conquista &quot;Perfeição&quot;</p>
           <p>Atinge 90% de média em todas as disciplinas para ser um Mestre Completo</p>
           <p>Completa 30 desafios diários para te tornares um Campeão</p>
-          <p>Sobe no ranking para desbloquear "Melhor da Classe"</p>
+          <p>Sobe no ranking para desbloquear &quot;Melhor da Classe&quot;</p>
         </CardContent>
       </Card>
     </div>

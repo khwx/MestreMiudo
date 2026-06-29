@@ -280,7 +280,7 @@ export async function getDailyChallengeQuestion(
 export async function completeDailyChallenge(
   studentId: string,
   correct: boolean,
-  bonusPointsEarned: number = 50
+  _bonusPointsEarned: number = 50
 ): Promise<boolean> {
   if (!isSupabaseConfigured() || !supabase) {
     return false;

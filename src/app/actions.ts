@@ -489,7 +489,7 @@ export async function generateQuiz(input: QuizInput) {
     console.log(`[QUIZ] Success! Generated ${quizOutput.quizQuestions.length} questions`);
     return quizOutput;
     
-  } catch (aiError) {
+  } catch {
     console.warn(`[QUIZ] AI failed, trying cache...`);
     
     // 2. If AI fails, try cache as fallback
@@ -1062,26 +1062,8 @@ export async function initializeStudent(studentId: string): Promise<{ success: b
 }
 
 // ============================================
-// Shop System
+// Shop System (legacy column check)
 // ============================================
-
-export async function getShopItems() {
-  if (!isSupabaseConfigured() || !supabase) {
-    return [];
-  }
-  try {
-    const { data, error } = await supabase
-      .from('shop_items')
-      .select('*')
-      .eq('available', true)
-      .order('price', { ascending: true });
-    if (error) throw error;
-    return data || [];
-  } catch (error) {
-    console.error('Error fetching shop items:', error);
-    return [];
-  }
-}
 
 export async function buyShopItem(studentId: string, itemId: string) {
   if (!isSupabaseConfigured() || !supabase) {

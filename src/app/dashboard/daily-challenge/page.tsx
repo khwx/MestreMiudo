@@ -28,6 +28,126 @@ interface ChallengeQuestion {
   hint: string | null;
 }
 
+interface MatchingChallengeProps {
+  content: Record<string, unknown>;
+  showResult: boolean;
+  onAnswerSelect: (answer: unknown) => void;
+  selectedAnswer: unknown;
+  isCorrect: boolean;
+}
+
+function MatchingChallenge({ content, showResult, onAnswerSelect, selectedAnswer, isCorrect }: MatchingChallengeProps) {
+  const pairs = content.pairs as Array<{ left: string; options: string[] }>;
+  const correctMatches = content.correct_matches as Record<string, string>;
+  const [matches, setMatches] = useState<Record<string, string>>({});
+
+  const handleMatchChange = (left: string, value: string) => {
+    if (showResult) return;
+    const newMatches = { ...matches, [left]: value };
+    setMatches(newMatches);
+    onAnswerSelect(newMatches);
+  };
+
+  return (
+    <div className="space-y-4">
+      {pairs.map((pair, index) => (
+        <div key={index} className="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border-2 border-gray-200 dark:border-gray-700">
+          <p className="font-semibold mb-2">{pair.left}</p>
+          <select
+            value={matches[pair.left] || ''}
+            onChange={(e) => handleMatchChange(pair.left, e.target.value)}
+            disabled={showResult}
+            className="w-full p-3 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-lg"
+          >
+            <option value="">Seleciona...</option>
+            {pair.options.map((opt, i) => (
+              <option key={i} value={opt}>{opt}</option>
+            ))}
+          </select>
+          {showResult && (
+            <p className={`mt-2 text-sm ${
+              matches[pair.left] === correctMatches[pair.left]
+                ? 'text-green-600'
+                : 'text-red-600'
+            }`}>
+              {matches[pair.left] === correctMatches[pair.left] ? '✅' : '❌'}
+              Correto: {correctMatches[pair.left]}
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+interface WordOrderChallengeProps {
+  content: Record<string, unknown>;
+  showResult: boolean;
+  onAnswerSelect: (answer: unknown) => void;
+  isCorrect: boolean;
+}
+
+function WordOrderChallenge({ content, showResult, onAnswerSelect, isCorrect }: WordOrderChallengeProps) {
+  const correctOrder = content.correct_order as string[];
+  const [order, setOrder] = useState<string[]>(() => {
+    return [...correctOrder].sort(() => Math.random() - 0.5);
+  });
+
+  const moveUp = (index: number) => {
+    if (showResult || index === 0) return;
+    const newOrder = [...order];
+    [newOrder[index - 1], newOrder[index]] = [newOrder[index], newOrder[index - 1]];
+    setOrder(newOrder);
+    onAnswerSelect(newOrder);
+  };
+
+  const moveDown = (index: number) => {
+    if (showResult || index === order.length - 1) return;
+    const newOrder = [...order];
+    [newOrder[index], newOrder[index + 1]] = [newOrder[index + 1], newOrder[index]];
+    setOrder(newOrder);
+    onAnswerSelect(newOrder);
+  };
+
+  return (
+    <div className="space-y-3">
+      <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
+        Ordena as palavras (usa as setas ↑↓)
+      </p>
+      <div className="space-y-2">
+        {order.map((word, index) => (
+          <div key={index} className="flex items-center gap-3 p-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl">
+            <span className="text-2xl font-bold flex-1 text-center">{word}</span>
+            <div className="flex flex-col">
+              <button
+                onClick={() => moveUp(index)}
+                disabled={showResult || index === 0}
+                className="text-orange-500 hover:text-orange-700 disabled:opacity-50"
+              >
+                ↑
+              </button>
+              <button
+                onClick={() => moveDown(index)}
+                disabled={showResult || index === order.length - 1}
+                className="text-orange-500 hover:text-orange-700 disabled:opacity-50"
+              >
+                ↓
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+      {showResult && (
+        <p className={`text-center text-lg font-bold ${
+          isCorrect ? 'text-green-600' : 'text-red-600'
+        }`}>
+          Ordem correta: {correctOrder.join(' → ')}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export default function DailyChallengePage() {
   const searchParams = useSearchParams();
   const name = searchParams.get('name') || 'Amigo';
@@ -35,7 +155,7 @@ export default function DailyChallengePage() {
 
   const [dailyChallenge, setDailyChallenge] = useState<DailyChallengeData | null>(null);
   const [question, setQuestion] = useState<ChallengeQuestion | null>(null);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | number | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<unknown>(null);
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
@@ -54,8 +174,8 @@ export default function DailyChallengePage() {
           const questionData = await getDailyChallengeQuestion(challenge.id);
           setQuestion(questionData);
         }
-      } catch (error) {
-        console.error('Error loading daily challenge:', error);
+      } catch (err) {
+        console.error('Error loading daily challenge:', err);
       } finally {
         setLoading(false);
       }
@@ -64,21 +184,21 @@ export default function DailyChallengePage() {
     loadDailyChallenge();
   }, [name, gradeLevel]);
 
-  const handleAnswerSelect = (answer: string | number) => {
+  const handleAnswerSelect = (answer: unknown) => {
     if (showResult) return;
     setSelectedAnswer(answer);
   };
 
   const handleSubmitAnswer = () => {
-    if (selectedAnswer === null || !question) return;
-    
+    if (selectedAnswer === null || selectedAnswer === undefined || !question) return;
+
     let correct = false;
     const content = question.content as Record<string, unknown>;
-    
+
     if (question.challenge_type === 'multiple_choice') {
       correct = selectedAnswer === content.correct_answer;
     } else if (question.challenge_type === 'fill_blank') {
-      const correctAnswers = content.correct_answers as string[] || [content.correct_answer as string];
+      const correctAnswers = (content.correct_answers as string[]) || [content.correct_answer as string];
       correct = correctAnswers.map(a => a.toLowerCase().trim()).includes(
         String(selectedAnswer).toLowerCase().trim()
       );
@@ -93,7 +213,7 @@ export default function DailyChallengePage() {
       const selectedOrder = selectedAnswer as string[];
       correct = JSON.stringify(correctOrder) === JSON.stringify(selectedOrder);
     }
-    
+
     setIsCorrect(correct);
     setShowResult(true);
   };
@@ -105,8 +225,8 @@ export default function DailyChallengePage() {
       await completeDailyChallenge(name, isCorrect, dailyChallenge.bonusPoints);
       setQuizCompleted(true);
       setDailyChallenge(prev => prev ? { ...prev, completed: true, correct: isCorrect } : null);
-    } catch (error) {
-      console.error('Error completing daily challenge:', error);
+    } catch (err) {
+      console.error('Error completing daily challenge:', err);
     } finally {
       setCompleting(false);
     }
@@ -178,9 +298,9 @@ export default function DailyChallengePage() {
             <p className={`text-center text-lg font-bold ${
               isCorrect ? 'text-green-600' : 'text-red-600'
             }`}>
-              Resposta correta: {Array.isArray(content.correct_answers) 
-                ? content.correct_answers.join(' ou ') 
-                : content.correct_answer}
+              Resposta correta: {Array.isArray(content.correct_answers)
+                ? (content.correct_answers as string[]).join(' ou ')
+                : String(content.correct_answer)}
             </p>
           )}
         </div>
@@ -188,107 +308,25 @@ export default function DailyChallengePage() {
     }
 
     if (question.challenge_type === 'matching') {
-      const pairs = content.pairs as Array<{ left: string; options: string[] }>;
-      const correctMatches = content.correct_matches as Record<string, string>;
-      const [matches, setMatches] = useState<Record<string, string>>({});
-
-      const handleMatchChange = (left: string, value: string) => {
-        if (showResult) return;
-        setMatches(prev => ({ ...prev, [left]: value }));
-        handleAnswerSelect({ ...matches, [left]: value });
-      };
-
       return (
-        <div className="space-y-4">
-          {pairs.map((pair, index) => (
-            <div key={index} className="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border-2 border-gray-200 dark:border-gray-700">
-              <p className="font-semibold mb-2">{pair.left}</p>
-              <select
-                value={matches[pair.left] || ''}
-                onChange={(e) => handleMatchChange(pair.left, e.target.value)}
-                disabled={showResult}
-                className="w-full p-3 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-lg"
-              >
-                <option value="">Seleciona...</option>
-                {pair.options.map((opt, i) => (
-                  <option key={i} value={opt}>{opt}</option>
-                ))}
-              </select>
-              {showResult && (
-                <p className={`mt-2 text-sm ${
-                  matches[pair.left] === correctMatches[pair.left] 
-                    ? 'text-green-600' 
-                    : 'text-red-600'
-                }`}>
-                  {matches[pair.left] === correctMatches[pair.left] ? '✅' : '❌'} 
-                  Correto: {correctMatches[pair.left]}
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
+        <MatchingChallenge
+          content={content}
+          showResult={showResult}
+          onAnswerSelect={handleAnswerSelect}
+          selectedAnswer={selectedAnswer}
+          isCorrect={isCorrect}
+        />
       );
     }
 
     if (question.challenge_type === 'word_order') {
-      const correctOrder = content.correct_order as string[];
-      const [order, setOrder] = useState<string[]>(() => {
-        // Shuffle initially
-        return [...correctOrder].sort(() => Math.random() - 0.5);
-      });
-
-      const moveUp = (index: number) => {
-        if (showResult || index === 0) return;
-        const newOrder = [...order];
-        [newOrder[index - 1], newOrder[index]] = [newOrder[index], newOrder[index - 1]];
-        setOrder(newOrder);
-        handleAnswerSelect(newOrder);
-      };
-
-      const moveDown = (index: number) => {
-        if (showResult || index === order.length - 1) return;
-        const newOrder = [...order];
-        [newOrder[index], newOrder[index + 1]] = [newOrder[index + 1], newOrder[index]];
-        setOrder(newOrder);
-        handleAnswerSelect(newOrder);
-      };
-
       return (
-        <div className="space-y-3">
-          <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
-            Ordena as palavras arrastando (usa as setas ↑↓)
-          </p>
-          <div className="space-y-2">
-            {order.map((word, index) => (
-              <div key={index} className="flex items-center gap-3 p-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl">
-                <span className="text-2xl font-bold flex-1 text-center">{word}</span>
-                <div className="flex flex-col">
-                  <button
-                    onClick={() => moveUp(index)}
-                    disabled={showResult || index === 0}
-                    className="text-orange-500 hover:text-orange-700 disabled:opacity-50"
-                  >
-                    ↑
-                  </button>
-                  <button
-                    onClick={() => moveDown(index)}
-                    disabled={showResult || index === order.length - 1}
-                    className="text-orange-500 hover:text-orange-700 disabled:opacity-50"
-                  >
-                    ↓
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-          {showResult && (
-            <p className={`text-center text-lg font-bold ${
-              isCorrect ? 'text-green-600' : 'text-red-600'
-            }`}>
-              Ordem correta: {correctOrder.join(' → ')}
-            </p>
-          )}
-        </div>
+        <WordOrderChallenge
+          content={content}
+          showResult={showResult}
+          onAnswerSelect={handleAnswerSelect}
+          isCorrect={isCorrect}
+        />
       );
     }
 
@@ -365,7 +403,6 @@ export default function DailyChallengePage() {
 
   return (
     <div className="space-y-8 p-4 md:p-8 max-w-2xl mx-auto">
-      {/* Header */}
       <div className="text-center space-y-4 py-4">
         <div className="text-6xl animate-bounce">🔥</div>
         <h2 className="text-4xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
@@ -376,7 +413,6 @@ export default function DailyChallengePage() {
         </p>
       </div>
 
-      {/* Challenge Info Card */}
       <div className="card-kid border-4 border-orange-300 bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-orange-900/20 dark:to-yellow-900/20 shadow-xl">
         <div className="p-6 flex items-center justify-between">
           <div>
@@ -390,12 +426,11 @@ export default function DailyChallengePage() {
         </div>
       </div>
 
-      {/* Question Card */}
       {question && !quizCompleted && (
         <div className="card-kid border-4 border-orange-300 dark:border-orange-700 shadow-2xl">
           <div className="p-8 space-y-6">
             <h3 className="text-xl font-black text-gray-800 dark:text-gray-200">{question.question}</h3>
-            
+
             {question.hint && (
               <div className="bg-yellow-50 dark:bg-yellow-900/30 border-2 border-yellow-200 dark:border-yellow-800 rounded-xl p-4">
                 <div className="flex items-center gap-2">
@@ -466,7 +501,6 @@ export default function DailyChallengePage() {
         </div>
       )}
 
-      {/* Back */}
       <div className="text-center pt-4">
         <Link href={`/dashboard?name=${name}&grade=${grade}`}>
           <Button variant="outline" className="btn-kid border-2 border-gray-300">
