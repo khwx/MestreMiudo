@@ -1,5 +1,5 @@
-import { logger } from "@/lib/logger";
 'use server';
+import { logger } from "@/lib/logger";
 
 /**
  * @fileOverview Quiz generation with fallback to Groq when Gemini fails.

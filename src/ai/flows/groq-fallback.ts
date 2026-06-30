@@ -1,5 +1,5 @@
-import { logger } from "@/lib/logger";
 'use server';
+import { logger } from "@/lib/logger";
 
 /**
  * @fileOverview Quiz generation using Groq API with curriculum support.

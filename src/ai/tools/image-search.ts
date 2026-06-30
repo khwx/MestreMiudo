@@ -1,5 +1,5 @@
-import { logger } from "@/lib/logger";
 'use server';
+import { logger } from "@/lib/logger";
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';

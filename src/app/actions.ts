@@ -1,6 +1,6 @@
-import { logger } from "@/lib/logger";
-
 "use server"
+
+import { logger } from "@/lib/logger";
 
 import { generateQuizDirect } from "@/lib/quiz-generator";
 import { generateDiagnosticTest, calculateDiagnosticResults, shouldTakeDiagnosticTest } from "@/lib/diagnostic-test";

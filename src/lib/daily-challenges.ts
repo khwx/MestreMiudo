@@ -1,5 +1,5 @@
-import { logger } from "./logger";
 'use server';
+import { logger } from "./logger";
 
 /**
  * @fileOverview Daily challenges system
