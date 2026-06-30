@@ -65,15 +65,20 @@ export default function SubjectPage() {
       const mappedSubject = subjectMap[subject];
       if (!mappedSubject) return;
       
-      const lessonsData = await getLessons(mappedSubject, grade);
-      setLessons(lessonsData);
-      
-      const completedLessons = await getCompletedLessons(name, mappedSubject);
-      const completedMap = Object.fromEntries(
-        completedLessons.map((lesson) => [lesson.lesson_id, lesson])
-      );
-      setCompleted(completedMap);
-      setLoading(false);
+      try {
+        const lessonsData = await getLessons(mappedSubject, grade);
+        setLessons(lessonsData);
+        
+        const completedLessons = await getCompletedLessons(name, mappedSubject);
+        const completedMap = Object.fromEntries(
+          completedLessons.map((lesson) => [lesson.lesson_id, lesson])
+        );
+        setCompleted(completedMap);
+      } catch (error) {
+        console.error('Failed to fetch lessons:', error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
@@ -96,7 +101,7 @@ export default function SubjectPage() {
       {/* Header */}
       <div className="flex items-center gap-4">
         <Link href={`/dashboard/learn?name=${name}&grade=${gradeParam}`}>
-          <button className="p-3 hover:bg-white/50 rounded-xl transition-all duration-300">
+          <button aria-label="Voltar" className="p-3 hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-xl transition-all duration-300">
             <ArrowLeft className="h-6 w-6" />
           </button>
         </Link>
@@ -190,16 +195,16 @@ export default function SubjectPage() {
                             <div className="flex items-center gap-2 mt-1">
                               <span className={`text-sm font-semibold ${config.color}`}>{lesson.difficulty}</span>
                               {lessonCompleted && (
-                                <div className="flex items-center gap-1 bg-green-100 px-2 py-1 rounded-full">
-                                  <CheckCircle className="h-4 w-4 text-green-600" />
-                                  <span className="text-xs font-bold text-green-700">Concluído</span>
+                                <div className="flex items-center gap-1 bg-green-100 dark:bg-green-900/40 px-2 py-1 rounded-full">
+                                   <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+                                   <span className="text-xs font-bold text-green-700 dark:text-green-300">Concluído</span>
                                 </div>
                               )}
                             </div>
                           </div>
                           {lessonCompleted ? (
-                            <div className="bg-green-100 p-2 rounded-full">
-                              <CheckCircle className="h-8 w-8 text-green-600" />
+                            <div className="bg-green-100 dark:bg-green-900/40 p-2 rounded-full">
+                              <CheckCircle className="h-8 w-8 text-green-600 dark:text-green-400" />
                             </div>
                           ) : (
                             <div className={`${config.bgColor} p-2 rounded-full`}>
@@ -208,7 +213,7 @@ export default function SubjectPage() {
                           )}
                         </div>
                         
-                        <p className="text-gray-600 mb-4">{lesson.description}</p>
+                        <p className="text-gray-600 dark:text-gray-400 mb-4">{lesson.description}</p>
                         
                         {lesson.story_context && (
                           <div className="bg-purple-50 dark:bg-purple-900/30 border-2 border-purple-200 dark:border-purple-700 rounded-xl p-3 mb-4">

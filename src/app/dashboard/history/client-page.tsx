@@ -1,5 +1,5 @@
-
 "use client";
+import { logger } from "@/lib/logger";
 
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -54,7 +54,7 @@ export default function HistoryClientPage() {
                     setQuizHistory(sortedQuizzes);
                     setLessonHistory(lessonData || []);
                 })
-                .catch(console.error)
+                .catch((err) => logger.error(err))
                 .finally(() => setLoading(false));
         } else {
             setLoading(false);

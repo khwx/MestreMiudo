@@ -1,4 +1,5 @@
 'use client';
+import { logger } from "@/lib/logger";
 
 import { Suspense, useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -57,8 +58,8 @@ function LeaderboardRow({ entry, currentUserId }: LeaderboardRowProps) {
     <div
       className={`flex items-center gap-4 p-4 rounded-lg border-2 transition-all ${
         isCurrentUser
-          ? 'bg-blue-50 border-blue-300 shadow-md'
-          : 'bg-white border-gray-200 hover:border-gray-300'
+          ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-300 dark:border-blue-700 shadow-md'
+          : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
       }`}
     >
       <div className={`text-3xl font-bold w-12 text-center ${getMedalColor(entry.rank)}`}>
@@ -113,7 +114,7 @@ function LeaderboardPageContent() {
         setGradeLeaderboard(gradeData);
         setStudentRankContext(rankContext);
       } catch (error) {
-        console.error('Failed to load leaderboards:', error);
+        logger.error('Falha ao carregar classificações:', error);
       } finally {
         setLoading(false);
       }
@@ -234,14 +235,14 @@ function LeaderboardPageContent() {
       </Tabs>
 
       {/* Tips */}
-      <Card className="bg-green-50 border-green-200">
+      <Card className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700">
         <CardHeader>
-          <CardTitle className="text-green-900 flex items-center gap-2">
+          <CardTitle className="text-green-900 dark:text-green-200 flex items-center gap-2">
             <Zap className="w-5 h-5" />
             Como Subir no Ranking
           </CardTitle>
         </CardHeader>
-        <CardContent className="text-sm text-green-800 space-y-2">
+        <CardContent className="text-sm text-green-800 dark:text-green-300 space-y-2">
           <p>✅ Completa quizzes para ganhar pontos</p>
           <p>⭐ Acerta mais questões para aumentar a tua média</p>
           <p>🔥 Mantém uma streak diária para bónus extra</p>
@@ -255,7 +256,7 @@ function LeaderboardPageContent() {
 
 export default function LeaderboardPage() {
   return (
-    <Suspense fallback={<div className="p-6 text-center">Carregando rankings...</div>}>
+    <Suspense fallback={<div className="p-6 text-center">A carregar rankings...</div>}>
       <LeaderboardPageContent />
     </Suspense>
   );

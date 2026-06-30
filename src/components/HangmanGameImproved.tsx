@@ -1,4 +1,5 @@
 "use client";
+import { logger } from "@/lib/logger";
 
 import { useState, useEffect, useCallback } from 'react';
 import { Button } from './ui/button';
@@ -114,7 +115,7 @@ export function HangmanGame() {
             setWordToGuess(newWord);
             setHint(newWordData.hint);
         } catch (error) {
-            console.error("Failed to generate word:", error);
+            logger.error("Failed to generate word:", error);
             toast({
                 title: "Erro ao gerar palavra",
                 description: "Não foi possível obter uma nova palavra. Tente novamente.",
@@ -162,11 +163,11 @@ export function HangmanGame() {
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                     <div className="text-center">
-                        <p className="text-xs text-gray-500">Vitórias</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Vitórias</p>
                         <p className="text-2xl font-bold text-green-600">{wins}</p>
                     </div>
                     <div className="text-center">
-                        <p className="text-xs text-gray-500">Derrotas</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Derrotas</p>
                         <p className="text-2xl font-bold text-red-600">{losses}</p>
                     </div>
                 </div>
@@ -183,7 +184,7 @@ export function HangmanGame() {
 
             {/* Settings Panel */}
             {showSettings && (
-                <div className="border-2 border-gray-200 rounded-lg p-4 space-y-4 bg-gray-50">
+                <div className="border-2 border-gray-200 dark:border-gray-700 rounded-lg p-4 space-y-4 bg-gray-50 dark:bg-gray-800/50">
                     <div>
                         <label className="block text-sm font-semibold mb-2">Categoria</label>
                         <div className="grid grid-cols-4 gap-2">
@@ -225,7 +226,7 @@ export function HangmanGame() {
 
             {/* Game Status */}
             <div className="text-center">
-                <p className="text-sm text-gray-600">Categoria: <span className="font-semibold">{category}</span> | Dificuldade: <span className="font-semibold">{difficulty}</span></p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Categoria: <span className="font-semibold">{category}</span> | Dificuldade: <span className="font-semibold">{difficulty}</span></p>
             </div>
 
             {/* Hangman Drawing */}
@@ -236,7 +237,7 @@ export function HangmanGame() {
             {/* Word Display */}
             <div className="text-center space-y-2">
                 <p className="text-5xl font-bold tracking-widest font-mono">{wordDisplay}</p>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
                     Erros: {incorrectGuesses.length}/6
                 </p>
             </div>
@@ -257,9 +258,9 @@ export function HangmanGame() {
             )}
 
             {showHint && (
-                <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4 text-center">
-                    <p className="text-sm text-gray-600">Dica:</p>
-                    <p className="text-lg font-semibold text-yellow-800">{hint}</p>
+                <div className="bg-yellow-50 dark:bg-yellow-900/20 border-2 border-yellow-200 dark:border-yellow-700 rounded-lg p-4 text-center">
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Dica:</p>
+                    <p className="text-lg font-semibold text-yellow-800 dark:text-yellow-200">{hint}</p>
                 </div>
             )}
 
@@ -275,18 +276,18 @@ export function HangmanGame() {
 
             {/* Game Over Messages */}
             {gameState.isWon && (
-                <div className="bg-green-50 border-2 border-green-200 rounded-lg p-6 text-center space-y-4">
+                <div className="bg-green-50 dark:bg-green-900/20 border-2 border-green-200 dark:border-green-700 rounded-lg p-6 text-center space-y-4">
                     <div className="text-5xl">🎉</div>
-                    <p className="text-xl font-bold text-green-600">Parabéns! Acertou!</p>
-                    <p className="text-gray-600">Palavra: {wordToGuess}</p>
+                    <p className="text-xl font-bold text-green-600 dark:text-green-400">Parabéns! Acertou!</p>
+                    <p className="text-gray-600 dark:text-gray-400">Palavra: {wordToGuess}</p>
                 </div>
             )}
 
             {gameState.isLost && (
-                <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 text-center space-y-4">
+                <div className="bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-700 rounded-lg p-6 text-center space-y-4">
                     <div className="text-5xl">😢</div>
-                    <p className="text-xl font-bold text-red-600">Fim do Jogo!</p>
-                    <p className="text-gray-600">A palavra era: {wordToGuess}</p>
+                    <p className="text-xl font-bold text-red-600 dark:text-red-400">Fim do Jogo!</p>
+                    <p className="text-gray-600 dark:text-gray-400">A palavra era: {wordToGuess}</p>
                 </div>
             )}
 

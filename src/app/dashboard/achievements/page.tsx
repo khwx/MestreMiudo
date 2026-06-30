@@ -1,4 +1,5 @@
 'use client';
+import { logger } from "@/lib/logger";
 
 import { Suspense, useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -109,8 +110,8 @@ function AchievementCard({ achievement, unlocked, unlockedDate }: AchievementCar
     <div
       className={`rounded-lg border-2 p-6 text-center transition-all duration-300 ${
         unlocked
-          ? 'bg-white border-gray-200 shadow-md hover:shadow-lg'
-          : 'bg-gray-100 border-gray-300 opacity-60'
+          ? 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md hover:shadow-lg'
+          : 'bg-gray-100 dark:bg-gray-800/50 border-gray-300 dark:border-gray-700 opacity-60'
       }`}
     >
       <div className="mb-3 text-5xl">{achievement.icon}</div>
@@ -170,7 +171,7 @@ function AchievementsPageContent() {
           unlockDate: a.unlocked_at 
         })));
       } catch (error) {
-        console.error('Error loading achievements:', error);
+        logger.error('Erro ao carregar conquistas:', error);
       } finally {
         setLoading(false);
       }
@@ -218,7 +219,7 @@ function AchievementsPageContent() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500"
               style={{ width: `${progressPercentage}%` }}
@@ -264,11 +265,11 @@ function AchievementsPageContent() {
       </div>
 
       {/* Tips Section */}
-      <Card className="bg-blue-50 border-blue-200">
+      <Card className="bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-700">
         <CardHeader>
-          <CardTitle className="text-blue-900">💡 Como Desbloquear Mais Conquistas</CardTitle>
+          <CardTitle className="text-blue-900 dark:text-blue-200">💡 Como Desbloquear Mais Conquistas</CardTitle>
         </CardHeader>
-        <CardContent className="text-sm text-blue-800 space-y-2">
+        <CardContent className="text-sm text-blue-800 dark:text-blue-300 space-y-2">
           <p>Completa quizzes regularmente para desbloquear badges de progresso</p>
           <p>Mantém uma streak diária para ganhar badges de consistência</p>
           <p>Consegue 100% num quiz para desbloquear a conquista &quot;Perfeição&quot;</p>
@@ -283,7 +284,7 @@ function AchievementsPageContent() {
 
 export default function AchievementsPage() {
   return (
-    <Suspense fallback={<div className="p-6 text-center">Carregando conquistas...</div>}>
+    <Suspense fallback={<div className="p-6 text-center">A carregar conquistas...</div>}>
       <AchievementsPageContent />
     </Suspense>
   );
