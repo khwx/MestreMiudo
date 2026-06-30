@@ -1,6 +1,8 @@
 "use client"
+import { logger } from "@/lib/logger";
 
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,6 +11,7 @@ import { Trophy, Star, Sparkles, ArrowUp } from 'lucide-react';
 import { getStudentRewards } from '@/app/actions';
 
 export function LevelUpCelebration() {
+  const searchParams = useSearchParams();
   const [showCelebration, setShowCelebration] = useState(false);
   const [currentLevel, setCurrentLevel] = useState(1);
   const [progress, setProgress] = useState(0);
@@ -16,7 +19,6 @@ export function LevelUpCelebration() {
 
   useEffect(() => {
     const checkLevelUp = async () => {
-      const searchParams = new URLSearchParams(window.location.search);
       const name = searchParams.get('name') || '';
       if (!name) return;
 
@@ -42,7 +44,7 @@ export function LevelUpCelebration() {
           sessionStorage.setItem('lastTier', tierName);
         }
       } catch (error) {
-        console.error('Failed to check level up:', error);
+        logger.error('Failed to check level up:', error);
       }
     };
 

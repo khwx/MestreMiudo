@@ -1,4 +1,5 @@
 'use client';
+import { logger } from "@/lib/logger";
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useParams } from 'next/navigation';
@@ -40,33 +41,38 @@ export default function LessonDetailClient() {
 
   useEffect(() => {
     const fetchLesson = async () => {
-      const lessonData = await getLesson(lessonId);
-      
-      // If lesson exists but has no challenges, generate them!
-      if (lessonData && (!lessonData.challenges || lessonData.challenges.length === 0)) {
-        setGenerating(true);
-        try {
-          const result = await generateLessonChallengesAction({
-            lessonId: lessonId,
-            subject: lessonData.subject,
-            gradeLevel: lessonData.grade_level,
-            title: lessonData.title,
-            learningObjective: lessonData.learning_objective || '',
-            storyContext: lessonData.story_context || ''
-          });
-          
-          if (result && result.challenges) {
-            lessonData.challenges = result.challenges;
+      try {
+        const lessonData = await getLesson(lessonId);
+        
+        // If lesson exists but has no challenges, generate them!
+        if (lessonData && (!lessonData.challenges || lessonData.challenges.length === 0)) {
+          setGenerating(true);
+          try {
+            const result = await generateLessonChallengesAction({
+              lessonId: lessonId,
+              subject: lessonData.subject,
+              gradeLevel: lessonData.grade_level,
+              title: lessonData.title,
+              learningObjective: lessonData.learning_objective || '',
+              storyContext: lessonData.story_context || ''
+            });
+            
+            if (result && result.challenges) {
+              lessonData.challenges = result.challenges;
+            }
+          } catch (error) {
+            logger.error("Failed to generate challenges automatically:", error);
+          } finally {
+            setGenerating(false);
           }
-        } catch (error) {
-          console.error("Failed to generate challenges automatically:", error);
-        } finally {
-          setGenerating(false);
         }
+        
+        setLesson(lessonData);
+      } catch (error) {
+        logger.error("Failed to fetch lesson:", error);
+      } finally {
+        setLoading(false);
       }
-      
-      setLesson(lessonData);
-      setLoading(false);
     };
 
     fetchLesson();
@@ -152,7 +158,7 @@ export default function LessonDetailClient() {
               }))
             );
           } catch (e) {
-            console.error('[SPACED] Failed to add review items:', e);
+            logger.error('[SPACED] Failed to add review items:', e);
           }
         }
 
@@ -229,7 +235,7 @@ export default function LessonDetailClient() {
       <div className="space-y-8 animate-in fade-in-50">
         <div className="flex items-center gap-4">
           <Link href={`/dashboard/learn/${subject}?name=${name}&grade=${gradeParam}`}>
-            <button className="p-2 hover:bg-secondary rounded-lg transition">
+            <button aria-label="Voltar" className="p-2 hover:bg-secondary rounded-lg transition">
               <ArrowLeft className="h-6 w-6" />
             </button>
           </Link>
@@ -356,7 +362,7 @@ export default function LessonDetailClient() {
       {/* Header */}
       <div className="flex items-center gap-4">
         <Link href={`/dashboard/learn/${subject}?name=${name}&grade=${gradeParam}`}>
-          <button className="p-2 hover:bg-secondary rounded-lg transition">
+          <button aria-label="Voltar" className="p-2 hover:bg-secondary rounded-lg transition">
             <ArrowLeft className="h-6 w-6" />
           </button>
         </Link>
@@ -462,6 +468,13 @@ function ChallengeRenderer({
   shuffledWordOrders: Record<string, string[]>;
   setShuffledWordOrders: React.Dispatch<React.SetStateAction<Record<string, string[]>>>;
 }) {
+  useEffect(() => {
+    if (challenge.challenge_type === 'word_order' && challenge.id && !shuffledWordOrders[challenge.id]) {
+      const correctOrder: string[] = challenge.content.correct_order || [];
+      const shuffled = [...correctOrder].sort(() => Math.random() - 0.5);
+      setShuffledWordOrders(prev => ({ ...prev, [challenge.id!]: shuffled }));
+    }
+  }, [challenge, shuffledWordOrders, setShuffledWordOrders]);
    if (challenge.challenge_type === 'multiple_choice') {
      return (
        <div className="space-y-3">
@@ -530,13 +543,8 @@ function ChallengeRenderer({
     const correctOrder: string[] = challenge.content.correct_order || [];
     const selectedWords: string[] = (answer as string[]) || [];
 
+    const base = shuffledWordOrders[challenge.id || ''] || [];
     const availableWords = (() => {
-      if (!shuffledWordOrders[challenge.id || '']) {
-        const shuffled = [...correctOrder].sort(() => Math.random() - 0.5);
-        setShuffledWordOrders(prev => ({ ...prev, [challenge.id || '']: shuffled }));
-        return shuffled;
-      }
-      const base = shuffledWordOrders[challenge.id || ''];
       const unselected: string[] = [];
       const used = [...selectedWords];
       for (const w of base) {

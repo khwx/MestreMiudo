@@ -43,7 +43,7 @@ export default function LearnPage() {
       {/* Header with back button */}
       <div className="flex items-center gap-4">
         <Link href={`/dashboard?name=${name}&grade=${grade}`}>
-          <button className="p-2 hover:bg-secondary rounded-lg transition">
+          <button aria-label="Voltar" className="p-2 hover:bg-secondary rounded-lg transition">
             <ArrowLeft className="h-6 w-6" />
           </button>
         </Link>
