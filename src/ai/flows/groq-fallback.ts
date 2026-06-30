@@ -1,3 +1,4 @@
+import { logger } from "@/lib/logger";
 'use server';
 
 /**
@@ -130,8 +131,8 @@ Each question MUST have: question, options, correctAnswer, topic, imageUrl (null
     const validated = PersonalizedLearningPathOutputSchema.parse({ quizQuestions: parsed });
     return validated;
   } catch (parseError) {
-    console.error('Failed to parse Groq response:', parseError);
-    console.error('Raw response:', content);
-    throw new Error('Failed to generate valid quiz questions');
+    logger.error('Falha ao processar resposta do Groq:', parseError);
+    logger.error('Resposta raw:', content);
+    throw new Error('Falha ao gerar perguntas de quiz válidas');
   }
 }

@@ -1,4 +1,5 @@
 "use client";
+import { logger } from "@/lib/logger";
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { generateQuiz, saveQuizResults } from '@/app/actions';
@@ -79,7 +80,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
         setQuizData(data);
       }
     } catch (err) {
-      console.error('Error generating quiz:', err);
+      logger.error('Erro ao gerar quiz:', err);
       setError('Ocorreu um erro ao gerar o quiz. Por favor tenta novamente.');
     } finally {
       setLoading(false);
@@ -154,7 +155,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
         origin: { y: 0.6 }
       });
     } catch (error) {
-      console.error('Error saving quiz results:', error);
+      logger.error('Erro ao guardar resultados do quiz:', error);
     }
   };
 

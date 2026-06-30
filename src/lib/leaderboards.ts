@@ -1,3 +1,4 @@
+import { logger } from "./logger";
 'use server';
 
 /**
@@ -28,7 +29,7 @@ export async function updateLeaderboardPosition(
   averageScore: number
 ): Promise<boolean> {
   if (!isSupabaseConfigured() || !supabase) {
-    console.warn('[LEADERBOARD] Supabase not configured');
+    logger.warn('[LEADERBOARD] Base de dados não configurada');
     return false;
   }
 
@@ -76,10 +77,10 @@ export async function updateLeaderboardPosition(
     // Update ranks for all students
     await updateAllRanks('global');
 
-    console.log(`[LEADERBOARD] Updated position for ${studentId}`);
+    logger.log(`[LEADERBOARD] Updated position for ${studentId}`);
     return true;
   } catch (error) {
-    console.error('[LEADERBOARD] Error updating position:', error);
+    logger.error('[LEADERBOARD] Erro ao atualizar posição:', error);
     return false;
   }
 }
@@ -109,9 +110,9 @@ async function updateAllRanks(rankPeriod: 'global' | 'weekly' | 'monthly'): Prom
         .eq('id', data[i].id);
     }
 
-    console.log(`[LEADERBOARD] Updated ranks for ${rankPeriod}`);
+    logger.log(`[LEADERBOARD] Updated ranks for ${rankPeriod}`);
   } catch (error) {
-    console.error('[LEADERBOARD] Error updating ranks:', error);
+    logger.error('[LEADERBOARD] Erro ao atualizar classificações:', error);
   }
 }
 
@@ -120,7 +121,7 @@ async function updateAllRanks(rankPeriod: 'global' | 'weekly' | 'monthly'): Prom
  */
 export async function getGlobalLeaderboard(limit: number = 100): Promise<LeaderboardEntry[]> {
   if (!isSupabaseConfigured() || !supabase) {
-    console.warn('[LEADERBOARD] Supabase not configured');
+    logger.warn('[LEADERBOARD] Base de dados não configurada');
     return [];
   }
 
@@ -148,7 +149,7 @@ export async function getGlobalLeaderboard(limit: number = 100): Promise<Leaderb
       })) || []
     );
   } catch (error) {
-    console.error('[LEADERBOARD] Error fetching global leaderboard:', error);
+    logger.error('[LEADERBOARD] Erro ao buscar classificação global:', error);
     return [];
   }
 }
@@ -161,7 +162,7 @@ export async function getStudentRankContext(
   contextSize: number = 2
 ): Promise<LeaderboardEntry[]> {
   if (!isSupabaseConfigured() || !supabase) {
-    console.warn('[LEADERBOARD] Supabase not configured');
+    logger.warn('[LEADERBOARD] Base de dados não configurada');
     return [];
   }
 
@@ -175,7 +176,7 @@ export async function getStudentRankContext(
       .single();
 
     if (studentError || !studentData) {
-      console.warn('[LEADERBOARD] Student not found in leaderboard');
+      logger.warn('[LEADERBOARD] Student not found in leaderboard');
       return [];
     }
 
@@ -208,7 +209,7 @@ export async function getStudentRankContext(
       })) || []
     );
   } catch (error) {
-    console.error('[LEADERBOARD] Error fetching rank context:', error);
+    logger.error('[LEADERBOARD] Erro ao buscar contexto de classificação:', error);
     return [];
   }
 }
@@ -221,7 +222,7 @@ export async function getGradeLeaderboard(
   limit: number = 50
 ): Promise<LeaderboardEntry[]> {
   if (!isSupabaseConfigured() || !supabase) {
-    console.warn('[LEADERBOARD] Supabase not configured');
+    logger.warn('[LEADERBOARD] Base de dados não configurada');
     return [];
   }
 
@@ -251,7 +252,7 @@ export async function getGradeLeaderboard(
       })) || []
     );
   } catch (error) {
-    console.error('[LEADERBOARD] Error fetching grade leaderboard:', error);
+    logger.error('[LEADERBOARD] Erro ao buscar classificação do ano:', error);
     return [];
   }
 }

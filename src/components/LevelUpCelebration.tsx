@@ -44,7 +44,7 @@ export function LevelUpCelebration() {
           sessionStorage.setItem('lastTier', tierName);
         }
       } catch (error) {
-        logger.error('Failed to check level up:', error);
+        logger.error('Falha ao verificar subida de nível:', error);
       }
     };
 

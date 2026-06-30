@@ -1,4 +1,5 @@
 "use client";
+import { logger } from "@/lib/logger";
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -36,7 +37,7 @@ export default function LoginPage() {
         
         router.push(`/dashboard?name=${encodeURIComponent(uniqueId)}&grade=${grade}`);
       } catch (error) {
-        console.error('Login error:', error);
+        logger.error('Erro de login:', error);
       } finally {
         setIsSubmitting(false);
       }

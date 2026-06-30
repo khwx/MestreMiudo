@@ -1,3 +1,4 @@
+import { logger } from "@/lib/logger";
 'use server';
 
 /**
@@ -39,7 +40,7 @@ async function getCachedWord(category: string, difficulty: string): Promise<Word
     const randomIndex = Math.floor(Math.random() * Math.min(shuffled.length, 10));
     return { word: shuffled[randomIndex].word, hint: shuffled[randomIndex].hint };
   } catch (error) {
-    console.error('Failed to get cached word:', error);
+    logger.error('Falha ao obter palavra em cache:', error);
     return null;
   }
 }
@@ -65,9 +66,9 @@ async function cacheWord(category: string, difficulty: string, word: string, hin
       hint,
     });
 
-    if (error) console.error('Failed to cache word:', error);
+    if (error) logger.error('Falha ao colocar palavra em cache:', error);
   } catch (error) {
-    console.error('Error caching word:', error);
+    logger.error('Erro ao colocar palavra em cache:', error);
   }
 }
 
@@ -109,7 +110,7 @@ Rules:
     });
 
     if (!response.ok) {
-      console.error('[WORD] OpenRouter error:', response.status);
+      logger.error('[WORD] OpenRouter error:', response.status);
       return null;
     }
 
@@ -127,7 +128,7 @@ Rules:
     }
     return null;
   } catch (error) {
-    console.error('[WORD] API call failed:', error);
+    logger.error('[WORD] API call failed:', error);
     return null;
   }
 }
@@ -314,18 +315,18 @@ export async function generateWord(input: WordGenerationInput): Promise<WordGene
   // Try cache first
   const cached = await getCachedWord(input.category, input.difficulty);
   if (cached) {
-    console.log(`[WORD] Cache HIT: ${cached.word} (${input.category}/${input.difficulty})`);
+    logger.log(`[WORD] Cache HIT: ${cached.word} (${input.category}/${input.difficulty})`);
     return cached;
   }
 
-  console.log(`[WORD] Cache MISS, generating word for ${input.category}/${input.difficulty}`);
+  logger.log(`[WORD] Cache MISS, generating word for ${input.category}/${input.difficulty}`);
   
   // Try OpenRouter API
   const apiResult = await generateWordViaAPI(input.category, input.difficulty);
   if (apiResult) {
-    console.log(`[WORD] API generated: ${apiResult.word}`);
+    logger.log(`[WORD] API generated: ${apiResult.word}`);
     cacheWord(input.category, input.difficulty, apiResult.word, apiResult.hint)
-      .catch(err => console.error('Background caching failed:', err));
+      .catch(err => logger.error('Cache em segundo plano falhou:', err));
     return apiResult;
   }
 
@@ -334,6 +335,6 @@ export async function generateWord(input: WordGenerationInput): Promise<WordGene
   const randomIndex = Math.floor(Math.random() * fallbackList.length);
   const fallback = fallbackList[randomIndex];
   
-  console.log(`[WORD] Using fallback: ${fallback.word}`);
+  logger.log(`[WORD] Using fallback: ${fallback.word}`);
   return { word: fallback.word, hint: fallback.hint };
 }

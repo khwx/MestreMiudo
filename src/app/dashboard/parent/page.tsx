@@ -1,4 +1,5 @@
 'use client';
+import { logger } from "@/lib/logger";
 
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -96,7 +97,7 @@ export default function ParentDashboardPage() {
 
         setStudents(Array.from(progressMap.values()));
       } catch (error) {
-        console.error('Error loading parent dashboard:', error);
+        logger.error('Erro ao carregar painel de pais:', error);
       } finally {
         setLoading(false);
       }
@@ -170,7 +171,7 @@ export default function ParentDashboardPage() {
 
       doc.save(`mestremiudo-relatorio-${new Date().toISOString().split('T')[0]}.pdf`);
     } catch (error) {
-      console.error('Error generating PDF:', error);
+      logger.error('Erro ao gerar PDF:', error);
     } finally {
       setGeneratingPdf(false);
     }

@@ -1,3 +1,4 @@
+import { logger } from "./logger";
 'use server';
 
 /**
@@ -65,7 +66,7 @@ Return ONLY a valid JSON array.`;
 async function generateWithOpenRouter(userPrompt: string): Promise<string | null> {
   const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) {
-    console.error('[OPENROUTER] No API key found');
+    logger.error('[OPENROUTER] No API key found');
     return null;
   }
 
@@ -91,14 +92,14 @@ async function generateWithOpenRouter(userPrompt: string): Promise<string | null
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('[OPENROUTER] API error:', response.status, errorText);
+      logger.error('[OPENROUTER] API error:', response.status, errorText);
       return null;
     }
 
     const data = await response.json();
     return data.choices?.[0]?.message?.content || null;
   } catch (error) {
-    console.error('[OPENROUTER] Request failed:', error);
+    logger.error('[OPENROUTER] Request failed:', error);
     return null;
   }
 }
@@ -106,7 +107,7 @@ async function generateWithOpenRouter(userPrompt: string): Promise<string | null
 async function generateWithGroq(userPrompt: string): Promise<string | null> {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
-    console.error('[GROQ] No API key found');
+    logger.error('[GROQ] No API key found');
     return null;
   }
 
@@ -130,14 +131,14 @@ async function generateWithGroq(userPrompt: string): Promise<string | null> {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('[GROQ] API error:', response.status, errorText);
+      logger.error('[GROQ] API error:', response.status, errorText);
       return null;
     }
 
     const data = await response.json();
     return data.choices?.[0]?.message?.content || null;
   } catch (error) {
-    console.error('[GROQ] Request failed:', error);
+    logger.error('[GROQ] Request failed:', error);
     return null;
   }
 }
@@ -145,12 +146,12 @@ async function generateWithGroq(userPrompt: string): Promise<string | null> {
 async function generateWithGemini(userPrompt: string): Promise<string | null> {
   const apiKey = process.env.GOOGLEAI_API_KEY;
   if (!apiKey) {
-    console.error('[GEMINI] No GOOGLEAI_API_KEY found');
+    logger.error('[GEMINI] No GOOGLEAI_API_KEY found');
     return null;
   }
 
   try {
-    console.log('[GEMINI] Calling API with gemini-1.5-flash...');
+    logger.log('[GEMINI] Calling API with gemini-1.5-flash...');
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
       {
@@ -168,16 +169,16 @@ async function generateWithGemini(userPrompt: string): Promise<string | null> {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('[GEMINI] API error:', response.status, errorText);
+      logger.error('[GEMINI] API error:', response.status, errorText);
       return null;
     }
 
     const data = await response.json();
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text || null;
-    console.log('[GEMINI] Response received:', text?.substring(0, 100) || 'empty');
+    logger.log('[GEMINI] Response received:', text?.substring(0, 100) || 'empty');
     return text;
   } catch (error) {
-    console.error('[GEMINI] Request failed:', error);
+    logger.error('[GEMINI] Request failed:', error);
     return null;
   }
 }
@@ -337,7 +338,7 @@ function normalizeQuestions(questions: QuizQuestion[]): QuizQuestion[] {
     if (q.options && q.options.length === 4) {
       const uniqueOptions = [...new Set(q.options)];
       if (uniqueOptions.length < 4) {
-        console.warn('[QUIZ] Question had duplicate options:', q.question);
+        logger.warn('[QUIZ] Question had duplicate options:', q.question);
       }
     }
     
@@ -346,7 +347,7 @@ function normalizeQuestions(questions: QuizQuestion[]): QuizQuestion[] {
 }
 
 async function addImagesToQuestions(questions: QuizQuestion[]): Promise<QuizQuestion[]> {
-  console.log('[PIXABAY] Fetching images for questions...');
+  logger.log('[PIXABAY] Fetching images for questions...');
   
   const enrichedQuestions: QuizQuestion[] = [];
   
@@ -355,10 +356,10 @@ async function addImagesToQuestions(questions: QuizQuestion[]): Promise<QuizQues
       const imageUrl = await fetchImageForTopic(question.topic);
       if (imageUrl) {
         question.imageUrl = imageUrl;
-        console.log(`[PIXABAY] Added image for topic: ${question.topic}`);
+        logger.log(`[PIXABAY] Added image for topic: ${question.topic}`);
       }
     } catch (error) {
-      console.warn(`[PIXABAY] Failed to fetch image for topic ${question.topic}:`, error);
+      logger.warn(`[PIXABAY] Failed to fetch image for topic ${question.topic}:`, error);
     }
     enrichedQuestions.push(question);
   }
@@ -369,35 +370,35 @@ async function addImagesToQuestions(questions: QuizQuestion[]): Promise<QuizQues
 export async function generateQuizDirect(
   input: PersonalizedLearningPathInput
 ): Promise<PersonalizedLearningPathOutput> {
-  console.log('[QUIZ] Starting quiz generation...');
-  console.log('[QUIZ] Input:', JSON.stringify(input));
+  logger.log('[QUIZ] Starting quiz generation...');
+  logger.log('[QUIZ] Input:', JSON.stringify(input));
   
   const prompt = buildPrompt(input);
   
   // Try OpenRouter first (best limits)
-  console.log('[QUIZ] Trying OpenRouter...');
+  logger.log('[QUIZ] Trying OpenRouter...');
   let content = await generateWithOpenRouter(prompt);
   
   if (!content) {
-    console.log('[QUIZ] OpenRouter failed, trying Groq...');
+    logger.log('[QUIZ] OpenRouter failed, trying Groq...');
     content = await generateWithGroq(prompt);
   } else {
-    console.log('[QUIZ] OpenRouter succeeded!');
+    logger.log('[QUIZ] OpenRouter succeeded!');
   }
   
   if (!content) {
-    console.log('[QUIZ] Groq failed, trying Gemini...');
+    logger.log('[QUIZ] Groq failed, trying Gemini...');
     content = await generateWithGemini(prompt);
   } else if (content) {
-    console.log('[QUIZ] Groq succeeded!');
+    logger.log('[QUIZ] Groq succeeded!');
   }
   
   if (!content) {
-    console.error('[QUIZ] All APIs failed');
+    logger.error('[QUIZ] All APIs failed');
     throw new Error('Não foi possível gerar o quiz. Por favor tenta novamente.');
   }
   
-  console.log('[QUIZ] Response received, parsing...');
+  logger.log('[QUIZ] Response received, parsing...');
   
   try {
     let questions = parseResponse(content);
@@ -406,7 +407,7 @@ export async function generateQuizDirect(
     questions = normalizeQuestions(questions);
     
     // ⚠️ CURRICULUM VALIDATION - Ensure questions are age-appropriate
-    console.log('[CURRICULUM] Validating questions for Grade', input.gradeLevel);
+    logger.log('[CURRICULUM] Validating questions for Grade', input.gradeLevel);
     for (const q of questions) {
       const validationResult = validateQuestionForCurriculum(
         q.question,
@@ -415,28 +416,28 @@ export async function generateQuizDirect(
       );
       
       if (!validationResult.isValid) {
-        console.warn(`[CURRICULUM] Question out of alignment for Grade ${input.gradeLevel}:`);
-        console.warn(`  Question: "${q.question}"`);
-        console.warn(`  Issues: ${validationResult.issues.join('; ')}`);
+        logger.warn(`[CURRICULUM] Question out of alignment for Grade ${input.gradeLevel}:`);
+        logger.warn(`  Question: "${q.question}"`);
+        logger.warn(`  Issues: ${validationResult.issues.join('; ')}`);
       }
       
       if (validationResult.warnings.length > 0) {
-        console.warn(`[CURRICULUM] Warnings for Grade ${input.gradeLevel}:`);
-        validationResult.warnings.forEach(w => console.warn(`  - ${w}`));
+        logger.warn(`[CURRICULUM] Warnings for Grade ${input.gradeLevel}:`);
+        validationResult.warnings.forEach(w => logger.warn(`  - ${w}`));
       }
     }
     
     // Add images from Pixabay (non-blocking, runs in background)
     addImagesToQuestions(questions).catch(err => 
-      console.error('[PIXABAY] Background image fetching failed:', err)
+      logger.error('[PIXABAY] Background image fetching failed:', err)
     );
     
     const validated = PersonalizedLearningPathOutputSchema.parse({ quizQuestions: questions });
-    console.log('[QUIZ] Success! Generated', validated.quizQuestions.length, 'questions');
+    logger.log('[QUIZ] Success! Generated', validated.quizQuestions.length, 'questions');
     return validated;
   } catch (error) {
-    console.error('[QUIZ] Parse error:', error);
-    console.error('[QUIZ] Raw content:', content);
+    logger.error('[QUIZ] Parse error:', error);
+    logger.error('[QUIZ] Raw content:', content);
     throw new Error('Erro ao processar perguntas. Por favor tenta novamente.');
   }
 }

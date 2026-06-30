@@ -1,3 +1,4 @@
+import { logger } from "@/lib/logger";
 export type TextToSpeechOutput = {
   audioDataUri: string;
 };
@@ -22,7 +23,7 @@ export async function textToSpeech(text: string): Promise<TextToSpeechOutput> {
 
     return { audioDataUri };
   } catch (error) {
-    console.error('[TTS] Failed:', error);
+    logger.error('[TTS] Failed:', error);
     throw new Error('Failed to generate speech audio.');
   }
 }

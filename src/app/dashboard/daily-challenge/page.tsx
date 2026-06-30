@@ -1,4 +1,5 @@
 "use client"
+import { logger } from "@/lib/logger";
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -175,7 +176,7 @@ export default function DailyChallengePage() {
           setQuestion(questionData);
         }
       } catch (err) {
-        console.error('Error loading daily challenge:', err);
+        logger.error('Erro ao carregar desafio diário:', err);
       } finally {
         setLoading(false);
       }
@@ -226,7 +227,7 @@ export default function DailyChallengePage() {
       setQuizCompleted(true);
       setDailyChallenge(prev => prev ? { ...prev, completed: true, correct: isCorrect } : null);
     } catch (err) {
-      console.error('Error completing daily challenge:', err);
+      logger.error('Erro ao completar desafio diário:', err);
     } finally {
       setCompleting(false);
     }

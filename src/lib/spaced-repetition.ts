@@ -1,3 +1,4 @@
+import { logger } from "./logger";
 'use server';
 
 import { supabase, isSupabaseConfigured } from './supabase';
@@ -39,7 +40,7 @@ export async function getItemsForReview(
     if (error) throw error;
     return data || [];
   } catch (error) {
-    console.error('[SPACED] Error fetching items for review:', error);
+    logger.error('[SPACED] Error fetching items for review:', error);
     return [];
   }
 }
@@ -100,7 +101,7 @@ export async function recordReview(
     if (error) throw error;
     return true;
   } catch (error) {
-    console.error('[SPACED] Error recording review:', error);
+    logger.error('[SPACED] Error recording review:', error);
     return false;
   }
 }
@@ -133,7 +134,7 @@ export async function addToSpacedRepetition(
     if (error) throw error;
     return true;
   } catch (error) {
-    console.error('[SPACED] Error adding items:', error);
+    logger.error('[SPACED] Error adding items:', error);
     return false;
   }
 }
@@ -160,7 +161,7 @@ export async function getStudentStats(studentId: string) {
 
     return { total: items.length, mastered, learning, due };
   } catch (error) {
-    console.error('[SPACED] Error getting stats:', error);
+    logger.error('[SPACED] Error getting stats:', error);
     return null;
   }
 }

@@ -1,3 +1,4 @@
+import { logger } from "@/lib/logger";
 
 "use server"
 
@@ -110,7 +111,7 @@ export async function updateStudentStreak(studentId: string) {
     if (updateError) throw updateError;
     return updatedStreak;
   } catch (error) {
-    console.error('Error updating student streak:', error);
+    logger.error('Erro ao atualizar streak do estudante:', error);
     return null;
   }
 }
@@ -135,7 +136,7 @@ async function getQuizHistoryFromFile(): Promise<QuizResultEntry[]> {
     const data = await fs.readFile(historyFilePath, 'utf-8');
     const parsed = z.array(QuizResultSchema).safeParse(JSON.parse(data));
     if (!parsed.success) {
-        console.warn('Invalid quiz history file format. Starting fresh.', parsed.error);
+        logger.warn('Formato inválido do ficheiro de histórico de quizzes. A começar do zero.', parsed.error);
         return [];
     }
     return parsed.data;
@@ -145,7 +146,7 @@ async function getQuizHistoryFromFile(): Promise<QuizResultEntry[]> {
     if ((err as any).code === 'ENOENT') {
       return [];
     }
-    console.error('Error reading or parsing quiz history:', error);
+    logger.error('Erro ao ler ou processar histórico de quizzes:', error);
     return [];
   }
 }
@@ -171,7 +172,7 @@ async function getQuizHistory(): Promise<QuizResultEntry[]> {
         score: row.score as number,
       }));
     } catch (error) {
-      console.error('Supabase quiz history fetch failed, falling back to file:', error);
+      logger.error('Falha ao buscar histórico de quizzes no Supabase, a usar ficheiro:', error);
       return getQuizHistoryFromFile();
     }
   }
@@ -228,7 +229,7 @@ async function saveQuizToFile(input: SaveQuizInput) {
     history.push(newEntry);
     await fs.writeFile(historyFilePath, JSON.stringify(history, null, 2));
   } catch (error) {
-    console.error('Error saving quiz to file:', error);
+    logger.error('Erro ao guardar quiz no ficheiro:', error);
   }
 }
 
@@ -247,7 +248,7 @@ async function saveQuiz(input: SaveQuizInput) {
       if (error) throw error;
       return;
     } catch (error) {
-      console.error('Supabase save failed, falling back to file:', error);
+      logger.error('Falha ao guardar no Supabase, a usar ficheiro:', error);
     }
   }
   await saveQuizToFile(input);
@@ -313,7 +314,7 @@ async function getCachedQuestionsFromFile(gradeLevel: number, subject: string | 
     const shuffled = availableQuestions.sort(() => Math.random() - 0.5);
     const selected = shuffled.slice(0, count);
 
-    console.log(`[CACHE-FILE] Found ${selected.length} questions from file history (${availableQuestions.length} available)`);
+    logger.log(`[CACHE-FILE] Found ${selected.length} questions from file history (${availableQuestions.length} available)`);
 
     return {
       quizQuestions: selected.map((q) => ({
@@ -325,7 +326,7 @@ async function getCachedQuestionsFromFile(gradeLevel: number, subject: string | 
       })),
     };
   } catch (error) {
-    console.error('Failed to get cached questions from file:', error);
+    logger.error('Falha ao obter perguntas em cache do ficheiro:', error);
     return null;
   }
 }
@@ -369,7 +370,7 @@ async function getCachedQuestions(gradeLevel: number, subject: string | undefine
               });
             }
           } catch (e) {
-            console.warn('Could not fetch recent history:', e);
+            logger.warn('Não foi possível buscar histórico recente:', e);
           }
         }
 
@@ -386,7 +387,7 @@ async function getCachedQuestions(gradeLevel: number, subject: string | undefine
         const selected = shuffled.slice(0, count);
 
         if (selected.length < count) {
-          console.log(`[CACHE] Only ${selected.length} questions available (need ${count})`);
+          logger.log(`[CACHE] Only ${selected.length} questions available (need ${count})`);
         }
 
         return {
@@ -400,12 +401,12 @@ async function getCachedQuestions(gradeLevel: number, subject: string | undefine
         };
       }
     } catch (error) {
-      console.error('Failed to get cached questions from Supabase:', error);
+      logger.error('Falha ao obter perguntas em cache do Supabase:', error);
     }
   }
 
   // Fallback to file-based cache
-  console.log('[CACHE] Supabase not available or no questions, trying file-based cache...');
+  logger.log('[CACHE] Supabase not available or no questions, trying file-based cache...');
   return getCachedQuestionsFromFile(gradeLevel, subject, count, studentId);
 }
 
@@ -426,7 +427,7 @@ async function cacheQuestions(gradeLevel: number, subject: string | undefined, q
     const newQuestions = questions.filter(q => !existingSet.has(q.question));
     
     if (newQuestions.length === 0) {
-      console.log('[CACHE] All questions already exist, skipping insert');
+      logger.log('[CACHE] All questions already exist, skipping insert');
       return;
     }
 
@@ -440,13 +441,13 @@ async function cacheQuestions(gradeLevel: number, subject: string | undefined, q
       image_url: q.imageUrl || null,
     }));
 
-    console.log(`[CACHE] Inserting ${rows.length} new questions (${questions.length - rows.length} duplicates skipped)`);
+    logger.log(`[CACHE] Inserting ${rows.length} new questions (${questions.length - rows.length} duplicates skipped)`);
     const { error } = await supabase.from('questions').insert(rows);
     if (error) {
-      console.error('Failed to cache questions:', error);
+      logger.error('Falha ao colocar perguntas em cache:', error);
     }
   } catch (error) {
-    console.error('Error caching questions:', error);
+    logger.error('Erro ao colocar em cache:', error);
   }
 }
 
@@ -464,7 +465,7 @@ export async function generateQuiz(input: QuizInput) {
   
   const resolvedSubject = validatedInput.subject === 'Misto' ? undefined : validatedInput.subject;
   
-  console.log(`[QUIZ] Generating quiz for grade ${validatedInput.gradeLevel}, subject: ${resolvedSubject || 'Misto'}`);
+  logger.log(`[QUIZ] Generating quiz for grade ${validatedInput.gradeLevel}, subject: ${resolvedSubject || 'Misto'}`);
 
   // Try direct API calls (Groq first, then Gemini)
   try {
@@ -483,14 +484,14 @@ export async function generateQuiz(input: QuizInput) {
     // Cache the generated questions for future use (non-blocking)
     if (quizOutput?.quizQuestions) {
       cacheQuestions(validatedInput.gradeLevel, resolvedSubject, quizOutput.quizQuestions)
-        .catch(err => console.error('Background caching failed:', err));
+        .catch(err => logger.error('Cache em segundo plano falhou:', err));
     }
     
-    console.log(`[QUIZ] Success! Generated ${quizOutput.quizQuestions.length} questions`);
+    logger.log(`[QUIZ] Success! Generated ${quizOutput.quizQuestions.length} questions`);
     return quizOutput;
     
   } catch {
-    console.warn(`[QUIZ] AI failed, trying cache...`);
+    logger.warn(`[QUIZ] AI failed, trying cache...`);
     
     // 2. If AI fails, try cache as fallback
     const cached = await getCachedQuestions(
@@ -501,12 +502,12 @@ export async function generateQuiz(input: QuizInput) {
     );
 
     if (cached) {
-      console.log(`[QUIZ] Cache fallback: ${cached.quizQuestions.length} questions`);
+      logger.log(`[QUIZ] Cache fallback: ${cached.quizQuestions.length} questions`);
       return cached;
     }
 
     // 3. If no cache either, throw error
-    console.error(`[QUIZ] All options failed`);
+    logger.error(`[QUIZ] All options failed`);
     throw new Error('Serviço temporariamente indisponível. Por favor tenta novamente mais tarde.');
   }
 }
@@ -537,7 +538,7 @@ const GenerateStoryActionOutputSchema = z.object({
 
 async function generateImage(prompt: string): Promise<string> {
   try {
-    console.log(`[IMAGE] Generating image with prompt: ${prompt.substring(0, 100)}...`);
+    logger.log(`[IMAGE] Generating image with prompt: ${prompt.substring(0, 100)}...`);
     const { media } = await ai.generate({
       model: 'googleai/imagen-4.0-fast-generate-001',
       prompt,
@@ -547,13 +548,13 @@ async function generateImage(prompt: string): Promise<string> {
     });
     const url = media?.url || '';
     if (url) {
-      console.log(`[IMAGE] Successfully generated image`);
+      logger.log(`[IMAGE] Successfully generated image`);
     } else {
-      console.warn(`[IMAGE] No media URL returned`);
+      logger.warn(`[IMAGE] No media URL returned`);
     }
     return url;
   } catch (error) {
-    console.error(`[IMAGE] Failed to generate image:`, error);
+    logger.error(`[IMAGE] Failed to generate image:`, error);
     return '';
   }
 }
@@ -563,13 +564,13 @@ export async function generateStoryAction(input: StoryGenerationInput): Promise<
   const warnings: string[] = [];
 
   try {
-    console.log(`[STORY_ACTION] Starting story generation for grade ${input.gradeLevel}`);
+    logger.log(`[STORY_ACTION] Starting story generation for grade ${input.gradeLevel}`);
     const storyOutput = await generateStory(validatedInput);
     if (!storyOutput || !storyOutput.story) {
-      throw new Error("Failed to generate story text - empty response from Genkit flow.");
+      throw new Error("Falha ao gerar texto da história - resposta vazia do fluxo Genkit.");
     }
 
-    console.log(`[STORY_ACTION] Story generated: "${storyOutput.title}"`);
+    logger.log(`[STORY_ACTION] Story generated: "${storyOutput.title}"`);
     const fullText = `${storyOutput.title}. ${storyOutput.story}`;
 
     const [ttsResult, imagesResult] = await Promise.allSettled([
@@ -585,7 +586,7 @@ export async function generateStoryAction(input: StoryGenerationInput): Promise<
     } else {
       warnings.push('O áudio não está disponível de momento.');
       if (ttsResult.status === 'rejected') {
-        console.error("[STORY_ACTION] Text-to-speech failed:", ttsResult.reason);
+        logger.error("[STORY_ACTION] Text-to-speech failed:", ttsResult.reason);
       }
     }
 
@@ -596,7 +597,7 @@ export async function generateStoryAction(input: StoryGenerationInput): Promise<
       }
     } else {
       warnings.push('As imagens não estão disponíveis de momento.');
-      console.error("[STORY_ACTION] Image generation failed:", imagesResult.reason);
+      logger.error("[STORY_ACTION] Image generation failed:", imagesResult.reason);
     }
 
     const result = {
@@ -607,7 +608,7 @@ export async function generateStoryAction(input: StoryGenerationInput): Promise<
       warnings: warnings.length > 0 ? warnings : undefined,
     };
 
-    console.log(`[STORY_ACTION] Story action complete: audio=${!!audioDataUri}, images=${images.length}, warnings=${warnings.length}`);
+    logger.log(`[STORY_ACTION] Story action complete: audio=${!!audioDataUri}, images=${images.length}, warnings=${warnings.length}`);
 
     // Save story to DB (non-blocking)
     if (isSupabaseConfigured() && supabase) {
@@ -620,15 +621,15 @@ export async function generateStoryAction(input: StoryGenerationInput): Promise<
         image_urls: images,
         has_audio: !!audioDataUri,
       }).then(({ error }) => {
-        if (error) console.error('[STORY_ACTION] Failed to save story:', error);
-        else console.log('[STORY_ACTION] Story saved to DB');
+        if (error) logger.error('[STORY_ACTION] Falha ao guardar história:', error);
+        else logger.log('[STORY_ACTION] Story saved to DB');
       });
     }
 
     return GenerateStoryActionOutputSchema.parse(result);
   } catch (error: unknown) {
     const err = error instanceof Error ? error : new Error(String(error));
-    console.error("[STORY_ACTION] Failed to generate story:", err.message || error);
+    logger.error("[STORY_ACTION] Falha ao gerar história:", err.message || error);
     const msg = err.message || '';
     if (msg.includes('API_KEY') || msg.includes('api key') || msg.includes('401') || msg.includes('403')) {
       throw new Error('A chave da API não está configurada corretamente. Contacta um adulto para resolver.');
@@ -662,13 +663,13 @@ export async function getStudentStories(studentId: string, limit = 10) {
     if (error) throw error;
     return data || [];
   } catch (error) {
-    console.error('Error fetching stories:', error);
+    logger.error('Erro ao buscar histórias:', error);
     return [];
   }
 }
 
 export async function generateDiagnostic(gradeLevel: 1 | 2 | 3 | 4) {
-  console.log('[DIAGNOSTIC] Generating diagnostic test...');
+  logger.log('[DIAGNOSTIC] Generating diagnostic test...');
   return generateDiagnosticTest(gradeLevel);
 }
 
@@ -680,7 +681,7 @@ export async function saveDiagnosticResults(
 ) {
   const results = calculateDiagnosticResults(answers, correctAnswers);
   
-  console.log('[DIAGNOSTIC] Results:', results);
+  logger.log('[DIAGNOSTIC] Results:', results);
   
   // Save to Supabase if configured
   if (isSupabaseConfigured() && supabase) {
@@ -695,9 +696,9 @@ export async function saveDiagnosticResults(
         created_at: new Date().toISOString(),
       });
       
-      if (error) console.error('Failed to save diagnostic results:', error);
+      if (error) logger.error('Falha ao guardar resultados do diagnóstico:', error);
     } catch (error) {
-      console.error('Error saving diagnostic results:', error);
+      logger.error('Erro ao guardar resultados do diagnóstico:', error);
     }
   }
   
@@ -720,10 +721,10 @@ export async function awardQuizPoints(
 ) {
   const points = calculateQuizPoints(score, total, gradeLevel);
   
-  console.log('[REWARDS] Awarding', points, 'points to', studentId);
+  logger.log('[REWARDS] Awarding', points, 'points to', studentId);
   
   if (!isSupabaseConfigured() || !supabase) {
-    console.warn('[REWARDS] Supabase not configured, skipping reward save');
+    logger.warn('[REWARDS] Base de dados não configurada, skipping reward save');
     return { points, message: generateCelebrationMessage(score, total, points) };
   }
   
@@ -774,7 +775,7 @@ export async function awardQuizPoints(
       progressPercentage: nextProgress.percentage,
     };
   } catch (error) {
-    console.error('[REWARDS] Failed to award points:', error);
+    logger.error('[REWARDS] Falha ao atribuir pontos:', error);
     return {
       points,
       message: generateCelebrationMessage(score, total, points),
@@ -798,7 +799,7 @@ export async function getStudentLessonHistoryAction(studentId: string) {
     if (error && error.code !== 'PGRST116') throw error;
     return data || [];
   } catch (error) {
-    console.error('Error fetching student lesson history:', error);
+    logger.error('Erro ao buscar histórico de lições do estudante:', error);
     return [];
   }
 }
@@ -827,7 +828,7 @@ export async function getStudentRewards(studentId: string) {
       };
     }
   } catch (error) {
-    console.error('[REWARDS] Failed to get student rewards:', error);
+    logger.error('[REWARDS] Falha ao obter recompensas do estudante:', error);
   }
   
   return null;
@@ -840,7 +841,7 @@ export async function getStudentRewards(studentId: string) {
 export async function getLessonDataAction(lessonId: string) {
   try {
     if (!isSupabaseConfigured() || !supabase) {
-      throw new Error('Supabase not configured');
+      throw new Error('Base de dados não configurada');
     }
 
     const { data: lesson, error: lessonError } = await supabase
@@ -865,7 +866,7 @@ export async function getLessonDataAction(lessonId: string) {
       challenges: challenges || [],
     };
   } catch (error) {
-    console.error('Error fetching lesson:', error);
+    logger.error('Erro ao buscar lição:', error);
     return null;
   }
 }
@@ -876,7 +877,7 @@ export async function getLessonsForSubjectAction(
 ) {
   try {
     if (!isSupabaseConfigured() || !supabase) {
-      throw new Error('Supabase not configured');
+      throw new Error('Base de dados não configurada');
     }
 
     const { data, error } = await supabase
@@ -889,7 +890,7 @@ export async function getLessonsForSubjectAction(
     if (error) throw error;
     return data || [];
   } catch (error) {
-    console.error('Error fetching lessons:', error);
+    logger.error('Erro ao buscar lições:', error);
     return [];
   }
 }
@@ -900,7 +901,7 @@ export async function getStudentLessonProgressAction(
 ) {
   try {
     if (!isSupabaseConfigured() || !supabase) {
-      throw new Error('Supabase not configured');
+      throw new Error('Base de dados não configurada');
     }
 
     const { data, error } = await supabase
@@ -913,7 +914,7 @@ export async function getStudentLessonProgressAction(
     if (error && error.code !== 'PGRST116') throw error;
     return data || null;
   } catch (error) {
-    console.error('Error fetching lesson progress:', error);
+    logger.error('Erro ao buscar progresso da lição:', error);
     return null;
   }
 }
@@ -926,7 +927,7 @@ export async function saveLessonCompletionAction(
 ) {
   try {
     if (!isSupabaseConfigured() || !supabase) {
-      throw new Error('Supabase not configured');
+      throw new Error('Base de dados não configurada');
     }
 
     // Calculate stars and coins
@@ -964,7 +965,7 @@ export async function saveLessonCompletionAction(
       data,
     };
   } catch (error) {
-    console.error('Error saving lesson completion:', error);
+    logger.error('Erro ao guardar conclusão da lição:', error);
     return {
       success: false,
       error: String(error),
@@ -978,7 +979,7 @@ export async function updateStudentRewardsWithCoinsAction(
 ) {
   try {
     if (!isSupabaseConfigured() || !supabase) {
-      throw new Error('Supabase not configured');
+      throw new Error('Base de dados não configurada');
     }
 
     // Get current rewards
@@ -1016,7 +1017,7 @@ export async function updateStudentRewardsWithCoinsAction(
 
     return true;
   } catch (error) {
-    console.error('Error updating student rewards:', error);
+    logger.error('Erro ao atualizar recompensas do estudante:', error);
     return false;
   }
 }
@@ -1056,7 +1057,7 @@ export async function initializeStudent(studentId: string): Promise<{ success: b
 
     return { success: true, welcomeBonus: WELCOME_BONUS };
   } catch (error) {
-    console.error('[INIT] Failed to initialize student:', error);
+    logger.error('[INIT] Failed to initialize student:', error);
     return { success: false };
   }
 }
@@ -1104,7 +1105,7 @@ export async function buyShopItem(studentId: string, itemId: string) {
 
     return { success: true };
   } catch (error) {
-    console.error('Error buying shop item:', error);
+    logger.error('Erro ao comprar item na loja:', error);
     return { success: false, error: 'Erro ao comprar item' };
   }
 }
@@ -1121,7 +1122,7 @@ export async function getUserInventory(studentId: string) {
     if (error) throw error;
     return data || [];
   } catch (error) {
-    console.error('Error fetching inventory:', error);
+    logger.error('Erro ao buscar inventário:', error);
     return [];
   }
 }
@@ -1142,7 +1143,7 @@ export async function equipInventoryItem(studentId: string, itemId: string) {
       .eq('item_id', itemId);
     return { success: true };
   } catch (error) {
-    console.error('Error equipping item:', error);
+    logger.error('Erro ao equipar item:', error);
     return { success: false, error: 'Erro ao equipar item' };
   }
 }
@@ -1173,7 +1174,7 @@ export async function generateLessonChallengesAction(input: GenerateChallengesIn
     
     return result;
   } catch (error) {
-    console.error('Failed to generate lesson challenges:', error);
+    logger.error('Falha ao gerar desafios da lição:', error);
     throw error;
   }
 }
@@ -1194,7 +1195,7 @@ export async function getStudentAchievements(studentId: string) {
     if (error) throw error;
     return data || [];
   } catch (error) {
-    console.error('Error fetching student achievements:', error);
+    logger.error('Erro ao buscar conquistas do estudante:', error);
     return [];
   }
 }
@@ -1213,7 +1214,7 @@ export async function unlockAchievement(studentId: string, achievementId: string
     if (error) throw error;
     return { success: true };
   } catch (error) {
-    console.error('Error unlocking achievement:', error);
+    logger.error('Erro ao desbloquear conquista:', error);
     return { success: false };
   }
 }
@@ -1235,7 +1236,7 @@ export async function getShopItems() {
     if (error) throw error;
     return data || [];
   } catch (error) {
-    console.error('Error fetching shop items:', error);
+    logger.error('Erro ao buscar itens da loja:', error);
     return [];
   }
 }

@@ -1,4 +1,5 @@
 "use client";
+import { logger } from "@/lib/logger";
 
 import { useState, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -61,7 +62,7 @@ export default function StoryCreatorClientPage() {
         });
       }
     } catch (err: unknown) {
-      console.error('Story generation error:', err);
+      logger.error('Erro na geração de história:', err);
       const error = err instanceof Error ? err : new Error(String(err));
       const serverMsg = error.message || '';
       if (serverMsg && serverMsg !== 'Não foi possível gerar a história. Tenta novamente!') {

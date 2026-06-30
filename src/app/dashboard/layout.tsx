@@ -57,7 +57,7 @@ export default function DashboardLayout({
         <DashboardHeader />
       </Suspense>
       <main className="container mx-auto p-4 md:p-8 flex-1">
-        <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-background p-4 animate-pulse">Carregando...</div>}>
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-background p-4 animate-pulse">A carregar...</div>}>
           {children}
         </Suspense>
       </main>

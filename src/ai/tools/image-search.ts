@@ -1,3 +1,4 @@
+import { logger } from "@/lib/logger";
 'use server';
 
 import {ai} from '@/ai/genkit';
@@ -19,7 +20,7 @@ export const searchImage = ai.defineTool(
   async ({query}) => {
     const apiKey = process.env.PIXABAY_API_KEY;
     if (!apiKey) {
-      console.warn('Pixabay API key is not configured. Returning placeholder image.');
+      logger.warn('Chave da API Pixabay não configurada. A retornar imagem de exemplo.');
       return 'https://placehold.co/600x400/EEE/31343C?text=Imagem+indispon%C3%ADvel';
     }
 
@@ -41,7 +42,7 @@ export const searchImage = ai.defineTool(
       }
       return 'https://placehold.co/600x400/EEE/31343C?text=Imagem+n%C3%A3o+encontrada';
     } catch (error) {
-      console.error('Error searching image on Pixabay:', error);
+      logger.error('Erro ao pesquisar imagem no Pixabay:', error);
       return 'https://placehold.co/600x400/EEE/31343C?text=Erro+ao+carregar';
     }
   }

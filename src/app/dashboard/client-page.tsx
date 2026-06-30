@@ -1,4 +1,5 @@
 "use client"
+import { logger } from "@/lib/logger";
 
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
@@ -115,7 +116,7 @@ export default function DashboardClientPage() {
           setDailyChallengeStats(stats)
         })
         .catch((err) => {
-          console.error("Error loading dashboard:", err)
+          logger.error("Error loading dashboard:", err)
           setHistory([])
           setLessonHistory([])
           setRewards(null)

@@ -1,3 +1,4 @@
+import { logger } from "@/lib/logger";
 
 'use server';
 
@@ -98,7 +99,7 @@ const personalizedLearningPathFlow = ai.defineFlow(
               try {
                 parsedPerformanceData = JSON.parse(input.performanceData);
               } catch (e) {
-                console.warn('Failed to parse performanceData as JSON:', e);
+                logger.warn('Falha ao processar performanceData como JSON:', e);
                 parsedPerformanceData = null; // fallback to null on parse error
               }
             }
@@ -124,7 +125,7 @@ const personalizedLearningPathFlow = ai.defineFlow(
         lastError = new Error("Model returned null or empty output.");
         retries--;
         if (retries > 0) {
-          console.log(`Model returned null output, retrying in 2 seconds... (${retries} attempts left)`);
+          logger.log(`Model returned null output, retrying in 2 seconds... (${retries} attempts left)`);
           await new Promise(resolve => setTimeout(resolve, 2000));
         }
         
@@ -135,7 +136,7 @@ const personalizedLearningPathFlow = ai.defineFlow(
         if (error.message.includes('503 Service Unavailable') || error.message.includes('overloaded') || (error.cause && String(error.cause).includes('503')) || error.name === 'ZodError') {
           retries--;
           if (retries > 0) {
-            console.log(`Model error or validation failed, retrying in 2 seconds... (${retries} attempts left)`, error);
+            logger.log(`Model error or validation failed, retrying in 2 seconds... (${retries} attempts left)`, error);
             await new Promise(resolve => setTimeout(resolve, 2000));
           }
         } else {
@@ -145,7 +146,7 @@ const personalizedLearningPathFlow = ai.defineFlow(
       }
     }
     // If all retries fail, throw the last recorded error.
-    console.error("All retries failed to generate quiz.");
+    logger.error("All retries failed to generate quiz.");
     throw lastError || new Error('Unknown error');
   }
 );

@@ -61,7 +61,7 @@ export default function LessonDetailClient() {
               lessonData.challenges = result.challenges;
             }
           } catch (error) {
-            logger.error("Failed to generate challenges automatically:", error);
+            logger.error("Falha ao gerar desafios automaticamente:", error);
           } finally {
             setGenerating(false);
           }
@@ -69,7 +69,7 @@ export default function LessonDetailClient() {
         
         setLesson(lessonData);
       } catch (error) {
-        logger.error("Failed to fetch lesson:", error);
+        logger.error("Falha ao carregar lição:", error);
       } finally {
         setLoading(false);
       }

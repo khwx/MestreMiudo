@@ -10,3 +10,6 @@ temp/
 .env.production
 .env.test
 .env.development
+.next/
+tsconfig.tsbuildinfo
+next-env.d.ts

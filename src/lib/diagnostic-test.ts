@@ -1,3 +1,4 @@
+import { logger } from "./logger";
 /**
  * @fileOverview Diagnostic test to detect student learning level
  * Helps identify weak areas and adjust difficulty accordingly
@@ -21,7 +22,7 @@ interface DiagnosticQuestion {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function generateDiagnosticTest(gradeLevel: 1 | 2 | 3 | 4): Promise<any> {
-  console.log(`[DIAGNOSTIC] Generating diagnostic test for grade ${gradeLevel}...`);
+  logger.log(`[DIAGNOSTIC] Generating diagnostic test for grade ${gradeLevel}...`);
   
   // Use the standard quiz generator with specific prompt
   const diagnosticInput: PersonalizedLearningPathInput = {
@@ -40,7 +41,7 @@ export async function generateDiagnosticTest(gradeLevel: 1 | 2 | 3 | 4): Promise
       throw new Error('Failed to generate diagnostic questions');
     }
 
-    console.log(`[DIAGNOSTIC] Generated ${diagnosticQuiz.quizQuestions.length} diagnostic questions`);
+    logger.log(`[DIAGNOSTIC] Generated ${diagnosticQuiz.quizQuestions.length} diagnostic questions`);
     
     return {
       gradeLevel,
@@ -51,7 +52,7 @@ export async function generateDiagnosticTest(gradeLevel: 1 | 2 | 3 | 4): Promise
       performance: null, // To be calculated after completion
     };
   } catch (error) {
-    console.error('[DIAGNOSTIC] Failed to generate diagnostic test:', error);
+    logger.error('[DIAGNOSTIC] Failed to generate diagnostic test:', error);
     throw error;
   }
 }

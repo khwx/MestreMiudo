@@ -1,3 +1,4 @@
+import { logger } from "./logger";
 /**
  * @fileOverview Pixabay image search utility for quiz questions
  * Fetches appropriate educational images for different topics
@@ -152,7 +153,7 @@ export async function fetchPixabayImage(
   safeSearch = true
 ): Promise<string | null> {
   if (!PIXABAY_API_KEY) {
-    console.warn('[PIXABAY] API key not configured');
+    logger.warn('[PIXABAY] API key not configured');
     return null;
   }
 
@@ -172,14 +173,14 @@ export async function fetchPixabayImage(
     const response = await fetch(`https://pixabay.com/api/?${params.toString()}`);
 
     if (!response.ok) {
-      console.error('[PIXABAY] API error:', response.status);
+      logger.error('[PIXABAY] API error:', response.status);
       return null;
     }
 
     const data = (await response.json()) as PixabayResponse;
 
     if (!data.hits || data.hits.length === 0) {
-      console.log(`[PIXABAY] No results for "${searchQuery}"`);
+      logger.log(`[PIXABAY] No results for "${searchQuery}"`);
       return null;
     }
 
@@ -187,7 +188,7 @@ export async function fetchPixabayImage(
     const image = data.hits[0];
     return image.webformatURL;
   } catch (error) {
-    console.error('[PIXABAY] Request failed:', error);
+    logger.error('[PIXABAY] Request failed:', error);
     return null;
   }
 }

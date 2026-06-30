@@ -1,3 +1,4 @@
+import { logger } from "./logger";
 'use server';
 
 /**
@@ -70,7 +71,7 @@ async function getRandomLessonChallenge(
     const randomIndex = Math.floor(Math.random() * challenges.length);
     return challenges[randomIndex];
   } catch (error) {
-    console.error('[DAILY] Error fetching lesson challenge:', error);
+    logger.error('[DAILY] Erro ao buscar desafio da lição:', error);
     return null;
   }
 }
@@ -83,7 +84,7 @@ export async function getDailyChallenge(
   gradeLevel: 1 | 2 | 3 | 4
 ): Promise<DailyChallenge | null> {
   if (!isSupabaseConfigured() || !supabase) {
-    console.warn('[DAILY] Supabase not configured');
+    logger.warn('[DAILY] Base de dados não configurada');
     return null;
   }
 
@@ -119,7 +120,7 @@ export async function getDailyChallenge(
     // Create a new challenge
     return createDailyChallenge(studentId, today, gradeLevel);
   } catch (error) {
-    console.error('[DAILY] Error getting daily challenge:', error);
+    logger.error('[DAILY] Erro ao obter desafio diário:', error);
     return null;
   }
 }
@@ -178,7 +179,7 @@ async function createDailyChallenge(
       bonusPoints: newChallenge.bonus_points,
     };
   } catch (error) {
-    console.error('[DAILY] Error creating daily challenge:', error);
+    logger.error('[DAILY] Erro ao criar desafio diário:', error);
     return null;
   }
 }
@@ -223,7 +224,7 @@ async function createFallbackChallenge(
       bonusPoints: challenge.bonus_points,
     };
   } catch (error) {
-    console.error('[DAILY] Error creating fallback challenge:', error);
+    logger.error('[DAILY] Erro ao criar desafio alternativo:', error);
     return null;
   }
 }
@@ -269,7 +270,7 @@ export async function getDailyChallengeQuestion(
       hint: question.hint,
     };
   } catch (error) {
-    console.error('[DAILY] Error getting challenge question:', error);
+    logger.error('[DAILY] Erro ao obter pergunta do desafio:', error);
     return null;
   }
 }
@@ -303,7 +304,7 @@ export async function completeDailyChallenge(
 
     return true;
   } catch (error) {
-    console.error('[DAILY] Error completing daily challenge:', error);
+    logger.error('[DAILY] Erro ao completar desafio diário:', error);
     return false;
   }
 }
@@ -352,7 +353,7 @@ export async function getDailyChallengeStats(
 
     return { completed, correctAnswers, streak };
   } catch (error) {
-    console.error('[DAILY] Error getting challenge stats:', error);
+    logger.error('[DAILY] Erro ao obter estatísticas do desafio:', error);
     return null;
   }
 }

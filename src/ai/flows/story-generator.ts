@@ -1,3 +1,4 @@
+import { logger } from "@/lib/logger";
 
 import { ai } from '@/ai/genkit';
 import { StoryGenerationOutputSchema, type StoryGenerationOutput } from '@/ai/schemas';
@@ -50,19 +51,19 @@ const storyGeneratorFlow = ai.defineFlow(
 
     while (retries > 0) {
       try {
-        console.log(`[STORY] Generating story for grade ${input.gradeLevel} with keywords: ${input.keywords}`);
+        logger.log(`[STORY] Generating story for grade ${input.gradeLevel} with keywords: ${input.keywords}`);
         const { output } = await prompt(input);
         
       if (output?.title && output.story) {
         if (!output.imagePrompts || output.imagePrompts.length === 0) {
           output.imagePrompts = [];
         }
-        console.log(`[STORY] Successfully generated story: "${output.title}"`);
+        logger.log(`[STORY] Successfully generated story: "${output.title}"`);
         return output;
       }
 
           lastError = new Error("Model returned invalid output (e.g., missing title, story, or 3 image prompts).");
-          console.warn(`[STORY] Invalid output from model:`, output);
+          logger.warn(`[STORY] Invalid output from model:`, output);
           retries--;
           if (retries > 0) {
             await new Promise(resolve => setTimeout(resolve, 1500));
@@ -71,21 +72,21 @@ const storyGeneratorFlow = ai.defineFlow(
       } catch (e: unknown) {
         const error = e instanceof Error ? e : new Error(String(e));
         lastError = error;
-        console.error(`[STORY] Error generating story (attempt ${4 - retries}/3):`, error.message);
+        logger.error(`[STORY] Error generating story (attempt ${4 - retries}/3):`, error.message);
         if (error.message.includes('503 Service Unavailable') || error.message.includes('overloaded')) {
           retries--;
           if (retries > 0) {
-            console.log(`[STORY] Model is overloaded, retrying in 2 seconds... (${retries} attempts left)`);
+            logger.log(`[STORY] Model is overloaded, retrying in 2 seconds... (${retries} attempts left)`);
             await new Promise(resolve => setTimeout(resolve, 2000));
           }
         } else {
           // Non-retriable error
-          console.error(`[STORY] Non-retriable error, giving up:`, error.message);
+          logger.error(`[STORY] Non-retriable error, giving up:`, error.message);
           throw error;
         }
       }
     }
-    console.error("[STORY] All retries failed to generate a story.", lastError?.message);
+    logger.error("[STORY] All retries failed to generate a story.", lastError?.message);
     throw lastError || new Error('Unknown error');
   }
 );

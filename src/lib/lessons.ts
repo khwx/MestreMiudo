@@ -1,3 +1,4 @@
+import { logger } from "./logger";
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import type { Lesson, LessonCompletion } from '@/app/shared-schemas';
 
@@ -25,7 +26,7 @@ export async function getLessons(
     if (error) throw error;
     return data || [];
   } catch (error) {
-    console.error('Error fetching lessons:', error);
+    logger.error('Erro ao buscar lições:', error);
     return [];
   }
 }
@@ -60,7 +61,7 @@ export async function getLesson(lessonId: string): Promise<Lesson | null> {
       challenges: challenges || [],
     };
   } catch (error) {
-    console.error('Error fetching lesson:', error);
+    logger.error('Erro ao buscar lição:', error);
     return null;
   }
 }
@@ -85,7 +86,7 @@ export async function getLessonProgress(
     if (error && error.code !== 'PGRST116') throw error; // PGRST116 = no rows
     return data || null;
   } catch (error) {
-    console.error('Error fetching lesson progress:', error);
+    logger.error('Erro ao buscar progresso da lição:', error);
     return null;
   }
 }
@@ -114,7 +115,7 @@ export async function getCompletedLessons(
     if (error) throw error;
     return data || [];
   } catch (error) {
-    console.error('Error fetching completed lessons:', error);
+    logger.error('Erro ao buscar lições concluídas:', error);
     return [];
   }
 }
@@ -188,7 +189,7 @@ export async function saveLessonCompletion(
     if (error) throw error;
     return data;
   } catch (error) {
-    console.error('Error saving lesson completion:', error);
+    logger.error('Erro ao guardar conclusão da lição:', error);
     return null;
   }
 }
@@ -227,7 +228,7 @@ export async function getLessonStats(studentId: string) {
     // Group by subject - this would need proper implementation with the join
     return stats;
   } catch (error) {
-    console.error('Error fetching lesson stats:', error);
+    logger.error('Erro ao buscar estatísticas da lição:', error);
     return null;
   }
 }
@@ -1474,7 +1475,7 @@ export async function initializeSampleLessons() {
         .insert(lesson)
         .select();
     } catch (error) {
-      console.error('Error inserting sample lesson:', error);
+      logger.error('Erro ao inserir lição de exemplo:', error);
     }
   }
 }

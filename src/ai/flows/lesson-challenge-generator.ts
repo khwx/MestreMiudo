@@ -1,3 +1,4 @@
+import { logger } from "@/lib/logger";
 'use server';
 
 import { ai } from '@/ai/genkit';
@@ -71,7 +72,7 @@ export const generateLessonChallengesFlow = ai.defineFlow(
 
         return { challenges: formattedChallenges };
       } catch (error) {
-        console.error(`Challenge generation attempt failed (${retries} retries left):`, error);
+        logger.error(`Challenge generation attempt failed (${retries} retries left):`, error);
         lastError = error instanceof Error ? error : new Error(String(error));
         retries--;
         

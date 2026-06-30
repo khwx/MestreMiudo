@@ -1,3 +1,4 @@
+import { logger } from "@/lib/logger";
 'use server';
 
 /**
@@ -17,30 +18,30 @@ export async function generateQuizWithFallback(
   input: PersonalizedLearningPathInput
 ): Promise<PersonalizedLearningPathOutput> {
   // Try Gemini first
-  console.log('[FALLBACK] Attempting to generate quiz with Gemini...');
+  logger.log('[FALLBACK] Attempting to generate quiz with Gemini...');
   
   try {
     const result = await personalizedLearningPath(input);
-    console.log('[FALLBACK] Quiz generated successfully with Gemini');
+    logger.log('[FALLBACK] Quiz generated successfully with Gemini');
     return result;
   } catch (geminiError: unknown) {
     const error = geminiError instanceof Error ? geminiError : new Error(String(geminiError));
-    console.warn('[FALLBACK] Gemini failed, error:', error.message || geminiError);
+    logger.warn('[FALLBACK] Gemini failed, error:', error.message || geminiError);
     
     // Check if Groq API key is available
     if (!process.env.GROQ_API_KEY) {
-      console.error('[FALLBACK] GROQ_API_KEY not configured');
+      logger.error('[FALLBACK] GROQ_API_KEY not configured');
       throw new Error('API temporariamente indisponível. Por favor tenta novamente mais tarde.');
     }
     
-    console.log('[FALLBACK] Trying Groq as fallback...');
+    logger.log('[FALLBACK] Trying Groq as fallback...');
     
     try {
       const groqResult = await generateQuizWithGroq(input);
-      console.log('[FALLBACK] Quiz generated successfully with Groq');
+      logger.log('[FALLBACK] Quiz generated successfully with Groq');
       return groqResult;
     } catch (groqError: unknown) {
-      console.error('[FALLBACK] Groq also failed:', groqError);
+      logger.error('[FALLBACK] Groq also failed:', groqError);
       throw new Error('Serviço temporariamente indisponível. Por favor tenta novamente mais tarde.');
     }
   }

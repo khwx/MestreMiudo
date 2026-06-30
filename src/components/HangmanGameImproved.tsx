@@ -115,7 +115,7 @@ export function HangmanGame() {
             setWordToGuess(newWord);
             setHint(newWordData.hint);
         } catch (error) {
-            logger.error("Failed to generate word:", error);
+            logger.error("Falha ao gerar palavra:", error);
             toast({
                 title: "Erro ao gerar palavra",
                 description: "Não foi possível obter uma nova palavra. Tente novamente.",
