@@ -1,7 +1,7 @@
 "use client";
 import { logger } from "@/lib/logger";
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { generateQuiz, saveQuizResults } from '@/app/actions';
 import type { PersonalizedLearningPathOutput } from '@/app/shared-schemas';
 import { Button } from '@/components/ui/button';
@@ -93,7 +93,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     }
   }, [fetchQuiz]);
 
-  const handleAnswerSelect = (answer: string) => {
+  const handleAnswerSelect = useCallback((answer: string) => {
     if (isAnswered) return;
     window.speechSynthesis.cancel();
     
@@ -122,21 +122,9 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
       isCorrect,
       topic: currentQuestion.topic || 'Geral',
     }]);
-  };
+  }, [isAnswered, quizData, currentQuestionIndex, playSuccess, playError]);
 
-  const handleNext = () => {
-    window.speechSynthesis.cancel();
-    if (currentQuestionIndex < quizData!.quizQuestions.length - 1) {
-      setCurrentQuestionIndex(prev => prev + 1);
-      setSelectedAnswer(null);
-      setIsAnswered(false);
-  } else {
-    setCurrentQuestionIndex(prev => prev + 1);
-    finishQuiz();
-  }
-  };
-
-  const finishQuiz = async () => {
+  const finishQuiz = useCallback(async () => {
     try {
       await saveQuizResults({
         studentId,
@@ -157,9 +145,21 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     } catch (error) {
       logger.error('Erro ao guardar resultados do quiz:', error);
     }
-  };
+  }, [studentId, gradeLevel, subject, score, answers, quizData, playLevelUp]);
 
-  const handleRestart = () => {
+  const handleNext = useCallback(() => {
+    window.speechSynthesis.cancel();
+    if (currentQuestionIndex < quizData!.quizQuestions.length - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
+      setSelectedAnswer(null);
+      setIsAnswered(false);
+  } else {
+    setCurrentQuestionIndex(prev => prev + 1);
+    finishQuiz();
+  }
+  }, [currentQuestionIndex, quizData, finishQuiz]);
+
+  const handleRestart = useCallback(() => {
     setQuizData(null);
     setCurrentQuestionIndex(0);
     setSelectedAnswer(null);
@@ -169,9 +169,9 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     setLoading(true);
     quizStarted.current = false;
     fetchQuiz();
-  };
+  }, [fetchQuiz]);
 
-  const handleAudioPlayback = () => {
+  const handleAudioPlayback = useCallback(() => {
     if (!quizData) return;
     window.speechSynthesis.cancel();
 
@@ -183,7 +183,17 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     utterance.lang = 'pt-PT';
     utterance.rate = 0.85;
     window.speechSynthesis.speak(utterance);
-  };
+  }, [quizData, currentQuestionIndex]);
+
+  const isQuizFinished = useMemo(
+    () => currentQuestionIndex >= (quizData?.quizQuestions.length ?? 0),
+    [currentQuestionIndex, quizData]
+  );
+
+  const progress = useMemo(
+    () => quizData ? ((currentQuestionIndex) / quizData.quizQuestions.length) * 100 : 0,
+    [currentQuestionIndex, quizData]
+  );
 
   if (loading) {
     return (
@@ -217,8 +227,6 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     );
   }
 
-  const isQuizFinished = currentQuestionIndex >= quizData.quizQuestions.length;
-  const progress = ((currentQuestionIndex) / quizData.quizQuestions.length) * 100;
   const currentQuestion = quizData.quizQuestions[currentQuestionIndex];
 
   if (isQuizFinished) {

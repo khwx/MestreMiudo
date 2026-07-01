@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Book, Divide, Leaf, Loader2, Shuffle, Gamepad2, BookHeart, Lightbulb, Flame, ShoppingBag } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { getFullQuizHistory, getStudentLessonHistoryAction, getStudentRewards, getStudentStreak } from "@/app/actions"
 import { getDailyChallenge, getDailyChallengeStats } from "@/lib/daily-challenges"
 import { getStudentStats as getSpacedRepetitionStats } from "@/lib/spaced-repetition"
@@ -133,16 +133,23 @@ export default function DashboardClientPage() {
     }
   }, [name, grade])
 
-  const quizPoints = history.reduce((acc, entry) => acc + entry.score * 10, 0)
-  const lessonPoints = lessonHistory.reduce((acc, lesson) => acc + (lesson.coins_earned || 0), 0)
-  const rewardPoints = (rewards?.total_points as number) || 0
-  const totalPoints = Math.max(quizPoints + lessonPoints, rewardPoints)
-  const { level, nextLevel, progressPercentage, pointsNeeded } = calculateLevel(totalPoints)
+  const totalPoints = useMemo(() => {
+    const quizPoints = history.reduce((acc, entry) => acc + entry.score * 10, 0)
+    const lessonPoints = lessonHistory.reduce((acc, lesson) => acc + (lesson.coins_earned || 0), 0)
+    const rewardPoints = (rewards?.total_points as number) || 0
+    return Math.max(quizPoints + lessonPoints, rewardPoints)
+  }, [history, lessonHistory, rewards])
 
-  const totalQuizzes = history.length
-  const averageScore = totalQuizzes > 0
-    ? Math.round(history.reduce((acc, h) => acc + (h.score / h.numberOfQuestions) * 100, 0) / totalQuizzes)
-    : 0
+  const levelInfo = useMemo(() => calculateLevel(totalPoints), [totalPoints])
+  const { level, nextLevel, progressPercentage, pointsNeeded } = levelInfo
+
+  const totalQuizzes = useMemo(() => history.length, [history])
+
+  const averageScore = useMemo(() => {
+    return totalQuizzes > 0
+      ? Math.round(history.reduce((acc, h) => acc + (h.score / h.numberOfQuestions) * 100, 0) / totalQuizzes)
+      : 0
+  }, [history, totalQuizzes])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
