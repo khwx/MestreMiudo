@@ -1,0 +1,408 @@
+"use server"
+
+import { logger } from "@/lib/logger";
+import { supabase, isSupabaseConfigured } from "@/lib/supabase";
+import { generateQuizDirect } from "@/lib/quiz-generator";
+import { z } from "zod";
+import fs from 'fs/promises';
+import path from 'path';
+import { QuizResultSchema } from "@/app/shared-schemas";
+import type { QuizResultEntry, SaveQuizInput, QuizInput, QuizQuestion } from '@/app/shared-schemas';
+
+const historyFilePath = path.join(process.cwd(), 'quiz-history.json');
+
+async function getQuizHistoryFromFile(): Promise<QuizResultEntry[]> {
+  try {
+    const data = await fs.readFile(historyFilePath, 'utf-8');
+    const parsed = z.array(QuizResultSchema).safeParse(JSON.parse(data));
+    if (!parsed.success) {
+        logger.warn('Formato inválido do ficheiro de histórico de quizzes. A começar do zero.', parsed.error);
+        return [];
+    }
+    return parsed.data;
+  } catch (error: unknown) {
+    const err = error instanceof Error ? error : new Error(String(error));
+    if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+      return [];
+    }
+    logger.error('Erro ao ler ou processar histórico de quizzes:', error);
+    return [];
+  }
+}
+
+async function getQuizHistory(): Promise<QuizResultEntry[]> {
+  if (isSupabaseConfigured() && supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('quiz_history')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      return (data || []).map((row) => ({
+        timestamp: row.created_at as string,
+        studentId: row.student_id as string,
+        gradeLevel: row.grade_level as number,
+        subject: row.subject as "Português" | "Matemática" | "Estudo do Meio" | "Misto",
+        numberOfQuestions: row.total_questions as number,
+        quiz: row.quiz_data,
+        answers: row.answers,
+        score: row.score as number,
+      }));
+    } catch (error) {
+      logger.error('Falha ao buscar histórico de quizzes no Supabase, a usar ficheiro:', error);
+      return getQuizHistoryFromFile();
+    }
+  }
+  return getQuizHistoryFromFile();
+}
+
+export async function getPerformanceData(studentId: string, subject?: string): Promise<Record<string, number> | null> {
+    const history = await getQuizHistory();
+    const studentHistory = history.filter(entry => 
+        entry.studentId === studentId && (subject ? entry.subject === subject : true)
+    );
+
+    if (studentHistory.length === 0) {
+        return null;
+    }
+
+    const topicPerformance: Record<string, { correct: number; total: number }> = {};
+
+    for (const entry of studentHistory) {
+      for (const answer of entry.answers) {
+          if (!topicPerformance[answer.topic]) {
+              topicPerformance[answer.topic] = { correct: 0, total: 0 };
+          }
+          topicPerformance[answer.topic].total++;
+          if (answer.isCorrect) {
+              topicPerformance[answer.topic].correct++;
+          }
+      }
+    }
+
+    const performanceScores: Record<string, number> = {};
+    for (const topic in topicPerformance) {
+        const { correct, total } = topicPerformance[topic];
+        performanceScores[topic] = total > 0 ? correct / total : 0;
+    }
+
+    return performanceScores;
+}
+
+async function saveQuizToFile(input: SaveQuizInput) {
+  const newEntry: QuizResultEntry = {
+    timestamp: new Date().toISOString(),
+    studentId: input.studentId,
+    gradeLevel: input.gradeLevel,
+    subject: input.subject,
+    numberOfQuestions: input.numberOfQuestions,
+    quiz: input.quiz,
+    answers: input.answers,
+    score: input.score,
+  };
+
+  try {
+    const history = await getQuizHistoryFromFile();
+    history.push(newEntry);
+    await fs.writeFile(historyFilePath, JSON.stringify(history, null, 2));
+  } catch (error) {
+    logger.error('Erro ao guardar quiz no ficheiro:', error);
+  }
+}
+
+async function saveQuiz(input: SaveQuizInput) {
+  if (isSupabaseConfigured() && supabase) {
+    try {
+      const { error } = await supabase.from('quiz_history').insert({
+        student_id: input.studentId,
+        grade_level: input.gradeLevel,
+        subject: input.subject,
+        score: input.score,
+        total_questions: input.numberOfQuestions,
+        answers: input.answers,
+        quiz_data: input.quiz,
+      });
+      if (error) throw error;
+      return;
+    } catch (error) {
+      logger.error('Falha ao guardar no Supabase, a usar ficheiro:', error);
+    }
+  }
+  await saveQuizToFile(input);
+}
+
+async function getCachedQuestionsFromFile(gradeLevel: number, subject: string | undefined, count: number, studentId?: string) {
+  try {
+    const history = await getQuizHistoryFromFile();
+    if (history.length === 0) return null;
+
+    // Get recently shown questions for this student (last 5 quizzes)
+    const excludeQuestions: string[] = [];
+    if (studentId) {
+      const studentHistory = history
+        .filter(entry => entry.studentId === studentId)
+        .slice(0, 5);
+      
+      studentHistory.forEach(entry => {
+        if (entry.quiz?.quizQuestions) {
+          entry.quiz.quizQuestions.forEach((q: QuizQuestion) => {
+            excludeQuestions.push(q.question);
+          });
+        }
+      });
+    }
+
+    // Collect all unique questions, excluding recently shown ones
+    const allQuestionsMap = new Map<string, QuizQuestion>();
+    
+    for (const entry of history) {
+      if (entry.quiz?.quizQuestions) {
+        for (const q of entry.quiz.quizQuestions) {
+          if (!excludeQuestions.includes(q.question) && !allQuestionsMap.has(q.question)) {
+            allQuestionsMap.set(q.question, q);
+          }
+        }
+      }
+    }
+
+    let availableQuestions = Array.from(allQuestionsMap.values());
+    
+    if (availableQuestions.length === 0) {
+      // If all questions were excluded, use all questions anyway
+      for (const entry of history) {
+        if (entry.quiz?.quizQuestions) {
+          for (const q of entry.quiz.quizQuestions) {
+            if (!allQuestionsMap.has(q.question)) {
+              allQuestionsMap.set(q.question, q);
+            }
+          }
+        }
+      }
+      availableQuestions = Array.from(allQuestionsMap.values());
+    }
+
+    if (availableQuestions.length === 0) return null;
+
+    // Shuffle and pick
+    const shuffled = availableQuestions.sort(() => Math.random() - 0.5);
+    const selected = shuffled.slice(0, count);
+
+    logger.log(`[CACHE-FILE] Found ${selected.length} questions from file history (${availableQuestions.length} available)`);
+
+    return {
+      quizQuestions: selected.map((q) => ({
+        question: q.question,
+        options: q.options,
+        correctAnswer: q.correctAnswer,
+        topic: q.topic,
+        imageUrl: q.imageUrl || undefined,
+      })),
+    };
+  } catch (error) {
+    logger.error('Falha ao obter perguntas em cache do ficheiro:', error);
+    return null;
+  }
+}
+
+async function getCachedQuestions(gradeLevel: number, subject: string | undefined, count: number, studentId?: string) {
+  // Try Supabase first
+  if (isSupabaseConfigured() && supabase) {
+    try {
+      let query = supabase
+        .from('questions')
+        .select('*')
+        .eq('grade_level', gradeLevel);
+
+      if (subject) {
+        query = query.eq('subject', subject);
+      }
+
+      // Get more questions than needed to allow filtering
+      const { data: allQuestions, error } = await query;
+      
+      if (error) throw error;
+      if (allQuestions && allQuestions.length > 0) {
+        // If studentId provided, exclude questions they've seen recently (last 5 quizzes)
+        const excludeQuestions: string[] = [];
+        if (studentId) {
+          try {
+            const { data: recentHistory } = await supabase
+              .from('quiz_history')
+              .select('quiz_data')
+              .eq('student_id', studentId)
+              .order('created_at', { ascending: false })
+              .limit(5);
+            
+            if (recentHistory) {
+              recentHistory.forEach((entry) => {
+                if (entry.quiz_data?.quizQuestions) {
+                  entry.quiz_data.quizQuestions.forEach((q: QuizQuestion) => {
+                    excludeQuestions.push(q.question);
+                  });
+                }
+              });
+            }
+          } catch (e) {
+            logger.warn('Não foi possível buscar histórico recente:', e);
+          }
+        }
+
+        // Filter out recently shown questions
+        let availableQuestions = allQuestions.filter((q) => !excludeQuestions.includes(q.question));
+        
+        // If not enough remaining, use all questions
+        if (availableQuestions.length < count) {
+          availableQuestions = allQuestions;
+        }
+
+        // Shuffle and pick
+        const shuffled = availableQuestions.sort(() => Math.random() - 0.5);
+        const selected = shuffled.slice(0, count);
+
+        if (selected.length < count) {
+          logger.log(`[CACHE] Only ${selected.length} questions available (need ${count})`);
+        }
+
+        return {
+          quizQuestions: selected.map((q) => ({
+            question: q.question,
+            options: q.options,
+            correctAnswer: q.correct_answer,
+            topic: q.topic,
+            imageUrl: q.image_url || undefined,
+          })),
+        };
+      }
+    } catch (error) {
+      logger.error('Falha ao obter perguntas em cache do Supabase:', error);
+    }
+  }
+
+  // Fallback to file-based cache
+  logger.log('[CACHE] Supabase not available or no questions, trying file-based cache...');
+  return getCachedQuestionsFromFile(gradeLevel, subject, count, studentId);
+}
+
+async function cacheQuestions(gradeLevel: number, subject: string | undefined, questions: QuizQuestion[]) {
+  if (!isSupabaseConfigured() || !supabase) return;
+
+  try {
+    // Check which questions already exist to avoid duplicates
+    const existingQuestions = questions.map(q => q.question);
+    const { data: existing } = await supabase
+      .from('questions')
+      .select('question')
+      .in('question', existingQuestions);
+
+    const existingSet = new Set(existing?.map(e => e.question) || []);
+    
+    // Filter out duplicates
+    const newQuestions = questions.filter(q => !existingSet.has(q.question));
+    
+    if (newQuestions.length === 0) {
+      logger.log('[CACHE] All questions already exist, skipping insert');
+      return;
+    }
+
+    const rows = newQuestions.map(q => ({
+      grade_level: gradeLevel,
+      subject: subject || 'Misto',
+      topic: q.topic,
+      question: q.question,
+      options: q.options,
+      correct_answer: q.correctAnswer,
+      image_url: q.imageUrl || null,
+    }));
+
+    logger.log(`[CACHE] Inserting ${rows.length} new questions (${questions.length - rows.length} duplicates skipped)`);
+    const { error } = await supabase.from('questions').insert(rows);
+    if (error) {
+      logger.error('Falha ao colocar perguntas em cache:', error);
+    }
+  } catch (error) {
+    logger.error('Erro ao colocar em cache:', error);
+  }
+}
+
+export async function generateQuiz(input: QuizInput) {
+  const validatedInput = z.object({
+      studentId: z.string(),
+      gradeLevel: z.coerce.number().min(1).max(4),
+      subject: z.enum(['Português', 'Matemática', 'Estudo do Meio', 'Misto']),
+      numberOfQuestions: z.number().min(5).max(20).default(5),
+    }).parse(input);
+  
+  const resolvedSubject = validatedInput.subject === 'Misto' ? undefined : validatedInput.subject;
+  
+  logger.log(`[QUIZ] Generating quiz for grade ${validatedInput.gradeLevel}, subject: ${resolvedSubject || 'Misto'}`);
+
+  // Try direct API calls (Groq first, then Gemini)
+  try {
+    const performanceData = await getPerformanceData(validatedInput.studentId, resolvedSubject);
+
+    const aiInput = {
+      studentId: validatedInput.studentId,
+      gradeLevel: validatedInput.gradeLevel,
+      subject: resolvedSubject,
+      performanceData,
+      numberOfQuestions: validatedInput.numberOfQuestions,
+    };
+    
+    const quizOutput = await generateQuizDirect(aiInput);
+
+    // Cache the generated questions for future use (non-blocking)
+    if (quizOutput?.quizQuestions) {
+      cacheQuestions(validatedInput.gradeLevel, resolvedSubject, quizOutput.quizQuestions)
+        .catch(err => logger.error('Cache em segundo plano falhou:', err));
+    }
+    
+    logger.log(`[QUIZ] Success! Generated ${quizOutput.quizQuestions.length} questions`);
+    return quizOutput;
+    
+  } catch {
+    logger.warn(`[QUIZ] AI failed, trying cache...`);
+    
+    // 2. If AI fails, try cache as fallback
+    const cached = await getCachedQuestions(
+      validatedInput.gradeLevel,
+      resolvedSubject,
+      validatedInput.numberOfQuestions,
+      validatedInput.studentId
+    );
+
+    if (cached) {
+      logger.log(`[QUIZ] Cache fallback: ${cached.quizQuestions.length} questions`);
+      return cached;
+    }
+
+    // 3. If no cache either, throw error
+    logger.error(`[QUIZ] All options failed`);
+    throw new Error('Serviço temporariamente indisponível. Por favor tenta novamente mais tarde.');
+  }
+}
+
+export async function saveQuizResults(input: SaveQuizInput) {
+    const validatedInput = z.object({
+      studentId: z.string(),
+      gradeLevel: z.coerce.number().min(1).max(4),
+      subject: z.enum(['Português', 'Matemática', 'Estudo do Meio', 'Misto']),
+      numberOfQuestions: z.number().min(5).max(20).default(5),
+      answers: z.array(z.object({
+        question: z.string(),
+        selectedAnswer: z.string(),
+        correctAnswer: z.string(),
+        isCorrect: z.boolean(),
+        topic: z.string(),
+      })),
+      quiz: z.any(),
+      score: z.number(),
+    }).parse(input);
+    await saveQuiz(validatedInput);
+}
+
+export async function getFullQuizHistory(studentId: string): Promise<QuizResultEntry[]> {
+  const allHistory = await getQuizHistory();
+  return allHistory.filter(entry => entry.studentId === studentId);
+}
