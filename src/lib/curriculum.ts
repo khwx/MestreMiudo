@@ -513,20 +513,17 @@ export type Disciplina = 'português' | 'matemática' | 'estudo do meio';
 export type Year = 1 | 2 | 3 | 4;
 
 export function getTopicsByDisciplineAndYear(discipline: Disciplina, year: Year): string[] {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (curriculum as any)[discipline]?.[year]?.topicos || [];
+  return (curriculum as Record<string, Record<string, { topicos?: string[]; tema?: string }>>)[discipline]?.[year]?.topicos || [];
 }
 
 export function getAllTopicsForYear(year: Year): Record<string, string[]> {
   return {
     português: curriculum.português[year]?.topicos || [],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    matemática: (curriculum as any)["matemática"]?.[year]?.topicos || [],
+    matemática: (curriculum as Record<string, Record<string, { topicos?: string[]; tema?: string }>>)["matemática"]?.[year]?.topicos || [],
     "estudo do meio": curriculum["estudo do meio"][year]?.topicos || []
   };
 }
 
 export function getThemeForSubject(discipline: Disciplina, year: Year): string {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (curriculum as any)[discipline]?.[year]?.tema || '';
+  return (curriculum as Record<string, Record<string, { topicos?: string[]; tema?: string }>>)[discipline]?.[year]?.tema || '';
 }

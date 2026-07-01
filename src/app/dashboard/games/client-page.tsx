@@ -1,4 +1,3 @@
-
 "use client";
 
 import { MemoryGame } from '@/components/MemoryGame';

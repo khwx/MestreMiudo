@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Quiz } from '@/components/Quiz';

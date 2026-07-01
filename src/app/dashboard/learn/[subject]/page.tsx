@@ -3,10 +3,9 @@
 import { useSearchParams, useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, Lock, CheckCircle, Star, Book, Divide, Leaf } from 'lucide-react';
 import { getLessons, getCompletedLessons } from '@/lib/lessons';
+import { logger } from '@/lib/logger';
 import type { Lesson, LessonCompletion } from '@/app/shared-schemas';
 
 const subjectConfig = {
@@ -75,7 +74,7 @@ export default function SubjectPage() {
         );
         setCompleted(completedMap);
       } catch (error) {
-        console.error('Failed to fetch lessons:', error);
+        logger.error('Falha ao carregar as lições:', error);
       } finally {
         setLoading(false);
       }

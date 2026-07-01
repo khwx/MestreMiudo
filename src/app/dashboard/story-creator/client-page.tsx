@@ -150,7 +150,7 @@ export default function StoryCreatorClientPage() {
 
       {/* Error Display */}
       {error && (
-        <div className="bg-red-50 border-4 border-red-300 rounded-2xl p-6">
+        <div className="bg-red-50 dark:bg-red-900/20 border-4 border-red-300 rounded-2xl p-6">
           <div className="flex items-center gap-3 text-red-600">
             <AlertTriangle className="h-8 w-8" />
             <p className="text-lg font-bold">{error}</p>
@@ -229,7 +229,7 @@ export default function StoryCreatorClientPage() {
 
           {/* Images */}
           {story.images && story.images.length > 0 && (
-            <div className="card-kid border-4 border-purple-300 bg-white shadow-xl">
+            <div className="card-kid border-4 border-purple-300 bg-white dark:bg-gray-800 shadow-xl">
               <div className="p-6">
                 <h4 className="text-2xl font-bold text-purple-700 mb-4 flex items-center gap-2">
                   🖼️ Imagens da História

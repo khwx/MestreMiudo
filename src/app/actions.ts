@@ -8,7 +8,6 @@ import {
   calculateQuizPoints, 
   getCurrentTier, 
   getNextTierProgress, 
-  checkBadges, 
   generateCelebrationMessage,
   getDailyBonus 
 } from "@/lib/rewards";
@@ -142,8 +141,7 @@ async function getQuizHistoryFromFile(): Promise<QuizResultEntry[]> {
     return parsed.data;
   } catch (error: unknown) {
     const err = error instanceof Error ? error : new Error(String(error));
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if ((err as any).code === 'ENOENT') {
+    if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
       return [];
     }
     logger.error('Erro ao ler ou processar histórico de quizzes:', error);

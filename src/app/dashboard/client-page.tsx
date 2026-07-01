@@ -3,12 +3,12 @@ import { logger } from "@/lib/logger";
 
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Book, Divide, Leaf, Loader2, Shuffle, Gamepad2, BookHeart, Lightbulb, Flame, ShoppingBag } from "lucide-react"
 import { useEffect, useState } from "react"
 import { getFullQuizHistory, getStudentLessonHistoryAction, getStudentRewards, getStudentStreak } from "@/app/actions"
 import { getDailyChallenge, getDailyChallengeStats } from "@/lib/daily-challenges"
-import { getItemsForReview, getStudentStats as getSpacedRepetitionStats } from "@/lib/spaced-repetition"
+import { getStudentStats as getSpacedRepetitionStats } from "@/lib/spaced-repetition"
 import type { QuizResultEntry } from "@/app/shared-schemas"
 import { Trophy, Target, Zap, Calendar, TrendingUp, Medal, Brain, RefreshCw } from "lucide-react"
 
@@ -21,7 +21,7 @@ interface LessonHistoryItem {
   coins_earned: number;
 }
 
-interface StudentRewards {
+interface _StudentRewards {
   total_points: number;
   current_streak: number;
   tier: string;
@@ -108,7 +108,7 @@ export default function DashboardClientPage() {
         getDailyChallenge(name, gradeLevel),
         getDailyChallengeStats(name),
       ])
-        .then(([quizHistory, lessons, studentRewards, studentStreak, challenge, stats]) => {
+        .then(([quizHistory, lessons, studentRewards, studentStreak, _challenge, stats]) => {
           setHistory(quizHistory || [])
           setLessonHistory(lessons || [])
           setRewards(studentRewards || null)
@@ -116,7 +116,7 @@ export default function DashboardClientPage() {
           setDailyChallengeStats(stats)
         })
         .catch((err) => {
-          logger.error("Error loading dashboard:", err)
+          logger.error("Erro ao carregar o painel:", err)
           setHistory([])
           setLessonHistory([])
           setRewards(null)

@@ -4,7 +4,6 @@ import { logger } from "@/lib/logger";
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
 import { Loader2, Download, Users, BookOpen, Trophy, TrendingUp, Calendar, ArrowLeft } from 'lucide-react';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 
@@ -195,7 +194,7 @@ export default function ParentDashboardPage() {
             <p className="text-lg text-gray-600 dark:text-gray-300">
               Usa o código de acesso fornecido pelo professor/encarregado.
             </p>
-            <Button onClick={() => window.history.back()} variant="outline" className="btn-kid border-2 border-gray-300">
+            <Button onClick={() => window.history.back()} variant="outline" className="btn-kid border-2 border-gray-300 dark:border-gray-700">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Voltar
             </Button>

@@ -319,14 +319,12 @@ function normalizeQuestions(questions: QuizQuestion[]): QuizQuestion[] {
     // Ensure correctAnswer is the text, not a letter
     if (q.correctAnswer && /^[A-D]$/.test(q.correctAnswer) && q.options) {
       const index = q.correctAnswer.charCodeAt(0) - 65; // A=0, B=1, C=2, D=3
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (q as any).correctAnswer = q.options[index] || q.correctAnswer;
+      (q as Record<string, unknown>).correctAnswer = q.options[index] || q.correctAnswer;
     }
     
     // Ensure imageUrl is nullish not undefined
     if (!q.imageUrl) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (q as any).imageUrl = null;
+      (q as Record<string, unknown>).imageUrl = null;
     }
     
     // Ensure topic exists

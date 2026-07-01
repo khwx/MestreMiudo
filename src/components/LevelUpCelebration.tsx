@@ -49,7 +49,7 @@ export function LevelUpCelebration() {
     };
 
     checkLevelUp();
-  }, []);
+  }, [searchParams]);
 
   const handleDismiss = () => {
     setCelebrating(false);

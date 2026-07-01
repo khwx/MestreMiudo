@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { ArrowLeft, Star, Coins, CheckCircle, AlertCircle, BookOpen } from 'lucide-react';
+import { ArrowLeft, Star, Coins, BookOpen } from 'lucide-react';
 import { getLesson, saveLessonCompletion, calculateStars, calculateCoins } from '@/lib/lessons';
 import { addToSpacedRepetition } from '@/lib/spaced-repetition';
 import { generateLessonChallengesAction } from '@/app/actions';
@@ -181,15 +181,14 @@ export default function LessonDetailClient() {
   const validateAnswer = (challenge: LessonChallenge, answer: unknown) => {
     if (!answer || (typeof answer === 'object' && Object.keys(answer).length === 0)) return false;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const content = challenge.content as any;
+    const content = challenge.content as Record<string, unknown>;
     
     if (challenge.challenge_type === 'multiple_choice') {
       return answer === content.correct_answer;
     }
 
     if (challenge.challenge_type === 'fill_blank') {
-      const correctAnswers = content.correct_answers || [content.correct_answer];
+      const correctAnswers = (content.correct_answers as string[]) || [content.correct_answer as string];
       const normalizedAnswer = normalizeText(answer as string);
       return correctAnswers.some((ca: string) => normalizeText(ca) === normalizedAnswer);
     }
@@ -306,7 +305,7 @@ export default function LessonDetailClient() {
                  {challenges.map((challenge, index) => {
                    const challengeId = challenge.id || '';
                    const isCorrect = answerCorrectness[challengeId];
-                   const studentAnswer = answers[challengeId];
+                    const _studentAnswer = answers[challengeId];
                    
                    return (
                      <div key={index} className={`border-l-4 pl-3 ${
@@ -626,9 +625,8 @@ function ChallengeRenderer({
   }
 
 if (challenge.challenge_type === 'matching') {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const content = challenge.content as any;
-      const pairs = content.pairs || [];
+      const content = challenge.content as Record<string, unknown>;
+      const pairs = (content.pairs as Array<Record<string, unknown>>) || [];
       const isCorrectAnswer = isSubmitted && isCorrect != null && isCorrect;
       const isWrongAnswer = isSubmitted && isCorrect != null && !isCorrect;
       

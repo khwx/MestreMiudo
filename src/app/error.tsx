@@ -46,7 +46,7 @@ export default function ErrorBoundary({
             <Button
               onClick={() => (window.location.href = '/')}
               variant="outline"
-              className="btn-kid border-2 border-gray-300 text-lg"
+              className="btn-kid border-2 border-gray-300 dark:border-gray-700 text-lg"
             >
               <Home className="mr-2 h-5 w-5" />
               Voltar ao Início

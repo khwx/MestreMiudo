@@ -37,7 +37,7 @@ interface MatchingChallengeProps {
   isCorrect: boolean;
 }
 
-function MatchingChallenge({ content, showResult, onAnswerSelect, selectedAnswer, isCorrect }: MatchingChallengeProps) {
+function MatchingChallenge({ content, showResult, onAnswerSelect, selectedAnswer: _selectedAnswer, isCorrect }: MatchingChallengeProps) {
   const pairs = content.pairs as Array<{ left: string; options: string[] }>;
   const correctMatches = content.correct_matches as Record<string, string>;
   const [matches, setMatches] = useState<Record<string, string>>({});
@@ -265,7 +265,7 @@ export default function DailyChallengePage() {
                     ? 'border-green-500 bg-green-500'
                     : showResult && selectedAnswer === option && !isCorrect
                     ? 'border-red-500 bg-red-500'
-                    : 'border-gray-300'
+                    : 'border-gray-300 dark:border-gray-700'
                 }`}>
                   {(selectedAnswer === option || (showResult && option === content.correct_answer)) && (
                     <div className="w-3 h-3 bg-white rounded-full" />
@@ -354,7 +354,7 @@ export default function DailyChallengePage() {
             <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200">Sem Desafio Hoje</h2>
             <p className="text-gray-600 dark:text-gray-300">Não foi possível carregar o desafio de hoje.</p>
             <Link href={`/dashboard?name=${name}&grade=${grade}`}>
-              <Button variant="outline" className="btn-kid border-2 border-gray-300">← Voltar</Button>
+              <Button variant="outline" className="btn-kid border-2 border-gray-300 dark:border-gray-700">← Voltar</Button>
             </Link>
           </div>
         </div>
@@ -504,7 +504,7 @@ export default function DailyChallengePage() {
 
       <div className="text-center pt-4">
         <Link href={`/dashboard?name=${name}&grade=${grade}`}>
-          <Button variant="outline" className="btn-kid border-2 border-gray-300">
+          <Button variant="outline" className="btn-kid border-2 border-gray-300 dark:border-gray-700">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Voltar ao Dashboard
           </Button>
