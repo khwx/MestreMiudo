@@ -1,5 +1,3 @@
-"use server"
-
 export { updateStudentStreak, getStudentStreak } from './streaks';
 export {
   getPerformanceData,
