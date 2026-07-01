@@ -52,7 +52,7 @@ export const FEEDBACK_MESSAGES = {
  * Generate progressive hints for a question
  */
 export function generateHint(context: HintContext): string {
-  const { question, correctAnswer, topic, attemptNumber, options } = context;
+  const { question: _question, correctAnswer, topic, attemptNumber, options } = context;
 
   // First hint: generic guidance
   if (attemptNumber === 1) {
@@ -116,7 +116,7 @@ export function generateFeedback(context: FeedbackContext & { isCorrect: boolean
  * Generate explanation of why answer is correct/incorrect
  */
 export function generateExplanation(context: FeedbackContext): string {
-  const explanations: Record<string, (q: string, a: string) => string> = {
+  const _explanations: Record<string, (q: string, a: string) => string> = {
     'Números': () => `A resposta correta é ${context.correctAnswer}.`,
     'Operações': () => `Quando você realiza esta operação, o resultado é ${context.correctAnswer}.`,
     'Formas': () => `Uma ${context.topic.toLowerCase()} tem as características de ${context.correctAnswer}.`,

@@ -76,7 +76,7 @@ export async function generateQuizWithGroq(
     topicsPerSubject[subj] = getTopicsForSubject(subj, grade);
   });
 
-  const allTopics = Object.values(topicsPerSubject).flat();
+  const _allTopics = Object.values(topicsPerSubject).flat();
   const questionsPerSubject = Math.ceil(input.numberOfQuestions / subjects.length);
 
   const userPrompt = `Create ${input.numberOfQuestions} quiz questions for ${grade}º ano do ensino básico em Portugal.

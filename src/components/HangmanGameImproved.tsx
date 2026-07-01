@@ -4,7 +4,7 @@ import { logger } from "@/lib/logger";
 import { useState, useEffect, useCallback } from 'react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
-import { Award, RotateCw, Skull, Lightbulb, Loader2, Settings } from 'lucide-react';
+import { RotateCw, Lightbulb, Loader2, Settings } from 'lucide-react';
 import { generateWord } from '@/ai/flows/word-generation';
 import { useToast } from "@/hooks/use-toast";
 

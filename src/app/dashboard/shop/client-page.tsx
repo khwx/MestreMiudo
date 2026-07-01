@@ -2,11 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Loader2, Coins, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Loader2, ShoppingBag, Star, Coins, CheckCircle2 } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
-import { cn } from '@/lib/utils';
 import { 
   getShopItems, 
   buyShopItem, 
@@ -40,7 +38,7 @@ export default function ShopClientPage() {
         setItems(shopItems || []);
         setInventory(userInv || []);
         setRewards(studentRewards);
-      } catch (error) {
+      } catch (_error) {
         toast({
           title: "Erro ao carregar loja",
           description: "Ocorreu um erro ao carregar os itens da loja.",
@@ -85,7 +83,7 @@ export default function ShopClientPage() {
           variant: "destructive"
         });
       }
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Erro",
         description: "Ocorreu um erro inesperado.",

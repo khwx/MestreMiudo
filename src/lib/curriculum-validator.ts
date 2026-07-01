@@ -76,7 +76,7 @@ interface ValidationResult {
 export function validateQuestionForCurriculum(
   question: string,
   grade: number,
-  subject: string,
+  _subject: string,
 ): ValidationResult {
   const issues: string[] = [];
   const warnings: string[] = [];
@@ -225,7 +225,7 @@ export function getRecommendedTopicsForGrade(
   return [...new Set(topics)];
 }
 
-export default {
+const curriculumValidator = {
   validateQuestionForCurriculum,
   validateQuestionsForCurriculum,
   getRecommendedTopicsForGrade,
@@ -233,3 +233,5 @@ export default {
   GRADE_3_4_ONLY_TOPICS,
   GRADE_5_PLUS_ONLY_TOPICS,
 };
+
+export default curriculumValidator;

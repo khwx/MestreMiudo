@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { generateQuiz, saveQuizResults } from '@/app/actions';
 import type { PersonalizedLearningPathOutput } from '@/app/shared-schemas';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Loader2, Volume2, Star, Trophy, RefreshCw, Check, X, Book, Divide, Leaf, Shuffle } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -50,7 +50,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   const quizStarted = useRef(false);
   const { playSuccess, playError, playLevelUp } = useSound();
   
-  const { toast } = useToast();
+  const { toast: _toast } = useToast();
   const router = useRouter();
 
   useEffect(() => {
@@ -222,7 +222,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   const currentQuestion = quizData.quizQuestions[currentQuestionIndex];
 
   if (isQuizFinished) {
-    const percentage = Math.round((score / quizData.quizQuestions.length) * 100);
+    const _percentage = Math.round((score / quizData.quizQuestions.length) * 100);
     const stars = score === quizData.quizQuestions.length ? 3 : score >= quizData.quizQuestions.length * 0.6 ? 2 : 1;
     
     return (

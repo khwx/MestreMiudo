@@ -13,16 +13,6 @@ interface Badge {
   unlockedDate?: string;
 }
 
-interface Achievement {
-  id: string;
-  name: string;
-  emoji: string;
-  description: string;
-  milestone: number; // e.g., 10 for "10 quizzes"
-  currentProgress: number;
-  isComplete: boolean;
-}
-
 interface RewardTier {
   level: number;
   name: string;
@@ -32,7 +22,7 @@ interface RewardTier {
 }
 
 // All available badges
-const BADGE_LIBRARY: Record<string, Badge> = {
+const _BADGE_LIBRARY: Record<string, Badge> = {
   first_quiz: {
     id: 'first_quiz',
     name: 'Iniciante',

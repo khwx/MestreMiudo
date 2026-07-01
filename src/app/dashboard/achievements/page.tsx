@@ -6,10 +6,8 @@ import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Share2, Copy, Check, Loader2 } from 'lucide-react';
+import { Share2, Check, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { getAllAchievements } from '@/lib/achievements';
-import type { Achievement } from '@/lib/achievements';
 import { getStudentAchievements } from '@/app/actions';
 
 const allAchievements = [

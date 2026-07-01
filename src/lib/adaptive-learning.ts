@@ -7,12 +7,6 @@ interface PerformanceMetrics {
   [topic: string]: number; // 0-1 score (correct/total)
 }
 
-interface AdaptiveParams {
-  performanceMetrics: PerformanceMetrics | null;
-  diagnosticScore?: number;
-  recentQuizzes?: number;
-}
-
 /**
  * Determine if student should get easier or harder questions
  */
@@ -53,8 +47,8 @@ export function getWeakTopics(
   if (!performanceMetrics) return [];
 
   return Object.entries(performanceMetrics)
-    .filter(([_, score]) => score < threshold)
-    .map(([topic, _]) => topic)
+    .filter(([_topic, score]) => score < threshold)
+    .map(([topic, _score]) => topic)
     .sort()
     .slice(0, 3); // Focus on top 3 weak areas
 }
@@ -69,8 +63,8 @@ export function getStrongTopics(
   if (!performanceMetrics) return [];
 
   return Object.entries(performanceMetrics)
-    .filter(([_, score]) => score >= threshold)
-    .map(([topic, _]) => topic);
+    .filter(([_topic, score]) => score >= threshold)
+    .map(([topic, _score]) => topic);
 }
 
 /**
@@ -156,7 +150,7 @@ export function getRecommendedSubject(
 export function generateAdaptiveFeedback(
   score: number,
   total: number,
-  performanceMetrics: PerformanceMetrics | null
+  _performanceMetrics: PerformanceMetrics | null
 ): string {
   const percentage = (score / total) * 100;
 

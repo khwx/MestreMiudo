@@ -8,14 +8,6 @@ import { logger } from "./logger";
 import { generateQuizDirect } from './quiz-generator';
 import type { PersonalizedLearningPathInput } from '@/app/shared-schemas';
 
-interface DiagnosticQuestion {
-  question: string;
-  options: string[];
-  correctAnswer: string;
-  topic: string;
-  expectedDifficulty: 'easy' | 'medium' | 'hard';
-}
-
 /**
  * Generate a diagnostic test for a specific grade
  * Test focuses on fundamental concepts to establish baseline
@@ -78,7 +70,7 @@ export function calculateDiagnosticResults(
 
   // Calculate correct answers
   let correct = 0;
-  const topicPerformance: Record<string, { correct: number; total: number }> = {};
+  const _topicPerformance: Record<string, { correct: number; total: number }> = {};
 
   answers.forEach((answer, index) => {
     const isCorrect = answer.selectedAnswer === correctAnswers[index];
@@ -116,7 +108,7 @@ export function calculateDiagnosticResults(
  */
 function getRecommendations(
   learningLevel: 'advanced' | 'proficient' | 'developing' | 'beginning',
-  percentage: number
+  _percentage: number
 ): string[] {
   const recommendations: Record<string, string[]> = {
     advanced: [

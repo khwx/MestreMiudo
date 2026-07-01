@@ -37,7 +37,7 @@ interface MatchingChallengeProps {
   isCorrect: boolean;
 }
 
-function MatchingChallenge({ content, showResult, onAnswerSelect, selectedAnswer: _selectedAnswer, isCorrect }: MatchingChallengeProps) {
+function MatchingChallenge({ content, showResult, onAnswerSelect, selectedAnswer: _selectedAnswer, isCorrect: _isCorrect }: MatchingChallengeProps) {
   const pairs = content.pairs as Array<{ left: string; options: string[] }>;
   const correctMatches = content.correct_matches as Record<string, string>;
   const [matches, setMatches] = useState<Record<string, string>>({});

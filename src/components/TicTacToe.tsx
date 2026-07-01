@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
-import { Award, RotateCw, X, Circle, User, BrainCircuit } from 'lucide-react';
+import { RotateCw, X, Circle, User, BrainCircuit } from 'lucide-react';
 
 type Player = 'X' | 'O';
 type GameMode = 'human' | 'computer' | null;

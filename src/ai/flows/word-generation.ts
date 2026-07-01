@@ -6,20 +6,17 @@ import { logger } from "@/lib/logger";
  * No longer uses Genkit - direct API call to OpenRouter.
  */
 
-import { z } from 'zod';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 
-const WordGenerationInputSchema = z.object({
-  category: z.string().describe('The category for the word (e.g., Animais, Frutas, Países).'),
-  difficulty: z.enum(['Fácil', 'Médio', 'Difícil']).describe('The difficulty level.'),
-});
-export type WordGenerationInput = z.infer<typeof WordGenerationInputSchema>;
+export type WordGenerationInput = {
+  category: string;
+  difficulty: 'Fácil' | 'Médio' | 'Difícil';
+};
 
-const WordGenerationOutputSchema = z.object({
-  word: z.string().describe('The generated word in Portuguese.'),
-  hint: z.string().describe('A simple hint for the generated word.'),
-});
-export type WordGenerationOutput = z.infer<typeof WordGenerationOutputSchema>;
+export type WordGenerationOutput = {
+  word: string;
+  hint: string;
+};
 
 // Try to get a cached word from Supabase
 async function getCachedWord(category: string, difficulty: string): Promise<WordGenerationOutput | null> {

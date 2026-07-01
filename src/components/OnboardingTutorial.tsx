@@ -45,7 +45,7 @@ const steps: OnboardingStep[] = [
 export function OnboardingTutorial() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
-  const router = useRouter();
+  const _router = useRouter();
 
   useEffect(() => {
     const hasSeenOnboarding = localStorage.getItem('hasSeenOnboarding');

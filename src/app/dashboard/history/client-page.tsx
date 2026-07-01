@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { getFullQuizHistory, getStudentLessonHistoryAction } from '@/app/actions';
 import type { QuizResultEntry } from '@/app/shared-schemas';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { Book, Divide, Leaf, Loader2, Check, X, Shuffle, GraduationCap } from 'lucide-react';

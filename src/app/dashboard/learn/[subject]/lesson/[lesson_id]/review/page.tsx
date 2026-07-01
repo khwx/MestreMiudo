@@ -17,7 +17,7 @@ export default function LessonReviewPage() {
   const lessonId = params.lesson_id as string;
   const name = searchParams.get('name') || 'Amigo';
   const gradeParam = searchParams.get('grade') || '1';
-  const grade = parseInt(gradeParam, 10);
+  const _grade = parseInt(gradeParam, 10);
 
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [completion, setCompletion] = useState<LessonCompletion | null>(null);
