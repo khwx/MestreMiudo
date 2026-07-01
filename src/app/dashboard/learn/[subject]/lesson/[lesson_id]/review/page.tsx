@@ -7,7 +7,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, CheckCircle, XCircle, Star } from 'lucide-react';
 import { getLesson, getLessonProgress } from '@/lib/lessons';
-import type { Lesson, LessonChallenge, LessonCompletion } from '@/app/shared-schemas';
+import { validateAnswer, getCorrectAnswerText } from '@/lib/challenge-utils';
+import type { Lesson, LessonCompletion } from '@/app/shared-schemas';
 
 export default function LessonReviewPage() {
   const params = useParams();
@@ -51,54 +52,6 @@ export default function LessonReviewPage() {
     
     fetchData();
   }, [lessonId, name]);
-
-  const validateAnswer = (challenge: LessonChallenge, answer: string | string[] | undefined): boolean => {
-    if (!answer) return false;
-
-    if (challenge.challenge_type === 'multiple_choice') {
-      return answer === challenge.content.correct_answer;
-    }
-
-    if (challenge.challenge_type === 'fill_blank') {
-      const correctAnswers = challenge.content.correct_answers || [challenge.content.correct_answer];
-      return correctAnswers.includes((answer as string).toLowerCase().trim());
-    }
-
-    if (challenge.challenge_type === 'word_order') {
-      const correctOrder = challenge.content.correct_order;
-      return JSON.stringify(answer) === JSON.stringify(correctOrder);
-    }
-
-    if (challenge.challenge_type === 'matching') {
-      const correctMatches = challenge.content.correct_matches;
-      return JSON.stringify(answer) === JSON.stringify(correctMatches);
-    }
-
-    return false;
-  };
-
-  const getCorrectAnswerText = (challenge: LessonChallenge): string => {
-    if (challenge.challenge_type === 'multiple_choice') {
-      return challenge.content.correct_answer;
-    }
-
-    if (challenge.challenge_type === 'fill_blank') {
-      const correctAnswers = challenge.content.correct_answers || [challenge.content.correct_answer];
-      return correctAnswers.join(' ou ');
-    }
-
-    if (challenge.challenge_type === 'word_order') {
-      const correctOrder = challenge.content.correct_order;
-      return correctOrder ? correctOrder.join(' ') : 'ordem correta';
-    }
-
-    if (challenge.challenge_type === 'matching') {
-      const correctMatches = challenge.content.correct_matches;
-      return Object.entries(correctMatches || {}).map(([key, value]) => `${key} -> ${value}`).join(', ');
-    }
-
-    return 'resposta correta';
-  };
 
   if (loading) {
     return (
