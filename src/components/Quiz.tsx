@@ -5,15 +5,13 @@ import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { generateQuiz, saveQuizResults } from '@/app/actions';
 import type { PersonalizedLearningPathOutput } from '@/app/shared-schemas';
 import { Button } from '@/components/ui/button';
-import { CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Loader2, Volume2, Star, Trophy, RefreshCw, Check, X, Book, Divide, Leaf, Shuffle } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Loader2, RefreshCw, Book, Divide, Leaf, Shuffle } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import { useSound } from '@/lib/sounds';
 import confetti from 'canvas-confetti';
+import { QuizResults } from '@/components/QuizResults';
+import { QuizQuestion } from '@/components/QuizQuestion';
 
 type QuizProps = {
   studentId: string;
@@ -195,6 +193,10 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     [currentQuestionIndex, quizData]
   );
 
+  const handleBack = useCallback(() => {
+    router.push(`/dashboard?name=${studentId}&grade=${gradeLevel}`);
+  }, [router, studentId, gradeLevel]);
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-8 text-center p-6">
@@ -227,65 +229,16 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     );
   }
 
-  const currentQuestion = quizData.quizQuestions[currentQuestionIndex];
-
   if (isQuizFinished) {
-    const _percentage = Math.round((score / quizData.quizQuestions.length) * 100);
-    const stars = score === quizData.quizQuestions.length ? 3 : score >= quizData.quizQuestions.length * 0.6 ? 2 : 1;
-    
     return (
-      <div className="space-y-6 max-w-2xl mx-auto">
-        <Button 
-          variant="ghost" 
-          size="lg" 
-          onClick={() => router.push(`/dashboard?name=${studentId}&grade=${gradeLevel}`)}
-          className="gap-2 text-lg"
-        >
-          ← Voltar ao Dashboard
-        </Button>
-        
-        <div className="text-center space-y-6 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-3xl p-8 border-4 border-yellow-300 shadow-2xl">
-          <div className="animate-bounce">
-            {stars === 3 ? '🎉' : stars === 2 ? '🎊' : '🎈'}
-          </div>
-          
-          <Trophy className="h-24 w-24 mx-auto text-yellow-500 animate-pulse" />
-          
-          <h2 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Desafio Concluído!
-          </h2>
-          
-          <div className="flex justify-center gap-2 text-4xl">
-            {[1, 2, 3].map((star) => (
-              <Star 
-                key={star}
-                className={`h-12 w-12 ${star <= stars ? 'text-yellow-500 fill-yellow-500' : 'text-gray-400 dark:text-gray-600'}`}
-              />
-            ))}
-          </div>
-          
-          <p className="text-2xl font-bold text-gray-700 dark:text-gray-200">
-            A tua pontuação: <span className="text-green-600">{score}</span> em <span className="text-blue-600">{quizData.quizQuestions.length}</span>!
-          </p>
-          
-          <p className="text-xl text-gray-600 dark:text-gray-300">
-            Isso dá-te <span className="font-bold text-yellow-600">{score * 10} pontos</span>! 🎁
-          </p>
-          
-          <div className="flex gap-4 justify-center pt-4">
-            <Button onClick={handleRestart} variant="outline" size="lg" className="btn-kid text-lg">
-              <RefreshCw className="mr-2 h-5 w-5" /> Jogar Novamente
-            </Button>
-            <Button 
-              onClick={() => router.push(`/dashboard?name=${studentId}&grade=${gradeLevel}`)} 
-              size="lg"
-              className="btn-kid btn-kid-primary text-lg"
-            >
-              Voltar ao Início →
-            </Button>
-          </div>
-        </div>
-      </div>
+      <QuizResults
+        score={score}
+        totalQuestions={quizData.quizQuestions.length}
+        quizData={quizData}
+        onRestart={handleRestart}
+        onBack={handleBack}
+        subject={subject}
+      />
     );
   }
 
@@ -294,110 +247,25 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
       <Button 
         variant="ghost" 
         size="sm" 
-        onClick={() => router.push(`/dashboard?name=${studentId}&grade=${gradeLevel}`)}
+        onClick={handleBack}
         className="gap-2"
       >
         ← Voltar ao Dashboard
       </Button>
       
-      <div className="card-kid card-kid-primary shadow-2xl">
-        <CardHeader className="pb-4">
-          <div className="flex justify-between items-center mb-4">
-            <CardTitle className="text-3xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              {title}
-            </CardTitle>
-            <div className="flex items-center gap-2 bg-yellow-100 dark:bg-yellow-900/40 px-4 py-2 rounded-full">
-              <Star className="h-6 w-6 text-yellow-500 fill-yellow-500" />
-              <span className="font-black text-yellow-700 text-lg">{score * 10} Pontos</span>
-            </div>
-          </div>
-          
-          <div className="space-y-2">
-            <Progress value={progress} className="h-4 progress-kid" />
-            <p className="text-md text-gray-500 dark:text-gray-400 text-center">
-              Pergunta {currentQuestionIndex + 1} de {quizData.quizQuestions.length}
-            </p>
-          </div>
-        </CardHeader>
-        
-        <CardContent className="space-y-6">
-          {currentQuestion.imageUrl && (
-            <div className="relative w-full aspect-video rounded-2xl overflow-hidden border-4 border-blue-200">
-              <Image 
-                src={currentQuestion.imageUrl} 
-                alt={currentQuestion.question}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
-            </div>
-          )}
-          
-          <div className="flex items-start gap-4 p-6 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl border-2 border-blue-200">
-            <p className="text-2xl font-bold flex-1 text-gray-800 dark:text-gray-100">
-              {currentQuestion.question}
-            </p>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={handleAudioPlayback}
-          aria-label="Ouvir a pergunta e as respostas"
-          className="shrink-0 hover:scale-110 transition-transform"
-        >
-          <Volume2 className="h-6 w-6 text-blue-600" />
-        </Button>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {currentQuestion.options.map((option: string, i: number) => {
-              const isCorrect = option === currentQuestion.correctAnswer;
-              const isSelected = option === selectedAnswer;
-              
-              return (
-                <Button
-                  key={i}
-                  variant="outline"
-                  className={cn(
-                    'min-h-[4rem] py-6 text-xl whitespace-normal justify-start text-left flex-row pl-16 relative border-4 transition-all duration-300',
-                    !isAnswered && 'hover:border-blue-400 hover:bg-blue-50 hover:shadow-lg hover:-translate-y-1',
-                    isAnswered && isCorrect && 'border-green-500 bg-green-50 text-green-900 scale-105 shadow-lg',
-                    isAnswered && isSelected && !isCorrect && 'border-red-500 bg-red-50 text-red-900 animate-shake',
-                    isAnswered && !isSelected && 'opacity-50'
-                  )}
-                  onClick={() => handleAnswerSelect(option)}
-                  disabled={isAnswered}
-                >
-                  <span className="absolute left-4 font-black text-2xl text-blue-600">
-                    {String.fromCharCode(65 + i)}.
-                  </span>
-                  <span className="flex-1">{option}</span>
-                  {isAnswered && (isSelected || isCorrect) && (
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                      {isCorrect ? (
-                        <Check className="h-10 w-10 text-green-600" />
-                      ) : (
-                        <X className="h-10 w-10 text-red-600" />
-                      )}
-                    </div>
-                  )}
-                </Button>
-              );
-            })}
-          </div>
-        </CardContent>
-        
-        {isAnswered && (
-          <CardFooter className="pt-0">
-            <Button 
-              onClick={handleNext}
-              size="lg"
-              className="w-full btn-kid btn-kid-primary text-xl h-16"
-            >
-              {currentQuestionIndex < quizData.quizQuestions.length - 1 ? 'Próxima Pergunta →' : 'Ver Resultados 🎉'}
-            </Button>
-          </CardFooter>
-        )}
-      </div>
+      <QuizQuestion
+        quizData={quizData}
+        currentQuestionIndex={currentQuestionIndex}
+        selectedAnswer={selectedAnswer}
+        showResult={isAnswered}
+        onAnswerSelect={handleAnswerSelect}
+        onNext={handleNext}
+        onAudioPlayback={handleAudioPlayback}
+        isPlayingAudio={false}
+        score={score}
+        title={title}
+        progress={progress}
+      />
     </div>
   );
 }
