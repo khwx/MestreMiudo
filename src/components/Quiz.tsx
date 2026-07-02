@@ -6,7 +6,6 @@ import { generateQuiz, saveQuizResults } from '@/app/actions';
 import type { PersonalizedLearningPathOutput } from '@/app/shared-schemas';
 import { Button } from '@/components/ui/button';
 import { Loader2, RefreshCw, Book, Divide, Leaf, Shuffle } from 'lucide-react';
-import { useToast } from "@/hooks/use-toast";
 import { useRouter } from 'next/navigation';
 import { useSound } from '@/lib/sounds';
 import confetti from 'canvas-confetti';
@@ -48,7 +47,6 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   const quizStarted = useRef(false);
   const { playSuccess, playError, playLevelUp } = useSound();
   
-  const { toast: _toast } = useToast();
   const router = useRouter();
 
   useEffect(() => {

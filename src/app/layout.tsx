@@ -1,9 +1,22 @@
 import type {Metadata} from 'next';
+import { Nunito, Fredoka } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { Analytics } from '@vercel/analytics/react';
 import { AccessibilitySettings } from '@/components/AccessibilitySettings';
 import { AccessibilityProvider } from '@/components/AccessibilityProvider';
+
+const nunito = Nunito({
+  subsets: ['latin'],
+  weight: ['400', '600', '700', '800', '900'],
+  variable: '--font-nunito',
+});
+
+const fredoka = Fredoka({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-fredoka',
+});
 
 export const metadata: Metadata = {
   title: 'MestreMiúdo',
@@ -19,14 +32,11 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Fredoka:wght@400;700&display=swap" rel="stylesheet" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
         <meta name="theme-color" content="#3b82f6" />
       </head>
-      <body className="font-body antialiased">
+      <body className={`${nunito.variable} ${fredoka.variable} font-body antialiased`}>
         <AccessibilityProvider>
           {children}
           <AccessibilitySettings />

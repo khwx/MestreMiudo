@@ -57,7 +57,40 @@ export default function DashboardLayout({
         <DashboardHeader />
       </Suspense>
       <main className="container mx-auto p-4 md:p-8 flex-1">
-        <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-background p-4 animate-pulse">A carregar...</div>}>
+        <Suspense fallback={
+          <div className="space-y-8 p-4 md:p-8 max-w-7xl mx-auto animate-pulse">
+            <div className="text-center space-y-4 py-6">
+              <div className="h-16 w-16 mx-auto bg-muted rounded-full" />
+              <div className="h-10 w-64 mx-auto bg-muted rounded-xl" />
+              <div className="h-5 w-48 mx-auto bg-muted rounded-lg" />
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="card-kid border-4 border-muted">
+                  <div className="p-6 text-center space-y-3">
+                    <div className="h-10 w-10 mx-auto bg-muted rounded-full" />
+                    <div className="h-8 w-16 mx-auto bg-muted rounded-lg" />
+                    <div className="h-4 w-20 mx-auto bg-muted rounded-md" />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="card-kid border-4 border-muted">
+                  <div className="p-6 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="h-7 w-40 bg-muted rounded-lg" />
+                      <div className="h-14 w-14 bg-muted rounded-full" />
+                    </div>
+                    <div className="h-5 w-full bg-muted rounded-md" />
+                    <div className="h-4 w-32 bg-muted rounded-md" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        }>
           {children}
         </Suspense>
       </main>
