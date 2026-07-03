@@ -84,6 +84,66 @@ const ACHIEVEMENTS_CATALOG = {
     icon: '🎯',
     color: '#8b5cf6',
   },
+  speed_demon: {
+    title: 'Demónio da Velocidade',
+    description: 'Completou um quiz em menos de 2 minutos',
+    icon: '⚡',
+    color: '#facc15',
+  },
+  night_owl: {
+    title: 'Coruja Noturna',
+    description: 'Completou um quiz depois das 20h',
+    icon: '🦉',
+    color: '#6366f1',
+  },
+  early_bird: {
+    title: 'Madrugador',
+    description: 'Completou um quiz antes das 8h',
+    icon: '🌅',
+    color: '#f97316',
+  },
+  quiz_marathon: {
+    title: 'Maratona de Quizzes',
+    description: 'Completou 3 quizzes num único dia',
+    icon: '🏃',
+    color: '#10b981',
+  },
+  subject_master_portugues: {
+    title: 'Mestre de Português',
+    description: 'Atingiu média de 90%+ em Português',
+    icon: '📖',
+    color: '#3b82f6',
+  },
+  subject_master_matematica: {
+    title: 'Mestre de Matemática',
+    description: 'Atingiu média de 90%+ em Matemática',
+    icon: '🔢',
+    color: '#ef4444',
+  },
+  subject_master_estudo: {
+    title: 'Mestre de Estudo do Meio',
+    description: 'Atingiu média de 90%+ em Estudo do Meio',
+    icon: '🌍',
+    color: '#22c55e',
+  },
+  streak_14: {
+    title: 'Duas Semanas de Fogo',
+    description: 'Manteve uma streak de 14 dias',
+    icon: '🔥',
+    color: '#dc2626',
+  },
+  daily_7: {
+    title: 'Desafiante Semanal',
+    description: 'Completou 7 desafios diários',
+    icon: '📅',
+    color: '#8b5cf6',
+  },
+  daily_30: {
+    title: 'Desafiante Mensal',
+    description: 'Completou 30 desafios diários',
+    icon: '🏆',
+    color: '#f59e0b',
+  },
 };
 
 /**
@@ -95,7 +155,15 @@ export async function checkAchievementUnlock(
   dayStreak: number,
   averageScore: number,
   isTopRanker: boolean,
-  dailyChallengesCompleted: number
+  dailyChallengesCompleted: number,
+  options?: {
+    quizDurationSeconds?: number;
+    completionHour?: number;
+    quizzesToday?: number;
+    portugueseAverage?: number;
+    mathAverage?: number;
+    estudoAverage?: number;
+  }
 ): Promise<string[]> {
   const unlockedIds: string[] = [];
 
@@ -109,6 +177,32 @@ export async function checkAchievementUnlock(
   if (isTopRanker) unlockedIds.push('best_in_class');
   if (averageScore >= 90) unlockedIds.push('all_subjects_master');
   if (dailyChallengesCompleted >= 30) unlockedIds.push('daily_challenge_master');
+
+  // New achievements
+  if (options?.quizDurationSeconds !== undefined && options.quizDurationSeconds < 120) {
+    unlockedIds.push('speed_demon');
+  }
+  if (options?.completionHour !== undefined && options.completionHour >= 20) {
+    unlockedIds.push('night_owl');
+  }
+  if (options?.completionHour !== undefined && options.completionHour < 8) {
+    unlockedIds.push('early_bird');
+  }
+  if (options?.quizzesToday !== undefined && options.quizzesToday >= 3) {
+    unlockedIds.push('quiz_marathon');
+  }
+  if (options?.portugueseAverage !== undefined && options.portugueseAverage >= 90) {
+    unlockedIds.push('subject_master_portugues');
+  }
+  if (options?.mathAverage !== undefined && options.mathAverage >= 90) {
+    unlockedIds.push('subject_master_matematica');
+  }
+  if (options?.estudoAverage !== undefined && options.estudoAverage >= 90) {
+    unlockedIds.push('subject_master_estudo');
+  }
+  if (dayStreak >= 14) unlockedIds.push('streak_14');
+  if (dailyChallengesCompleted >= 7) unlockedIds.push('daily_7');
+  if (dailyChallengesCompleted >= 30) unlockedIds.push('daily_30');
 
   return unlockedIds;
 }
