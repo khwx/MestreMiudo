@@ -5,6 +5,7 @@ import { Button } from './ui/button';
 import { Progress } from './ui/progress';
 import { cn } from '@/lib/utils';
 import { CheckCircle, XCircle, Clock, Award, RotateCw, ArrowRight } from 'lucide-react';
+import { getRandomQuestions } from '@/lib/question-bank';
 
 interface DiagnosticQuestion {
   id: string;
@@ -20,6 +21,8 @@ interface DiagnosticResult {
   learningLevel: 'advanced' | 'proficient' | 'developing' | 'beginning';
   recommendations: string[];
   subjectScores: Record<string, { correct: number; total: number }>;
+  answers: Array<{ questionId: string; answer: string; correct: boolean }>;
+  correctAnswers: string[];
 }
 
 interface DiagnosticTestProps {
@@ -28,19 +31,6 @@ interface DiagnosticTestProps {
   onComplete: (result: DiagnosticResult) => void;
   onBack?: () => void;
 }
-
-const MOCK_QUESTIONS: DiagnosticQuestion[] = [
-  { id: '1', question: 'Qual é a cor do céu?', options: ['Azul', 'Verde', 'Vermelho', 'Amarelo'], correctAnswer: 'Azul', subject: 'Português' },
-  { id: '2', question: 'Quantas patas tem um cão?', options: ['2', '4', '6', '8'], correctAnswer: '4', subject: 'Matemática' },
-  { id: '3', question: 'Qual animal faz "miau"?', options: ['Cão', 'Gato', 'Pássaro', 'Peixe'], correctAnswer: 'Gato', subject: 'Português' },
-  { id: '4', question: 'Qual é a forma do sol?', options: ['Quadrado', 'Triângulo', 'Círculo', 'Retângulo'], correctAnswer: 'Círculo', subject: 'Matemática' },
-  { id: '5', question: '2 + 3 = ?', options: ['4', '5', '6', '7'], correctAnswer: '5', subject: 'Matemática' },
-  { id: '6', question: 'Qual fruta é amarela e comprida?', options: ['Maçã', 'Banana', 'Laranja', 'Uva'], correctAnswer: 'Banana', subject: 'Estudo do Meio' },
-  { id: '7', question: 'Quantos dias tem uma semana?', options: ['5', '6', '7', '8'], correctAnswer: '7', subject: 'Estudo do Meio' },
-  { id: '8', question: 'Qual estação vem depois do Inverno?', options: ['Verão', 'Outono', 'Primavera', 'Inverno'], correctAnswer: 'Primavera', subject: 'Estudo do Meio' },
-  { id: '9', question: '5 - 2 = ?', options: ['1', '2', '3', '4'], correctAnswer: '3', subject: 'Matemática' },
-  { id: '10', question: 'Qual parte do corpo usamos para ver?', options: ['Ouvido', 'Olho', 'Mão', 'Pé'], correctAnswer: 'Olho', subject: 'Português' },
-];
 
 function getRecommendations(level: string): string[] {
   const recommendations: Record<string, string[]> = {
@@ -68,8 +58,18 @@ function getRecommendations(level: string): string[] {
   return recommendations[level] || recommendations.developing;
 }
 
-export function DiagnosticTest({ studentName, gradeLevel: _gradeLevel, onComplete, onBack }: DiagnosticTestProps) {
-  const [questions] = useState<DiagnosticQuestion[]>(MOCK_QUESTIONS);
+export function DiagnosticTest({ studentName, gradeLevel, onComplete, onBack }: DiagnosticTestProps) {
+  const [questions] = useState<DiagnosticQuestion[]>(() => {
+    const grade = gradeLevel || 1;
+    const allQuestions = getRandomQuestions(10, { gradeLevel: grade as 1 | 2 | 3 | 4 });
+    return allQuestions.map(q => ({
+      id: q.id,
+      question: q.question,
+      options: q.options || [],
+      correctAnswer: typeof q.correctAnswer === 'string' ? q.correctAnswer : q.correctAnswer[0],
+      subject: q.subject,
+    }));
+  });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [showResult, setShowResult] = useState(false);
@@ -134,6 +134,8 @@ export function DiagnosticTest({ studentName, gradeLevel: _gradeLevel, onComplet
         learningLevel,
         recommendations: getRecommendations(learningLevel),
         subjectScores,
+        answers: allAnswers,
+        correctAnswers: questions.map(q => q.correctAnswer),
       };
 
       setResult(finalResult);

@@ -7,6 +7,7 @@ import { ArrowLeft, ClipboardCheck } from 'lucide-react';
 import { useState, useCallback } from 'react';
 import { DiagnosticTest } from '@/components/DiagnosticTest';
 import { logger } from '@/lib/logger';
+import { saveDiagnosticResults } from '@/app/actions/diagnostic';
 
 interface DiagnosticResult {
   score: number;
@@ -14,6 +15,8 @@ interface DiagnosticResult {
   learningLevel: 'advanced' | 'proficient' | 'developing' | 'beginning';
   recommendations: string[];
   subjectScores: Record<string, { correct: number; total: number }>;
+  answers: Array<{ questionId: string; answer: string; correct: boolean }>;
+  correctAnswers: string[];
 }
 
 export default function DiagnosticPage() {
@@ -32,6 +35,11 @@ export default function DiagnosticPage() {
   const handleComplete = useCallback(async (result: DiagnosticResult) => {
     setCompleted(true);
     try {
+      const answersArray = result.answers.map((a, idx) => ({
+        questionIndex: idx,
+        selectedAnswer: a.answer,
+      }));
+      await saveDiagnosticResults(name, gradeLevel, answersArray, result.correctAnswers);
       logger.log('[DIAGNOSTIC] Resultados guardados:', { name, gradeLevel, result });
     } catch (err) {
       logger.error('[DIAGNOSTIC] Erro ao guardar resultados:', err);

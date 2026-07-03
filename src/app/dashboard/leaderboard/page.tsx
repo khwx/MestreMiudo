@@ -91,6 +91,7 @@ function LeaderboardRow({ entry, currentUserId }: LeaderboardRowProps) {
 function LeaderboardPageContent() {
   const searchParams = useSearchParams();
   const studentName = searchParams.get('name') || 'Jogador';
+  const studentId = searchParams.get('studentId') || '';
   const gradeStr = searchParams.get('grade') || '1';
   const gradeLevel = parseInt(gradeStr);
   
@@ -106,7 +107,7 @@ function LeaderboardPageContent() {
         const [globalData, gradeData, rankContext] = await Promise.all([
           getGlobalLeaderboard(50), // Get top 50 for global leaderboard
           getGradeLeaderboard(gradeLevel, 10), // Get top 10 for grade leaderboard
-          getStudentRankContext(studentName, 2) // Get context around current student
+          getStudentRankContext(studentId || studentName, 2) // Get context around current student
         ]);
         
         setGlobalLeaderboard(globalData);
@@ -119,12 +120,12 @@ function LeaderboardPageContent() {
       }
     };
 
-    if (studentName) {
+    if (studentName || studentId) {
       loadLeaderboards();
     } else {
       setLoading(false);
     }
-  }, [studentName, gradeLevel]);
+  }, [studentName, studentId, gradeLevel]);
 
   if (loading) {
     return (
@@ -200,7 +201,7 @@ function LeaderboardPageContent() {
           </TabsTrigger>
           <TabsTrigger value="grade" className="gap-2">
             <Medal className="w-4 h-4" />
-            3º Ano
+            {gradeLevel}º Ano
           </TabsTrigger>
         </TabsList>
 
@@ -212,7 +213,7 @@ function LeaderboardPageContent() {
             </CardHeader>
             <CardContent className="space-y-3">
               {globalLeaderboard.map((entry) => (
-                <LeaderboardRow key={entry.rank} entry={entry} />
+                <LeaderboardRow key={entry.rank} entry={entry} currentUserId={studentId || currentUserInGlobal?.studentId} />
               ))}
             </CardContent>
           </Card>
@@ -221,12 +222,12 @@ function LeaderboardPageContent() {
         <TabsContent value="grade" className="space-y-4 mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>Top 3 do 3º Ano</CardTitle>
+              <CardTitle>Top 3 do {gradeLevel}º Ano</CardTitle>
               <CardDescription>Os melhores da tua turma</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               {gradeLeaderboard.map((entry) => (
-                <LeaderboardRow key={entry.rank} entry={entry} />
+                <LeaderboardRow key={entry.rank} entry={entry} currentUserId={studentId || currentUserInGlobal?.studentId} />
               ))}
             </CardContent>
           </Card>
