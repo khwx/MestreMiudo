@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { Award, RotateCw, Star, Heart, Cloud, Anchor, Bug, Cake, Sun, Moon } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useSound } from '@/lib/sounds';
+import { type Subject, getRandomVocabularyPairs } from '@/lib/vocabulary';
 
 const icons = [
     { icon: Star, color: 'text-yellow-400' },
@@ -18,18 +19,32 @@ const icons = [
     { icon: Moon, color: 'text-indigo-500' },
 ];
 
-const createShuffledBoard = () => {
+type IconCard = { type: 'icon'; icon: typeof icons[0]['icon']; color: string; isFlipped: boolean; isMatched: boolean };
+type WordCard = { type: 'word'; word: string; category: string; isFlipped: boolean; isMatched: boolean };
+type CardType = IconCard | WordCard;
+
+const createIconBoard = (): CardType[] => {
     const duplicatedIcons = [...icons, ...icons];
     return duplicatedIcons
         .map((value) => ({ card: value, sort: Math.random() }))
         .sort((a, b) => a.sort - b.sort)
-        .map(({ card }) => ({ icon: card.icon, color: card.color, isFlipped: false, isMatched: false }));
+        .map(({ card }): IconCard => ({ type: 'icon', icon: card.icon, color: card.color, isFlipped: false, isMatched: false }));
 };
 
-type CardType = ReturnType<typeof createShuffledBoard>[0];
+const createVocabularyBoard = (subject: Subject): CardType[] => {
+    const pairs = getRandomVocabularyPairs(subject, 8);
+    const cards: WordCard[] = [];
+    pairs.forEach(word => {
+        cards.push({ type: 'word', word: word.word, category: word.category, isFlipped: false, isMatched: false });
+        cards.push({ type: 'word', word: word.word, category: word.category, isFlipped: false, isMatched: false });
+    });
+    return cards
+        .map((card) => ({ card, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ card }) => card);
+};
 
 const Card = ({ card, onCardClick, index }: { card: CardType, onCardClick: (index: number) => void, index: number }) => {
-    const Icon = card.icon;
     return (
         <div
             className={cn(
@@ -47,14 +62,26 @@ const Card = ({ card, onCardClick, index }: { card: CardType, onCardClick: (inde
                 "absolute w-full h-full bg-card border-2 rounded-lg flex items-center justify-center transform-rotate-y-180 backface-visibility-hidden",
                 card.isMatched ? 'border-green-500' : 'border-primary'
             )}>
-                 <Icon className={cn("h-16 w-16", card.color)} />
+                {card.type === 'icon' ? (
+                    <card.icon className={cn("h-16 w-16", card.color)} />
+                ) : (
+                    <span className="text-sm md:text-base font-bold text-center px-1 leading-tight text-gray-800 dark:text-gray-200">
+                        {card.word}
+                    </span>
+                )}
             </div>
         </div>
     )
 };
 
-export function MemoryGame() {
-    const [board, setBoard] = useState(createShuffledBoard);
+interface MemoryGameProps {
+    subject?: Subject;
+}
+
+export function MemoryGame({ subject }: MemoryGameProps) {
+    const [board, setBoard] = useState<CardType[]>(() =>
+        subject ? createVocabularyBoard(subject) : createIconBoard()
+    );
     const [flippedCards, setFlippedCards] = useState<number[]>([]);
     const [moves, setMoves] = useState(0);
     const [isChecking, setIsChecking] = useState(false);
@@ -82,7 +109,13 @@ export function MemoryGame() {
             const firstCard = board[firstIndex];
             const secondCard = board[secondIndex];
 
-            if (firstCard.icon === secondCard.icon) {
+            const isMatch = firstCard.type === 'word' && secondCard.type === 'word'
+                ? firstCard.word === secondCard.word
+                : firstCard.type === 'icon' && secondCard.type === 'icon'
+                    ? firstCard.icon === secondCard.icon
+                    : false;
+
+            if (isMatch) {
                 playSuccess();
                 setBoard(prevBoard => {
                     const newBoard = [...prevBoard];
@@ -94,7 +127,6 @@ export function MemoryGame() {
                 setIsChecking(false);
             } else {
                 playError();
-                // Not a match, flip back after a delay
                 setTimeout(() => {
                     setBoard(prevBoard => {
                         const newBoard = [...prevBoard];
@@ -123,7 +155,7 @@ export function MemoryGame() {
     };
     
     const handleRestart = () => {
-        setBoard(createShuffledBoard());
+        setBoard(subject ? createVocabularyBoard(subject) : createIconBoard());
         setFlippedCards([]);
         setMoves(0);
         setIsChecking(false);

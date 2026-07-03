@@ -4,7 +4,7 @@ import { logger } from "@/lib/logger";
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Loader2, Download, Users, BookOpen, Trophy, TrendingUp, Calendar, ArrowLeft } from 'lucide-react';
+import { Loader2, Users, BookOpen, Trophy, TrendingUp, Calendar, ArrowLeft, FileText, FileSpreadsheet } from 'lucide-react';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { generatePdfReport } from '@/lib/pdf-report';
 
@@ -16,6 +16,9 @@ interface StudentProgress {
   totalPoints: number;
   currentStreak: number;
   lastActivity: string | null;
+  recentQuizzes?: { score: number; total: number; date: string }[];
+  subjectAverages?: { subject: string; average: number }[];
+  recentAchievements?: { title: string; icon: string; date: string }[];
 }
 
 export default function ParentDashboardPage() {
@@ -50,7 +53,7 @@ export default function ParentDashboardPage() {
 
         const { data: quizData } = await supabase
           .from('quiz_history')
-          .select('student_id, score, total_questions')
+          .select('student_id, score, total_questions, subject, created_at')
           .in('student_id', studentIds);
 
         const progressMap = new Map<string, StudentProgress>();
@@ -63,6 +66,9 @@ export default function ParentDashboardPage() {
             totalPoints: 0,
             currentStreak: 0,
             lastActivity: null,
+            recentQuizzes: [],
+            subjectAverages: [],
+            recentAchievements: [],
           });
         });
 
@@ -83,6 +89,20 @@ export default function ParentDashboardPage() {
           const stats = quizByStudent.get(q.student_id)!;
           stats.total += q.total_questions;
           stats.correct += q.score;
+
+          const s = progressMap.get(q.student_id);
+          if (s && q.created_at) {
+            const quizDate = new Date(q.created_at);
+            const sevenDaysAgo = new Date();
+            sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+            if (quizDate >= sevenDaysAgo) {
+              s.recentQuizzes!.push({
+                score: q.score,
+                total: q.total_questions,
+                date: q.created_at,
+              });
+            }
+          }
         });
 
         quizByStudent.forEach((stats, id) => {
@@ -93,6 +113,37 @@ export default function ParentDashboardPage() {
               ? Math.round((stats.correct / stats.total) * 100)
               : 0;
           }
+        });
+
+        progressMap.forEach((s) => {
+          const subjectMap = new Map<string, { total: number; correct: number }>();
+          quizData?.forEach(q => {
+            if (q.student_id === s.studentId && q.subject) {
+              if (!subjectMap.has(q.subject)) {
+                subjectMap.set(q.subject, { total: 0, correct: 0 });
+              }
+              const sub = subjectMap.get(q.subject)!;
+              sub.total += q.total_questions;
+              sub.correct += q.score;
+            }
+          });
+          s.subjectAverages = Array.from(subjectMap.entries()).map(([subject, stats]) => ({
+            subject,
+            average: stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0,
+          }));
+
+          if (s.averageScore >= 80) {
+            s.recentAchievements = [
+              { title: 'Média Elevada', icon: '🌟', date: new Date().toISOString() },
+            ];
+          }
+          if (s.currentStreak >= 7) {
+            s.recentAchievements!.push({ title: 'Streak de 7 Dias', icon: '🔥', date: new Date().toISOString() });
+          }
+          if (s.totalQuizzes >= 10) {
+            s.recentAchievements!.push({ title: '10 Quizzes Completos', icon: '📚', date: new Date().toISOString() });
+          }
+          s.recentAchievements = s.recentAchievements!.slice(0, 3);
         });
 
         setStudents(Array.from(progressMap.values()));
@@ -113,6 +164,43 @@ export default function ParentDashboardPage() {
     } finally {
       setGeneratingPdf(false);
     }
+  };
+
+  const handleExportCsv = () => {
+    const headers = ['Aluno', 'Média %', 'Total Quizzes', 'Pontos', 'Streak Dias'];
+    const rows = students.map(s => [
+      s.studentName,
+      String(s.averageScore),
+      String(s.totalQuizzes),
+      String(s.totalPoints),
+      String(s.currentStreak),
+    ]);
+    const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `relatorio_mestremiudo_${new Date().toISOString().slice(0, 10)}.csv`;
+    link.click();
+  };
+
+  const getWeeklyData = (student: StudentProgress) => {
+    const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    const today = new Date();
+    const days: { day: string; score: number }[] = [];
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(today);
+      d.setDate(d.getDate() - i);
+      const dayStr = dayNames[d.getDay()];
+      const dayQuizzes = (student.recentQuizzes || []).filter(q => {
+        const qDate = new Date(q.date);
+        return qDate.toDateString() === d.toDateString();
+      });
+      const avg = dayQuizzes.length > 0
+        ? Math.round(dayQuizzes.reduce((sum, q) => sum + (q.total > 0 ? (q.score / q.total) * 100 : 0), 0) / dayQuizzes.length)
+        : 0;
+      days.push({ day: dayStr, score: avg });
+    }
+    return days;
   };
 
   if (loading) {
@@ -240,19 +328,138 @@ export default function ParentDashboardPage() {
             ))}
           </div>
 
-          {/* Export Button */}
-          <div className="text-center pt-4">
+          {/* Resumo Semanal */}
+          <div className="card-kid border-4 border-blue-300 dark:border-blue-700 shadow-xl p-6">
+            <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
+              📊 Resumo Semanal
+            </h2>
+            <div className="space-y-4">
+              {students.map(student => {
+                const weeklyData = getWeeklyData(student);
+                const maxScore = Math.max(...weeklyData.map(d => d.score), 1);
+                return (
+                  <div key={student.studentId} className="space-y-2">
+                    <h3 className="text-lg font-bold text-gray-700 dark:text-gray-300">{student.studentName}</h3>
+                    <div className="flex items-end gap-2 h-32">
+                      {weeklyData.map((data, i) => (
+                        <div key={i} className="flex-1 flex flex-col items-center gap-1">
+                          <span className="text-xs font-bold text-gray-600 dark:text-gray-400">{data.score}%</span>
+                          <div
+                            className={`w-full rounded-t-md transition-all duration-500 ${
+                              data.score >= 80
+                                ? 'bg-gradient-to-t from-green-400 to-emerald-500'
+                                : data.score >= 60
+                                ? 'bg-gradient-to-t from-yellow-400 to-amber-500'
+                                : data.score > 0
+                                ? 'bg-gradient-to-t from-red-400 to-rose-500'
+                                : 'bg-gray-200 dark:bg-gray-700'
+                            }`}
+                            style={{ height: `${Math.max((data.score / maxScore) * 100, data.score > 0 ? 10 : 4)}%` }}
+                          />
+                          <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">{data.day}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Disciplinas */}
+          <div className="card-kid border-4 border-purple-300 dark:border-purple-700 shadow-xl p-6">
+            <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
+              📚 Média por Disciplina
+            </h2>
+            <div className="space-y-4">
+              {students.map(student => (
+                <div key={student.studentId} className="space-y-2">
+                  <h3 className="text-lg font-bold text-gray-700 dark:text-gray-300">{student.studentName}</h3>
+                  {student.subjectAverages && student.subjectAverages.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      {student.subjectAverages.map(sub => (
+                        <div
+                          key={sub.subject}
+                          className="bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl p-4 border-2 border-purple-200 dark:border-purple-700"
+                        >
+                          <p className="text-sm font-bold text-gray-700 dark:text-gray-300 capitalize">{sub.subject}</p>
+                          <p className="text-3xl font-black text-purple-600">{sub.average}%</p>
+                          <div className="mt-2 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                            <div
+                              className={`h-full rounded-full transition-all duration-500 ${
+                                sub.average >= 80
+                                  ? 'bg-gradient-to-r from-green-400 to-emerald-500'
+                                  : sub.average >= 60
+                                  ? 'bg-gradient-to-r from-yellow-400 to-amber-500'
+                                  : 'bg-gradient-to-r from-red-400 to-rose-500'
+                              }`}
+                              style={{ width: `${sub.average}%` }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Sem dados de disciplinas ainda.</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Conquistas Recentes */}
+          <div className="card-kid border-4 border-yellow-300 dark:border-yellow-700 shadow-xl p-6">
+            <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
+              🏆 Conquistas Recentes
+            </h2>
+            <div className="space-y-4">
+              {students.map(student => (
+                <div key={student.studentId} className="space-y-2">
+                  <h3 className="text-lg font-bold text-gray-700 dark:text-gray-300">{student.studentName}</h3>
+                  {student.recentAchievements && student.recentAchievements.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      {student.recentAchievements.map((ach, i) => (
+                        <div
+                          key={i}
+                          className="bg-gradient-to-br from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 rounded-xl p-4 border-2 border-yellow-200 dark:border-yellow-700 text-center"
+                        >
+                          <div className="text-4xl mb-2">{ach.icon}</div>
+                          <p className="text-sm font-bold text-gray-700 dark:text-gray-300">{ach.title}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                            {new Date(ach.date).toLocaleDateString('pt-PT')}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Sem conquistas registadas ainda.</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Export Buttons */}
+          <div className="text-center pt-4 flex flex-wrap justify-center gap-4">
             <Button
               onClick={handleGeneratePdf}
-              className="btn-kid bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white text-xl h-14"
+              className="btn-kid bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white text-lg h-12"
               size="lg"
             >
               {generatingPdf ? (
                 <Loader2 className="mr-2 h-5 w-5 animate-spin" />
               ) : (
-                <Download className="mr-2 h-5 w-5" />
+                <FileText className="mr-2 h-5 w-5" />
               )}
-              Exportar Relatório 📄
+              Exportar PDF
+            </Button>
+            <Button
+              onClick={handleExportCsv}
+              className="btn-kid bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white text-lg h-12"
+              size="lg"
+            >
+              <FileSpreadsheet className="mr-2 h-5 w-5" />
+              Exportar CSV
             </Button>
           </div>
         </>
