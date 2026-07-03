@@ -1,5 +1,3 @@
-'use server';
-
 /**
  * @fileOverview Shareable achievements system
  * Generates achievement cards and social sharing URLs
