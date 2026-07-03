@@ -20,7 +20,7 @@ const icons = [
 ];
 
 type IconCard = { type: 'icon'; icon: typeof icons[0]['icon']; color: string; isFlipped: boolean; isMatched: boolean };
-type WordCard = { type: 'word'; word: string; category: string; isFlipped: boolean; isMatched: boolean };
+type WordCard = { type: 'word'; word: string; category: string; matchLabel: string; isFlipped: boolean; isMatched: boolean };
 type CardType = IconCard | WordCard;
 
 const createIconBoard = (): CardType[] => {
@@ -31,12 +31,17 @@ const createIconBoard = (): CardType[] => {
         .map(({ card }): IconCard => ({ type: 'icon', icon: card.icon, color: card.color, isFlipped: false, isMatched: false }));
 };
 
-const createVocabularyBoard = (subject: Subject): CardType[] => {
+const createVocabularyBoard = (subject: Subject, mode: 'icon' | 'word' | 'definition' = 'icon'): CardType[] => {
     const pairs = getRandomVocabularyPairs(subject, 8);
     const cards: WordCard[] = [];
     pairs.forEach(word => {
-        cards.push({ type: 'word', word: word.word, category: word.category, isFlipped: false, isMatched: false });
-        cards.push({ type: 'word', word: word.word, category: word.category, isFlipped: false, isMatched: false });
+        if (mode === 'definition') {
+            cards.push({ type: 'word', word: word.word, category: word.category, matchLabel: word.word, isFlipped: false, isMatched: false });
+            cards.push({ type: 'word', word: word.word, category: word.category, matchLabel: word.category, isFlipped: false, isMatched: false });
+        } else {
+            cards.push({ type: 'word', word: word.word, category: word.category, matchLabel: word.word, isFlipped: false, isMatched: false });
+            cards.push({ type: 'word', word: word.word, category: word.category, matchLabel: word.word, isFlipped: false, isMatched: false });
+        }
     });
     return cards
         .map((card) => ({ card, sort: Math.random() }))
@@ -53,11 +58,9 @@ const Card = ({ card, onCardClick, index }: { card: CardType, onCardClick: (inde
             )}
             onClick={() => onCardClick(index)}
         >
-            {/* Front of the card */}
             <div className="absolute w-full h-full bg-primary rounded-lg flex items-center justify-center backface-visibility-hidden">
                  <Star className="h-12 w-12 text-primary-foreground opacity-50" />
             </div>
-            {/* Back of the card */}
             <div className={cn(
                 "absolute w-full h-full bg-card border-2 rounded-lg flex items-center justify-center transform-rotate-y-180 backface-visibility-hidden",
                 card.isMatched ? 'border-green-500' : 'border-primary'
@@ -65,8 +68,11 @@ const Card = ({ card, onCardClick, index }: { card: CardType, onCardClick: (inde
                 {card.type === 'icon' ? (
                     <card.icon className={cn("h-16 w-16", card.color)} />
                 ) : (
-                    <span className="text-sm md:text-base font-bold text-center px-1 leading-tight text-gray-800 dark:text-gray-200">
-                        {card.word}
+                    <span className={cn(
+                        "font-bold text-center px-1 leading-tight text-gray-800 dark:text-gray-200",
+                        card.matchLabel.length > 8 ? "text-[10px] md:text-xs" : "text-sm md:text-base"
+                    )}>
+                        {card.matchLabel}
                     </span>
                 )}
             </div>
@@ -76,11 +82,12 @@ const Card = ({ card, onCardClick, index }: { card: CardType, onCardClick: (inde
 
 interface MemoryGameProps {
     subject?: Subject;
+    mode?: 'icon' | 'word' | 'definition';
 }
 
-export function MemoryGame({ subject }: MemoryGameProps) {
+export function MemoryGame({ subject, mode = 'icon' }: MemoryGameProps) {
     const [board, setBoard] = useState<CardType[]>(() =>
-        subject ? createVocabularyBoard(subject) : createIconBoard()
+        subject ? createVocabularyBoard(subject, mode) : createIconBoard()
     );
     const [flippedCards, setFlippedCards] = useState<number[]>([]);
     const [moves, setMoves] = useState(0);
@@ -155,7 +162,7 @@ export function MemoryGame({ subject }: MemoryGameProps) {
     };
     
     const handleRestart = () => {
-        setBoard(subject ? createVocabularyBoard(subject) : createIconBoard());
+        setBoard(subject ? createVocabularyBoard(subject, mode) : createIconBoard());
         setFlippedCards([]);
         setMoves(0);
         setIsChecking(false);
