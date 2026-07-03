@@ -4,9 +4,15 @@ import { logger } from "@/lib/logger";
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Loader2, Users, BookOpen, Trophy, TrendingUp, Calendar, ArrowLeft, FileText, FileSpreadsheet } from 'lucide-react';
+import { Loader2, Users, BookOpen, Trophy, TrendingUp, Calendar, ArrowLeft, FileText, FileSpreadsheet, AlertTriangle, Lightbulb } from 'lucide-react';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { generatePdfReport } from '@/lib/pdf-report';
+import {
+  getWeeklyProgress,
+  getTopicAnalysis,
+  getLearningTrend,
+  generateStudyRecommendations,
+} from '@/lib/analytics';
 
 interface StudentProgress {
   studentId: string;
@@ -27,6 +33,10 @@ export default function ParentDashboardPage() {
   const [students, setStudents] = useState<StudentProgress[]>([]);
   const [loading, setLoading] = useState(true);
   const [generatingPdf, setGeneratingPdf] = useState(false);
+  const [weeklyData, setWeeklyData] = useState<Record<string, { date: string; score: number }[]>>({});
+  const [topicData, setTopicData] = useState<Record<string, { topic: string; averageScore: number; status: 'strong' | 'weak' }[]>>({});
+  const [trendData, setTrendData] = useState<Record<string, { trend: string; changePercent: number }>>({});
+  const [recommendations, setRecommendations] = useState<Record<string, { topic: string; priority: string; suggestion: string }[]>>({});
 
   useEffect(() => {
     async function loadStudents() {
@@ -147,6 +157,27 @@ export default function ParentDashboardPage() {
         });
 
         setStudents(Array.from(progressMap.values()));
+
+        const wMap: Record<string, { date: string; score: number }[]> = {};
+        const tMap: Record<string, { topic: string; averageScore: number; status: 'strong' | 'weak' }[]> = {};
+        const trMap: Record<string, { trend: string; changePercent: number }> = {};
+        const rMap: Record<string, { topic: string; priority: string; suggestion: string }[]> = {};
+        for (const id of studentIds) {
+          const [w, t, tr, r] = await Promise.all([
+            getWeeklyProgress(id),
+            getTopicAnalysis(id),
+            getLearningTrend(id),
+            generateStudyRecommendations(id),
+          ]);
+          wMap[id] = w;
+          tMap[id] = t;
+          trMap[id] = { trend: tr.trend, changePercent: tr.changePercent };
+          rMap[id] = r;
+        }
+        setWeeklyData(wMap);
+        setTopicData(tMap);
+        setTrendData(trMap);
+        setRecommendations(rMap);
       } catch (error) {
         logger.error('Erro ao carregar painel de pais:', error);
       } finally {
@@ -436,6 +467,141 @@ export default function ParentDashboardPage() {
                   )}
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Tendência de Aprendizagem - Weekly Progress Chart */}
+          <div className="card-kid border-4 border-blue-300 dark:border-blue-700 shadow-xl p-6">
+            <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
+              <TrendingUp className="h-6 w-6 text-blue-500" />
+              Tendência de Aprendizagem
+            </h2>
+            <div className="space-y-6">
+              {students.map(student => {
+                const data = weeklyData[student.studentId] || [];
+                if (!data.length) return null;
+                const maxScore = Math.max(...data.map(d => d.score), 1);
+                const trend = trendData[student.studentId];
+                return (
+                  <div key={student.studentId} className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-bold text-gray-700 dark:text-gray-300">{student.studentName}</h3>
+                      {trend && (
+                        <span className={`text-sm font-bold px-3 py-1 rounded-full ${
+                          trend.trend === 'improving' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' :
+                          trend.trend === 'declining' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' :
+                          'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400'
+                        }`}>
+                          {trend.trend === 'improving' ? '📈 A melhorar' :
+                           trend.trend === 'declining' ? '📉 A piorar' : '➡️ Estável'}
+                          {trend.changePercent !== 0 && ` (${trend.changePercent > 0 ? '+' : ''}${trend.changePercent}%)`}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-end gap-2 h-36 bg-gray-50 dark:bg-gray-800/50 rounded-xl p-3">
+                      {data.map((day, i) => (
+                        <div key={i} className="flex-1 flex flex-col items-center gap-1">
+                          <span className="text-[11px] font-bold text-gray-500 dark:text-gray-400">{day.score}%</span>
+                          <div className="w-full rounded-t-md bg-gray-200 dark:bg-gray-700 relative" style={{ height: '100%' }}>
+                            <div
+                              className={`absolute bottom-0 w-full rounded-t-md transition-all duration-500 ${
+                                day.score >= 80 ? 'bg-gradient-to-t from-green-400 to-emerald-500'
+                                  : day.score >= 60 ? 'bg-gradient-to-t from-yellow-400 to-amber-500'
+                                  : day.score > 0 ? 'bg-gradient-to-t from-red-400 to-rose-500'
+                                  : 'bg-gray-300 dark:bg-gray-600'
+                              }`}
+                              style={{ height: `${Math.max((day.score / maxScore) * 100, day.score > 0 ? 8 : 2)}%` }}
+                            />
+                          </div>
+                          <span className="text-[10px] font-semibold text-gray-400 dark:text-gray-500">
+                            {day.date.split('/')[0]}/{day.date.split('/')[1]}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Áreas para Melhorar */}
+          <div className="card-kid border-4 border-red-300 dark:border-red-700 shadow-xl p-6">
+            <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
+              <AlertTriangle className="h-6 w-6 text-red-500" />
+              Áreas para Melhorar
+            </h2>
+            <div className="space-y-4">
+              {students.map(student => {
+                const topics = topicData[student.studentId] || [];
+                const weak = topics.filter(t => t.status === 'weak');
+                if (!weak.length) return (
+                  <div key={student.studentId} className="p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border-2 border-green-200 dark:border-green-700">
+                    <p className="font-bold text-green-700 dark:text-green-400">✅ {student.studentName}: Sem áreas fracas identificadas!</p>
+                  </div>
+                );
+                return (
+                  <div key={student.studentId} className="space-y-3">
+                    <h3 className="text-lg font-bold text-gray-700 dark:text-gray-300">{student.studentName}</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {weak.sort((a, b) => a.averageScore - b.averageScore).map((t, i) => (
+                        <div key={i} className="flex items-center justify-between p-4 bg-red-50 dark:bg-red-900/20 rounded-xl border-2 border-red-200 dark:border-red-700">
+                          <div className="space-y-1">
+                            <p className="font-bold text-gray-800 dark:text-gray-200">{t.topic}</p>
+                            <p className="text-sm text-red-600 dark:text-red-400">{t.averageScore}% de acerto</p>
+                          </div>
+                          <div className="w-20 h-3 bg-red-200 dark:bg-red-800 rounded-full overflow-hidden">
+                            <div className="h-full bg-red-500 rounded-full transition-all duration-500" style={{ width: `${t.averageScore}%` }} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Recomendações de Estudo */}
+          <div className="card-kid border-4 border-purple-300 dark:border-purple-700 shadow-xl p-6">
+            <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
+              <Lightbulb className="h-6 w-6 text-purple-500" />
+              Recomendações de Estudo
+            </h2>
+            <div className="space-y-4">
+              {students.map(student => {
+                const recs = recommendations[student.studentId] || [];
+                if (!recs.length) return (
+                  <div key={student.studentId} className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-xl border-2 border-purple-200 dark:border-purple-700">
+                    <p className="font-bold text-purple-700 dark:text-purple-400">🌟 {student.studentName}: Excelente desempenho! Sem recomendações especiais.</p>
+                  </div>
+                );
+                return (
+                  <div key={student.studentId} className="space-y-3">
+                    <h3 className="text-lg font-bold text-gray-700 dark:text-gray-300">{student.studentName}</h3>
+                    <div className="space-y-2">
+                      {recs.map((r, i) => (
+                        <div key={i} className="flex items-start gap-3 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-xl border-2 border-purple-200 dark:border-purple-700">
+                          <div className={`mt-1 w-3 h-3 rounded-full flex-shrink-0 ${
+                            r.priority === 'high' ? 'bg-red-500' : r.priority === 'medium' ? 'bg-yellow-500' : 'bg-green-500'
+                          }`} />
+                          <div className="space-y-1">
+                            <p className="font-bold text-gray-800 dark:text-gray-200">{r.topic}</p>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">{r.suggestion}</p>
+                            <span className={`inline-block text-xs font-bold px-2 py-0.5 rounded-full ${
+                              r.priority === 'high' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' :
+                              r.priority === 'medium' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400' :
+                              'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
+                            }`}>
+                              Prioridade {r.priority === 'high' ? 'Alta' : r.priority === 'medium' ? 'Média' : 'Baixa'}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
