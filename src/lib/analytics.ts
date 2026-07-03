@@ -192,25 +192,65 @@ export async function getLearningTrend(studentId: string): Promise<LearningTrend
   }
 }
 
+interface CategoryRule {
+  category: string;
+  keywords: string[];
+  suggestion: string;
+}
+
+const CATEGORY_RULES: CategoryRule[] = [
+  {
+    category: 'matematica',
+    keywords: ['número', 'conta', 'soma', 'subtra', 'multipli', 'divis', 'aritmétic', 'operaç', 'fraç', 'decimal', 'percent', 'geometr', 'medida', 'ângulo', 'perímetro', 'área', 'volume', 'razão', 'proporç', 'equaç', 'algebr', 'adicionar', 'subtrair', 'multiplicar', 'dividir', 'mais', 'menos', 'igual', 'maior', 'menor', 'tabuada', 'calcular', 'contar', 'valor', 'moeda', 'dinheiro', 'reais', 'euros', 'centavos', 'graus', 'comprimento', 'quilograma', 'litro', 'segundo', 'minuto', 'hora', 'tempo'],
+    suggestion: 'Revisa as operações básicas e resolve problemas passo a passo.',
+  },
+  {
+    category: 'portugues',
+    keywords: ['vogal', 'consoante', 'ditong', 'hiato', 'silaba', 'acent', 'ortograf', 'gramátic', 'verbo', 'substantiv', 'adjetiv', 'advérb', 'artigo', 'preposiç', 'conjunç', 'frase', 'sujeito', 'predicad', 'objeto', 'oraç', 'texto', 'letra', 'palavra', 'escrever', 'ler', 'alfabeto', 'sílaba', 'plural', 'singular', 'género', 'número', 'conjugar', 'conjugação', 'tempos verbais', 'presente', 'passado', 'futuro', 'condicional', 'subjuntivo', 'indicativo', 'nome', 'pronome'],
+    suggestion: 'Lê mais textos e pratica a conjugação de verbos.',
+  },
+  {
+    category: 'estudo do meio',
+    keywords: ['ciência', 'científic', 'naturaleza', 'natureza', 'anim', 'plant', 'corpo', 'saúde', 'doença', 'aliment', 'ecossist', 'meio ambiente', 'solo', 'água', 'ar', 'energia', 'força', 'máquina', 'invent', 'tecnolog', 'planeta', 'sistema solar', 'estrel', 'lua', 'sol', 'terra', 'ser vivo', 'ser humano', 'célula', 'órgão', 'sentido', 'propriedade', 'matéria', 'estado da matéria', 'sólido', 'líquido', 'gasoso'],
+    suggestion: 'Explora experiências simples e lê sobre os temas científicos.',
+  },
+  {
+    category: 'história',
+    keywords: ['histór', 'civiliz', 'antiguidad', 'egito', 'roma', 'greg', 'medieval', 'revoluç', 'guerra', 'descobr', 'descoberta', 'era', 'dynast', 'imper', 'rei', 'rainha', 'rainha', 'monarqu', 'república', 'ditadura', 'presidente', 'independên', 'linha do tempo', 'século', 'milénio', 'acontecimento', 'passado', 'heró'],
+    suggestion: 'Cria linha do tempo dos acontecimentos principais.',
+  },
+  {
+    category: 'geografia',
+    keywords: ['geograf', 'mapa', 'continente', 'país', 'capital', 'oceano', 'rio', 'montanha', 'planície', 'vulcão', 'terramoto', 'clima', 'temperatura', 'fuso horário', 'hemisfério', 'localizaç', 'relief', 'fronteira', 'região', 'cidade', 'aldeia', 'populaç', 'densidade', 'economia', 'recurso natural'],
+    suggestion: 'Estuda mapas e memoriza capitais e continentes.',
+  },
+];
+
+function matchTopicToCategory(topicName: string): CategoryRule {
+  const lower = topicName.toLowerCase();
+  for (const rule of CATEGORY_RULES) {
+    for (const keyword of rule.keywords) {
+      if (lower.includes(keyword)) {
+        return rule;
+      }
+    }
+  }
+  return { category: 'geral', keywords: [], suggestion: 'Pratica mais exercícios sobre este tópico.' };
+}
+
 export async function generateStudyRecommendations(studentId: string): Promise<StudyRecommendation[]> {
   const topics = await getTopicAnalysis(studentId);
   const weakTopics = topics.filter(t => t.status === 'weak');
 
-  const suggestions: Record<string, string> = {
-    default: 'Pratica mais exercícios sobre este tópico.',
-    matematica: 'Revisa as operações básicas e resolve problemas passo a passo.',
-    portugues: ' Lê mais textos e pratica a conjugação de verbes.',
-    ciencias: 'Explora experiências simples e lê sobre os temas.',
-    historia: 'Cria linha do tempo dos acontecimentos principais.',
-    geografia: 'Estuda mapas e memoriza capitais e continentes.',
-  };
-
   return weakTopics
     .sort((a, b) => a.averageScore - b.averageScore)
     .slice(0, 5)
-    .map((topic, i) => ({
-      topic: topic.topic,
-      priority: i < 2 ? 'high' : i < 4 ? 'medium' : 'low',
-      suggestion: suggestions[topic.topic.toLowerCase()] || suggestions.default,
-    }));
+    .map((topic, i) => {
+      const rule = matchTopicToCategory(topic.topic);
+      return {
+        topic: topic.topic,
+        priority: i < 2 ? 'high' : i < 4 ? 'medium' : 'low',
+        suggestion: rule.suggestion,
+      };
+    });
 }

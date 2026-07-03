@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Loader2, Users, BookOpen, Trophy, TrendingUp, Calendar, ArrowLeft, FileText, FileSpreadsheet, AlertTriangle, Lightbulb } from 'lucide-react';
+import Link from 'next/link';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { generatePdfReport } from '@/lib/pdf-report';
 import {
@@ -13,6 +14,7 @@ import {
   getLearningTrend,
   generateStudyRecommendations,
 } from '@/lib/analytics';
+import { checkAchievementUnlock, getAllAchievements } from '@/lib/achievements';
 
 interface StudentProgress {
   studentId: string;
@@ -141,20 +143,60 @@ export default function ParentDashboardPage() {
             subject,
             average: stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0,
           }));
-
-          if (s.averageScore >= 80) {
-            s.recentAchievements = [
-              { title: 'Média Elevada', icon: '🌟', date: new Date().toISOString() },
-            ];
-          }
-          if (s.currentStreak >= 7) {
-            s.recentAchievements!.push({ title: 'Streak de 7 Dias', icon: '🔥', date: new Date().toISOString() });
-          }
-          if (s.totalQuizzes >= 10) {
-            s.recentAchievements!.push({ title: '10 Quizzes Completos', icon: '📚', date: new Date().toISOString() });
-          }
-          s.recentAchievements = s.recentAchievements!.slice(0, 3);
         });
+
+        const allAchievementDefs = getAllAchievements();
+
+        for (const s of progressMap.values()) {
+          const studentQuizData = quizData?.filter(q => q.student_id === s.studentId) || [];
+          const totalQuizzes = studentQuizData.length;
+          const perfectScores = studentQuizData.filter(q => q.total_questions > 0 && q.score === q.total_questions).length;
+          const totalCorrect = studentQuizData.reduce((sum, q) => sum + q.score, 0);
+          const totalQuestions = studentQuizData.reduce((sum, q) => sum + q.total_questions, 0);
+          const averageScore = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
+
+          const subjectMap = new Map<string, { total: number; correct: number }>();
+          studentQuizData.forEach(q => {
+            if (!q.subject) return;
+            if (!subjectMap.has(q.subject)) subjectMap.set(q.subject, { total: 0, correct: 0 });
+            const sub = subjectMap.get(q.subject)!;
+            sub.total += q.total_questions;
+            sub.correct += q.score;
+          });
+          const subjectAverages: Record<string, number> = {};
+          subjectMap.forEach((stats, subject) => {
+            subjectAverages[subject] = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+          });
+
+          const portugueseAverage = subjectAverages['portugues'] ?? subjectAverages['Português'];
+          const mathAverage = subjectAverages['matematica'] ?? subjectAverages['Matemática'];
+          const estudoAverage = subjectAverages['estudo do meio'] ?? subjectAverages['Estudo do Meio'];
+
+          const unlockedIds = await checkAchievementUnlock(
+            totalQuizzes,
+            perfectScores,
+            s.currentStreak,
+            averageScore,
+            false,
+            0,
+            {
+              portugueseAverage,
+              mathAverage,
+              estudoAverage,
+            }
+          );
+
+          s.recentAchievements = unlockedIds
+            .slice(0, 3)
+            .map(id => {
+              const def = allAchievementDefs.find(a => a.id === id);
+              return {
+                title: def?.title ?? id,
+                icon: def?.icon ?? '⭐',
+                date: new Date().toISOString(),
+              };
+            });
+        }
 
         setStudents(Array.from(progressMap.values()));
 
@@ -440,9 +482,11 @@ export default function ParentDashboardPage() {
 
           {/* Conquistas Recentes */}
           <div className="card-kid border-4 border-yellow-300 dark:border-yellow-700 shadow-xl p-6">
-            <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
-              🏆 Conquistas Recentes
-            </h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200 flex items-center gap-2">
+                🏆 Conquistas Recentes
+              </h2>
+            </div>
             <div className="space-y-4">
               {students.map(student => (
                 <div key={student.studentId} className="space-y-2">
@@ -467,6 +511,14 @@ export default function ParentDashboardPage() {
                   )}
                 </div>
               ))}
+            </div>
+            <div className="mt-4 text-center">
+              <Link
+                href={`/dashboard/achievements?name=${students[0]?.studentName || 'Jogador'}`}
+                className="inline-flex items-center gap-2 text-sm font-bold text-yellow-600 hover:text-yellow-700 dark:text-yellow-400 dark:hover:text-yellow-300"
+              >
+                Ver todas as conquistas →
+              </Link>
             </div>
           </div>
 
