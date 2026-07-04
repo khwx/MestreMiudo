@@ -3,6 +3,12 @@ import { useEffect } from 'react';
 import type React from 'react';
 import type { LessonChallenge } from '@/app/shared-schemas';
 
+interface MatchingPair {
+  left: string;
+  options: string[];
+  correct_matches?: Record<string, string>;
+}
+
 type ChallengeRendererProps = {
   challenge: LessonChallenge;
   answer: unknown;
@@ -182,7 +188,7 @@ export function ChallengeRenderer({
 
   if (challenge.challenge_type === 'matching') {
     const content = challenge.content as Record<string, unknown>;
-    const pairs = (content.pairs as Array<Record<string, unknown>>) || [];
+    const pairs = (content.pairs as MatchingPair[]) || [];
     const isCorrectAnswer = isSubmitted && isCorrect != null && isCorrect;
     const isWrongAnswer = isSubmitted && isCorrect != null && !isCorrect;
     
@@ -194,8 +200,7 @@ export function ChallengeRenderer({
             ? 'border-destructive bg-destructive/50 p-4 rounded-lg'
             : ''
       ) : ''}`}>
-      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-{pairs.map((pair: any, index: number) => {
+      {pairs.map((pair, index: number) => {
           const answerRecord = (typeof answer === 'object' && answer !== null && !Array.isArray(answer)) ? answer as Record<string, string> : {};
           const userAnswer = answerRecord[pair.left];
           const correctAnswer = pair.correct_matches?.[pair.left];

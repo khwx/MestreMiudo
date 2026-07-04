@@ -6,14 +6,13 @@ import { logger } from "./logger";
  */
 
 import { generateQuizDirect } from './quiz-generator';
-import type { PersonalizedLearningPathInput } from '@/app/shared-schemas';
+import type { PersonalizedLearningPathInput, QuizQuestion } from '@/app/shared-schemas';
 
 /**
  * Generate a diagnostic test for a specific grade
  * Test focuses on fundamental concepts to establish baseline
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function generateDiagnosticTest(gradeLevel: 1 | 2 | 3 | 4): Promise<any> {
+export async function generateDiagnosticTest(gradeLevel: 1 | 2 | 3 | 4): Promise<{ gradeLevel: number; timestamp: string; isComplete: boolean; questions: QuizQuestion[]; answers: never[]; performance: null }> {
   logger.log(`[DIAGNOSTIC] Generating diagnostic test for grade ${gradeLevel}...`);
   
   // Use the standard quiz generator with specific prompt
