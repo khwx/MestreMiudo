@@ -1,5 +1,3 @@
-'use server';
-
 /**
  * @fileOverview Question bank for MestreMiudo
  * Pre-seeded questions organized by subject, grade, and topic

@@ -1,5 +1,3 @@
-'use server';
-
 /**
  * @fileOverview Comprehensive question bank for MestreMiudo
  * Re-export from modular question files
