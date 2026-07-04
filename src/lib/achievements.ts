@@ -142,6 +142,36 @@ const ACHIEVEMENTS_CATALOG = {
     icon: '🏆',
     color: '#f59e0b',
   },
+  portugues_master: {
+    title: 'Mestre de Português',
+    description: 'Completou 20 quizzes de Português com média de 80%+',
+    icon: '📖',
+    color: '#22c55e',
+  },
+  matematica_master: {
+    title: 'Mestre de Matemática',
+    description: 'Completou 20 quizzes de Matemática com média de 80%+',
+    icon: '🔢',
+    color: '#3b82f6',
+  },
+  ciencias_master: {
+    title: 'Mestre de Ciências',
+    description: 'Completou 20 quizzes de Estudo do Meio com média de 80%+',
+    icon: '🔬',
+    color: '#f97316',
+  },
+  quiz_100_streak: {
+    title: 'Três Perfeições Seguidas',
+    description: 'Acertou 100% em 3 quizzes consecutivos',
+    icon: '💎',
+    color: '#8b5cf6',
+  },
+  all_rounder: {
+    title: 'Polivalente do Dia',
+    description: 'Atingiu 80%+ em todas as 3 disciplinas no mesmo dia',
+    icon: '🌟',
+    color: '#ec4899',
+  },
 };
 
 /**
@@ -161,6 +191,11 @@ export async function checkAchievementUnlock(
     portugueseAverage?: number;
     mathAverage?: number;
     estudoAverage?: number;
+    portugueseQuizzes?: number;
+    mathQuizzes?: number;
+    estudoQuizzes?: number;
+    consecutivePerfectScores?: number;
+    allSubjectsQuizzedToday?: boolean;
   }
 ): Promise<string[]> {
   const unlockedIds: string[] = [];
@@ -201,6 +236,25 @@ export async function checkAchievementUnlock(
   if (dayStreak >= 14) unlockedIds.push('streak_14');
   if (dailyChallengesCompleted >= 7) unlockedIds.push('daily_7');
   if (dailyChallengesCompleted >= 30) unlockedIds.push('daily_30');
+
+  // Curriculum mastery badges
+  if (options?.portugueseQuizzes !== undefined && options.portugueseQuizzes >= 20 && options.portugueseAverage !== undefined && options.portugueseAverage >= 80) {
+    unlockedIds.push('portugues_master');
+  }
+  if (options?.mathQuizzes !== undefined && options.mathQuizzes >= 20 && options.mathAverage !== undefined && options.mathAverage >= 80) {
+    unlockedIds.push('matematica_master');
+  }
+  if (options?.estudoQuizzes !== undefined && options.estudoQuizzes >= 20 && options.estudoAverage !== undefined && options.estudoAverage >= 80) {
+    unlockedIds.push('ciencias_master');
+  }
+  if (options?.consecutivePerfectScores !== undefined && options.consecutivePerfectScores >= 3) {
+    unlockedIds.push('quiz_100_streak');
+  }
+  if (options?.portugueseAverage !== undefined && options.mathAverage !== undefined && options.estudoAverage !== undefined &&
+      options.portugueseAverage >= 80 && options.mathAverage >= 80 && options.estudoAverage >= 80 &&
+      options.allSubjectsQuizzedToday) {
+    unlockedIds.push('all_rounder');
+  }
 
   return unlockedIds;
 }

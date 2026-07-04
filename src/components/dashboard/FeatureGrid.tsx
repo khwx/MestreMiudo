@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Book, Divide, Leaf, Shuffle, Gamepad2, BookHeart, Lightbulb, Flame, ShoppingBag, Brain, RefreshCw, TrendingUp, Trophy, Calendar } from "lucide-react"
+import { Book, Divide, Leaf, Shuffle, Gamepad2, BookHeart, Lightbulb, Flame, ShoppingBag, Brain, RefreshCw, TrendingUp, Trophy, Calendar, BarChart3 } from "lucide-react"
 
 interface SpacedStats {
   total: number;
@@ -158,6 +158,17 @@ export function FeatureGrid({ name, grade, spacedStats, dailyChallengeStats }: F
               <Trophy className="h-12 w-12 mx-auto mb-3 text-amber-600 dark:text-amber-400" />
               <h4 className="text-xl font-black text-amber-700 dark:text-amber-300">🏆 Conquistas</h4>
               <p className="text-amber-600 dark:text-amber-400 mt-2">Desbloqueia prémios!</p>
+            </div>
+          </div>
+        </Link>
+
+        {/* Progresso */}
+        <Link href={`/dashboard/progress?name=${name}&grade=${grade}`}>
+          <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col border-4 border-cyan-300 dark:border-cyan-700">
+            <div className="p-6 text-center flex-grow">
+              <BarChart3 className="h-12 w-12 mx-auto mb-3 text-cyan-600 dark:text-cyan-400" />
+              <h4 className="text-xl font-black text-cyan-700 dark:text-cyan-300">📊 Progresso</h4>
+              <p className="text-cyan-600 dark:text-cyan-400 mt-2">Vê o teu desempenho!</p>
             </div>
           </div>
         </Link>
