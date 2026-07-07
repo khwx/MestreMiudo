@@ -85,6 +85,22 @@ const portugueseWords: VocabularyWord[] = [
   { word: 'Areia', category: 'Natureza', difficulty: 'easy' },
   { word: 'Neve', category: 'Natureza', difficulty: 'normal' },
   { word: 'Relva', category: 'Natureza', difficulty: 'easy' },
+  // Família
+  { word: 'Mãe', category: 'Família', difficulty: 'easy' },
+  { word: 'Pai', category: 'Família', difficulty: 'easy' },
+  { word: 'Irmão', category: 'Família', difficulty: 'easy' },
+  { word: 'Irmã', category: 'Família', difficulty: 'easy' },
+  { word: 'Avó', category: 'Família', difficulty: 'easy' },
+  { word: 'Avô', category: 'Família', difficulty: 'easy' },
+  { word: 'Tio', category: 'Família', difficulty: 'easy' },
+  { word: 'Tia', category: 'Família', difficulty: 'easy' },
+  // Profissões
+  { word: 'Médico', category: 'Profissões', difficulty: 'normal' },
+  { word: 'Professor', category: 'Profissões', difficulty: 'normal' },
+  { word: 'Bombeiro', category: 'Profissões', difficulty: 'normal' },
+  { word: 'Polícia', category: 'Profissões', difficulty: 'normal' },
+  { word: 'Enfermeira', category: 'Profissões', difficulty: 'normal' },
+  { word: 'Cozinheiro', category: 'Profissões', difficulty: 'normal' },
 ];
 
 const mathWords: VocabularyWord[] = [
@@ -138,6 +154,14 @@ const mathWords: VocabularyWord[] = [
   { word: 'Nota', category: 'Dinheiro', difficulty: 'easy' },
   { word: 'Preço', category: 'Dinheiro', difficulty: 'easy' },
   { word: 'Troco', category: 'Dinheiro', difficulty: 'normal' },
+  // Tempo
+  { word: 'Hora', category: 'Tempo', difficulty: 'easy' },
+  { word: 'Minuto', category: 'Tempo', difficulty: 'easy' },
+  { word: 'Segundo', category: 'Tempo', difficulty: 'easy' },
+  { word: 'Dia', category: 'Tempo', difficulty: 'easy' },
+  { word: 'Semana', category: 'Tempo', difficulty: 'easy' },
+  { word: 'Mês', category: 'Tempo', difficulty: 'easy' },
+  { word: 'Ano', category: 'Tempo', difficulty: 'easy' },
 ];
 
 const estudoDoMeioWords: VocabularyWord[] = [
@@ -193,6 +217,13 @@ const estudoDoMeioWords: VocabularyWord[] = [
   { word: 'Plástico', category: 'Materiais', difficulty: 'easy' },
   { word: 'Papel', category: 'Materiais', difficulty: 'easy' },
   { word: 'Tecido', category: 'Materiais', difficulty: 'normal' },
+  // Cidades
+  { word: 'Lisboa', category: 'Cidades', difficulty: 'easy' },
+  { word: 'Porto', category: 'Cidades', difficulty: 'easy' },
+  { word: 'Coimbra', category: 'Cidades', difficulty: 'easy' },
+  { word: 'Faro', category: 'Cidades', difficulty: 'easy' },
+  { word: 'Braga', category: 'Cidades', difficulty: 'easy' },
+  { word: 'Évora', category: 'Cidades', difficulty: 'normal' },
 ];
 
 export const vocabularyBySubject: Record<Subject, VocabularyWord[]> = {

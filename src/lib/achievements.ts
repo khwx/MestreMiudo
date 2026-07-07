@@ -172,6 +172,54 @@ const ACHIEVEMENTS_CATALOG = {
     icon: '🌟',
     color: '#ec4899',
   },
+  first_lesson: {
+    title: 'Primeira Lição',
+    description: 'Completou a primeira lição',
+    icon: '📚',
+    color: '#3b82f6',
+  },
+  ten_lessons: {
+    title: 'Dez Lições',
+    description: 'Completou 10 lições',
+    icon: '📖',
+    color: '#8b5cf6',
+  },
+  story_lover: {
+    title: 'Amante de Histórias',
+    description: 'Criou 5 histórias',
+    icon: '📝',
+    color: '#ec4899',
+  },
+  game_champion: {
+    title: 'Campeão de Jogos',
+    description: 'Venceu 10 jogos',
+    icon: '🎮',
+    color: '#10b981',
+  },
+  streak_30: {
+    title: 'Trinta Dias de Fogo',
+    description: 'Manteve uma streak de 30 dias',
+    icon: '🏆',
+    color: '#f59e0b',
+  },
+  daily_14: {
+    title: 'Desafiante Quinzenal',
+    description: 'Completou 14 desafios diários',
+    icon: '🔥',
+    color: '#ef4444',
+  },
+  all_games_master: {
+    title: 'Mestre de Todos os Jogos',
+    description: 'Venceu todos os 5 tipos de jogos',
+    icon: '🎯',
+    color: '#6366f1',
+  },
+  perfect_week: {
+    title: 'Semana Perfeita',
+    description: 'Manteve média de 80%+ durante 7 dias seguidos',
+    icon: '⭐',
+    color: '#fbbf24',
+  },
 };
 
 /**
@@ -196,6 +244,11 @@ export async function checkAchievementUnlock(
     estudoQuizzes?: number;
     consecutivePerfectScores?: number;
     allSubjectsQuizzedToday?: boolean;
+    lessonsCompleted?: number;
+    storiesCreated?: number;
+    gamesWon?: number;
+    gamesWonByType?: Set<string>;
+    consecutiveDaysAverage80Plus?: number;
   }
 ): Promise<string[]> {
   const unlockedIds: string[] = [];
@@ -211,7 +264,7 @@ export async function checkAchievementUnlock(
   if (averageScore >= 90) unlockedIds.push('all_subjects_master');
   if (dailyChallengesCompleted >= 30) unlockedIds.push('daily_challenge_master');
 
-  // New achievements
+  // Speed and time achievements
   if (options?.quizDurationSeconds !== undefined && options.quizDurationSeconds < 120) {
     unlockedIds.push('speed_demon');
   }
@@ -224,6 +277,8 @@ export async function checkAchievementUnlock(
   if (options?.quizzesToday !== undefined && options.quizzesToday >= 3) {
     unlockedIds.push('quiz_marathon');
   }
+
+  // Subject mastery achievements
   if (options?.portugueseAverage !== undefined && options.portugueseAverage >= 90) {
     unlockedIds.push('subject_master_portugues');
   }
@@ -233,8 +288,14 @@ export async function checkAchievementUnlock(
   if (options?.estudoAverage !== undefined && options.estudoAverage >= 90) {
     unlockedIds.push('subject_master_estudo');
   }
+
+  // Streak achievements
   if (dayStreak >= 14) unlockedIds.push('streak_14');
+  if (dayStreak >= 30) unlockedIds.push('streak_30');
+
+  // Daily challenge achievements
   if (dailyChallengesCompleted >= 7) unlockedIds.push('daily_7');
+  if (dailyChallengesCompleted >= 14) unlockedIds.push('daily_14');
   if (dailyChallengesCompleted >= 30) unlockedIds.push('daily_30');
 
   // Curriculum mastery badges
@@ -254,6 +315,30 @@ export async function checkAchievementUnlock(
       options.portugueseAverage >= 80 && options.mathAverage >= 80 && options.estudoAverage >= 80 &&
       options.allSubjectsQuizzedToday) {
     unlockedIds.push('all_rounder');
+  }
+
+  // New lesson and story achievements
+  if (options?.lessonsCompleted !== undefined && options.lessonsCompleted >= 1) {
+    unlockedIds.push('first_lesson');
+  }
+  if (options?.lessonsCompleted !== undefined && options.lessonsCompleted >= 10) {
+    unlockedIds.push('ten_lessons');
+  }
+  if (options?.storiesCreated !== undefined && options.storiesCreated >= 5) {
+    unlockedIds.push('story_lover');
+  }
+
+  // Game achievements
+  if (options?.gamesWon !== undefined && options.gamesWon >= 10) {
+    unlockedIds.push('game_champion');
+  }
+  if (options?.gamesWonByType !== undefined && options.gamesWonByType.size >= 5) {
+    unlockedIds.push('all_games_master');
+  }
+
+  // Perfect week achievement
+  if (options?.consecutiveDaysAverage80Plus !== undefined && options.consecutiveDaysAverage80Plus >= 7) {
+    unlockedIds.push('perfect_week');
   }
 
   return unlockedIds;
