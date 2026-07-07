@@ -5,10 +5,11 @@ import { TicTacToe } from '@/components/TicTacToe';
 import { HangmanGame } from '@/components/HangmanGameImproved';
 import { CrosswordGame } from '@/components/CrosswordGame';
 import { WordSearchGame } from '@/components/WordSearchGame';
+import { MathQuizGame } from '@/components/MathQuizGame';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import { Gamepad2, Brain, Skull, Grid3x3, Puzzle } from 'lucide-react';
+import { Gamepad2, Brain, Skull, Grid3x3, Puzzle, Calculator } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 
@@ -25,7 +26,7 @@ export default function GamesClientPage() {
       </Button>
       <h1 className="text-4xl font-headline font-bold text-primary mb-8">Salão de Jogos</h1>
       <Tabs defaultValue="memory" className="w-full max-w-4xl">
-        <TabsList className="grid w-full grid-cols-5">
+        <TabsList className="grid w-full grid-cols-6">
           <TabsTrigger value="memory">
             <Brain className="mr-2 h-5 w-5" />
             Jogo da Memória
@@ -45,6 +46,10 @@ export default function GamesClientPage() {
           <TabsTrigger value="wordsearch">
             <Grid3x3 className="mr-2 h-5 w-5" />
             Sopa de Letras
+          </TabsTrigger>
+          <TabsTrigger value="mathquiz">
+            <Calculator className="mr-2 h-5 w-5" />
+            Quiz de Matemática
           </TabsTrigger>
         </TabsList>
         <TabsContent value="memory">
@@ -99,6 +104,17 @@ export default function GamesClientPage() {
                 </CardHeader>
                 <CardContent>
                     <WordSearchGame />
+                </CardContent>
+            </Card>
+        </TabsContent>
+        <TabsContent value="mathquiz">
+            <Card>
+                <CardHeader>
+                    <CardTitle>Quiz de Matemática</CardTitle>
+                    <CardDescription>Testa os teus conhecimentos de matemática contra o tempo!</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <MathQuizGame />
                 </CardContent>
             </Card>
         </TabsContent>
