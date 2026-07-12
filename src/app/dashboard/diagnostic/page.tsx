@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, ClipboardCheck } from 'lucide-react';
+import { AlertTriangle, ArrowLeft, ClipboardCheck } from 'lucide-react';
 import { useState, useCallback } from 'react';
 import { DiagnosticTest } from '@/components/DiagnosticTest';
 import { logger } from '@/lib/logger';
@@ -27,6 +27,7 @@ export default function DiagnosticPage() {
   const gradeLevel = parseInt(grade, 10) as 1 | 2 | 3 | 4;
   const [started, setStarted] = useState(false);
   const [completed, setCompleted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleStart = useCallback(() => {
     setStarted(true);
@@ -43,6 +44,7 @@ export default function DiagnosticPage() {
       logger.log('[DIAGNOSTIC] Resultados guardados:', { name, gradeLevel, result });
     } catch (err) {
       logger.error('[DIAGNOSTIC] Erro ao guardar resultados:', err);
+      setError('Ocorreu um erro ao guardar os resultados. Por favor tenta novamente.');
     }
   }, [name, gradeLevel]);
 
@@ -50,6 +52,23 @@ export default function DiagnosticPage() {
     setStarted(false);
     setCompleted(false);
   }, []);
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[50vh] text-center gap-6 p-6">
+        <div className="text-6xl">😕</div>
+        <div className="bg-red-50 dark:bg-red-900/20 border-4 border-red-300 rounded-2xl p-8 max-w-lg">
+          <div className="flex items-center gap-3 text-red-600">
+            <AlertTriangle className="h-8 w-8" />
+            <p className="text-lg font-bold">{error}</p>
+          </div>
+          <Button onClick={() => setError(null)} variant="outline" className="mt-4 btn-kid border-2">
+            Tentar Novamente
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8 p-4 md:p-8 max-w-2xl mx-auto">

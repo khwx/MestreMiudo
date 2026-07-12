@@ -8,12 +8,13 @@ type QuizResultsProps = {
   score: number;
   totalQuestions: number;
   quizData: PersonalizedLearningPathOutput | null;
+  points?: number;
   onRestart: () => void;
   onBack: () => void;
   subject: string;
 };
 
-export function QuizResults({ score, totalQuestions, onRestart, onBack }: QuizResultsProps) {
+export function QuizResults({ score, totalQuestions, points, onRestart, onBack }: QuizResultsProps) {
   const stars = score === totalQuestions ? 3 : score >= totalQuestions * 0.6 ? 2 : 1;
 
   return (
@@ -52,7 +53,7 @@ export function QuizResults({ score, totalQuestions, onRestart, onBack }: QuizRe
         </p>
         
         <p className="text-xl text-gray-600 dark:text-gray-300">
-          Isso dá-te <span className="font-bold text-yellow-600">{score * 10} pontos</span>! 🎁
+          Isso dá-te <span className="font-bold text-yellow-600">{points ?? score * 10} pontos</span>!
         </p>
         
         <div className="flex gap-4 justify-center pt-4">

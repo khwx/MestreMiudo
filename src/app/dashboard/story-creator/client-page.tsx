@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Wand2, BookHeart, Loader2, AlertTriangle, Play, Pause } from 'lucide-react';
+import { Wand2, BookHeart, Loader2, AlertTriangle, Play, Pause, BookOpen } from 'lucide-react';
 import { generateStoryAction } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 
@@ -267,6 +267,14 @@ export default function StoryCreatorClientPage() {
               className="flex-1 btn-kid border-2 border-purple-300 text-lg"
             >
               <Wand2 className="mr-2 h-5 w-5" /> Nova História
+            </Button>
+            <Button
+              onClick={() => router.push(`/dashboard/story-gallery?name=${name}&grade=${grade}`)}
+              size="lg"
+              variant="outline"
+              className="flex-1 btn-kid border-2 border-purple-300 text-lg"
+            >
+              <BookOpen className="mr-2 h-5 w-5" /> Ver na Galeria
             </Button>
             <Button
               onClick={() => router.push(`/dashboard?name=${name}&grade=${grade}`)}

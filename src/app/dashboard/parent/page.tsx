@@ -4,7 +4,7 @@ import { logger } from "@/lib/logger";
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Loader2, Users, BookOpen, Trophy, TrendingUp, Calendar, ArrowLeft, FileText, FileSpreadsheet, AlertTriangle, Lightbulb } from 'lucide-react';
+import { AlertTriangle, ArrowLeft, BookOpen, Calendar, FileSpreadsheet, FileText, Lightbulb, Loader2, TrendingUp, Trophy, Users } from 'lucide-react';
 import Link from 'next/link';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { generatePdfReport } from '@/lib/pdf-report';
@@ -34,6 +34,7 @@ export default function ParentDashboardPage() {
   const accessCode = searchParams.get('code');
   const [students, setStudents] = useState<StudentProgress[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [generatingPdf, setGeneratingPdf] = useState(false);
   const [weeklyData, setWeeklyData] = useState<Record<string, { date: string; score: number }[]>>({});
   const [topicData, setTopicData] = useState<Record<string, { topic: string; averageScore: number; status: 'strong' | 'weak' }[]>>({});
@@ -222,6 +223,7 @@ export default function ParentDashboardPage() {
         setRecommendations(rMap);
       } catch (error) {
         logger.error('Erro ao carregar painel de pais:', error);
+        setError('Não foi possível carregar o painel de pais. Por favor tenta novamente.');
       } finally {
         setLoading(false);
       }
@@ -280,6 +282,23 @@ export default function ParentDashboardPage() {
     return (
       <div className="flex justify-center items-center min-h-[50vh]">
         <Loader2 className="h-12 w-12 animate-spin text-blue-500" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[50vh] text-center gap-6 p-6">
+        <div className="text-6xl">😕</div>
+        <div className="bg-red-50 dark:bg-red-900/20 border-4 border-red-300 rounded-2xl p-8 max-w-lg">
+          <div className="flex items-center gap-3 text-red-600">
+            <AlertTriangle className="h-8 w-8" />
+            <p className="text-lg font-bold">{error}</p>
+          </div>
+          <Button onClick={() => window.location.reload()} variant="outline" className="mt-4 btn-kid border-2">
+            Tentar Novamente
+          </Button>
+        </div>
       </div>
     );
   }

@@ -3,6 +3,7 @@
 import { logger } from "@/lib/logger";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 import { updateStudentRewardsWithCoinsAction } from './rewards';
+import { updateStudentStreak } from './streaks';
 
 export async function getLessonDataAction(lessonId: string) {
   try {
@@ -125,6 +126,11 @@ export async function saveLessonCompletionAction(
 
     // Update student rewards
     await updateStudentRewardsWithCoinsAction(studentId, coins);
+    
+    // Update streak
+    updateStudentStreak(studentId).catch((err) => {
+      logger.error('[LESSONS] Failed to update streak:', err);
+    });
 
     return {
       success: true,

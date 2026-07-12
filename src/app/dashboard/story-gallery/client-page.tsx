@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, BookHeart, Calendar, Loader2, Eye, Trash2 } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowLeft, BookHeart, Calendar, Loader2, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getStudentStories } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
@@ -24,7 +25,6 @@ export default function StoryGalleryClientPage() {
   const searchParams = useSearchParams();
   const name = searchParams.get('name') || 'Amigo';
   const grade = searchParams.get('grade') || '1';
-  const router = useRouter();
   const { toast } = useToast();
 
   const [stories, setStories] = useState<Story[]>([]);
@@ -103,7 +103,13 @@ export default function StoryGalleryClientPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {selectedStory.image_urls.map((url, i) => (
                   <div key={i} className="relative w-full aspect-square rounded-xl overflow-hidden border-2 border-purple-200">
-                    <img src={url} alt={`Ilustração ${i + 1}`} className="w-full h-full object-cover" />
+                    <Image
+                      src={url}
+                      alt={`Ilustração ${i + 1}`}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
                   </div>
                 ))}
               </div>

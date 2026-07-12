@@ -2,7 +2,7 @@
 import { logger } from "@/lib/logger";
 
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { generateQuiz, saveQuizResults } from '@/app/actions';
+import { generateQuiz, saveQuizResults, awardQuizPoints, getFullQuizHistory, unlockAchievement } from '@/app/actions';
 import type { PersonalizedLearningPathOutput } from '@/app/shared-schemas';
 import { Button } from '@/components/ui/button';
 import { Loader2, RefreshCw, Book, Divide, Leaf, Shuffle } from 'lucide-react';
@@ -11,6 +11,7 @@ import { useSound } from '@/lib/sounds';
 import confetti from 'canvas-confetti';
 import { QuizResults } from '@/components/QuizResults';
 import { QuizQuestion } from '@/components/QuizQuestion';
+import { BadgePopup, BADGE_DEFINITIONS } from '@/components/BadgePopup';
 
 type QuizProps = {
   studentId: string;
@@ -44,6 +45,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
+  const [newBadge, setNewBadge] = useState<{ name: string; description: string; icon: string } | null>(null);
   const quizStarted = useRef(false);
   const { playSuccess, playError, playLevelUp } = useSound();
   
@@ -132,6 +134,37 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
         numberOfQuestions: quizData!.quizQuestions.length,
       });
       
+      // Award points for gamification system
+      const pointsResult = await awardQuizPoints(studentId, score, quizData!.quizQuestions.length, gradeLevel);
+      logger.log(`[QUIZ] Points awarded: ${pointsResult.points}`);
+      
+      // Check for new badges
+      try {
+        const history = await getFullQuizHistory(studentId);
+        const totalQuizzes = history.length;
+        const perfectScores = history.filter(h => h.score === h.numberOfQuestions).length;
+        
+        // Check for first quiz badge
+        if (totalQuizzes === 1) {
+          const badge = BADGE_DEFINITIONS['primeiro_quiz'];
+          if (badge) {
+            await unlockAchievement(studentId, 'primeiro_quiz');
+            setNewBadge(badge);
+          }
+        }
+        
+        // Check for perfect score badge
+        if (score === quizData!.quizQuestions.length && perfectScores >= 1) {
+          const badge = BADGE_DEFINITIONS['perfeicao'];
+          if (badge && !newBadge) {
+            await unlockAchievement(studentId, 'perfeicao');
+            setNewBadge(badge);
+          }
+        }
+      } catch (badgeError) {
+        logger.error('[QUIZ] Failed to check badges:', badgeError);
+      }
+      
       playLevelUp();
       confetti({
         particleCount: 200,
@@ -141,7 +174,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     } catch (error) {
       logger.error('Erro ao guardar resultados do quiz:', error);
     }
-  }, [studentId, gradeLevel, subject, score, answers, quizData, playLevelUp]);
+  }, [studentId, gradeLevel, subject, score, answers, quizData, playLevelUp, newBadge]);
 
   const handleNext = useCallback(() => {
     window.speechSynthesis.cancel();
@@ -229,14 +262,24 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
 
   if (isQuizFinished) {
     return (
-      <QuizResults
-        score={score}
-        totalQuestions={quizData.quizQuestions.length}
-        quizData={quizData}
-        onRestart={handleRestart}
-        onBack={handleBack}
-        subject={subject}
-      />
+      <>
+        {newBadge && (
+          <BadgePopup
+            badgeName={newBadge.name}
+            badgeDescription={newBadge.description}
+            badgeIcon={newBadge.icon}
+            onClose={() => setNewBadge(null)}
+          />
+        )}
+        <QuizResults
+          score={score}
+          totalQuestions={quizData.quizQuestions.length}
+          quizData={quizData}
+          onRestart={handleRestart}
+          onBack={handleBack}
+          subject={subject}
+        />
+      </>
     );
   }
 

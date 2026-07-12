@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Share2, Check, Loader2 } from 'lucide-react';
+import { AlertTriangle, Check, Loader2, Share2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { getStudentAchievements } from '@/app/actions';
 
@@ -159,6 +159,7 @@ function AchievementsPageContent() {
   
   const [unlockedAchievements, setUnlockedAchievements] = useState<Array<{id: string, unlockDate: string}>>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadAchievements = async () => {
@@ -170,6 +171,7 @@ function AchievementsPageContent() {
         })));
       } catch (error) {
         logger.error('Erro ao carregar conquistas:', error);
+        setError('Não foi possível carregar as conquistas. Por favor tenta novamente.');
       } finally {
         setLoading(false);
       }
@@ -186,6 +188,23 @@ function AchievementsPageContent() {
     return (
       <div className="flex justify-center items-center p-8">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[50vh] text-center gap-6 p-6">
+        <div className="text-6xl">😕</div>
+        <div className="bg-red-50 dark:bg-red-900/20 border-4 border-red-300 rounded-2xl p-8 max-w-lg">
+          <div className="flex items-center gap-3 text-red-600">
+            <AlertTriangle className="h-8 w-8" />
+            <p className="text-lg font-bold">{error}</p>
+          </div>
+          <Button onClick={() => window.location.reload()} variant="outline" className="mt-4 btn-kid border-2">
+            Tentar Novamente
+          </Button>
+        </div>
       </div>
     );
   }
