@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Book, Divide, Leaf, Shuffle, Gamepad2, BookHeart, Lightbulb, Flame, ShoppingBag, Brain, RefreshCw, TrendingUp, Trophy, Calendar, BarChart3 } from "lucide-react"
+import { Book, Divide, Leaf, Shuffle, Gamepad2, BookHeart, BookOpen, Lightbulb, Flame, ShoppingBag, Brain, RefreshCw, TrendingUp, Trophy, Calendar, BarChart3 } from "lucide-react"
 
 interface SpacedStats {
   total: number;
@@ -134,8 +134,19 @@ export function FeatureGrid({ name, grade, spacedStats, dailyChallengeStats }: F
           <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col border-4 border-purple-300 dark:border-purple-700">
             <div className="p-6 text-center flex-grow">
               <BookHeart className="h-12 w-12 mx-auto mb-3 text-purple-600 dark:text-purple-400" />
-              <h4 className="text-xl font-black text-purple-700 dark:text-purple-300">📖 Histórias</h4>
+              <h4 className="text-xl font-black text-purple-700 dark:text-purple-300">📖 Criar História</h4>
               <p className="text-purple-600 dark:text-purple-400 mt-2">Cria histórias únicas!</p>
+            </div>
+          </div>
+        </Link>
+
+        {/* Galeria de Histórias */}
+        <Link href={`/dashboard/story-gallery?name=${name}&grade=${grade}`}>
+          <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col border-4 border-pink-300 dark:border-pink-700">
+            <div className="p-6 text-center flex-grow">
+              <BookOpen className="h-12 w-12 mx-auto mb-3 text-pink-600 dark:text-pink-400" />
+              <h4 className="text-xl font-black text-pink-700 dark:text-pink-300">📚 Galeria</h4>
+              <p className="text-pink-600 dark:text-pink-400 mt-2">Vê as tuas histórias!</p>
             </div>
           </div>
         </Link>

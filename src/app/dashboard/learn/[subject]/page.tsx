@@ -167,18 +167,24 @@ export default function SubjectPage() {
             return (
               <div key={lesson.id}>
                 {isLocked ? (
-                  <div className={`card-kid border-4 bg-muted/50 opacity-60 cursor-not-allowed ${config.borderColor}`}>
+                  <div className={`card-kid border-4 bg-muted/30 opacity-70 cursor-not-allowed ${config.borderColor} relative group`}>
                     <div className="p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-grow">
-                           <h3 className="text-xl font-black text-gray-400 dark:text-gray-500">{lesson.title}</h3>
+                           <h3 className="text-xl font-black text-gray-500 dark:text-gray-400">{lesson.title}</h3>
                            <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">{lesson.difficulty}</p>
                         </div>
-                         <Lock className="h-8 w-8 text-gray-400 dark:text-gray-500" />
+                         <div className="bg-gray-200 dark:bg-gray-700 p-2 rounded-full">
+                           <Lock className="h-8 w-8 text-gray-400 dark:text-gray-500" />
+                         </div>
                       </div>
-                       <p className="text-gray-400 dark:text-gray-500">{lesson.description}</p>
-                       <div className="mt-4 flex items-center gap-2 text-gray-400 dark:text-gray-500">
-                         <span className="text-sm">🔒 Completa a lição anterior</span>
+                       <p className="text-gray-400 dark:text-gray-500 mb-4">{lesson.description}</p>
+                       <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-3 flex items-center gap-3">
+                         <span className="text-2xl">🔒</span>
+                         <div>
+                           <p className="text-sm font-bold text-gray-500 dark:text-gray-400">Lição Trancada</p>
+                           <p className="text-xs text-gray-400 dark:text-gray-500">Completa a lição anterior para desbloquear</p>
+                         </div>
                        </div>
                     </div>
                   </div>
