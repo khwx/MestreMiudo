@@ -92,6 +92,7 @@ export default function ProgressPage() {
   const [totalPoints, setTotalPoints] = useState(0)
   const [currentStreak, setCurrentStreak] = useState(0)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!name) return
@@ -137,7 +138,8 @@ export default function ProgressPage() {
         }
         setCurrentStreak(streak)
       } catch (err) {
-        console.error("Erro ao carregar progresso:", err)
+        console.error("Erro ao carregar progresso:", err);
+        setError("Não foi possível carregar os teus dados de progresso.");
       } finally {
         setLoading(false)
       }
@@ -177,6 +179,23 @@ export default function ProgressPage() {
         <div className="text-center space-y-4">
           <div className="text-6xl animate-bounce">📊</div>
           <p className="text-xl text-gray-600 dark:text-gray-300 font-bold">A carregar progresso...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center">
+        <div className="text-center space-y-6 max-w-md">
+          <div className="text-6xl">😕</div>
+          <h2 className="text-2xl font-bold text-red-600 dark:text-red-400">Erro ao carregar dados</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300">{error}</p>
+          <Link href={`/dashboard?name=${name}&grade=${grade}`}>
+            <div className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-xl font-bold text-lg transition-colors">
+              Voltar ao Dashboard
+            </div>
+          </Link>
         </div>
       </div>
     )

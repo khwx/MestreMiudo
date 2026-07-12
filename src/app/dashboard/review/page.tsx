@@ -26,6 +26,7 @@ export default function ReviewPage() {
   const [completed, setCompleted] = useState(false);
   const [stats, setStats] = useState<{ total: number; mastered: number; learning: number; due: number } | null>(null);
   const [sessionStats, setSessionStats] = useState({ known: 0, unknown: 0 });
+  const [error, setError] = useState<string | null>(null);
 
   const loadItems = useCallback(async () => {
     setLoading(true);
@@ -40,9 +41,10 @@ export default function ReviewPage() {
       setShowAnswer(false);
       setCompleted(false);
       setSessionStats({ known: 0, unknown: 0 });
-    } catch (error) {
-      logger.error('Erro ao carregar itens para revisão:', error);
-    } finally {
+} catch (error) {
+        logger.error('Erro ao carregar itens para revisão:', error);
+        setError('Não foi possível carregar os itens para revisão.');
+      } finally {
       setLoading(false);
     }
   }, [name]);
@@ -79,6 +81,23 @@ export default function ReviewPage() {
   const currentItem = items[currentIndex];
   const totalReviewed = sessionStats.known + sessionStats.unknown;
   const progressPercent = items.length > 0 ? Math.round((totalReviewed / items.length) * 100) : 0;
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center min-h-[50vh]">
+        <div className="text-center space-y-4">
+          <AlertTriangle className="h-10 w-10 text-red-500 mx-auto" />
+          <h2 className="text-2xl font-bold text-red-600 dark:text-red-400">Erro ao carregar</h2>
+          <p className="text-red-500 dark:text-red-400">{error}</p>
+          <Link href={`/dashboard?name=${encodeURIComponent(name)}&grade=${grade}`}>
+            <button className="btn-outline px-6 py-2">
+              ← Voltar ao Dashboard
+            </button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (

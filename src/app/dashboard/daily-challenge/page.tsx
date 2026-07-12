@@ -44,6 +44,7 @@ export default function DailyChallengePage() {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [completing, setCompleting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const gradeLevel = parseInt(grade, 10) as 1 | 2 | 3 | 4;
 
@@ -59,6 +60,7 @@ export default function DailyChallengePage() {
         }
       } catch (err) {
         logger.error('Erro ao carregar desafio diário:', err);
+        setError('Não foi possível carregar o desafio de hoje.');
       } finally {
         setLoading(false);
       }
@@ -222,6 +224,23 @@ export default function DailyChallengePage() {
         <div className="text-center space-y-4">
           <Loader2 className="h-12 w-12 animate-spin text-orange-500 mx-auto" />
           <p className="text-xl font-bold text-gray-600 dark:text-gray-300">A carregar o teu desafio diário...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-[50vh] flex items-center justify-center p-8">
+        <div className="card-kid border-4 border-red-300 dark:border-red-700 shadow-2xl max-w-lg">
+          <div className="p-8 text-center space-y-4">
+            <AlertTriangle className="h-16 w-16 text-red-500 mx-auto" />
+            <h2 className="text-2xl font-black text-red-700 dark:text-red-300">Erro ao carregar</h2>
+            <p className="text-red-600 dark:text-red-400">{error}</p>
+            <Link href={`/dashboard?name=${name}&grade=${grade}`}>
+              <Button variant="outline" className="btn-kid border-2 border-red-300 dark:border-red-700">Voltar</Button>
+            </Link>
+          </div>
         </div>
       </div>
     );

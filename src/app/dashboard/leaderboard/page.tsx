@@ -99,6 +99,7 @@ function LeaderboardPageContent() {
   const [gradeLeaderboard, setGradeLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [studentRankContext, setStudentRankContext] = useState<LeaderboardEntry[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadLeaderboards = async () => {
@@ -115,6 +116,7 @@ function LeaderboardPageContent() {
         setStudentRankContext(rankContext);
       } catch (error) {
         logger.error('Falha ao carregar classificações:', error);
+        setError('Não foi possível carregar as classificações.');
       } finally {
         setLoading(false);
       }
@@ -131,6 +133,16 @@ function LeaderboardPageContent() {
     return (
       <div className="flex justify-center items-center p-8">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="card-kid border-4 border-red-300 dark:border-red-700 max-w-md mx-auto mt-8 p-8 text-center">
+        <Trophy className="h-16 w-16 text-red-400 mx-auto mb-4" />
+        <h2 className="text-2xl font-black text-red-700 dark:text-red-300 mb-2">Erro ao carregar</h2>
+        <p className="text-red-600 dark:text-red-400 mb-6">{error}</p>
       </div>
     );
   }
