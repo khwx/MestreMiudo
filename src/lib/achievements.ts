@@ -220,6 +220,54 @@ const ACHIEVEMENTS_CATALOG = {
     icon: '⭐',
     color: '#fbbf24',
   },
+  story_creator: {
+    title: 'Criador de Histórias',
+    description: 'Criou a primeira história',
+    icon: '📝',
+    color: '#ec4899',
+  },
+  shopaholic: {
+    title: 'Comprador Fiel',
+    description: 'Comprou 5 itens na loja',
+    icon: '🛍️',
+    color: '#f97316',
+  },
+  daily_21: {
+    title: 'Desafiante Dedicado',
+    description: '21 desafios diários completados',
+    icon: '🔥',
+    color: '#ef4444',
+  },
+  streak_21: {
+    title: 'Três Semanas de Fogo',
+    description: 'Streak de 21 dias consecutivos',
+    icon: '💪',
+    color: '#dc2626',
+  },
+  portugues_pro: {
+    title: 'Profissional de Português',
+    description: '50 quizzes de Português completados',
+    icon: '📖',
+    color: '#22c55e',
+  },
+  matematica_pro: {
+    title: 'Profissional de Matemática',
+    description: '50 quizzes de Matemática completados',
+    icon: '🔢',
+    color: '#3b82f6',
+  },
+  ciencias_pro: {
+    title: 'Profissional de Ciências',
+    description: '50 quizzes de Estudo do Meio completados',
+    icon: '🌍',
+    color: '#8b5cf6',
+  },
+  legendary: {
+    title: 'Lendário',
+    description: 'Completou 100 quizzes no total',
+    icon: '👑',
+    color: '#f59e0b',
+  },
 };
 
 /**
@@ -249,6 +297,7 @@ export async function checkAchievementUnlock(
     gamesWon?: number;
     gamesWonByType?: Set<string>;
     consecutiveDaysAverage80Plus?: number;
+    shopItemsPurchased?: number;
   }
 ): Promise<string[]> {
   const unlockedIds: string[] = [];
@@ -340,6 +389,36 @@ export async function checkAchievementUnlock(
   if (options?.consecutiveDaysAverage80Plus !== undefined && options.consecutiveDaysAverage80Plus >= 7) {
     unlockedIds.push('perfect_week');
   }
+
+  // Story achievements
+  if (options?.storiesCreated !== undefined && options.storiesCreated >= 1) {
+    unlockedIds.push('story_creator');
+  }
+
+  // Shop achievement
+  if (options?.shopItemsPurchased !== undefined && options.shopItemsPurchased >= 5) {
+    unlockedIds.push('shopaholic');
+  }
+
+  // Daily challenge milestones
+  if (dailyChallengesCompleted >= 21) unlockedIds.push('daily_21');
+
+  // Streak milestones
+  if (dayStreak >= 21) unlockedIds.push('streak_21');
+
+  // Subject pro achievements
+  if (options?.portugueseQuizzes !== undefined && options.portugueseQuizzes >= 50) {
+    unlockedIds.push('portugues_pro');
+  }
+  if (options?.mathQuizzes !== undefined && options.mathQuizzes >= 50) {
+    unlockedIds.push('matematica_pro');
+  }
+  if (options?.estudoQuizzes !== undefined && options.estudoQuizzes >= 50) {
+    unlockedIds.push('ciencias_pro');
+  }
+
+  // Legendary achievement
+  if (studentQuizzes >= 100) unlockedIds.push('legendary');
 
   return unlockedIds;
 }

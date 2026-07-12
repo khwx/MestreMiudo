@@ -101,6 +101,35 @@ const portugueseWords: VocabularyWord[] = [
   { word: 'Polícia', category: 'Profissões', difficulty: 'normal' },
   { word: 'Enfermeira', category: 'Profissões', difficulty: 'normal' },
   { word: 'Cozinheiro', category: 'Profissões', difficulty: 'normal' },
+  // Desportos
+  { word: 'Futebol', category: 'Desportos', difficulty: 'easy' },
+  { word: 'Basquetebol', category: 'Desportos', difficulty: 'normal' },
+  { word: 'Natação', category: 'Desportos', difficulty: 'easy' },
+  { word: 'Ténis', category: 'Desportos', difficulty: 'normal' },
+  { word: 'Atletismo', category: 'Desportos', difficulty: 'normal' },
+  { word: 'Ciclismo', category: 'Desportos', difficulty: 'normal' },
+  { word: 'Ginástica', category: 'Desportos', difficulty: 'normal' },
+  { word: 'Judo', category: 'Desportos', difficulty: 'hard' },
+  // Transportes
+  { word: 'Carro', category: 'Transportes', difficulty: 'easy' },
+  { word: 'Autocarro', category: 'Transportes', difficulty: 'easy' },
+  { word: 'Comboio', category: 'Transportes', difficulty: 'easy' },
+  { word: 'Avião', category: 'Transportes', difficulty: 'easy' },
+  { word: 'Barco', category: 'Transportes', difficulty: 'easy' },
+  { word: 'Bicicleta', category: 'Transportes', difficulty: 'easy' },
+  { word: 'Metro', category: 'Transportes', difficulty: 'normal' },
+  { word: 'Helicóptero', category: 'Transportes', difficulty: 'hard' },
+  // Escola (more)
+  { word: 'Lousa', category: 'Escola', difficulty: 'normal' },
+  { word: 'Prova', category: 'Escola', difficulty: 'normal' },
+  { word: 'Estojo', category: 'Escola', difficulty: 'easy' },
+  { word: 'Mochila', category: 'Escola', difficulty: 'easy' },
+  { word: 'Bloco', category: 'Escola', difficulty: 'easy' },
+  { word: 'Cartola', category: 'Escola', difficulty: 'hard' },
+  // Natureza (more)
+  { word: 'Lago', category: 'Natureza', difficulty: 'normal' },
+  { word: 'Vulcão', category: 'Natureza', difficulty: 'hard' },
+  { word: 'Ilha', category: 'Natureza', difficulty: 'normal' },
 ];
 
 const mathWords: VocabularyWord[] = [
@@ -162,6 +191,28 @@ const mathWords: VocabularyWord[] = [
   { word: 'Semana', category: 'Tempo', difficulty: 'easy' },
   { word: 'Mês', category: 'Tempo', difficulty: 'easy' },
   { word: 'Ano', category: 'Tempo', difficulty: 'easy' },
+  { word: 'Século', category: 'Tempo', difficulty: 'hard' },
+  // Geometria
+  { word: 'Triângulo', category: 'Geometria', difficulty: 'easy' },
+  { word: 'Quadrado', category: 'Geometria', difficulty: 'easy' },
+  { word: 'Círculo', category: 'Geometria', difficulty: 'easy' },
+  { word: 'Retângulo', category: 'Geometria', difficulty: 'easy' },
+  { word: 'Losango', category: 'Geometria', difficulty: 'normal' },
+  { word: 'Pentágono', category: 'Geometria', difficulty: 'normal' },
+  { word: 'Hexágono', category: 'Geometria', difficulty: 'normal' },
+  { word: 'Esfera', category: 'Geometria', difficulty: 'normal' },
+  { word: 'Cubo', category: 'Geometria', difficulty: 'normal' },
+  { word: 'Pirâmide', category: 'Geometria', difficulty: 'hard' },
+  { word: 'Cilindro', category: 'Geometria', difficulty: 'hard' },
+  { word: 'Cone', category: 'Geometria', difficulty: 'normal' },
+  { word: 'Simetria', category: 'Geometria', difficulty: 'hard' },
+  // Operações (more)
+  { word: 'Triplo', category: 'Operações', difficulty: 'normal' },
+  { word: 'Quociente', category: 'Operações', difficulty: 'hard' },
+  { word: 'Resto', category: 'Operações', difficulty: 'normal' },
+  // Dinheiro (more)
+  { word: 'Carteira', category: 'Dinheiro', difficulty: 'easy' },
+  { word: 'Poupança', category: 'Dinheiro', difficulty: 'normal' },
 ];
 
 const estudoDoMeioWords: VocabularyWord[] = [
@@ -224,6 +275,25 @@ const estudoDoMeioWords: VocabularyWord[] = [
   { word: 'Faro', category: 'Cidades', difficulty: 'easy' },
   { word: 'Braga', category: 'Cidades', difficulty: 'easy' },
   { word: 'Évora', category: 'Cidades', difficulty: 'normal' },
+  { word: 'Aveiro', category: 'Cidades', difficulty: 'normal' },
+  { word: 'Guimarães', category: 'Cidades', difficulty: 'normal' },
+  // Alimentos
+  { word: 'Maçã', category: 'Alimentos', difficulty: 'easy' },
+  { word: 'Pera', category: 'Alimentos', difficulty: 'easy' },
+  { word: 'Banana', category: 'Alimentos', difficulty: 'easy' },
+  { word: 'Laranja', category: 'Alimentos', difficulty: 'easy' },
+  { word: 'Cenoura', category: 'Alimentos', difficulty: 'easy' },
+  { word: 'Tomate', category: 'Alimentos', difficulty: 'easy' },
+  { word: 'Arroz', category: 'Alimentos', difficulty: 'easy' },
+  { word: 'Pão', category: 'Alimentos', difficulty: 'easy' },
+  { word: 'Peixe', category: 'Alimentos', difficulty: 'easy' },
+  { word: 'Carne', category: 'Alimentos', difficulty: 'easy' },
+  { word: 'Ovo', category: 'Alimentos', difficulty: 'easy' },
+  // Ciência (more)
+  { word: 'Condutor', category: 'Ciência', difficulty: 'normal' },
+  { word: 'Isolante', category: 'Ciência', difficulty: 'normal' },
+  { word: 'Íman', category: 'Ciência', difficulty: 'normal' },
+  { word: 'Circuito', category: 'Ciência', difficulty: 'hard' },
 ];
 
 export const vocabularyBySubject: Record<Subject, VocabularyWord[]> = {
