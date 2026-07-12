@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Loader2, ArrowLeft, RotateCcw, CheckCircle2, XCircle, Brain } from 'lucide-react';
+import { Loader2, ArrowLeft, RotateCcw, CheckCircle2, XCircle, Brain, AlertTriangle } from 'lucide-react';
 import {
   getItemsForReview,
   recordReview,

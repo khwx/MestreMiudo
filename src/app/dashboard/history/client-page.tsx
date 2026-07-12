@@ -3,12 +3,13 @@ import { logger } from "@/lib/logger";
 
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { getFullQuizHistory, getStudentLessonHistoryAction } from '@/app/actions';
 import type { QuizResultEntry } from '@/app/shared-schemas';
 import { Card } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import { Book, Divide, Leaf, Loader2, Check, X, Shuffle, GraduationCap } from 'lucide-react';
+import { Book, Divide, Leaf, Loader2, Check, X, Shuffle, GraduationCap, AlertTriangle } from 'lucide-react';
 import { format } from 'date-fns';
 import { pt } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
@@ -71,10 +72,10 @@ const [quizHistory, setQuizHistory] = useState<QuizResultEntry[]>([]);
             <AlertTriangle className="h-12 w-12 mb-4 text-red-500" />
             <h2 className="text-2xl font-bold text-red-600 mb-3">Erro ao carregar histórico</h2>
             <p className="text-red-500 mb-6">{error}</p>
-            <Button variant="outline" asChild href="/">
-              <a className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors hover:bg-muted/accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4">
+<Button variant="outline" asChild>
+              <Link href="/" className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors hover:bg-muted/accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4">
                 Voltar ao Dashboard
-              </a>
+              </Link>
             </Button>
           </div>
         );
