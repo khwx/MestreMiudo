@@ -25,6 +25,8 @@ export default function StoryCreatorClientPage() {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  const suggestedKeywords = ['dragão', 'castelo', 'magia', 'floresta', 'espaço', 'fada', 'tesouro', 'aventura', 'amigo', 'heroi'];
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!keywords.trim()) return;
@@ -131,6 +133,24 @@ export default function StoryCreatorClientPage() {
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 💡 Escreve palavras e a IA criará uma história única!
               </p>
+              <div className="flex flex-wrap gap-2 mt-3">
+                <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 mr-1">Sugestões:</span>
+                {suggestedKeywords.map((kw) => (
+                  <button
+                    key={kw}
+                    type="button"
+                    onClick={() => {
+                      const current = keywords.split(',').map(k => k.trim()).filter(k => k);
+                      if (!current.includes(kw)) {
+                        setKeywords([...current, kw].join(', '));
+                      }
+                    }}
+                    className="px-3 py-1 text-sm font-semibold rounded-full bg-purple-100 dark:bg-purple-800/40 text-purple-700 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-800/60 transition-colors"
+                  >
+                    {kw}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <Button
