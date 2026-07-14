@@ -3,6 +3,7 @@ import { logger } from "@/lib/logger";
 
 import { Suspense, useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -163,12 +164,13 @@ function LeaderboardPageContent() {
   return (
     <div className="w-full space-y-8 p-6 max-w-4xl mx-auto">
       {/* Voltar */}
-      <button
-        onClick={() => window.history.back()}
-        className="text-sm text-blue-600 hover:text-blue-800 font-semibold"
-      >
-        ← Voltar ao Dashboard
-      </button>
+      <Link href={`/dashboard?name=${studentName}&grade=${gradeStr}`}>
+        <button
+          className="text-sm text-blue-600 hover:text-blue-800 font-semibold"
+        >
+          ← Voltar ao Dashboard
+        </button>
+      </Link>
 
       {/* Header */}
       <div className="text-center space-y-4">

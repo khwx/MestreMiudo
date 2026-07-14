@@ -3,6 +3,7 @@ import { logger } from "@/lib/logger";
 
 import { Suspense, useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -156,6 +157,7 @@ function AchievementCard({ achievement, unlocked, unlockedDate }: AchievementCar
 function AchievementsPageContent() {
   const searchParams = useSearchParams();
   const name = searchParams.get('name') || 'Jogador';
+  const grade = searchParams.get('grade') || '1';
   
   const [unlockedAchievements, setUnlockedAchievements] = useState<Array<{id: string, unlockDate: string}>>([]);
   const [loading, setLoading] = useState(true);
@@ -212,12 +214,13 @@ function AchievementsPageContent() {
   return (
     <div className="w-full space-y-8 p-6 max-w-6xl mx-auto">
       {/* Voltar */}
-      <button
-        onClick={() => window.history.back()}
-        className="text-sm text-blue-600 hover:text-blue-800 font-semibold"
-      >
-        ← Voltar ao Dashboard
-      </button>
+      <Link href={`/dashboard?name=${name}&grade=${grade}`}>
+        <button
+          className="text-sm text-blue-600 hover:text-blue-800 font-semibold"
+        >
+          ← Voltar ao Dashboard
+        </button>
+      </Link>
 
       {/* Header */}
       <div className="text-center space-y-4">
