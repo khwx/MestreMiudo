@@ -156,8 +156,8 @@ function LeaderboardPageContent() {
   // Create a local "current user rank" for display
   const currentUserRank = currentUserInGlobal || {
     rank: studentRankContext.length > 0 ? studentRankContext[0].rank : 0,
-    points: 0,
-    quizzes: 0,
+    totalPoints: 0,
+    totalQuizzes: 0,
     averageScore: 0
   };
 
@@ -226,9 +226,16 @@ function LeaderboardPageContent() {
               <CardDescription>Os melhores estudantes em toda a plataforma</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              {globalLeaderboard.map((entry) => (
-                <LeaderboardRow key={entry.rank} entry={entry} currentUserId={studentId || currentUserInGlobal?.studentId} />
-              ))}
+              {globalLeaderboard.length > 0 ? (
+                globalLeaderboard.map((entry) => (
+                  <LeaderboardRow key={entry.rank} entry={entry} currentUserId={studentId || currentUserInGlobal?.studentId} />
+                ))
+              ) : (
+                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                  <p className="text-lg font-semibold">Ainda não há classificações disponíveis.</p>
+                  <p className="text-sm mt-1">Completa quizzes para apareceres no ranking!</p>
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
@@ -240,9 +247,16 @@ function LeaderboardPageContent() {
               <CardDescription>Os melhores da tua turma</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              {gradeLeaderboard.map((entry) => (
-                <LeaderboardRow key={entry.rank} entry={entry} currentUserId={studentId || currentUserInGlobal?.studentId} />
-              ))}
+              {gradeLeaderboard.length > 0 ? (
+                gradeLeaderboard.map((entry) => (
+                  <LeaderboardRow key={entry.rank} entry={entry} currentUserId={studentId || currentUserInGlobal?.studentId} />
+                ))
+              ) : (
+                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                  <p className="text-lg font-semibold">Ainda não há classificações para este ano.</p>
+                  <p className="text-sm mt-1">Sê o primeiro a completar um quiz!</p>
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
