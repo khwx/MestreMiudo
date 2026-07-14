@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, BookHeart, Calendar, Loader2, Eye } from 'lucide-react';
+import { ArrowLeft, BookHeart, Calendar, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getStudentStories } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
@@ -139,11 +139,27 @@ export default function StoryGalleryClientPage() {
       </div>
 
       {loading ? (
-        <div className="flex justify-center items-center p-12">
-          <div className="text-center">
-            <Loader2 className="h-12 w-12 animate-spin text-purple-500 mx-auto mb-4" />
-            <p className="text-xl text-gray-500">A carregar histórias...</p>
-          </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="card-kid border-4 border-purple-200 dark:border-purple-800 shadow-xl animate-pulse">
+              <div className="p-6 space-y-4">
+                <div className="flex items-start justify-between">
+                  <div className="space-y-2 flex-1">
+                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+                  </div>
+                  <div className="h-5 w-5 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                </div>
+                <div className="flex items-center justify-between pt-4 border-t-2 border-gray-100 dark:border-gray-700">
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
+                  <div className="flex gap-1">
+                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-16"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       ) : stories.length === 0 ? (
         <div className="card-kid border-4 border-gray-300 dark:border-gray-700 shadow-xl max-w-2xl mx-auto">
