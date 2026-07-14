@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { Loader2, Coins, CheckCircle2 } from 'lucide-react';
+import { Coins, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from "@/hooks/use-toast";
 import { 
@@ -98,8 +98,32 @@ export default function ShopClientPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-[50vh]">
-        <Loader2 className="h-12 w-12 animate-spin text-yellow-500" />
+      <div className="space-y-8 p-4 md:p-8 max-w-6xl mx-auto">
+        <div className="text-center space-y-4 py-6">
+          <div className="text-6xl animate-bounce">🛍️</div>
+          <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-64 mx-auto animate-pulse"></div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="card-kid border-4 border-gray-200 dark:border-gray-700 animate-pulse">
+              <div className="p-6 space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="h-12 w-12 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+                  <div className="space-y-2 flex-1">
+                    <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+                  </div>
+                </div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+                <div className="flex items-center justify-between pt-4 border-t-2 border-gray-100 dark:border-gray-700">
+                  <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                  <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
