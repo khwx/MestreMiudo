@@ -1,7 +1,7 @@
 "use client";
 import { logger } from "@/lib/logger";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { getFullQuizHistory, getStudentLessonHistoryAction } from '@/app/actions';
@@ -41,31 +41,37 @@ export default function HistoryClientPage() {
     const router = useRouter();
     const name = searchParams.get('name');
     const grade = searchParams.get('grade') || '1';
-const [quizHistory, setQuizHistory] = useState<QuizResultEntry[]>([]);
-  const [lessonHistory, setLessonHistory] = useState<LessonEntry[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+    const [quizHistory, setQuizHistory] = useState<QuizResultEntry[]>([]);
+    const [lessonHistory, setLessonHistory] = useState<LessonEntry[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        if (name) {
-            Promise.all([
+    const loadHistory = useCallback(async () => {
+        if (!name) {
+            setLoading(false);
+            return;
+        }
+        setLoading(true);
+        setError(null);
+        try {
+            const [quizData, lessonData] = await Promise.all([
                 getFullQuizHistory(name),
                 getStudentLessonHistoryAction(name)
-            ])
-                .then(([quizData, lessonData]) => {
-                    const sortedQuizzes = (quizData || []).sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-                    setQuizHistory(sortedQuizzes);
-                    setLessonHistory(lessonData || []);
-                })
-.catch((err) => {
-        logger.error(err);
-        setError('Não foi possível carregar o histórico de atividades.');
-      })
-      .finally(() => setLoading(false));
-        } else {
+            ]);
+            const sortedQuizzes = (quizData || []).sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+            setQuizHistory(sortedQuizzes);
+            setLessonHistory(lessonData || []);
+        } catch (err) {
+            logger.error(err);
+            setError('Não foi possível carregar o histórico de atividades.');
+        } finally {
             setLoading(false);
         }
-}, [name]);
+    }, [name]);
+
+    useEffect(() => {
+        loadHistory();
+    }, [loadHistory]);
 
       if (error) {
         return (
@@ -73,11 +79,16 @@ const [quizHistory, setQuizHistory] = useState<QuizResultEntry[]>([]);
             <AlertTriangle className="h-12 w-12 mb-4 text-red-500" />
             <h2 className="text-2xl font-bold text-red-600 mb-3">Erro ao carregar histórico</h2>
             <p className="text-red-500 mb-6">{error}</p>
-            <Button variant="outline" asChild>
-              <Link href={`/dashboard?name=${name}&grade=${grade}`} className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors hover:bg-muted/accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4">
-                Voltar ao Dashboard
-              </Link>
-            </Button>
+            <div className="flex gap-3">
+              <Button variant="outline" onClick={loadHistory}>
+                Tentar Novamente
+              </Button>
+              <Button variant="outline" asChild>
+                <Link href={`/dashboard?name=${name}&grade=${grade}`} className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors hover:bg-muted/accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4">
+                  Voltar ao Dashboard
+                </Link>
+              </Button>
+            </div>
           </div>
         );
       }
