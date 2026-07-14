@@ -7,6 +7,7 @@ interface AccessibilitySettings {
   keyboardNavigation: boolean;
   reducedMotion: boolean;
   highContrast: boolean;
+  soundEnabled: boolean;
 }
 
 interface AccessibilityContextValue {
@@ -23,6 +24,7 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
     keyboardNavigation: true,
     reducedMotion: false,
     highContrast: false,
+    soundEnabled: true,
   });
   const [mounted, setMounted] = useState(false);
 

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Loader2, RefreshCw, Book, Divide, Leaf, Shuffle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useSound } from '@/lib/sounds';
+import { useAccessibility } from '@/components/AccessibilityProvider';
 import confetti from 'canvas-confetti';
 import { QuizResults } from '@/components/QuizResults';
 import { QuizQuestion } from '@/components/QuizQuestion';
@@ -48,6 +49,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   const [newBadge, setNewBadge] = useState<{ name: string; description: string; icon: string } | null>(null);
   const quizStarted = useRef(false);
   const { playSuccess, playError, playLevelUp } = useSound();
+  const { settings: a11y } = useAccessibility();
   
   const router = useRouter();
 
@@ -103,14 +105,16 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     
     if (isCorrect) {
       setScore(prev => prev + 1);
-      playSuccess();
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
+      if (a11y.soundEnabled) playSuccess();
+      if (a11y.reducedMotion === false) {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
     } else {
-      playError();
+      if (a11y.soundEnabled) playError();
     }
     
     setAnswers(prev => [...prev, {
@@ -120,7 +124,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
       isCorrect,
       topic: currentQuestion.topic || 'Geral',
     }]);
-  }, [isAnswered, quizData, currentQuestionIndex, playSuccess, playError]);
+  }, [isAnswered, quizData, currentQuestionIndex, playSuccess, playError, a11y.soundEnabled, a11y.reducedMotion]);
 
   const finishQuiz = useCallback(async () => {
     try {
@@ -165,16 +169,18 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
         logger.error('[QUIZ] Failed to check badges:', badgeError);
       }
       
-      playLevelUp();
-      confetti({
-        particleCount: 200,
-        spread: 100,
-        origin: { y: 0.6 }
-      });
+      if (a11y.soundEnabled) playLevelUp();
+      if (a11y.reducedMotion === false) {
+        confetti({
+          particleCount: 200,
+          spread: 100,
+          origin: { y: 0.6 }
+        });
+      }
     } catch (error) {
       logger.error('Erro ao guardar resultados do quiz:', error);
     }
-  }, [studentId, gradeLevel, subject, score, answers, quizData, playLevelUp, newBadge]);
+  }, [studentId, gradeLevel, subject, score, answers, quizData, playLevelUp, newBadge, a11y.soundEnabled, a11y.reducedMotion]);
 
   const handleNext = useCallback(() => {
     window.speechSynthesis.cancel();

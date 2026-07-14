@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
-import { Accessibility, Keyboard, Volume2, Eye } from 'lucide-react';
+import { Accessibility, Keyboard, Volume2, Eye, VolumeX } from 'lucide-react';
 import { useAccessibility } from './AccessibilityProvider';
 
 export function AccessibilitySettings() {
@@ -50,6 +50,26 @@ export function AccessibilitySettings() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Volume2 className="h-5 w-5 text-muted-foreground" />
+              <div>
+                <Label htmlFor="sound-enabled" className="font-medium">Som ativado</Label>
+                <p className="text-sm text-muted-foreground">Efeitos sonoros e áudio</p>
+              </div>
+            </div>
+            <Switch
+              id="sound-enabled"
+              checked={settings.soundEnabled}
+              onCheckedChange={(checked) => {
+                setSettings(s => ({ ...s, soundEnabled: checked }));
+                if (!checked) {
+                  window.speechSynthesis?.cancel();
+                }
+              }}
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <VolumeX className="h-5 w-5 text-muted-foreground" />
               <div>
                 <Label htmlFor="reduced-motion" className="font-medium">Reduzir movimento</Label>
                 <p className="text-sm text-muted-foreground">Desativa animações</p>
