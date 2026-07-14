@@ -175,10 +175,31 @@ export default function ProgressPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="text-6xl animate-bounce">📊</div>
-          <p className="text-xl text-gray-600 dark:text-gray-300 font-bold">A carregar progresso...</p>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        <div className="space-y-8 p-4 md:p-8 max-w-7xl mx-auto">
+          <div className="flex items-center gap-4">
+            <div className="p-2 rounded-full bg-white/50 dark:bg-gray-700/50 w-10 h-10"></div>
+            <div className="space-y-2">
+              <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-48 animate-pulse"></div>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="card-kid border-4 border-gray-200 dark:border-gray-700 overflow-hidden animate-pulse">
+                <div className="h-16 bg-gray-200 dark:bg-gray-700"></div>
+                <div className="p-4 space-y-3">
+                  <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mx-auto"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mx-auto"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="card-kid border-4 border-purple-300 dark:border-purple-700 animate-pulse">
+            <div className="p-6 space-y-4">
+              <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-48"></div>
+              <div className="h-48 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+            </div>
+          </div>
         </div>
       </div>
     )
