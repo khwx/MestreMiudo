@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { AlertTriangle, Check, Loader2, Share2 } from 'lucide-react';
+import { AlertTriangle, Check, Share2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { getStudentAchievements } from '@/app/actions';
 
@@ -188,8 +188,24 @@ function AchievementsPageContent() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center p-8">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="w-full space-y-8 p-6 max-w-6xl mx-auto">
+        <div className="text-center space-y-4">
+          <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded w-48 mx-auto animate-pulse"></div>
+          <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-96 mx-auto animate-pulse"></div>
+        </div>
+        <div className="space-y-4">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-48 animate-pulse"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="rounded-lg border-2 p-6 text-center animate-pulse bg-gray-100 dark:bg-gray-800/50">
+                <div className="h-16 w-16 bg-gray-200 dark:bg-gray-700 rounded-full mx-auto mb-3"></div>
+                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mx-auto mb-2"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-4"></div>
+                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
