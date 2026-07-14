@@ -101,8 +101,9 @@ export default function ReviewPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-[50vh]">
-        <Loader2 className="h-12 w-12 animate-spin text-purple-500" />
+      <div className="flex flex-col items-center justify-center min-h-[50vh] text-center gap-4">
+        <div className="text-6xl animate-bounce">📝</div>
+        <p className="text-xl text-gray-600 dark:text-gray-300 font-bold">A carregar itens para revisão...</p>
       </div>
     );
   }
