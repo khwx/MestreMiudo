@@ -27,6 +27,12 @@ export default function StoryCreatorClientPage() {
 
   const suggestedKeywords = ['dragão', 'castelo', 'magia', 'floresta', 'espaço', 'fada', 'tesouro', 'aventura', 'amigo', 'heroi'];
 
+  const handleRandomKeywords = () => {
+    const shuffled = [...suggestedKeywords].sort(() => Math.random() - 0.5);
+    const random = shuffled.slice(0, 3);
+    setKeywords(random.join(', '));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!keywords.trim()) return;
@@ -150,6 +156,13 @@ export default function StoryCreatorClientPage() {
                     {kw}
                   </button>
                 ))}
+                <button
+                  type="button"
+                  onClick={handleRandomKeywords}
+                  className="px-3 py-1 text-sm font-semibold rounded-full bg-pink-100 dark:bg-pink-800/40 text-pink-700 dark:text-pink-300 hover:bg-pink-200 dark:hover:bg-pink-800/60 transition-colors"
+                >
+                  🎲 Surpresa!
+                </button>
               </div>
             </div>
 
