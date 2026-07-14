@@ -3,7 +3,7 @@
 import { useSearchParams, useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Lock, CheckCircle, Star, Book, Divide, Leaf } from 'lucide-react';
+import { ArrowLeft, Lock, CheckCircle, Star, Book, Divide, Leaf, AlertTriangle } from 'lucide-react';
 import { getLessons, getCompletedLessons } from '@/lib/lessons';
 import { logger } from '@/lib/logger';
 import type { Lesson, LessonCompletion } from '@/app/shared-schemas';
@@ -58,6 +58,7 @@ export default function SubjectPage() {
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [completed, setCompleted] = useState<Record<string, LessonCompletion>>({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,6 +76,7 @@ export default function SubjectPage() {
         setCompleted(completedMap);
       } catch (error) {
         logger.error('Falha ao carregar as lições:', error);
+        setError('Não foi possível carregar as lições. Por favor tenta novamente.');
       } finally {
         setLoading(false);
       }
@@ -91,6 +93,26 @@ export default function SubjectPage() {
     return (
       <div className="text-center p-8">
         <p className="text-muted-foreground">Disciplina não encontrada.</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[50vh] text-center gap-6 p-6">
+        <div className="text-6xl">😕</div>
+        <div className="bg-red-50 dark:bg-red-900/20 border-4 border-red-300 rounded-2xl p-8 max-w-lg">
+          <div className="flex items-center gap-3 text-red-600">
+            <AlertTriangle className="h-8 w-8" />
+            <p className="text-lg font-bold">{error}</p>
+          </div>
+          <button
+            onClick={() => setError(null)}
+            className="mt-4 btn-kid border-2 border-red-300 px-4 py-2 rounded-xl font-bold hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors"
+          >
+            Tentar Novamente
+          </button>
+        </div>
       </div>
     );
   }

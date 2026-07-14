@@ -1,10 +1,13 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Book, Divide, Leaf } from 'lucide-react';
+import { Book, Divide, Leaf, CheckCircle } from 'lucide-react';
 import { ArrowLeft } from 'lucide-react';
+import { getLessonStats } from '@/lib/lessons';
+import { logger } from '@/lib/logger';
 
 const subjects = [
   {
@@ -38,6 +41,33 @@ export default function LearnPage() {
   const name = searchParams.get('name') || 'Amigo';
   const grade = searchParams.get('grade') || '1';
 
+  const [stats, setStats] = useState<Record<string, { completed: number; total: number }>>({});
+  const [loadingStats, setLoadingStats] = useState(true);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const data = await getLessonStats(name);
+        if (data?.bySubject) {
+          const statsMap: Record<string, { completed: number; total: number }> = {
+            'Português': { completed: 0, total: 0 },
+            'Matemática': { completed: 0, total: 0 },
+            'Estudo do Meio': { completed: 0, total: 0 },
+          };
+          Object.entries(data.bySubject).forEach(([subject, count]) => {
+            statsMap[subject] = { completed: count as number, total: 0 };
+          });
+          setStats(statsMap);
+        }
+      } catch (err) {
+        logger.error('Erro ao carregar estatísticas das lições:', err);
+      } finally {
+        setLoadingStats(false);
+      }
+    };
+    fetchStats();
+  }, [name]);
+
   return (
     <div className="space-y-8 animate-in fade-in-50">
       {/* Header with back button */}
@@ -55,25 +85,42 @@ export default function LearnPage() {
 
       {/* Subject cards */}
       <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
-        {subjects.map((subject) => (
-          <Link
-            key={subject.name}
-            href={`/dashboard/learn/${subject.slug}?name=${name}&grade=${grade}`}
-            passHref
-          >
-            <Card className="hover:shadow-xl hover:border-primary transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-2xl font-bold">{subject.name}</CardTitle>
-                <div className={`p-3 rounded-full ${subject.bgColor}`}>
-                  <subject.icon className={`h-8 w-8 ${subject.color}`} />
-                </div>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <p className="text-muted-foreground">{subject.description}</p>
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
+        {subjects.map((subject) => {
+          const subjectStats = stats[subject.name];
+          const completedCount = subjectStats?.completed || 0;
+          
+          return (
+            <Link
+              key={subject.name}
+              href={`/dashboard/learn/${subject.slug}?name=${name}&grade=${grade}`}
+              passHref
+            >
+              <Card className="hover:shadow-xl hover:border-primary transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-2xl font-bold">{subject.name}</CardTitle>
+                  <div className={`p-3 rounded-full ${subject.bgColor}`}>
+                    <subject.icon className={`h-8 w-8 ${subject.color}`} />
+                  </div>
+                </CardHeader>
+                <CardContent className="flex-grow space-y-4">
+                  <p className="text-muted-foreground">{subject.description}</p>
+                  {!loadingStats && completedCount > 0 && (
+                    <div className="flex items-center gap-2 text-sm font-semibold text-green-600 dark:text-green-400">
+                      <CheckCircle className="h-4 w-4" />
+                      <span>{completedCount} lições concluídas</span>
+                    </div>
+                  )}
+                  {!loadingStats && completedCount === 0 && (
+                    <div className="flex items-center gap-2 text-sm font-semibold text-gray-400">
+                      <Book className="h-4 w-4" />
+                      <span>Ainda não começaste</span>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </Link>
+          );
+        })}
       </div>
 
       {/* Info section */}
