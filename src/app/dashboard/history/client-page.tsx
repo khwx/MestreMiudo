@@ -9,7 +9,7 @@ import type { QuizResultEntry } from '@/app/shared-schemas';
 import { Card } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import { Book, Divide, Leaf, Loader2, Check, X, Shuffle, GraduationCap, AlertTriangle } from 'lucide-react';
+import { Book, Divide, Leaf, Check, X, Shuffle, GraduationCap, AlertTriangle } from 'lucide-react';
 import { format } from 'date-fns';
 import { pt } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
@@ -84,8 +84,32 @@ const [quizHistory, setQuizHistory] = useState<QuizResultEntry[]>([]);
 
       if (loading) {
         return (
-          <div className="flex justify-center items-center h-full">
-            <Loader2 className="h-12 w-12 animate-spin text-primary" />
+          <div className="space-y-6">
+            <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-48 animate-pulse"></div>
+            <div className="grid grid-cols-2 gap-4 text-center mb-6">
+              <Card className="p-4 animate-pulse">
+                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-12 mx-auto mb-2"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-16 mx-auto"></div>
+              </Card>
+              <Card className="p-4 animate-pulse">
+                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-12 mx-auto mb-2"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-16 mx-auto"></div>
+              </Card>
+            </div>
+            {[1, 2, 3].map((i) => (
+              <Card key={i} className="animate-pulse">
+                <div className="p-6 space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="h-10 w-10 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+                    <div className="space-y-2 flex-1">
+                      <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+                    </div>
+                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
         );
       }
