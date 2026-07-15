@@ -188,7 +188,8 @@ export function FeatureGrid({ name, grade, spacedStats, dailyChallengeStats }: F
       {/* Linha 3: Revisão + Desafio Diário + Rankings + Histórico */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {/* Revisão Espaçada */}
-        <div className="card-kid hover:shadow-2xl transition-all duration-300 cursor-pointer border-4 border-indigo-300 bg-gradient-to-r from-indigo-100 to-violet-100 dark:from-indigo-900/30 dark:to-violet-900/30">
+        <Link href={`/dashboard/review?name=${name}&grade=${grade}`} className="md:col-span-1">
+        <div className="card-kid hover:shadow-2xl transition-all duration-300 cursor-pointer border-4 border-indigo-300 bg-gradient-to-r from-indigo-100 to-violet-100 dark:from-indigo-900/30 dark:to-violet-900/30 h-full">
           <div className="p-6 text-center">
             <div className="flex items-center justify-center gap-3 mb-4">
               <Brain className="h-8 w-8 text-indigo-500" />
@@ -217,6 +218,7 @@ export function FeatureGrid({ name, grade, spacedStats, dailyChallengeStats }: F
             )}
           </div>
         </div>
+        </Link>
 
         {/* Desafio Diário */}
         <Link href={`/dashboard/daily-challenge?name=${name}&grade=${grade}`} className="md:col-span-1">

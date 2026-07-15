@@ -82,6 +82,7 @@ export default function DashboardClientPage() {
   const [dailyChallengeStats, setDailyChallengeStats] = useState<DailyChallengeStats | null>(null)
   const [spacedStats, setSpacedStats] = useState<{ total: number; mastered: number; learning: number; due: number } | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     if (name) {
@@ -104,11 +105,7 @@ export default function DashboardClientPage() {
         })
         .catch((err) => {
           logger.error("Erro ao carregar o painel:", err)
-          setHistory([])
-          setLessonHistory([])
-          setRewards(null)
-          setStreak(null)
-          setDailyChallengeStats(null)
+          setError("Não foi possível carregar o painel. Por favor tenta novamente.")
         })
         .finally(() => setLoading(false))
 
@@ -140,7 +137,23 @@ export default function DashboardClientPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <div className="space-y-8 p-4 md:p-8 max-w-7xl mx-auto">
+      {error && (
+        <div className="flex items-center justify-center min-h-[50vh] p-6">
+          <div className="card-kid border-4 border-red-300 dark:border-red-700 shadow-2xl max-w-lg p-8 text-center">
+            <div className="text-6xl mb-4">😕</div>
+            <h2 className="text-2xl font-black text-red-700 dark:text-red-300 mb-2">Erro ao carregar</h2>
+            <p className="text-red-600 dark:text-red-400 mb-6">{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="btn-kid border-2 border-red-300 px-6 py-2 rounded-xl font-bold hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors"
+            >
+              Tentar Novamente
+            </button>
+          </div>
+        </div>
+      )}
+      {!error && (
+        <div className="space-y-8 p-4 md:p-8 max-w-7xl mx-auto">
         {/* Header Animado */}
         <div className="text-center space-y-4 py-6">
           <div className="text-6xl animate-bounce">🎮</div>
@@ -174,6 +187,7 @@ export default function DashboardClientPage() {
           dailyChallengeStats={dailyChallengeStats}
         />
       </div>
+      )}
     </div>
   )
 }
