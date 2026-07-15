@@ -12,12 +12,19 @@ export default function ProfessorLoginPage() {
   const router = useRouter();
   const [accessCode, setAccessCode] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     if (accessCode.trim()) {
       setIsSubmitting(true);
-      router.push(`/dashboard/teacher?teacherName=${encodeURIComponent('Professor')}&classCode=${encodeURIComponent(accessCode.trim())}`);
+      try {
+        router.push(`/dashboard/teacher?teacherName=${encodeURIComponent('Professor')}&classCode=${encodeURIComponent(accessCode.trim())}`);
+      } catch (_err) {
+        setError('Ocorreu um erro ao aceder ao painel. Por favor tenta novamente.');
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -51,6 +58,12 @@ export default function ProfessorLoginPage() {
                 Introduza o código de acesso da sua turma
               </p>
             </div>
+
+            {error && (
+              <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border-4 border-red-300 rounded-2xl">
+                <p className="text-red-600 dark:text-red-400 text-center font-bold">{error}</p>
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-3">
