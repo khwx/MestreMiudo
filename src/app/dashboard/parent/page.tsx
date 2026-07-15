@@ -313,10 +313,12 @@ export default function ParentDashboardPage() {
             <p className="text-lg text-gray-600 dark:text-gray-300">
               Usa o código de acesso fornecido pelo professor/encarregado.
             </p>
-            <Button onClick={() => window.history.back()} variant="outline" className="btn-kid border-2 border-gray-300 dark:border-gray-700">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Voltar
-            </Button>
+            <Link href="/login">
+              <Button variant="outline" className="btn-kid border-2 border-gray-300 dark:border-gray-700">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Voltar
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
