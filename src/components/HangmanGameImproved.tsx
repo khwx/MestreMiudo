@@ -176,6 +176,7 @@ export function HangmanGame() {
                     variant="ghost"
                     size="icon"
                     onClick={() => setShowSettings(!showSettings)}
+                    aria-label="Configurações"
                     title="Configurações"
                 >
                     <Settings className="w-5 h-5" />

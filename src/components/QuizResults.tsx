@@ -23,6 +23,7 @@ export function QuizResults({ score, totalQuestions, points, onRestart, onBack }
         variant="ghost" 
         size="lg" 
         onClick={onBack}
+        aria-label="Voltar ao Dashboard"
         className="gap-2 text-lg"
       >
         ← Voltar ao Dashboard

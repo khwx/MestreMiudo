@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Analytics } from '@vercel/analytics/react';
 import { AccessibilitySettings } from '@/components/AccessibilitySettings';
 import { AccessibilityProvider } from '@/components/AccessibilityProvider';
+import { SkipNav } from '@/components/SkipNav';
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -38,6 +39,7 @@ export default function RootLayout({
       </head>
       <body className={`${nunito.variable} ${fredoka.variable} font-body antialiased`}>
         <AccessibilityProvider>
+          <SkipNav />
           {children}
           <AccessibilitySettings />
         </AccessibilityProvider>

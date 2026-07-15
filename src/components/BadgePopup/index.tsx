@@ -48,6 +48,7 @@ export function BadgePopup({ badgeName, badgeDescription, badgeIcon, onClose }: 
             setIsVisible(false);
             setTimeout(onClose, 300);
           }}
+          aria-label="Fechar"
           className="absolute top-4 right-4 p-1 rounded-full hover:bg-yellow-200 dark:hover:bg-yellow-800/50 transition-colors"
         >
           <X className="h-5 w-5 text-yellow-600" />

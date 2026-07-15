@@ -49,7 +49,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   const [newBadge, setNewBadge] = useState<{ name: string; description: string; icon: string } | null>(null);
   const quizStarted = useRef(false);
   const { playSuccess, playError, playLevelUp } = useSound();
-  const { settings: a11y } = useAccessibility();
+  const { settings: a11y, announceToScreenReader } = useAccessibility();
   
   const router = useRouter();
 
@@ -225,6 +225,19 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     [currentQuestionIndex, quizData]
   );
 
+  useEffect(() => {
+    if (isQuizFinished && quizData) {
+      const percentage = Math.round((score / quizData.quizQuestions.length) * 100);
+      announceToScreenReader(`Quiz concluído! Obtiveste ${score} de ${quizData.quizQuestions.length} perguntas corretas, ${percentage}%.`);
+    }
+  }, [isQuizFinished, quizData, score, announceToScreenReader]);
+
+  useEffect(() => {
+    if (newBadge) {
+      announceToScreenReader(`Parabéns! Desbloqueaste uma nova conquista: ${newBadge.name}. ${newBadge.description}`, 'assertive');
+    }
+  }, [newBadge, announceToScreenReader]);
+
   const progress = useMemo(
     () => quizData ? ((currentQuestionIndex) / quizData.quizQuestions.length) * 100 : 0,
     [currentQuestionIndex, quizData]
@@ -295,6 +308,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
         variant="ghost" 
         size="sm" 
         onClick={handleBack}
+        aria-label="Voltar ao Dashboard"
         className="gap-2"
       >
         ← Voltar ao Dashboard

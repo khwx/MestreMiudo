@@ -56,7 +56,7 @@ export default function DashboardLayout({
       <Suspense fallback={<div className="bg-card border-b p-4 h-20 animate-pulse" />}>
         <DashboardHeader />
       </Suspense>
-      <main className="container mx-auto p-4 md:p-8 flex-1">
+      <main id="main-content" className="container mx-auto p-4 md:p-8 flex-1">
         <Suspense fallback={
           <div className="space-y-8 p-4 md:p-8 max-w-7xl mx-auto animate-pulse">
             <div className="text-center space-y-4 py-6">

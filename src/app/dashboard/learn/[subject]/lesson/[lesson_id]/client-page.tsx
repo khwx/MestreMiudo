@@ -14,6 +14,7 @@ import { getLesson, saveLessonCompletion, calculateStars, calculateCoins } from 
 import { addToSpacedRepetition } from '@/lib/spaced-repetition';
 import { generateLessonChallengesAction } from '@/app/actions';
 import { validateAnswer, getCorrectAnswerText } from '@/lib/challenge-utils';
+import { useAccessibility } from '@/components/AccessibilityProvider';
 import type { Lesson } from '@/app/shared-schemas';
 
 type ChallengeAnswer = Record<string, string | string[] | Record<string, string>>;
@@ -25,6 +26,7 @@ export default function LessonDetailClient() {
   const lessonId = params.lesson_id as string;
   const name = searchParams.get('name') || 'Amigo';
   const gradeParam = searchParams.get('grade') || '1';
+  const { announceToScreenReader } = useAccessibility();
 
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [currentChallengeIndex, setCurrentChallengeIndex] = useState(0);
@@ -40,6 +42,12 @@ export default function LessonDetailClient() {
   const [submittedAnswers, setSubmittedAnswers] = useState<string[]>([]);
   const [answerCorrectness, setAnswerCorrectness] = useState<Record<string, boolean | null>>({});
   const [shuffledWordOrders, setShuffledWordOrders] = useState<Record<string, string[]>>({});
+
+  useEffect(() => {
+    if (completed) {
+      announceToScreenReader(`Lição completa! Obtiveste ${stars} estrelas e ${coins} moedas.`, 'assertive');
+    }
+  }, [completed, stars, coins, announceToScreenReader]);
 
   useEffect(() => {
     const fetchLesson = async () => {

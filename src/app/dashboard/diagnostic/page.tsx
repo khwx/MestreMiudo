@@ -118,7 +118,7 @@ export default function DiagnosticPage() {
         <div className="space-y-6">
           <div className="flex items-center gap-4">
             <Link href={`/dashboard?name=${name}&grade=${grade}`}>
-              <Button variant="outline" size="icon" className="shrink-0">
+              <Button variant="outline" size="icon" className="shrink-0" aria-label="Voltar ao Dashboard">
                 <ArrowLeft className="h-5 w-5" />
               </Button>
             </Link>

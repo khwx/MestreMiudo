@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Wand2, BookHeart, Loader2, AlertTriangle, Play, Pause, BookOpen } from 'lucide-react';
 import { generateStoryAction } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
+import { useAccessibility } from '@/components/AccessibilityProvider';
 
 export default function StoryCreatorClientPage() {
   const searchParams = useSearchParams();
@@ -17,6 +18,7 @@ export default function StoryCreatorClientPage() {
   const grade = searchParams.get("grade") || "1";
   const router = useRouter();
   const { toast } = useToast();
+  const { announceToScreenReader } = useAccessibility();
 
   const [keywords, setKeywords] = useState('');
   const [loading, setLoading] = useState(false);
@@ -68,6 +70,7 @@ export default function StoryCreatorClientPage() {
           title: "História Criada!",
           description: "A tua história mágica está pronta!",
         });
+        announceToScreenReader(`A tua história "${data.title || 'História Mágica'}" está pronta!`);
       }
     } catch (err: unknown) {
       logger.error('Erro na geração de história:', err);
