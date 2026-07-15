@@ -16,9 +16,11 @@ export default function LoginPage() {
   const [grade, setGrade] = useState('1');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [welcomeBonus, setWelcomeBonus] = useState<number | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     if (name.trim() && code.trim()) {
       setIsSubmitting(true);
       try {
@@ -37,6 +39,7 @@ export default function LoginPage() {
         router.push(`/dashboard?name=${encodeURIComponent(uniqueId)}&grade=${grade}`);
       } catch (error) {
         logger.error('Erro de login:', error);
+        setError('Ocorreu um erro ao entrar. Por favor tenta novamente.');
       } finally {
         setIsSubmitting(false);
       }
@@ -83,6 +86,12 @@ export default function LoginPage() {
                 Digita o teu nome e código de acesso!
               </p>
             </div>
+
+            {error && (
+              <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border-4 border-red-300 rounded-2xl">
+                <p className="text-red-600 dark:text-red-400 text-center font-bold">{error}</p>
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Nome */}
