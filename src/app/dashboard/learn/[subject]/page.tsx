@@ -165,11 +165,25 @@ export default function SubjectPage() {
 
       {/* Lessons Grid */}
       {loading ? (
-        <div className="flex justify-center items-center p-12">
-          <div className="text-center">
-            <div className="text-6xl mb-4">📖</div>
-            <p className="text-xl text-gray-500 dark:text-gray-400">A carregar lições...</p>
-          </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="card-kid border-4 border-gray-200 dark:border-gray-700 animate-pulse">
+              <div className="p-6 space-y-4">
+                <div className="flex items-start justify-between">
+                  <div className="space-y-2 flex-1">
+                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4"></div>
+                  </div>
+                  <div className="h-10 w-10 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+                </div>
+                <div className="space-y-2">
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+                </div>
+                <div className="h-20 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+              </div>
+            </div>
+          ))}
         </div>
       ) : lessons.length === 0 ? (
         <div className="card-kid border-4 border-gray-300 dark:border-gray-700 shadow-xl max-w-2xl mx-auto">

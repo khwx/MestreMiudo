@@ -13,11 +13,14 @@ export function DarkModeToggle() {
   useEffect(() => {
     setMounted(true);
     const storedMode = localStorage.getItem('darkMode');
-    if (storedMode) {
-      setDarkMode(storedMode === 'true');
-      document.documentElement.classList.toggle('dark', storedMode === 'true');
-    } else {
-      document.documentElement.classList.remove('dark');
+    if (storedMode !== null) {
+      const isDark = storedMode === 'true';
+      setDarkMode(isDark);
+      document.documentElement.classList.toggle('dark', isDark);
+    } else if (typeof window !== 'undefined') {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setDarkMode(prefersDark);
+      document.documentElement.classList.toggle('dark', prefersDark);
     }
   }, []);
 
