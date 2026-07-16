@@ -9,7 +9,6 @@ describe('getCorrectAnswerText', () => {
       challenge_type: 'multiple_choice',
       content: { correct_answer: 'B' },
       question: 'Test',
-      options: ['A', 'B', 'C'],
     };
     expect(getCorrectAnswerText(challenge)).toBe('B');
   });

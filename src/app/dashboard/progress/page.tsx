@@ -6,6 +6,7 @@ import Link from "next/link"
 import { ArrowLeft, TrendingUp, TrendingDown, Minus, Target } from "lucide-react"
 import { getWeeklyProgress, getSubjectPerformance, getTopicAnalysis, getLearningTrend, generateStudyRecommendations } from "@/lib/analytics"
 import { getFullQuizHistory } from "@/app/actions"
+import { logger } from "@/lib/logger";
 
 interface DailyScore {
   date: string
@@ -138,7 +139,7 @@ export default function ProgressPage() {
         }
         setCurrentStreak(streak)
       } catch (err) {
-        console.error("Erro ao carregar progresso:", err);
+        logger.error("Erro ao carregar progresso:", err);
         setError("Não foi possível carregar os teus dados de progresso.");
       } finally {
         setLoading(false)

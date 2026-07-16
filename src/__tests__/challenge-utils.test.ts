@@ -27,8 +27,7 @@ describe('validateAnswer', () => {
     challenge_type: type,
     content,
     question: 'Test question',
-    options: type === 'multiple_choice' ? ['A', 'B', 'C'] : undefined,
-  });
+  } as LessonChallenge);
 
   it('validates multiple choice answers', () => {
     const challenge = createChallenge('multiple_choice', { correct_answer: 'B' });
@@ -64,7 +63,8 @@ describe('validateAnswer', () => {
   });
 
   it('returns false for unknown challenge types', () => {
-    const challenge = createChallenge('unknown', { correct_answer: 'B' });
+    const challenge = createChallenge('multiple_choice', { correct_answer: 'B' });
+    challenge.challenge_type = 'unknown' as LessonChallenge['challenge_type'];
     expect(validateAnswer(challenge, 'B')).toBe(false);
   });
 });
