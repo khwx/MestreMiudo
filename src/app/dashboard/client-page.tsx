@@ -40,7 +40,7 @@ const levelThresholds = [
   { level: 6, points: 1500 },
 ]
 
-const calculateLevel = (totalPoints: number) => {
+export const calculateLevel = (totalPoints: number) => {
   let currentLevel = 1
   let pointsForNextLevel = 100
   let pointsAtCurrentLevel = 0

@@ -1,0 +1,2710 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for lib/curriculum-topics.json</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">lib</a> curriculum-topics.json</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>2/2</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>2/2</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line high'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a>
+<a name='L184'></a><a href='#L184'>184</a>
+<a name='L185'></a><a href='#L185'>185</a>
+<a name='L186'></a><a href='#L186'>186</a>
+<a name='L187'></a><a href='#L187'>187</a>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a>
+<a name='L190'></a><a href='#L190'>190</a>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a>
+<a name='L193'></a><a href='#L193'>193</a>
+<a name='L194'></a><a href='#L194'>194</a>
+<a name='L195'></a><a href='#L195'>195</a>
+<a name='L196'></a><a href='#L196'>196</a>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a>
+<a name='L206'></a><a href='#L206'>206</a>
+<a name='L207'></a><a href='#L207'>207</a>
+<a name='L208'></a><a href='#L208'>208</a>
+<a name='L209'></a><a href='#L209'>209</a>
+<a name='L210'></a><a href='#L210'>210</a>
+<a name='L211'></a><a href='#L211'>211</a>
+<a name='L212'></a><a href='#L212'>212</a>
+<a name='L213'></a><a href='#L213'>213</a>
+<a name='L214'></a><a href='#L214'>214</a>
+<a name='L215'></a><a href='#L215'>215</a>
+<a name='L216'></a><a href='#L216'>216</a>
+<a name='L217'></a><a href='#L217'>217</a>
+<a name='L218'></a><a href='#L218'>218</a>
+<a name='L219'></a><a href='#L219'>219</a>
+<a name='L220'></a><a href='#L220'>220</a>
+<a name='L221'></a><a href='#L221'>221</a>
+<a name='L222'></a><a href='#L222'>222</a>
+<a name='L223'></a><a href='#L223'>223</a>
+<a name='L224'></a><a href='#L224'>224</a>
+<a name='L225'></a><a href='#L225'>225</a>
+<a name='L226'></a><a href='#L226'>226</a>
+<a name='L227'></a><a href='#L227'>227</a>
+<a name='L228'></a><a href='#L228'>228</a>
+<a name='L229'></a><a href='#L229'>229</a>
+<a name='L230'></a><a href='#L230'>230</a>
+<a name='L231'></a><a href='#L231'>231</a>
+<a name='L232'></a><a href='#L232'>232</a>
+<a name='L233'></a><a href='#L233'>233</a>
+<a name='L234'></a><a href='#L234'>234</a>
+<a name='L235'></a><a href='#L235'>235</a>
+<a name='L236'></a><a href='#L236'>236</a>
+<a name='L237'></a><a href='#L237'>237</a>
+<a name='L238'></a><a href='#L238'>238</a>
+<a name='L239'></a><a href='#L239'>239</a>
+<a name='L240'></a><a href='#L240'>240</a>
+<a name='L241'></a><a href='#L241'>241</a>
+<a name='L242'></a><a href='#L242'>242</a>
+<a name='L243'></a><a href='#L243'>243</a>
+<a name='L244'></a><a href='#L244'>244</a>
+<a name='L245'></a><a href='#L245'>245</a>
+<a name='L246'></a><a href='#L246'>246</a>
+<a name='L247'></a><a href='#L247'>247</a>
+<a name='L248'></a><a href='#L248'>248</a>
+<a name='L249'></a><a href='#L249'>249</a>
+<a name='L250'></a><a href='#L250'>250</a>
+<a name='L251'></a><a href='#L251'>251</a>
+<a name='L252'></a><a href='#L252'>252</a>
+<a name='L253'></a><a href='#L253'>253</a>
+<a name='L254'></a><a href='#L254'>254</a>
+<a name='L255'></a><a href='#L255'>255</a>
+<a name='L256'></a><a href='#L256'>256</a>
+<a name='L257'></a><a href='#L257'>257</a>
+<a name='L258'></a><a href='#L258'>258</a>
+<a name='L259'></a><a href='#L259'>259</a>
+<a name='L260'></a><a href='#L260'>260</a>
+<a name='L261'></a><a href='#L261'>261</a>
+<a name='L262'></a><a href='#L262'>262</a>
+<a name='L263'></a><a href='#L263'>263</a>
+<a name='L264'></a><a href='#L264'>264</a>
+<a name='L265'></a><a href='#L265'>265</a>
+<a name='L266'></a><a href='#L266'>266</a>
+<a name='L267'></a><a href='#L267'>267</a>
+<a name='L268'></a><a href='#L268'>268</a>
+<a name='L269'></a><a href='#L269'>269</a>
+<a name='L270'></a><a href='#L270'>270</a>
+<a name='L271'></a><a href='#L271'>271</a>
+<a name='L272'></a><a href='#L272'>272</a>
+<a name='L273'></a><a href='#L273'>273</a>
+<a name='L274'></a><a href='#L274'>274</a>
+<a name='L275'></a><a href='#L275'>275</a>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a>
+<a name='L278'></a><a href='#L278'>278</a>
+<a name='L279'></a><a href='#L279'>279</a>
+<a name='L280'></a><a href='#L280'>280</a>
+<a name='L281'></a><a href='#L281'>281</a>
+<a name='L282'></a><a href='#L282'>282</a>
+<a name='L283'></a><a href='#L283'>283</a>
+<a name='L284'></a><a href='#L284'>284</a>
+<a name='L285'></a><a href='#L285'>285</a>
+<a name='L286'></a><a href='#L286'>286</a>
+<a name='L287'></a><a href='#L287'>287</a>
+<a name='L288'></a><a href='#L288'>288</a>
+<a name='L289'></a><a href='#L289'>289</a>
+<a name='L290'></a><a href='#L290'>290</a>
+<a name='L291'></a><a href='#L291'>291</a>
+<a name='L292'></a><a href='#L292'>292</a>
+<a name='L293'></a><a href='#L293'>293</a>
+<a name='L294'></a><a href='#L294'>294</a>
+<a name='L295'></a><a href='#L295'>295</a>
+<a name='L296'></a><a href='#L296'>296</a>
+<a name='L297'></a><a href='#L297'>297</a>
+<a name='L298'></a><a href='#L298'>298</a>
+<a name='L299'></a><a href='#L299'>299</a>
+<a name='L300'></a><a href='#L300'>300</a>
+<a name='L301'></a><a href='#L301'>301</a>
+<a name='L302'></a><a href='#L302'>302</a>
+<a name='L303'></a><a href='#L303'>303</a>
+<a name='L304'></a><a href='#L304'>304</a>
+<a name='L305'></a><a href='#L305'>305</a>
+<a name='L306'></a><a href='#L306'>306</a>
+<a name='L307'></a><a href='#L307'>307</a>
+<a name='L308'></a><a href='#L308'>308</a>
+<a name='L309'></a><a href='#L309'>309</a>
+<a name='L310'></a><a href='#L310'>310</a>
+<a name='L311'></a><a href='#L311'>311</a>
+<a name='L312'></a><a href='#L312'>312</a>
+<a name='L313'></a><a href='#L313'>313</a>
+<a name='L314'></a><a href='#L314'>314</a>
+<a name='L315'></a><a href='#L315'>315</a>
+<a name='L316'></a><a href='#L316'>316</a>
+<a name='L317'></a><a href='#L317'>317</a>
+<a name='L318'></a><a href='#L318'>318</a>
+<a name='L319'></a><a href='#L319'>319</a>
+<a name='L320'></a><a href='#L320'>320</a>
+<a name='L321'></a><a href='#L321'>321</a>
+<a name='L322'></a><a href='#L322'>322</a>
+<a name='L323'></a><a href='#L323'>323</a>
+<a name='L324'></a><a href='#L324'>324</a>
+<a name='L325'></a><a href='#L325'>325</a>
+<a name='L326'></a><a href='#L326'>326</a>
+<a name='L327'></a><a href='#L327'>327</a>
+<a name='L328'></a><a href='#L328'>328</a>
+<a name='L329'></a><a href='#L329'>329</a>
+<a name='L330'></a><a href='#L330'>330</a>
+<a name='L331'></a><a href='#L331'>331</a>
+<a name='L332'></a><a href='#L332'>332</a>
+<a name='L333'></a><a href='#L333'>333</a>
+<a name='L334'></a><a href='#L334'>334</a>
+<a name='L335'></a><a href='#L335'>335</a>
+<a name='L336'></a><a href='#L336'>336</a>
+<a name='L337'></a><a href='#L337'>337</a>
+<a name='L338'></a><a href='#L338'>338</a>
+<a name='L339'></a><a href='#L339'>339</a>
+<a name='L340'></a><a href='#L340'>340</a>
+<a name='L341'></a><a href='#L341'>341</a>
+<a name='L342'></a><a href='#L342'>342</a>
+<a name='L343'></a><a href='#L343'>343</a>
+<a name='L344'></a><a href='#L344'>344</a>
+<a name='L345'></a><a href='#L345'>345</a>
+<a name='L346'></a><a href='#L346'>346</a>
+<a name='L347'></a><a href='#L347'>347</a>
+<a name='L348'></a><a href='#L348'>348</a>
+<a name='L349'></a><a href='#L349'>349</a>
+<a name='L350'></a><a href='#L350'>350</a>
+<a name='L351'></a><a href='#L351'>351</a>
+<a name='L352'></a><a href='#L352'>352</a>
+<a name='L353'></a><a href='#L353'>353</a>
+<a name='L354'></a><a href='#L354'>354</a>
+<a name='L355'></a><a href='#L355'>355</a>
+<a name='L356'></a><a href='#L356'>356</a>
+<a name='L357'></a><a href='#L357'>357</a>
+<a name='L358'></a><a href='#L358'>358</a>
+<a name='L359'></a><a href='#L359'>359</a>
+<a name='L360'></a><a href='#L360'>360</a>
+<a name='L361'></a><a href='#L361'>361</a>
+<a name='L362'></a><a href='#L362'>362</a>
+<a name='L363'></a><a href='#L363'>363</a>
+<a name='L364'></a><a href='#L364'>364</a>
+<a name='L365'></a><a href='#L365'>365</a>
+<a name='L366'></a><a href='#L366'>366</a>
+<a name='L367'></a><a href='#L367'>367</a>
+<a name='L368'></a><a href='#L368'>368</a>
+<a name='L369'></a><a href='#L369'>369</a>
+<a name='L370'></a><a href='#L370'>370</a>
+<a name='L371'></a><a href='#L371'>371</a>
+<a name='L372'></a><a href='#L372'>372</a>
+<a name='L373'></a><a href='#L373'>373</a>
+<a name='L374'></a><a href='#L374'>374</a>
+<a name='L375'></a><a href='#L375'>375</a>
+<a name='L376'></a><a href='#L376'>376</a>
+<a name='L377'></a><a href='#L377'>377</a>
+<a name='L378'></a><a href='#L378'>378</a>
+<a name='L379'></a><a href='#L379'>379</a>
+<a name='L380'></a><a href='#L380'>380</a>
+<a name='L381'></a><a href='#L381'>381</a>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a>
+<a name='L384'></a><a href='#L384'>384</a>
+<a name='L385'></a><a href='#L385'>385</a>
+<a name='L386'></a><a href='#L386'>386</a>
+<a name='L387'></a><a href='#L387'>387</a>
+<a name='L388'></a><a href='#L388'>388</a>
+<a name='L389'></a><a href='#L389'>389</a>
+<a name='L390'></a><a href='#L390'>390</a>
+<a name='L391'></a><a href='#L391'>391</a>
+<a name='L392'></a><a href='#L392'>392</a>
+<a name='L393'></a><a href='#L393'>393</a>
+<a name='L394'></a><a href='#L394'>394</a>
+<a name='L395'></a><a href='#L395'>395</a>
+<a name='L396'></a><a href='#L396'>396</a>
+<a name='L397'></a><a href='#L397'>397</a>
+<a name='L398'></a><a href='#L398'>398</a>
+<a name='L399'></a><a href='#L399'>399</a>
+<a name='L400'></a><a href='#L400'>400</a>
+<a name='L401'></a><a href='#L401'>401</a>
+<a name='L402'></a><a href='#L402'>402</a>
+<a name='L403'></a><a href='#L403'>403</a>
+<a name='L404'></a><a href='#L404'>404</a>
+<a name='L405'></a><a href='#L405'>405</a>
+<a name='L406'></a><a href='#L406'>406</a>
+<a name='L407'></a><a href='#L407'>407</a>
+<a name='L408'></a><a href='#L408'>408</a>
+<a name='L409'></a><a href='#L409'>409</a>
+<a name='L410'></a><a href='#L410'>410</a>
+<a name='L411'></a><a href='#L411'>411</a>
+<a name='L412'></a><a href='#L412'>412</a>
+<a name='L413'></a><a href='#L413'>413</a>
+<a name='L414'></a><a href='#L414'>414</a>
+<a name='L415'></a><a href='#L415'>415</a>
+<a name='L416'></a><a href='#L416'>416</a>
+<a name='L417'></a><a href='#L417'>417</a>
+<a name='L418'></a><a href='#L418'>418</a>
+<a name='L419'></a><a href='#L419'>419</a>
+<a name='L420'></a><a href='#L420'>420</a>
+<a name='L421'></a><a href='#L421'>421</a>
+<a name='L422'></a><a href='#L422'>422</a>
+<a name='L423'></a><a href='#L423'>423</a>
+<a name='L424'></a><a href='#L424'>424</a>
+<a name='L425'></a><a href='#L425'>425</a>
+<a name='L426'></a><a href='#L426'>426</a>
+<a name='L427'></a><a href='#L427'>427</a>
+<a name='L428'></a><a href='#L428'>428</a>
+<a name='L429'></a><a href='#L429'>429</a>
+<a name='L430'></a><a href='#L430'>430</a>
+<a name='L431'></a><a href='#L431'>431</a>
+<a name='L432'></a><a href='#L432'>432</a>
+<a name='L433'></a><a href='#L433'>433</a>
+<a name='L434'></a><a href='#L434'>434</a>
+<a name='L435'></a><a href='#L435'>435</a>
+<a name='L436'></a><a href='#L436'>436</a>
+<a name='L437'></a><a href='#L437'>437</a>
+<a name='L438'></a><a href='#L438'>438</a>
+<a name='L439'></a><a href='#L439'>439</a>
+<a name='L440'></a><a href='#L440'>440</a>
+<a name='L441'></a><a href='#L441'>441</a>
+<a name='L442'></a><a href='#L442'>442</a>
+<a name='L443'></a><a href='#L443'>443</a>
+<a name='L444'></a><a href='#L444'>444</a>
+<a name='L445'></a><a href='#L445'>445</a>
+<a name='L446'></a><a href='#L446'>446</a>
+<a name='L447'></a><a href='#L447'>447</a>
+<a name='L448'></a><a href='#L448'>448</a>
+<a name='L449'></a><a href='#L449'>449</a>
+<a name='L450'></a><a href='#L450'>450</a>
+<a name='L451'></a><a href='#L451'>451</a>
+<a name='L452'></a><a href='#L452'>452</a>
+<a name='L453'></a><a href='#L453'>453</a>
+<a name='L454'></a><a href='#L454'>454</a>
+<a name='L455'></a><a href='#L455'>455</a>
+<a name='L456'></a><a href='#L456'>456</a>
+<a name='L457'></a><a href='#L457'>457</a>
+<a name='L458'></a><a href='#L458'>458</a>
+<a name='L459'></a><a href='#L459'>459</a>
+<a name='L460'></a><a href='#L460'>460</a>
+<a name='L461'></a><a href='#L461'>461</a>
+<a name='L462'></a><a href='#L462'>462</a>
+<a name='L463'></a><a href='#L463'>463</a>
+<a name='L464'></a><a href='#L464'>464</a>
+<a name='L465'></a><a href='#L465'>465</a>
+<a name='L466'></a><a href='#L466'>466</a>
+<a name='L467'></a><a href='#L467'>467</a>
+<a name='L468'></a><a href='#L468'>468</a>
+<a name='L469'></a><a href='#L469'>469</a>
+<a name='L470'></a><a href='#L470'>470</a>
+<a name='L471'></a><a href='#L471'>471</a>
+<a name='L472'></a><a href='#L472'>472</a>
+<a name='L473'></a><a href='#L473'>473</a>
+<a name='L474'></a><a href='#L474'>474</a>
+<a name='L475'></a><a href='#L475'>475</a>
+<a name='L476'></a><a href='#L476'>476</a>
+<a name='L477'></a><a href='#L477'>477</a>
+<a name='L478'></a><a href='#L478'>478</a>
+<a name='L479'></a><a href='#L479'>479</a>
+<a name='L480'></a><a href='#L480'>480</a>
+<a name='L481'></a><a href='#L481'>481</a>
+<a name='L482'></a><a href='#L482'>482</a>
+<a name='L483'></a><a href='#L483'>483</a>
+<a name='L484'></a><a href='#L484'>484</a>
+<a name='L485'></a><a href='#L485'>485</a>
+<a name='L486'></a><a href='#L486'>486</a>
+<a name='L487'></a><a href='#L487'>487</a>
+<a name='L488'></a><a href='#L488'>488</a>
+<a name='L489'></a><a href='#L489'>489</a>
+<a name='L490'></a><a href='#L490'>490</a>
+<a name='L491'></a><a href='#L491'>491</a>
+<a name='L492'></a><a href='#L492'>492</a>
+<a name='L493'></a><a href='#L493'>493</a>
+<a name='L494'></a><a href='#L494'>494</a>
+<a name='L495'></a><a href='#L495'>495</a>
+<a name='L496'></a><a href='#L496'>496</a>
+<a name='L497'></a><a href='#L497'>497</a>
+<a name='L498'></a><a href='#L498'>498</a>
+<a name='L499'></a><a href='#L499'>499</a>
+<a name='L500'></a><a href='#L500'>500</a>
+<a name='L501'></a><a href='#L501'>501</a>
+<a name='L502'></a><a href='#L502'>502</a>
+<a name='L503'></a><a href='#L503'>503</a>
+<a name='L504'></a><a href='#L504'>504</a>
+<a name='L505'></a><a href='#L505'>505</a>
+<a name='L506'></a><a href='#L506'>506</a>
+<a name='L507'></a><a href='#L507'>507</a>
+<a name='L508'></a><a href='#L508'>508</a>
+<a name='L509'></a><a href='#L509'>509</a>
+<a name='L510'></a><a href='#L510'>510</a>
+<a name='L511'></a><a href='#L511'>511</a>
+<a name='L512'></a><a href='#L512'>512</a>
+<a name='L513'></a><a href='#L513'>513</a>
+<a name='L514'></a><a href='#L514'>514</a>
+<a name='L515'></a><a href='#L515'>515</a>
+<a name='L516'></a><a href='#L516'>516</a>
+<a name='L517'></a><a href='#L517'>517</a>
+<a name='L518'></a><a href='#L518'>518</a>
+<a name='L519'></a><a href='#L519'>519</a>
+<a name='L520'></a><a href='#L520'>520</a>
+<a name='L521'></a><a href='#L521'>521</a>
+<a name='L522'></a><a href='#L522'>522</a>
+<a name='L523'></a><a href='#L523'>523</a>
+<a name='L524'></a><a href='#L524'>524</a>
+<a name='L525'></a><a href='#L525'>525</a>
+<a name='L526'></a><a href='#L526'>526</a>
+<a name='L527'></a><a href='#L527'>527</a>
+<a name='L528'></a><a href='#L528'>528</a>
+<a name='L529'></a><a href='#L529'>529</a>
+<a name='L530'></a><a href='#L530'>530</a>
+<a name='L531'></a><a href='#L531'>531</a>
+<a name='L532'></a><a href='#L532'>532</a>
+<a name='L533'></a><a href='#L533'>533</a>
+<a name='L534'></a><a href='#L534'>534</a>
+<a name='L535'></a><a href='#L535'>535</a>
+<a name='L536'></a><a href='#L536'>536</a>
+<a name='L537'></a><a href='#L537'>537</a>
+<a name='L538'></a><a href='#L538'>538</a>
+<a name='L539'></a><a href='#L539'>539</a>
+<a name='L540'></a><a href='#L540'>540</a>
+<a name='L541'></a><a href='#L541'>541</a>
+<a name='L542'></a><a href='#L542'>542</a>
+<a name='L543'></a><a href='#L543'>543</a>
+<a name='L544'></a><a href='#L544'>544</a>
+<a name='L545'></a><a href='#L545'>545</a>
+<a name='L546'></a><a href='#L546'>546</a>
+<a name='L547'></a><a href='#L547'>547</a>
+<a name='L548'></a><a href='#L548'>548</a>
+<a name='L549'></a><a href='#L549'>549</a>
+<a name='L550'></a><a href='#L550'>550</a>
+<a name='L551'></a><a href='#L551'>551</a>
+<a name='L552'></a><a href='#L552'>552</a>
+<a name='L553'></a><a href='#L553'>553</a>
+<a name='L554'></a><a href='#L554'>554</a>
+<a name='L555'></a><a href='#L555'>555</a>
+<a name='L556'></a><a href='#L556'>556</a>
+<a name='L557'></a><a href='#L557'>557</a>
+<a name='L558'></a><a href='#L558'>558</a>
+<a name='L559'></a><a href='#L559'>559</a>
+<a name='L560'></a><a href='#L560'>560</a>
+<a name='L561'></a><a href='#L561'>561</a>
+<a name='L562'></a><a href='#L562'>562</a>
+<a name='L563'></a><a href='#L563'>563</a>
+<a name='L564'></a><a href='#L564'>564</a>
+<a name='L565'></a><a href='#L565'>565</a>
+<a name='L566'></a><a href='#L566'>566</a>
+<a name='L567'></a><a href='#L567'>567</a>
+<a name='L568'></a><a href='#L568'>568</a>
+<a name='L569'></a><a href='#L569'>569</a>
+<a name='L570'></a><a href='#L570'>570</a>
+<a name='L571'></a><a href='#L571'>571</a>
+<a name='L572'></a><a href='#L572'>572</a>
+<a name='L573'></a><a href='#L573'>573</a>
+<a name='L574'></a><a href='#L574'>574</a>
+<a name='L575'></a><a href='#L575'>575</a>
+<a name='L576'></a><a href='#L576'>576</a>
+<a name='L577'></a><a href='#L577'>577</a>
+<a name='L578'></a><a href='#L578'>578</a>
+<a name='L579'></a><a href='#L579'>579</a>
+<a name='L580'></a><a href='#L580'>580</a>
+<a name='L581'></a><a href='#L581'>581</a>
+<a name='L582'></a><a href='#L582'>582</a>
+<a name='L583'></a><a href='#L583'>583</a>
+<a name='L584'></a><a href='#L584'>584</a>
+<a name='L585'></a><a href='#L585'>585</a>
+<a name='L586'></a><a href='#L586'>586</a>
+<a name='L587'></a><a href='#L587'>587</a>
+<a name='L588'></a><a href='#L588'>588</a>
+<a name='L589'></a><a href='#L589'>589</a>
+<a name='L590'></a><a href='#L590'>590</a>
+<a name='L591'></a><a href='#L591'>591</a>
+<a name='L592'></a><a href='#L592'>592</a>
+<a name='L593'></a><a href='#L593'>593</a>
+<a name='L594'></a><a href='#L594'>594</a>
+<a name='L595'></a><a href='#L595'>595</a>
+<a name='L596'></a><a href='#L596'>596</a>
+<a name='L597'></a><a href='#L597'>597</a>
+<a name='L598'></a><a href='#L598'>598</a>
+<a name='L599'></a><a href='#L599'>599</a>
+<a name='L600'></a><a href='#L600'>600</a>
+<a name='L601'></a><a href='#L601'>601</a>
+<a name='L602'></a><a href='#L602'>602</a>
+<a name='L603'></a><a href='#L603'>603</a>
+<a name='L604'></a><a href='#L604'>604</a>
+<a name='L605'></a><a href='#L605'>605</a>
+<a name='L606'></a><a href='#L606'>606</a>
+<a name='L607'></a><a href='#L607'>607</a>
+<a name='L608'></a><a href='#L608'>608</a>
+<a name='L609'></a><a href='#L609'>609</a>
+<a name='L610'></a><a href='#L610'>610</a>
+<a name='L611'></a><a href='#L611'>611</a>
+<a name='L612'></a><a href='#L612'>612</a>
+<a name='L613'></a><a href='#L613'>613</a>
+<a name='L614'></a><a href='#L614'>614</a>
+<a name='L615'></a><a href='#L615'>615</a>
+<a name='L616'></a><a href='#L616'>616</a>
+<a name='L617'></a><a href='#L617'>617</a>
+<a name='L618'></a><a href='#L618'>618</a>
+<a name='L619'></a><a href='#L619'>619</a>
+<a name='L620'></a><a href='#L620'>620</a>
+<a name='L621'></a><a href='#L621'>621</a>
+<a name='L622'></a><a href='#L622'>622</a>
+<a name='L623'></a><a href='#L623'>623</a>
+<a name='L624'></a><a href='#L624'>624</a>
+<a name='L625'></a><a href='#L625'>625</a>
+<a name='L626'></a><a href='#L626'>626</a>
+<a name='L627'></a><a href='#L627'>627</a>
+<a name='L628'></a><a href='#L628'>628</a>
+<a name='L629'></a><a href='#L629'>629</a>
+<a name='L630'></a><a href='#L630'>630</a>
+<a name='L631'></a><a href='#L631'>631</a>
+<a name='L632'></a><a href='#L632'>632</a>
+<a name='L633'></a><a href='#L633'>633</a>
+<a name='L634'></a><a href='#L634'>634</a>
+<a name='L635'></a><a href='#L635'>635</a>
+<a name='L636'></a><a href='#L636'>636</a>
+<a name='L637'></a><a href='#L637'>637</a>
+<a name='L638'></a><a href='#L638'>638</a>
+<a name='L639'></a><a href='#L639'>639</a>
+<a name='L640'></a><a href='#L640'>640</a>
+<a name='L641'></a><a href='#L641'>641</a>
+<a name='L642'></a><a href='#L642'>642</a>
+<a name='L643'></a><a href='#L643'>643</a>
+<a name='L644'></a><a href='#L644'>644</a>
+<a name='L645'></a><a href='#L645'>645</a>
+<a name='L646'></a><a href='#L646'>646</a>
+<a name='L647'></a><a href='#L647'>647</a>
+<a name='L648'></a><a href='#L648'>648</a>
+<a name='L649'></a><a href='#L649'>649</a>
+<a name='L650'></a><a href='#L650'>650</a>
+<a name='L651'></a><a href='#L651'>651</a>
+<a name='L652'></a><a href='#L652'>652</a>
+<a name='L653'></a><a href='#L653'>653</a>
+<a name='L654'></a><a href='#L654'>654</a>
+<a name='L655'></a><a href='#L655'>655</a>
+<a name='L656'></a><a href='#L656'>656</a>
+<a name='L657'></a><a href='#L657'>657</a>
+<a name='L658'></a><a href='#L658'>658</a>
+<a name='L659'></a><a href='#L659'>659</a>
+<a name='L660'></a><a href='#L660'>660</a>
+<a name='L661'></a><a href='#L661'>661</a>
+<a name='L662'></a><a href='#L662'>662</a>
+<a name='L663'></a><a href='#L663'>663</a>
+<a name='L664'></a><a href='#L664'>664</a>
+<a name='L665'></a><a href='#L665'>665</a>
+<a name='L666'></a><a href='#L666'>666</a>
+<a name='L667'></a><a href='#L667'>667</a>
+<a name='L668'></a><a href='#L668'>668</a>
+<a name='L669'></a><a href='#L669'>669</a>
+<a name='L670'></a><a href='#L670'>670</a>
+<a name='L671'></a><a href='#L671'>671</a>
+<a name='L672'></a><a href='#L672'>672</a>
+<a name='L673'></a><a href='#L673'>673</a>
+<a name='L674'></a><a href='#L674'>674</a>
+<a name='L675'></a><a href='#L675'>675</a>
+<a name='L676'></a><a href='#L676'>676</a>
+<a name='L677'></a><a href='#L677'>677</a>
+<a name='L678'></a><a href='#L678'>678</a>
+<a name='L679'></a><a href='#L679'>679</a>
+<a name='L680'></a><a href='#L680'>680</a>
+<a name='L681'></a><a href='#L681'>681</a>
+<a name='L682'></a><a href='#L682'>682</a>
+<a name='L683'></a><a href='#L683'>683</a>
+<a name='L684'></a><a href='#L684'>684</a>
+<a name='L685'></a><a href='#L685'>685</a>
+<a name='L686'></a><a href='#L686'>686</a>
+<a name='L687'></a><a href='#L687'>687</a>
+<a name='L688'></a><a href='#L688'>688</a>
+<a name='L689'></a><a href='#L689'>689</a>
+<a name='L690'></a><a href='#L690'>690</a>
+<a name='L691'></a><a href='#L691'>691</a>
+<a name='L692'></a><a href='#L692'>692</a>
+<a name='L693'></a><a href='#L693'>693</a>
+<a name='L694'></a><a href='#L694'>694</a>
+<a name='L695'></a><a href='#L695'>695</a>
+<a name='L696'></a><a href='#L696'>696</a>
+<a name='L697'></a><a href='#L697'>697</a>
+<a name='L698'></a><a href='#L698'>698</a>
+<a name='L699'></a><a href='#L699'>699</a>
+<a name='L700'></a><a href='#L700'>700</a>
+<a name='L701'></a><a href='#L701'>701</a>
+<a name='L702'></a><a href='#L702'>702</a>
+<a name='L703'></a><a href='#L703'>703</a>
+<a name='L704'></a><a href='#L704'>704</a>
+<a name='L705'></a><a href='#L705'>705</a>
+<a name='L706'></a><a href='#L706'>706</a>
+<a name='L707'></a><a href='#L707'>707</a>
+<a name='L708'></a><a href='#L708'>708</a>
+<a name='L709'></a><a href='#L709'>709</a>
+<a name='L710'></a><a href='#L710'>710</a>
+<a name='L711'></a><a href='#L711'>711</a>
+<a name='L712'></a><a href='#L712'>712</a>
+<a name='L713'></a><a href='#L713'>713</a>
+<a name='L714'></a><a href='#L714'>714</a>
+<a name='L715'></a><a href='#L715'>715</a>
+<a name='L716'></a><a href='#L716'>716</a>
+<a name='L717'></a><a href='#L717'>717</a>
+<a name='L718'></a><a href='#L718'>718</a>
+<a name='L719'></a><a href='#L719'>719</a>
+<a name='L720'></a><a href='#L720'>720</a>
+<a name='L721'></a><a href='#L721'>721</a>
+<a name='L722'></a><a href='#L722'>722</a>
+<a name='L723'></a><a href='#L723'>723</a>
+<a name='L724'></a><a href='#L724'>724</a>
+<a name='L725'></a><a href='#L725'>725</a>
+<a name='L726'></a><a href='#L726'>726</a>
+<a name='L727'></a><a href='#L727'>727</a>
+<a name='L728'></a><a href='#L728'>728</a>
+<a name='L729'></a><a href='#L729'>729</a>
+<a name='L730'></a><a href='#L730'>730</a>
+<a name='L731'></a><a href='#L731'>731</a>
+<a name='L732'></a><a href='#L732'>732</a>
+<a name='L733'></a><a href='#L733'>733</a>
+<a name='L734'></a><a href='#L734'>734</a>
+<a name='L735'></a><a href='#L735'>735</a>
+<a name='L736'></a><a href='#L736'>736</a>
+<a name='L737'></a><a href='#L737'>737</a>
+<a name='L738'></a><a href='#L738'>738</a>
+<a name='L739'></a><a href='#L739'>739</a>
+<a name='L740'></a><a href='#L740'>740</a>
+<a name='L741'></a><a href='#L741'>741</a>
+<a name='L742'></a><a href='#L742'>742</a>
+<a name='L743'></a><a href='#L743'>743</a>
+<a name='L744'></a><a href='#L744'>744</a>
+<a name='L745'></a><a href='#L745'>745</a>
+<a name='L746'></a><a href='#L746'>746</a>
+<a name='L747'></a><a href='#L747'>747</a>
+<a name='L748'></a><a href='#L748'>748</a>
+<a name='L749'></a><a href='#L749'>749</a>
+<a name='L750'></a><a href='#L750'>750</a>
+<a name='L751'></a><a href='#L751'>751</a>
+<a name='L752'></a><a href='#L752'>752</a>
+<a name='L753'></a><a href='#L753'>753</a>
+<a name='L754'></a><a href='#L754'>754</a>
+<a name='L755'></a><a href='#L755'>755</a>
+<a name='L756'></a><a href='#L756'>756</a>
+<a name='L757'></a><a href='#L757'>757</a>
+<a name='L758'></a><a href='#L758'>758</a>
+<a name='L759'></a><a href='#L759'>759</a>
+<a name='L760'></a><a href='#L760'>760</a>
+<a name='L761'></a><a href='#L761'>761</a>
+<a name='L762'></a><a href='#L762'>762</a>
+<a name='L763'></a><a href='#L763'>763</a>
+<a name='L764'></a><a href='#L764'>764</a>
+<a name='L765'></a><a href='#L765'>765</a>
+<a name='L766'></a><a href='#L766'>766</a>
+<a name='L767'></a><a href='#L767'>767</a>
+<a name='L768'></a><a href='#L768'>768</a>
+<a name='L769'></a><a href='#L769'>769</a>
+<a name='L770'></a><a href='#L770'>770</a>
+<a name='L771'></a><a href='#L771'>771</a>
+<a name='L772'></a><a href='#L772'>772</a>
+<a name='L773'></a><a href='#L773'>773</a>
+<a name='L774'></a><a href='#L774'>774</a>
+<a name='L775'></a><a href='#L775'>775</a>
+<a name='L776'></a><a href='#L776'>776</a>
+<a name='L777'></a><a href='#L777'>777</a>
+<a name='L778'></a><a href='#L778'>778</a>
+<a name='L779'></a><a href='#L779'>779</a>
+<a name='L780'></a><a href='#L780'>780</a>
+<a name='L781'></a><a href='#L781'>781</a>
+<a name='L782'></a><a href='#L782'>782</a>
+<a name='L783'></a><a href='#L783'>783</a>
+<a name='L784'></a><a href='#L784'>784</a>
+<a name='L785'></a><a href='#L785'>785</a>
+<a name='L786'></a><a href='#L786'>786</a>
+<a name='L787'></a><a href='#L787'>787</a>
+<a name='L788'></a><a href='#L788'>788</a>
+<a name='L789'></a><a href='#L789'>789</a>
+<a name='L790'></a><a href='#L790'>790</a>
+<a name='L791'></a><a href='#L791'>791</a>
+<a name='L792'></a><a href='#L792'>792</a>
+<a name='L793'></a><a href='#L793'>793</a>
+<a name='L794'></a><a href='#L794'>794</a>
+<a name='L795'></a><a href='#L795'>795</a>
+<a name='L796'></a><a href='#L796'>796</a>
+<a name='L797'></a><a href='#L797'>797</a>
+<a name='L798'></a><a href='#L798'>798</a>
+<a name='L799'></a><a href='#L799'>799</a>
+<a name='L800'></a><a href='#L800'>800</a>
+<a name='L801'></a><a href='#L801'>801</a>
+<a name='L802'></a><a href='#L802'>802</a>
+<a name='L803'></a><a href='#L803'>803</a>
+<a name='L804'></a><a href='#L804'>804</a>
+<a name='L805'></a><a href='#L805'>805</a>
+<a name='L806'></a><a href='#L806'>806</a>
+<a name='L807'></a><a href='#L807'>807</a>
+<a name='L808'></a><a href='#L808'>808</a>
+<a name='L809'></a><a href='#L809'>809</a>
+<a name='L810'></a><a href='#L810'>810</a>
+<a name='L811'></a><a href='#L811'>811</a>
+<a name='L812'></a><a href='#L812'>812</a>
+<a name='L813'></a><a href='#L813'>813</a>
+<a name='L814'></a><a href='#L814'>814</a>
+<a name='L815'></a><a href='#L815'>815</a>
+<a name='L816'></a><a href='#L816'>816</a>
+<a name='L817'></a><a href='#L817'>817</a>
+<a name='L818'></a><a href='#L818'>818</a>
+<a name='L819'></a><a href='#L819'>819</a>
+<a name='L820'></a><a href='#L820'>820</a>
+<a name='L821'></a><a href='#L821'>821</a>
+<a name='L822'></a><a href='#L822'>822</a>
+<a name='L823'></a><a href='#L823'>823</a>
+<a name='L824'></a><a href='#L824'>824</a>
+<a name='L825'></a><a href='#L825'>825</a>
+<a name='L826'></a><a href='#L826'>826</a>
+<a name='L827'></a><a href='#L827'>827</a>
+<a name='L828'></a><a href='#L828'>828</a>
+<a name='L829'></a><a href='#L829'>829</a>
+<a name='L830'></a><a href='#L830'>830</a>
+<a name='L831'></a><a href='#L831'>831</a>
+<a name='L832'></a><a href='#L832'>832</a>
+<a name='L833'></a><a href='#L833'>833</a>
+<a name='L834'></a><a href='#L834'>834</a>
+<a name='L835'></a><a href='#L835'>835</a>
+<a name='L836'></a><a href='#L836'>836</a>
+<a name='L837'></a><a href='#L837'>837</a>
+<a name='L838'></a><a href='#L838'>838</a>
+<a name='L839'></a><a href='#L839'>839</a>
+<a name='L840'></a><a href='#L840'>840</a>
+<a name='L841'></a><a href='#L841'>841</a>
+<a name='L842'></a><a href='#L842'>842</a>
+<a name='L843'></a><a href='#L843'>843</a>
+<a name='L844'></a><a href='#L844'>844</a>
+<a name='L845'></a><a href='#L845'>845</a>
+<a name='L846'></a><a href='#L846'>846</a>
+<a name='L847'></a><a href='#L847'>847</a>
+<a name='L848'></a><a href='#L848'>848</a>
+<a name='L849'></a><a href='#L849'>849</a>
+<a name='L850'></a><a href='#L850'>850</a>
+<a name='L851'></a><a href='#L851'>851</a>
+<a name='L852'></a><a href='#L852'>852</a>
+<a name='L853'></a><a href='#L853'>853</a>
+<a name='L854'></a><a href='#L854'>854</a>
+<a name='L855'></a><a href='#L855'>855</a>
+<a name='L856'></a><a href='#L856'>856</a>
+<a name='L857'></a><a href='#L857'>857</a>
+<a name='L858'></a><a href='#L858'>858</a>
+<a name='L859'></a><a href='#L859'>859</a>
+<a name='L860'></a><a href='#L860'>860</a>
+<a name='L861'></a><a href='#L861'>861</a>
+<a name='L862'></a><a href='#L862'>862</a>
+<a name='L863'></a><a href='#L863'>863</a>
+<a name='L864'></a><a href='#L864'>864</a>
+<a name='L865'></a><a href='#L865'>865</a>
+<a name='L866'></a><a href='#L866'>866</a>
+<a name='L867'></a><a href='#L867'>867</a>
+<a name='L868'></a><a href='#L868'>868</a>
+<a name='L869'></a><a href='#L869'>869</a>
+<a name='L870'></a><a href='#L870'>870</a>
+<a name='L871'></a><a href='#L871'>871</a>
+<a name='L872'></a><a href='#L872'>872</a>
+<a name='L873'></a><a href='#L873'>873</a>
+<a name='L874'></a><a href='#L874'>874</a>
+<a name='L875'></a><a href='#L875'>875</a>
+<a name='L876'></a><a href='#L876'>876</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">{
+  "português": {
+    "1": {
+      "domains": [
+        {
+          "name": "Oralidade",
+          "descriptors": [
+            "Saber escutar para interagir com adequação ao contexto e a diversas finalidades (nomeadamente, reproduzir pequenas mensagens, cumprir instruções, responder a questões)",
+            "Identificar informação essencial em textos orais sobre temas conhecidos",
+            "Utilizar padrões de entoação e ritmo adequados na formulação de perguntas, de afirmações e de pedidos",
+            "Pedir a palavra e falar na sua vez de forma clara e audível, com uma articulação correta e natural das palavras",
+            "Exprimir opinião partilhando ideias e sentimentos"
+          ]
+        },
+        {
+          "name": "Leitura",
+          "descriptors": [
+            "Pronunciar segmentos fónicos a partir dos respetivos grafemas e dígrafos, incluindo os casos que dependem de diferentes posições dos fonemas ou dos grafemas na palavra",
+            "Identificar as letras do alfabeto, nas formas minúscula e maiúscula, em resposta ao nome da letra",
+            "Nomear, pela sua ordenação convencional, as letras do alfabeto",
+            "Ler palavras isoladas e pequenos textos com articulação correta e prosódia adequada",
+            "Inferir o tema e resumir as ideias centrais de textos associados a diferentes finalidades (lúdicas, estéticas, informativas)"
+          ]
+        },
+        {
+          "name": "Escrita",
+          "descriptors": [
+            "Representar por escrito os fonemas através dos respetivos grafemas e dígrafos, incluindo os casos que dependem de diferentes posições dos fonemas ou dos grafemas na palavra",
+            "Escrever palavras de diferentes níveis de dificuldade e extensão silábica, aplicando regras de correspondência fonema-grafema",
+            "Identificar especificidades gráficas do texto escrito (direcionalidade da escrita, gestão da mancha gráfica e fronteira de palavra)",
+            "Escrever frases simples e textos curtos em escrita cursiva e através de digitação num dispositivo eletrónico, utilizando adequadamente os sinais de pontuação: ponto final, vírgula, ponto de interrogação e ponto de exclamação",
+            "Planificar, redigir e rever textos curtos com a colaboração do professor",
+            "Elaborar respostas escritas a questionários e a instruções, escrever legivelmente com correção (orto)gráfica e com uma gestão correta do espaço da página"
+          ]
+        },
+        {
+          "name": "Educação Literária",
+          "descriptors": [
+            "Manifestar ideias, emoções e apreciações geradas pela escuta ativa de obras literárias e textos da tradição popular",
+            "Revelar curiosidade e emitir juízos valorativos face aos textos ouvidos",
+            "Reconhecer rimas e outras repetições de sons em poemas, trava-línguas e em outros textos ouvidos",
+            "Antecipar o(s) tema(s) com base em noções elementares de género (contos de fada, lengalengas, poemas, etc.), em elementos do paratexto e nos textos visuais (ilustrações)",
+            "Compreender textos narrativos (sequência de acontecimentos, intenções e emoções de personagens, tema e assunto; mudança de espaço) e poemas",
+            "Antecipar o desenvolvimento da história por meio de inferências reveladoras da compreensão de ideias, de eventos e de personagens",
+            "Distinguir ficção de não ficção",
+            "(Re)contar histórias",
+            "Dizer, de modo dramatizado, trava-línguas, lengalengas e poemas memorizados, de modo a incluir treino da voz, dos gestos, das pausas, da entoação e expressão facial"
+          ]
+        },
+        {
+          "name": "Gramática",
+          "descriptors": [
+            "Identificar unidades da língua: palavras, sílabas, fonemas",
+            "Usar regras de flexão em número, com base na descoberta de regularidades do funcionamento do nome e do adjetivo",
+            "Reconhecer o nome próprio",
+            "Fazer concordar o adjetivo com o nome em género",
+            "Descobrir e compreender o significado de palavras pelas múltiplas relações que podem estabelecer entre si",
+            "Descobrir o significado de palavras desconhecidas a partir do contexto verbal e não-verbal",
+            "Usar, com intencionalidade, conectores de tempo, de causa, de maior frequência na formação de frases complexas",
+            "Conhecer regras de correspondência fonema-grafema e de utilização dos sinais de pontuação (frase simples)"
+          ]
+        }
+      ]
+    },
+    "2": {
+      "domains": [
+        {
+          "name": "Oralidade",
+          "descriptors": [
+            "Identificar intenções comunicativas de textos orais, designadamente perguntas, afirmações, exclamações apreciativas, ordens, pedidos",
+            "Selecionar informação relevante em função dos objetivos de escuta e registá-la por meio de técnicas diversas",
+            "Falar com clareza e articular de modo adequado as palavras",
+            "Usar a palavra na sua vez e empregar formas de tratamento adequadas na interação oral, com respeito pelos princípios de cooperação e cortesia",
+            "Variar adequadamente a prosódia e o ritmo discursivo em função da finalidade comunicativa",
+            "Formular perguntas, pedidos e respostas a questões considerando a situação e o interlocutor",
+            "Planear, produzir e avaliar os seus próprios textos",
+            "Recontar histórias e narrar situações vividas e imaginadas",
+            "Representar diferentes papéis comunicativos em jogos de simulação e dramatizações"
+          ]
+        },
+        {
+          "name": "Leitura",
+          "descriptors": [
+            "Associar a cada letra do alfabeto as respetivas formas maiúscula e minúscula",
+            "Compreender o sentido de textos com características narrativas e descritivas, associados a finalidades diferentes (lúdicas, estéticas, informativas)",
+            "Mobilizar as suas experiências e saberes no processo de construção de sentidos do texto",
+            "Identificar informação explícita no texto",
+            "Identificar e referir o essencial de textos lidos",
+            "Ler com articulação correta, entoação e velocidade adequadas ao sentido dos textos",
+            "Recriar pequenos textos em diferentes formas de expressão (verbal, gestual, corporal, musical, plástica)"
+          ]
+        },
+        {
+          "name": "Escrita",
+          "descriptors": [
+            "Representar por escrito os fonemas através dos respetivos grafemas e dígrafos, incluindo os casos que dependem de diferentes posições dos fonemas ou dos grafemas na palavra",
+            "Indicar as possibilidades de representar na escrita as relações fonema-grafema e grafema-fonema mais frequentes",
+            "Escrever corretamente palavras com todos os tipos de sílabas, com utilização correta dos acentos gráficos e do til",
+            "Escrever textos curtos com diversas finalidades (narrar, informar, explicar)",
+            "Redigir textos coerentes e coesos com recurso a elementos como a concordância entre constituintes, a correlação de tempos verbais, a sinonímia e a pronominalização",
+            "Articular segmentos do texto através do emprego de elementos gramaticais que marcam relações de tempo e causa",
+            "Utilizar o ponto final na delimitação de frases e a vírgula em enumerações e em mecanismos de coordenação",
+            "Proceder à revisão de texto, individualmente ou em grupo após discussão de diferentes pontos de vista"
+          ]
+        },
+        {
+          "name": "Educação Literária",
+          "descriptors": [
+            "Ouvir ler obras literárias e textos da tradição popular",
+            "Ler narrativas e poemas adequados à idade, por iniciativa própria ou de outrem",
+            "Antecipar o(s) tema(s) com base em noções elementares de género (contos de fada, lengalengas, poemas, etc.) em elementos do paratexto e nos textos visuais (ilustrações)",
+            "Compreender narrativas literárias (temas, experiências e valores)",
+            "Explicitar o sentido dos poemas escutados ou lidos",
+            "(Re)contar histórias",
+            "Valorizar a diversidade cultural dos textos (ouvidos ou lidos)",
+            "Dizer, de modo dramatizado, trava-línguas, lengalengas e poemas memorizados, de modo a incluir treino da voz, dos gestos, das pausas, da entoação e expressão facial",
+            "Manifestar preferências, de entre textos lidos, e explicar as reações derivadas da leitura",
+            "Selecionar livros para leitura pessoal, apresentando as razões das suas escolhas"
+          ]
+        },
+        {
+          "name": "Gramática",
+          "descriptors": [
+            "Classificar as palavras quanto ao número de sílabas (palavra escrita)",
+            "Identificar e distinguir sílaba tónica de átona",
+            "Identificar a classe das palavras: determinante artigo, nome (próprio e comum), adjetivo, verbo, pronome pessoal e interjeição",
+            "Reconhecer diferentes processos para formar o feminino dos nomes e adjetivos",
+            "Reconhecer a flexão nominal e adjetival quanto ao número",
+            "Conhecer a forma do infinitivo dos verbos",
+            "Conhecer as estruturas de coordenação copulativa e disjuntiva",
+            "Usar de modo intencional e com adequação conectores de tempo, de causa, de explicação e de contraste de maior frequência, em textos narrativos e de opinião",
+            "Depreender o significado de palavras a partir da sua ocorrência nas diferentes áreas disciplinares curriculares",
+            "Associar significados conotativos a palavras e/ou expressões que não correspondam ao sentido literal",
+            "Desenvolver o conhecimento lexical, passivo e ativo",
+            "Mobilizar adequadamente as regras de ortografia, ao nível da correspondência grafema-fonema e da utilização dos sinais de escrita"
+          ]
+        }
+      ]
+    },
+    "3": {
+      "domains": [
+        {
+          "name": "Oralidade",
+          "descriptors": [
+            "Interpretar o essencial de discursos orais sobre temas conhecidos",
+            "Identificar, organizar e registar informação relevante em função dos objetivos de escuta",
+            "Fazer inferências, esclarecer dúvidas, identificar diferentes intencionalidades comunicativas",
+            "Falar com clareza e articular de modo adequado as palavras",
+            "Gerir adequadamente a tomada de vez na comunicação oral, com respeito pelos princípios da cooperação e da cortesia",
+            "Usar a palavra com propriedade para expor conhecimentos e apresentar narrações",
+            "Planear, produzir e avaliar os seus próprios textos orais",
+            "Detetar semelhanças e diferenças entre o texto oral e o texto escrito"
+          ]
+        },
+        {
+          "name": "Leitura",
+          "descriptors": [
+            "Ler textos com características narrativas e descritivas, associados a diferentes finalidades (informativas, lúdicas, estéticas)",
+            "Distinguir nos textos características da notícia, da carta, do convite e da banda desenhada (estruturação, finalidade)",
+            "Ler textos com entoação e ritmo adequados",
+            "Realizar leitura silenciosa e autónoma",
+            "Mobilizar as suas experiências e saberes no processo de construção de sentidos do texto",
+            "Identificar o tema e o assunto do texto ou de partes do texto",
+            "Exprimir uma opinião crítica acerca de aspetos do texto (do conteúdo e/ou da forma)"
+          ]
+        },
+        {
+          "name": "Educação Literária",
+          "descriptors": [
+            "Ouvir ler obras literárias e textos da tradição popular",
+            "Ler integralmente narrativas, poemas e texto dramático, por iniciativa própria ou de outrem",
+            "Antecipar o(s) tema(s) com base em noções elementares de género (contos de fada, lengalengas, poemas, etc.) em elementos do paratexto e em textos visuais (ilustrações)",
+            "Compreender textos narrativos, poéticos e dramáticos, escutados ou lidos",
+            "Ler poemas em público, com segurança",
+            "Fazer a leitura dramatizada de obras literárias",
+            "Manifestar ideias, sentimentos e pontos de vista suscitados pelas histórias ouvidas ou lidas",
+            "Apresentar obras literárias em público, através da leitura de poemas e da representação de textos dramáticos",
+            "Desenvolver um projeto de leitura que implique seleção de obras, a partir de preferências do aluno previamente discutidas em aula"
+          ]
+        },
+        {
+          "name": "Escrita",
+          "descriptors": [
+            "Indicar as diferentes possibilidades de representar graficamente os fonemas para as relações fonema-grafema e grafema-fonema mais frequentes",
+            "Registar e organizar ideias na planificação de textos estruturados com introdução, desenvolvimento e conclusão",
+            "Redigir textos com utilização correta das formas de representação escrita (grafia, pontuação e translineação, configuração gráfica e sinais auxiliares da escrita)",
+            "Avaliar os próprios textos com consequente aperfeiçoamento",
+            "Escrever textos géneros variados, adequados a finalidades como narrar e informar, em diferentes suportes",
+            "Exprimir opiniões e fundamentá-las",
+            "Recriar pequenos textos em diferentes formas de expressão (verbal, gestual, corporal, musical, plástica)"
+          ]
+        },
+        {
+          "name": "Gramática",
+          "descriptors": [
+            "Distinguir sílaba tónica de átona e acento prosódico de acento gráfico",
+            "Identificar a classe das palavras: determinante (possessivo e demonstrativo), quantificador numeral e advérbio",
+            "Conjugar verbos regulares e irregulares no presente, no pretérito perfeito e no futuro do modo indicativo",
+            "Utilizar apropriadamente os tempos verbais para exprimir anterioridade, posterioridade e simultaneidade",
+            "Manipular diferentes processos para expressar noções de grau numa frase, tendo em conta os seus valores",
+            "Reconhecer a frase a partir dos seus grupos constituintes (grupo nominal e grupo verbal) e das funções sintáticas centrais (sujeito e predicado)",
+            "Distinguir tipos de frase e o valor afirmativo ou negativo dos enunciados",
+            "Recorrer de modo intencional e adequado a conectores diversificados, em textos orais e escritos",
+            "Usar frases complexas para exprimir sequências ([tão] que, para que)",
+            "Depreender o significado de palavras a partir da sua análise e a partir das múltiplas relações que podem estabelecer entre si",
+            "Deduzir significados de palavras e/ou expressões que não correspondam ao sentido literal",
+            "Conhecer a família de palavras como modo de organização do léxico",
+            "Mobilizar adequadamente as regras de ortografia"
+          ]
+        }
+      ]
+    },
+    "4": {
+      "domains": [
+        {
+          "name": "Oralidade",
+          "descriptors": [
+            "Selecionar informação relevante em função dos objetivos de escuta e registá-la por meio de técnicas diversas",
+            "Distinguir entre factos e opiniões, informação implícita e explícita, essencial e acessório, denotação e conotação",
+            "Pedir e tomar a palavra e respeitar o tempo de palavra dos outros",
+            "Planear, produzir e avaliar discursos orais breves, com vocabulário variado e frases complexas, individualmente ou em grupo",
+            "Participar com empenho em atividades de expressão oral orientada, respeitando regras e papéis específicos",
+            "Realizar exposições breves, a partir de planificação",
+            "Usar a palavra para exprimir opiniões e partilhar ideias de forma audível, com boa articulação, entoação e ritmo adequados",
+            "Assegurar contacto visual com a audiência (postura corporal, expressão facial, olhar)"
+          ]
+        },
+        {
+          "name": "Leitura",
+          "descriptors": [
+            "Ler textos com características narrativas e descritivas de maior complexidade, associados a finalidades várias e em suportes variados",
+            "Distinguir nos textos características do artigo de enciclopédia, da entrada de dicionário e do aviso (estruturação, finalidade)",
+            "Fazer uma leitura fluente e segura, que evidencie a compreensão do sentido dos textos",
+            "Realizar leitura silenciosa e autónoma",
+            "Mobilizar experiências e saberes no processo de construção de sentidos do texto",
+            "Explicitar ideias-chave do texto",
+            "Identificar o tema e o assunto do texto ou de partes do texto",
+            "Exprimir uma opinião crítica acerca de aspetos do texto (do conteúdo e/ou da forma)"
+          ]
+        },
+        {
+          "name": "Educação Literária",
+          "descriptors": [
+            "Ouvir ler textos literários e expressar reações de leitura de modo criativo",
+            "Ler integralmente narrativas, poemas e textos dramáticos",
+            "Antecipar o(s) tema(s) com base em noções elementares de género (contos de fada, lengalengas, poemas, etc.) em elementos do paratexto e nos textos visuais (ilustrações)",
+            "Compreender a organização interna e externa de textos poéticos, narrativos e dramáticos",
+            "Compreender recursos que enfatizam o sentido do texto (onomatopeias, trocadilhos, interjeições, comparações)",
+            "Dramatizar textos e dizer em público, com expressividade e segurança, poemas memorizados",
+            "Participar, de forma responsável e cooperante, em representações de textos dramáticos literários",
+            "Manifestar ideias, sentimentos e pontos de vista suscitados por histórias ou poemas ouvidos ou lidos",
+            "Desenvolver um projeto de leitura em que se integre compreensão da obra, questionamento e motivação de escrita do autor"
+          ]
+        },
+        {
+          "name": "Escrita",
+          "descriptors": [
+            "Escrever relatos (com situação inicial, peripécias e conclusão), com descrição e relato do discurso das personagens, representado por meio de discurso direto e de discurso indireto",
+            "Utilizar processos de planificação, textualização e revisão, realizados de modo individual e/ou em grupo",
+            "Usar frases complexas para exprimir sequências e relações de consequência e finalidade",
+            "Superar problemas associados ao processo de escrita por meio da revisão com vista ao aperfeiçoamento de texto",
+            "Redigir textos com utilização correta das formas de representação escrita (grafia, pontuação e translineação, configuração gráfica e sinais auxiliares da escrita)",
+            "Escrever textos, organizados em parágrafos, coesos, coerentes e adequados às convenções de representação gráfica"
+          ]
+        },
+        {
+          "name": "Gramática",
+          "descriptors": [
+            "Identificar a classe das palavras: determinante (interrogativo), preposição, pronome (pessoal, nas suas formas tónica e átonas, possessivo e demonstrativo)",
+            "Conjugar verbos regulares e irregulares no pretérito imperfeito do modo indicativo e no modo imperativo",
+            "Reconhecer diferentes processos para formar o feminino dos nomes e adjetivos",
+            "Reconhecer a flexão nominal e adjetival quanto ao número e grau",
+            "Aplicar formas átonas do pronome pessoal em frases afirmativas, em frases com negação e com advérbios pré-verbais",
+            "Recorrer, de modo intencional e adequado, a conectores diversificados, em textos orais e escritos",
+            "Aplicar processos de expansão e redução de frases",
+            "Inferir o significado de palavras desconhecidas a partir da análise da sua estrutura interna (base, radical e afixos)",
+            "Deduzir significados conotativos a palavras e/ou expressões que não correspondam ao sentido literal",
+            "Compreender regras de derivação das palavras e formas de organização do léxico (famílias de palavras)",
+            "Reconhecer onomatopeias",
+            "Explicitar regras de ortografia"
+          ]
+        }
+      ]
+    }
+  },
+  "matemática": {
+    "1": {
+      "domains": [
+        {
+          "name": "Números",
+          "descriptors": [
+            "Identificar números em contextos vários e reconhecer o seu significado como indicador de quantidade, medida, ordenação, identificação e localização",
+            "Contar de 1 em 1, de 2 em 2, de 5 em 5 e de 10 em 10, usando modelos estruturados de contagem",
+            "Ler e representar números, pelo menos até 100, usando uma diversidade de representações, nomeadamente a reta numérica",
+            "Comparar e ordenar números naturais, de forma crescente e decrescente",
+            "Reconhecer os numerais ordinais até ao 10.º, em contextos diversos",
+            "Reconhecer números pares e ímpares",
+            "Estimar o número de objetos de um dado conjunto pelo menos até 50, explicar as suas razões, e verificar a estimativa realizada através de contagem organizada",
+            "Reconhecer e usar o valor posicional de um algarismo no sistema de numeração decimal",
+            "Compor e decompor números naturais até ao 100, de diversas formas, usando diversos recursos e representações",
+            "Relacionar um número com números de referência que lhe sejam próximos",
+            "Compreender e automatizar as possíveis combinações de pares de números naturais que podem ser adicionados para formar o 5 e o 10 e relacionar esses factos básicos com a subtração",
+            "Compreender e usar com fluência estratégias de cálculo mental diversificadas para obter o resultado de adições/subtrações",
+            "Mobilizar os factos básicos da adição/subtração e as propriedades da adição e da subtração para realizar cálculo mental",
+            "Produzir estimativas através do cálculo mental, adequadas às situações em contexto",
+            "Interpretar e modelar situações com adição nos sentidos de acrescentar e juntar e resolver problemas associados",
+            "Interpretar e modelar situações com subtração, nos sentidos de retirar, completar e comparar, e resolver problemas associados",
+            "Relacionar a adição e a subtração, em situações de cálculo e na interpretação e resolução de problemas"
+          ]
+        },
+        {
+          "name": "Álgebra",
+          "descriptors": [
+            "Reconhecer e justificar se uma sequência pictórica tem ou não regularidade",
+            "Identificar e descrever regularidades em sequências variadas em contextos diversos, estabelecendo conexões matemáticas com a realidade próxima",
+            "Continuar uma sequência pictórica respeitando uma regra de formação dada ou regularidades identificadas",
+            "Identificar elementos em falta em sequências dadas e justificar com base em regularidades encontradas",
+            "Reconhecer que cada elemento de uma sequência corresponde a uma ordem nessa sequência",
+            "Interpretar e modelar situações envolvendo sequências de repetição, estabelecendo conexões com outros temas matemáticos",
+            "Criar e modificar sequências, usando materiais manipuláveis e outros recursos",
+            "Reconhecer igualdades aritméticas envolvendo a adição",
+            "Decidir sobre a correção de igualdades aritméticas e justificar as suas ideias",
+            "Completar igualdades aritméticas envolvendo a adição, explicando os seus raciocínios",
+            "Descrever situações que atribuam significado a igualdades aritméticas dadas",
+            "Interpretar e modelar situações que envolvam regularidades numéricas, e resolver problemas associados",
+            "Reconhecer a comutatividade da adição e expressar em linguagem natural o seu significado",
+            "Reconhecer o zero como elemento neutro da adição"
+          ]
+        },
+        {
+          "name": "Dados",
+          "descriptors": [
+            "Participar na formulação de questões estatísticas sobre uma característica qualitativa",
+            "Participar na definição de quais os dados a recolher para responder a uma dada questão estatística e decidir onde observar/inquirir",
+            "Participar criticamente na definição de um método de recolha de dados adequado a um dado estudo",
+            "Recolher dados através de observação ou inquirição",
+            "Usar listas para registar os dados a recolher",
+            "Usar tabelas de contagem para registar e organizar os dados à medida que são recolhidos",
+            "Representar conjuntos de dados através de pictogramas (correspondência um para um), incluindo fonte, título e legenda",
+            "Representar conjuntos de dados através de gráficos de pontos, incluindo fonte, título e legenda",
+            "Participar na decisão sobre qual(is) as representações gráficas a adotar num dado estudo",
+            "Ler, interpretar e discutir a distribuição dos dados, identificando o(s) dado(s) que mais e menos se repete(m)",
+            "Retirar conclusões, fundamentar decisões e colocar novas questões suscitadas pelas conclusões obtidas",
+            "Decidir a quem divulgar um estudo realizado",
+            "Apresentar oralmente os resultados de um estudo realizado, atendendo ao público a quem será divulgado"
+          ]
+        },
+        {
+          "name": "Geometria e Medida",
+          "descriptors": [
+            "Descrever a posição relativa de pessoas e objetos, usando vocabulário próprio",
+            "Reconhecer, em objetos do quotidiano, formas de sólidos comuns (cone, cilindro, esfera, cubo, paralelepípedo retângulo, pirâmide, prisma)",
+            "Identificar superfícies planas e superfícies curvas em objetos comuns e em modelos físicos de sólidos",
+            "Reconhecer triângulos, quadrados, retângulos, pentágonos, hexágonos e círculos em sólidos diversos",
+            "Reconhecer figuras congruentes, usando diferentes estratégias e recursos",
+            "Construir, representar e comparar figuras planas compostas",
+            "Compor e decompor uma dada figura plana, recorrendo a materiais manipuláveis físicos ou virtuais",
+            "Compreender o que é o comprimento de um objeto e comparar e ordenar objetos segundo o seu comprimento",
+            "Medir o comprimento de um objeto, usando unidades de medida não convencionais adequadas",
+            "Estimar a medida de um comprimento, e explicar as razões da sua estimativa",
+            "Resolver problemas que envolvam comprimentos, comparando criticamente diferentes estratégias da resolução",
+            "Reconhecer e ordenar cronologicamente acontecimentos",
+            "Ler o calendário"
+          ]
+        }
+      ]
+    },
+    "2": {
+      "domains": [
+        {
+          "name": "Números",
+          "descriptors": [
+            "Contar de 50 em 50, 100 em 100, e 200 em 200",
+            "Ler e representar números naturais, pelo menos até 1000, usando uma diversidade de representações",
+            "Comparar e ordenar números naturais, de forma crescente e decrescente",
+            "Reconhecer os numerais ordinais até ao 20.º, em contextos diversos",
+            "Arredondar números naturais à dezena ou centena mais próxima",
+            "Estimar o número de objetos de um dado conjunto pelo menos até 100, explicar as suas razões, e verificar a estimativa",
+            "Reconhecer e usar o valor posicional de um algarismo no sistema de numeração decimal",
+            "Usar a estrutura multiplicativa do sistema decimal para compreender a grandeza dos números",
+            "Compor e decompor números naturais até ao 1000 de diversas formas",
+            "Compreender e automatizar os dobros de números até ao dobro de 10",
+            "Compreender e automatizar os factos básicos da multiplicação (tabuadas do 2, 4, 5, 10 e 3) e sua relação com a divisão",
+            "Reconhecer a fração como possibilidade de representar uma quantidade não inteira relativa a uma relação parte-todo",
+            "Representar uma fração de diversas formas, transitando de forma fluente entre as diferentes representações",
+            "Reconhecer frações que representam a metade e quartos da unidade",
+            "Reconhecer que uma fração cujo numerador e denominador são iguais corresponde a uma unidade",
+            "Comparar e ordenar frações unitárias em contextos diversos",
+            "Compreender e usar com fluência estratégias de cálculo mental diversificadas",
+            "Produzir estimativas através do cálculo mental, adequadas à situação em contexto",
+            "Interpretar e modelar situações com a multiplicação no sentido aditivo",
+            "Interpretar e modelar situações com a divisão nos sentidos de partilha equitativa e medida",
+            "Relacionar a multiplicação e a divisão, em situações de cálculo e na interpretação e resolução de problemas"
+          ]
+        },
+        {
+          "name": "Álgebra",
+          "descriptors": [
+            "Identificar e descrever regularidades em sequências de repetição",
+            "Identificar e descrever o grupo de repetição de uma sequência",
+            "Prever um termo não visível de uma sequência de repetição e justificar a previsão",
+            "Identificar e descrever regularidades em sequências de crescimento",
+            "Continuar uma sequência de crescimento, respeitando uma regra de formação dada",
+            "Reconhecer as sequências numéricas dos múltiplos, formulando e testando conjeturas",
+            "Criar e modificar sequências, usando materiais manipuláveis e outros recursos",
+            "Reconhecer igualdades aritméticas envolvendo a adição e a subtração",
+            "Decidir sobre a correção de igualdades aritméticas e justificar as suas ideias",
+            "Completar igualdades aritméticas envolvendo a subtração",
+            "Descrever situações que atribuam significado a igualdades aritméticas",
+            "Investigar, formular e justificar conjeturas sobre relações numéricas em contextos diversos",
+            "Descrever e representar regularidades em tabelas e diagramas",
+            "Reconhecer a associatividade da adição",
+            "Reconhecer a comutatividade da multiplicação",
+            "Reconhecer o um como elemento neutro da multiplicação",
+            "Reconhecer o zero como elemento absorvente da multiplicação"
+          ]
+        },
+        {
+          "name": "Dados",
+          "descriptors": [
+            "Participar na formulação de questões estatísticas sobre diferentes características qualitativas",
+            "Formular conjeturas sobre eventuais relações entre duas características qualitativas",
+            "Participar na definição de quais os dados a recolher num dado estudo e decidir sobre a fonte primária de dados",
+            "Participar criticamente na seleção de um método de recolha dos dados num estudo",
+            "Recolher dados através de um dado método de recolha",
+            "Usar tabelas de frequência absolutas para organizar dados referentes a uma característica qualitativa",
+            "Usar diagramas de Carroll para organizar dados relativos a duas características qualitativas dicotómicas",
+            "Representar através de pictogramas (correspondência um para vários) os dados recolhidos",
+            "Representar através de gráficos de barras os dados recolhidos, incluindo fonte, título e legenda",
+            "Decidir sobre qual(is) as representações gráficas a adotar num dado estudo",
+            "Analisar representações gráficas e discutir criticamente a sua adequabilidade",
+            "Reconhecer a(s) moda(s) e identificá-la(s) num conjunto de dados qualitativos",
+            "Ler, interpretar e discutir a distribuição dos dados, relacionando tabelas, representações gráficas e a moda",
+            "Retirar conclusões, fundamentar decisões e colocar novas questões",
+            "Decidir a quem divulgar um estudo realizado",
+            "Elaborar um poster que apoie a apresentação de um estudo realizado"
+          ]
+        },
+        {
+          "name": "Geometria e Medida",
+          "descriptors": [
+            "Criar, representar e comparar itinerários, usando os termos 'quarto de volta', 'meia volta', 'três quartos de volta' e 'volta completa'",
+            "Desenhar vistas de sólidos simples (vistas de cima, frente e lado)",
+            "Reconhecer vistas de sólidos dados, identificando o ponto de vista correspondente",
+            "Ler, interpretar e esboçar plantas de espaços da proximidade da turma",
+            "Descrever as características de sólidos comuns (cone, cilindro, esfera, cubo, paralelepípedo, pirâmide, prisma)",
+            "Distinguir poliedros de outros sólidos",
+            "Classificar figuras planas com base nas suas características",
+            "Reconhecer polígonos e relacionar a sua designação com o respetivo número de lados",
+            "Reconhecer ângulos retos em polígonos",
+            "Compreender a hierarquia quadrado, retângulo",
+            "Justificar com base nos movimentos de deslizar, rodar e voltar a congruência entre figuras planas",
+            "Interpretar e modelar situações recorrendo ao deslizar, voltar ou rodar",
+            "Reconhecer o metro e o centímetro como unidades de medida convencionais, relacioná-las e fazer medições",
+            "Reconhecer o perímetro de uma figura plana",
+            "Estimar a medida de um comprimento usando unidades de medida convencionais",
+            "Compreender o que é a área de uma figura plana",
+            "Medir a área de figuras planas, usando unidades de medida não convencionais adequadas",
+            "Estimar a medida da área de uma figura plana e explicar as razões da sua estimativa",
+            "Relacionar hora, dia, mês e ano",
+            "Resolver problemas que envolvam o tempo",
+            "Conhecer as diferentes notas e moedas, comparar o seu valor e relacioná-las",
+            "Relacionar o euro com o cêntimo",
+            "Fazer estimativas de quantias de dinheiro, por arredondamento",
+            "Resolver problemas que envolvem dinheiro comparando diferentes estratégias de resolução"
+          ]
+        }
+      ]
+    },
+    "3": {
+      "domains": [
+        {
+          "name": "Números",
+          "descriptors": [
+            "Ler, representar, comparar e ordenar números naturais, pelo menos, até 10 000, em contextos variados",
+            "Arredondar números naturais à dezena, centena ou unidade de milhar mais próxima",
+            "Reconhecer os numerais ordinais até ao 100.º, em contextos variados",
+            "Reconhecer e usar o valor posicional de um algarismo no sistema de numeração decimal",
+            "Usar a estrutura multiplicativa do sistema decimal para compreender a grandeza dos números",
+            "Compor e decompor números naturais até ao 10 000 de diversas formas",
+            "Compreender e usar a regra para calcular o produto de um número por 10, 100 e 1000",
+            "Compreender e automatizar os factos básicos da multiplicação (tabuadas do 8, 6, 9, e 7) e a sua relação com a divisão",
+            "Reconhecer a fração como representação de uma relação parte-todo e de quociente, sendo o todo uma unidade discreta",
+            "Representar uma fração de diversas formas, transitando de forma fluente entre as diferentes representações",
+            "Comparar e ordenar frações com o mesmo denominador em contextos diversos",
+            "Reconhecer a equivalência entre diferentes frações que representem a metade, a quarta parte e a terça parte",
+            "Compreender e usar com fluência estratégias de cálculo mental diversificadas",
+            "Produzir estimativas através do cálculo mental, adequadas à situação em contexto",
+            "Interpretar e modelar situações com a multiplicação no sentido combinatório",
+            "Interpretar e modelar situações com a adição/subtração e multiplicação/divisão e resolver problemas associados",
+            "Decidir qual a estratégia mais adequada para produzir o resultado de uma operação",
+            "Compreender e usar o algoritmo da adição com números naturais até quatro algarismos",
+            "Compreender e usar o algoritmo da subtração com números naturais até quatro algarismos"
+          ]
+        },
+        {
+          "name": "Álgebra",
+          "descriptors": [
+            "Identificar e descrever o grupo de repetição de uma sequência",
+            "Descrever, em linguagem natural, a regra de formação de uma sequência de repetição",
+            "Identificar e descrever regularidades em sequências de crescimento",
+            "Continuar uma sequência de crescimento respeitando uma regra de formação dada",
+            "Estabelecer a correspondência entre a ordem do termo de uma sequência e o termo",
+            "Prever um termo não visível de uma sequência de crescimento, e justificar a previsão",
+            "Criar e modificar sequências, usando materiais manipuláveis e outros recursos",
+            "Formular e testar conjeturas relativas a regularidades nas sequências de múltiplos de números",
+            "Reconhecer expressões numéricas equivalentes, envolvendo a multiplicação",
+            "Completar igualdades aritméticas, envolvendo a multiplicação",
+            "Comparar expressões numéricas, usando a simbologia &gt;, &lt; e =",
+            "Investigar, formular e justificar conjeturas sobre relações numéricas em contextos diversos",
+            "Estabelecer relações entre a paridade das parcelas e a paridade da soma na adição de dois números naturais",
+            "Reconhecer a relação de dependência entre quantidades ou grandezas em contextos diversos",
+            "Interpretar e modelar situações com variação de quantidades ou grandezas e resolver problemas associados",
+            "Reconhecer a propriedade distributiva da multiplicação em relação à adição"
+          ]
+        },
+        {
+          "name": "Dados",
+          "descriptors": [
+            "Formular questões estatísticas sobre uma característica quantitativa discreta",
+            "Definir quais os dados a recolher num estudo e onde devem ser recolhidos, incluindo fontes secundárias",
+            "Selecionar criticamente um método de recolha de dados adequado a um estudo",
+            "Recolher dados através de um dado método de recolha, nomeadamente recorrendo a sítios credíveis na internet",
+            "Usar tabelas de frequência absolutas para organizar dados referentes a uma característica quantitativa discreta",
+            "Representar dados quantitativos discretos através de diagramas de caule e folhas",
+            "Decidir sobre qual(ais) a(s) representação(ões) gráfica(s) a adotar num dado estudo",
+            "Analisar representações gráficas e discutir criticamente a sua adequabilidade",
+            "Identificar a(s) moda(s) num conjunto de dados quantitativos discretos",
+            "Reconhecer o mínimo e o máximo num conjunto de dados quantitativos discretos",
+            "Ler, interpretar e discutir a distribuição dos dados, relacionando tabelas, representações gráficas e medidas",
+            "Retirar conclusões, fundamentar decisões e colocar novas questões",
+            "Decidir a quem divulgar um estudo realizado em contextos exteriores à comunidade escolar",
+            "Elaborar um infográfico que apoie a apresentação de um estudo realizado",
+            "Exprimir a maior ou menor convicção sobre a ocorrência de acontecimentos que resultam de fenómenos aleatórios, usando as ideias de 'impossível', 'possível' e 'certo'",
+            "Usar a convicção sobre a ocorrência de acontecimentos para fazer previsões e tomar decisões informadas"
+          ]
+        },
+        {
+          "name": "Geometria e Medida",
+          "descriptors": [
+            "Descrever posições recorrendo à identificação de coordenadas",
+            "Ler e utilizar mapas ou vistas aéreas, estabelecendo conexões matemáticas com a realidade",
+            "Descrever características dos prismas e das pirâmides regulares e distingui-los",
+            "Formular e testar conjeturas que envolvam relações entre as faces, vértices e arestas de prismas ou de pirâmides regulares",
+            "Compreender o conceito de ângulo e identificar ângulos retos, rasos, agudos, obtusos e giros",
+            "Obter a imagem de uma figura plana simples por reflexão, a partir de eixos de reflexão, horizontais ou verticais",
+            "Obter a imagem de uma figura plana simples por rotação, com centro num ponto exterior à figura, com amplitude de rotação de quartos de volta (90º) ou de meias voltas (180º)",
+            "Reconhecer o quilómetro e o milímetro como unidades de medida convencionais e medir comprimentos",
+            "Estimar a medida de um comprimento usando unidades de medida convencionais",
+            "Resolver problemas que envolvam comprimentos, usando unidades de medida convencionais",
+            "Reconhecer figuras equivalentes",
+            "Estimar a medida de área de uma figura plana por enquadramento",
+            "Interpretar e modelar situações que envolvam a área e resolver problemas associados",
+            "Compreender a que se refere a massa de um objeto e comparar e ordenar objetos segundo a massa",
+            "Medir a massa de um objeto, usando unidades de medida convencionais (quilograma e grama) e relacioná-las",
+            "Reconhecer valores de referência de massa (125 g, 250 g, 500 g, 1 kg) e estabelecer relações entre eles",
+            "Estimar a medida da massa de objetos, usando unidades de medida convencionais",
+            "Resolver problemas que envolvam a massa, usando unidades de medida convencionais",
+            "Ler e escrever a medida do tempo em horas e minutos em relógios analógicos e digitais",
+            "Relacionar horas, minutos e segundos",
+            "Medir o tempo utilizando diferentes instrumentos",
+            "Estimar o tempo de duração de acontecimentos",
+            "Resolver problemas que envolvam o tempo, em diversos contextos",
+            "Elaborar e analisar listas de compras com diferentes fins, incluindo a estimativa dos custos"
+          ]
+        }
+      ]
+    },
+    "4": {
+      "domains": [
+        {
+          "name": "Números",
+          "descriptors": [
+            "Ler, representar, comparar e ordenar números naturais, pelo menos, até 1 000 000, usando uma diversidade de representações",
+            "Arredondar números naturais à dezena, centena ou unidade, dezena ou centena de milhar mais próxima",
+            "Reconhecer e usar o valor posicional de um algarismo no sistema de numeração decimal e interpretar a ordem de grandeza de um número",
+            "Usar a estrutura multiplicativa do sistema decimal para compreender a grandeza dos números",
+            "Compor e decompor números naturais até ao 1 000 000 de diversas formas",
+            "Compreender e automatizar a composição de uma unidade, usando pares de decimais (ordem das décimas) e a sua relação com a subtração",
+            "Compreender e usar a regra para calcular o quociente de um número natural por 10, 100 e 1000",
+            "Comparar e ordenar frações com o mesmo numerador, em contextos diversos",
+            "Reconhecer o numeral decimal como possibilidade de representar uma quantidade não inteira",
+            "Ler, representar, comparar e ordenar decimais, em contextos variados e resolver problemas associados",
+            "Usar de forma fluente diferentes representações simbólicas de valores de referência envolvendo decimais (0,50, 1/2 e 50%; 0,25, 1/4 e 25%; 0,75, 3/4 e 75%; 0,1, 1/10 e 10%; 0,01, 1/100 e 1%)",
+            "Compreender e usar com fluência estratégias de cálculo mental diversificadas, para produzir o resultado de um cálculo que envolva decimais",
+            "Produzir estimativas que envolvam decimais através do cálculo mental",
+            "Interpretar e modelar situações com as operações e resolver problemas associados",
+            "Compreender e usar algoritmos para a adição e subtração envolvendo decimais com números até quatro algarismos",
+            "Compreender e usar o algoritmo da multiplicação e aplicá-lo com números até três algarismos no multiplicando e dois algarismos no multiplicador",
+            "Compreender e usar o algoritmo da divisão e aplicá-lo com números até três algarismos no dividendo e dois algarismos no divisor",
+            "Interpretar o resto da divisão obtida no algoritmo da divisão, nomeadamente no contexto da resolução de problemas"
+          ]
+        },
+        {
+          "name": "Álgebra",
+          "descriptors": [
+            "Formular conjeturas sobre a estrutura de uma sequência de crescimento e testar essas conjeturas",
+            "Identificar e descrever regularidades em sequências de crescimento",
+            "Continuar uma sequência de crescimento respeitando uma regra de formação dada ou regularidades identificadas",
+            "Estabelecer a correspondência entre a ordem do termo de uma sequência e o termo",
+            "Prever um termo não visível de uma sequência pictórica de crescimento e justificar a previsão",
+            "Descrever em linguagem natural a regra de formação de uma sequência de crescimento",
+            "Criar e modificar sequências, revelando criatividade e flexibilidade",
+            "Reconhecer expressões numéricas equivalentes, envolvendo a divisão",
+            "Completar igualdades aritméticas envolvendo a divisão, justificando",
+            "Comparar expressões numéricas, usando a simbologia &gt;, &lt; ou = para exprimir o resultado dessa comparação",
+            "Investigar, formular e justificar conjeturas sobre relações numéricas em contextos diversos",
+            "Interpretar e modelar situações com variação de quantidades ou grandezas e resolver problemas associados, usando representações múltiplas, em particular letras",
+            "Reconhecer a utilização das propriedades das operações em algoritmos alternativos e descrever os seus processos de construção"
+          ]
+        },
+        {
+          "name": "Dados",
+          "descriptors": [
+            "Formular questões sobre características qualitativas e quantitativas discretas que contribuam para um mesmo estudo",
+            "Definir quais os dados a recolher num estudo e onde devem ser recolhidos (fontes primárias ou secundárias)",
+            "Selecionar criticamente um método de recolha de dados adequado a um estudo",
+            "Recolher dados através de um dado método de recolha, recorrendo a fontes primárias ou sítios credíveis na internet",
+            "Representar conjuntos de dados quantitativos sobre a mesma característica através de diagramas de caule-e-folhas (duplos)",
+            "Representar dois conjuntos de dados sobre a mesma característica através de gráficos de barras justapostas (frequências absolutas)",
+            "Decidir sobre qual(is) a(s) representação(ões) gráfica(s) a adotar num dado estudo",
+            "Analisar representações gráficas presentes nos media e discutir criticamente a sua adequabilidade",
+            "Ler, interpretar e discutir a distribuição dos dados, salientando criticamente os aspetos mais relevantes",
+            "Retirar conclusões, fundamentar decisões e colocar novas questões suscitadas pelas conclusões obtidas",
+            "Decidir a quem divulgar um estudo realizado, em contextos exteriores à comunidade escolar",
+            "Elaborar recursos que apoiem a apresentação de um estudo realizado, de forma rigorosa, eficaz, apelativa e não enganadora",
+            "Exprimir a maior ou menor convicção sobre a ocorrência de acontecimentos que resultam de fenómenos aleatórios, usando as ideias de 'impossível', 'improvável', 'igualmente provável', 'provável' e 'certo'",
+            "Usar a convicção sobre a ocorrência de acontecimentos para fazer previsões e tomar decisões informadas"
+          ]
+        },
+        {
+          "name": "Geometria e Medida",
+          "descriptors": [
+            "Construir planificações de prismas e pirâmides, utilizando diferentes tipos de recursos",
+            "Classificar hierarquicamente quadriláteros (quadrado, retângulo, losango e paralelogramo) com base nas suas propriedades",
+            "Identificar retas paralelas e perpendiculares",
+            "Compreender que os pontos de uma circunferência estão à mesma distância do seu centro e identificar esta distância com a medida do raio",
+            "Relacionar a medida do raio com a medida do diâmetro",
+            "Distinguir círculo de circunferência",
+            "Reconhecer se uma figura plana tem simetria de reflexão e identificar os eixos de simetria",
+            "Reconhecer se uma figura plana tem simetria de rotação e identificar a amplitude das rotações associadas",
+            "Interpretar e modelar situações recorrendo à simetria de reflexão e à simetria de rotação",
+            "Reconhecer o cm2 e o m2 como unidades convencionais de medida da área e relacioná-las",
+            "Generalizar a expressão para o cálculo da medida da área do retângulo",
+            "Generalizar a expressão para o cálculo da medida da área do quadrado",
+            "Estimar a medida da área de uma figura usando o cm2 e o m2",
+            "Interpretar e modelar situações que envolvam área, expressa em m2 ou cm2, e resolver problemas associados",
+            "Compreender o que é a capacidade de um recipiente e comparar e ordenar recipientes segundo a sua capacidade",
+            "Medir a capacidade de um recipiente, usando unidades de medida convencionais (litro, centilitro e mililitro) e relacioná-las",
+            "Reconhecer valores de referência de capacidade (1l, 50 cl, 33 cl, 200 ml) e estabelecer relações entre eles",
+            "Estimar a medida da capacidade de recipientes, usando unidades de medida convencionais",
+            "Resolver problemas que envolvam a capacidade, usando unidades de medida convencionais",
+            "Elaborar orçamentos simples, identificando receitas e despesas, e compreender o que é o saldo",
+            "Discutir criticamente informações públicas que envolvam o dinheiro"
+          ]
+        }
+      ]
+    }
+  },
+  "estudo do meio": {
+    "1": {
+      "domains": [
+        {
+          "name": "Sociedade",
+          "descriptors": [
+            "Conhecer datas e factos significativos da sua história individual que concorram para a construção do conhecimento de si próprio",
+            "Estabelecer relações de anterioridade, posterioridade e simultaneidade na descrição de situações do quotidiano e ou da sua história pessoal, numa linha do tempo",
+            "Estabelecer relações de parentesco através de uma árvore genealógica simples, ou outros processos, até à terceira geração",
+            "Relacionar as atividades exercidas por alguns membros da comunidade familiar ou local com as respetivas profissões",
+            "Associar os principais símbolos nacionais (hino e bandeira) à sua nacionalidade, desenvolvendo o sentido de pertença"
+          ]
+        },
+        {
+          "name": "Natureza",
+          "descriptors": [
+            "Verificar alterações morfológicas que se vão operando ao longo das etapas da vida humana, comparando aspetos decorrentes de parâmetros como: sexo, idade, dentição, etc.",
+            "Identificar situações e comportamentos de risco para a saúde e segurança individual e coletiva em diversos contextos – casa, rua, escola e meio aquático - e propor medidas de proteção adequadas",
+            "Identificar os fatores que concorrem para o bem-estar físico e psicológico, individual e coletivo, desenvolvendo rotinas diárias de higiene pessoal, alimentar, do vestuário e dos espaços de uso coletivo",
+            "Reconhecer as implicações das condições atmosféricas diárias, no seu quotidiano",
+            "Reconhecer a desigual repartição entre os continentes e os oceanos, localizando no globo terrestre as áreas emersas (continentes) e imersas (oceanos)",
+            "Localizar em mapas, por exemplo digitais, o local de nascimento, de residência, a sua escola e o itinerário entre ambas",
+            "Comunicar ideias e conhecimentos relativos a lugares, regiões e acontecimentos, utilizando linguagem icónica e verbal",
+            "Reconhecer a existência de diversidade entre seres vivos de grupos diferentes e distingui-los de formas não vivas",
+            "Reconhecer a importância do Sol para a existência de vida na Terra",
+            "Reconhecer que os seres vivos têm necessidades básicas, distintas, em diferentes fases do seu desenvolvimento"
+          ]
+        },
+        {
+          "name": "Tecnologia",
+          "descriptors": [
+            "Reconhecer que a tecnologia responde a necessidades e a problemas do quotidiano (rede elétrica, canalização de água, telecomunicações, etc.)",
+            "Realizar experiências em condições de segurança, seguindo os procedimentos experimentais",
+            "Saber manusear materiais e objetos do quotidiano, em segurança, explorando relações lógicas de forma e de função (tesoura, agrafador, furador, espremedor, saca-rolhas, talheres, etc.)",
+            "Identificar as propriedades de diferentes materiais (forma, textura, cor, sabor, cheiro, brilho, flutuabilidade, solubilidade), agrupando-os de acordo com as suas características",
+            "Agrupar, montar, desmontar, ligar, sobrepor etc., explorando objetos livremente",
+            "Identificar atividades humanas que envolvem transformações tecnológicas no mundo que o rodeia"
+          ]
+        },
+        {
+          "name": "Sociedade/Natureza/Tecnologia",
+          "descriptors": [
+            "Desenhar mapas e itinerários simples de espaços do seu quotidiano, utilizando símbolos, cores ou imagens na identificação de elementos de referência",
+            "Relacionar espaços da sua vivência com diferentes funções, estabelecendo relações de identidade com o espaço",
+            "Localizar, com base na observação direta e indireta, elementos naturais e humanos da paisagem do local onde vive",
+            "Saber colocar questões, levantar hipóteses, fazer inferências, comprovar resultados e saber comunicar, reconhecendo como se constrói o conhecimento",
+            "Manifestar atitudes de respeito, de solidariedade, de cooperação, de responsabilidade, na relação com os que lhe são próximos",
+            "Saber atuar em situações de emergência, recorrendo ao número europeu de emergência médica (112)",
+            "Manifestar atitudes positivas conducentes à preservação do ambiente próximo sendo capaz de apresentar propostas de intervenção, nomeadamente comportamentos que visem os três 'R'"
+          ]
+        }
+      ]
+    },
+    "2": {
+      "domains": [
+        {
+          "name": "Sociedade",
+          "descriptors": [
+            "Reconhecer a importância de fontes documentais na construção do conhecimento do seu passado pessoal e familiar (Registo de Nascimento, Cartão de Cidadão, Boletim Individual de Saúde, Registo de Vacinações, fotografias pessoais, álbuns, etc.)",
+            "Reconhecer datas, factos e locais significativos para a história pessoal ou das pessoas que lhe são próximas, localizando-os em mapas ou plantas e numa linha de tempo",
+            "Relacionar instituições e serviços que contribuem para o bem-estar das populações com as respetivas atividades e funções",
+            "Reconhecer a importância do diálogo, da negociação e do compromisso na resolução pacífica de situações de conflito",
+            "Reconhecer as múltiplas pertenças de cada pessoa a diferentes grupos e comunidades",
+            "Reconhecer influências de outros países e culturas em diversos aspetos do seu dia a dia (alimentação, vestuário, música, comunicação, etc.)",
+            "Valorizar a aplicação dos direitos consagrados na Convenção sobre os Direitos da Criança"
+          ]
+        },
+        {
+          "name": "Natureza",
+          "descriptors": [
+            "Distinguir os principais órgãos - coração, pulmões, estômago e rins – em representações do corpo humano, associando-os à sua principal função vital",
+            "Associar os ossos e os músculos à posição, ao movimento e ao equilíbrio, reconhecendo que o seu bom funcionamento implica cuidados específicos (postura e atividade física)",
+            "Refletir sobre comportamentos e atitudes, vivenciados ou observados, que concorrem para o bem-estar físico e psicológico, individual e coletivo",
+            "Reconhecer a importância da vacinação e do uso correto dos medicamentos, nomeadamente dos antibióticos",
+            "Identificar situações e comportamentos de risco para a saúde e a segurança individual e coletiva, propondo medidas de prevenção e proteção adequadas",
+            "Identificar símbolos informativos fundamentais para o consumidor, relacionados com a produção e a utilização de bens",
+            "Localizar Portugal, na Europa e no Mundo, em diferentes representações cartográficas, reconhecendo as suas fronteiras",
+            "Caracterizar os estados de tempo típicos das estações do ano em Portugal e a sua variabilidade",
+            "Estabelecer a correspondência entre as mudanças de estado físico (evaporação, condensação, solidificação, fusão) e as condições que as originam, com o ciclo da água",
+            "Categorizar os seres vivos de acordo com semelhanças e diferenças observáveis (animais: tipos de revestimento, alimentação, locomoção e reprodução; plantas: tipo de raiz, tipo de caule, forma da folha, etc.)",
+            "Relacionar as características dos seres vivos (animais e plantas), com o seu habitat",
+            "Relacionar ameaças à biodiversidade dos seres vivos com a necessidade de desenvolvimento de atitudes responsáveis face à Natureza"
+          ]
+        },
+        {
+          "name": "Tecnologia",
+          "descriptors": [
+            "Distinguir vantagens e desvantagens da utilização de recursos tecnológicos (analógicos e digitais) do seu quotidiano",
+            "Prever as transformações causadas pelo aquecimento e arrefecimento de materiais"
+          ]
+        },
+        {
+          "name": "Sociedade/Natureza/Tecnologia",
+          "descriptors": [
+            "Elaborar itinerários do quotidiano, em plantas simplificadas do seu meio, assinalando diferentes elementos naturais e humanos",
+            "Descrever elementos naturais e humanos do lugar onde vive através da recolha de informação em várias fontes documentais",
+            "Comunicar conhecimentos relativos a lugares, regiões e acontecimentos",
+            "Representar lugares reais que lhes estão próximos no tempo e no espaço",
+            "Reconhecer a existência de bens comuns à humanidade (água, ar, solo, etc.) e a necessidade da sua preservação",
+            "Saber colocar questões sobre problemas ambientais existentes na localidade onde vive, nomeadamente relacionados com a água, a energia, os resíduos, o ar, os solos, apresentando propostas de intervenção",
+            "Saber colocar questões, levantar hipóteses, fazer inferências, comprovar resultados e saber comunicar, reconhecendo como se constrói o conhecimento",
+            "Comparar meios de comunicação e informação, atribuindo-lhes relevância pessoal e social"
+          ]
+        }
+      ]
+    },
+    "3": {
+      "domains": [
+        {
+          "name": "Sociedade",
+          "descriptors": [
+            "Reconhecer as unidades de tempo: década, século e milénio e as referências temporais a.C. e d.C.",
+            "Relacionar datas e factos importantes para a compreensão da história local (origem da povoação, batalhas, lendas históricas, personagens/personalidades históricas, feriado municipal)",
+            "Reconhecer vestígios do passado local: construções, instrumentos antigos e atividades a que estavam ligados, costumes e tradições",
+            "Reconstituir o passado de uma instituição local (escola, autarquia, instituições religiosas, associações, etc.), recorrendo a fontes orais e documentais",
+            "Reconhecer e valorizar a diversidade de etnias e culturas existentes na sua comunidade",
+            "Identificar alguns Estados Europeus, localizando-os no mapa da Europa",
+            "Reconhecer a existência de semelhanças e diferenças entre os diversos povos europeus, valorizando a sua diversidade",
+            "Reconhecer casos de desrespeito dos direitos consagrados na Convenção sobre os Direitos da Criança, sabendo como atuar em algumas situações"
+          ]
+        },
+        {
+          "name": "Natureza",
+          "descriptors": [
+            "Conhecer procedimentos adequados em situação de queimaduras, hemorragias, distensões, fraturas, mordeduras de animais e hematomas",
+            "Relacionar hábitos quotidianos com estilos de vida saudável, reconhecendo que o consumo de álcool, de tabaco e de outras drogas é prejudicial para a saúde",
+            "Compreender que os seres vivos dependem uns dos outros, nomeadamente através de relações alimentares, e do meio físico, reconhecendo a importância da preservação da Natureza",
+            "Reconhecer que os seres vivos se reproduzem e que os seus descendentes apresentam características semelhantes aos progenitores, mas também diferem em algumas delas",
+            "Relacionar fatores do ambiente (ar, luz, temperatura, água, solo) com condições indispensáveis a diferentes etapas da vida das plantas e dos animais",
+            "Localizar, no planisfério ou no globo terrestre, as principais formas físicas da superfície da Terra (continentes, oceanos, cadeias montanhosas, rios, florestas, desertos)",
+            "Distinguir formas de relevo (diferentes elevações, vales e planícies) e recursos hídricos (cursos de água, oceano, lagos, lagoas, etc.), do meio local",
+            "Identificar os diferentes agentes erosivos (vento, águas correntes, ondas, precipitação, etc.), reconhecendo que dão origem a diferentes paisagens à superfície da Terra",
+            "Relacionar os movimentos de rotação e translação da Terra com a sucessão do dia e da noite e a existência de estações do ano",
+            "Compreender, recorrendo a um modelo, que as fases da Lua resultam do seu movimento em torno da Terra",
+            "Utilizar instrumentos de medida para orientação e localização no espaço de elementos naturais e humanos do meio local e da região onde vive, tendo como referência os pontos cardeais",
+            "Distinguir as diferenças existentes entre sólidos, líquidos e gases",
+            "Identificar a existência de transformações reversíveis (condensação, evaporação, solidificação, dissolução, fusão)"
+          ]
+        },
+        {
+          "name": "Tecnologia",
+          "descriptors": [
+            "Comparar o comportamento da luz no que respeita à linearidade da sua propagação em diferentes materiais (transparentes, translúcidos e opacos)",
+            "Estabelecer uma relação de causa-efeito decorrente da aplicação de uma força sobre um objeto e do movimento exercido sobre o mesmo em diferentes superfícies",
+            "Manusear operadores tecnológicos (elásticos, molas, interruptor, alavanca, roldana, etc.) de acordo com as suas funções, princípios e relações",
+            "Reconhecer o efeito das forças de atração e repulsão na interação entre magnetes",
+            "Utilizar informações e simbologias como linguagem específica da tecnologia"
+          ]
+        },
+        {
+          "name": "Sociedade/Natureza/Tecnologia",
+          "descriptors": [
+            "Distinguir diferentes formas de interferência do Oceano na vida humana (clima, saúde, alimentação, etc.)",
+            "Reconhecer o modo como as modificações ambientais (desflorestação, incêndios, assoreamento, poluição) provocam desequilíbrios nos ecossistemas e influenciam a vida dos seres vivos e da sociedade",
+            "Identificar um problema ambiental ou social existente na sua comunidade (resíduos sólidos urbanos, poluição, pobreza, desemprego, exclusão social, etc.), propondo soluções de resolução",
+            "Identificar diferenças e semelhanças entre o passado e o presente de um lugar quanto a aspetos naturais, sociais, culturais e tecnológicos",
+            "Reconhecer as potencialidades da internet, utilizando as tecnologias de informação e da comunicação com segurança e respeito, mantendo as informações pessoais em sigilo",
+            "Reconhecer o papel dos media na informação sobre o mundo atual",
+            "Saber colocar questões, levantar hipóteses, fazer inferências, comprovar resultados e saber comunicá-los, reconhecendo como se constrói o conhecimento"
+          ]
+        }
+      ]
+    },
+    "4": {
+      "domains": [
+        {
+          "name": "Sociedade",
+          "descriptors": [
+            "Construir um friso cronológico com os factos e as datas relevantes da História de Portugal, destacando a formação de Portugal, a época da expansão marítima, o período filipino e a Restauração, a implantação da República e o 25 de Abril",
+            "Conhecer personagens e aspetos da vida em sociedade relacionados com os factos relevantes da história de Portugal, com recurso a fontes documentais",
+            "Relacionar a Revolução do 25 de Abril de 1974 com a obtenção de liberdades e direitos",
+            "Reconhecer a importância da Declaração Universal dos Direitos Humanos para a construção de uma sociedade mais justa",
+            "Conhecer o número de Estados pertencentes à União Europeia, localizando alguns estados-membros num mapa da Europa",
+            "Reconhecer a existência de fluxos migratórios, temporários ou de longa duração, identificando causas e consequências para os territórios envolvidos"
+          ]
+        },
+        {
+          "name": "Natureza",
+          "descriptors": [
+            "Descrever, de forma simplificada, e com recurso a representações, os sistemas digestivo, respiratório, circulatório, excretor e reprodutivo, reconhecendo que o seu bom funcionamento implica cuidados específicos",
+            "Conhecer algumas modificações biológicas e comportamentais que ocorrem na adolescência",
+            "Reconhecer mecanismos simples de defesa do organismo, por exemplo, a pele como primeira barreira de proteção e de prevenção de doenças",
+            "Identificar plantas e animais em vias de extinção ou mesmo extintos, investigando as razões que conduziram a essa situação",
+            "Localizar o planeta Terra no Sistema Solar, representando-o de diversas formas",
+            "Utilizar representações cartográficas, a diferentes escalas, para localizar formas de relevo, rios, lagos e lagoas em Portugal",
+            "Comparar diferentes formas de relevo de Portugal, através de observação direta ou indireta, de esquemas e de mapas hipsométricos, utilizando vocabulário geográfico adequado",
+            "Utilizar diversos processos para referenciar os pontos cardeais (posição do Sol, bússola, estrela polar), na orientação, localização e deslocação à superfície da Terra",
+            "Reconhecer alguns fenómenos naturais (sismos, vulcões, etc.) como manifestações da dinâmica e da estrutura interna da Terra e como agentes modificadores da paisagem",
+            "Recolher amostras de rochas e de solos agrupando-as de acordo com as suas propriedades (cor, textura, dureza, cheiro, permeabilidade) e exemplificar a sua aplicabilidade",
+            "Descrever diversos tipos de uso do solo da sua região (áreas agrícolas, florestais, industriais ou turísticas), comparando com os de outras regiões",
+            "Reconhecer de que forma a atividade humana interfere no oceano (poluição, alterações nas zonas costeiras e rios, etc.)"
+          ]
+        },
+        {
+          "name": "Tecnologia",
+          "descriptors": [
+            "Comparar diversos materiais, por exemplo, através dos circuitos elétricos, indicando se são isoladores ou condutores elétricos, e discutir as suas aplicações, bem como as regras de segurança na sua utilização",
+            "Identificar objetos tecnológicos (analógicos e digitais), utilizados no passado e no presente, relacionando-os com os materiais utilizados no seu fabrico, para constatar permanências e evoluções",
+            "Reconhecer a importância da evolução tecnológica para a evolução da sociedade, relacionando objetos, equipamentos e soluções tecnológicas com diferentes necessidades e problemas do quotidiano",
+            "Produzir soluções tecnológicas através da reutilização ou reciclagem de materiais (catavento, forno solar, etc.)"
+          ]
+        },
+        {
+          "name": "Sociedade/Natureza/Tecnologia",
+          "descriptors": [
+            "Reconhecer e valorizar o património natural e cultural - local, nacional, etc. - identificando na paisagem elementos naturais e vestígios materiais do passado, costumes, tradições, símbolos e efemérides",
+            "Relacionar a distribuição espacial de alguns fenómenos físicos (relevo, clima, rede hidrográfica, etc.) com a distribuição espacial de fenómenos humanos (população, atividades económicas, etc.) a diferentes escalas",
+            "Relacionar o aumento da população mundial e do consumo de bens com alterações na qualidade do ambiente (destruição de florestas, poluição, esgotamento de recursos, extinção de espécies, etc.), reconhecendo a necessidade de adotar medidas individuais e coletivas que minimizem o impacto negativo",
+            "Utilizar as tecnologias de informação e comunicação com segurança, respeito e responsabilidade, tomando consciência de que o seu uso abusivo gera dependência",
+            "Saber colocar questões, levantar hipóteses, fazer inferências, comprovar resultados e saber comunicá-los, reconhecendo como se constrói o conhecimento"
+          ]
+        }
+      ]
+    }
+  }
+}
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2026-07-15T23:52:01.816Z
+            </div>
+        <script src="../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
+    </body>
+</html>
+    
