@@ -3,7 +3,7 @@
 import { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { User, BrainCircuit, History } from 'lucide-react';
+import { User, BrainCircuit, History, Info } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { DarkModeToggle } from '@/components/DarkModeToggle';
@@ -28,9 +28,15 @@ function DashboardHeader() {
                   Histórico
               </Button>
           </Link>
-          <div className="flex items-center gap-2">
-            <DarkModeToggle />
-          </div>
+        <div className="flex items-center gap-2">
+          <Link href={`/about?name=${encodeURIComponent(name)}&grade=${grade}`} passHref>
+            <Button variant="ghost">
+              <Info className="mr-2 h-5 w-5" />
+              Sobre
+            </Button>
+          </Link>
+          <DarkModeToggle />
+        </div>
           <div className="text-right hidden sm:block">
             <p className="font-bold text-lg">{name}</p>
           </div>
