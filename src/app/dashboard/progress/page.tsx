@@ -7,6 +7,7 @@ import { ArrowLeft, TrendingUp, TrendingDown, Minus, Target } from "lucide-react
 import { getWeeklyProgress, getSubjectPerformance, getTopicAnalysis, getLearningTrend, generateStudyRecommendations } from "@/lib/analytics"
 import { getFullQuizHistory } from "@/app/actions"
 import { logger } from "@/lib/logger";
+import { calculateLevel } from "@/lib/levels";
 
 interface DailyScore {
   date: string
@@ -56,26 +57,6 @@ const subjectBorderColors: Record<string, string> = {
   Português: "border-green-300 dark:border-green-700",
   Matemática: "border-blue-300 dark:border-blue-700",
   "Estudo do Meio": "border-orange-300 dark:border-orange-700",
-}
-
-const levelThresholds = [
-  { level: 1, points: 0 },
-  { level: 2, points: 100 },
-  { level: 3, points: 300 },
-  { level: 4, points: 600 },
-  { level: 5, points: 1000 },
-  { level: 6, points: 1500 },
-]
-
-function calculateLevel(totalPoints: number) {
-  let currentLevel = 1
-  for (let i = levelThresholds.length - 1; i >= 0; i--) {
-    if (totalPoints >= levelThresholds[i].points) {
-      currentLevel = levelThresholds[i].level
-      break
-    }
-  }
-  return currentLevel
 }
 
 export default function ProgressPage() {
@@ -149,7 +130,7 @@ export default function ProgressPage() {
     loadData()
   }, [name])
 
-  const level = useMemo(() => calculateLevel(totalPoints), [totalPoints])
+  const level = useMemo(() => calculateLevel(totalPoints).level, [totalPoints])
 
   const maxBarScore = useMemo(() => {
     const max = Math.max(...weeklyProgress.map((d) => d.score), 1)

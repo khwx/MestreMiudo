@@ -27,6 +27,17 @@ export function BadgePopup({ badgeName, badgeDescription, badgeIcon, onClose }: 
     return () => clearTimeout(timer);
   }, [onClose]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsVisible(false);
+        setTimeout(onClose, 300);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div

@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { RotateCw, Timer, Trophy } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { getVocabularyForSubject, type Subject } from '@/lib/vocabulary';
+import { shuffleArray, formatTime } from '@/lib/game-utils';
 
 type Direction = 'across' | 'down';
 
@@ -23,15 +24,6 @@ interface CrosswordState {
   clues: ClueEntry[];
   answers: string[][];
   size: number;
-}
-
-function shuffleArray<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
 }
 
 function generateCrossword(subject: Subject): CrosswordState {
@@ -125,12 +117,6 @@ function generateCrossword(subject: Subject): CrosswordState {
   }
 
   return { grid, clues, answers, size };
-}
-
-function formatTime(seconds: number): string {
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
 export function CrosswordGame() {
@@ -376,6 +362,7 @@ export function CrosswordGame() {
                     onChange={e => handleLetterChange(ri, ci, e.target.value)}
                     onKeyDown={e => handleKeyDown(ri, ci, e)}
                     onClick={() => handleCellClick(ri, ci)}
+                    aria-label={`Célula linha ${ri + 1}, coluna ${ci + 1}${clueNum ? `, pista ${clueNum}` : ''}`}
                     className={cn(
                       "w-9 h-9 text-center font-bold text-sm uppercase border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary",
                       isSelected && "ring-2 ring-primary",
@@ -397,22 +384,23 @@ export function CrosswordGame() {
             <div>
               <h3 className="font-bold text-sm mb-2 text-gray-700 dark:text-gray-300">Horizontal</h3>
               <div className="space-y-1">
-                {acrossClues.map(c => (
-                  <button
-                    key={c.number}
-                    onClick={() => {
-                      setSelectedClue(c);
-                      setSelectedCell({ row: c.row, col: c.col });
-                      setTimeout(() => inputRefs.current.get(`${c.row}-${c.col}`)?.focus(), 0);
-                    }}
-                    className={cn(
-                      "block w-full text-left text-xs px-2 py-1 rounded transition-colors",
-                      selectedClue === c ? "bg-primary text-primary-foreground" : "hover:bg-gray-100 dark:hover:bg-gray-800"
-                    )}
-                  >
-                    <span className="font-bold">{c.number}.</span> {c.clue}
-                  </button>
-                ))}
+                 {acrossClues.map(c => (
+                   <button
+                     key={c.number}
+                     onClick={() => {
+                       setSelectedClue(c);
+                       setSelectedCell({ row: c.row, col: c.col });
+                       setTimeout(() => inputRefs.current.get(`${c.row}-${c.col}`)?.focus(), 0);
+                     }}
+                     className={cn(
+                       "block w-full text-left text-xs px-2 py-1 rounded transition-colors",
+                       selectedClue === c ? "bg-primary text-primary-foreground" : "hover:bg-gray-100 dark:hover:bg-gray-800"
+                     )}
+                     aria-label={`Pista ${c.number} horizontal: ${c.clue}`}
+                   >
+                     <span className="font-bold">{c.number}.</span> {c.clue}
+                   </button>
+                 ))}
               </div>
             </div>
           )}
@@ -420,22 +408,23 @@ export function CrosswordGame() {
             <div>
               <h3 className="font-bold text-sm mb-2 text-gray-700 dark:text-gray-300">Vertical</h3>
               <div className="space-y-1">
-                {downClues.map(c => (
-                  <button
-                    key={c.number}
-                    onClick={() => {
-                      setSelectedClue(c);
-                      setSelectedCell({ row: c.row, col: c.col });
-                      setTimeout(() => inputRefs.current.get(`${c.row}-${c.col}`)?.focus(), 0);
-                    }}
-                    className={cn(
-                      "block w-full text-left text-xs px-2 py-1 rounded transition-colors",
-                      selectedClue === c ? "bg-primary text-primary-foreground" : "hover:bg-gray-100 dark:hover:bg-gray-800"
-                    )}
-                  >
-                    <span className="font-bold">{c.number}.</span> {c.clue}
-                  </button>
-                ))}
+                 {downClues.map(c => (
+                   <button
+                     key={c.number}
+                     onClick={() => {
+                       setSelectedClue(c);
+                       setSelectedCell({ row: c.row, col: c.col });
+                       setTimeout(() => inputRefs.current.get(`${c.row}-${c.col}`)?.focus(), 0);
+                     }}
+                     className={cn(
+                       "block w-full text-left text-xs px-2 py-1 rounded transition-colors",
+                       selectedClue === c ? "bg-primary text-primary-foreground" : "hover:bg-gray-100 dark:hover:bg-gray-800"
+                     )}
+                     aria-label={`Pista ${c.number} vertical: ${c.clue}`}
+                   >
+                     <span className="font-bold">{c.number}.</span> {c.clue}
+                   </button>
+                 ))}
               </div>
             </div>
           )}

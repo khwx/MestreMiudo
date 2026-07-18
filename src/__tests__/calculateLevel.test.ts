@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calculateLevel } from '@/app/dashboard/client-page';
+import { calculateLevel } from '@/lib/levels';
 
 describe('calculateLevel', () => {
   it('returns level 1 for 0 points', () => {

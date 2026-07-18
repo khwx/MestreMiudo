@@ -30,14 +30,17 @@ export default function StoryGalleryClientPage() {
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchStories = async () => {
       try {
+        setError(null);
         const data = await getStudentStories(name, 20);
         setStories(data as Story[]);
-      } catch (error) {
-        logger.error('Erro ao carregar histórias:', error);
+      } catch (err) {
+        logger.error('Erro ao carregar histórias:', err);
+        setError('Não foi possível carregar as tuas histórias. Tenta novamente.');
         toast({
           title: 'Erro ao carregar histórias',
           description: 'Não foi possível carregar as tuas histórias.',
@@ -161,6 +164,24 @@ export default function StoryGalleryClientPage() {
             </div>
           ))}
         </div>
+      ) : error ? (
+        <div className="card-kid border-4 border-red-300 dark:border-red-700 shadow-xl max-w-2xl mx-auto">
+          <div className="p-8 text-center space-y-4">
+            <div className="text-6xl">😕</div>
+            <h3 className="text-2xl font-black text-red-700 dark:text-red-300">Erro ao carregar</h3>
+            <p className="text-red-600 dark:text-red-400">{error}</p>
+            <button
+              onClick={() => {
+                setError(null);
+                setLoading(true);
+                setStories([]);
+              }}
+              className="btn-kid border-2 border-red-300 px-6 py-2 rounded-xl font-bold hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors"
+            >
+              Tentar Novamente
+            </button>
+          </div>
+        </div>
       ) : stories.length === 0 ? (
         <div className="card-kid border-4 border-gray-300 dark:border-gray-700 shadow-xl max-w-2xl mx-auto">
           <div className="p-8 text-center">
@@ -178,10 +199,12 @@ export default function StoryGalleryClientPage() {
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {stories.map((story) => (
-            <div
+            <button
               key={story.id}
+              type="button"
               onClick={() => setSelectedStory(story)}
-              className="card-kid border-4 border-purple-200 dark:border-purple-800 shadow-xl hover:shadow-2xl hover:border-purple-400 transition-all duration-300 cursor-pointer group"
+              className="card-kid border-4 border-purple-200 dark:border-purple-800 shadow-xl hover:shadow-2xl hover:border-purple-400 transition-all duration-300 cursor-pointer group text-left w-full"
+              aria-label={`Ver história: ${story.title}`}
             >
               <div className="p-6">
                 <div className="flex items-start justify-between mb-3">
@@ -212,7 +235,7 @@ export default function StoryGalleryClientPage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       )}

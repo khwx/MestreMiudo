@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { RotateCw, Timer, Trophy, Check } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { getVocabularyForSubject, type Subject } from '@/lib/vocabulary';
+import { shuffleArray, formatTime } from '@/lib/game-utils';
 
 interface WordPlacement {
   word: string;
@@ -30,15 +31,6 @@ const DIRECTIONS: [number, number][] = [
   [-1, -1], // diagonal up-left
   [1, -1],  // diagonal down-left
 ];
-
-function shuffleArray<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
 
 function generateWordSearch(subject: Subject): WordSearchState {
   const vocab = getVocabularyForSubject(subject);
@@ -97,12 +89,6 @@ function generateWordSearch(subject: Subject): WordSearchState {
   return { grid, words: placements, size };
 }
 
-function formatTime(seconds: number): string {
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  return `${m}:${s.toString().padStart(2, '0')}`;
-}
-
 interface Selection {
   startRow: number;
   startCol: number;
@@ -157,6 +143,7 @@ export function WordSearchGame() {
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const [focusedCell, setFocusedCell] = useState<{ row: number; col: number } | null>(null);
 
   const startGame = useCallback(() => {
     const g = generateWordSearch(subject);
@@ -268,6 +255,46 @@ export function WordSearchGame() {
     setSelection(null);
   };
 
+  const handleGridKeyDown = (e: React.KeyboardEvent) => {
+    if (!game) return;
+    const size = game.size;
+    const current = focusedCell || { row: 0, col: 0 };
+
+    switch (e.key) {
+      case 'ArrowUp':
+        e.preventDefault();
+        setFocusedCell({ row: Math.max(0, current.row - 1), col: current.col });
+        break;
+      case 'ArrowDown':
+        e.preventDefault();
+        setFocusedCell({ row: Math.min(size - 1, current.row + 1), col: current.col });
+        break;
+      case 'ArrowLeft':
+        e.preventDefault();
+        setFocusedCell({ row: current.row, col: Math.max(0, current.col - 1) });
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        setFocusedCell({ row: current.row, col: Math.min(size - 1, current.col + 1) });
+        break;
+      case 'Enter':
+      case ' ':
+        e.preventDefault();
+        if (!isSelecting && !completed) {
+          setIsSelecting(true);
+          setSelection({ startRow: current.row, startCol: current.col, endRow: current.row, endCol: current.col });
+          if (!running) setRunning(true);
+        }
+        break;
+      case 'Escape':
+        if (isSelecting) {
+          setIsSelecting(false);
+          setSelection(null);
+        }
+        break;
+    }
+  };
+
   if (!game) return null;
 
   return (
@@ -323,6 +350,8 @@ export function WordSearchGame() {
         {/* Grid */}
         <div
           ref={gridRef}
+          role="grid"
+          aria-label="Sopa de letras"
           className="inline-grid gap-0 border-2 border-gray-300 dark:border-gray-600 mx-auto select-none touch-none"
           style={{ gridTemplateColumns: `repeat(${game.size}, 2.25rem)` }}
           onMouseDown={handlePointerDown}
@@ -332,20 +361,28 @@ export function WordSearchGame() {
           onTouchStart={handlePointerDown}
           onTouchMove={handlePointerMove}
           onTouchEnd={handlePointerUp}
+          onKeyDown={handleGridKeyDown}
+          tabIndex={0}
         >
           {game.grid.map((row, ri) =>
             row.map((cell, ci) => {
               const key = `${ri}-${ci}`;
               const foundColor = foundCells.get(key);
               const inSelection = selection ? isCellInSelection(ri, ci, selection) : false;
+              const isFocused = focusedCell?.row === ri && focusedCell?.col === ci;
 
               return (
                 <div
                   key={key}
+                  role="gridcell"
+                  aria-label={`Linha ${ri + 1}, coluna ${ci + 1}: ${cell}`}
+                  tabIndex={isFocused ? 0 : -1}
+                  onFocus={() => setFocusedCell({ row: ri, col: ci })}
                   className={cn(
-                    "w-9 h-9 flex items-center justify-center text-xs font-bold uppercase border border-gray-200 dark:border-gray-700 cursor-pointer transition-colors",
+                    "w-9 h-9 flex items-center justify-center text-xs font-bold uppercase border border-gray-200 dark:border-gray-700 transition-colors outline-none",
                     foundColor !== undefined ? COLORS[foundColor] : "bg-white dark:bg-gray-800",
                     inSelection && foundColor === undefined && "bg-blue-100 dark:bg-blue-900/50",
+                    isFocused && "ring-2 ring-primary ring-offset-1",
                     "hover:bg-gray-100 dark:hover:bg-gray-700"
                   )}
                 >

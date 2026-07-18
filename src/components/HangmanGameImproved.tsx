@@ -188,7 +188,7 @@ export function HangmanGame() {
                 <div className="border-2 border-gray-200 dark:border-gray-700 rounded-lg p-4 space-y-4 bg-gray-50 dark:bg-gray-800/50">
                     <div>
                         <label className="block text-sm font-semibold mb-2">Categoria</label>
-                        <div className="grid grid-cols-4 gap-2">
+                        <div className="grid grid-cols-4 gap-2" role="group" aria-label="Seleção de categoria">
                             {CATEGORIES.map(cat => (
                                 <Button
                                     key={cat}
@@ -198,6 +198,7 @@ export function HangmanGame() {
                                         setCategory(cat);
                                         setShowSettings(false);
                                     }}
+                                    aria-pressed={category === cat}
                                 >
                                     {cat}
                                 </Button>
@@ -207,7 +208,7 @@ export function HangmanGame() {
 
                     <div>
                         <label className="block text-sm font-semibold mb-2">Dificuldade</label>
-                        <div className="flex gap-2">
+                        <div className="flex gap-2" role="group" aria-label="Seleção de dificuldade">
                             {DIFFICULTIES.map(diff => (
                                 <Button
                                     key={diff}
@@ -216,6 +217,7 @@ export function HangmanGame() {
                                         setDifficulty(diff);
                                         setShowSettings(false);
                                     }}
+                                    aria-pressed={difficulty === diff}
                                 >
                                     {diff}
                                 </Button>
@@ -251,6 +253,7 @@ export function HangmanGame() {
                         size="sm"
                         onClick={() => setShowHint(true)}
                         className="gap-2"
+                        aria-label="Mostrar dica"
                     >
                         <Lightbulb className="w-4 h-4" />
                         Dica
