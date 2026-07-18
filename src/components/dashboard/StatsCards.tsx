@@ -2,6 +2,7 @@
 
 import { CardContent } from "@/components/ui/card"
 import { Trophy, Target, Zap, Flame } from "lucide-react"
+import React from "react"
 
 interface StudentStreak {
   current_streak: number;
@@ -15,7 +16,7 @@ interface StatsCardsProps {
   streak: StudentStreak | null;
 }
 
-export function StatsCards({ totalPoints, averageScore, totalQuizzes, streak }: StatsCardsProps) {
+export const StatsCards = React.memo(function StatsCards({ totalPoints, averageScore, totalQuizzes, streak }: StatsCardsProps) {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       <div className="stat-card bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-900/30 dark:to-yellow-800/30 border-4 border-yellow-300 transition-all duration-300">
@@ -51,4 +52,4 @@ export function StatsCards({ totalPoints, averageScore, totalQuizzes, streak }: 
       </div>
     </div>
   )
-}
+});

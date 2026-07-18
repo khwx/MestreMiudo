@@ -3,6 +3,7 @@
 import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Medal } from "lucide-react"
+import React from "react"
 
 interface LevelProgressProps {
   level: number;
@@ -12,7 +13,7 @@ interface LevelProgressProps {
   loading: boolean;
 }
 
-export function LevelProgress({ level, progressPercentage, pointsNeeded, nextLevel, loading }: LevelProgressProps) {
+export const LevelProgress = React.memo(function LevelProgress({ level, progressPercentage, pointsNeeded, nextLevel, loading }: LevelProgressProps) {
   return (
     <div className="max-w-2xl mx-auto border-4 border-blue-300 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl shadow-xl">
       <CardHeader className="text-center pb-2">
@@ -49,4 +50,4 @@ export function LevelProgress({ level, progressPercentage, pointsNeeded, nextLev
       </CardContent>
     </div>
   )
-}
+});
