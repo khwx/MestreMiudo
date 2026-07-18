@@ -23,6 +23,15 @@ describe('calculateStars', () => {
     expect(calculateStars(59)).toBe(0);
     expect(calculateStars(30)).toBe(0);
   });
+
+  it('handles edge cases', () => {
+    expect(calculateStars(-10)).toBe(0);
+    expect(calculateStars(101)).toBe(2);
+    expect(calculateStars(79.9)).toBe(1);
+    expect(calculateStars(80)).toBe(2);
+    expect(calculateStars(99.9)).toBe(2);
+    expect(calculateStars(100)).toBe(3);
+  });
 });
 
 describe('calculateCoins', () => {
