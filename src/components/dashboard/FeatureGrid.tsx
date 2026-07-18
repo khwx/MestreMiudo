@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { Book, Divide, Leaf, Shuffle, Gamepad2, BookHeart, BookOpen, Lightbulb, Flame, ShoppingBag, Brain, RefreshCw, TrendingUp, Trophy, Calendar, BarChart3 } from "lucide-react"
+import React from "react"
 
 interface SpacedStats {
   total: number;
@@ -29,7 +30,7 @@ const subjects = [
   { name: "Estudo do Meio", icon: Leaf, color: "text-orange-600", slug: "estudo-do-meio" },
 ]
 
-export function FeatureGrid({ name, grade, spacedStats, dailyChallengeStats }: FeatureGridProps) {
+export const FeatureGrid = React.memo(function FeatureGrid({ name, grade, spacedStats, dailyChallengeStats }: FeatureGridProps) {
   return (
     <div className="space-y-4">
       <h3 className="text-2xl font-black text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -268,4 +269,4 @@ export function FeatureGrid({ name, grade, spacedStats, dailyChallengeStats }: F
       </div>
     </div>
   )
-}
+});

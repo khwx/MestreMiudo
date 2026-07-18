@@ -35,7 +35,6 @@ describe('generateFeedback', () => {
   it('returns feedback for correct answer', () => {
     const feedback = generateFeedback({
       question: 'What is 2+2?',
-      options: ['3', '4', '5', '6'],
       correctAnswer: '4',
       studentAnswer: '4',
       topic: 'matematica',
@@ -49,7 +48,6 @@ describe('generateFeedback', () => {
   it('returns feedback for incorrect answer', () => {
     const feedback = generateFeedback({
       question: 'What is 2+2?',
-      options: ['3', '4', '5', '6'],
       correctAnswer: '4',
       studentAnswer: '3',
       topic: 'matematica',

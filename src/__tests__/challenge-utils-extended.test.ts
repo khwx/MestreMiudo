@@ -26,9 +26,8 @@ describe('validateAnswer', () => {
     const challenge: LessonChallenge = {
       id: '1',
       challenge_type: 'multiple_choice',
+      question: 'test',
       content: { correct_answer: 'A' },
-      subject: 'matematica',
-      grade_level: 1,
     };
     expect(validateAnswer(challenge, '')).toBe(false);
     expect(validateAnswer(challenge, null)).toBe(false);
@@ -39,9 +38,8 @@ describe('validateAnswer', () => {
     const challenge: LessonChallenge = {
       id: '1',
       challenge_type: 'multiple_choice',
+      question: 'test',
       content: { correct_answer: 'A' },
-      subject: 'matematica',
-      grade_level: 1,
     };
     expect(validateAnswer(challenge, 'A')).toBe(true);
     expect(validateAnswer(challenge, 'B')).toBe(false);
@@ -51,9 +49,8 @@ describe('validateAnswer', () => {
     const challenge: LessonChallenge = {
       id: '1',
       challenge_type: 'fill_blank',
+      question: 'test',
       content: { correct_answers: ['coração', 'coracao'] },
-      subject: 'portugues',
-      grade_level: 1,
     };
     expect(validateAnswer(challenge, 'coração')).toBe(true);
     expect(validateAnswer(challenge, 'coracao')).toBe(true);
@@ -65,9 +62,8 @@ describe('validateAnswer', () => {
     const challenge: LessonChallenge = {
       id: '1',
       challenge_type: 'word_order',
+      question: 'test',
       content: { correct_order: ['A', 'B', 'C'] },
-      subject: 'portugues',
-      grade_level: 1,
     };
     expect(validateAnswer(challenge, ['A', 'B', 'C'])).toBe(true);
     expect(validateAnswer(challenge, ['C', 'B', 'A'])).toBe(false);
@@ -77,9 +73,8 @@ describe('validateAnswer', () => {
     const challenge: LessonChallenge = {
       id: '1',
       challenge_type: 'matching',
+      question: 'test',
       content: { correct_matches: { '1': 'A', '2': 'B' } },
-      subject: 'matematica',
-      grade_level: 1,
     };
     expect(validateAnswer(challenge, { '1': 'A', '2': 'B' })).toBe(true);
     expect(validateAnswer(challenge, { '1': 'B', '2': 'A' })).toBe(false);
@@ -91,9 +86,8 @@ describe('getCorrectAnswerText', () => {
     const challenge: LessonChallenge = {
       id: '1',
       challenge_type: 'multiple_choice',
+      question: 'test',
       content: { correct_answer: 'A' },
-      subject: 'matematica',
-      grade_level: 1,
     };
     expect(getCorrectAnswerText(challenge)).toBe('A');
   });
@@ -102,9 +96,8 @@ describe('getCorrectAnswerText', () => {
     const challenge: LessonChallenge = {
       id: '1',
       challenge_type: 'fill_blank',
+      question: 'test',
       content: { correct_answers: ['coração', 'coracao'] },
-      subject: 'portugues',
-      grade_level: 1,
     };
     expect(getCorrectAnswerText(challenge)).toBe('coração ou coracao');
   });
@@ -113,9 +106,8 @@ describe('getCorrectAnswerText', () => {
     const challenge: LessonChallenge = {
       id: '1',
       challenge_type: 'word_order',
+      question: 'test',
       content: { correct_order: ['A', 'B', 'C'] },
-      subject: 'portugues',
-      grade_level: 1,
     };
     expect(getCorrectAnswerText(challenge)).toBe('A B C');
   });
@@ -124,9 +116,8 @@ describe('getCorrectAnswerText', () => {
     const challenge: LessonChallenge = {
       id: '1',
       challenge_type: 'matching',
+      question: 'test',
       content: { correct_matches: { '1': 'A', '2': 'B' } },
-      subject: 'matematica',
-      grade_level: 1,
     };
     expect(getCorrectAnswerText(challenge)).toBe('1 -> A, 2 -> B');
   });
