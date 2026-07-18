@@ -7,6 +7,7 @@ import { Award, RotateCw, Star, Heart, Cloud, Anchor, Bug, Cake, Sun, Moon } fro
 import confetti from 'canvas-confetti';
 import { useSound } from '@/lib/sounds';
 import { type Subject, getRandomVocabularyPairs } from '@/lib/vocabulary';
+import React from 'react';
 
 const icons = [
     { icon: Star, color: 'text-yellow-400' },
@@ -49,7 +50,7 @@ const createVocabularyBoard = (subject: Subject, mode: 'icon' | 'word' | 'defini
         .map(({ card }) => card);
 };
 
-const Card = ({ card, onCardClick, index }: { card: CardType, onCardClick: (index: number) => void, index: number }) => {
+const Card = React.memo(({ card, onCardClick, index }: { card: CardType, onCardClick: (index: number) => void, index: number }) => {
     return (
         <button
             type="button"
@@ -81,7 +82,8 @@ const Card = ({ card, onCardClick, index }: { card: CardType, onCardClick: (inde
             </div>
         </button>
     )
-};
+});
+Card.displayName = 'Card';
 
 interface MemoryGameProps {
     subject?: Subject;

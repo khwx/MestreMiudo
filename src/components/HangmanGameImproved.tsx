@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { RotateCw, Lightbulb, Loader2, Settings } from 'lucide-react';
 import { generateWord } from '@/ai/flows/word-generation';
 import { useToast } from "@/hooks/use-toast";
+import React from 'react';
 
 const CATEGORIES = [
   "Animais",
@@ -23,7 +24,7 @@ const CATEGORIES = [
 
 const DIFFICULTIES: ("Fácil" | "Médio" | "Difícil")[] = ["Fácil", "Médio", "Difícil"];
 
-const HangmanDrawing = ({ numberOfGuesses }: { numberOfGuesses: number }) => {
+const HangmanDrawing = React.memo(({ numberOfGuesses }: { numberOfGuesses: number }) => {
     const bodyParts = [
         { key: "head", part: <div key="head" className="w-16 h-16 rounded-full border-4 border-foreground absolute top-[40px] right-[-24px]" /> },
         { key: "body", part: <div key="body" className="w-1 h-24 bg-foreground absolute top-[104px] right-0" /> },
@@ -42,9 +43,10 @@ const HangmanDrawing = ({ numberOfGuesses }: { numberOfGuesses: number }) => {
             <div className="h-1 w-64 bg-foreground" />
         </div>
     );
-};
+});
+HangmanDrawing.displayName = 'HangmanDrawing';
 
-const Keyboard = ({ activeLetters, inactiveLetters, onSelect, disabled }: {
+const Keyboard = React.memo(({ activeLetters, inactiveLetters, onSelect, disabled }: {
     activeLetters: string[];
     inactiveLetters: string[];
     onSelect: (letter: string) => void;
@@ -75,7 +77,8 @@ const Keyboard = ({ activeLetters, inactiveLetters, onSelect, disabled }: {
             })}
         </div>
     )
-}
+});
+Keyboard.displayName = 'Keyboard';
 
 const normalize = (str: string) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
 

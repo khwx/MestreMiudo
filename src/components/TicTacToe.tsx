@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { RotateCw, X, Circle, User, BrainCircuit } from 'lucide-react';
+import React from 'react';
 
 type Player = 'X' | 'O';
 type GameMode = 'human' | 'computer' | null;
 type Difficulty = 'easy' | 'medium' | 'hard' | null;
 
-const Square = ({ value, onSquareClick, isWinning, index }: { value: Player | null, onSquareClick: () => void, isWinning: boolean, index: number }) => (
+const Square = React.memo(({ value, onSquareClick, isWinning, index }: { value: Player | null, onSquareClick: () => void, isWinning: boolean, index: number }) => (
     <button 
         aria-label={`Casa ${index + 1}${value ? `, ${value}` : ', vazia'}`}
         className={cn(
@@ -22,7 +23,8 @@ const Square = ({ value, onSquareClick, isWinning, index }: { value: Player | nu
         {value === 'X' && <X className="h-8 w-8 md:h-12 md:w-12 text-blue-500" />}
         {value === 'O' && <Circle className="h-8 w-8 md:h-12 md:w-12 text-red-500" />}
     </button>
-);
+));
+Square.displayName = 'Square';
 
 const calculateWinner = (squares: (Player | null)[]): { winner: Player | null; line: number[] } => {
   const lines = [
