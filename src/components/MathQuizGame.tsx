@@ -343,6 +343,9 @@ export function MathQuizGame() {
 
       {/* Timer */}
       <div className="flex flex-col items-center gap-1">
+        <div aria-live="polite" aria-atomic="true" className="sr-only">
+          {timeLeft <= 10 ? `Restam ${timeLeft} segundos` : `Restam ${timeLeft} segundos`}
+        </div>
         <div className={cn("flex items-center gap-2", timerColor)}>
           <Clock className="h-5 w-5" />
           <span className="text-2xl font-bold">{timeLeft}s</span>

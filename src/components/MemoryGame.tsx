@@ -51,9 +51,12 @@ const createVocabularyBoard = (subject: Subject, mode: 'icon' | 'word' | 'defini
 
 const Card = ({ card, onCardClick, index }: { card: CardType, onCardClick: (index: number) => void, index: number }) => {
     return (
-        <div
+        <button
+            type="button"
+            aria-label={card.type === 'icon' ? 'Carta de ícone' : `Carta: ${card.matchLabel}`}
+            aria-pressed={card.isFlipped}
             className={cn(
-                "w-16 h-16 md:w-24 md:h-24 rounded-lg flex items-center justify-center cursor-pointer transition-transform duration-500 transform-style-preserve-3d",
+                "w-16 h-16 md:w-24 md:h-24 rounded-lg flex items-center justify-center cursor-pointer transition-transform duration-500 transform-style-preserve-3d focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
                 card.isFlipped ? 'transform-rotate-y-180' : ''
             )}
             onClick={() => onCardClick(index)}
@@ -76,7 +79,7 @@ const Card = ({ card, onCardClick, index }: { card: CardType, onCardClick: (inde
                     </span>
                 )}
             </div>
-        </div>
+        </button>
     )
 };
 

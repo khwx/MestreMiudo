@@ -9,8 +9,9 @@ type Player = 'X' | 'O';
 type GameMode = 'human' | 'computer' | null;
 type Difficulty = 'easy' | 'medium' | 'hard' | null;
 
-const Square = ({ value, onSquareClick, isWinning }: { value: Player | null, onSquareClick: () => void, isWinning: boolean }) => (
+const Square = ({ value, onSquareClick, isWinning, index }: { value: Player | null, onSquareClick: () => void, isWinning: boolean, index: number }) => (
     <button 
+        aria-label={`Casa ${index + 1}${value ? `, ${value}` : ', vazia'}`}
         className={cn(
             "flex items-center justify-center w-16 h-16 md:w-24 md:h-24 text-3xl md:text-4xl font-bold border-4 rounded-lg transition-all duration-300",
             isWinning ? 'bg-green-300 border-green-500 scale-110' : 'bg-card border-border hover:bg-muted',
@@ -218,6 +219,7 @@ export function TicTacToe() {
               value={square} 
               onSquareClick={() => handleClick(i)}
               isWinning={winningLine.includes(Number(i))}
+              index={i}
             />
         ))}
       </div>
