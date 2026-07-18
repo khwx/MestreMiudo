@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Award, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import React from 'react';
 
 interface BadgePopupProps {
   badgeName: string;
@@ -11,7 +12,7 @@ interface BadgePopupProps {
   onClose: () => void;
 }
 
-export function BadgePopup({ badgeName, badgeDescription, badgeIcon, onClose }: BadgePopupProps) {
+export const BadgePopup = React.memo(function BadgePopup({ badgeName, badgeDescription, badgeIcon, onClose }: BadgePopupProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -96,7 +97,7 @@ export function BadgePopup({ badgeName, badgeDescription, badgeIcon, onClose }: 
       </div>
     </div>
   );
-}
+});
 
 // Badge definitions for easy reference
 export const BADGE_DEFINITIONS: Record<string, { name: string; description: string; icon: string }> = {
