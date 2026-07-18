@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { generateHint, generateFeedback, generateExplanation } from '@/lib/feedback-system';
 
 interface QuestionFeedbackProps {
