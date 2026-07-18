@@ -253,12 +253,11 @@ export default function LessonDetailClient() {
              <div className="space-y-4">
                <h3 className="text-lg font-semibold text-center">Revisão dos Desafios</h3>
                <div className="space-y-3">
-                 {challenges.map((challenge, index) => {
-                   const challengeId = challenge.id || '';
-                   const isCorrect = answerCorrectness[challengeId];
-                    const _studentAnswer = answers[challengeId];
-                   
-                   return (
+                  {challenges.map((challenge, index) => {
+                    const challengeId = challenge.id || '';
+                    const isCorrect = answerCorrectness[challengeId];
+                    
+                    return (
                      <div key={index} className={`border-l-4 pl-3 ${
                        isCorrect === true 
                          ? 'border-success' 
