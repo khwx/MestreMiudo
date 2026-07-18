@@ -6,6 +6,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { AccessibilitySettings } from '@/components/AccessibilitySettings';
 import { AccessibilityProvider } from '@/components/AccessibilityProvider';
 import { SkipNav } from '@/components/SkipNav';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -40,7 +41,9 @@ export default function RootLayout({
       <body className={`${nunito.variable} ${fredoka.variable} font-body antialiased`}>
         <AccessibilityProvider>
           <SkipNav />
-          {children}
+          <ErrorBoundary>
+            {children}
+          </ErrorBoundary>
           <AccessibilitySettings />
         </AccessibilityProvider>
         <Toaster />
