@@ -7,6 +7,7 @@ import { User, BrainCircuit, History, Info } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { DarkModeToggle } from '@/components/DarkModeToggle';
+import { SkipNav } from '@/components/SkipNav';
 
 function DashboardHeader() {
   const searchParams = useSearchParams();
@@ -59,6 +60,7 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SkipNav />
       <Suspense fallback={<div className="bg-card border-b p-4 h-20 animate-pulse" />}>
         <DashboardHeader />
       </Suspense>

@@ -1,5 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { isSupabaseConfigured } from '@/lib/supabase';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 
 describe('isSupabaseConfigured', () => {
   const originalUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
