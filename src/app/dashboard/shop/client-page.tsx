@@ -220,12 +220,13 @@ export default function ShopClientPage() {
                       <div className="bg-green-50 px-4 py-2 rounded-full">
                         <span className="text-green-700 font-bold">✅ Já tens!</span>
                       </div>
-                    ) : (
-                      <Button
-                        onClick={() => handleBuy(item)}
-                        className="btn-kid bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white font-bold"
-                        disabled={((rewards?.total_points as number) || 0) < item.price}
-                      >
+                     ) : (
+                       <Button
+                         onClick={() => handleBuy(item)}
+                         className="btn-kid bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white font-bold"
+                         disabled={((rewards?.total_points as number) || 0) < item.price}
+                         aria-label={`Comprar ${item.name} por ${item.price} pontos`}
+                       >
                         Comprar!
                       </Button>
                     )}

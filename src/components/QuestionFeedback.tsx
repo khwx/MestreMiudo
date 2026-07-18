@@ -70,6 +70,7 @@ export function QuestionFeedback({
         <button
           onClick={() => setHintLevel(hintLevel + 1)}
           className="w-full px-4 py-2 bg-yellow-100 hover:bg-yellow-200 dark:bg-yellow-900/30 dark:hover:bg-yellow-900/50 border-2 border-yellow-300 dark:border-yellow-700 rounded-lg font-semibold text-yellow-700 dark:text-yellow-300 transition"
+          aria-label={`Mostrar dica ${hintLevel + 1}`}
         >
           💡 Dica {hintLevel > 0 && `(${hintLevel}/4)`}
         </button>
@@ -96,6 +97,7 @@ export function QuestionFeedback({
         <button
           onClick={() => setShowExplanation(!showExplanation)}
           className="w-full px-4 py-2 bg-blue-100 hover:bg-blue-200 dark:bg-blue-900/30 dark:hover:bg-blue-900/50 border-2 border-blue-300 dark:border-blue-700 rounded-lg font-semibold text-blue-700 dark:text-blue-300 transition"
+          aria-label={showExplanation ? 'Fechar explicação' : 'Ver explicação'}
         >
           {showExplanation ? '✕ Fechar Explicação' : '📖 Ver Explicação'}
         </button>
@@ -144,6 +146,7 @@ export function QuestionHint({
             setHintLevel(1);
           }}
           className="text-sm px-3 py-1 bg-yellow-100 hover:bg-yellow-200 dark:bg-yellow-900/30 dark:hover:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300 rounded-lg font-semibold transition"
+          aria-label="Mostrar dica"
         >
           💡 Dica
         </button>
