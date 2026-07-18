@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { generateHint, generateFeedback, generateExplanation } from '@/lib/feedback-system';
+import React from 'react';
 
 interface QuestionFeedbackProps {
   question: string;
@@ -14,7 +15,7 @@ interface QuestionFeedbackProps {
   streak?: number;
 }
 
-export function QuestionFeedback({
+export const QuestionFeedback = React.memo(function QuestionFeedback({
   question,
   options,
   correctAnswer,
@@ -118,7 +119,7 @@ export function QuestionFeedback({
       )}
     </div>
   );
-}
+});
 
 /**
  * Hint-only component for quiz taking
