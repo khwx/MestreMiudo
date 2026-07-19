@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Coins, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -95,9 +95,9 @@ export default function ShopClientPage() {
     }
   };
 
-  const isOwned = (itemId: string) => {
-    return inventory.some(inv => inv.item_id === itemId);
-  };
+  const ownedItemIds = useMemo(() => new Set(inventory.map(inv => inv.item_id)), [inventory]);
+
+  const isOwned = (itemId: string) => ownedItemIds.has(itemId);
 
   if (loading) {
     return (

@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sun, Moon } from 'lucide-react';
 import { useSound } from '@/lib/sounds';
+import React from 'react';
 
-export function DarkModeToggle() {
+export const DarkModeToggle = React.memo(function DarkModeToggle() {
   const [darkMode, setDarkMode] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { playClick } = useSound();
@@ -59,4 +60,4 @@ export function DarkModeToggle() {
       {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
     </Button>
   );
-}
+});

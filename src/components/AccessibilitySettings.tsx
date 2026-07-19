@@ -7,8 +7,9 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Accessibility, Keyboard, Volume2, Eye, VolumeX } from 'lucide-react';
 import { useAccessibility } from './AccessibilityProvider';
+import React from 'react';
 
-export function AccessibilitySettings() {
+export const AccessibilitySettings = React.memo(function AccessibilitySettings() {
   const [open, setOpen] = useState(false);
   const { settings, setSettings } = useAccessibility();
 
@@ -109,4 +110,4 @@ export function AccessibilitySettings() {
       </DialogContent>
     </Dialog>
   );
-}
+});

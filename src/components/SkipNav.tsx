@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect } from 'react';
+import React from 'react';
 
-export function SkipNav() {
+export const SkipNav = React.memo(function SkipNav() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -27,4 +28,4 @@ export function SkipNav() {
       Saltar para o conteúdo principal
     </a>
   );
-}
+});

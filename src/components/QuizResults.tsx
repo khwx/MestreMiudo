@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Star, Trophy, RefreshCw } from 'lucide-react';
 import type { PersonalizedLearningPathOutput } from '@/app/shared-schemas';
+import React from 'react';
 
 type QuizResultsProps = {
   score: number;
@@ -14,7 +15,7 @@ type QuizResultsProps = {
   subject: string;
 };
 
-export function QuizResults({ score, totalQuestions, points, onRestart, onBack }: QuizResultsProps) {
+export const QuizResults = React.memo(function QuizResults({ score, totalQuestions, points, onRestart, onBack }: QuizResultsProps) {
   const stars = score === totalQuestions ? 3 : score >= totalQuestions * 0.6 ? 2 : 1;
 
   return (
@@ -72,4 +73,4 @@ export function QuizResults({ score, totalQuestions, points, onRestart, onBack }
       </div>
     </div>
   );
-}
+});

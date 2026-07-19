@@ -1,7 +1,7 @@
 "use client";
 import { logger } from "@/lib/logger";
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { getFullQuizHistory, getStudentLessonHistoryAction } from '@/app/actions';
@@ -129,7 +129,7 @@ export default function HistoryClientPage() {
         return <p className="text-center text-destructive">Nome do aluno não especificado.</p>;
     }
     
-    const allHistory = [
+    const allHistory = useMemo(() => [
         ...lessonHistory.map(lesson => ({
             type: 'lesson' as const,
             subject: lesson.lessons?.subject || 'Português',
@@ -149,7 +149,7 @@ export default function HistoryClientPage() {
             totalQuestions: quiz.numberOfQuestions,
             id: quiz.timestamp
         }))
-    ].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+    ].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()), [lessonHistory, quizHistory]);
 
     return (
         <div className="space-y-6">

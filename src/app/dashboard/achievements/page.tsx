@@ -1,7 +1,7 @@
 'use client';
 import { logger } from "@/lib/logger";
 
-import { Suspense, useState, useEffect } from 'react';
+import { Suspense, useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -181,10 +181,12 @@ function AchievementsPageContent() {
     loadAchievements();
   }, [name]);
 
-  const unlockedIds = new Set(unlockedAchievements.map((a) => a.id));
-  const unlockedMap = new Map(unlockedAchievements.map((a) => [a.id, a]));
-
-  const progressPercentage = (unlockedAchievements.length / allAchievements.length) * 100;
+  const { unlockedIds, unlockedMap, progressPercentage } = useMemo(() => {
+    const ids = new Set(unlockedAchievements.map((a) => a.id));
+    const map = new Map(unlockedAchievements.map((a) => [a.id, a]));
+    const progress = (unlockedAchievements.length / allAchievements.length) * 100;
+    return { unlockedIds: ids, unlockedMap: map, progressPercentage: progress };
+  }, [unlockedAchievements, allAchievements]);
 
   if (loading) {
     return (

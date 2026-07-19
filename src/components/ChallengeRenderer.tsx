@@ -1,6 +1,5 @@
 'use client';
-import { useEffect } from 'react';
-import type React from 'react';
+import React, { useEffect } from 'react';
 import type { LessonChallenge } from '@/app/shared-schemas';
 
 interface MatchingPair {
@@ -19,7 +18,7 @@ type ChallengeRendererProps = {
   setShuffledWordOrders: React.Dispatch<React.SetStateAction<Record<string, string[]>>>;
 };
 
-export function ChallengeRenderer({
+export const ChallengeRenderer = React.memo(function ChallengeRenderer({
   challenge,
   answer,
   onChange,
@@ -257,4 +256,4 @@ export function ChallengeRenderer({
   }
 
   return <p className="text-muted-foreground">Tipo de desafio não suportado</p>;
-}
+});

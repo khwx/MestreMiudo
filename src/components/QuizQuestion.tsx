@@ -7,6 +7,7 @@ import { Volume2, Star, Check, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import type { PersonalizedLearningPathOutput } from '@/app/shared-schemas';
+import React from 'react';
 
 type QuizQuestionProps = {
   quizData: PersonalizedLearningPathOutput;
@@ -22,7 +23,7 @@ type QuizQuestionProps = {
   progress: number;
 };
 
-export function QuizQuestion({
+export const QuizQuestion = React.memo(function QuizQuestion({
   quizData,
   currentQuestionIndex,
   selectedAnswer,
@@ -139,4 +140,4 @@ export function QuizQuestion({
       </div>
     </div>
   );
-}
+});

@@ -69,6 +69,7 @@ export default function StoryGalleryClientPage() {
         <div className="flex items-center gap-4">
           <button
             onClick={() => setSelectedStory(null)}
+            aria-label="Voltar à galeria"
             className="p-3 hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-xl transition-all duration-300"
           >
             <ArrowLeft className="h-6 w-6" />
@@ -127,7 +128,7 @@ export default function StoryGalleryClientPage() {
     <div className="space-y-8 p-4 md:p-8 max-w-6xl mx-auto">
       <div className="flex items-center gap-4">
         <Link href={`/dashboard?name=${name}&grade=${grade}`}>
-          <button className="p-3 hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-xl transition-all duration-300">
+          <button aria-label="Voltar ao Dashboard" className="p-3 hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-xl transition-all duration-300">
             <ArrowLeft className="h-6 w-6" />
           </button>
         </Link>

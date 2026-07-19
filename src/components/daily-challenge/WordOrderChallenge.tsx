@@ -44,6 +44,7 @@ export function WordOrderChallenge({ content, showResult, onAnswerSelect, isCorr
               <button
                 onClick={() => moveUp(index)}
                 disabled={showResult || index === 0}
+                aria-label="Mover para cima"
                 className="text-orange-500 hover:text-orange-700 disabled:opacity-50"
               >
                 ↑
@@ -51,6 +52,7 @@ export function WordOrderChallenge({ content, showResult, onAnswerSelect, isCorr
               <button
                 onClick={() => moveDown(index)}
                 disabled={showResult || index === order.length - 1}
+                aria-label="Mover para baixo"
                 className="text-orange-500 hover:text-orange-700 disabled:opacity-50"
               >
                 ↓
