@@ -73,6 +73,28 @@ export default function HistoryClientPage() {
         loadHistory();
     }, [loadHistory]);
 
+    const allHistory = useMemo(() => [
+        ...lessonHistory.map(lesson => ({
+            type: 'lesson' as const,
+            subject: lesson.lessons?.subject || 'Português',
+            title: lesson.lessons?.title || 'Lição',
+            timestamp: lesson.completed_at,
+            score: lesson.score,
+            stars: lesson.stars,
+            coins: lesson.coins_earned,
+            id: lesson.id
+        })),
+        ...quizHistory.map(quiz => ({
+            type: 'quiz' as const,
+            subject: quiz.subject,
+            title: quiz.subject === 'Misto' ? 'Desafio Surpresa' : quiz.subject,
+            timestamp: quiz.timestamp,
+            score: quiz.score,
+            totalQuestions: quiz.numberOfQuestions,
+            id: quiz.timestamp
+        }))
+    ].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()), [lessonHistory, quizHistory]);
+
       if (error) {
         return (
           <div className="flex flex-col items-center justify-center min-h-[60vh] px-4 py-8 text-center">
@@ -129,28 +151,6 @@ export default function HistoryClientPage() {
         return <p className="text-center text-destructive">Nome do aluno não especificado.</p>;
     }
     
-    const allHistory = useMemo(() => [
-        ...lessonHistory.map(lesson => ({
-            type: 'lesson' as const,
-            subject: lesson.lessons?.subject || 'Português',
-            title: lesson.lessons?.title || 'Lição',
-            timestamp: lesson.completed_at,
-            score: lesson.score,
-            stars: lesson.stars,
-            coins: lesson.coins_earned,
-            id: lesson.id
-        })),
-        ...quizHistory.map(quiz => ({
-            type: 'quiz' as const,
-            subject: quiz.subject,
-            title: quiz.subject === 'Misto' ? 'Desafio Surpresa' : quiz.subject,
-            timestamp: quiz.timestamp,
-            score: quiz.score,
-            totalQuestions: quiz.numberOfQuestions,
-            id: quiz.timestamp
-        }))
-    ].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()), [lessonHistory, quizHistory]);
-
     return (
         <div className="space-y-6">
             <Button variant="ghost" size="sm" onClick={() => router.push(`/dashboard?name=${name}&grade=${grade}`)} className="gap-2 self-start mb-4">

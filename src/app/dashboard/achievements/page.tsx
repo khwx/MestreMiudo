@@ -186,7 +186,7 @@ function AchievementsPageContent() {
     const map = new Map(unlockedAchievements.map((a) => [a.id, a]));
     const progress = (unlockedAchievements.length / allAchievements.length) * 100;
     return { unlockedIds: ids, unlockedMap: map, progressPercentage: progress };
-  }, [unlockedAchievements, allAchievements]);
+  }, [unlockedAchievements]);
 
   if (loading) {
     return (
