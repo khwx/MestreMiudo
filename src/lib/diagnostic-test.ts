@@ -64,7 +64,7 @@ export function calculateDiagnosticResults(
   recommendations: string[];
 } {
   if (!answers || !correctAnswers || answers.length === 0) {
-    throw new Error('Invalid diagnostic answers');
+    return { score: 0, percentage: 0, learningLevel: 'beginning', weakTopics: [], strongTopics: [], recommendations: ['Invalid diagnostic answers'] };
   }
 
   // Calculate correct answers

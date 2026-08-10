@@ -131,7 +131,7 @@ export function getRecommendedSubject(
 
   // Find subject with lowest average score
   let weakestSubject = undefined;
-  let lowestAverage = 1;
+  let lowestAverage = Infinity;
 
   Object.entries(subjectScores).forEach(([subject, scores]) => {
     const average = scores.totalScore / scores.count;

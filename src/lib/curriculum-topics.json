@@ -60,6 +60,11 @@
             "Conhecer regras de correspondência fonema-grafema e de utilização dos sinais de pontuação (frase simples)"
           ]
         }
+      ],
+      "topicos": [
+        "Educação Literária",
+        "Iniciação à Literacia",
+        "Rimas e aliterações"
       ]
     },
     "2": {
@@ -135,6 +140,11 @@
             "Mobilizar adequadamente as regras de ortografia, ao nível da correspondência grafema-fonema e da utilização dos sinais de escrita"
           ]
         }
+      ],
+      "topicos": [
+        "Educação Literária",
+        "Compreensão Textual",
+        "Gramática Básica"
       ]
     },
     "3": {
@@ -208,6 +218,11 @@
             "Mobilizar adequadamente as regras de ortografia"
           ]
         }
+      ],
+      "topicos": [
+        "Foco na Linguagem",
+        "Compreensão do Texto",
+        "Leitura de Textos"
       ]
     },
     "4": {
@@ -280,6 +295,11 @@
             "Explicitar regras de ortografia"
           ]
         }
+      ],
+      "topicos": [
+        "Texto Narrativo",
+        "Leitura de Textos",
+        "Compreensão do Texto"
       ]
     }
   },
@@ -363,6 +383,11 @@
             "Ler o calendário"
           ]
         }
+      ],
+      "topicos": [
+        "Números",
+        "Adições",
+        "Soma"
       ]
     },
     "2": {
@@ -465,6 +490,11 @@
             "Resolver problemas que envolvem dinheiro comparando diferentes estratégias de resolução"
           ]
         }
+      ],
+      "topicos": [
+        "Multiplicação",
+        "Divisão",
+        "Frações"
       ]
     },
     "3": {
@@ -564,6 +594,11 @@
             "Elaborar e analisar listas de compras com diferentes fins, incluindo a estimativa dos custos"
           ]
         }
+      ],
+      "topicos": [
+        "Geometria",
+        "Área",
+        "Perímetro"
       ]
     },
     "4": {
@@ -654,6 +689,11 @@
             "Discutir criticamente informações públicas que envolvam o dinheiro"
           ]
         }
+      ],
+      "topicos": [
+        "Problemas",
+        "Equações",
+        "Álgebra"
       ]
     }
   },
@@ -708,6 +748,11 @@
             "Manifestar atitudes positivas conducentes à preservação do ambiente próximo sendo capaz de apresentar propostas de intervenção, nomeadamente comportamentos que visem os três 'R'"
           ]
         }
+      ],
+      "topicos": [
+        "Leitura",
+        "Escrita",
+        "Saber Escutar"
       ]
     },
     "2": {
@@ -761,6 +806,11 @@
             "Comparar meios de comunicação e informação, atribuindo-lhes relevância pessoal e social"
           ]
         }
+      ],
+      "topicos": [
+        "Compreensão",
+        "Reconhecimento",
+        "Memória"
       ]
     },
     "3": {
@@ -818,6 +868,11 @@
             "Saber colocar questões, levantar hipóteses, fazer inferências, comprovar resultados e saber comunicá-los, reconhecendo como se constrói o conhecimento"
           ]
         }
+      ],
+      "topicos": [
+        "Desenvolvimento",
+        "Interação",
+        "Construção"
       ]
     },
     "4": {
@@ -869,6 +924,11 @@
             "Saber colocar questões, levantar hipóteses, fazer inferências, comprovar resultados e saber comunicá-los, reconhecendo como se constrói o conhecimento"
           ]
         }
+      ],
+      "topicos": [
+        "Compreensão",
+        "Leitura",
+        "Expressão"
       ]
     }
   }

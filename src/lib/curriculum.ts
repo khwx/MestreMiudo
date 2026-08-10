@@ -513,17 +513,18 @@ export type Disciplina = 'português' | 'matemática' | 'estudo do meio';
 export type Year = 1 | 2 | 3 | 4;
 
 export function getTopicsByDisciplineAndYear(discipline: Disciplina, year: Year): string[] {
-  return (curriculum as Record<string, Record<string, { topicos?: string[]; tema?: string }>>)[discipline]?.[year]?.topicos || [];
+  return (curriculum as Record<string, Record<string, { topicos?: string[]; tema?: string }>>)[discipline]?.[String(year)]?.topicos || [];
 }
 
 export function getAllTopicsForYear(year: Year): Record<string, string[]> {
+  const c = curriculum as Record<string, Record<string, { topicos?: string[]; tema?: string }>>;
   return {
-    português: curriculum.português[year]?.topicos || [],
-    matemática: (curriculum as Record<string, Record<string, { topicos?: string[]; tema?: string }>>)["matemática"]?.[year]?.topicos || [],
-    "estudo do meio": curriculum["estudo do meio"][year]?.topicos || []
+    português: c.português?.[String(year)]?.topicos || [],
+    matemática: c.matemática?.[String(year)]?.topicos || [],
+    "estudo do meio": c["estudo do meio"]?.[String(year)]?.topicos || []
   };
 }
 
 export function getThemeForSubject(discipline: Disciplina, year: Year): string {
-  return (curriculum as Record<string, Record<string, { topicos?: string[]; tema?: string }>>)[discipline]?.[year]?.tema || '';
+  return (curriculum as Record<string, Record<string, { topicos?: string[]; tema?: string }>>)[discipline]?.[String(year)]?.tema || '';
 }
