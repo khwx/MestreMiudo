@@ -468,6 +468,50 @@ export default function TeacherDashboardPage() {
                 </div>
               </div>
             </div>
+
+            <div className="card-kid border-4 border-indigo-300 dark:border-indigo-700 shadow-xl">
+              <div className="p-6">
+                <h2 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                  <BarChart3 className="h-5 w-5 text-indigo-500" />
+                  Desempenho por Disciplina
+                </h2>
+                {(() => {
+                  const subjectStats: Record<string, { total: number; count: number }> = {};
+                  students.forEach(s => {
+                    s.subjectAverages?.forEach(sa => {
+                      if (!subjectStats[sa.subject]) subjectStats[sa.subject] = { total: 0, count: 0 };
+                      subjectStats[sa.subject].total += sa.average;
+                      subjectStats[sa.subject].count++;
+                    });
+                  });
+                  const subjects = Object.entries(subjectStats).map(([name, data]) => ({
+                    name,
+                    average: data.count > 0 ? Math.round(data.total / data.count) : 0,
+                  }));
+                  if (subjects.length === 0) return <p className="text-slate-500 dark:text-slate-400">Sem dados de disciplinas disponíveis.</p>;
+                  return (
+                    <div className="space-y-4">
+                      {subjects.map(sub => (
+                        <div key={sub.name} className="space-y-1">
+                          <div className="flex justify-between text-sm">
+                            <span className="font-medium text-slate-700 dark:text-slate-300">{sub.name}</span>
+                            <span className={`font-bold ${getScoreColor(sub.average)}`}>{sub.average}%</span>
+                          </div>
+                          <div className="w-full bg-slate-200 dark:bg-gray-700 rounded-full h-3">
+                            <div
+                              className={`h-3 rounded-full transition-all ${
+                                sub.average >= 80 ? 'bg-green-500' : sub.average >= 60 ? 'bg-yellow-500' : 'bg-red-500'
+                              }`}
+                              style={{ width: `${sub.average}%` }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })()}
+              </div>
+            </div>
           </div>
         )}
 
