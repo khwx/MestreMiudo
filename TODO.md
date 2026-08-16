@@ -24,6 +24,8 @@
 - Added sound effects system with Web Audio API
 - Added PWA support (manifest.json, service worker, offline page)
 - Added accessibility features (keyboard navigation, screen reader, high contrast)
+- Implemented story deletion (deleteStory action) wired into the story gallery with a confirmation dialog, optimistic list updates and error handling
 
-## 📋 Future Enhancements
+## 📋 Pending Enhancements
 (None pending - all planned features have been implemented!)
+Last updated: 2026-08-17

@@ -8,6 +8,7 @@ export {
 export {
   generateStoryAction,
   getStudentStories,
+  deleteStory,
 } from './stories';
 export {
   generateDiagnostic,

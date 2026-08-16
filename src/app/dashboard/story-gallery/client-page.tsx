@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, BookHeart, Calendar, Eye } from 'lucide-react';
+import { ArrowLeft, BookHeart, Calendar, Eye, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getStudentStories } from '@/app/actions';
+import DeleteStoryDialog from '@/components/DeleteStoryDialog';
 import { useToast } from '@/hooks/use-toast';
 import { logger } from '@/lib/logger';
 
@@ -63,20 +64,44 @@ export default function StoryGalleryClientPage() {
     });
   };
 
+  const handleStoryDeleted = (id: string) => {
+    setStories((prev) => prev.filter((s) => s.id !== id));
+  };
+
   if (selectedStory) {
     return (
       <div className="space-y-6 p-4 md:p-8 max-w-4xl mx-auto">
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => setSelectedStory(null)}
-            aria-label="Voltar à galeria"
-            className="p-3 hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-xl transition-all duration-300"
-          >
-            <ArrowLeft className="h-6 w-6" />
-          </button>
-          <h1 className="text-3xl font-black text-purple-700 dark:text-purple-300">
-            {selectedStory.title}
-          </h1>
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setSelectedStory(null)}
+              aria-label="Voltar à galeria"
+              className="p-3 hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-xl transition-all duration-300"
+            >
+              <ArrowLeft className="h-6 w-6" />
+            </button>
+            <h1 className="text-3xl font-black text-purple-700 dark:text-purple-300">
+              {selectedStory.title}
+            </h1>
+          </div>
+          <DeleteStoryDialog
+            storyId={selectedStory.id}
+            storyTitle={selectedStory.title}
+            trigger={
+              <button
+                type="button"
+                aria-label="Eliminar história"
+                className="p-2 rounded-xl text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors"
+                title="Eliminar esta história"
+              >
+                <Trash2 className="h-5 w-5" />
+              </button>
+            }
+            onDeleted={() => {
+              handleStoryDeleted(selectedStory.id);
+              setSelectedStory(null);
+            }}
+          />
         </div>
 
         <div className="card-kid border-4 border-purple-300 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
@@ -199,45 +224,62 @@ export default function StoryGalleryClientPage() {
         </div>
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {stories.map((story) => (
-            <button
-              key={story.id}
-              type="button"
-              onClick={() => setSelectedStory(story)}
-              className="card-kid border-4 border-purple-200 dark:border-purple-800 shadow-xl hover:shadow-2xl hover:border-purple-400 transition-all duration-300 cursor-pointer group text-left w-full"
-              aria-label={`Ver história: ${story.title}`}
-            >
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-xl font-black text-purple-700 dark:text-purple-300 group-hover:text-purple-900 dark:group-hover:text-purple-100 line-clamp-2">
-                    {story.title}
-                  </h3>
-                  <Eye className="h-5 w-5 text-purple-400 group-hover:text-purple-600 flex-shrink-0 ml-2" />
-                </div>
-                <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-3 mb-4">
-                  {story.content}
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-xs text-gray-500">
-                    <Calendar className="h-3 w-3" />
-                    {formatDate(story.created_at)}
-                  </div>
-                  <div className="flex gap-1">
-                    {story.keywords.slice(0, 2).map((kw, i) => (
-                      <span key={i} className="px-2 py-0.5 bg-purple-100 dark:bg-purple-800/40 text-purple-700 dark:text-purple-300 rounded-full text-xs">
-                        {kw}
-                      </span>
-                    ))}
-                    {story.keywords.length > 2 && (
-                      <span className="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full text-xs">
-                        +{story.keywords.length - 2}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </button>
-          ))}
+           {stories.map((story) => (
+             <div key={story.id} className="relative group/card">
+               <button
+               type="button"
+               onClick={() => setSelectedStory(story)}
+               className="card-kid border-4 border-purple-200 dark:border-purple-800 shadow-xl hover:shadow-2xl hover:border-purple-400 transition-all duration-300 cursor-pointer group text-left w-full"
+               aria-label={`Ver história: ${story.title}`}
+             >
+               <div className="p-6">
+                 <div className="flex items-start justify-between mb-3">
+                   <h3 className="text-xl font-black text-purple-700 dark:text-purple-300 group-hover:text-purple-900 dark:group-hover:text-purple-100 line-clamp-2">
+                     {story.title}
+                   </h3>
+                   <Eye className="h-5 w-5 text-purple-400 group-hover:text-purple-600 flex-shrink-0 ml-2" />
+                 </div>
+                 <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-3 mb-4">
+                   {story.content}
+                 </p>
+                 <div className="flex items-center justify-between">
+                   <div className="flex items-center gap-2 text-xs text-gray-500">
+                     <Calendar className="h-3 w-3" />
+                     {formatDate(story.created_at)}
+                   </div>
+                   <div className="flex gap-1">
+                     {story.keywords.slice(0, 2).map((kw, i) => (
+                       <span key={i} className="px-2 py-0.5 bg-purple-100 dark:bg-purple-800/40 text-purple-700 dark:text-purple-300 rounded-full text-xs">
+                         {kw}
+                       </span>
+                     ))}
+                     {story.keywords.length > 2 && (
+                       <span className="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full text-xs">
+                         +{story.keywords.length - 2}
+                       </span>
+                     )}
+                   </div>
+                 </div>
+               </div>
+             </button>
+             <DeleteStoryDialog
+               storyId={story.id}
+               storyTitle={story.title}
+               trigger={
+                 <button
+                   type="button"
+                   aria-label={`Eliminar história: ${story.title}`}
+                   title="Eliminar esta história"
+                   onClick={(e) => e.stopPropagation()}
+                   className="absolute top-3 right-3 p-2 rounded-xl text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors opacity-0 group-hover/card:opacity-100 focus:opacity-100"
+                 >
+                   <Trash2 className="h-5 w-5" />
+                 </button>
+               }
+               onDeleted={handleStoryDeleted}
+             />
+             </div>
+           ))}
         </div>
       )}
     </div>

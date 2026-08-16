@@ -46,8 +46,8 @@ Este documento serve para acompanhar o progresso do desenvolvimento, o que já f
 - [ ] **Novos tipos de desafios:** Adicionar exercícios de arrastar e soltar mais complexos.
 
 ### 📖 Oficina de Histórias (Polimento)
-- [ ] **Tratamento de Erros:** Melhorar a mensagem de erro quando a IA falha.
-- [ ] **Galeria de Histórias:** Permitir que a criança guarde as suas histórias favoritas.
+- [x] **Tratamento de Erros:** Mensagens de erro aprimoradas quando a IA falha (API key, rate limit, serviço indisponível, sem ligação).
+- [x] **Galeria de Histórias:** Crianças podem guardar (histórias criadas são salvas na BD) e agora **eliminar** histórias com diálogo de confirmação.
 
 ---
 
@@ -62,4 +62,4 @@ Este documento serve para acompanhar o progresso do desenvolvimento, o que já f
 | Gamification | ⏳ | 60% |
 | Deployment | ✅ | 100% |
 
-**Última Atualização:** 2026-04-09
+**Última Atualização:** 2026-08-17

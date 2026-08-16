@@ -144,3 +144,18 @@ export async function getStudentStories(studentId: string, limit = 10) {
     return [];
   }
 }
+
+export async function deleteStory(id: string) {
+  if (!isSupabaseConfigured() || !supabase) return { success: false, error: 'Supabase não configurado' };
+  try {
+    const { error } = await supabase
+      .from('stories')
+      .delete()
+      .eq('id', id);
+    if (error) throw error;
+    return { success: true };
+  } catch (error) {
+    logger.error('Erro ao eliminar história:', error);
+    return { success: false, error: 'Falha ao eliminar história' };
+  }
+}
