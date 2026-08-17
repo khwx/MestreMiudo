@@ -3,10 +3,12 @@
 import { Button } from '@/components/ui/button';
 import { CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { Volume2, Star, Check, X } from 'lucide-react';
+import { Volume2, Star, Check, X, Lightbulb } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import type { PersonalizedLearningPathOutput } from '@/app/shared-schemas';
+import { generateHint } from '@/lib/hint';
+import { useAccessibility } from '@/components/AccessibilityProvider';
 import React from 'react';
 
 type QuizQuestionProps = {
@@ -37,6 +39,20 @@ export const QuizQuestion = React.memo(function QuizQuestion({
   progress,
 }: QuizQuestionProps) {
   const currentQuestion = quizData.quizQuestions[currentQuestionIndex];
+  const { announceToScreenReader } = useAccessibility();
+  const [showHint, setShowHint] = React.useState(false);
+
+  const hint = generateHint(currentQuestion);
+
+  const handleToggleHint = React.useCallback(() => {
+    setShowHint((prev) => {
+      const next = !prev;
+      if (next && hint) {
+        announceToScreenReader(`Dica: ${hint}`);
+      }
+      return next;
+    });
+  }, [hint, announceToScreenReader]);
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
@@ -86,7 +102,32 @@ export const QuizQuestion = React.memo(function QuizQuestion({
             >
               <Volume2 className="h-6 w-6 text-blue-600" />
             </Button>
+            {hint && (
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={handleToggleHint}
+                aria-label={showHint ? 'Esconder dica' : 'Mostrar dica'}
+                aria-pressed={showHint}
+                className={cn(
+                  'shrink-0 hover:scale-110 transition-transform',
+                  showHint && 'bg-yellow-100 border-yellow-400 dark:bg-yellow-900/40'
+                )}
+              >
+                <Lightbulb className={cn('h-6 w-6', showHint ? 'text-yellow-500 fill-yellow-500' : 'text-yellow-500')} />
+              </Button>
+            )}
           </div>
+
+          {hint && showHint && (
+            <div
+              role="note"
+              className="flex items-start gap-3 p-4 rounded-2xl border-2 border-yellow-300 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-900 dark:text-yellow-100"
+            >
+              <Lightbulb className="h-5 w-5 shrink-0 mt-0.5 text-yellow-500 fill-yellow-500" />
+              <p className="text-lg font-medium">{hint}</p>
+            </div>
+          )}
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {currentQuestion.options.map((option: string, i: number) => {

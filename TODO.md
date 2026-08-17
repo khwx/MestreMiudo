@@ -25,6 +25,7 @@
 - Added PWA support (manifest.json, service worker, offline page)
 - Added accessibility features (keyboard navigation, screen reader, high contrast)
 - Implemented story deletion (deleteStory action) wired into the story gallery with a confirmation dialog, optimistic list updates and error handling
+- Added a child-friendly "Dica" (hint) button to quiz questions with a derived hint generator and screen-reader announcements
 
 ## 📋 Pending Enhancements
 (None pending - all planned features have been implemented!)

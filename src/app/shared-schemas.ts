@@ -37,6 +37,7 @@ export const PersonalizedLearningPathOutputSchema = z.object({
       correctAnswer: z.string().describe('The correct answer to the question.'),
       topic: z.string().describe('The topic of the question'),
       imageUrl: z.string().url().nullish().describe('An optional image URL for the question.'),
+      hint: z.string().nullish().describe('An optional helpful hint for the child.'),
     })
   ).describe('An array of quiz questions tailored to the student.'),
 });
@@ -50,6 +51,7 @@ export type QuizQuestion = {
   correctAnswer: string;
   topic: string;
   imageUrl?: string | null;
+  hint?: string | null;
 };
 
 

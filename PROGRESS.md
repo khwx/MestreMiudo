@@ -14,3 +14,15 @@ Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
   - Em modo lista, o botão de eliminar usa `stopPropagation` para não abrir o detalhe da história (o card inteiro abre o detalhe).
   - Em modo detalhe, após eliminar, volta para a lista.
 - **Docs atualizados:** `TODO.md` (item concluído + data), `PROJECT_STATUS.md` (galeria de histórias e tratamento de erros marcados como concluídos).
+
+## 2026-08-17 - Melhoria contínua: botão "Dica" nos quizzes
+
+- **Contexto:** As perguntas do quiz não ofereciam apoio adicional para as crianças que têm dificuldade em responder, apesar de o blueprint enfatizar suporte a diferentes estilos de aprendizagem.
+- **Tarefa implementada:** Adicionar um botão "Dica" (💡) às perguntas do quiz que revela uma pista amigável. Quando a pergunta já traz uma `hint` explícita (campo agora opcional no schema), esta é usada; caso contrário, `lib/hint.ts` deriva uma pista a partir das opções e da resposta correta (revela a primeira letra e elimina uma opção errada).
+- **Alterações:**
+  - `src/app/shared-schemas.ts` — campo `hint` opcional adicionado ao schema de saída do quiz e ao tipo `QuizQuestion`.
+  - `src/lib/hint.ts` (novo) — helper `generateHint` com lógica de derivação e testes.
+  - `src/components/QuizQuestion.tsx` — botão de dica com toggle, acessível (`aria-pressed`, `aria-label`), anúncio via `announceToScreenReader` e callout visual.
+  - `src/__tests__/hint.test.ts` (novo, 5 testes).
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 341 testes a passar (36 ficheiros).
+- **Docs atualizados:** `TODO.md` (item concluído), `PROJECT_STATUS.md` (aprendizagem + gamificação 65%).

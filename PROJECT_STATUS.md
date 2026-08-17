@@ -10,6 +10,7 @@ Este documento serve para acompanhar o progresso do desenvolvimento, o que já f
 - [x] Desafios interativos para todas as 16 lições iniciais
 - [x] Cálculo de Estrelas (0-3) e Moedas baseado no desempenho
 - [x] Salvaguarda de progresso no Supabase
+- [x] Botão "Dica" nas perguntas do quiz para apoiar a aprendizagem das crianças
 
 ### 🎮 Jogos Educativos
 - [x] Jogo da Memória funcional
@@ -59,7 +60,7 @@ Este documento serve para acompanhar o progresso do desenvolvimento, o que já f
 | Content (G1-G2) | ✅ | 100% |
 | Content (G3-G4) | ⏳ | 10% |
 | Security | ⚠️ | 40% |
-| Gamification | ⏳ | 60% |
+| Gamification | ⏳ | 65% |
 | Deployment | ✅ | 100% |
 
-**Última Atualização:** 2026-08-17
+**Última Atualização:** 2026-08-17 (sessão de melhoria contínua)
