@@ -28,5 +28,15 @@
 - Added a child-friendly "Dica" (hint) button to quiz questions with a derived hint generator and screen-reader announcements
 
 ## 📋 Pending Enhancements
-(None pending - all planned features have been implemented!)
-Last updated: 2026-08-17
+- [ ] Seleção de voz europeia (pt-PT) para todos os recursos de áudio (TTS do quiz e da oficina de histórias)
+- [ ] Sincronizar catálogo de conquistas (`lib/achievements.ts`) com `BADGE_DEFINITIONS` para evitar chaves duplicadas
+- [ ] Expandir banco de perguntas para os temas do Estudo do Meio (grades 3-4)
+- [ ] Adicionar testes unitários para `lib/groq.ts`, `lib/pixabay.ts` e `lib/question-bank.ts`
+- [ ] Permitir regenerar apenas uma pergunta incorreta no final do quiz
+- [ ] Modo "Praticar temas fracos" baseado em `getWeakTopics` no ecrã de quiz
+- [ ] Relatório PDF de progresso enviável por email para encarregados de educação
+- [ ] Suporte offline aprimorado (pré-carregar lições por grade no service worker)
+- [ ] Acessibilidade: navegação por teclado completa nos jogos (jogo da memória, galo, forca)
+- [ ] Tradução/adaptação da interface para outros dialetos de português
+- [ ] Painel do professor: exportar notas em CSV
+Last updated: 2026-08-18

@@ -13,6 +13,7 @@ import confetti from 'canvas-confetti';
 import { QuizResults } from '@/components/QuizResults';
 import { QuizQuestion } from '@/components/QuizQuestion';
 import { BadgePopup, BADGE_DEFINITIONS } from '@/components/BadgePopup';
+import { selectPortugueseVoice } from '@/lib/tts-voice';
 
 type QuizProps = {
   studentId: string;
@@ -217,6 +218,13 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     const utterance = new SpeechSynthesisUtterance(fullText);
     utterance.lang = 'pt-PT';
     utterance.rate = 0.85;
+
+    const voices = typeof window !== 'undefined' ? window.speechSynthesis.getVoices() : [];
+    const portugueseVoice = selectPortugueseVoice(voices);
+    if (portugueseVoice) {
+      utterance.voice = portugueseVoice as SpeechSynthesisVoice;
+    }
+
     window.speechSynthesis.speak(utterance);
   }, [quizData, currentQuestionIndex]);
 

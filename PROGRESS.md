@@ -26,3 +26,16 @@ Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
   - `src/__tests__/hint.test.ts` (novo, 5 testes).
 - **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 341 testes a passar (36 ficheiros).
 - **Docs atualizados:** `TODO.md` (item concluído), `PROJECT_STATUS.md` (aprendizagem + gamificação 65%).
+
+## 2026-08-18 - Melhoria de áudio: seleção de voz europeia (pt-PT) no quiz
+
+- **Contexto:** O botão de áudio do quiz (`src/components/Quiz.tsx`) reproduzia a pergunta com `utterance.lang = 'pt-PT'` mas não escolhia uma voz concreta, pelo que em muitos sistemas o browser usava a voz por omissão (frequentemente inglês ou pt-BR), prejudicando o suporte auditivo das crianças portuguesas.
+- **Tarefa implementada:** Criar um helper de seleção de voz e aplicá-lo na reprodução do quiz.
+  - `src/lib/tts-voice.ts` (novo) — `selectPortugueseVoice` (prefere pt-PT sobre pt-BR) e `applyPortugueseVoice`.
+  - `src/components/Quiz.tsx` — `handleAudioPlayback` agora resolve a melhor voz portuguesa via `window.speechSynthesis.getVoices()` antes de falar.
+  - `src/__tests__/tts-voice.test.ts` (novo, 10 testes).
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 351 testes a passar.
+- **Decisões:**
+  - Helper mantido puro e testável (recebe a lista de vozes), para poder ser reutilizado também na oficina de histórias numa fase futura (ver lista de pendências no TODO.md).
+  - Degradação graciosa: se não existir voz portuguesa, mantém só o `lang`, sem quebrar a reprodução.
+- **Docs atualizados:** `TODO.md` (lista de melhorias pendentes repovoado, incluindo alargar a voz pt-PT a todos os recursos de áudio).
