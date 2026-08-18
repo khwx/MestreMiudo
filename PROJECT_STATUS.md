@@ -11,6 +11,7 @@ Este documento serve para acompanhar o progresso do desenvolvimento, o que já f
 - [x] Cálculo de Estrelas (0-3) e Moedas baseado no desempenho
 - [x] Salvaguarda de progresso no Supabase
 - [x] Botão "Dica" nas perguntas do quiz para apoiar a aprendizagem das crianças
+- [x] Modo "Praticar perguntas erradas" no final do quiz (reforça apenas as perguntas incorretas)
 
 ### 🎮 Jogos Educativos
 - [x] Jogo da Memória funcional

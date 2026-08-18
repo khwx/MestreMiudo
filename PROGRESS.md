@@ -39,3 +39,17 @@ Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
   - Helper mantido puro e testável (recebe a lista de vozes), para poder ser reutilizado também na oficina de histórias numa fase futura (ver lista de pendências no TODO.md).
   - Degradação graciosa: se não existir voz portuguesa, mantém só o `lang`, sem quebrar a reprodução.
 - **Docs atualizados:** `TODO.md` (lista de melhorias pendentes repovoado, incluindo alargar a voz pt-PT a todos os recursos de áudio).
+
+## 2026-08-18 - Melhoria contínua: modo "Praticar perguntas erradas" no quiz
+
+- **Contexto:** Ao terminar um quiz, as crianças não tinham forma de reforçar exatamente as perguntas que erraram, apesar de o blueprint enfatizar apoio à aprendizagem. O item pendente "Permitir regenerar apenas uma pergunta incorreta no final do quiz" motivou esta melhoria (implementada como prática local das perguntas erradas, sem depender de regeneração por IA).
+- **Tarefa implementada:** Adicionar um botão "Praticar N que erraste" aos resultados do quiz que, quando há respostas erradas, reinicia o quiz apresentando apenas as perguntas incorretas. No modo de prática não se re-guardam pontos nem conquistas (apenas reforço).
+  - `src/lib/quiz-practice.ts` (novo) — helpers puros `getWrongQuestions` (filtra as perguntas erradas por texto) e `hasWrongAnswers`.
+  - `src/components/Quiz.tsx` — estado `practiceMode`, handler `handlePracticeWrong` e lógica em `handleNext`/`handleRestart` para não guardar resultados em modo de prática.
+  - `src/components/QuizResults.tsx` — botão condicional de prática e título "Prática Concluída!" em modo de prática.
+  - `src/__tests__/quiz-practice.test.ts` (novo, 6 testes).
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 355 testes a passar.
+- **Decisões:**
+  - Optou-se por praticar as mesmas perguntas erradas (reforço imediato e determinístico) em vez de regenerar novas via IA, por simplicidade, fiabilidade e para não consumir chamadas de API.
+  - A correspondência pergunta→erro é feita por texto da pergunta, mantendo a ordem original e suportando fontes distintas (quiz gerado vs. respostas registadas).
+- **Docs atualizados:** `TODO.md` (nova funcionalidade em concluídos; itens de voz pt-PT e banco de Estudo do Meio G3-G4 marcados como concluídos após verificação).

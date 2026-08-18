@@ -14,6 +14,7 @@ import { QuizResults } from '@/components/QuizResults';
 import { QuizQuestion } from '@/components/QuizQuestion';
 import { BadgePopup, BADGE_DEFINITIONS } from '@/components/BadgePopup';
 import { selectPortugueseVoice } from '@/lib/tts-voice';
+import { getWrongQuestions } from '@/lib/quiz-practice';
 
 type QuizProps = {
   studentId: string;
@@ -48,6 +49,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
   const [newBadge, setNewBadge] = useState<{ name: string; description: string; icon: string } | null>(null);
+  const [practiceMode, setPracticeMode] = useState(false);
   const quizStarted = useRef(false);
   const { playSuccess, playError, playLevelUp } = useSound();
   const { settings: a11y, announceToScreenReader } = useAccessibility();
@@ -191,9 +193,25 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
       setIsAnswered(false);
   } else {
     setCurrentQuestionIndex(prev => prev + 1);
-    finishQuiz();
+    if (!practiceMode) {
+      finishQuiz();
+    }
   }
-  }, [currentQuestionIndex, quizData, finishQuiz]);
+  }, [currentQuestionIndex, quizData, practiceMode, finishQuiz]);
+
+  const handlePracticeWrong = useCallback(() => {
+    if (!quizData) return;
+    const wrong = getWrongQuestions(quizData.quizQuestions, answers);
+    if (wrong.length === 0) return;
+    setQuizData({ ...quizData, quizQuestions: wrong });
+    setCurrentQuestionIndex(0);
+    setSelectedAnswer(null);
+    setIsAnswered(false);
+    setScore(0);
+    setAnswers([]);
+    setPracticeMode(true);
+    setNewBadge(null);
+  }, [quizData, answers]);
 
   const handleRestart = useCallback(() => {
     setQuizData(null);
@@ -202,6 +220,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     setIsAnswered(false);
     setScore(0);
     setAnswers([]);
+    setPracticeMode(false);
     setLoading(true);
     quizStarted.current = false;
     fetchQuiz();
@@ -305,6 +324,9 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
           onRestart={handleRestart}
           onBack={handleBack}
           subject={subject}
+          practiceMode={practiceMode}
+          wrongCount={practiceMode ? 0 : answers.filter((a) => !a.isCorrect).length}
+          onPracticeWrong={handlePracticeWrong}
         />
       </>
     );

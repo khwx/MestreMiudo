@@ -26,13 +26,14 @@
 - Added accessibility features (keyboard navigation, screen reader, high contrast)
 - Implemented story deletion (deleteStory action) wired into the story gallery with a confirmation dialog, optimistic list updates and error handling
 - Added a child-friendly "Dica" (hint) button to quiz questions with a derived hint generator and screen-reader announcements
+- Added a "Praticar perguntas erradas" mode at the end of the quiz that re-presents only the questions the child got wrong, with unit tests for the selection helper
+- Confirmed European Portuguese (pt-PT) voice selection now covers all audio resources (quiz via speechSynthesis voice picker; story workshop TTS uses `pt-PT-RaquelNeural`)
+- Confirmed the Estudo do Meio question bank already covers grades 3-4 (topics and questions present in `estudo-do-meio.ts`)
 
 ## 📋 Pending Enhancements
-- [ ] Seleção de voz europeia (pt-PT) para todos os recursos de áudio (TTS do quiz e da oficina de histórias)
 - [ ] Sincronizar catálogo de conquistas (`lib/achievements.ts`) com `BADGE_DEFINITIONS` para evitar chaves duplicadas
-- [ ] Expandir banco de perguntas para os temas do Estudo do Meio (grades 3-4)
 - [ ] Adicionar testes unitários para `lib/groq.ts`, `lib/pixabay.ts` e `lib/question-bank.ts`
-- [ ] Permitir regenerar apenas uma pergunta incorreta no final do quiz
+- [ ] Modo "Praticar temas fracos" baseado em `getWeakTopics` no ecrã de quiz
 - [ ] Modo "Praticar temas fracos" baseado em `getWeakTopics` no ecrã de quiz
 - [ ] Relatório PDF de progresso enviável por email para encarregados de educação
 - [ ] Suporte offline aprimorado (pré-carregar lições por grade no service worker)

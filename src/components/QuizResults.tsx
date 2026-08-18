@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from '@/components/ui/button';
-import { Star, Trophy, RefreshCw } from 'lucide-react';
+import { Star, Trophy, RefreshCw, BookOpen } from 'lucide-react';
 import type { PersonalizedLearningPathOutput } from '@/app/shared-schemas';
 import React from 'react';
 
@@ -13,16 +13,29 @@ type QuizResultsProps = {
   onRestart: () => void;
   onBack: () => void;
   subject: string;
+  practiceMode?: boolean;
+  wrongCount?: number;
+  onPracticeWrong?: () => void;
 };
 
-export const QuizResults = React.memo(function QuizResults({ score, totalQuestions, points, onRestart, onBack }: QuizResultsProps) {
+export const QuizResults = React.memo(function QuizResults({
+  score,
+  totalQuestions,
+  points,
+  onRestart,
+  onBack,
+  practiceMode = false,
+  wrongCount = 0,
+  onPracticeWrong,
+}: QuizResultsProps) {
   const stars = score === totalQuestions ? 3 : score >= totalQuestions * 0.6 ? 2 : 1;
+  const canPractice = !practiceMode && wrongCount > 0 && typeof onPracticeWrong === 'function';
 
   return (
     <div className="space-y-6 max-w-2xl mx-auto">
       <Button 
         variant="ghost" 
-        size="lg" 
+        size="lg"
         onClick={onBack}
         aria-label="Voltar ao Dashboard"
         className="gap-2 text-lg"
@@ -38,7 +51,7 @@ export const QuizResults = React.memo(function QuizResults({ score, totalQuestio
         <Trophy className="h-24 w-24 mx-auto text-yellow-500 animate-pulse" />
         
         <h2 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          Desafio Concluído!
+          {practiceMode ? 'Prática Concluída!' : 'Desafio Concluído!'}
         </h2>
         
         <div className="flex justify-center gap-2 text-4xl">
@@ -58,7 +71,18 @@ export const QuizResults = React.memo(function QuizResults({ score, totalQuestio
           Isso dá-te <span className="font-bold text-yellow-600">{points ?? score * 10} pontos</span>!
         </p>
         
-        <div className="flex gap-4 justify-center pt-4">
+        <div className="flex gap-4 justify-center pt-4 flex-wrap">
+          {canPractice && (
+            <Button
+              onClick={onPracticeWrong}
+              variant="secondary"
+              size="lg"
+              className="btn-kid text-lg"
+              aria-label={`Praticar ${wrongCount} pergunta${wrongCount > 1 ? 's' : ''} que erraste`}
+            >
+              <BookOpen className="mr-2 h-5 w-5" /> Praticar {wrongCount} que erraste
+            </Button>
+          )}
           <Button onClick={onRestart} variant="outline" size="lg" className="btn-kid text-lg">
             <RefreshCw className="mr-2 h-5 w-5" /> Jogar Novamente
           </Button>
