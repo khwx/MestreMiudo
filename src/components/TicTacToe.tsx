@@ -1,24 +1,35 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { RotateCw, X, Circle, User, BrainCircuit } from 'lucide-react';
+import { getGridNavigationIndex, GRID_NAVIGATION_KEYS } from '@/lib/game-utils';
 import React from 'react';
 
 type Player = 'X' | 'O';
 type GameMode = 'human' | 'computer' | null;
 type Difficulty = 'easy' | 'medium' | 'hard' | null;
 
-const Square = React.memo(({ value, onSquareClick, isWinning, index }: { value: Player | null, onSquareClick: () => void, isWinning: boolean, index: number }) => (
+const Square = React.memo(({ value, onSquareClick, isWinning, index, tabIndex, onFocus, squareRef }: {
+    value: Player | null,
+    onSquareClick: () => void,
+    isWinning: boolean,
+    index: number,
+    tabIndex: number,
+    onFocus: (index: number) => void,
+    squareRef: (el: HTMLButtonElement | null) => void,
+}) => (
     <button 
+        ref={squareRef}
+        tabIndex={tabIndex}
         aria-label={`Casa ${index + 1}${value ? `, ${value}` : ', vazia'}`}
         className={cn(
-            "flex items-center justify-center w-16 h-16 md:w-24 md:h-24 text-3xl md:text-4xl font-bold border-4 rounded-lg transition-all duration-300",
+            "flex items-center justify-center w-16 h-16 md:w-24 md:h-24 text-3xl md:text-4xl font-bold border-4 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
             isWinning ? 'bg-green-300 border-green-500 scale-110' : 'bg-card border-border hover:bg-muted',
         )}
         onClick={onSquareClick}
-        disabled={!!value}
+        onFocus={() => onFocus(index)}
     >
         {value === 'X' && <X className="h-8 w-8 md:h-12 md:w-12 text-blue-500" />}
         {value === 'O' && <Circle className="h-8 w-8 md:h-12 md:w-12 text-red-500" />}
@@ -122,6 +133,8 @@ export function TicTacToe() {
   const [xIsNext, setXIsNext] = useState(true);
   const [gameMode, setGameMode] = useState<GameMode>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>(null);
+  const [focusedIndex, setFocusedIndex] = useState(0);
+  const squareRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const { winner, line: winningLine } = calculateWinner(squares);
   const isDraw = squares.every(square => square !== null) && !winner;
@@ -172,6 +185,18 @@ export function TicTacToe() {
     setXIsNext(true);
     setGameMode(null);
     setDifficulty(null);
+    setFocusedIndex(0);
+  };
+   
+  const handleGridKeyDown = (event: React.KeyboardEvent) => {
+    if (!GRID_NAVIGATION_KEYS.includes(event.key as (typeof GRID_NAVIGATION_KEYS)[number])) {
+      return;
+    }
+    const next = getGridNavigationIndex(focusedIndex, event.key, 3, squares.length);
+    if (next === null || next === focusedIndex) return;
+    event.preventDefault();
+    setFocusedIndex(next);
+    squareRefs.current[next]?.focus();
   };
   
   const handleModeSelect = (mode: GameMode) => {
@@ -214,7 +239,12 @@ export function TicTacToe() {
         {winner && (winner === 'X' ? <X className="h-10 w-10 text-blue-500" /> : <Circle className="h-10 w-10 text-red-500" />)}
         {!winner && !isDraw && (xIsNext ? <X className="h-10 w-10 text-blue-500" /> : <Circle className="h-10 w-10 text-red-500" />)}
       </div>
-      <div className="grid grid-cols-3 gap-2 p-2 bg-background rounded-lg">
+      <div
+        className="grid grid-cols-3 gap-2 p-2 bg-background rounded-lg"
+        role="grid"
+        aria-label="Jogo do galo"
+        onKeyDown={handleGridKeyDown}
+      >
         {squares.map((square, i) => (
             <Square 
               key={i} 
@@ -222,6 +252,9 @@ export function TicTacToe() {
               onSquareClick={() => handleClick(i)}
               isWinning={winningLine.includes(Number(i))}
               index={i}
+              tabIndex={i === focusedIndex ? 0 : -1}
+              onFocus={setFocusedIndex}
+              squareRef={(el) => { squareRefs.current[i] = el; }}
             />
         ))}
       </div>

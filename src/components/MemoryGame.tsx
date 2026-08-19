@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { Award, RotateCw, Star, Heart, Cloud, Anchor, Bug, Cake, Sun, Moon } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useSound } from '@/lib/sounds';
 import { type Subject, getRandomVocabularyPairs } from '@/lib/vocabulary';
+import { getGridNavigationIndex, GRID_NAVIGATION_KEYS } from '@/lib/game-utils';
 import React from 'react';
 
 const icons = [
@@ -50,10 +51,19 @@ const createVocabularyBoard = (subject: Subject, mode: 'icon' | 'word' | 'defini
         .map(({ card }) => card);
 };
 
-const Card = React.memo(({ card, onCardClick, index }: { card: CardType, onCardClick: (index: number) => void, index: number }) => {
+const Card = React.memo(({ card, onCardClick, index, tabIndex, onFocus, cardRef }: {
+    card: CardType,
+    onCardClick: (index: number) => void,
+    index: number,
+    tabIndex: number,
+    onFocus: (index: number) => void,
+    cardRef: (el: HTMLButtonElement | null) => void,
+}) => {
     return (
         <button
             type="button"
+            ref={cardRef}
+            tabIndex={tabIndex}
             aria-label={card.type === 'icon' ? 'Carta de ícone' : `Carta: ${card.matchLabel}`}
             aria-pressed={card.isFlipped}
             className={cn(
@@ -61,6 +71,7 @@ const Card = React.memo(({ card, onCardClick, index }: { card: CardType, onCardC
                 card.isFlipped ? 'transform-rotate-y-180' : ''
             )}
             onClick={() => onCardClick(index)}
+            onFocus={() => onFocus(index)}
         >
             <div className="absolute w-full h-full bg-primary rounded-lg flex items-center justify-center backface-visibility-hidden">
                  <Star className="h-12 w-12 text-primary-foreground opacity-50" />
@@ -97,6 +108,8 @@ export function MemoryGame({ subject, mode = 'icon' }: MemoryGameProps) {
     const [flippedCards, setFlippedCards] = useState<number[]>([]);
     const [moves, setMoves] = useState(0);
     const [isChecking, setIsChecking] = useState(false);
+    const [focusedIndex, setFocusedIndex] = useState(0);
+    const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
     const { playSuccess, playError, playGameWin } = useSound();
 
     const allMatched = board.every(card => card.isMatched);
@@ -171,10 +184,22 @@ export function MemoryGame({ subject, mode = 'icon' }: MemoryGameProps) {
         setFlippedCards([]);
         setMoves(0);
         setIsChecking(false);
+        setFocusedIndex(0);
+    };
+
+    const handleGridKeyDown = (event: React.KeyboardEvent) => {
+        if (!GRID_NAVIGATION_KEYS.includes(event.key as (typeof GRID_NAVIGATION_KEYS)[number])) {
+            return;
+        }
+        const next = getGridNavigationIndex(focusedIndex, event.key, 4, board.length);
+        if (next === null || next === focusedIndex) return;
+        event.preventDefault();
+        setFocusedIndex(next);
+        cardRefs.current[next]?.focus();
     };
 
     return (
-        <div className="flex flex-col items-center gap-6 animate-in fade-in-50">
+        <div className="flex flex-col items-center gap-6 animate-in fade-in-50" onKeyDown={handleGridKeyDown}>
             {allMatched ? (
                 <div className="text-center space-y-4">
                     <Award className="h-20 w-20 text-accent mx-auto" />
@@ -188,13 +213,20 @@ export function MemoryGame({ subject, mode = 'icon' }: MemoryGameProps) {
             ) : (
                 <>
                     <p className="text-2xl font-bold">Jogadas: {moves}</p>
-                    <div className="grid grid-cols-4 gap-2 md:gap-4 perspective-[1000px]">
+                    <div
+                        className="grid grid-cols-4 gap-2 md:gap-4 perspective-[1000px]"
+                        role="grid"
+                        aria-label="Jogo da memória"
+                    >
                         {board.map((card, i) => (
                             <Card
                                 key={i}
                                 card={card}
                                 onCardClick={handleCardClick}
                                 index={i}
+                                tabIndex={i === focusedIndex ? 0 : -1}
+                                onFocus={setFocusedIndex}
+                                cardRef={(el) => { cardRefs.current[i] = el; }}
                             />
                         ))}
                     </div>

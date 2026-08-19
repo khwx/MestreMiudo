@@ -15,6 +15,20 @@ Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 - **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 390 testes a passar (41 ficheiros).
 - **Docs atualizados:** `TODO.md` (item concluído).
 
+## 2026-08-19 - Navegação por teclado (setas) nos jogos educativos
+
+- **Contexto:** Os três jogos (Jogo da Memória, Jogo do Galo e Jogo da Forca) usavam `<button>` nativos (Enter/Espaço funcionavam) mas não tinham navegação por setas entre células, dificultando o uso por teclado para crianças que dependem de acessibilidade.
+- **Tarefa implementada:** Adicionar navegação por teclado completa (roving tabindex + setas + Home/End) a todos os jogos, com contentores `role="grid"` e ARIA adequado.
+- **Alterações:**
+  - `src/lib/game-utils.ts` — nova função pura `getGridNavigationIndex` e constante `GRID_NAVIGATION_KEYS` (reutilizável e testável).
+  - `src/components/MemoryGame.tsx` — grelha 4 colunas com foco por setas; `Card` passa `ref`, `tabIndex` e `onFocus`.
+  - `src/components/TicTacToe.tsx` — grelha 3x3 com foco por setas; `Square` deixou de usar `disabled` (o `onClick` já protege) para manter todas as casas focáveis.
+  - `src/components/HangmanGameImproved.tsx` — teclado de letras (7 colunas) com foco por setas via estado interno do componente `Keyboard`.
+  - `src/__tests__/game-utils.test.ts` — testes unitários de `getGridNavigationIndex` (bordas, linha parcial, grelha vazia).
+  - `src/__tests__/keyboard-navigation.test.tsx` — testes de componente confirmando a movimentação de foco no galo e na memória.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 393 testes a passar (43 ficheiros).
+- **Docs atualizados:** `TODO.md` (itens "Acessibilidade nos jogos", "testes unitários", "Praticar temas fracos" e "CSV" marcados como concluídos; nota de nova funcionalidade na secção Completed).
+
 ## 2026-08-17 - Wire-up eliminação de histórias na galeria
 
 - **Contexto:** O projecto tinha uma ação de servidor `deleteStory` (em `src/app/actions/stories.ts`) mas não estava exportada no barrel `src/app/actions/index.ts` e a UI da galeria de histórias não tinha forma de eliminar histórias.

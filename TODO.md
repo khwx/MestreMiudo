@@ -32,11 +32,11 @@
 
 ## 📋 Pending Enhancements
 - [x] Sincronizar catálogo de conquistas (`lib/achievements.ts`) com `BADGE_DEFINITIONS` para evitar chaves duplicadas
-- [ ] Adicionar testes unitários para `lib/groq.ts`, `lib/pixabay.ts` e `lib/question-bank.ts`
-- [ ] Modo "Praticar temas fracos" baseado em `getWeakTopics` no ecrã de quiz
+- [x] Adicionar testes unitários para `lib/groq.ts`, `lib/pixabay.ts` e `lib/question-bank.ts`
+- [x] Modo "Praticar temas fracos" baseado em `getWeakTopics` no ecrã de quiz
 - [ ] Relatório PDF de progresso enviável por email para encarregados de educação
 - [ ] Suporte offline aprimorado (pré-carregar lições por grade no service worker)
-- [ ] Acessibilidade: navegação por teclado completa nos jogos (jogo da memória, galo, forca)
+- [x] Acessibilidade: navegação por teclado completa nos jogos (jogo da memória, galo, forca)
 - [ ] Tradução/adaptação da interface para outros dialetos de português
-- [ ] Painel do professor: exportar notas em CSV
+- [x] Painel do professor: exportar notas em CSV (`handleExportCsv` no `parent/page.tsx`)
 Last updated: 2026-08-19

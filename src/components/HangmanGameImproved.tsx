@@ -1,12 +1,13 @@
 "use client";
 import { logger } from "@/lib/logger";
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { RotateCw, Lightbulb, Loader2, Settings } from 'lucide-react';
 import { generateWord } from '@/ai/flows/word-generation';
 import { useToast } from "@/hooks/use-toast";
+import { getGridNavigationIndex, GRID_NAVIGATION_KEYS } from '@/lib/game-utils';
 import React from 'react';
 
 const CATEGORIES = [
@@ -53,22 +54,46 @@ const Keyboard = React.memo(({ activeLetters, inactiveLetters, onSelect, disable
     disabled?: boolean;
 }) => {
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+    const [focusedIndex, setFocusedIndex] = useState(0);
+    const letterRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (!GRID_NAVIGATION_KEYS.includes(event.key as (typeof GRID_NAVIGATION_KEYS)[number])) {
+            return;
+        }
+        const next = getGridNavigationIndex(focusedIndex, event.key, 7, alphabet.length);
+        if (next === null || next === focusedIndex) return;
+        event.preventDefault();
+        setFocusedIndex(next);
+        letterRefs.current[next]?.focus();
+    };
+
     return (
-        <div className="grid grid-cols-7 gap-2 self-stretch">
-            {alphabet.map(key => {
+        <div
+            className="grid grid-cols-7 gap-2 self-stretch"
+            role="grid"
+            aria-label="Letras disponíveis"
+            onKeyDown={handleKeyDown}
+        >
+            {alphabet.map((key, i) => {
                 const isActive = activeLetters.includes(key);
                 const isInactive = inactiveLetters.includes(key);
                 return (
                     <Button
                         key={key}
+                        ref={(el) => { letterRefs.current[i] = el; }}
                         variant="outline"
                         size="lg"
+                        tabIndex={i === focusedIndex ? 0 : -1}
+                        aria-label={`Letra ${key}`}
+                        aria-pressed={isActive || isInactive}
                         className={cn(
-                            'text-xl uppercase font-bold',
+                            'text-xl uppercase font-bold focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
                             isActive && 'bg-[hsl(var(--chart-3))] text-white',
                             isInactive && 'bg-destructive text-white opacity-50',
                         )}
                         onClick={() => onSelect(key)}
+                        onFocus={() => setFocusedIndex(i)}
                         disabled={isInactive || isActive || disabled}
                     >
                         {key}
