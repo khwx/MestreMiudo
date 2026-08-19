@@ -34,7 +34,7 @@
 - [x] Sincronizar catálogo de conquistas (`lib/achievements.ts`) com `BADGE_DEFINITIONS` para evitar chaves duplicadas
 - [x] Adicionar testes unitários para `lib/groq.ts`, `lib/pixabay.ts` e `lib/question-bank.ts`
 - [x] Modo "Praticar temas fracos" baseado em `getWeakTopics` no ecrã de quiz
-- [ ] Relatório PDF de progresso enviável por email para encarregados de educação
+- [x] Relatório PDF de progresso enviável/partilhável (Web Share API com anexo + fallback mailto) para encarregados de educação
 - [ ] Suporte offline aprimorado (pré-carregar lições por grade no service worker)
 - [x] Acessibilidade: navegação por teclado completa nos jogos (jogo da memória, galo, forca)
 - [ ] Tradução/adaptação da interface para outros dialetos de português

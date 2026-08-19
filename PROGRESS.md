@@ -2,6 +2,19 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-19 - Relatório PDF enviável/partilhável para encarregados
+
+- **Contexto:** O relatório de progresso em PDF (`src/lib/pdf-report.ts`) só era descarregado localmente; faltava a possibilidade de o enviar/partilhar com os encarregados de educação (item pendente no TODO.md).
+- **Tarefa implementada:** Tornar o relatório em PDF enviável/partilhável sem precisar de backend de email.
+- **Alterações:**
+  - `src/lib/pdf-report.ts` — refatorado para gerar o documento via `buildReportDoc` (assíncrono); adicionadas `generatePdfReportBlob`, `buildReportMailtoLink` e `sharePdfReport` (usa Web Share API com anexo de ficheiro, com fallback para `mailto:` quando indisponível).
+  - `src/app/dashboard/parent/page.tsx` — novo botão "Enviar / Partilhar" (ícone `Share2`) junto ao "Exportar PDF".
+  - `src/app/dashboard/teacher/page.tsx` — novo botão "Enviar / Partilhar PDF".
+  - `src/__tests__/pdf-report.test.ts` — testes para `generatePdfReportBlob` e `buildReportMailtoLink` (total: 7 testes no ficheiro).
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 404 testes a passar (42 ficheiros).
+- **Nota:** O envio por email via servidor (SMTP/Resend) continua como melhoria futura; a implementação atual cobre partilha cliente (app de email no telemóvel/desktop via Web Share API e mailto).
+- **Docs atualizados:** `TODO.md` (item "Relatório PDF enviável por email" marcado como concluído).
+
 ## 2026-08-19 - Sincronização do catálogo de conquistas (badges)
 
 - **Contexto:** Existiam três sistemas de definição de badges com chaves duplicadas: `BADGE_DEFINITIONS` no BadgePopup (IDs legados como `primeiro_quiz`), `_BADGE_LIBRARY` no rewards.ts e `UNIFIED_BADGES` no badges.ts. O import não utilizado de `UNIFIED_BADGES` em `achievements.ts` gerava aviso de lint, e o `LEGACY_ID_MAP` em `badges.ts` tinha uma chave duplicada `streak_3`.

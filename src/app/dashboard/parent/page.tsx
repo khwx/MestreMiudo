@@ -4,10 +4,10 @@ import { logger } from "@/lib/logger";
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { AlertTriangle, ArrowLeft, BookOpen, Calendar, FileSpreadsheet, FileText, Lightbulb, Loader2, TrendingUp, Trophy, Users } from 'lucide-react';
+import { AlertTriangle, ArrowLeft, BookOpen, Calendar, FileSpreadsheet, FileText, Lightbulb, Loader2, Share2, TrendingUp, Trophy, Users } from 'lucide-react';
 import Link from 'next/link';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
-import { generatePdfReport } from '@/lib/pdf-report';
+import { generatePdfReport, sharePdfReport } from '@/lib/pdf-report';
 import {
   getWeeklyProgress,
   getTopicAnalysis,
@@ -36,6 +36,7 @@ export default function ParentDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [generatingPdf, setGeneratingPdf] = useState(false);
+  const [sharingPdf, setSharingPdf] = useState(false);
   const [weeklyData, setWeeklyData] = useState<Record<string, { date: string; score: number }[]>>({});
   const [topicData, setTopicData] = useState<Record<string, { topic: string; averageScore: number; status: 'strong' | 'weak' }[]>>({});
   const [trendData, setTrendData] = useState<Record<string, { trend: string; changePercent: number }>>({});
@@ -238,6 +239,17 @@ export default function ParentDashboardPage() {
       await generatePdfReport(students);
     } finally {
       setGeneratingPdf(false);
+    }
+  };
+
+  const handleSharePdf = async () => {
+    setSharingPdf(true);
+    try {
+      await sharePdfReport(students);
+    } catch (err) {
+      logger.error('Erro ao partilhar PDF:', err);
+    } finally {
+      setSharingPdf(false);
     }
   };
 
@@ -691,6 +703,19 @@ export default function ParentDashboardPage() {
                 <FileText className="mr-2 h-5 w-5" />
               )}
               Exportar PDF
+            </Button>
+            <Button
+              onClick={handleSharePdf}
+              disabled={sharingPdf || students.length === 0}
+              className="btn-kid bg-gradient-to-r from-purple-500 to-fuchsia-500 hover:from-purple-600 hover:to-fuchsia-600 text-white text-lg h-12"
+              size="lg"
+            >
+              {sharingPdf ? (
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              ) : (
+                <Share2 className="mr-2 h-5 w-5" />
+              )}
+              Enviar / Partilhar
             </Button>
             <Button
               onClick={handleExportCsv}

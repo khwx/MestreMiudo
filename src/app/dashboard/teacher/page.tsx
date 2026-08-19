@@ -4,10 +4,10 @@ import { logger } from "@/lib/logger";
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { AlertTriangle, ArrowLeft, BookOpen, BarChart3, Loader2, TrendingUp, Trophy, Award, Book, UsersIcon, Star } from 'lucide-react';
+import { AlertTriangle, ArrowLeft, BookOpen, BarChart3, Loader2, Share2, TrendingUp, Trophy, Award, Book, UsersIcon, Star } from 'lucide-react';
 import Link from 'next/link';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
-import { generatePdfReport } from '@/lib/pdf-report';
+import { generatePdfReport, sharePdfReport } from '@/lib/pdf-report';
 
 interface StudentProgress {
   studentId: string;
@@ -40,6 +40,7 @@ export default function TeacherDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [generatingPdf, setGeneratingPdf] = useState(false);
+  const [sharingPdf, setSharingPdf] = useState(false);
   const [activeTab, setActiveTab] = useState<'overview' | 'students' | 'analytics' | 'reports'>('overview');
 
   useEffect(() => {
@@ -547,6 +548,33 @@ export default function TeacherDashboardPage() {
                       <>
                         <Book className="mr-3 h-5 w-5" />
                         Exportar Relatório PDF
+                      </>
+                    )}
+                  </Button>
+
+                  <Button
+                    onClick={async () => {
+                      setSharingPdf(true);
+                      try {
+                        await sharePdfReport(students);
+                      } catch (err) {
+                        logger.error('Erro ao partilhar PDF:', err);
+                      } finally {
+                        setSharingPdf(false);
+                      }
+                    }}
+                    disabled={sharingPdf || students.length === 0}
+                    className="w-full btn-kid bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white shadow-lg"
+                  >
+                    {sharingPdf ? (
+                      <>
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        A partilhar...
+                      </>
+                    ) : (
+                      <>
+                        <Share2 className="mr-3 h-5 w-5" />
+                        Enviar / Partilhar PDF
                       </>
                     )}
                   </Button>
