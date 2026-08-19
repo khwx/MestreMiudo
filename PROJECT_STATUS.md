@@ -29,6 +29,7 @@ Este documento serve para acompanhar o progresso do desenvolvimento, o que já f
 - [x] Integração com OpenRouter AI para conteúdo dinâmico
 - [x] Deployment na Vercel
 - [x] Sincronização com GitHub
+- [x] PWA + suporte offline (manifest, service worker, offline.html, pré-carregamento proativo de lições)
 
 ---
 
@@ -64,4 +65,4 @@ Este documento serve para acompanhar o progresso do desenvolvimento, o que já f
 | Gamification | ⏳ | 65% |
 | Deployment | ✅ | 100% |
 
-**Última Atualização:** 2026-08-17 (sessão de melhoria contínua)
+**Última Atualização:** 2026-08-19 (suporte offline aprimorado)

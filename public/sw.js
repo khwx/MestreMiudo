@@ -131,3 +131,51 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+
+/**
+ * Proactive lesson preloading.
+ *
+ * When the client sends a PRELOAD_LESSONS message with a list of Supabase
+ * REST URLs, the SW fetches each URL and stores the response in the
+ * lesson cache so children can browse lessons while offline.
+ *
+ * Errors are swallowed individually so one failed URL does not abort the
+ * whole batch.
+ */
+async function preloadUrls(urls) {
+  if (!urls || !Array.isArray(urls) || urls.length === 0) return;
+
+  const cache = await caches.open(LESSON_CACHE);
+
+  const results = await Promise.allSettled(
+    urls.map(async (url) => {
+      try {
+        const request = new Request(url, { mode: 'cors' });
+        const response = await fetch(request);
+        if (response && response.status === 200) {
+          cache.put(url, response.clone());
+        }
+      } catch (_) {
+        // Swallow — offline preloading is best-effort.
+      }
+    })
+  );
+
+  // Notify clients that preloading finished.
+  const clients = await self.clients.matchAll({ type: 'window' });
+  clients.forEach((client) => {
+    client.postMessage({
+      type: 'PRELOAD_COMPLETE',
+      successCount: results.filter((r) => r.status === 'fulfilled').length,
+      totalCount: urls.length,
+    });
+  });
+}
+
+self.addEventListener('message', (event) => {
+  if (!event.data) return;
+
+  if (event.data.type === 'PRELOAD_LESSONS') {
+    preloadUrls(event.data.urls);
+  }
+});

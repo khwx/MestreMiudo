@@ -8,6 +8,7 @@ import { Book, Divide, Leaf, CheckCircle } from 'lucide-react';
 import { ArrowLeft } from 'lucide-react';
 import { getLessonStats } from '@/lib/lessons';
 import { logger } from '@/lib/logger';
+import { preloadAllLessons } from '@/lib/offline-preload';
 
 const subjects = [
   {
@@ -66,6 +67,14 @@ export default function LearnPage() {
       }
     };
     fetchStats();
+
+    if (typeof window !== 'undefined' && 'serviceWorker' in navigator && navigator.onLine) {
+      try {
+        preloadAllLessons(process.env.NEXT_PUBLIC_SUPABASE_URL);
+      } catch (err) {
+        logger.error('Erro ao iniciar pré-carregamento offline:', err);
+      }
+    }
   }, [name]);
 
   return (

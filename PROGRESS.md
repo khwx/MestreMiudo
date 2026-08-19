@@ -2,6 +2,18 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-19 - Suporte offline aprimorado (pré-carregamento de lições por grade)
+
+- **Contexto:** O service worker (`public/sw.js`) existente apenas armazenava em cache as lições quando eram solicitadas; não havia um mecanismo proativo de pré-carregar dados de lições para todas as grades/subjects, o que limitava a experiência offline.
+- **Tarefa implementada:** Adicionar um sistema de pré-carregamento proativo de lições no service worker, acionado quando o utilizador visita o ecrã "Aprender a Brincar".
+- **Alterações:**
+  - `src/lib/offline-preload.ts` (novo) — funções puras: `buildSupabaseLessonUrl`, `buildLessonPreloadUrls`, `isServiceWorkerReady`, `triggerLessonPreload` e `preloadAllLessons`; constantes `OFFLINE_SUBJECTS` (Português, Matemática, Estudo do Meio) e `OFFLINE_GRADES` (1-4).
+  - `public/sw.js` — adicionado listener de `message` para a mensagem `PRELOAD_LESSONS` que fetcheia as URLs enviadas e armazena-as no cache `LESSON_CACHE`; envia mensagem de volta `PRELOAD_COMPLETE` aos clientes.
+  - `src/app/dashboard/learn/page.tsx` — `useEffect` que chama `preloadAllLessons` quando o navegador tem service worker e está online.
+  - `src/__tests__/offline-preload.test.ts` (novo) — 23 testes cobrindo URL building, codificação, SSR safety, e interações com o service worker.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 427 testes a passar (43 ficheiros).
+- **Docs atualizados:** `TODO.md` (item "Suporte offline aprimorado" marcado como concluído).
+
 ## 2026-08-19 - Relatório PDF enviável/partilhável para encarregados
 
 - **Contexto:** O relatório de progresso em PDF (`src/lib/pdf-report.ts`) só era descarregado localmente; faltava a possibilidade de o enviar/partilhar com os encarregados de educação (item pendente no TODO.md).
