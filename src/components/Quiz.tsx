@@ -12,9 +12,10 @@ import { useAccessibility } from '@/components/AccessibilityProvider';
 import confetti from 'canvas-confetti';
 import { QuizResults } from '@/components/QuizResults';
 import { QuizQuestion } from '@/components/QuizQuestion';
-import { BadgePopup, BADGE_DEFINITIONS } from '@/components/BadgePopup';
+import { BadgePopup } from '@/components/BadgePopup';
+import { getBadgeByAnyId } from '@/lib/badges';
 import { selectPortugueseVoice } from '@/lib/tts-voice';
-import { getWrongQuestions } from '@/lib/quiz-practice';
+import { getWrongQuestions, getWeakTopicsFromAnswers, getQuestionsForWeakTopics } from '@/lib/quiz-practice';
 
 type QuizProps = {
   studentId: string;
@@ -153,19 +154,19 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
         
         // Check for first quiz badge
         if (totalQuizzes === 1) {
-          const badge = BADGE_DEFINITIONS['primeiro_quiz'];
+          const badge = getBadgeByAnyId('first_quiz');
           if (badge) {
-            await unlockAchievement(studentId, 'primeiro_quiz');
-            setNewBadge(badge);
+            await unlockAchievement(studentId, 'first_quiz');
+            setNewBadge({ name: badge.name, description: badge.description, icon: badge.icon });
           }
         }
         
         // Check for perfect score badge
         if (score === quizData!.quizQuestions.length && perfectScores >= 1) {
-          const badge = BADGE_DEFINITIONS['perfeicao'];
+          const badge = getBadgeByAnyId('perfect_score');
           if (badge && !newBadge) {
-            await unlockAchievement(studentId, 'perfeicao');
-            setNewBadge(badge);
+            await unlockAchievement(studentId, 'perfect_score');
+            setNewBadge({ name: badge.name, description: badge.description, icon: badge.icon });
           }
         }
       } catch (badgeError) {
@@ -204,6 +205,22 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
     const wrong = getWrongQuestions(quizData.quizQuestions, answers);
     if (wrong.length === 0) return;
     setQuizData({ ...quizData, quizQuestions: wrong });
+    setCurrentQuestionIndex(0);
+    setSelectedAnswer(null);
+    setIsAnswered(false);
+    setScore(0);
+    setAnswers([]);
+    setPracticeMode(true);
+    setNewBadge(null);
+  }, [quizData, answers]);
+
+  const handlePracticeWeakTopics = useCallback(() => {
+    if (!quizData) return;
+    const weakTopics = getWeakTopicsFromAnswers(answers);
+    if (weakTopics.length === 0) return;
+    const weakQuestions = getQuestionsForWeakTopics(quizData.quizQuestions, weakTopics);
+    if (weakQuestions.length === 0) return;
+    setQuizData({ ...quizData, quizQuestions: weakQuestions });
     setCurrentQuestionIndex(0);
     setSelectedAnswer(null);
     setIsAnswered(false);
@@ -317,7 +334,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
             onClose={() => setNewBadge(null)}
           />
         )}
-        <QuizResults
+         <QuizResults
           score={score}
           totalQuestions={quizData.quizQuestions.length}
           quizData={quizData}
@@ -327,6 +344,8 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
           practiceMode={practiceMode}
           wrongCount={practiceMode ? 0 : answers.filter((a) => !a.isCorrect).length}
           onPracticeWrong={handlePracticeWrong}
+          weakTopics={practiceMode ? null : getWeakTopicsFromAnswers(answers)}
+          onPracticeWeakTopics={handlePracticeWeakTopics}
         />
       </>
     );

@@ -16,6 +16,8 @@ type QuizResultsProps = {
   practiceMode?: boolean;
   wrongCount?: number;
   onPracticeWrong?: () => void;
+  weakTopics?: string[] | null;
+  onPracticeWeakTopics?: () => void;
 };
 
 export const QuizResults = React.memo(function QuizResults({
@@ -27,9 +29,12 @@ export const QuizResults = React.memo(function QuizResults({
   practiceMode = false,
   wrongCount = 0,
   onPracticeWrong,
+  weakTopics = null,
+  onPracticeWeakTopics,
 }: QuizResultsProps) {
   const stars = score === totalQuestions ? 3 : score >= totalQuestions * 0.6 ? 2 : 1;
   const canPractice = !practiceMode && wrongCount > 0 && typeof onPracticeWrong === 'function';
+  const canPracticeWeakTopics = !practiceMode && Array.isArray(weakTopics) && weakTopics.length > 0 && typeof onPracticeWeakTopics === 'function';
 
   return (
     <div className="space-y-6 max-w-2xl mx-auto">
@@ -81,6 +86,17 @@ export const QuizResults = React.memo(function QuizResults({
               aria-label={`Praticar ${wrongCount} pergunta${wrongCount > 1 ? 's' : ''} que erraste`}
             >
               <BookOpen className="mr-2 h-5 w-5" /> Praticar {wrongCount} que erraste
+            </Button>
+          )}
+          {canPracticeWeakTopics && (
+            <Button
+              onClick={onPracticeWeakTopics}
+              variant="secondary"
+              size="lg"
+              className="btn-kid text-lg"
+              aria-label={`Praticar temas fracos: ${weakTopics!.join(', ')}`}
+            >
+              <BookOpen className="mr-2 h-5 w-5" /> Praticar temas fracos
             </Button>
           )}
           <Button onClick={onRestart} variant="outline" size="lg" className="btn-kid text-lg">

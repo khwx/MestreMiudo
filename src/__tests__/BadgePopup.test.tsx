@@ -50,11 +50,10 @@ describe('BadgePopup', () => {
 
 describe('BADGE_DEFINITIONS', () => {
   it('has required badge definitions', () => {
-    expect(BADGE_DEFINITIONS['primeiro_quiz']).toBeDefined();
-    expect(BADGE_DEFINITIONS['perfeicao']).toBeDefined();
-    expect(BADGE_DEFINITIONS['streak_3']).toBeDefined();
-    expect(BADGE_DEFINITIONS['streak_7']).toBeDefined();
-    expect(BADGE_DEFINITIONS['streak_30']).toBeDefined();
+    expect(BADGE_DEFINITIONS['first_quiz']).toBeDefined();
+    expect(BADGE_DEFINITIONS['perfect_score']).toBeDefined();
+    expect(BADGE_DEFINITIONS['week_streak']).toBeDefined();
+    expect(BADGE_DEFINITIONS['month_streak']).toBeDefined();
   });
 
   it('each badge has required properties', () => {

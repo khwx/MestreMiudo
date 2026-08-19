@@ -31,13 +31,12 @@
 - Confirmed the Estudo do Meio question bank already covers grades 3-4 (topics and questions present in `estudo-do-meio.ts`)
 
 ## 📋 Pending Enhancements
-- [ ] Sincronizar catálogo de conquistas (`lib/achievements.ts`) com `BADGE_DEFINITIONS` para evitar chaves duplicadas
+- [x] Sincronizar catálogo de conquistas (`lib/achievements.ts`) com `BADGE_DEFINITIONS` para evitar chaves duplicadas
 - [ ] Adicionar testes unitários para `lib/groq.ts`, `lib/pixabay.ts` e `lib/question-bank.ts`
-- [ ] Modo "Praticar temas fracos" baseado em `getWeakTopics` no ecrã de quiz
 - [ ] Modo "Praticar temas fracos" baseado em `getWeakTopics` no ecrã de quiz
 - [ ] Relatório PDF de progresso enviável por email para encarregados de educação
 - [ ] Suporte offline aprimorado (pré-carregar lições por grade no service worker)
 - [ ] Acessibilidade: navegação por teclado completa nos jogos (jogo da memória, galo, forca)
 - [ ] Tradução/adaptação da interface para outros dialetos de português
 - [ ] Painel do professor: exportar notas em CSV
-Last updated: 2026-08-18
+Last updated: 2026-08-19

@@ -3,6 +3,12 @@
  * Generates achievement cards and social sharing URLs
  */
 
+import {
+  getBadge,
+  getAllBadges,
+  BadgeDefinition,
+} from '@/lib/badges';
+
 export interface Achievement {
   id: string;
   title: string;
@@ -20,255 +26,17 @@ export interface AchievementCard {
   imageUrl: string;
 }
 
-// Define all possible achievements
-const ACHIEVEMENTS_CATALOG = {
-  first_quiz: {
-    title: 'Primeiro Passo',
-    description: 'Completou o primeiro quiz',
-    icon: '🚀',
-    color: '#3b82f6',
-  },
-  five_quizzes: {
-    title: 'Aprendiz',
-    description: 'Completou 5 quizzes',
-    icon: '📚',
-    color: '#8b5cf6',
-  },
-  ten_quizzes: {
-    title: 'Estudante Dedicado',
-    description: 'Completou 10 quizzes',
-    icon: '⭐',
-    color: '#ec4899',
-  },
-  fifty_quizzes: {
-    title: 'Mestre do Conhecimento',
-    description: 'Completou 50 quizzes',
-    icon: '👑',
-    color: '#f59e0b',
-  },
-  perfect_score: {
-    title: 'Perfeição!',
-    description: 'Acertou um quiz com 100%',
-    icon: '💯',
-    color: '#10b981',
-  },
-  week_streak: {
-    title: 'Uma Semana de Fogo',
-    description: 'Manteve uma streak de 7 dias',
-    icon: '🔥',
-    color: '#ef4444',
-  },
-  month_streak: {
-    title: 'Consistência é Chave',
-    description: 'Manteve uma streak de 30 dias',
-    icon: '💪',
-    color: '#f97316',
-  },
-  best_in_class: {
-    title: 'Melhor da Classe',
-    description: 'Liderou o ranking da sua turma',
-    icon: '🏆',
-    color: '#fbbf24',
-  },
-  all_subjects_master: {
-    title: 'Mestre Completo',
-    description: 'Atingiu média de 90% em todas as disciplinas',
-    icon: '🎓',
-    color: '#6b7280',
-  },
-  daily_challenge_master: {
-    title: 'Desafio Diário - Campeão',
-    description: 'Completou 30 desafios diários com sucesso',
-    icon: '🎯',
-    color: '#8b5cf6',
-  },
-  speed_demon: {
-    title: 'Demónio da Velocidade',
-    description: 'Completou um quiz em menos de 2 minutos',
-    icon: '⚡',
-    color: '#facc15',
-  },
-  night_owl: {
-    title: 'Coruja Noturna',
-    description: 'Completou um quiz depois das 20h',
-    icon: '🦉',
-    color: '#6366f1',
-  },
-  early_bird: {
-    title: 'Madrugador',
-    description: 'Completou um quiz antes das 8h',
-    icon: '🌅',
-    color: '#f97316',
-  },
-  quiz_marathon: {
-    title: 'Maratona de Quizzes',
-    description: 'Completou 3 quizzes num único dia',
-    icon: '🏃',
-    color: '#10b981',
-  },
-  subject_master_portugues: {
-    title: 'Mestre de Português',
-    description: 'Atingiu média de 90%+ em Português',
-    icon: '📖',
-    color: '#3b82f6',
-  },
-  subject_master_matematica: {
-    title: 'Mestre de Matemática',
-    description: 'Atingiu média de 90%+ em Matemática',
-    icon: '🔢',
-    color: '#ef4444',
-  },
-  subject_master_estudo: {
-    title: 'Mestre de Estudo do Meio',
-    description: 'Atingiu média de 90%+ em Estudo do Meio',
-    icon: '🌍',
-    color: '#22c55e',
-  },
-  streak_14: {
-    title: 'Duas Semanas de Fogo',
-    description: 'Manteve uma streak de 14 dias',
-    icon: '🔥',
-    color: '#dc2626',
-  },
-  daily_7: {
-    title: 'Desafiante Semanal',
-    description: 'Completou 7 desafios diários',
-    icon: '📅',
-    color: '#8b5cf6',
-  },
-  daily_30: {
-    title: 'Desafiante Mensal',
-    description: 'Completou 30 desafios diários',
-    icon: '🏆',
-    color: '#f59e0b',
-  },
-  portugues_master: {
-    title: 'Mestre de Português',
-    description: 'Completou 20 quizzes de Português com média de 80%+',
-    icon: '📖',
-    color: '#22c55e',
-  },
-  matematica_master: {
-    title: 'Mestre de Matemática',
-    description: 'Completou 20 quizzes de Matemática com média de 80%+',
-    icon: '🔢',
-    color: '#3b82f6',
-  },
-  ciencias_master: {
-    title: 'Mestre de Ciências',
-    description: 'Completou 20 quizzes de Estudo do Meio com média de 80%+',
-    icon: '🔬',
-    color: '#f97316',
-  },
-  quiz_100_streak: {
-    title: 'Três Perfeições Seguidas',
-    description: 'Acertou 100% em 3 quizzes consecutivos',
-    icon: '💎',
-    color: '#8b5cf6',
-  },
-  all_rounder: {
-    title: 'Polivalente do Dia',
-    description: 'Atingiu 80%+ em todas as 3 disciplinas no mesmo dia',
-    icon: '🌟',
-    color: '#ec4899',
-  },
-  first_lesson: {
-    title: 'Primeira Lição',
-    description: 'Completou a primeira lição',
-    icon: '📚',
-    color: '#3b82f6',
-  },
-  ten_lessons: {
-    title: 'Dez Lições',
-    description: 'Completou 10 lições',
-    icon: '📖',
-    color: '#8b5cf6',
-  },
-  story_lover: {
-    title: 'Amante de Histórias',
-    description: 'Criou 5 histórias',
-    icon: '📝',
-    color: '#ec4899',
-  },
-  game_champion: {
-    title: 'Campeão de Jogos',
-    description: 'Venceu 10 jogos',
-    icon: '🎮',
-    color: '#10b981',
-  },
-  streak_30: {
-    title: 'Trinta Dias de Fogo',
-    description: 'Manteve uma streak de 30 dias',
-    icon: '🏆',
-    color: '#f59e0b',
-  },
-  daily_14: {
-    title: 'Desafiante Quinzenal',
-    description: 'Completou 14 desafios diários',
-    icon: '🔥',
-    color: '#ef4444',
-  },
-  all_games_master: {
-    title: 'Mestre de Todos os Jogos',
-    description: 'Venceu todos os 5 tipos de jogos',
-    icon: '🎯',
-    color: '#6366f1',
-  },
-  perfect_week: {
-    title: 'Semana Perfeita',
-    description: 'Manteve média de 80%+ durante 7 dias seguidos',
-    icon: '⭐',
-    color: '#fbbf24',
-  },
-  story_creator: {
-    title: 'Criador de Histórias',
-    description: 'Criou a primeira história',
-    icon: '📝',
-    color: '#ec4899',
-  },
-  shopaholic: {
-    title: 'Comprador Fiel',
-    description: 'Comprou 5 itens na loja',
-    icon: '🛍️',
-    color: '#f97316',
-  },
-  daily_21: {
-    title: 'Desafiante Dedicado',
-    description: '21 desafios diários completados',
-    icon: '🔥',
-    color: '#ef4444',
-  },
-  streak_21: {
-    title: 'Três Semanas de Fogo',
-    description: 'Streak de 21 dias consecutivos',
-    icon: '💪',
-    color: '#dc2626',
-  },
-  portugues_pro: {
-    title: 'Profissional de Português',
-    description: '50 quizzes de Português completados',
-    icon: '📖',
-    color: '#22c55e',
-  },
-  matematica_pro: {
-    title: 'Profissional de Matemática',
-    description: '50 quizzes de Matemática completados',
-    icon: '🔢',
-    color: '#3b82f6',
-  },
-  ciencias_pro: {
-    title: 'Profissional de Ciências',
-    description: '50 quizzes de Estudo do Meio completados',
-    icon: '🌍',
-    color: '#8b5cf6',
-  },
-  legendary: {
-    title: 'Lendário',
-    description: 'Completou 100 quizzes no total',
-    icon: '👑',
-    color: '#f59e0b',
-  },
-};
+/**
+ * Convert unified badge to achievement format
+ */
+function toAchievement(badge: BadgeDefinition): Omit<Achievement, 'id' | 'unlockDate'> {
+  return {
+    title: badge.name,
+    description: badge.description,
+    icon: badge.icon,
+    color: badge.color,
+  };
+}
 
 /**
  * Check if student has unlocked an achievement
@@ -431,9 +199,8 @@ export function generateShareableAchievementCard(
   achievementId: string,
   unlockDate: string
 ): AchievementCard {
-  const achievement = ACHIEVEMENTS_CATALOG[
-    achievementId as keyof typeof ACHIEVEMENTS_CATALOG
-  ] || {
+  const badge = getBadge(achievementId);
+  const achievement = badge ? toAchievement(badge) : {
     title: 'Conquista Desbloqueada',
     description: 'Conquista desconhecida',
     icon: '⭐',
@@ -449,10 +216,7 @@ export function generateShareableAchievementCard(
     studentName,
     achievement: {
       id: achievementId,
-      title: achievement.title,
-      description: achievement.description,
-      icon: achievement.icon,
-      color: achievement.color,
+      ...achievement,
       unlockDate,
     },
     shareUrl,
@@ -500,7 +264,7 @@ export function generateAchievementHTML(card: AchievementCard): string {
           }
           .description {
             font-size: 18px;
-            color: #6b7280;
+            color: #6b6b80;
             margin-bottom: 20px;
           }
           .student-name {
@@ -543,21 +307,19 @@ export function generateShareText(
   achievementId: string,
   shareUrl: string
 ): string {
-  const achievement = ACHIEVEMENTS_CATALOG[
-    achievementId as keyof typeof ACHIEVEMENTS_CATALOG
-  ];
-  if (!achievement) return '';
+  const badge = getBadge(achievementId);
+  if (!badge) return '';
 
-  return `🎉 ${studentName} desbloqueou a conquista "${achievement.title}" no MestreMiudo! ${achievement.icon}\n\n"${achievement.description}"\n\nVê também a minha conquista: ${shareUrl}`;
+  return `🎉 ${studentName} desbloqueou a conquista "${badge.name}" no MestreMiudo! ${badge.icon}\n\n"${badge.description}"\n\nVê também a minha conquista: ${shareUrl}`;
 }
 
 /**
  * Get all available achievements
  */
 export function getAllAchievements(): Array<Achievement & { id: string }> {
-  return Object.entries(ACHIEVEMENTS_CATALOG).map(([id, achievement]) => ({
-    id,
-    ...achievement,
+  return getAllBadges().map((badge) => ({
+    id: badge.id,
+    ...toAchievement(badge),
     unlockDate: new Date().toISOString(),
   }));
 }

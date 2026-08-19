@@ -2,6 +2,19 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-19 - Sincronização do catálogo de conquistas (badges)
+
+- **Contexto:** Existiam três sistemas de definição de badges com chaves duplicadas: `BADGE_DEFINITIONS` no BadgePopup (IDs legados como `primeiro_quiz`), `_BADGE_LIBRARY` no rewards.ts e `UNIFIED_BADGES` no badges.ts. O import não utilizado de `UNIFIED_BADGES` em `achievements.ts` gerava aviso de lint, e o `LEGACY_ID_MAP` em `badges.ts` tinha uma chave duplicada `streak_3`.
+- **Tarefa implementada:** Unificar todas as definições de badges para usar o catálogo unificado em `badges.ts` como única fonte de verdade.
+- **Alterações:**
+  - `src/lib/achievements.ts` — removido import não utilizado de `UNIFIED_BADGES`.
+  - `src/lib/badges.ts` — removida chave duplicada `streak_3` do `LEGACY_ID_MAP`.
+  - `src/components/BadgePopup/index.tsx` — substituídas definições hardcoded por `getBadgePopupDefinitions()` do catálogo unificado.
+  - `src/components/Quiz.tsx` — substituído `BADGE_DEFINITIONS['primeiro_quiz']` e `['perfeicao']` por `getBadgeByAnyId('first_quiz')` e `getBadgeByAnyId('perfect_score')` com IDs unificados.
+  - `src/__tests__/BadgePopup.test.tsx` — atualizados IDs nos testes para usar chaves unificadas.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 390 testes a passar (41 ficheiros).
+- **Docs atualizados:** `TODO.md` (item concluído).
+
 ## 2026-08-17 - Wire-up eliminação de histórias na galeria
 
 - **Contexto:** O projecto tinha uma ação de servidor `deleteStory` (em `src/app/actions/stories.ts`) mas não estava exportada no barrel `src/app/actions/index.ts` e a UI da galeria de histórias não tinha forma de eliminar histórias.

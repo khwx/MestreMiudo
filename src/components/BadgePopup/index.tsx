@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Award, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import React from 'react';
+import { getBadgePopupDefinitions } from '@/lib/badges';
 
 interface BadgePopupProps {
   badgeName: string;
@@ -99,56 +100,5 @@ export const BadgePopup = React.memo(function BadgePopup({ badgeName, badgeDescr
   );
 });
 
-// Badge definitions for easy reference
-export const BADGE_DEFINITIONS: Record<string, { name: string; description: string; icon: string }> = {
-  'primeiro_quiz': {
-    name: 'Primeiro Quiz',
-    description: 'Completaste o teu primeiro quiz!',
-    icon: '🎯',
-  },
-  'perfeicao': {
-    name: 'Perfeição',
-    description: 'Conseguiste 100% num quiz!',
-    icon: '💯',
-  },
-  'streak_3': {
-    name: 'Três Dias Seguidos',
-    description: 'Mantiveste a streak por 3 dias!',
-    icon: '🔥',
-  },
-  'streak_7': {
-    name: 'Uma Semana Completa',
-    description: '7 dias seguidos de aprendizagem!',
-    icon: '⭐',
-  },
-  'streak_30': {
-    name: 'Mestre da Consistência',
-    description: '30 dias seguidos! Incrível!',
-    icon: '👑',
-  },
-  'mestre_completo': {
-    name: 'Mestre Completo',
-    description: 'Atingiste 90% de média em todas as disciplinas!',
-    icon: '🎓',
-  },
-  'explorador': {
-    name: 'Explorador',
-    description: 'Completaste lições em todas as disciplinas!',
-    icon: '🧭',
-  },
-  'colecionador': {
-    name: 'Colecionador',
-    description: 'Tens 10 conquistas desbloqueadas!',
-    icon: '🏅',
-  },
-  'campeao': {
-    name: 'Campeão',
-    description: 'Completa 30 desafios diários!',
-    icon: '🏆',
-  },
-  'melhor_da_classe': {
-    name: 'Melhor da Classe',
-    description: 'Estás no top 10 do ranking!',
-    icon: '🥇',
-  },
-};
+// Badge definitions for easy reference - sourced from unified catalog
+export const BADGE_DEFINITIONS: Record<string, { name: string; description: string; icon: string }> = getBadgePopupDefinitions();
