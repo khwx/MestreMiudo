@@ -35,5 +35,6 @@ export {
   getLessonDataAction,
   getLessonsForSubjectAction,
   getStudentLessonProgressAction,
+  getNextLessonAction,
   saveLessonCompletionAction,
 } from './lessons';

@@ -3,7 +3,7 @@ import { logger } from "@/lib/logger";
 
 import { useSearchParams } from "next/navigation"
 import { useEffect, useMemo, useState } from "react"
-import { getFullQuizHistory, getStudentLessonHistoryAction, getStudentRewards, getStudentStreak } from "@/app/actions"
+import { getFullQuizHistory, getStudentLessonHistoryAction, getStudentRewards, getStudentStreak, getNextLessonAction } from "@/app/actions"
 import { getDailyChallenge, getDailyChallengeStats } from "@/lib/daily-challenges"
 import { getStudentStats as getSpacedRepetitionStats } from "@/lib/spaced-repetition"
 import type { QuizResultEntry } from "@/app/shared-schemas"
@@ -45,6 +45,7 @@ export default function DashboardClientPage() {
   const [streak, setStreak] = useState<StudentStreak | null>(null)
   const [dailyChallengeStats, setDailyChallengeStats] = useState<DailyChallengeStats | null>(null)
   const [spacedStats, setSpacedStats] = useState<{ total: number; mastered: number; learning: number; due: number } | null>(null)
+  const [nextLessonTitle, setNextLessonTitle] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -59,13 +60,15 @@ export default function DashboardClientPage() {
         getStudentStreak(name),
         getDailyChallenge(name, gradeLevel),
         getDailyChallengeStats(name),
+        getNextLessonAction(name, gradeLevel),
       ])
-        .then(([quizHistory, lessons, studentRewards, studentStreak, _challenge, stats]) => {
+        .then(([quizHistory, lessons, studentRewards, studentStreak, _challenge, stats, nextLesson]) => {
           setHistory(quizHistory || [])
           setLessonHistory(lessons || [])
           setRewards(studentRewards || null)
           setStreak(studentStreak || null)
           setDailyChallengeStats(stats)
+          setNextLessonTitle(nextLesson?.title ?? null)
         })
         .catch((err) => {
           logger.error("Erro ao carregar o painel:", err)
@@ -109,8 +112,9 @@ export default function DashboardClientPage() {
       dueReviewCount: spacedStats?.due ?? 0,
       streak: streak?.current_streak ?? 0,
       dailyChallengeAvailable: Boolean(dailyChallengeStats),
+      nextLessonTitle,
     })
-  }, [history, spacedStats, streak, dailyChallengeStats, name])
+  }, [history, spacedStats, streak, dailyChallengeStats, name, nextLessonTitle])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">

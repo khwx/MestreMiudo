@@ -2,6 +2,19 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-20 - Recomendar a próxima lição concreta por completar no painel
+
+- **Contexto:** O motor de recomendações já suportava `nextLessonTitle`, mas o painel nunca o calculava a partir do progresso real de lições da criança — o tipo `newLesson` ficava sempre vazio.
+- **Tarefa implementada:** Ligar a recomendação "Próxima lição" ao progresso real, descobrindo a primeira lição (por disciplina e ordem) ainda não concluída para a grade da criança.
+- **Alterações:**
+  - `src/lib/lessons/next-lesson.ts` (novo) — funções puras: `getNextLesson` e `getNextLessonTitle`. Ordena por disciplina (Português → Matemática → Estudo do Meio) e, dentro de cada uma, por `lesson_index`; devolve `null` se não houver pendentes.
+  - `src/app/actions/lessons.ts` — `getNextLessonAction(name, grade)` que cruza as lições da grade com as `lesson_completion` concluídas e aplica `getNextLesson`.
+  - `src/app/actions/index.ts` — exporta `getNextLessonAction`.
+  - `src/app/dashboard/client-page.tsx` — carrega `getNextLessonAction` no `Promise.all`, guarda `nextLessonTitle` em estado e passa-o a `buildRecommendations` (com dependência no `useMemo`).
+  - `src/__tests__/next-lesson.test.ts` (novo) — 7 testes cobrindo ordem de disciplina, ordem dentro da disciplina, tudo concluído e lista vazia.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 447 testes a passar (45 ficheiros).
+- **Docs atualizados:** `TODO.md` (item "Recomendar a próxima lição concreta" marcado como concluído).
+
 ## 2026-08-20 - Sugestões de estudo personalizadas no painel (recomendações)
 
 - **Contexto:** O painel (`dashboard`) já apresentava revisão espaçada, desafio diário e temas fracos em sítios distintos, mas faltava uma vista unificada e priorizada do "próximo passo" para a criança.

@@ -42,7 +42,7 @@
 Last updated: 2026-08-20
 
 ## 💡 Pendentes futuras (ideias de melhoria)
-- [ ] Recomendar a próxima lição concreta por completar (usar progresso de lições para obter `nextLessonTitle`)
+- [x] Recomendar a próxima lição concreta por completar (usar progresso de lições para obter `nextLessonTitle`)
 - [ ] Permitir ao encarregado definir um objetivo diário de quizzes e mostrar progresso no painel
 - [ ] Adicionar testes de componente (React Testing Library) ao `RecommendationsPanel`
 - [ ] Tradução/adaptação da interface para outros dialetos de português (ex.: pt-BR)

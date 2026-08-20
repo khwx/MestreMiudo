@@ -4,6 +4,7 @@ import { logger } from "@/lib/logger";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 import { updateStudentRewardsWithCoinsAction } from './rewards';
 import { updateStudentStreak } from './streaks';
+import { getNextLesson, type NextLessonInfo } from '@/lib/lessons/next-lesson';
 
 export async function getLessonDataAction(lessonId: string) {
   try {
@@ -82,6 +83,40 @@ export async function getStudentLessonProgressAction(
     return data || null;
   } catch (error) {
     logger.error('Erro ao buscar progresso da lição:', error);
+    return null;
+  }
+}
+
+export async function getNextLessonAction(
+  studentId: string,
+  gradeLevel: number
+): Promise<NextLessonInfo | null> {
+  try {
+    if (!isSupabaseConfigured() || !supabase) return null;
+
+    const { data: lessons, error: lessonsError } = await supabase
+      .from('lessons')
+      .select('id, title, subject, lesson_index')
+      .eq('grade_level', gradeLevel);
+
+    if (lessonsError) throw lessonsError;
+    if (!lessons || lessons.length === 0) return null;
+
+    const { data: completions, error: completionsError } = await supabase
+      .from('lesson_completion')
+      .select('lesson_id')
+      .eq('student_id', studentId)
+      .eq('completed', true);
+
+    if (completionsError) throw completionsError;
+
+    const completedIds = new Set(
+      (completions || []).map((c) => c.lesson_id as string)
+    );
+
+    return getNextLesson(lessons, completedIds);
+  } catch (error) {
+    logger.error('Erro ao calcular próxima lição:', error);
     return null;
   }
 }
