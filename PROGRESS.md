@@ -2,6 +2,19 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-20 - Sugestões de estudo personalizadas no painel (recomendações)
+
+- **Contexto:** O painel (`dashboard`) já apresentava revisão espaçada, desafio diário e temas fracos em sítios distintos, mas faltava uma vista unificada e priorizada do "próximo passo" para a criança.
+- **Tarefa implementada:** Adicionar um motor de recomendações de estudo que combina revisão espaçada (itens em falta), temas fracos (das respostas recentes), desafio diário e sequência (streak) numa lista ordenada por prioridade, e exibi-la no painel.
+- **Alterações:**
+  - `src/lib/study-recommendations.ts` (novo) — funções puras e determinísticas: `buildRecommendations`, `getWeakTopicsFromContext`, `getRecommendationGreeting`. Disponibiliza `StudyRecommendation` com tipo, título, descrição, prioridade e ação.
+  - `src/components/dashboard/RecommendationsPanel.tsx` (novo) — painel "💡 Sugestões para ti" com ligações às áreas certas (revisão, quiz, lição, desafio) conforme a ação.
+  - `src/app/dashboard/client-page.tsx` — cálculo (memo) das recomendações a partir do histórico recente, `spacedStats.due`, `streak` e `dailyChallengeStats`; painel inserido entre o progresso e a grelha de funcionalidades.
+  - `src/lib/vocabulary.ts` — `getRandomVocabularyPairs` agora deduplica por palavra antes de baralhar, corrigindo um teste flaky de unicidade.
+  - `src/__tests__/study-recommendations.test.ts` (novo) — 13 testes cobrindo priorização, temas fracos, desafio diário, streak e saudação.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 440 testes a passar (44 ficheiros).
+- **Docs atualizados:** `TODO.md` (nova secção "Pendentes futuras" com melhorias propostas).
+
 ## 2026-08-19 - Suporte offline aprimorado (pré-carregamento de lições por grade)
 
 - **Contexto:** O service worker (`public/sw.js`) existente apenas armazenava em cache as lições quando eram solicitadas; não havia um mecanismo proativo de pré-carregar dados de lições para todas as grades/subjects, o que limitava a experiência offline.

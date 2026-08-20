@@ -321,6 +321,12 @@ export function getCategoriesForSubject(subject: Subject): string[] {
 
 export function getRandomVocabularyPairs(subject: Subject, count: number = 8): VocabularyWord[] {
   const words = getVocabularyForSubject(subject);
-  const shuffled = [...words].sort(() => Math.random() - 0.5);
+  const seen = new Set<string>();
+  const unique = words.filter((w) => {
+    if (seen.has(w.word)) return false;
+    seen.add(w.word);
+    return true;
+  });
+  const shuffled = [...unique].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, count);
 }

@@ -10,6 +10,8 @@ import type { QuizResultEntry } from "@/app/shared-schemas"
 import { StatsCards } from "@/components/dashboard/StatsCards"
 import { LevelProgress } from "@/components/dashboard/LevelProgress"
 import { FeatureGrid } from "@/components/dashboard/FeatureGrid"
+import { RecommendationsPanel } from "@/components/dashboard/RecommendationsPanel"
+import { buildRecommendations } from "@/lib/study-recommendations"
 import { calculateLevel } from "@/lib/levels";
 
 interface LessonHistoryItem {
@@ -97,6 +99,19 @@ export default function DashboardClientPage() {
       : 0
   }, [history, totalQuizzes])
 
+  const recommendations = useMemo(() => {
+    const recentAnswers = history
+      .slice(-3)
+      .flatMap((h) => h.answers || [])
+    return buildRecommendations({
+      studentName: name,
+      answers: recentAnswers,
+      dueReviewCount: spacedStats?.due ?? 0,
+      streak: streak?.current_streak ?? 0,
+      dailyChallengeAvailable: Boolean(dailyChallengeStats),
+    })
+  }, [history, spacedStats, streak, dailyChallengeStats, name])
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {error && (
@@ -140,6 +155,12 @@ export default function DashboardClientPage() {
           pointsNeeded={pointsNeeded}
           nextLevel={nextLevel}
           loading={loading}
+        />
+
+        <RecommendationsPanel
+          name={name}
+          grade={grade}
+          recommendations={recommendations}
         />
 
         <FeatureGrid
