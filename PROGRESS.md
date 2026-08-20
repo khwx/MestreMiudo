@@ -2,6 +2,15 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-20 - Testes de componente (RTL) para o RecommendationsPanel
+
+- **Contexto:** O painel de recomendações (`src/components/dashboard/RecommendationsPanel.tsx`) já estava a funcionar no painel, mas não tinha cobertura de testes de componente, ao contrário do motor de recomendações (`study-recommendations.ts`).
+- **Tarefa implementada:** Adicionar testes de componente com React Testing Library cobrindo o `RecommendationsPanel`: ausência total (retorna null), cabeçalho, uma entrada por recomendação, ligações (`href`) corretas por ação (review/learn/quiz/challenge) com `name` e `grade`, e renderização das descrições.
+- **Alterações:**
+  - `src/__tests__/RecommendationsPanel.test.tsx` (novo) — 5 testes (renderização, lista de itens, links por ação, descrições, estado vazio).
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 452 testes a passar (46 ficheiros).
+- **Docs atualizados:** `TODO.md` (item "Adicionar testes de componente ao RecommendationsPanel" marcado como concluído).
+
 ## 2026-08-20 - Recomendar a próxima lição concreta por completar no painel
 
 - **Contexto:** O motor de recomendações já suportava `nextLessonTitle`, mas o painel nunca o calculava a partir do progresso real de lições da criança — o tipo `newLesson` ficava sempre vazio.
