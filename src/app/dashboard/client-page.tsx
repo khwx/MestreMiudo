@@ -3,7 +3,7 @@ import { logger } from "@/lib/logger";
 
 import { useSearchParams } from "next/navigation"
 import { useEffect, useMemo, useState } from "react"
-import { getFullQuizHistory, getStudentLessonHistoryAction, getStudentRewards, getStudentStreak, getNextLessonAction } from "@/app/actions"
+import { getFullQuizHistory, getStudentLessonHistoryAction, getStudentRewards, getStudentStreak, getNextLessonAction, getDailyGoalAction } from "@/app/actions"
 import { getDailyChallenge, getDailyChallengeStats } from "@/lib/daily-challenges"
 import { getStudentStats as getSpacedRepetitionStats } from "@/lib/spaced-repetition"
 import type { QuizResultEntry } from "@/app/shared-schemas"
@@ -13,6 +13,8 @@ import { FeatureGrid } from "@/components/dashboard/FeatureGrid"
 import { RecommendationsPanel } from "@/components/dashboard/RecommendationsPanel"
 import { buildRecommendations } from "@/lib/study-recommendations"
 import { calculateLevel } from "@/lib/levels";
+import { DailyGoalCard } from "@/components/dashboard/DailyGoalCard";
+import { countQuizzesOnDate, getTodayDateStr } from "@/lib/daily-goal";
 
 interface LessonHistoryItem {
   lessonId: string;
@@ -46,6 +48,8 @@ export default function DashboardClientPage() {
   const [dailyChallengeStats, setDailyChallengeStats] = useState<DailyChallengeStats | null>(null)
   const [spacedStats, setSpacedStats] = useState<{ total: number; mastered: number; learning: number; due: number } | null>(null)
   const [nextLessonTitle, setNextLessonTitle] = useState<string | null>(null)
+  const [dailyGoalTarget, setDailyGoalTarget] = useState<number>(3)
+  const [quizzesToday, setQuizzesToday] = useState<number>(0)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -61,14 +65,17 @@ export default function DashboardClientPage() {
         getDailyChallenge(name, gradeLevel),
         getDailyChallengeStats(name),
         getNextLessonAction(name, gradeLevel),
+        getDailyGoalAction(name),
       ])
-        .then(([quizHistory, lessons, studentRewards, studentStreak, _challenge, stats, nextLesson]) => {
+        .then(([quizHistory, lessons, studentRewards, studentStreak, _challenge, stats, nextLesson, dailyGoal]) => {
           setHistory(quizHistory || [])
           setLessonHistory(lessons || [])
           setRewards(studentRewards || null)
           setStreak(studentStreak || null)
           setDailyChallengeStats(stats)
           setNextLessonTitle(nextLesson?.title ?? null)
+          if (dailyGoal != null) setDailyGoalTarget(dailyGoal)
+          setQuizzesToday(countQuizzesOnDate(quizHistory || [], getTodayDateStr()))
         })
         .catch((err) => {
           logger.error("Erro ao carregar o painel:", err)
@@ -165,6 +172,12 @@ export default function DashboardClientPage() {
           name={name}
           grade={grade}
           recommendations={recommendations}
+        />
+
+        <DailyGoalCard
+          name={name}
+          target={dailyGoalTarget}
+          quizzesToday={quizzesToday}
         />
 
         <FeatureGrid

@@ -38,3 +38,7 @@ export {
   getNextLessonAction,
   saveLessonCompletionAction,
 } from './lessons';
+export {
+  getDailyGoalAction,
+  setDailyGoalAction,
+} from './daily-goals';

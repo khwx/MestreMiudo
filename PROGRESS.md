@@ -2,6 +2,22 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-21 - Objetivo diário de quizzes definível pelo encarregado
+
+- **Contexto:** Faltava a tarefa pendente de permitir ao encarregado de educação definir um objetivo diário de quizzes e mostrar o progresso no painel. O histórico de quizzes já estava disponível no cliente (`getFullQuizHistory`).
+- **Tarefa implementada:** Cartão "Objetivo de hoje" no painel que conta os quizzes feitos no dia, mostra uma barra de progresso (X/Y) e permite ao encarregado definir/editar o alvo diário (1-20). Ao atingir o alvo, surge mensagem de celebração.
+- **Alterações:**
+  - `supabase-setup.sql` — tabela `daily_goals` (student_name único, target_quizzes, updated_at) + índice e política RLS "Allow all".
+  - `src/lib/daily-goal.ts` (novo) — funções puras: `getTodayDateStr`, `countQuizzesOnDate`, `getDailyGoalProgress`.
+  - `src/app/actions/daily-goals.ts` (novo) — `getDailyGoalAction` (default 3) e `setDailyGoalAction` (upsert, limitado a 1-20).
+  - `src/app/actions/index.ts` — exporta as novas ações.
+  - `src/components/dashboard/DailyGoalCard.tsx` (novo) — cartão com barra de progresso e edição inline.
+  - `src/app/dashboard/client-page.tsx` — carrega objetivo e quizzes de hoje (`Promise.all` + `countQuizzesOnDate`) e renderiza o `DailyGoalCard`.
+  - `src/__tests__/daily-goal.test.ts` (novo) — 8 testes à lógica pura.
+  - `src/__tests__/DailyGoalCard.test.tsx` (novo) — 4 testes ao componente (progresso, conquista, edição/guardar, validação).
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 465 testes a passar (48 ficheiros).
+- **Docs atualizados:** `TODO.md` (item "Permitir ao encarregado definir um objetivo diário de quizzes" marcado como concluído).
+
 ## 2026-08-20 - Testes de componente (RTL) para o RecommendationsPanel
 
 - **Contexto:** O painel de recomendações (`src/components/dashboard/RecommendationsPanel.tsx`) já estava a funcionar no painel, mas não tinha cobertura de testes de componente, ao contrário do motor de recomendações (`study-recommendations.ts`).

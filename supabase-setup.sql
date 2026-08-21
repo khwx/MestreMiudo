@@ -159,6 +159,19 @@ CREATE INDEX IF NOT EXISTS idx_leaderboards_rank
   ON leaderboards(rank, rank_period);
 
 -- ============================================
+-- Table: daily_goals (parent-defined daily quiz target per student)
+-- ============================================
+CREATE TABLE IF NOT EXISTS daily_goals (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  student_name TEXT NOT NULL UNIQUE,
+  target_quizzes INT NOT NULL DEFAULT 3,
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_daily_goals_student
+  ON daily_goals(student_name);
+
+-- ============================================
 -- Enable Row Level Security (RLS)
 -- For now, allow all operations (public app for kids)
 -- ============================================
@@ -173,6 +186,7 @@ ALTER TABLE leaderboards ENABLE ROW LEVEL SECURITY;
 ALTER TABLE lessons ENABLE ROW LEVEL SECURITY;
 ALTER TABLE lesson_challenges ENABLE ROW LEVEL SECURITY;
 ALTER TABLE lesson_completion ENABLE ROW LEVEL SECURITY;
+ALTER TABLE daily_goals ENABLE ROW LEVEL SECURITY;
 
 -- ============================================
 -- Table: lessons (learning content by subject)
@@ -332,3 +346,6 @@ CREATE POLICY "Allow all for leaderboards" ON leaderboards FOR ALL USING (true) 
 
 DROP POLICY IF EXISTS "Allow all for lesson_completion" ON lesson_completion;
 CREATE POLICY "Allow all for lesson_completion" ON lesson_completion FOR ALL USING (true) WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Allow all for daily_goals" ON daily_goals;
+CREATE POLICY "Allow all for daily_goals" ON daily_goals FOR ALL USING (true) WITH CHECK (true);
