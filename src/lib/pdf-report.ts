@@ -1,5 +1,15 @@
 import { logger } from "./logger";
 
+interface SubjectAverage {
+  subject: string;
+  average: number;
+}
+
+interface DailyScore {
+  date: string;
+  score: number;
+}
+
 interface StudentProgress {
   studentId: string;
   studentName: string;
@@ -8,6 +18,8 @@ interface StudentProgress {
   totalPoints: number;
   currentStreak: number;
   lastActivity: string | null;
+  subjectAverages?: SubjectAverage[];
+  weeklyProgress?: DailyScore[];
 }
 
 function reportFilename(): string {
@@ -36,7 +48,7 @@ async function buildReportDoc(students: StudentProgress[]) {
   let y = 52;
 
   students.forEach((student, index) => {
-    if (y > 250) {
+    if (y > 230) {
       doc.addPage();
       y = 20;
     }
@@ -70,7 +82,74 @@ async function buildReportDoc(students: StudentProgress[]) {
     doc.setFillColor(barColor[0], barColor[1], barColor[2]);
     doc.roundedRect(25, y, (140 * student.averageScore) / 100, 4, 2, 2, 'F');
 
-    y += 14;
+    y += 12;
+
+    if (student.subjectAverages && student.subjectAverages.length > 0) {
+      if (y > 220) {
+        doc.addPage();
+        y = 20;
+      }
+      doc.setFontSize(11);
+      doc.setTextColor(59, 130, 246);
+      doc.text('Desempenho por Disciplina:', 20, y);
+      y += 7;
+
+      doc.setFontSize(9);
+      student.subjectAverages.forEach((sub) => {
+        if (y > 250) {
+          doc.addPage();
+          y = 20;
+        }
+        doc.setTextColor(80, 80, 80);
+        doc.text(`${sub.subject}: ${sub.average}%`, 25, y);
+
+        y += 2;
+        doc.setFillColor(230, 230, 230);
+        doc.roundedRect(25, y, 140, 3, 1.5, 1.5, 'F');
+
+        const subBarColor = sub.average >= 80 ? [34, 197, 94] : sub.average >= 60 ? [250, 204, 21] : [239, 68, 68];
+        doc.setFillColor(subBarColor[0], subBarColor[1], subBarColor[2]);
+        doc.roundedRect(25, y, (140 * sub.average) / 100, 3, 1.5, 1.5, 'F');
+
+        y += 6;
+      });
+      y += 4;
+    }
+
+    if (student.weeklyProgress && student.weeklyProgress.length > 0) {
+      if (y > 200) {
+        doc.addPage();
+        y = 20;
+      }
+      doc.setFontSize(11);
+      doc.setTextColor(59, 130, 246);
+      doc.text('Evolucao Semanal (ultimos 7 dias):', 20, y);
+      y += 7;
+
+      doc.setFontSize(8);
+      const maxScore = Math.max(...student.weeklyProgress.map(d => d.score), 1);
+      student.weeklyProgress.forEach((day) => {
+        if (y > 260) {
+          doc.addPage();
+          y = 20;
+        }
+        const dayName = new Date(day.date.split('/').reverse().join('-')).toLocaleDateString('pt-PT', { weekday: 'short' });
+        doc.setTextColor(80, 80, 80);
+        doc.text(`${dayName}: ${day.score}%`, 25, y);
+
+        y += 1.5;
+        doc.setFillColor(230, 230, 230);
+        const barWidth = (140 * day.score) / maxScore;
+        doc.roundedRect(25, y, 140, 2.5, 1, 1, 'F');
+
+        const dayBarColor = day.score >= 80 ? [34, 197, 94] : day.score >= 60 ? [250, 204, 21] : day.score > 0 ? [239, 68, 68] : [200, 200, 200];
+        doc.setFillColor(dayBarColor[0], dayBarColor[1], dayBarColor[2]);
+        doc.roundedRect(25, y, Math.max(barWidth, 2), 2.5, 1, 1, 'F');
+
+        y += 5;
+      });
+      y += 4;
+    }
   });
 
   return doc;

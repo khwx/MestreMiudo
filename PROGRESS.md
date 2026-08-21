@@ -2,6 +2,18 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-22 - Relatório PDF com detalhe por disciplina e evolução semanal
+
+- **Contexto:** O relatório PDF existente (`src/lib/pdf-report.ts`) apenas mostrava estatísticas gerais (quizzes, média, pontos, streak) sem detalhar o desempenho por disciplina nem a evolução temporal, embora o painel de progresso já apresentasse esses dados visualmente.
+- **Tarefa implementada:** Enriquecer o relatório PDF com:
+  1. Secção "Desempenho por Disciplina" com barras de progresso coloridas (verde/amarelo/vermelho conforme média).
+  2. Secção "Evolução Semanal" mostrando os últimos 7 dias com barras proporcionais à pontuação diária.
+- **Alterações:**
+  - `src/lib/pdf-report.ts` — tipos `SubjectAverage` e `DailyScore` adicionados ao `StudentProgress`; `buildReportDoc` expandido para renderizar ambas as secções com barras visuais (jsPDF `roundedRect`).
+  - `src/app/dashboard/parent/page.tsx` — `handleGeneratePdf` e `handleSharePdf` passam agora `weeklyProgress` (já carregado via `getWeeklyProgress`) para o relatório.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 465 testes a passar (48 ficheiros).
+- **Docs atualizados:** `TODO.md` (item "Relatório PDF com detalhe por disciplina e evolução semanal" adicionado e marcado como concluído).
+
 ## 2026-08-21 - Objetivo diário de quizzes definível pelo encarregado
 
 - **Contexto:** Faltava a tarefa pendente de permitir ao encarregado de educação definir um objetivo diário de quizzes e mostrar o progresso no painel. O histórico de quizzes já estava disponível no cliente (`getFullQuizHistory`).

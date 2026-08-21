@@ -39,10 +39,10 @@
 - [x] Acessibilidade: navegação por teclado completa nos jogos (jogo da memória, galo, forca)
 - [x] Painel do professor: exportar notas em CSV (`handleExportCsv` no `parent/page.tsx`)
 - [x] Sugestões de estudo personalizadas no painel (recomendações por prioridade: revisão, temas fracos, desafio diário, streak)
-Last updated: 2026-08-21
-
-## 💡 Pendentes futuras (ideias de melhoria)
 - [x] Recomendar a próxima lição concreta por completar (usar progresso de lições para obter `nextLessonTitle`)
+- [x] Permitir ao encarregado definir um objetivo diário de quizzes e mostrar progresso no painel
+- [x] Recomendar a próxima lição concreta por completar (usar progresso de lições para obter `nextLessonTitle`)
+- [x] Relatório PDF com detalhe por disciplina e evolução semanal (barras de progresso)
 - [x] Permitir ao encarregado definir um objetivo diário de quizzes e mostrar progresso no painel
 - [x] Recomendar a próxima lição concreta por completar (usar progresso de lições para obter `nextLessonTitle`)
 - [ ] Tradução/adaptação da interface para outros dialetos de português (ex.: pt-BR)

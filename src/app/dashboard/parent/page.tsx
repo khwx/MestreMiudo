@@ -236,7 +236,11 @@ export default function ParentDashboardPage() {
   const handleGeneratePdf = async () => {
     setGeneratingPdf(true);
     try {
-      await generatePdfReport(students);
+      const studentsWithWeekly = students.map(s => ({
+        ...s,
+        weeklyProgress: weeklyData[s.studentId] || [],
+      }));
+      await generatePdfReport(studentsWithWeekly);
     } finally {
       setGeneratingPdf(false);
     }
@@ -245,7 +249,11 @@ export default function ParentDashboardPage() {
   const handleSharePdf = async () => {
     setSharingPdf(true);
     try {
-      await sharePdfReport(students);
+      const studentsWithWeekly = students.map(s => ({
+        ...s,
+        weeklyProgress: weeklyData[s.studentId] || [],
+      }));
+      await sharePdfReport(studentsWithWeekly);
     } catch (err) {
       logger.error('Erro ao partilhar PDF:', err);
     } finally {
