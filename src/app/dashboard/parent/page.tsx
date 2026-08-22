@@ -8,6 +8,8 @@ import { AlertTriangle, ArrowLeft, BookOpen, Calendar, FileSpreadsheet, FileText
 import Link from 'next/link';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { generatePdfReport, sharePdfReport } from '@/lib/pdf-report';
+import { buildSubjectTimeSeries, QuizSeriesRow } from '@/lib/progress-chart';
+import { SubjectProgressChart } from '@/components/dashboard/SubjectProgressChart';
 import {
   getWeeklyProgress,
   getTopicAnalysis,
@@ -41,6 +43,7 @@ export default function ParentDashboardPage() {
   const [topicData, setTopicData] = useState<Record<string, { topic: string; averageScore: number; status: 'strong' | 'weak' }[]>>({});
   const [trendData, setTrendData] = useState<Record<string, { trend: string; changePercent: number }>>({});
   const [recommendations, setRecommendations] = useState<Record<string, { topic: string; priority: string; suggestion: string }[]>>({});
+  const [quizRowsByStudent, setQuizRowsByStudent] = useState<Record<string, QuizSeriesRow[]>>({});
 
   useEffect(() => {
     async function loadStudents() {
@@ -201,6 +204,19 @@ export default function ParentDashboardPage() {
         }
 
         setStudents(Array.from(progressMap.values()));
+
+        const rowsByStudent: Record<string, QuizSeriesRow[]> = {};
+        quizData?.forEach((q) => {
+          if (!q.student_id) return;
+          const list = rowsByStudent[q.student_id] || (rowsByStudent[q.student_id] = []);
+          list.push({
+            subject: q.subject ?? null,
+            score: q.score,
+            totalQuestions: q.total_questions,
+            createdAt: q.created_at,
+          });
+        });
+        setQuizRowsByStudent(rowsByStudent);
 
         const wMap: Record<string, { date: string; score: number }[]> = {};
         const tMap: Record<string, { topic: string; averageScore: number; status: 'strong' | 'weak' }[]> = {};
@@ -518,6 +534,28 @@ export default function ParentDashboardPage() {
                   )}
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Evolução por Disciplina */}
+          <div className="card-kid border-4 border-indigo-300 dark:border-indigo-700 shadow-xl p-6">
+            <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
+              <TrendingUp className="h-6 w-6 text-indigo-500" />
+              Evolução por Disciplina
+            </h2>
+            <div className="space-y-6">
+              {students.map(student => {
+                const rows = quizRowsByStudent[student.studentId] || [];
+                const data = buildSubjectTimeSeries(rows, {
+                  subjects: student.subjectAverages?.map(s => s.subject),
+                });
+                return (
+                  <div key={student.studentId} className="space-y-2">
+                    <h3 className="text-lg font-bold text-gray-700 dark:text-gray-300">{student.studentName}</h3>
+                    <SubjectProgressChart data={data} />
+                  </div>
+                );
+              })}
             </div>
           </div>
 

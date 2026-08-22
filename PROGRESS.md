@@ -2,6 +2,18 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-22 - Gráfico de evolução temporal por disciplina (painéis de encarregado e professor)
+
+- **Contexto:** Faltava o item pendente "Relatório de progresso por disciplina com gráfico de evolução temporal". Os painéis já tinham gráficos separados (média por disciplina e evolução temporal global), mas não uma vista combinada que mostrasse a evolução de cada disciplina ao longo do tempo.
+- **Tarefa implementada:** Gráfico de linhas interativo que mostra, por disciplina, a percentagem de acertos dia-a-dia (últimos 7 dias), nos painéis de encarregado e professor.
+- **Alterações:**
+  - `src/lib/progress-chart.ts` (novo) — funções puras e testáveis: `normalizeSubjectName` (unifica aliases pt-PT como "portugues"→"Português"), `getDateKeys`, `buildSubjectTimeSeries` (agrega as respostas de `quiz_history` por dia e disciplina num formato próprio para recharts) e `getSeriesSubjects`.
+  - `src/components/dashboard/SubjectProgressChart.tsx` (novo) — componente cliente com recharts (`LineChart`) que desenha uma linha por disciplina; mostra mensagem de "sem dados" quando não há registos.
+  - `src/app/dashboard/parent/page.tsx` — guarda as linhas de `quiz_history` por aluno (`quizRowsByStudent`) e renderiza o novo gráfico na secção "Evolução por Disciplina".
+  - `src/app/dashboard/teacher/page.tsx` —同等: guarda as linhas por aluno e adiciona o gráfico no separador "Análises".
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 486 testes a passar (50 ficheiros).
+- **Docs atualizados:** `TODO.md` (item "Relatório de progresso por disciplina com gráfico de evolução temporal" marcado como concluído).
+
 ## 2026-08-22 - Notificações push (service worker) a lembrar revisão espaçada em falta
 
 - **Contexto:** Faltava a tarefa pendente de avisar a criança (via service worker) quando há itens da revisão espaçada por rever, para combater o esquecimento.

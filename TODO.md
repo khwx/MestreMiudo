@@ -47,5 +47,5 @@
 - [x] Recomendar a próxima lição concreta por completar (usar progresso de lições para obter `nextLessonTitle`)
 - [ ] Tradução/adaptação da interface para outros dialetos de português (ex.: pt-BR)
 - [ ] Modo "desafio entre amigos" com partilha de resultado
-- [ ] Relatório de progresso por disciplina com gráfico de evolução temporal
+- [x] Relatório de progresso por disciplina com gráfico de evolução temporal (gráfico de linhas interativo por disciplina nos painéis de encarregado e professor)
 - [x] Notificações/push (via service worker) a lembrar a revisão espaçada em falta

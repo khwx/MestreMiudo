@@ -8,6 +8,8 @@ import { AlertTriangle, ArrowLeft, BookOpen, BarChart3, Loader2, Share2, Trendin
 import Link from 'next/link';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { generatePdfReport, sharePdfReport } from '@/lib/pdf-report';
+import { buildSubjectTimeSeries, QuizSeriesRow } from '@/lib/progress-chart';
+import { SubjectProgressChart } from '@/components/dashboard/SubjectProgressChart';
 
 interface StudentProgress {
   studentId: string;
@@ -42,6 +44,7 @@ export default function TeacherDashboardPage() {
   const [generatingPdf, setGeneratingPdf] = useState(false);
   const [sharingPdf, setSharingPdf] = useState(false);
   const [activeTab, setActiveTab] = useState<'overview' | 'students' | 'analytics' | 'reports'>('overview');
+  const [quizRowsByStudent, setQuizRowsByStudent] = useState<Record<string, QuizSeriesRow[]>>({});
 
   useEffect(() => {
     async function loadClass() {
@@ -148,6 +151,19 @@ export default function TeacherDashboardPage() {
 
         const studentList = Array.from(progressMap.values());
         setStudents(studentList);
+
+        const rowsByStudent: Record<string, QuizSeriesRow[]> = {};
+        quizData?.forEach((q) => {
+          if (!q.student_id) return;
+          const list = rowsByStudent[q.student_id] || (rowsByStudent[q.student_id] = []);
+          list.push({
+            subject: q.subject ?? null,
+            score: q.score,
+            totalQuestions: q.total_questions,
+            createdAt: q.created_at,
+          });
+        });
+        setQuizRowsByStudent(rowsByStudent);
 
         const activeStudents = studentList.filter(s => s.totalQuizzes > 0).length;
         const avgScore = studentList.length > 0 ? Math.round(studentList.reduce((sum, s) => sum + s.averageScore, 0) / studentList.length) : 0;
@@ -449,6 +465,29 @@ export default function TeacherDashboardPage() {
                       <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Média de acertos</p>
                     </div>
                   ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="card-kid border-4 border-indigo-300 dark:border-indigo-700 shadow-xl">
+              <div className="p-6">
+                <h2 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5 text-indigo-500" />
+                  Evolução por Disciplina
+                </h2>
+                <div className="space-y-6">
+                  {students.map(student => {
+                    const rows = quizRowsByStudent[student.studentId] || [];
+                    const data = buildSubjectTimeSeries(rows, {
+                      subjects: student.subjectAverages?.map(s => s.subject),
+                    });
+                    return (
+                      <div key={student.studentId} className="space-y-2">
+                        <h3 className="font-semibold text-slate-800 dark:text-slate-200">{student.studentName}</h3>
+                        <SubjectProgressChart data={data} />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
