@@ -2,6 +2,18 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-22 - Notificações push (service worker) a lembrar revisão espaçada em falta
+
+- **Contexto:** Faltava a tarefa pendente de avisar a criança (via service worker) quando há itens da revisão espaçada por rever, para combater o esquecimento.
+- **Tarefa implementada:** Sistema de lembretes de revisão espaçada:
+  1. Lógica pura e testável em `src/lib/review-reminder.ts` (`shouldShowReviewReminder` com cooldown de 6h; `buildReviewReminder` gera título/corpo pt-PT).
+  2. Helper de cliente `src/lib/notification.ts` (`requestNotificationPermission`, `notificationsGranted`, `maybeNotifyReviewReminder`) que respeita permissão, cooldown (localStorage) e envia a notificação via service worker (`sw.controller.postMessage` → `REVIEW_REMINDER`), com fallback para a API `Notification`.
+  3. `public/sw.js` — novo handler de mensagem `REVIEW_REMINDER` que mostra a notificação (`registration.showNotification`).
+  4. `src/app/dashboard/client-page.tsx` — ao carregar `spacedStats`, chama `maybeNotifyReviewReminder(sr.due)`.
+  5. `src/app/dashboard/review/page.tsx` — botão "Ativar lembretes" que pede permissão (gesto do utilizador) e reflete estado ativo/inativo.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 473 testes a passar (49 ficheiros).
+- **Docs atualizados:** `TODO.md` (item "Notificações/push (via service worker)" marcado como concluído).
+
 ## 2026-08-22 - Relatório PDF com detalhe por disciplina e evolução semanal
 
 - **Contexto:** O relatório PDF existente (`src/lib/pdf-report.ts`) apenas mostrava estatísticas gerais (quizzes, média, pontos, streak) sem detalhar o desempenho por disciplina nem a evolução temporal, embora o painel de progresso já apresentasse esses dados visualmente.

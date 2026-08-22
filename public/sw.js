@@ -178,4 +178,16 @@ self.addEventListener('message', (event) => {
   if (event.data.type === 'PRELOAD_LESSONS') {
     preloadUrls(event.data.urls);
   }
+
+  if (event.data.type === 'REVIEW_REMINDER') {
+    const title = event.data.title || 'MestreMiúdo';
+    const body = event.data.body || '';
+    self.registration.showNotification(title, {
+      body,
+      icon: '/icons/icon-192.png',
+      badge: '/icons/icon-192.png',
+    }).catch(() => {
+      // Notification permission may be missing; this is best-effort.
+    });
+  }
 });

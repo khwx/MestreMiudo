@@ -15,6 +15,7 @@ import { buildRecommendations } from "@/lib/study-recommendations"
 import { calculateLevel } from "@/lib/levels";
 import { DailyGoalCard } from "@/components/dashboard/DailyGoalCard";
 import { countQuizzesOnDate, getTodayDateStr } from "@/lib/daily-goal";
+import { maybeNotifyReviewReminder } from "@/lib/notification";
 
 interface LessonHistoryItem {
   lessonId: string;
@@ -84,7 +85,10 @@ export default function DashboardClientPage() {
         .finally(() => setLoading(false))
 
       getSpacedRepetitionStats(name).then((sr) => {
-        if (sr) setSpacedStats(sr)
+        if (sr) {
+          setSpacedStats(sr)
+          maybeNotifyReviewReminder(sr.due)
+        }
       })
     } else {
       setLoading(false)

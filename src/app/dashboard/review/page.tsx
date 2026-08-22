@@ -5,7 +5,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Loader2, ArrowLeft, RotateCcw, CheckCircle2, XCircle, Brain, AlertTriangle } from 'lucide-react';
+import { Loader2, ArrowLeft, RotateCcw, CheckCircle2, XCircle, Brain, AlertTriangle, Bell, BellRing } from 'lucide-react';
+import { requestNotificationPermission, notificationsGranted } from '@/lib/notification';
 import {
   getItemsForReview,
   recordReview,
@@ -27,6 +28,16 @@ export default function ReviewPage() {
   const [stats, setStats] = useState<{ total: number; mastered: number; learning: number; due: number } | null>(null);
   const [sessionStats, setSessionStats] = useState({ known: 0, unknown: 0 });
   const [error, setError] = useState<string | null>(null);
+  const [notifEnabled, setNotifEnabled] = useState(false);
+
+  useEffect(() => {
+    setNotifEnabled(notificationsGranted());
+  }, []);
+
+  const handleEnableNotifications = async () => {
+    const result = await requestNotificationPermission();
+    setNotifEnabled(result === 'granted');
+  };
 
   const loadItems = useCallback(async () => {
     setLoading(true);
@@ -123,6 +134,26 @@ export default function ReviewPage() {
           <p className="text-gray-500 dark:text-gray-400">Reforça o que aprendeste</p>
         </div>
       </div>
+
+      {stats && (
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Queres um lembrete quando tiveres revisões pendentes?
+          </p>
+          <Button
+            onClick={handleEnableNotifications}
+            variant="outline"
+            className="btn-kid border-2 border-purple-300 dark:border-purple-700 whitespace-nowrap"
+            aria-pressed={notifEnabled}
+          >
+            {notifEnabled ? (
+              <><BellRing className="mr-2 h-4 w-4 text-purple-600" /> Lembretes ativos</>
+            ) : (
+              <><Bell className="mr-2 h-4 w-4" /> Ativar lembretes</>
+            )}
+          </Button>
+        </div>
+      )}
 
       {stats && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">

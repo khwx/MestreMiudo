@@ -48,4 +48,4 @@
 - [ ] Tradução/adaptação da interface para outros dialetos de português (ex.: pt-BR)
 - [ ] Modo "desafio entre amigos" com partilha de resultado
 - [ ] Relatório de progresso por disciplina com gráfico de evolução temporal
-- [ ] Notificações/push (via service worker) a lembrar a revisão espaçada em falta
+- [x] Notificações/push (via service worker) a lembrar a revisão espaçada em falta
