@@ -16,12 +16,14 @@ import { BadgePopup } from '@/components/BadgePopup';
 import { getBadgeByAnyId } from '@/lib/badges';
 import { selectPortugueseVoice } from '@/lib/tts-voice';
 import { getWrongQuestions, getWeakTopicsFromAnswers, getQuestionsForWeakTopics } from '@/lib/quiz-practice';
+import type { QuizChallenge } from '@/lib/challenge-share';
 
 type QuizProps = {
   studentId: string;
   gradeLevel: number;
   subject: 'Português' | 'Matemática' | 'Estudo do Meio' | 'Misto';
   title: string;
+  challenge?: QuizChallenge | null;
 };
 
 type Answer = {
@@ -39,7 +41,7 @@ const loadingMessages = [
   "🚀 Quase pronto! A preparar o desafio...",
 ];
 
-export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
+export function Quiz({ studentId, gradeLevel, subject, title, challenge = null }: QuizProps) {
   const [quizData, setQuizData] = useState<PersonalizedLearningPathOutput | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -51,6 +53,7 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
   const [newBadge, setNewBadge] = useState<{ name: string; description: string; icon: string } | null>(null);
   const [practiceMode, setPracticeMode] = useState(false);
+  const [challengeDismissed, setChallengeDismissed] = useState(false);
   const quizStarted = useRef(false);
   const { playSuccess, playError, playLevelUp } = useSound();
   const { settings: a11y, announceToScreenReader } = useAccessibility();
@@ -346,6 +349,9 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
           onPracticeWrong={handlePracticeWrong}
           weakTopics={practiceMode ? null : getWeakTopicsFromAnswers(answers)}
           onPracticeWeakTopics={handlePracticeWeakTopics}
+          studentName={studentId}
+          grade={gradeLevel}
+          challenge={challenge}
         />
       </>
     );
@@ -353,6 +359,26 @@ export function Quiz({ studentId, gradeLevel, subject, title }: QuizProps) {
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
+      {challenge && !challengeDismissed && (
+        <div
+          className="flex items-center justify-between gap-3 rounded-2xl border-2 border-purple-300 bg-purple-50 dark:bg-purple-900/20 p-4 text-purple-800 dark:text-purple-200"
+          role="status"
+        >
+          <span className="font-bold">
+            🏅 Foste desafiado por <span className="underline">{challenge.from}</span>! Ele/a fez{' '}
+            {challenge.score}/{challenge.total} no quiz de {challenge.subject}. Bate a marca!
+          </span>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setChallengeDismissed(true)}
+            aria-label="Dispensar desafio"
+            className="shrink-0"
+          >
+            ✕
+          </Button>
+        </div>
+      )}
       <Button 
         variant="ghost" 
         size="sm" 

@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { Loader2 } from 'lucide-react';
 import QuizClientPage from './client-page';
 import { notFound } from 'next/navigation';
+import { decodeChallenge } from '@/lib/challenge-share';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,6 +25,7 @@ export default async function QuizPage({ params, searchParams }: { params: Promi
 
   const name = resolvedSearchParams?.name as string || 'Jogador';
   const grade = resolvedSearchParams?.grade as string;
+  const challenge = decodeChallenge(resolvedSearchParams?.challenge as string | undefined);
 
   if (!subjectTitle) {
     notFound();
@@ -51,6 +53,7 @@ export default async function QuizPage({ params, searchParams }: { params: Promi
             gradeLevel={parseInt(grade, 10)}
             subject={quizSubject}
             title={subjectTitle}
+            challenge={challenge}
         />
        </div>
     </Suspense>

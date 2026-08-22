@@ -2,6 +2,18 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-22 - Modo "desafio entre amigos" com partilha de resultado
+
+- **Contexto:** Faltava o item pendente de permitir um "desafio entre amigos" com partilha de resultado. Os resultados do quiz não tinham qualquer forma de serem partilhados nem de desafiar outra criança.
+- **Tarefa implementada:** Funcionalidade de desafio social:
+  1. `src/lib/challenge-share.ts` (novo) — lógica pura e testável: `starsForScore`, `subjectToSlug`, `encodeChallenge`/`decodeChallenge` (base64url UTF-8 seguro para URL, com validação robusta → `null` em dados inválidos), `buildChallengeShareText` (mensagem pt-PT), `buildChallengeLink` (ligação ao quiz com `?challenge=...&grade=`) e `compareChallenge` (compara o resultado do amigo com o desafio).
+  2. `shareChallenge` (no mesmo ficheiro) — usa a Web Share API com fallback para copiar o texto+ligação para a área de transferência.
+  3. `src/components/QuizResults.tsx` — novo botão "Desafiar Amigos" (ícone `Share2`) que partilha o resultado; mostra estado "copiado"/"falhou"; quando o utilizador está a responder a um desafio, apresenta a comparação (ganhou/empate/perdeu).
+  4. `src/components/Quiz.tsx` — aceita prop `challenge`, mostra um banner "Foste desafiado por X!" durante o quiz (dispensável) e passa os dados ao `QuizResults`.
+  5. `src/app/quiz/[subject]/client-page.tsx` e `src/app/quiz/[subject]/page.tsx` — lêem o parâmetro `challenge` da URL, descodificam-no e propagam-no até ao `Quiz`.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 501 testes a passar (51 ficheiros).
+- **Docs atualizados:** `TODO.md` (item "Modo 'desafio entre amigos' com partilha de resultado" marcado como concluído).
+
 ## 2026-08-22 - Gráfico de evolução temporal por disciplina (painéis de encarregado e professor)
 
 - **Contexto:** Faltava o item pendente "Relatório de progresso por disciplina com gráfico de evolução temporal". Os painéis já tinham gráficos separados (média por disciplina e evolução temporal global), mas não uma vista combinada que mostrasse a evolução de cada disciplina ao longo do tempo.
