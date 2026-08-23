@@ -7,6 +7,8 @@ import { AccessibilitySettings } from '@/components/AccessibilitySettings';
 import { AccessibilityProvider } from '@/components/AccessibilityProvider';
 import { SkipNav } from '@/components/SkipNav';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { TranslationProvider } from '@/lib/i18n/useTranslation';
+import { LocaleSwitcher } from '@/components/LocaleSwitcher';
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -40,11 +42,14 @@ export default function RootLayout({
       </head>
       <body className={`${nunito.variable} ${fredoka.variable} font-body antialiased`}>
         <AccessibilityProvider>
-          <SkipNav />
-          <ErrorBoundary>
-            {children}
-          </ErrorBoundary>
-          <AccessibilitySettings />
+          <TranslationProvider>
+            <SkipNav />
+            <ErrorBoundary>
+              {children}
+            </ErrorBoundary>
+            <AccessibilitySettings />
+            <LocaleSwitcher className="fixed bottom-4 right-4 z-50 shadow-lg" />
+          </TranslationProvider>
         </AccessibilityProvider>
         <Toaster />
         <Analytics />

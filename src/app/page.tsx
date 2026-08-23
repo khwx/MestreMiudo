@@ -9,9 +9,11 @@ import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { OnboardingTutorial } from '@/components/OnboardingTutorial'
+import { useTranslation } from '@/lib/i18n/useTranslation'
 
 export default function HomePage() {
   const router = useRouter()
+  const { t } = useTranslation()
   const [name, setName] = useState('')
   const [grade, setGrade] = useState('1')
   const [showOnboarding, setShowOnboarding] = useState(false)
@@ -57,15 +59,15 @@ export default function HomePage() {
         <Card className="w-full max-w-md z-10 shadow-2xl bg-card">
           <CardHeader className="text-center">
             <h1 className="font-headline text-5xl font-bold text-primary">MestreMiúdo</h1>
-            <CardDescription className="text-lg pt-2">Vamos aprender a brincar!</CardDescription>
+            <CardDescription className="text-lg pt-2">{t('login.subtitle')}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
               <Button 
                 onClick={handleIconLogin} 
-                className="w-full text-lg h-14 bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500"
+                className="w-full text-lg h-14 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-500"
               >
-                🌻 Escolhe o teu Icon!
+                🌻 {t('common.choose')} o teu Ícon!
               </Button>
               
               <div className="relative flex items-center justify-center">
@@ -77,11 +79,11 @@ export default function HomePage() {
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-md">O teu nome</Label>
+                  <Label htmlFor="name" className="text-md">{t('common.name')}</Label>
                   <Input
                     id="name"
                     type="text"
-                    placeholder="Escreve o teu nome"
+                    placeholder={t('onboarding.enter_name')}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -89,7 +91,7 @@ export default function HomePage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="grade" className="text-md">Ano escolar</Label>
+                  <Label htmlFor="grade" className="text-md">{t('common.grade')}</Label>
                   <select
                     id="grade"
                     value={grade}
@@ -104,7 +106,7 @@ export default function HomePage() {
                   </select>
                 </div>
                 <Button type="submit" className="w-full text-xl h-14" disabled={!name}>
-                  Começar a Aprender!
+                  {t('common.start')} a Aprender!
                 </Button>
               </form>
             </div>

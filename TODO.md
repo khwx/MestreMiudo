@@ -45,7 +45,7 @@
 - [x] Relatório PDF com detalhe por disciplina e evolução semanal (barras de progresso)
 - [x] Permitir ao encarregado definir um objetivo diário de quizzes e mostrar progresso no painel
 - [x] Recomendar a próxima lição concreta por completar (usar progresso de lições para obter `nextLessonTitle`)
-- [ ] Tradução/adaptação da interface para outros dialetos de português (ex.: pt-BR)
+- [x] Tradução/adaptação da interface para outros dialetos de português (ex.: pt-BR) — infraestrutura i18n (pt-PT + pt-BR), seletor de idioma e página inicial localizada
 - [x] Modo "desafio entre amigos" com partilha de resultado (botão "Desafiar Amigos" nos resultados + ligação de desafio descodificável no quiz)
 - [x] Relatório de progresso por disciplina com gráfico de evolução temporal (gráfico de linhas interativo por disciplina nos painéis de encarregado e professor)
 - [x] Notificações/push (via service worker) a lembrar a revisão espaçada em falta

@@ -2,6 +2,19 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-23 - Tradução/adaptação da interface para pt-BR (i18n)
+
+- **Contexto:** Faltava o item pendente de adaptar a interface a outros dialetos de português (ex.: pt-BR). Já existia em `src/lib/i18n/` um esboço não ligado à app (sem provider no layout, sem seletor de idioma, sem testes).
+- **Tarefa implementada:** Integração i18n funcional:
+  1. `src/lib/i18n/translations.ts` — corrigido duplicado `dashboard.total_quizzes`; mantém blocos completos `pt-PT` e `pt-BR` (vocabulário brasileiro: "Guardar"→"Salvar", "Eliminar"→"Excluir", "Palavra-passe"→"Senha", "Partilhar"→"Compartilhar", "Disciplina"→"Matéria", "Jogo do Galo"→"Jogo da Velha", etc.).
+  2. `src/lib/i18n/useTranslation.tsx` (renomeado de `.ts` — continha JSX) — `TranslationProvider`, `useTranslation`, `useLocale`, com persistência em `localStorage`.
+  3. `src/components/LocaleSwitcher.tsx` (novo) — seletor fixo (canto inferior direito) para alternar pt-PT/pt-BR.
+  4. `src/app/layout.tsx` — `TranslationProvider` embrulha a app e renderiza o `LocaleSwitcher`.
+  5. `src/app/page.tsx` — página inicial passa a usar `t(...)` para os textos visíveis (subtítulo, nome, ano, botões).
+  6. `src/__tests__/i18n.test.ts` (novo) — 8 testes: fallback pt-PT, override pt-BR, interpolação, chave em falta, e igualdade de chaves entre os dois dialetos.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 509 testes a passar (52 ficheiros).
+- **Docs atualizados:** `TODO.md` (item "Tradução/adaptação para pt-BR" marcado como concluído).
+
 ## 2026-08-22 - Modo "desafio entre amigos" com partilha de resultado
 
 - **Contexto:** Faltava o item pendente de permitir um "desafio entre amigos" com partilha de resultado. Os resultados do quiz não tinham qualquer forma de serem partilhados nem de desafiar outra criança.
