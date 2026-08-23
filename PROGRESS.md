@@ -2,6 +2,16 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-23 - Partilha de desafio no WhatsApp a partir dos resultados do quiz
+
+- **Contexto:** O modo "desafio entre amigos" já permitia partilhar via Web Share API/área de transferência, mas faltava uma via direta e muito popular junto das famílias portuguesas/brasileiras: o WhatsApp.
+- **Tarefa implementada:** Expansão da partilha social:
+  1. `src/lib/challenge-share.ts` — nova função `buildWhatsappLink(data, origin)` que gera uma ligação `https://wa.me/?text=...` com o texto de desafio e a ligação do quiz pré-preenchidos e devidamente URL-encoded.
+  2. `src/components/QuizResults.tsx` — novo botão "WhatsApp" (ícone `MessageCircle`) que abre a ligação numa nova janela.
+  3. `src/__tests__/challenge-share.test.ts` (novo) — 2 testes: formato da ligação e segurança de URL-encoding (sem espaços nem `?`).
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run` → 521 testes a passar (53 ficheiros).
+- **Docs atualizados:** `TODO.md` (secção de pendências reorganizada em "Concluídas (histórico)" + nova secção "Pendentes futuras" com 7 candidatas; item WhatsApp marcado como concluído). Restaurado `.env.example` que tinha sido truncado acidentalmente.
+
 ## 2026-08-23 - Diploma/certificado de conquista partilhável
 
 - **Contexto:** Os resultados do quiz já permitiam partilhar desafios e praticar erros, mas não havia um reconhecimento "físico" (diploma) que os encarregados pudessem imprimir/guardar em PDF para a criança.
