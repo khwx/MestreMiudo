@@ -116,6 +116,13 @@ export function compareChallenge(data: QuizChallenge, myScore: number): Challeng
   return { beat, message };
 }
 
+// Constrói uma ligação do WhatsApp com o texto + ligação do desafio pré-preenchidos.
+// Usa o formato wa.me (sem número) para abrir o seletor de conversa no telemóvel/desktop.
+export function buildWhatsappLink(data: QuizChallenge, origin: string): string {
+  const text = `${buildChallengeShareText(data)} ${buildChallengeLink(data, origin)}`;
+  return `https://wa.me/?text=${encodeURIComponent(text)}`;
+}
+
 export type ChallengeShareResult = 'shared' | 'copied' | 'failed';
 
 // Partilha o desafio via Web Share API, com fallback para copiar para a área de transferência.

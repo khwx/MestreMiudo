@@ -5,6 +5,7 @@ import {
   decodeChallenge,
   buildChallengeShareText,
   buildChallengeLink,
+  buildWhatsappLink,
   compareChallenge,
   subjectToSlug,
   type QuizChallenge,
@@ -88,6 +89,24 @@ describe('buildChallengeLink', () => {
     expect(link).toBe(
       `https://exemplo.pt/quiz/matematica?challenge=${encodeChallenge(sample)}&grade=2`
     );
+  });
+});
+
+describe('buildWhatsappLink', () => {
+  it('builds a wa.me link with encoded text and challenge link', () => {
+    const link = buildWhatsappLink(sample, 'https://exemplo.pt');
+    expect(link.startsWith('https://wa.me/?text=')).toBe(true);
+    const decoded = decodeURIComponent(link.slice('https://wa.me/?text='.length));
+    expect(decoded).toContain('Ana');
+    expect(decoded).toContain('4/5');
+    expect(decoded).toContain(`https://exemplo.pt/quiz/matematica?challenge=`);
+  });
+
+  it('URL-encodes reserved characters so the link is safe to open', () => {
+    const link = buildWhatsappLink(sample, 'https://exemplo.pt');
+    const payload = link.slice('https://wa.me/?text='.length);
+    expect(payload).not.toContain(' ');
+    expect(payload).not.toContain('?');
   });
 });
 

@@ -1,10 +1,10 @@
 "use client";
 
 import { Button } from '@/components/ui/button';
-import { Star, Trophy, RefreshCw, BookOpen, Share2 } from 'lucide-react';
+import { Star, Trophy, RefreshCw, BookOpen, Share2, MessageCircle } from 'lucide-react';
 import type { PersonalizedLearningPathOutput } from '@/app/shared-schemas';
 import React, { useState } from 'react';
-import { compareChallenge, shareChallenge, type QuizChallenge } from '@/lib/challenge-share';
+import { compareChallenge, shareChallenge, buildWhatsappLink, type QuizChallenge } from '@/lib/challenge-share';
 import { openCertificate } from '@/lib/certificate';
 
 type QuizResultsProps = {
@@ -60,6 +60,14 @@ export const QuizResults = React.memo(function QuizResults({
     const result = await shareChallenge(myChallenge, origin);
     if (result === 'copied') setShareState('copied');
     if (result === 'failed') setShareState('failed');
+  };
+
+  const handleShareWhatsapp = () => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    const link = buildWhatsappLink(myChallenge, origin);
+    if (typeof window !== 'undefined') {
+      window.open(link, '_blank', 'noopener,noreferrer');
+    }
   };
 
   const handleCertificate = () => {
@@ -171,6 +179,15 @@ export const QuizResults = React.memo(function QuizResults({
             aria-label="Desafiar amigos com este resultado"
           >
             <Share2 className="mr-2 h-5 w-5" /> Desafiar Amigos
+          </Button>
+          <Button
+            onClick={handleShareWhatsapp}
+            variant="secondary"
+            size="lg"
+            className="btn-kid text-lg"
+            aria-label="Partilhar desafio no WhatsApp"
+          >
+            <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp
           </Button>
           <Button 
             onClick={onBack} 

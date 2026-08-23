@@ -30,23 +30,29 @@
 - Confirmed European Portuguese (pt-PT) voice selection now covers all audio resources (quiz via speechSynthesis voice picker; story workshop TTS uses `pt-PT-RaquelNeural`)
 - Confirmed the Estudo do Meio question bank already covers grades 3-4 (topics and questions present in `estudo-do-meio.ts`)
 
-## 📋 Pending Enhancements
+## 📋 Concluídas (histórico de pendências)
 - [x] Sincronizar catálogo de conquistas (`lib/achievements.ts`) com `BADGE_DEFINITIONS` para evitar chaves duplicadas
 - [x] Adicionar testes unitários para `lib/groq.ts`, `lib/pixabay.ts` e `lib/question-bank.ts`
-- [x] Modo "Praticar temas fracos" baseado em `getWeakTopics` no ecrã de quiz
+- [x] Modo "Praticar perguntas erradas" / "Praticar temas fracos" no ecrã de quiz
 - [x] Relatório PDF de progresso enviável/partilhável (Web Share API com anexo + fallback mailto) para encarregados de educação
 - [x] Suporte offline aprimorado (pré-carregar lições por grade no service worker)
 - [x] Acessibilidade: navegação por teclado completa nos jogos (jogo da memória, galo, forca)
 - [x] Painel do professor: exportar notas em CSV (`handleExportCsv` no `parent/page.tsx`)
 - [x] Sugestões de estudo personalizadas no painel (recomendações por prioridade: revisão, temas fracos, desafio diário, streak)
 - [x] Recomendar a próxima lição concreta por completar (usar progresso de lições para obter `nextLessonTitle`)
-- [x] Permitir ao encarregado definir um objetivo diário de quizzes e mostrar progresso no painel
-- [x] Recomendar a próxima lição concreta por completar (usar progresso de lições para obter `nextLessonTitle`)
 - [x] Relatório PDF com detalhe por disciplina e evolução semanal (barras de progresso)
-- [x] Permitir ao encarregado definir um objetivo diário de quizzes e mostrar progresso no painel
-- [x] Recomendar a próxima lição concreta por completar (usar progresso de lições para obter `nextLessonTitle`)
 - [x] Tradução/adaptação da interface para outros dialetos de português (ex.: pt-BR) — infraestrutura i18n (pt-PT + pt-BR), seletor de idioma e página inicial localizada
 - [x] Modo "desafio entre amigos" com partilha de resultado (botão "Desafiar Amigos" nos resultados + ligação de desafio descodificável no quiz)
 - [x] Relatório de progresso por disciplina com gráfico de evolução temporal (gráfico de linhas interativo por disciplina nos painéis de encarregado e professor)
 - [x] Notificações/push (via service worker) a lembrar a revisão espaçada em falta
 - [x] Diploma/certificado de conquista partilhável e imprimível a partir dos resultados do quiz (botão "Ver Diploma" + gerador HTML com escaping anti-XSS)
+- [x] Partilha de desafio no WhatsApp a partir dos resultados do quiz (botão "WhatsApp" + `buildWhatsappLink`)
+
+## 🚀 Pendentes futuras (candidatas a melhorias)
+- [ ] Partilha de desafio por e-mail (mailto/SMTP) diretamente a partir dos resultados do quiz
+- [ ] Envio de relatório PDF por e-mail via servidor (SMTP/Resend) a partir dos painéis de encarregado/professor
+- [ ] Novo mini-jogo educativo (ex.: "Caça-Palavras" ou "Sequência Mágica") no Salão de Jogos
+- [ ] Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano
+- [ ] Modo "treino livre" sem guardar pontos, para praticar sem pressão
+- [ ] Sincronização de progresso entre dispositivos (conta única do encarregado com várias crianças)
+- [ ] Acessibilidade: leitor de ecrã a anunciar resultados e conquistas de forma mais rica
