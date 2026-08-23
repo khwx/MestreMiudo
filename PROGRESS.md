@@ -2,6 +2,16 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-23 - Diploma/certificado de conquista partilhável
+
+- **Contexto:** Os resultados do quiz já permitiam partilhar desafios e praticar erros, mas não havia um reconhecimento "físico" (diploma) que os encarregados pudessem imprimir/guardar em PDF para a criança.
+- **Tarefa implementada:** Gerador de diploma:
+  1. `src/lib/certificate.ts` (novo) — `CertificateData`, `subjectLabel`, `generateCertificateHTML` (HTML autocontido e imprimível, com `escapeHtml` para evitar XSS no nome), `buildCertificateShareText` e `openCertificate` (abre numa nova janela via Blob URL).
+  2. `src/components/QuizResults.tsx` — novo botão "🏅 Ver Diploma" que abre o certificado com os dados do resultado.
+  3. `src/__tests__/certificate.test.ts` (novo) — 10 testes: labels, conteúdo, percentagem, estrelas, escaping XSS, fallback de nome, total zero e texto de partilha.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run src/__tests__/certificate.test.ts` → 10 testes a passar.
+- **Docs atualizados:** `TODO.md` (novo item "Diploma/certificado de conquista" marcado como concluído).
+
 ## 2026-08-23 - Tradução/adaptação da interface para pt-BR (i18n)
 
 - **Contexto:** Faltava o item pendente de adaptar a interface a outros dialetos de português (ex.: pt-BR). Já existia em `src/lib/i18n/` um esboço não ligado à app (sem provider no layout, sem seletor de idioma, sem testes).

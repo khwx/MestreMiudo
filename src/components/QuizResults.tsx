@@ -5,6 +5,7 @@ import { Star, Trophy, RefreshCw, BookOpen, Share2 } from 'lucide-react';
 import type { PersonalizedLearningPathOutput } from '@/app/shared-schemas';
 import React, { useState } from 'react';
 import { compareChallenge, shareChallenge, type QuizChallenge } from '@/lib/challenge-share';
+import { openCertificate } from '@/lib/certificate';
 
 type QuizResultsProps = {
   score: number;
@@ -59,6 +60,17 @@ export const QuizResults = React.memo(function QuizResults({
     const result = await shareChallenge(myChallenge, origin);
     if (result === 'copied') setShareState('copied');
     if (result === 'failed') setShareState('failed');
+  };
+
+  const handleCertificate = () => {
+    openCertificate({
+      studentName,
+      subject,
+      grade,
+      score,
+      total: totalQuestions,
+      stars,
+    });
   };
 
   const comparison = challenge ? compareChallenge(challenge, score) : null;
@@ -141,6 +153,15 @@ export const QuizResults = React.memo(function QuizResults({
           )}
           <Button onClick={onRestart} variant="outline" size="lg" className="btn-kid text-lg">
             <RefreshCw className="mr-2 h-5 w-5" /> Jogar Novamente
+          </Button>
+          <Button
+            onClick={handleCertificate}
+            variant="secondary"
+            size="lg"
+            className="btn-kid text-lg"
+            aria-label="Ver diploma de conquista"
+          >
+            🏅 Ver Diploma
           </Button>
           <Button
             onClick={handleShare}

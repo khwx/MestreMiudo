@@ -49,3 +49,4 @@
 - [x] Modo "desafio entre amigos" com partilha de resultado (botão "Desafiar Amigos" nos resultados + ligação de desafio descodificável no quiz)
 - [x] Relatório de progresso por disciplina com gráfico de evolução temporal (gráfico de linhas interativo por disciplina nos painéis de encarregado e professor)
 - [x] Notificações/push (via service worker) a lembrar a revisão espaçada em falta
+- [x] Diploma/certificado de conquista partilhável e imprimível a partir dos resultados do quiz (botão "Ver Diploma" + gerador HTML com escaping anti-XSS)
