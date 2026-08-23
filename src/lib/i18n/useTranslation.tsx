@@ -13,10 +13,8 @@ const TranslationContext = createContext<TranslationContextType | undefined>(und
 
 export function TranslationProvider({ children, initialLocale = 'pt-PT' }: { children: ReactNode; initialLocale?: Locale }) {
   const [locale, setLocaleState] = useState<Locale>(initialLocale);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const savedLocale = localStorage.getItem('mestremiudo-locale') as Locale | null;
     if (savedLocale && (savedLocale === 'pt-PT' || savedLocale === 'pt-BR')) {
       setLocaleState(savedLocale);
@@ -31,10 +29,6 @@ export function TranslationProvider({ children, initialLocale = 'pt-PT' }: { chi
   const t = (key: string, params?: Record<string, string | number>) => {
     return getTranslation(locale, key, params);
   };
-
-  if (!mounted) {
-    return <>{children}</>;
-  }
 
   return (
     <TranslationContext.Provider value={{ locale, setLocale, t }}>
