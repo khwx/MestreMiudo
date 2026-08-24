@@ -2,6 +2,17 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-24 - Novo mini-jogo "Sequência Mágica" no Salão de Jogos
+
+- **Contexto:** O Salão de Jogos já incluía Jogo da Memória, Jogo do Galo, Forca, Palavras Cruzadas, Sopa de Letras e Quiz de Matemática. Faltava um jogo de raciocínio sobre padrões/sequências numéricas alinhado ao currículo (listado como pendente em TODO.md).
+- **Tarefa implementada:** Mini-jogo educativo de sequências:
+  1. `src/lib/magic-sequence.ts` (novo) — lógica pura e testável: `generateSequencePuzzle(grade)` gera puzzles com regras aritméticas (soma/subtração constante), geométricas (multiplicação) e de Fibonacci, com dificuldade por ano (Grade 1: passos pequenos; Grade 4: multiplicação/razões maiores). Inclui `checkSequenceAnswer` e gerador de distratores plausíveis sem repetir valores visíveis.
+  2. `src/components/MagicSequenceGame.tsx` (novo) — componente "use client" com seletor de ano, 10 rondas, temporizador, feedback imediato, explicação da regra, pontuação/streak e ecrã de resultados (padrão dos jogos existentes).
+  3. `src/app/dashboard/games/client-page.tsx` — novo separador "Sequência Mágica" (ícone `Sparkles`) integrado no `Tabs` do Salão de Jogos (grid passou a 7 colunas).
+  4. `src/__tests__/magic-sequence.test.ts` (novo) — 5 testes: exatamente um espaço em branco por puzzle, opções válidas e únicas, ausência de valores repetidos entre visíveis e correto, limites da Grade 1, e verificação da regra aritmética.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run src/__tests__/magic-sequence.test.ts` → 5 testes a passar (1 ficheiro).
+- **Docs atualizados:** `TODO.md` (item "Novo mini-jogo educativo" marcado como concluído na secção "Pendentes futuras").
+
 ## 2026-08-24 - Partilha de desafio por e-mail a partir dos resultados do quiz
 
 - **Contexto:** O modo "desafio entre amigos" já permitia partilhar via Web Share API, área de transferência e WhatsApp. Faltava a via e-mail (mailto) diretamente nos resultados do quiz.

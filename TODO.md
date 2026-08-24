@@ -52,7 +52,7 @@
 ## 🚀 Pendentes futuras (candidatas a melhorias)
 - [x] Partilha de desafio por e-mail (mailto/SMTP) diretamente a partir dos resultados do quiz
 - [ ] Envio de relatório PDF por e-mail via servidor (SMTP/Resend) a partir dos painéis de encarregado/professor
-- [ ] Novo mini-jogo educativo (ex.: "Caça-Palavras" ou "Sequência Mágica") no Salão de Jogos
+- [x] Novo mini-jogo educativo (ex.: "Caça-Palavras" ou "Sequência Mágica") no Salão de Jogos
 - [ ] Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano
 - [ ] Modo "treino livre" sem guardar pontos, para praticar sem pressão
 - [ ] Sincronização de progresso entre dispositivos (conta única do encarregado com várias crianças)

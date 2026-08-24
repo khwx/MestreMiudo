@@ -6,10 +6,11 @@ import { HangmanGame } from '@/components/HangmanGameImproved';
 import { CrosswordGame } from '@/components/CrosswordGame';
 import { WordSearchGame } from '@/components/WordSearchGame';
 import { MathQuizGame } from '@/components/MathQuizGame';
+import { MagicSequenceGame } from '@/components/MagicSequenceGame';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import { Gamepad2, Brain, Skull, Grid3x3, Puzzle, Calculator } from 'lucide-react';
+import { Gamepad2, Brain, Skull, Grid3x3, Puzzle, Calculator, Sparkles } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 
@@ -26,7 +27,7 @@ export default function GamesClientPage() {
       </Button>
       <h1 className="text-4xl font-headline font-bold text-primary mb-8">Salão de Jogos</h1>
       <Tabs defaultValue="memory" className="w-full max-w-4xl">
-        <TabsList className="grid w-full grid-cols-6">
+        <TabsList className="grid w-full grid-cols-7">
           <TabsTrigger value="memory">
             <Brain className="mr-2 h-5 w-5" />
             Jogo da Memória
@@ -50,6 +51,10 @@ export default function GamesClientPage() {
           <TabsTrigger value="mathquiz">
             <Calculator className="mr-2 h-5 w-5" />
             Quiz de Matemática
+          </TabsTrigger>
+          <TabsTrigger value="sequence">
+            <Sparkles className="mr-2 h-5 w-5" />
+            Sequência Mágica
           </TabsTrigger>
         </TabsList>
         <TabsContent value="memory">
@@ -115,6 +120,17 @@ export default function GamesClientPage() {
                 </CardHeader>
                 <CardContent>
                     <MathQuizGame />
+                </CardContent>
+            </Card>
+        </TabsContent>
+        <TabsContent value="sequence">
+            <Card>
+                <CardHeader>
+                    <CardTitle>Sequência Mágica</CardTitle>
+                    <CardDescription>Descobre a regra e descobre o número que falta na sequência!</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <MagicSequenceGame />
                 </CardContent>
             </Card>
         </TabsContent>
