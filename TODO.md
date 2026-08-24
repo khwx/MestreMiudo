@@ -47,9 +47,10 @@
 - [x] Notificações/push (via service worker) a lembrar a revisão espaçada em falta
 - [x] Diploma/certificado de conquista partilhável e imprimível a partir dos resultados do quiz (botão "Ver Diploma" + gerador HTML com escaping anti-XSS)
 - [x] Partilha de desafio no WhatsApp a partir dos resultados do quiz (botão "WhatsApp" + `buildWhatsappLink`)
+- [x] Partilha de desafio por e-mail (mailto) diretamente a partir dos resultados do quiz (botão "E-mail" + `buildEmailLink`)
 
 ## 🚀 Pendentes futuras (candidatas a melhorias)
-- [ ] Partilha de desafio por e-mail (mailto/SMTP) diretamente a partir dos resultados do quiz
+- [x] Partilha de desafio por e-mail (mailto/SMTP) diretamente a partir dos resultados do quiz
 - [ ] Envio de relatório PDF por e-mail via servidor (SMTP/Resend) a partir dos painéis de encarregado/professor
 - [ ] Novo mini-jogo educativo (ex.: "Caça-Palavras" ou "Sequência Mágica") no Salão de Jogos
 - [ ] Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano

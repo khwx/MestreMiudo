@@ -2,6 +2,16 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-24 - Partilha de desafio por e-mail a partir dos resultados do quiz
+
+- **Contexto:** O modo "desafio entre amigos" já permitia partilhar via Web Share API, área de transferência e WhatsApp. Faltava a via e-mail (mailto) diretamente nos resultados do quiz.
+- **Tarefa implementada:** Partilha por e-mail:
+  1. `src/lib/challenge-share.ts` — nova função `buildEmailLink(data, origin)` que gera uma ligação `mailto:?subject=...&body=...` com assunto e corpo pré-preenchidos (texto de desafio + ligação do quiz) devidamente URL-encoded.
+  2. `src/components/QuizResults.tsx` — novo botão "E-mail" (ícone `Mail`) que abre a ligação mailto numa nova janela.
+  3. `src/__tests__/challenge-share.test.ts` — 2 testes: formato da ligação mailto e segurança de URL-encoding (sem espaços).
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run src/__tests__/challenge-share.test.ts` → 19 testes a passar (1 ficheiro).
+- **Docs atualizados:** `TODO.md` (item "Partilha de desafio por e-mail" marcado como concluído em ambas as secções).
+
 ## 2026-08-23 - Partilha de desafio no WhatsApp a partir dos resultados do quiz
 
 - **Contexto:** O modo "desafio entre amigos" já permitia partilhar via Web Share API/área de transferência, mas faltava uma via direta e muito popular junto das famílias portuguesas/brasileiras: o WhatsApp.

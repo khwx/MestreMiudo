@@ -6,6 +6,7 @@ import {
   buildChallengeShareText,
   buildChallengeLink,
   buildWhatsappLink,
+  buildEmailLink,
   compareChallenge,
   subjectToSlug,
   type QuizChallenge,
@@ -107,6 +108,24 @@ describe('buildWhatsappLink', () => {
     const payload = link.slice('https://wa.me/?text='.length);
     expect(payload).not.toContain(' ');
     expect(payload).not.toContain('?');
+  });
+});
+
+describe('buildEmailLink', () => {
+  it('builds a mailto link with encoded subject and body', () => {
+    const link = buildEmailLink(sample, 'https://exemplo.pt');
+    expect(link.startsWith('mailto:?subject=')).toBe(true);
+    expect(link).toContain('&body=');
+    const decodedBody = decodeURIComponent(link.slice(link.indexOf('&body=') + 6));
+    expect(decodedBody).toContain('Ana');
+    expect(decodedBody).toContain('4/5');
+    expect(decodedBody).toContain('https://exemplo.pt/quiz/matematica?challenge=');
+  });
+
+  it('URL-encodes spaces and reserved characters safely', () => {
+    const link = buildEmailLink(sample, 'https://exemplo.pt');
+    const payload = link.slice('mailto:?subject='.length);
+    expect(payload).not.toContain(' ');
   });
 });
 

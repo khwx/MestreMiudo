@@ -123,6 +123,15 @@ export function buildWhatsappLink(data: QuizChallenge, origin: string): string {
   return `https://wa.me/?text=${encodeURIComponent(text)}`;
 }
 
+// Constrói uma ligação de e-mail (mailto) com assunto e corpo pré-preenchidos
+// com o desafio e a ligação para o amigo aceitar.
+export function buildEmailLink(data: QuizChallenge, origin: string): string {
+  const link = buildChallengeLink(data, origin);
+  const subject = encodeURIComponent('Desafio do MestreMiúdo 🎮');
+  const body = encodeURIComponent(`${buildChallengeShareText(data)} ${link}`);
+  return `mailto:?subject=${subject}&body=${body}`;
+}
+
 export type ChallengeShareResult = 'shared' | 'copied' | 'failed';
 
 // Partilha o desafio via Web Share API, com fallback para copiar para a área de transferência.
