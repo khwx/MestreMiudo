@@ -16,6 +16,7 @@ import { BadgePopup } from '@/components/BadgePopup';
 import { getBadgeByAnyId } from '@/lib/badges';
 import { selectPortugueseVoice } from '@/lib/tts-voice';
 import { getWrongQuestions, getWeakTopicsFromAnswers, getQuestionsForWeakTopics } from '@/lib/quiz-practice';
+import { buildQuizResultAnnouncement } from '@/lib/quiz-announcements';
 import type { QuizChallenge } from '@/lib/challenge-share';
 
 type QuizProps = {
@@ -274,10 +275,16 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null }
 
   useEffect(() => {
     if (isQuizFinished && quizData) {
-      const percentage = Math.round((score / quizData.quizQuestions.length) * 100);
-      announceToScreenReader(`Quiz concluído! Obtiveste ${score} de ${quizData.quizQuestions.length} perguntas corretas, ${percentage}%.`);
+      announceToScreenReader(
+        buildQuizResultAnnouncement({
+          score,
+          total: quizData.quizQuestions.length,
+          subject,
+          practiceMode,
+        })
+      );
     }
-  }, [isQuizFinished, quizData, score, announceToScreenReader]);
+  }, [isQuizFinished, quizData, score, subject, practiceMode, announceToScreenReader]);
 
   useEffect(() => {
     if (newBadge) {

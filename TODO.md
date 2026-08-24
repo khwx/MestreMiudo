@@ -56,4 +56,4 @@
 - [ ] Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano
 - [ ] Modo "treino livre" sem guardar pontos, para praticar sem pressão
 - [ ] Sincronização de progresso entre dispositivos (conta única do encarregado com várias crianças)
-- [ ] Acessibilidade: leitor de ecrã a anunciar resultados e conquistas de forma mais rica
+- [x] Acessibilidade: leitor de ecrã a anunciar resultados e conquistas de forma mais rica

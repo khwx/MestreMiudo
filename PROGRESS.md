@@ -2,6 +2,16 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-24 - Acessibilidade: anúncio de ecrã mais rico nos resultados do quiz
+
+- **Contexto:** O leitor de ecrã apenas anunciava "Quiz concluído! Obtiveste X de Y perguntas corretas, Z%." faltando o reconhecimento das estrelas conquistadas e da disciplina, menos informativo para crianças que dependem de leitura assistida.
+- **Tarefa implementada:** Anúncio de resultado enriquecido:
+  1. `src/lib/quiz-announcements.ts` (novo) — `buildQuizResultAnnouncement({ score, total, subject, practiceMode })` gera uma mensagem em pt-PT que inclui pontuação, percentagem, estrelas (calculadas via `calculateStars`) por extenso ("três estrelas") e o nome da disciplina; distingue o modo de prática ("Prática concluída") e trata total zero com segurança.
+  2. `src/components/Quiz.tsx` — o `useEffect` de fim de quiz passa a usar `buildQuizResultAnnouncement` em vez da mensagem hardcoded.
+  3. `src/__tests__/quiz-announcements.test.ts` (novo) — 7 testes: quiz normal, prefixo de prática, pontuação perfeita (3 estrelas), pontuação baixa (0 estrelas), truncagem da pontuação, omissão de disciplina e total zero.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run src/__tests__/quiz-announcements.test.ts` → 7 testes a passar (1 ficheiro).
+- **Docs atualizados:** `TODO.md` (item "Acessibilidade: leitor de ecrã a anunciar resultados e conquistas de forma mais rica" marcado como concluído).
+
 ## 2026-08-24 - Novo mini-jogo "Sequência Mágica" no Salão de Jogos
 
 - **Contexto:** O Salão de Jogos já incluía Jogo da Memória, Jogo do Galo, Forca, Palavras Cruzadas, Sopa de Letras e Quiz de Matemática. Faltava um jogo de raciocínio sobre padrões/sequências numéricas alinhado ao currículo (listado como pendente em TODO.md).
