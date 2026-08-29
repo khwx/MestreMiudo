@@ -2,6 +2,17 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-29 - Expansão do banco de perguntas de Matemática (tópicos com pouca cobertura)
+
+- **Contexto:** Dando continuidade à expansão do banco de perguntas (o TODO mantém aberto "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano"), a análise de cobertura de `src/lib/questions/matematica.ts` revelou tópicos com pouca cobertura: G1 Estimativas/Figuras Sólidas (3-4), G2 Geometria (4), G3 Perímetros/Área/Números Romanos (4), G4 Proporcionalidade/Área/Numeracia (4).
+- **Tarefa implementada:** Adicionadas 24 novas perguntas de Matemática em `src/lib/questions/matematica.ts` (bloco `mat-exp3-###`, IDs únicos `mat-exp3-001` a `mat-exp3-024`), alinhadas ao currículo português do 1º Ciclo:
+  - **G1 (5):** Estimativas, Figuras Sólidas, Contagem, Aritmética.
+  - **G2 (5):** Geometria, Medidas, Numeração, Tabuada.
+  - **G3 (6):** Números Romanos (C, XL), Perímetros, Área, Divisão, Frações.
+  - **G4 (8):** Numeração (valor posicional), Decimais, Frações equivalentes, Proporcionalidade, Percentagens, Área, Multiplicação.
+- **Validação:** banco passou de 737 para 761 perguntas; IDs únicos confirmados; todas as perguntas de escolha múltipla têm a `correctAnswer` presente nas `options`; `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 540 testes a passar (56 ficheiros).
+- **Docs atualizados:** registo desta expansão (o TODO item de expansão permanece aberto por ser contínuo por disciplina/ano).
+
 ## 2026-08-29 - Expansão do banco de perguntas de Português (tópicos com pouca cobertura)
 
 - **Contexto:** O TODO listava como pendente a "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano". Uma análise de cobertura (`src/lib/questions/index.ts`) revelou que muitos tópicos tinham apenas 1 pergunta (ex.: G1 Artigos/Preposicoes, G2 Substantivos/Preposicoes, G3 Conjunções/Adverbios, G4 Tipos de Texto/Estrutura de Carta/Revisão de Textos).
