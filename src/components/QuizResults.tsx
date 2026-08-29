@@ -6,6 +6,7 @@ import type { PersonalizedLearningPathOutput } from '@/app/shared-schemas';
 import React, { useState } from 'react';
 import { compareChallenge, shareChallenge, buildWhatsappLink, buildEmailLink, type QuizChallenge } from '@/lib/challenge-share';
 import { openCertificate } from '@/lib/certificate';
+import { buildFreePracticeResultMessage, buildFreePracticeResultTitle } from '@/lib/free-practice';
 
 type QuizResultsProps = {
   score: number;
@@ -16,6 +17,7 @@ type QuizResultsProps = {
   onBack: () => void;
   subject: string;
   practiceMode?: boolean;
+  freePractice?: boolean;
   wrongCount?: number;
   onPracticeWrong?: () => void;
   weakTopics?: string[] | null;
@@ -33,6 +35,7 @@ export const QuizResults = React.memo(function QuizResults({
   onBack,
   subject,
   practiceMode = false,
+  freePractice = false,
   wrongCount = 0,
   onPracticeWrong,
   weakTopics = null,
@@ -111,7 +114,7 @@ export const QuizResults = React.memo(function QuizResults({
         <Trophy className="h-24 w-24 mx-auto text-yellow-500 animate-pulse" />
         
         <h2 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          {practiceMode ? 'Prática Concluída!' : 'Desafio Concluído!'}
+          {practiceMode ? 'Prática Concluída!' : freePractice ? buildFreePracticeResultTitle() : 'Desafio Concluído!'}
         </h2>
         
         <div className="flex justify-center gap-2 text-4xl">
@@ -127,9 +130,15 @@ export const QuizResults = React.memo(function QuizResults({
           A tua pontuação: <span className="text-green-600">{score}</span> em <span className="text-blue-600">{totalQuestions}</span>!
         </p>
         
-        <p className="text-xl text-gray-600 dark:text-gray-300">
-          Isso dá-te <span className="font-bold text-yellow-600">{points ?? score * 10} pontos</span>!
-        </p>
+        {freePractice ? (
+          <p className="text-xl text-gray-600 dark:text-gray-300">
+            <span className="font-bold text-cyan-600">{buildFreePracticeResultMessage().replace('📝 ', '')}</span>
+          </p>
+        ) : (
+          <p className="text-xl text-gray-600 dark:text-gray-300">
+            Isso dá-te <span className="font-bold text-yellow-600">{points ?? score * 10} pontos</span>!
+          </p>
+        )}
 
         {comparison && (
           <div
@@ -145,7 +154,7 @@ export const QuizResults = React.memo(function QuizResults({
         )}
        
        <div className="flex gap-4 justify-center pt-4 flex-wrap">
-          {canPractice && (
+          {!freePractice && canPractice && (
             <Button
               onClick={onPracticeWrong}
               variant="secondary"
@@ -156,7 +165,7 @@ export const QuizResults = React.memo(function QuizResults({
               <BookOpen className="mr-2 h-5 w-5" /> Praticar {wrongCount} que erraste
             </Button>
           )}
-          {canPracticeWeakTopics && (
+          {!freePractice && canPracticeWeakTopics && (
             <Button
               onClick={onPracticeWeakTopics}
               variant="secondary"
@@ -170,42 +179,46 @@ export const QuizResults = React.memo(function QuizResults({
           <Button onClick={onRestart} variant="outline" size="lg" className="btn-kid text-lg">
             <RefreshCw className="mr-2 h-5 w-5" /> Jogar Novamente
           </Button>
-          <Button
-            onClick={handleCertificate}
-            variant="secondary"
-            size="lg"
-            className="btn-kid text-lg"
-            aria-label="Ver diploma de conquista"
-          >
-            🏅 Ver Diploma
-          </Button>
-          <Button
-            onClick={handleShare}
-            variant="secondary"
-            size="lg"
-            className="btn-kid text-lg"
-            aria-label="Desafiar amigos com este resultado"
-          >
-            <Share2 className="mr-2 h-5 w-5" /> Desafiar Amigos
-          </Button>
-          <Button
-            onClick={handleShareWhatsapp}
-            variant="secondary"
-            size="lg"
-            className="btn-kid text-lg"
-            aria-label="Partilhar desafio no WhatsApp"
-          >
-            <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp
-          </Button>
-          <Button
-            onClick={handleShareEmail}
-            variant="secondary"
-            size="lg"
-            className="btn-kid text-lg"
-            aria-label="Partilhar desafio por e-mail"
-          >
-            <Mail className="mr-2 h-5 w-5" /> E-mail
-          </Button>
+          {!freePractice && (
+            <>
+              <Button
+                onClick={handleCertificate}
+                variant="secondary"
+                size="lg"
+                className="btn-kid text-lg"
+                aria-label="Ver diploma de conquista"
+              >
+                🏅 Ver Diploma
+              </Button>
+              <Button
+                onClick={handleShare}
+                variant="secondary"
+                size="lg"
+                className="btn-kid text-lg"
+                aria-label="Desafiar amigos com este resultado"
+              >
+                <Share2 className="mr-2 h-5 w-5" /> Desafiar Amigos
+              </Button>
+              <Button
+                onClick={handleShareWhatsapp}
+                variant="secondary"
+                size="lg"
+                className="btn-kid text-lg"
+                aria-label="Partilhar desafio no WhatsApp"
+              >
+                <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp
+              </Button>
+              <Button
+                onClick={handleShareEmail}
+                variant="secondary"
+                size="lg"
+                className="btn-kid text-lg"
+                aria-label="Partilhar desafio por e-mail"
+              >
+                <Mail className="mr-2 h-5 w-5" /> E-mail
+              </Button>
+            </>
+          )}
           <Button 
             onClick={onBack} 
             size="lg"

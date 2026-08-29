@@ -9,9 +9,10 @@ type QuizClientPageProps = {
   subject: 'Português' | 'Matemática' | 'Estudo do Meio' | 'Misto';
   title: string;
   challenge?: QuizChallenge | null;
+  freePractice?: boolean;
 };
 
-export default function QuizClientPage({ studentId, gradeLevel, subject, title, challenge = null }: QuizClientPageProps) {
+export default function QuizClientPage({ studentId, gradeLevel, subject, title, challenge = null, freePractice = false }: QuizClientPageProps) {
   return (
       <Quiz
         studentId={studentId}
@@ -19,6 +20,7 @@ export default function QuizClientPage({ studentId, gradeLevel, subject, title, 
         subject={subject}
         title={title}
         challenge={challenge}
+        freePractice={freePractice}
       />
   );
 }

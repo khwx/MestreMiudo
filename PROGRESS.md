@@ -2,6 +2,19 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-29 - Modo "Treino Livre" para praticar sem guardar pontos
+
+- **Contexto:** Os quizzes guardavam sempre os resultados, atribuíam pontos e desbloqueavam conquistas, o que criava pressão e poluía o histórico de progresso quando a criança só queria praticar à vontade (listado como pendente em TODO.md).
+- **Tarefa implementada:** Modo "Treino Livre" que não guarda nada:
+  1. `src/lib/free-practice.ts` (novo) — helpers puros e testáveis: `shouldSkipSaving(freePractice)` e textos do banner/resultado (`buildFreePracticeBannerText`, `buildFreePracticeResultMessage`, `buildFreePracticeResultTitle`).
+  2. `src/app/quiz/[subject]/page.tsx` — novo parâmetro de consulta `treino=1` (ou `treino=true`) lido e repassado.
+  3. `src/app/quiz/[subject]/client-page.tsx` — nova prop `freePractice` repassada ao `Quiz`.
+  4. `src/components/Quiz.tsx` — quando `freePractice` está ativo, `finishQuiz` **salta** `saveQuizResults`, `awardQuizPoints` e a verificação de conquistas (usando `shouldSkipSaving`); exibe um banner de "Treino Livre" no topo.
+  5. `src/components/QuizResults.tsx` — no modo treino livre mostra título "Treino Livre Concluído!", indica que nada foi guardado e oculta os botões de gamificação/partilha (Ver Diploma, Desafiar Amigos, WhatsApp, E-mail, Praticar erradas/temas fracos), mantendo "Jogar Novamente" e "Voltar".
+  6. `src/components/dashboard/FeatureGrid.tsx` — novo cartão "🎈 Treino Livre" que abre o quiz misto em modo treino, para acesso fácil.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, `npx vitest run src/__tests__/free-practice.test.ts` → 5 testes a passar; suíte completa: 540 testes a passar (56 ficheiros).
+- **Docs atualizados:** `TODO.md` (item "Modo 'treino livre' sem guardar pontos, para praticar sem pressão" marcado como concluído).
+
 ## 2026-08-24 - Acessibilidade: anúncio de ecrã mais rico nos resultados do quiz
 
 - **Contexto:** O leitor de ecrã apenas anunciava "Quiz concluído! Obtiveste X de Y perguntas corretas, Z%." faltando o reconhecimento das estrelas conquistadas e da disciplina, menos informativo para crianças que dependem de leitura assistida.

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Book, Divide, Leaf, Shuffle, Gamepad2, BookHeart, BookOpen, Lightbulb, Flame, ShoppingBag, Brain, RefreshCw, TrendingUp, Trophy, Calendar, BarChart3 } from "lucide-react"
+import { Book, Divide, Leaf, Shuffle, Gamepad2, BookHeart, BookOpen, Lightbulb, Flame, ShoppingBag, Brain, RefreshCw, TrendingUp, Trophy, Calendar, BarChart3, Puzzle } from "lucide-react"
 import React from "react"
 
 interface SpacedStats {
@@ -185,6 +185,27 @@ export const FeatureGrid = React.memo(function FeatureGrid({ name, grade, spaced
           </div>
         </Link>
       </div>
+
+      {/* Treino Livre */}
+      <Link href={`/quiz/misto?name=${name}&grade=${grade}&treino=1`}>
+        <div className="card-kid hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col border-4 border-cyan-300 dark:border-cyan-700">
+          <div className="p-6 flex flex-row items-center justify-between pb-2">
+            <h4 className="text-2xl font-black text-cyan-700 dark:text-cyan-300">🎈 Treino Livre</h4>
+            <div className="p-4 rounded-full bg-cyan-100 dark:bg-cyan-900/40">
+              <Puzzle className="h-10 w-10 text-cyan-600 dark:text-cyan-400" />
+            </div>
+          </div>
+          <div className="p-6 pt-0 flex-grow">
+            <p className="text-cyan-700 dark:text-cyan-300 text-lg">Pratica sem pressão, sem guardar pontos!</p>
+          </div>
+          <div className="p-4 pt-0">
+            <div className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400">
+              <span className="text-xl">🧘</span>
+              <span className="font-semibold">Só para praticar</span>
+            </div>
+          </div>
+        </div>
+      </Link>
 
       {/* Linha 3: Revisão + Desafio Diário + Rankings + Histórico */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">

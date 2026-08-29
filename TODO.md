@@ -54,6 +54,6 @@
 - [ ] Envio de relatório PDF por e-mail via servidor (SMTP/Resend) a partir dos painéis de encarregado/professor
 - [x] Novo mini-jogo educativo (ex.: "Caça-Palavras" ou "Sequência Mágica") no Salão de Jogos
 - [ ] Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano
-- [ ] Modo "treino livre" sem guardar pontos, para praticar sem pressão
+- [x] Modo "treino livre" sem guardar pontos, para praticar sem pressão
 - [ ] Sincronização de progresso entre dispositivos (conta única do encarregado com várias crianças)
 - [x] Acessibilidade: leitor de ecrã a anunciar resultados e conquistas de forma mais rica

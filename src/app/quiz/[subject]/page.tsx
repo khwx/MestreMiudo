@@ -26,6 +26,7 @@ export default async function QuizPage({ params, searchParams }: { params: Promi
   const name = resolvedSearchParams?.name as string || 'Jogador';
   const grade = resolvedSearchParams?.grade as string;
   const challenge = decodeChallenge(resolvedSearchParams?.challenge as string | undefined);
+  const freePractice = resolvedSearchParams?.treino === '1' || resolvedSearchParams?.treino === 'true';
 
   if (!subjectTitle) {
     notFound();
@@ -54,6 +55,7 @@ export default async function QuizPage({ params, searchParams }: { params: Promi
             subject={quizSubject}
             title={subjectTitle}
             challenge={challenge}
+            freePractice={freePractice}
         />
        </div>
     </Suspense>

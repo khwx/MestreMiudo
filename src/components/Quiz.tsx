@@ -17,6 +17,7 @@ import { getBadgeByAnyId } from '@/lib/badges';
 import { selectPortugueseVoice } from '@/lib/tts-voice';
 import { getWrongQuestions, getWeakTopicsFromAnswers, getQuestionsForWeakTopics } from '@/lib/quiz-practice';
 import { buildQuizResultAnnouncement } from '@/lib/quiz-announcements';
+import { shouldSkipSaving, buildFreePracticeBannerText } from '@/lib/free-practice';
 import type { QuizChallenge } from '@/lib/challenge-share';
 
 type QuizProps = {
@@ -25,6 +26,7 @@ type QuizProps = {
   subject: 'Português' | 'Matemática' | 'Estudo do Meio' | 'Misto';
   title: string;
   challenge?: QuizChallenge | null;
+  freePractice?: boolean;
 };
 
 type Answer = {
@@ -42,7 +44,7 @@ const loadingMessages = [
   "🚀 Quase pronto! A preparar o desafio...",
 ];
 
-export function Quiz({ studentId, gradeLevel, subject, title, challenge = null }: QuizProps) {
+export function Quiz({ studentId, gradeLevel, subject, title, challenge = null, freePractice = false }: QuizProps) {
   const [quizData, setQuizData] = useState<PersonalizedLearningPathOutput | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -135,6 +137,19 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null }
   }, [isAnswered, quizData, currentQuestionIndex, playSuccess, playError, a11y.soundEnabled, a11y.reducedMotion]);
 
   const finishQuiz = useCallback(async () => {
+    if (shouldSkipSaving(freePractice)) {
+      logger.log('[QUIZ] Modo treino livre: resultados não guardados nem pontos atribuídos');
+      if (a11y.soundEnabled) playLevelUp();
+      if (a11y.reducedMotion === false) {
+        confetti({
+          particleCount: 200,
+          spread: 100,
+          origin: { y: 0.6 }
+        });
+      }
+      return;
+    }
+
     try {
       await saveQuizResults({
         studentId,
@@ -188,7 +203,7 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null }
     } catch (error) {
       logger.error('Erro ao guardar resultados do quiz:', error);
     }
-  }, [studentId, gradeLevel, subject, score, answers, quizData, playLevelUp, newBadge, a11y.soundEnabled, a11y.reducedMotion]);
+  }, [studentId, gradeLevel, subject, score, answers, quizData, playLevelUp, newBadge, a11y.soundEnabled, a11y.reducedMotion, freePractice]);
 
   const handleNext = useCallback(() => {
     window.speechSynthesis.cancel();
@@ -352,6 +367,7 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null }
           onBack={handleBack}
           subject={subject}
           practiceMode={practiceMode}
+          freePractice={freePractice}
           wrongCount={practiceMode ? 0 : answers.filter((a) => !a.isCorrect).length}
           onPracticeWrong={handlePracticeWrong}
           weakTopics={practiceMode ? null : getWeakTopicsFromAnswers(answers)}
@@ -366,6 +382,15 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null }
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
+      {freePractice && (
+        <div
+          className="flex items-center gap-3 rounded-2xl border-2 border-cyan-300 bg-cyan-50 dark:bg-cyan-900/20 p-4 text-cyan-800 dark:text-cyan-200"
+          role="status"
+        >
+          <span className="text-2xl">🎈</span>
+          <span className="font-bold">{buildFreePracticeBannerText().replace('🎈 ', '')}</span>
+        </div>
+      )}
       {challenge && !challengeDismissed && (
         <div
           className="flex items-center justify-between gap-3 rounded-2xl border-2 border-purple-300 bg-purple-50 dark:bg-purple-900/20 p-4 text-purple-800 dark:text-purple-200"
