@@ -2,6 +2,17 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-29 - Expansão do banco de perguntas de Estudo do Meio (tópicos com pouca cobertura)
+
+- **Contexto:** Continuação da expansão contínua do banco de perguntas (TODO em aberto). A análise de cobertura de `src/lib/questions/estudo-do-meio.ts` revelou muitos tópicos com apenas 2-3 perguntas: G1 Clima/Higiene/Cuidados com o Corpo/Regras de Segurança, G2 Alimentos/Habitats, G3 Cadeias Alimentares/Sistema Solar/Ecologia/Recursos Naturais/Sistema Digestório/Doenças Transmissíveis, G4 Biomas/Força e Movimento/Ecologia/Geografia/Portugal no Mundo/Tecnologia/Corpo Humano/Segurança Online.
+- **Tarefa implementada:** Adicionadas 23 novas perguntas de Estudo do Meio em `src/lib/questions/estudo-do-meio.ts` (bloco `em-exp3-###`, IDs únicos `em-exp3-001` a `em-exp3-023`), alinhadas ao currículo do 1º Ciclo:
+  - **G1 (4):** Clima, Higiene, Cuidados com o Corpo, Regras de Segurança.
+  - **G2 (3):** Alimentos, Habitats, Plantas.
+  - **G3 (7):** Cadeias Alimentares, Sistema Solar, Ecologia, Recursos Naturais, Sistema Digestório, Doenças Transmissíveis, Magnetismo.
+  - **G4 (9):** Biomas, Força e Movimento, Ecologia, Geografia, Portugal no Mundo, Tecnologia, Corpo Humano, Segurança Online, Cidadania (novo tópico).
+- **Validação:** banco passou de 761 para 784 perguntas; IDs únicos confirmados; todas as perguntas de escolha múltipla e verdadeiro/falso com respostas válidas; `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 540 testes a passar (56 ficheiros).
+- **Docs atualizados:** registo desta expansão (o TODO item de expansão permanece aberto por ser contínuo por disciplina/ano).
+
 ## 2026-08-29 - Expansão do banco de perguntas de Matemática (tópicos com pouca cobertura)
 
 - **Contexto:** Dando continuidade à expansão do banco de perguntas (o TODO mantém aberto "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano"), a análise de cobertura de `src/lib/questions/matematica.ts` revelou tópicos com pouca cobertura: G1 Estimativas/Figuras Sólidas (3-4), G2 Geometria (4), G3 Perímetros/Área/Números Romanos (4), G4 Proporcionalidade/Área/Numeracia (4).
