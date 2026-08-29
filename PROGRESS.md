@@ -2,6 +2,17 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-29 - Expansão do banco de perguntas de Português (tópicos com pouca cobertura)
+
+- **Contexto:** O TODO listava como pendente a "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano". Uma análise de cobertura (`src/lib/questions/index.ts`) revelou que muitos tópicos tinham apenas 1 pergunta (ex.: G1 Artigos/Preposicoes, G2 Substantivos/Preposicoes, G3 Conjunções/Adverbios, G4 Tipos de Texto/Estrutura de Carta/Revisão de Textos).
+- **Tarefa implementada:** Adicionadas 25 novas perguntas de Português em `src/lib/questions/portugues.ts` (bloco `pt-exp3-###`, IDs únicos `pt-exp3-001` a `pt-exp3-025`), cobrindo os tópicos com menor cobertura nas Grades 1-4, sempre alinhadas ao currículo português do 1º Ciclo:
+  - **G1:** Género, Número, Artigos, Preposições, Adjetivos, Aliterações.
+  - **G2:** Artigos, Substantivos (coletivos), Preposições, Tema de Texto, Escrita de Parágrafos.
+  - **G3:** Tempos Verbais, Advérbios, Adjetivos (superlativo), Conjunções, Análise de Texto Narrativo, Função de Conectores, Reformulação de Frases.
+  - **G4:** Tipos de Texto, Conjunções, Interpretação de Texto de Opinião, Estrutura de Carta, Revisão de Textos, Figuras de Linguagem.
+- **Validação:** banco passou de 712 para 737 perguntas; IDs únicos confirmados; todas as perguntas de escolha múltipla têm a `correctAnswer` presente nas `options`; `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 540 testes a passar (56 ficheiros).
+- **Docs atualizados:** registo desta expansão (o TODO item de expansão permanece aberto por ser contínuo por disciplina/ano).
+
 ## 2026-08-29 - Modo "Treino Livre" para praticar sem guardar pontos
 
 - **Contexto:** Os quizzes guardavam sempre os resultados, atribuíam pontos e desbloqueavam conquistas, o que criava pressão e poluía o histórico de progresso quando a criança só queria praticar à vontade (listado como pendente em TODO.md).
