@@ -2,6 +2,17 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-29 - Expansão do banco de perguntas de Estudo do Meio (G2: tópicos ainda com 2 perguntas)
+
+- **Contexto:** Reforço da expansão contínua do banco de perguntas. Uma nova auditoria (`src/lib/questions/estudo-do-meio.ts`) detetou que 4 tópicos do G2 permaneciam com apenas 2 perguntas cada: Transformacoes da Agua, Propriedades dos Materiais, Ciclos Naturais e Magnetism (os demais tópicos já tinham 3+ após a expansão anterior).
+- **Tarefa implementada:** Adicionadas 8 novas perguntas de Estudo do Meio G2 em `src/lib/questions/estudo-do-meio.ts` (bloco `em-exp3-024` a `em-exp3-031`), 2 por tópico, alinhadas ao currículo do 1º Ciclo:
+  - **Transformacoes da Agua (2):** congelação a 0°C; evaporação ao secar.
+  - **Propriedades dos Materiais (2):** borracha flexível/elástica; madeira flutua (densidade).
+  - **Ciclos Naturais (2):** sequência das estações; queda de folhas no outono.
+  - **Magnetism (2):** pólos iguais repelem-se; Terra como íman gigante.
+- **Validação:** banco passou de 784 para 792 perguntas; IDs únicos confirmados; respostas válidas; `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 540 testes a passar (56 ficheiros).
+- **Docs atualizados:** registo desta expansão (o TODO item de expansão permanece aberto por ser contínuo por disciplina/ano).
+
 ## 2026-08-29 - Expansão do banco de perguntas de Estudo do Meio (tópicos com pouca cobertura)
 
 - **Contexto:** Continuação da expansão contínua do banco de perguntas (TODO em aberto). A análise de cobertura de `src/lib/questions/estudo-do-meio.ts` revelou muitos tópicos com apenas 2-3 perguntas: G1 Clima/Higiene/Cuidados com o Corpo/Regras de Segurança, G2 Alimentos/Habitats, G3 Cadeias Alimentares/Sistema Solar/Ecologia/Recursos Naturais/Sistema Digestório/Doenças Transmissíveis, G4 Biomas/Força e Movimento/Ecologia/Geografia/Portugal no Mundo/Tecnologia/Corpo Humano/Segurança Online.
