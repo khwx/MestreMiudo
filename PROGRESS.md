@@ -2,6 +2,15 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-08-29 - Seletor de número de perguntas no início do quiz (5/10/15)
+
+- **Contexto:** O quiz gerava sempre exatamente 5 perguntas (`numberOfQuestions: 5` hardcoded em `Quiz.tsx`), apesar de todo o pipeline (`QuizInputSchema`, `generateQuiz`, `saveQuizResults`) já suportar 5-20 perguntas. Não havia forma de o miúdo escolher a dimensão do desafio.
+- **Tarefa implementada:** Tela de configuração com escolha da dimensão do quiz no início:
+  1. `src/lib/quiz-setup.ts` (novo) — constantes e helpers puros e testáveis: `QUIZ_LENGTH_OPTIONS = [5, 10, 15]`, `getQuizLengthOptions()` e `isValidQuizLength(n)`.
+  2. `src/components/Quiz.tsx` — novo estado `showSetup` e `questionCount`; `fetchQuiz(count)` passa a receber o número de perguntas; `startQuiz(count)` inicia com a dimensão escolhida; `handleRestart` volta à tela de configuração; o `useEffect` de montagem só inicia automaticamente no modo "desafio entre amigos" (com 5 perguntas). Nova tela amigável com botões "5/10/15 perguntas" (e aviso de Treino Livre quando aplicável).
+- **Validação:** `src/__tests__/quiz-setup.test.ts` (novo) — 4 testes; `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar (57 ficheiros).
+- **Docs atualizados:** registo desta melhoria.
+
 ## 2026-08-29 - Expansão do banco de perguntas de Estudo do Meio (G2: tópicos ainda com 2 perguntas)
 
 - **Contexto:** Reforço da expansão contínua do banco de perguntas. Uma nova auditoria (`src/lib/questions/estudo-do-meio.ts`) detetou que 4 tópicos do G2 permaneciam com apenas 2 perguntas cada: Transformacoes da Agua, Propriedades dos Materiais, Ciclos Naturais e Magnetism (os demais tópicos já tinham 3+ após a expansão anterior).

@@ -48,6 +48,7 @@
 - [x] Diploma/certificado de conquista partilhável e imprimível a partir dos resultados do quiz (botão "Ver Diploma" + gerador HTML com escaping anti-XSS)
 - [x] Partilha de desafio no WhatsApp a partir dos resultados do quiz (botão "WhatsApp" + `buildWhatsappLink`)
 - [x] Partilha de desafio por e-mail (mailto) diretamente a partir dos resultados do quiz (botão "E-mail" + `buildEmailLink`)
+- [x] Seletor de número de perguntas (5/10/15) no início do quiz — tela de configuração criança-amigável (`lib/quiz-setup.ts` + `Quiz.tsx`)
 
 ## 🚀 Pendentes futuras (candidatas a melhorias)
 - [x] Partilha de desafio por e-mail (mailto/SMTP) diretamente a partir dos resultados do quiz

@@ -18,6 +18,7 @@ import { selectPortugueseVoice } from '@/lib/tts-voice';
 import { getWrongQuestions, getWeakTopicsFromAnswers, getQuestionsForWeakTopics } from '@/lib/quiz-practice';
 import { buildQuizResultAnnouncement } from '@/lib/quiz-announcements';
 import { shouldSkipSaving, buildFreePracticeBannerText } from '@/lib/free-practice';
+import { getQuizLengthOptions } from '@/lib/quiz-setup';
 import type { QuizChallenge } from '@/lib/challenge-share';
 
 type QuizProps = {
@@ -57,6 +58,8 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null, 
   const [newBadge, setNewBadge] = useState<{ name: string; description: string; icon: string } | null>(null);
   const [practiceMode, setPracticeMode] = useState(false);
   const [challengeDismissed, setChallengeDismissed] = useState(false);
+  const [showSetup, setShowSetup] = useState(() => !challenge);
+  const [questionCount, setQuestionCount] = useState(5);
   const quizStarted = useRef(false);
   const { playSuccess, playError, playLevelUp } = useSound();
   const { settings: a11y, announceToScreenReader } = useAccessibility();
@@ -72,7 +75,7 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null, 
     }
   }, [loading]);
 
-  const fetchQuiz = useCallback(async () => {
+  const fetchQuiz = useCallback(async (count: number) => {
     setLoading(true);
     setError(null);
     quizStarted.current = true;
@@ -81,7 +84,7 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null, 
         studentId,
         gradeLevel,
         subject,
-        numberOfQuestions: 5,
+        numberOfQuestions: count,
       });
       if (!data || data.quizQuestions.length === 0) {
         setError('Não foram geradas perguntas. Por favor tenta novamente.');
@@ -98,9 +101,15 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null, 
   }, [studentId, gradeLevel, subject]);
 
   useEffect(() => {
-    if (!quizStarted.current) {
-      fetchQuiz();
+    if (challenge && !quizStarted.current) {
+      fetchQuiz(5);
     }
+  }, [challenge, fetchQuiz]);
+
+  const startQuiz = useCallback((count: number) => {
+    setQuestionCount(count);
+    setShowSetup(false);
+    fetchQuiz(count);
   }, [fetchQuiz]);
 
   const handleAnswerSelect = useCallback((answer: string) => {
@@ -257,10 +266,11 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null, 
     setScore(0);
     setAnswers([]);
     setPracticeMode(false);
+    setNewBadge(null);
     setLoading(true);
     quizStarted.current = false;
-    fetchQuiz();
-  }, [fetchQuiz]);
+    setShowSetup(true);
+  }, []);
 
   const handleAudioPlayback = useCallback(() => {
     if (!quizData) return;
@@ -315,6 +325,44 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null, 
   const handleBack = useCallback(() => {
     router.push(`/dashboard?name=${studentId}&grade=${gradeLevel}`);
   }, [router, studentId, gradeLevel]);
+
+  if (showSetup) {
+    const options = getQuizLengthOptions();
+    return (
+      <div className="space-y-6 max-w-2xl mx-auto">
+        <Button variant="ghost" size="sm" onClick={handleBack} aria-label="Voltar ao Dashboard" className="gap-2">
+          ← Voltar ao Dashboard
+        </Button>
+        <div className="text-center space-y-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-3xl p-8 border-4 border-blue-300 shadow-2xl">
+          <div className="text-6xl animate-bounce">{subject === 'Misto' ? '🎲' : '📚'}</div>
+          <h2 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Quiz de {subject}!
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 font-bold">
+            Quantas perguntas queres responder?
+          </p>
+          {freePractice && (
+            <p className="text-lg text-cyan-700 dark:text-cyan-300 font-bold" role="status">
+              🎈 Modo Treino Livre: não guarda pontos nem progresso.
+            </p>
+          )}
+        </div>
+        <div className="flex flex-wrap justify-center gap-4">
+          {options.map((count) => (
+            <Button
+              key={count}
+              onClick={() => startQuiz(count)}
+              size="lg"
+              className={`btn-kid text-lg ${questionCount === count ? 'btn-kid-primary' : ''}`}
+              aria-label={`Começar quiz com ${count} perguntas`}
+            >
+              {count} perguntas
+            </Button>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
