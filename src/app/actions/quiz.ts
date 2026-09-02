@@ -7,7 +7,8 @@ import { z } from "zod";
 import fs from 'fs/promises';
 import path from 'path';
 import { QuizResultSchema } from "@/app/shared-schemas";
-import type { QuizResultEntry, SaveQuizInput, QuizInput, QuizQuestion } from '@/app/shared-schemas';
+import type { QuizResultEntry, SaveQuizInput, QuizInput, QuizQuestion, PersonalizedLearningPathOutput } from '@/app/shared-schemas';
+import { buildTopicQuiz } from "@/lib/topic-quiz";
 
 const historyFilePath = path.join(process.cwd(), 'quiz-history.json');
 
@@ -405,4 +406,34 @@ export async function saveQuizResults(input: SaveQuizInput) {
 export async function getFullQuizHistory(studentId: string): Promise<QuizResultEntry[]> {
   const allHistory = await getQuizHistory();
   return allHistory.filter(entry => entry.studentId === studentId);
+}
+
+export async function generateTopicQuiz(input: {
+  studentId: string;
+  gradeLevel: number;
+  subject: 'Português' | 'Matemática' | 'Estudo do Meio' | 'Misto';
+  topic: string;
+  numberOfQuestions: number;
+}): Promise<PersonalizedLearningPathOutput> {
+  const validated = z.object({
+    studentId: z.string(),
+    gradeLevel: z.coerce.number().min(1).max(4),
+    subject: z.enum(['Português', 'Matemática', 'Estudo do Meio', 'Misto']),
+    topic: z.string().min(1),
+    numberOfQuestions: z.number().min(5).max(20).default(5),
+  }).parse(input);
+
+  const quizQuestions = buildTopicQuiz(
+    validated.subject,
+    validated.gradeLevel,
+    validated.topic,
+    validated.numberOfQuestions
+  );
+
+  if (quizQuestions.length === 0) {
+    throw new Error('Não foram encontradas perguntas para este tópico.');
+  }
+
+  logger.log(`[TOPIC-QUIZ] ${quizQuestions.length} questões locais para "${validated.topic}" (${validated.subject}, grade ${validated.gradeLevel})`);
+  return { quizQuestions };
 }

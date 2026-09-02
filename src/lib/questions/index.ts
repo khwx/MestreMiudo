@@ -100,6 +100,17 @@ export function getTopicsForSubjectAndGrade(
 }
 
 /**
+ * Get questions for a specific subject, grade, and topic
+ */
+export function getQuestionsBySubjectGradeTopic(
+  subject: Subject,
+  gradeLevel: GradeLevel,
+  topic: string
+): Question[] {
+  return getFilteredQuestions({ subject, gradeLevel, topic });
+}
+
+/**
  * Get question stats
  */
 export function getQuestionStats(): {

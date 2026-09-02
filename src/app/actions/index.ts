@@ -2,6 +2,7 @@ export { updateStudentStreak, getStudentStreak } from './streaks';
 export {
   getPerformanceData,
   generateQuiz,
+  generateTopicQuiz,
   saveQuizResults,
   getFullQuizHistory,
 } from './quiz';

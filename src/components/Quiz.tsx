@@ -19,6 +19,8 @@ import { getWrongQuestions, getWeakTopicsFromAnswers, getQuestionsForWeakTopics 
 import { buildQuizResultAnnouncement } from '@/lib/quiz-announcements';
 import { shouldSkipSaving, buildFreePracticeBannerText } from '@/lib/free-practice';
 import { getQuizLengthOptions } from '@/lib/quiz-setup';
+import { isTopicQuizEligible, getAvailableTopics, buildTopicQuiz } from '@/lib/topic-quiz';
+import { generateTopicQuiz } from '@/app/actions';
 import type { QuizChallenge } from '@/lib/challenge-share';
 
 type QuizProps = {
@@ -60,6 +62,8 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null, 
   const [challengeDismissed, setChallengeDismissed] = useState(false);
   const [showSetup, setShowSetup] = useState(() => !challenge);
   const [questionCount, setQuestionCount] = useState(5);
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+  const [setupStep, setSetupStep] = useState<'count' | 'topic'>('count');
   const quizStarted = useRef(false);
   const { playSuccess, playError, playLevelUp } = useSound();
   const { settings: a11y, announceToScreenReader } = useAccessibility();
@@ -75,17 +79,28 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null, 
     }
   }, [loading]);
 
-  const fetchQuiz = useCallback(async (count: number) => {
+  const fetchQuiz = useCallback(async (count: number, topic?: string | null) => {
     setLoading(true);
     setError(null);
     quizStarted.current = true;
     try {
-      const data = await generateQuiz({
-        studentId,
-        gradeLevel,
-        subject,
-        numberOfQuestions: count,
-      });
+      let data: PersonalizedLearningPathOutput;
+      if (topic && topic !== 'Tudo') {
+        data = await generateTopicQuiz({
+          studentId,
+          gradeLevel,
+          subject,
+          topic,
+          numberOfQuestions: count,
+        });
+      } else {
+        data = await generateQuiz({
+          studentId,
+          gradeLevel,
+          subject,
+          numberOfQuestions: count,
+        });
+      }
       if (!data || data.quizQuestions.length === 0) {
         setError('Não foram geradas perguntas. Por favor tenta novamente.');
         setQuizData(null);
@@ -108,9 +123,19 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null, 
 
   const startQuiz = useCallback((count: number) => {
     setQuestionCount(count);
+    if (isTopicQuizEligible(subject)) {
+      setSetupStep('topic');
+    } else {
+      setShowSetup(false);
+      fetchQuiz(count);
+    }
+  }, [subject]);
+
+  const startTopicQuiz = useCallback((topic: string) => {
+    setSelectedTopic(topic === 'Tudo' ? null : topic);
     setShowSetup(false);
-    fetchQuiz(count);
-  }, [fetchQuiz]);
+    fetchQuiz(questionCount, topic === 'Tudo' ? null : topic);
+  }, [fetchQuiz, questionCount]);
 
   const handleAnswerSelect = useCallback((answer: string) => {
     if (isAnswered) return;
@@ -327,19 +352,58 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null, 
   }, [router, studentId, gradeLevel]);
 
   if (showSetup) {
-    const options = getQuizLengthOptions();
+    if (setupStep === 'count') {
+      const options = getQuizLengthOptions();
+      return (
+        <div className="space-y-6 max-w-2xl mx-auto">
+          <Button variant="ghost" size="sm" onClick={handleBack} aria-label="Voltar ao Dashboard" className="gap-2">
+            ← Voltar ao Dashboard
+          </Button>
+          <div className="text-center space-y-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-3xl p-8 border-4 border-blue-300 shadow-2xl">
+            <div className="text-6xl animate-bounce">{subject === 'Misto' ? '🎲' : '📚'}</div>
+            <h2 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Quiz de {subject}!
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 font-bold">
+              Quantas perguntas queres responder?
+            </p>
+            {freePractice && (
+              <p className="text-lg text-cyan-700 dark:text-cyan-300 font-bold" role="status">
+                🎈 Modo Treino Livre: não guarda pontos nem progresso.
+              </p>
+            )}
+          </div>
+          <div className="flex flex-wrap justify-center gap-4">
+            {options.map((count) => (
+              <Button
+                key={count}
+                onClick={() => startQuiz(count)}
+                size="lg"
+                className={`btn-kid text-lg ${questionCount === count ? 'btn-kid-primary' : ''}`}
+                aria-label={`Começar quiz com ${count} perguntas`}
+              >
+                {count} perguntas
+              </Button>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // Topic selection step
+    const topics = ['Tudo', ...getAvailableTopics(subject, gradeLevel)];
     return (
       <div className="space-y-6 max-w-2xl mx-auto">
-        <Button variant="ghost" size="sm" onClick={handleBack} aria-label="Voltar ao Dashboard" className="gap-2">
-          ← Voltar ao Dashboard
+        <Button variant="ghost" size="sm" onClick={() => setSetupStep('count')} aria-label="Voltar a escolher número de perguntas" className="gap-2">
+          ← Voltar
         </Button>
-        <div className="text-center space-y-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-3xl p-8 border-4 border-blue-300 shadow-2xl">
-          <div className="text-6xl animate-bounce">{subject === 'Misto' ? '🎲' : '📚'}</div>
-          <h2 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Quiz de {subject}!
+        <div className="text-center space-y-6 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-3xl p-8 border-4 border-purple-300 shadow-2xl">
+          <div className="text-6xl animate-bounce">🎯</div>
+          <h2 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            Escolhe um tema
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 font-bold">
-            Quantas perguntas queres responder?
+            {questionCount} perguntas sobre...
           </p>
           {freePractice && (
             <p className="text-lg text-cyan-700 dark:text-cyan-300 font-bold" role="status">
@@ -348,15 +412,15 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null, 
           )}
         </div>
         <div className="flex flex-wrap justify-center gap-4">
-          {options.map((count) => (
+          {topics.map((topic) => (
             <Button
-              key={count}
-              onClick={() => startQuiz(count)}
+              key={topic}
+              onClick={() => startTopicQuiz(topic)}
               size="lg"
-              className={`btn-kid text-lg ${questionCount === count ? 'btn-kid-primary' : ''}`}
-              aria-label={`Começar quiz com ${count} perguntas`}
+              className={`btn-kid text-lg ${selectedTopic === topic ? 'btn-kid-primary' : ''}`}
+              aria-label={`Começar quiz de ${topic}`}
             >
-              {count} perguntas
+              {topic}
             </Button>
           ))}
         </div>
