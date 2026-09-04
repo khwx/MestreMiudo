@@ -134,6 +134,7 @@ export function TicTacToe() {
   const [gameMode, setGameMode] = useState<GameMode>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>(null);
   const [focusedIndex, setFocusedIndex] = useState(0);
+  const [score, setScore] = useState({ x: 0, o: 0, draws: 0 });
   const squareRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const { winner, line: winningLine } = calculateWinner(squares);
@@ -178,14 +179,29 @@ export function TicTacToe() {
     nextSquares[i] = xIsNext ? 'X' : 'O';
     setSquares(nextSquares);
     setXIsNext(!xIsNext);
+
+    // Check if this move results in a win or draw
+    const { winner: nextWinner } = calculateWinner(nextSquares);
+    const nextIsDraw = nextSquares.every(s => s !== null) && !nextWinner;
+    
+    if (nextWinner === 'X') {
+      setScore(prev => ({ ...prev, x: prev.x + 1 }));
+    } else if (nextWinner === 'O') {
+      setScore(prev => ({ ...prev, o: prev.o + 1 }));
+    } else if (nextIsDraw) {
+      setScore(prev => ({ ...prev, draws: prev.draws + 1 }));
+    }
   };
 
   const handleRestart = () => {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
-    setGameMode(null);
-    setDifficulty(null);
     setFocusedIndex(0);
+  };
+
+  const handleResetScore = () => {
+    setScore({ x: 0, o: 0, draws: 0 });
+    handleRestart();
   };
    
   const handleGridKeyDown = (event: React.KeyboardEvent) => {
@@ -239,6 +255,21 @@ export function TicTacToe() {
         {winner && (winner === 'X' ? <X className="h-10 w-10 text-blue-500" /> : <Circle className="h-10 w-10 text-red-500" />)}
         {!winner && !isDraw && (xIsNext ? <X className="h-10 w-10 text-blue-500" /> : <Circle className="h-10 w-10 text-red-500" />)}
       </div>
+
+      {/* Placar (Scoreboard) */}
+      <div className="flex items-center justify-center gap-6 text-lg font-bold bg-muted/50 rounded-xl px-6 py-3 border-2 border-border">
+        <div className="flex items-center gap-2 text-blue-500">
+          <X className="h-6 w-6" /> <span>{score.x}</span>
+        </div>
+        <div className="flex items-center gap-2 text-gray-500">
+          <span className="px-2">|</span>
+          <span>{score.draws}</span>
+        </div>
+        <div className="flex items-center gap-2 text-red-500">
+          <Circle className="h-6 w-6" /> <span>{score.o}</span>
+        </div>
+      </div>
+
       <div
         className="grid grid-cols-3 gap-2 p-2 bg-background rounded-lg"
         role="grid"
@@ -264,9 +295,15 @@ export function TicTacToe() {
           Jogar Novamente
         </Button>
       )}
-       <Button onClick={handleRestart} variant="ghost" size="sm" className="mt-4">
-          Recomeçar e Mudar de Modo
-        </Button>
+       <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
+         <Button onClick={handleRestart} variant="ghost" size="sm">
+            Recomeçar e Mudar de Modo
+          </Button>
+         <Button onClick={handleResetScore} variant="ghost" size="sm" className="text-xs">
+            <RotateCw className="mr-1 h-4 w-4" />
+            Resetar Placar
+          </Button>
+        </div>
     </div>
   );
 }
