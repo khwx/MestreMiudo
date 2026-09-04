@@ -19,7 +19,7 @@ import { getWrongQuestions, getWeakTopicsFromAnswers, getQuestionsForWeakTopics 
 import { buildQuizResultAnnouncement } from '@/lib/quiz-announcements';
 import { shouldSkipSaving, buildFreePracticeBannerText } from '@/lib/free-practice';
 import { getQuizLengthOptions } from '@/lib/quiz-setup';
-import { isTopicQuizEligible, getAvailableTopics, buildTopicQuiz } from '@/lib/topic-quiz';
+import { isTopicQuizEligible, getAvailableTopics } from '@/lib/topic-quiz';
 import { generateTopicQuiz } from '@/app/actions';
 import type { QuizChallenge } from '@/lib/challenge-share';
 
@@ -129,7 +129,7 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null, 
       setShowSetup(false);
       fetchQuiz(count);
     }
-  }, [subject]);
+  }, [subject, fetchQuiz]);
 
   const startTopicQuiz = useCallback((topic: string) => {
     setSelectedTopic(topic === 'Tudo' ? null : topic);
