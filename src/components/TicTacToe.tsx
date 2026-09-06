@@ -6,6 +6,8 @@ import { cn } from '@/lib/utils';
 import { RotateCw, X, Circle, User, BrainCircuit } from 'lucide-react';
 import { getGridNavigationIndex, GRID_NAVIGATION_KEYS } from '@/lib/game-utils';
 import React from 'react';
+import confetti from 'canvas-confetti';
+import { useSound } from '@/lib/sounds';
 
 type Player = 'X' | 'O';
 type GameMode = 'human' | 'computer' | null;
@@ -136,10 +138,18 @@ export function TicTacToe() {
   const [focusedIndex, setFocusedIndex] = useState(0);
   const [score, setScore] = useState({ x: 0, o: 0, draws: 0 });
   const squareRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const { playGameWin } = useSound();
 
   const { winner, line: winningLine } = calculateWinner(squares);
   const isDraw = squares.every(square => square !== null) && !winner;
-  
+
+  useEffect(() => {
+    if (winner || isDraw) {
+      confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+      playGameWin();
+    }
+  }, [winner, isDraw, playGameWin]);
+
   useEffect(() => {
     if (gameMode === 'computer' && !xIsNext && !winner && !isDraw && difficulty) {
       const computerMoveTimeout = setTimeout(() => {
