@@ -141,7 +141,13 @@ export function WordSearchGame() {
   const [running, setRunning] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
+  const [bestTime, setBestTime] = useState<number | null>(() => {
+    const stored = localStorage.getItem(`wordsearch-best-${subject}`);
+    return stored ? parseInt(stored, 10) : null;
+  });
+  const [isNewRecord, setIsNewRecord] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timeRef = useRef(0);
   const gridRef = useRef<HTMLDivElement>(null);
   const [focusedCell, setFocusedCell] = useState<{ row: number; col: number } | null>(null);
 
@@ -153,9 +159,13 @@ export function WordSearchGame() {
     setSelection(null);
     setIsSelecting(false);
     setTime(0);
+    timeRef.current = 0;
     setRunning(false);
     setCompleted(false);
     setMessage(null);
+    setIsNewRecord(false);
+    const stored = localStorage.getItem(`wordsearch-best-${subject}`);
+    setBestTime(stored ? parseInt(stored, 10) : null);
     if (timerRef.current) clearInterval(timerRef.current);
   }, [subject]);
 
@@ -166,7 +176,12 @@ export function WordSearchGame() {
 
   useEffect(() => {
     if (running && !completed) {
-      timerRef.current = setInterval(() => setTime(t => t + 1), 1000);
+      timerRef.current = setInterval(() => {
+        setTime(t => {
+          timeRef.current = t + 1;
+          return t + 1;
+        });
+      }, 1000);
       return () => { if (timerRef.current) clearInterval(timerRef.current); };
     }
   }, [running, completed]);
@@ -176,8 +191,16 @@ export function WordSearchGame() {
       setCompleted(true);
       setRunning(false);
       confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+
+      const currentTime = timeRef.current;
+      if (bestTime === null || currentTime < bestTime) {
+        const key = `wordsearch-best-${subject}`;
+        localStorage.setItem(key, currentTime.toString());
+        setBestTime(currentTime);
+        setIsNewRecord(true);
+      }
     }
-  }, [foundWords, game, completed]);
+  }, [foundWords, game, completed, bestTime, subject]);
 
   const getCellFromEvent = (e: React.MouseEvent | React.TouchEvent) => {
     if (!gridRef.current || !game) return null;
@@ -324,6 +347,12 @@ export function WordSearchGame() {
           <Trophy className="h-4 w-4 text-yellow-500" />
           <span>{foundWords.size}/{game.words.length} palavras</span>
         </div>
+        {bestTime !== null && (
+          <div className="flex items-center gap-2 text-sm">
+            <Trophy className="h-4 w-4 text-accent" />
+            <span className="font-bold">Melhor: {formatTime(bestTime)}</span>
+          </div>
+        )}
       </div>
 
       {/* Message */}
@@ -342,6 +371,11 @@ export function WordSearchGame() {
           <div className="text-5xl">🎉</div>
           <p className="text-xl font-bold text-green-600 dark:text-green-400">Parabéns! Encontraste todas as palavras!</p>
           <p className="text-gray-600 dark:text-gray-400">Tempo: {formatTime(time)}</p>
+          {bestTime !== null && (
+            <p className="text-lg font-bold text-accent">
+              {isNewRecord ? '🎉 Novo Recorde!' : `Melhor: ${formatTime(bestTime)}`}
+            </p>
+          )}
         </div>
       )}
 
