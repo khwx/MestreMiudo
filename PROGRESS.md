@@ -2,6 +2,18 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-06 - Melhor tempo (recorde) nas Palavras Cruzadas
+
+- **Contexto:** As Palavras Cruzadas (CrosswordGame) cronometravam o jogo (`time`) mas nunca guardavam o melhor tempo, ao contrário da Sopa de Letras e do Jogo da Memória que já tinham recorde local. Não havia forma de a criança ver o seu melhor desempenho nem competir consigo própria por disciplina.
+- **Tarefa implementada:** Guardar o melhor tempo por disciplina em `localStorage`:
+  1. `src/components/CrosswordGame.tsx` — novo estado `bestTime` (inicializado a partir de `localStorage` com chave `crossword-best-${subject}`) e `isNewRecord`; ref `timeRef` para ler o tempo atual sem closures obsoletos no `setInterval`.
+  2. Ao completar o cruzograma (`checkWin`), se o tempo for menor que o recorde (ou primeiro), guarda e marca `isNewRecord`.
+  3. No ecrã de estatísticas, novo indicador "🎯 Melhor: mm:ss".
+  4. Na mensagem de vitória, mostra "🎉 Novo Recorde!" quando bate o recorde, senão o melhor tempo.
+  5. `startGame` reinicia `timeRef`/recorde e recarrega o melhor tempo ao mudar de disciplina.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar (57 ficheiros).
+- **Docs atualizados:** registo desta melhoria.
+
 ## 2026-09-06 - Melhor tempo (recorde) na Sopa de Letras
 
 - **Contexto:** A Sopa de Letras (WordSearchGame) cronometrava o jogo (`time`) mas nunca guardava o melhor tempo, ao contrário do Jogo da Memória que já tinha recorde local. Não havia forma de a criança ver o seu melhor desempenho nem competir consigo própria por disciplina.
