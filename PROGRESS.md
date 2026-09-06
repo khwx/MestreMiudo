@@ -2,6 +2,14 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-06 - Confetti e efeitos sonoros no Jogo do Galo
+
+- **Contexto:** O Jogo do Galo (TicTacToe) era o único jogo do Salão de Jogos que não tinha celebração visual (confetti) nem efeitos sonoros ao vencer ou empatar, criando uma experiência inconsistente face aos outros jogos (Memória, Forca, Sopa de Letras, Palavras Cruzadas, Sequência Mágica, Quiz de Matemática).
+- **Tarefa implementada:** Adicionar confetti + sons consistentes:
+  1. `src/components/TicTacToe.tsx` — importa `confetti` de `canvas-confetti` e `useSound` de `@/lib/sounds`; adiciona `useEffect` que dispara `confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } })` e `playGameWin()` sempre que `winner` ou `isDraw` muda para verdadeiro.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar (57 ficheiros).
+- **Docs atualizados:** registo desta melhoria.
+
 ## 2026-08-29 - Seletor de número de perguntas no início do quiz (5/10/15)
 
 - **Contexto:** O quiz gerava sempre exatamente 5 perguntas (`numberOfQuestions: 5` hardcoded em `Quiz.tsx`), apesar de todo o pipeline (`QuizInputSchema`, `generateQuiz`, `saveQuizResults`) já suportar 5-20 perguntas. Não havia forma de o miúdo escolher a dimensão do desafio.
