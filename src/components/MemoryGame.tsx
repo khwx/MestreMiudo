@@ -109,6 +109,11 @@ export function MemoryGame({ subject, mode = 'icon' }: MemoryGameProps) {
     const [moves, setMoves] = useState(0);
     const [isChecking, setIsChecking] = useState(false);
     const [focusedIndex, setFocusedIndex] = useState(0);
+    const [bestMoves, setBestMoves] = useState<number | null>(() => {
+        const key = `memory-best-${subject || 'icons'}-${mode}`;
+        const stored = localStorage.getItem(key);
+        return stored ? parseInt(stored, 10) : null;
+    });
     const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
     const { playSuccess, playError, playGameWin } = useSound();
 
@@ -180,6 +185,13 @@ export function MemoryGame({ subject, mode = 'icon' }: MemoryGameProps) {
     };
     
     const handleRestart = () => {
+        if (allMatched && moves > 0) {
+            if (bestMoves === null || moves < bestMoves) {
+                const key = `memory-best-${subject || 'icons'}-${mode}`;
+                localStorage.setItem(key, moves.toString());
+                setBestMoves(moves);
+            }
+        }
         setBoard(subject ? createVocabularyBoard(subject, mode) : createIconBoard());
         setFlippedCards([]);
         setMoves(0);
@@ -205,6 +217,11 @@ export function MemoryGame({ subject, mode = 'icon' }: MemoryGameProps) {
                     <Award className="h-20 w-20 text-accent mx-auto" />
                     <h2 className="text-3xl font-bold">Parabéns!</h2>
                     <p className="text-xl text-muted-foreground">Completaste o jogo em {moves} jogadas!</p>
+                    {bestMoves !== null && (
+                        <p className="text-lg font-bold text-accent">
+                            {moves === bestMoves ? '🎉 Novo Recorde!' : `Melhor: ${bestMoves} jogadas`}
+                        </p>
+                    )}
                     <Button onClick={handleRestart} size="lg" className="animate-bounce">
                         <RotateCw className="mr-2 h-5 w-5" />
                         Jogar Novamente
@@ -212,7 +229,12 @@ export function MemoryGame({ subject, mode = 'icon' }: MemoryGameProps) {
                 </div>
             ) : (
                 <>
-                    <p className="text-2xl font-bold">Jogadas: {moves}</p>
+                    <div className="flex items-center justify-between w-full max-w-[320px] mx-auto mb-2">
+                        <p className="text-2xl font-bold">Jogadas: {moves}</p>
+                        {bestMoves !== null && (
+                            <p className="text-lg font-bold text-accent">Melhor: {bestMoves}</p>
+                        )}
+                    </div>
                     <div
                         className="grid grid-cols-4 gap-2 md:gap-4 perspective-[1000px]"
                         role="grid"
