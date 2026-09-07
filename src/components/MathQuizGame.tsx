@@ -127,8 +127,11 @@ export function MathQuizGame() {
   const [totalAnswered, setTotalAnswered] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [totalTimeTaken, setTotalTimeTaken] = useState(0);
+  const [bestScore, setBestScore] = useState<number | null>(null);
+  const [isNewBestScore, setIsNewBestScore] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const onTimeoutRef = useRef<(() => void) | null>(null);
+  const scoreRef = useRef(0);
   const { playSuccess, playError, playGameWin, playLevelUp } = useSound();
 
   const startGame = useCallback((selectedGrade: Grade) => {
@@ -137,6 +140,7 @@ export function MathQuizGame() {
     setQuestions(qs);
     setCurrentIndex(0);
     setScore(0);
+    scoreRef.current = 0;
     setStreak(0);
     setBestStreak(0);
     setTimeLeft(TIMER_SECONDS);
@@ -146,6 +150,9 @@ export function MathQuizGame() {
     setTotalAnswered(0);
     setGameOver(false);
     setTotalTimeTaken(0);
+    setIsNewBestScore(false);
+    const stored = localStorage.getItem(`math-quiz-best-${selectedGrade}`);
+    setBestScore(stored ? parseInt(stored, 10) : null);
   }, []);
 
   const endGame = useCallback(() => {
@@ -157,7 +164,21 @@ export function MathQuizGame() {
       spread: 90,
       origin: { y: 0.6 },
     });
-  }, [playGameWin]);
+
+    if (grade) {
+      const currentScore = scoreRef.current;
+      const stored = localStorage.getItem(`math-quiz-best-${grade}`);
+      const prevBest = stored ? parseInt(stored, 10) : null;
+      if (prevBest === null || currentScore > prevBest) {
+        localStorage.setItem(`math-quiz-best-${grade}`, currentScore.toString());
+        setBestScore(currentScore);
+        setIsNewBestScore(true);
+      } else {
+        setBestScore(prevBest);
+        setIsNewBestScore(false);
+      }
+    }
+  }, [playGameWin, grade]);
 
   const moveToNext = useCallback(() => {
     if (currentIndex + 1 >= TOTAL_QUESTIONS) {
@@ -214,7 +235,8 @@ export function MathQuizGame() {
 
     if (correct) {
       const points = calculatePoints(timeLeft);
-      setScore(prev => prev + points);
+      scoreRef.current += points;
+      setScore(scoreRef.current);
       setCorrectCount(prev => prev + 1);
       setStreak(prev => {
         const newStreak = prev + 1;
@@ -288,6 +310,11 @@ export function MathQuizGame() {
             <p className="text-3xl font-bold text-blue-500">{avgTime}s</p>
           </div>
         </div>
+        {bestScore !== null && (
+          <p className="text-lg font-bold text-accent">
+            {isNewBestScore ? '🎉 Novo Recorde!' : `Recorde: ${bestScore}`}
+          </p>
+        )}
         <p className="text-muted-foreground">
           {correctCount} de {totalAnswered} corretas
         </p>
