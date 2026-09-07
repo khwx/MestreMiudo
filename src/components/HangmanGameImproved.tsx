@@ -223,6 +223,12 @@ export function HangmanGame() {
                         <p className="text-xs text-gray-500 dark:text-gray-400">Derrotas</p>
                         <p className="text-2xl font-bold text-red-600">{losses}</p>
                     </div>
+                    <div className="text-center">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Taxa</p>
+                        <p className="text-2xl font-bold text-primary">
+                            {(wins + losses) > 0 ? Math.round((wins / (wins + losses)) * 100) : 0}%
+                        </p>
+                    </div>
                 </div>
                 
                 <Button
