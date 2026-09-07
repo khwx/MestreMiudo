@@ -34,8 +34,11 @@ export function MagicSequenceGame() {
   const [correctCount, setCorrectCount] = useState(0);
   const [totalAnswered, setTotalAnswered] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [bestScore, setBestScore] = useState<number | null>(null);
+  const [isNewBestScore, setIsNewBestScore] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const onTimeoutRef = useRef<(() => void) | null>(null);
+  const scoreRef = useRef(0);
   const { playSuccess, playError, playGameWin, playLevelUp } = useSound();
 
   const startGame = useCallback((selectedGrade: Grade) => {
@@ -43,6 +46,7 @@ export function MagicSequenceGame() {
     setPuzzles(Array.from({ length: TOTAL_ROUNDS }, () => generateSequencePuzzle(selectedGrade)));
     setCurrentIndex(0);
     setScore(0);
+    scoreRef.current = 0;
     setStreak(0);
     setBestStreak(0);
     setTimeLeft(TIMER_SECONDS);
@@ -51,6 +55,9 @@ export function MagicSequenceGame() {
     setCorrectCount(0);
     setTotalAnswered(0);
     setGameOver(false);
+    setIsNewBestScore(false);
+    const stored = localStorage.getItem(`magic-sequence-best-${selectedGrade}`);
+    setBestScore(stored ? parseInt(stored, 10) : null);
   }, []);
 
   const endGame = useCallback(() => {
@@ -58,7 +65,20 @@ export function MagicSequenceGame() {
     if (timerRef.current) clearInterval(timerRef.current);
     playGameWin();
     confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
-  }, [playGameWin]);
+
+    if (grade) {
+      const currentScore = scoreRef.current;
+      if (bestScore === null || currentScore > bestScore) {
+        const key = `magic-sequence-best-${grade}`;
+        localStorage.setItem(key, currentScore.toString());
+        setBestScore(currentScore);
+        setIsNewBestScore(true);
+      } else {
+        const stored = localStorage.getItem(`magic-sequence-best-${grade}`);
+        setBestScore(stored ? parseInt(stored, 10) : bestScore);
+      }
+    }
+  }, [playGameWin, grade, bestScore]);
 
   const moveToNext = useCallback(() => {
     if (currentIndex + 1 >= TOTAL_ROUNDS) {
@@ -113,7 +133,8 @@ export function MagicSequenceGame() {
 
     if (correct) {
       const points = 100 + timeLeft * 5;
-      setScore((prev) => prev + points);
+      scoreRef.current += points;
+      setScore(scoreRef.current);
       setCorrectCount((prev) => prev + 1);
       setStreak((prev) => {
         const newStreak = prev + 1;
@@ -180,6 +201,11 @@ export function MagicSequenceGame() {
             <p className="text-3xl font-bold text-blue-500">{correctCount}</p>
           </div>
         </div>
+        {bestScore !== null && (
+          <p className="text-lg font-bold text-accent">
+            {isNewBestScore ? '🎉 Novo Recorde!' : `Recorde: ${bestScore}`}
+          </p>
+        )}
         <p className="text-muted-foreground">
           {correctCount} de {totalAnswered} corretas
         </p>
