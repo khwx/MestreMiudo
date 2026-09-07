@@ -2,6 +2,17 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-06 - Recorde de pontuação na Sequência Mágica
+
+- **Contexto:** A Sequência Mágica (MagicSequenceGame) já tinha estatísticas ricas (pontuação, precisão, melhor sequência, acertos) mas nada era persistido entre sessões, ao contrário da Memória/Sopa de Letras/Palavras Cruzadas. Não havia forma de a criança ver o seu melhor desempenho nem competir consigo própria por ano letivo.
+- **Tarefa implementada:** Guardar o recorde de pontuação por ano letivo em `localStorage`:
+  1. `src/components/MagicSequenceGame.tsx` — novos estados `bestScore` (inicializado a partir de `localStorage` com chave `magic-sequence-best-${grade}`) e `isNewBestScore`; ref `scoreRef` para ler a pontuação final sem closures obsoletos.
+  2. `endGame` — no fim do jogo, se a pontuação for maior que o recorde (ou primeira), guarda e marca `isNewBestScore`.
+  3. Ecrã de resultados — mostra "🎉 Novo Recorde!" quando bate o recorde, senão "Recorde: X".
+  4. `startGame` carrega o recorde ao escolher o ano letivo.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar (57 ficheiros).
+- **Docs atualizados:** registo desta melhoria.
+
 ## 2026-09-06 - Melhor tempo (recorde) nas Palavras Cruzadas
 
 - **Contexto:** As Palavras Cruzadas (CrosswordGame) cronometravam o jogo (`time`) mas nunca guardavam o melhor tempo, ao contrário da Sopa de Letras e do Jogo da Memória que já tinham recorde local. Não havia forma de a criança ver o seu melhor desempenho nem competir consigo própria por disciplina.
