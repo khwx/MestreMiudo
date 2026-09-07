@@ -2,6 +2,13 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-06 - Percentagem de taxa de vitória no Jogo da Forca
+
+- **Contexto:** O Jogo da Forca já tinha persistência de vitórias/derrotas em `localStorage`, mas não mostrava a taxa de vitória (wins/total), o que ajudaria a criança a perceber a sua evolução.
+- **Tarefa implementada:** Adicionar novo indicador "Taxa" no cabeçalho das estatísticas, calculado como `Math.round((wins / (wins + losses)) * 100)`, com fallback a 0% quando não há jogos.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar (57 ficheiros).
+- **Docs atualizados:** registo desta melhoria.
+
 ## 2026-09-06 - Confetti, efeitos sonoros e persistência no Jogo da Forca
 
 - **Contexto:** O Jogo da Forca (HangmanGameImproved) era o único jogo do Salão de Jogos que não tinha celebração visual (confetti) nem efeitos sonoros, e as suas estatísticas (vitórias/derrotas) eram session-only e perdiam-se ao dar refresh.
