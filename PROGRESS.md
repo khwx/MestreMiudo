@@ -2,6 +2,18 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-06 - Confetti, efeitos sonoros e persistência no Jogo da Forca
+
+- **Contexto:** O Jogo da Forca (HangmanGameImproved) era o único jogo do Salão de Jogos que não tinha celebração visual (confetti) nem efeitos sonoros, e as suas estatísticas (vitórias/derrotas) eram session-only e perdiam-se ao dar refresh.
+- **Tarefa implementada:** Consistência e persistência no Jogo da Forca:
+  1. `src/components/HangmanGameImproved.tsx` — importa `confetti` (`canvas-confetti`) e `useSound` (`playSuccess`, `playError`, `playGameWin`).
+  2. **Confetti** — 150 partículas disparadas ao acertar a palavra.
+  3. **Sons** — `playSuccess()` em cada letra correta, `playError()` em cada letra errada, `playGameWin()` ao ganhar.
+  4. **Persistência** — `wins` e `losses` inicializados a partir de `localStorage` (`hangman-wins`/`hangman-losses`); cada vitória/derrota guarda automaticamente no `localStorage`.
+  5. As estatísticas sobrevivem ao refresh da página.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar (57 ficheiros).
+- **Docs atualizados:** registo desta melhoria.
+
 ## 2026-09-06 - Recorde de pontuação no Quiz de Matemática
 
 - **Contexto:** O Quiz de Matemática (MathQuizGame) já tinha estatísticas ricas (pontuação, precisão, melhor sequência, tempo médio) mas nada era persistido entre sessões, ao contrário da Memória/Sopa de Letras/Palavras Cruzadas/Sequência Mágica. Não havia forma de a criança ver o seu melhor desempenho nem competir consigo própria por ano letivo.
