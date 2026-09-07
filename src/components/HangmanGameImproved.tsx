@@ -9,6 +9,8 @@ import { generateWord } from '@/ai/flows/word-generation';
 import { useToast } from "@/hooks/use-toast";
 import { getGridNavigationIndex, GRID_NAVIGATION_KEYS } from '@/lib/game-utils';
 import React from 'react';
+import confetti from 'canvas-confetti';
+import { useSound } from '@/lib/sounds';
 
 const CATEGORIES = [
   "Animais",
@@ -116,9 +118,16 @@ export function HangmanGame() {
     const [category, setCategory] = useState("Animais");
     const [difficulty, setDifficulty] = useState<"Fácil" | "Médio" | "Difícil">("Fácil");
     const [showSettings, setShowSettings] = useState(false);
-    const [wins, setWins] = useState(0);
-    const [losses, setLosses] = useState(0);
+    const [wins, setWins] = useState(() => {
+        const stored = localStorage.getItem('hangman-wins');
+        return stored ? parseInt(stored, 10) : 0;
+    });
+    const [losses, setLosses] = useState(() => {
+        const stored = localStorage.getItem('hangman-losses');
+        return stored ? parseInt(stored, 10) : 0;
+    });
     const { toast } = useToast();
+    const { playSuccess, playError, playGameWin } = useSound();
 
     const incorrectGuesses = guessedLetters.filter(letter => !normalize(wordToGuess).includes(letter));
     const correctGuesses = guessedLetters.filter(letter => normalize(wordToGuess).includes(letter));
@@ -164,26 +173,42 @@ export function HangmanGame() {
     const handleGuess = (letter: string) => {
         if (!guessedLetters.includes(letter)) {
             setGuessedLetters(letters => [...letters, letter]);
+            if (normalize(wordToGuess).includes(letter)) {
+                playSuccess();
+            } else {
+                playError();
+            }
         }
     };
 
     useEffect(() => {
         if (gameState.isWon) {
-            setWins(w => w + 1);
+            setWins(w => {
+                const newWins = w + 1;
+                localStorage.setItem('hangman-wins', newWins.toString());
+                return newWins;
+            });
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+            playGameWin();
             toast({
                 title: "🎉 Parabéns!",
                 description: `Acertou a palavra: ${wordToGuess}`,
             });
         }
         if (gameState.isLost) {
-            setLosses(l => l + 1);
+            setLosses(l => {
+                const newLosses = l + 1;
+                localStorage.setItem('hangman-losses', newLosses.toString());
+                return newLosses;
+            });
+            playError();
             toast({
                 title: "😔 Fim do Jogo",
                 description: `A palavra era: ${wordToGuess}`,
                 variant: "destructive"
             });
         }
-    }, [gameState.isWon, gameState.isLost, wordToGuess, toast]);
+    }, [gameState.isWon, gameState.isLost, wordToGuess, toast, playGameWin, playError]);
 
     return (
         <div className="flex flex-col gap-6 p-6 max-w-2xl">
