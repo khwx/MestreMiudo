@@ -2,6 +2,13 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-06 - Role grid e aria-label nas Palavras Cruzadas
+
+- **Contexto:** O componente Palavras Cruzadas (CrosswordGame) era o único jogo de grelha do Salão de Jogos sem `role="grid"` e `aria-label` no container, enquanto Memória, Jogo do Galo, Forca e Sopa de Letras já os tinham.
+- **Tarefa implementada:** Adicionar `role="grid"` e `aria-label="Palavras cruzadas"` ao container da grelha em `src/components/CrosswordGame.tsx` (linha 360).
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar (57 ficheiros).
+- **Docs atualizados:** registo desta melhoria.
+
 ## 2026-09-06 - Melhorias de acessibilidade, responsividade e limpeza de código
 
 - **Contexto:** Auditoria de acessibilidade e código identificou várias melhorias pequenas mas valiosas em vários componentes do Salão de Jogos e do painel.
