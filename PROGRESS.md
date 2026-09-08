@@ -2,6 +2,18 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-06 - Melhorias de acessibilidade, responsividade e limpeza de código
+
+- **Contexto:** Auditoria de acessibilidade e código identificou várias melhorias pequenas mas valiosas em vários componentes do Salão de Jogos e do painel.
+- **Tarefa implementada:** Cinco melhorias分散as numa única revisão:
+  1. `src/app/dashboard/games/client-page.tsx` — Tabs do Salão de Jogos responsivas: `grid-cols-2 sm:grid-cols-4 lg:grid-cols-7` (antes hardcode `grid-cols-7` que em mobile ficava apertado/desbordado).
+  2. `src/components/MagicSequenceGame.tsx` — Adicionado `aria-live="polite"` no countdown para leitor de ecrã anunciar os segundos restantes (consistente com `MathQuizGame`).
+  3. `src/components/MathQuizGame.tsx` — Simplificado ternário redundante no `aria-live` do countdown (ambos os ramos produziam a mesma string).
+  4. `src/components/TicTacToe.tsx` — Removido código morto `setDifficulty('hard')` no modo humano (comentário "Not used, but set for consistency").
+  5. `src/components/dashboard/DailyGoalCard.tsx` — Associado label ao input via `htmlFor`/`id` e adicionado `aria-label="Cancelar"` no botão de cancelar edição.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar (57 ficheiros).
+- **Docs atualizados:** registo desta melhoria.
+
 ## 2026-09-06 - Percentagem de taxa de vitória no Jogo da Forca
 
 - **Contexto:** O Jogo da Forca já tinha persistência de vitórias/derrotas em `localStorage`, mas não mostrava a taxa de vitória (wins/total), o que ajudaria a criança a perceber a sua evolução.
