@@ -357,7 +357,12 @@ export function CrosswordGame() {
       {/* Grid + Clues layout */}
       <div className="flex flex-col lg:flex-row gap-6 items-start justify-center">
         {/* Grid */}
-        <div className="inline-grid gap-0 border-2 border-gray-300 dark:border-gray-600 mx-auto" style={{ gridTemplateColumns: `repeat(${game.size}, 2.25rem)` }}>
+        <div 
+          role="grid" 
+          aria-label="Palavras cruzadas"
+          className="inline-grid gap-0 border-2 border-gray-300 dark:border-gray-600 mx-auto" 
+          style={{ gridTemplateColumns: `repeat(${game.size}, 2.25rem)` }}
+        >
           {game.grid.map((row, ri) =>
             row.map((cell, ci) => {
               const isEmpty = cell === null;
