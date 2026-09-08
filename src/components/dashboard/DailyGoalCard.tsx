@@ -65,10 +65,11 @@ export function DailyGoalCard({ name, target, quizzesToday }: DailyGoalCardProps
 
         {editing ? (
           <div className="flex items-center gap-3">
-            <label className="text-sm font-bold text-amber-800 dark:text-amber-200">
+            <label htmlFor="daily-goal-input" className="text-sm font-bold text-amber-800 dark:text-amber-200">
               Quizzes por dia:
             </label>
             <input
+              id="daily-goal-input"
               type="number"
               min={1}
               max={20}
@@ -87,6 +88,7 @@ export function DailyGoalCard({ name, target, quizzesToday }: DailyGoalCardProps
             <button
               type="button"
               onClick={() => setEditing(false)}
+              aria-label="Cancelar"
               className="p-2 rounded-full hover:bg-amber-200/60 dark:hover:bg-amber-800/40 transition-colors"
             >
               <X className="h-5 w-5 text-amber-600 dark:text-amber-300" />

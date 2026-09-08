@@ -27,7 +27,7 @@ export default function GamesClientPage() {
       </Button>
       <h1 className="text-4xl font-headline font-bold text-primary mb-8">Salão de Jogos</h1>
       <Tabs defaultValue="memory" className="w-full max-w-4xl">
-        <TabsList className="grid w-full grid-cols-7">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-7">
           <TabsTrigger value="memory">
             <Brain className="mr-2 h-5 w-5" />
             Jogo da Memória

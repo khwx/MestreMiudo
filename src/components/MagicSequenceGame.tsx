@@ -252,6 +252,9 @@ export function MagicSequenceGame() {
       </p>
 
       <div className="flex flex-col items-center gap-1">
+        <div aria-live="polite" aria-atomic="true" className="sr-only">
+          Restam {timeLeft} segundos
+        </div>
         <div className={cn("flex items-center gap-2", timerColor)}>
           <span className="text-2xl font-bold">{timeLeft}s</span>
         </div>

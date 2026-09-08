@@ -227,9 +227,6 @@ export function TicTacToe() {
   
   const handleModeSelect = (mode: GameMode) => {
       setGameMode(mode);
-      if (mode === 'human') {
-          setDifficulty('hard'); // Not used, but set for consistency
-      }
   }
 
   if (!gameMode) {
