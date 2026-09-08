@@ -2,6 +2,16 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-06 - Expansão banco de perguntas (tópicos com pouca cobertura)
+
+- **Contexto:** O TODO mantinha aberto "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano". Uma análise de cobertura detetou 148 combinações subject|grade|topic com ≤2 perguntas (sobre 270 totais).
+- **Tarefa implementada:** Adicionadas 34 novas perguntas alinhadas ao currículo do 1º Ciclo:
+  1. `src/lib/questions/portugues.ts` — 12 perguntas: Conjunções G1/G3 (+3), Palavras G2 (+2), Notícia G2/G4 (+4), Biografia G1/G3 (+3). IDs `pt-exp4-001` a `pt-exp4-012`.
+  2. `src/lib/questions/matematica.ts` — 10 perguntas: Soma/Subtração com Transporte G1 (+4), Comprimento G2 (+2), Coordenadas G3 (+2), Resolução 2 Passos G3/G4 (+2). IDs `mat-exp4-001` a `mat-exp4-010`.
+  3. `src/lib/questions/estudo-do-meio.ts` — 12 perguntas: Equilíbrio Ecológico G2 (+2), Eletricidade G1 (+2), Fotossíntese G1/G2 (+4), Magnetismo G2/G4 (+4), Universo G4 (+2). IDs `em-exp4-001` a `em-exp4-012`.
+- **Validação:** Banco passou de 792 para 826 perguntas; IDs únicos confirmados; todas com opções válidas e respostas corretas; `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar (57 ficheiros).
+- **Docs atualizados:** registo desta expansão (o TODO item permanece aberto por ser contínuo por disciplina/ano).
+
 ## 2026-09-06 - Navegação por teclado com foco real na Sopa de Letras
 
 - **Contexto:** A navegação por teclado (setas) na Sopa de Letras atualizava o estado `focusedCell` e a visualização (ring), mas nunca chamava `.focus()` no elemento DOM — ao contrário da Memória, do Jogo do Galo e da Forca, que usam roving tabindex real. O foco físico do teclado não se movia.
