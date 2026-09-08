@@ -19,7 +19,8 @@ import { getWrongQuestions, getWeakTopicsFromAnswers, getQuestionsForWeakTopics 
 import { buildQuizResultAnnouncement } from '@/lib/quiz-announcements';
 import { shouldSkipSaving, buildFreePracticeBannerText } from '@/lib/free-practice';
 import { getQuizLengthOptions } from '@/lib/quiz-setup';
-import { isTopicQuizEligible, getAvailableTopics } from '@/lib/topic-quiz';
+import { isTopicQuizEligible, getAvailableTopics, toBankSubject } from '@/lib/topic-quiz';
+import { getQuestionsBySubjectGradeTopic } from '@/lib/questions';
 import { generateTopicQuiz } from '@/app/actions';
 import type { QuizChallenge } from '@/lib/challenge-share';
 
@@ -412,17 +413,28 @@ export function Quiz({ studentId, gradeLevel, subject, title, challenge = null, 
           )}
         </div>
         <div className="flex flex-wrap justify-center gap-4">
-          {topics.map((topic) => (
-            <Button
-              key={topic}
-              onClick={() => startTopicQuiz(topic)}
-              size="lg"
-              className={`btn-kid text-lg ${selectedTopic === topic ? 'btn-kid-primary' : ''}`}
-              aria-label={`Começar quiz de ${topic}`}
-            >
-              {topic}
-            </Button>
-          ))}
+          {topics.map((topic) => {
+            const questionCountLabel = topic === 'Tudo' ? null : (() => {
+              const bankSubject = toBankSubject(subject);
+              if (!bankSubject) return null;
+              const count = getQuestionsBySubjectGradeTopic(bankSubject, gradeLevel as 1 | 2 | 3 | 4, topic).length;
+              return count > 0 ? `${count} perguntas` : null;
+            })();
+            return (
+              <Button
+                key={topic}
+                onClick={() => startTopicQuiz(topic)}
+                size="lg"
+                className={`btn-kid text-lg flex flex-col gap-1 min-w-[140px] ${selectedTopic === topic ? 'btn-kid-primary' : ''}`}
+                aria-label={`Começar quiz de ${topic}${questionCountLabel ? `, ${questionCountLabel} disponíveis` : ''}`}
+              >
+                <span>{topic}</span>
+                {questionCountLabel && (
+                  <span className="text-xs opacity-75 font-normal">{questionCountLabel}</span>
+                )}
+              </Button>
+            );
+          })}
         </div>
       </div>
     );
