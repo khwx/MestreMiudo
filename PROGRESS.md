@@ -2,6 +2,17 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-06 - Número de perguntas disponíveis por tema no quiz
+
+- **Contexto:** A tela de seleção de tema no quiz mostrava apenas o nome do tema, sem indicar quantas perguntas existiam naquele tema. A criança não sabia se o tema tinha poucas ou muitas perguntas disponíveis antes de escolher.
+- **Tarefa implementada:** Mostrar o número de perguntas disponíveis por tema:
+  1. `src/components/Quiz.tsx` — importa `toBankSubject` de `topic-quiz` e `getQuestionsBySubjectGradeTopic` de `questions`.
+  2. Para cada tema (exceto "Tudo"), calcula o número de perguntas disponíveis usando `getQuestionsBySubjectGradeTopic`.
+  3. Botões de tema agora mostram "X perguntas" por baixo do nome do tema.
+  4. `aria-label` atualizado com o número de perguntas disponíveis.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar (57 ficheiros).
+- **Docs atualizados:** registo desta melhoria.
+
 ## 2026-09-06 - Role grid e aria-label nas Palavras Cruzadas
 
 - **Contexto:** O componente Palavras Cruzadas (CrosswordGame) era o único jogo de grelha do Salão de Jogos sem `role="grid"` e `aria-label` no container, enquanto Memória, Jogo do Galo, Forca e Sopa de Letras já os tinham.
