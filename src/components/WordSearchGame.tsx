@@ -149,6 +149,7 @@ export function WordSearchGame() {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const timeRef = useRef(0);
   const gridRef = useRef<HTMLDivElement>(null);
+  const cellRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [focusedCell, setFocusedCell] = useState<{ row: number; col: number } | null>(null);
 
   const startGame = useCallback(() => {
@@ -282,23 +283,24 @@ export function WordSearchGame() {
     if (!game) return;
     const size = game.size;
     const current = focusedCell || { row: 0, col: 0 };
+    let nextCell: { row: number; col: number } | null = null;
 
     switch (e.key) {
       case 'ArrowUp':
         e.preventDefault();
-        setFocusedCell({ row: Math.max(0, current.row - 1), col: current.col });
+        nextCell = { row: Math.max(0, current.row - 1), col: current.col };
         break;
       case 'ArrowDown':
         e.preventDefault();
-        setFocusedCell({ row: Math.min(size - 1, current.row + 1), col: current.col });
+        nextCell = { row: Math.min(size - 1, current.row + 1), col: current.col };
         break;
       case 'ArrowLeft':
         e.preventDefault();
-        setFocusedCell({ row: current.row, col: Math.max(0, current.col - 1) });
+        nextCell = { row: current.row, col: Math.max(0, current.col - 1) };
         break;
       case 'ArrowRight':
         e.preventDefault();
-        setFocusedCell({ row: current.row, col: Math.min(size - 1, current.col + 1) });
+        nextCell = { row: current.row, col: Math.min(size - 1, current.col + 1) };
         break;
       case 'Enter':
       case ' ':
@@ -315,6 +317,12 @@ export function WordSearchGame() {
           setSelection(null);
         }
         break;
+    }
+
+    if (nextCell) {
+      setFocusedCell(nextCell);
+      const idx = nextCell.row * size + nextCell.col;
+      setTimeout(() => cellRefs.current[idx]?.focus(), 0);
     }
   };
 
@@ -408,6 +416,10 @@ export function WordSearchGame() {
               return (
                 <div
                   key={key}
+                  ref={(el) => {
+                    const idx = ri * game.size + ci;
+                    cellRefs.current[idx] = el;
+                  }}
                   role="gridcell"
                   aria-label={`Linha ${ri + 1}, coluna ${ci + 1}: ${cell}`}
                   tabIndex={isFocused ? 0 : -1}
