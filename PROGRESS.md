@@ -2,6 +2,17 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-06 - Navegação por teclado com foco real na Sopa de Letras
+
+- **Contexto:** A navegação por teclado (setas) na Sopa de Letras atualizava o estado `focusedCell` e a visualização (ring), mas nunca chamava `.focus()` no elemento DOM — ao contrário da Memória, do Jogo do Galo e da Forca, que usam roving tabindex real. O foco físico do teclado não se movia.
+- **Tarefa implementada:** Mover o foco real na navegação:
+  1. `src/components/WordSearchGame.tsx` — novo ref `cellRefs` para referenciar cada célula da grelha.
+  2. `handleGridKeyDown` — calcula a célula seguinte (`nextCell`) primeiro, atualiza `setFocusedCell(nextCell)` e depois chama `setTimeout(() => cellRefs.current[idx]?.focus(), 0)`.
+  3. Cada célula (`role="gridcell"`) passa a ter o `ref` correspondente.
+  4. Corrigido o bug em que o foco só se movia visualmente sem mover o foco real do teclado.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar (57 ficheiros).
+- **Docs atualizados:** registo desta melhoria.
+
 ## 2026-09-06 - Número de perguntas disponíveis por tema no quiz
 
 - **Contexto:** A tela de seleção de tema no quiz mostrava apenas o nome do tema, sem indicar quantas perguntas existiam naquele tema. A criança não sabia se o tema tinha poucas ou muitas perguntas disponíveis antes de escolher.
