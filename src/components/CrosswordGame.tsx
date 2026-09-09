@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { RotateCw, Timer, Trophy } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { getVocabularyForSubject, type Subject } from '@/lib/vocabulary';
-import { shuffleArray, formatTime } from '@/lib/game-utils';
+import { shuffleArray, formatTime, getGridNavigationIndex, GRID_NAVIGATION_KEYS } from '@/lib/game-utils';
 
 type Direction = 'across' | 'down';
 
@@ -137,6 +137,7 @@ export function CrosswordGame() {
   const inputRefs = useRef<Map<string, HTMLInputElement>>(new Map());
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const timeRef = useRef(0);
+  const [focusedCell, setFocusedCell] = useState<{ row: number; col: number } | null>(null);
 
   const startGame = useCallback(() => {
     const g = generateCrossword(subject);
@@ -275,6 +276,31 @@ export function CrosswordGame() {
     }
   };
 
+  const handleGridKeyDown = (e: React.KeyboardEvent) => {
+    if (!game) return;
+    const size = game.size;
+    const current = focusedCell || { row: 0, col: 0 };
+
+    if (!GRID_NAVIGATION_KEYS.includes(e.key as (typeof GRID_NAVIGATION_KEYS)[number])) {
+      return;
+    }
+    const next = getGridNavigationIndex(current.row, e.key, size, size * size);
+    if (next === null || next === current.row * size + current.col) return;
+
+    const nextRow = Math.floor(next / size);
+    const nextCol = next % size;
+
+    // Skip empty (black) cells
+    if (game.grid[nextRow][nextCol] === null) {
+      return;
+    }
+
+    e.preventDefault();
+    setFocusedCell({ row: nextRow, col: nextCol });
+    setSelectedCell({ row: nextRow, col: nextCol });
+    setTimeout(() => inputRefs.current.get(`${nextRow}-${nextCol}`)?.focus(), 0);
+  };
+
   const getCellStatus = (row: number, col: number): 'empty' | 'correct' | 'incorrect' | 'revealed' => {
     if (!game || game.grid[row][col] === null) return 'empty';
     const key = `${row}-${col}`;
@@ -362,12 +388,15 @@ export function CrosswordGame() {
           aria-label="Palavras cruzadas"
           className="inline-grid gap-0 border-2 border-gray-300 dark:border-gray-600 mx-auto" 
           style={{ gridTemplateColumns: `repeat(${game.size}, 2.25rem)` }}
+          onKeyDown={handleGridKeyDown}
+          tabIndex={0}
         >
           {game.grid.map((row, ri) =>
             row.map((cell, ci) => {
               const isEmpty = cell === null;
               const status = getCellStatus(ri, ci);
               const isSelected = selectedCell?.row === ri && selectedCell?.col === ci;
+              const isFocused = focusedCell?.row === ri && focusedCell?.col === ci;
               const isHighlighted = selectedClue
                 ? (() => {
                     for (let i = 0; i < selectedClue.word.length; i++) {
@@ -405,6 +434,7 @@ export function CrosswordGame() {
                     className={cn(
                       "w-9 h-9 text-center font-bold text-sm uppercase border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary",
                       isSelected && "ring-2 ring-primary",
+                      isFocused && "ring-2 ring-accent ring-offset-2",
                       isHighlighted && !isSelected && "bg-blue-50 dark:bg-blue-900/30",
                       status === 'correct' && "bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300",
                       status === 'incorrect' && "bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300",
