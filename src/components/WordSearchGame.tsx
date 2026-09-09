@@ -165,6 +165,8 @@ export function WordSearchGame() {
     setCompleted(false);
     setMessage(null);
     setIsNewRecord(false);
+    cellRefs.current = [];
+    setFocusedCell(null);
     const stored = localStorage.getItem(`wordsearch-best-${subject}`);
     setBestTime(stored ? parseInt(stored, 10) : null);
     if (timerRef.current) clearInterval(timerRef.current);

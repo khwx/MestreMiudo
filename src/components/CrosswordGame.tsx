@@ -145,12 +145,14 @@ export function CrosswordGame() {
     setUserGrid(Array.from({ length: g.size }, () => Array(g.size).fill('')));
     setSelectedClue(null);
     setSelectedCell(null);
+    setFocusedCell(null);
     setTime(0);
     timeRef.current = 0;
     setRunning(false);
     setCompleted(false);
     setRevealed(new Set());
     setIsNewRecord(false);
+    inputRefs.current.clear();
     const stored = localStorage.getItem(`crossword-best-${subject}`);
     setBestTime(stored ? parseInt(stored, 10) : null);
     if (timerRef.current) clearInterval(timerRef.current);
