@@ -2,6 +2,18 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-06 - Navegação por teclado (setas) nas Palavras Cruzadas
+
+- **Contexto:** As Palavras Cruzadas (CrosswordGame) permitiam navegar por Tab (próxima pista) e Backspace (apagar), mas não tinham navegação por setas entre células, ao contrário dos outros jogos de grelha (Memória, Galo, Forca, Sopa de Letras).
+- **Tarefa implementada:** Navegação por setas consistente:
+  1. `src/components/CrosswordGame.tsx` — importa `getGridNavigationIndex` e `GRID_NAVIGATION_KEYS`; adiciona estado `focusedCell`.
+  2. Novo `handleGridKeyDown` que calcula a célula seguinte com `getGridNavigationIndex`, ignora células pretas (`null`), atualiza `focusedCell`/`selectedCell` e chama `.focus()` no input.
+  3. Container da grelha recebe `onKeyDown={handleGridKeyDown}` e `tabIndex={0}`.
+  4. Células mostram anel `ring-accent ring-offset-2` quando focadas.
+  5. Comportamento igual à Memória, Galo, Forca e Sopa de Letras (roving tabindex real).
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar (57 ficheiros).
+- **Docs atualizados:** registo desta melhoria.
+
 ## 2026-09-06 - Expansão banco de perguntas (tópicos com pouca cobertura)
 
 - **Contexto:** O TODO mantinha aberto "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano". Uma análise de cobertura detetou 148 combinações subject|grade|topic com ≤2 perguntas (sobre 270 totais).
