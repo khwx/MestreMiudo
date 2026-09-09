@@ -2,6 +2,15 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-06 - Limpeza de refs ao reiniciar jogos (Crossword + Sopa de Letras)
+
+- **Contexto:** Ao reiniciar os jogos Palavras Cruzadas e Sopa de Letras, as refs (`inputRefs` e `cellRefs`) não eram limpas, podendo manter referências a elementos DOM antigos e causar comportamentos inesperados no foco.
+- **Tarefa implementada:** Limpar refs e estados de foco ao reiniciar:
+  1. `src/components/CrosswordGame.tsx` — `inputRefs.current.clear()` e `setFocusedCell(null)` no `startGame`.
+  2. `src/components/WordSearchGame.tsx` — `cellRefs.current = []` e `setFocusedCell(null)` no `startGame`.
+- **Validação:** `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar (57 ficheiros).
+- **Docs atualizados:** registo desta correção.
+
 ## 2026-09-06 - Navegação por teclado (setas) nas Palavras Cruzadas
 
 - **Contexto:** As Palavras Cruzadas (CrosswordGame) permitiam navegar por Tab (próxima pista) e Backspace (apagar), mas não tinham navegação por setas entre células, ao contrário dos outros jogos de grelha (Memória, Galo, Forca, Sopa de Letras).
