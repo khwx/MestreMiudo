@@ -2,7 +2,17 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
-## 2026-09-06 - Expansão banco de perguntas Português (+12 questões total)
+## 2026-09-06 - Expansão banco de perguntas Português (+24 questões total)
+
+- **Contexto:** Continuação da expansão do banco em tópicos com pouca cobertura (análise de `TODO.md` e cobertura). Foco em Português G3/G4 onde persistem tópicos com 1 pergunta.
+- **Tarefa implementada:** Adicionadas 24 novas perguntas de Português em `src/lib/questions/portugues.ts` (quatro fases):
+  - **Fase 1 (6):** Texto Descritivo G1/G2 (+4), Identificação de Personagens G1 (+1), Sequência de Eventos G1 (+1). IDs `pt-exp5-001` a `pt-exp5-006`.
+  - **Fase 2 (6):** Gênero e Número G3 (+1), Entrevista G1/G2 (+2), Argumentação G1/G2 (+2), Texto Descritivo G3 (+1). IDs `pt-exp5-007` a `pt-exp5-012`.
+  - **Fase 3 (12):** Biografia G3 (+2), Notícia G3 (+2), Argumentação G3/G4 (+4), Texto Descritivo G4 (+2), Entrevista G4 (+2). IDs `pt-exp6-001` a `pt-exp6-012`.
+- **Validação:** Banco passou de 826 a 862 perguntas; `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar.
+- **Docs atualizados:** registo desta expansão.
+
+## 2026-09-06 - Limpeza de refs ao reiniciar jogos (Crossword + Sopa de Letras)
 
 - **Contexto:** Continuação da expansão do banco em tópicos com pouca cobertura (análise de `TODO.md` e cobertura).
 - **Tarefa implementada:** Adicionadas 12 novas perguntas de Português em `src/lib/questions/portugues.ts` (duas fases):
