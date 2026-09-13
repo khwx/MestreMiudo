@@ -2,6 +2,18 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-06 - Expansão banco de perguntas Português (+8 questões G2)
+
+- **Contexto:** Continuação da expansão do banco em tópicos com pouca cobertura (análise de `TODO.md` e cobertura). Foco em Português G2 (Gramática/Ortografia/Género/Plural - cada 1 pergunta).
+- **Tarefa implementada:** Adicionadas 8 novas perguntas de Português em `src/lib/questions/portugues.ts` (Fase 7):
+  - **Gramática G2 (+2):** conceito de palavra, pontuação.
+  - **Ortografia G2 (+2):** acentuação aguda (pássaro, café).
+  - **Género G2 (+2):** masculino/feminino (menino/menina).
+  - **Plural G2 (+2):** regras -s e -éis (gato→gatos, papel→papéis).
+  - IDs `pt-exp7-001` a `pt-exp7-008`.
+- **Validação:** Banco passou de 850 a 858 perguntas; `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar.
+- **Docs atualizados:** registo desta expansão.
+
 ## 2026-09-06 - Expansão banco de perguntas Português (+24 questões total)
 
 - **Contexto:** Continuação da expansão do banco em tópicos com pouca cobertura (análise de `TODO.md` e cobertura). Foco em Português G3/G4 onde persistem tópicos com 1 pergunta.
