@@ -2,6 +2,18 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-06 - Expansão banco de perguntas Estudo do Meio (+5 questões G3/G4)
+
+- **Contexto:** Continuação da expansão do banco em tópicos com pouca cobertura (análise de `TODO.md` e cobertura). Foco em Estudo do Meio G3/G4 onde persistem tópicos com 1 pergunta.
+- **Tarefa implementada:** Adicionadas 5 novas perguntas de Estudo do Meio em `src/lib/questions/estudo-do-meio.ts` (Fase 5 complementar):
+  - **Eletricidade G4 (+1):** circuito fechado necessário para corrente.
+  - **Fotossíntese G3 (+1):** ocorre nas folhas (cloroplastos).
+  - **Ciência G4 (+2):** variável experimental, grupo de controlo.
+  - **Habitats G4 (+1):** definição de habitat.
+  - IDs `em-exp5-011` a `em-exp5-015`.
+- **Validação:** Banco passou de 881 a 886 perguntas; `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar.
+- **Docs atualizados:** registo desta expansão.
+
 ## 2026-09-06 - Expansão banco de perguntas Matemática (+10 questões G1/G2/G3/G4)
 
 - **Contexto:** Continuação da expansão do banco em tópicos com pouca cobertura (análise de `TODO.md` e cobertura). Foco em Matemática onde persistem tópicos com 1 pergunta.
