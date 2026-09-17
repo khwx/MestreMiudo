@@ -2,6 +2,22 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-06 - Expansão banco de perguntas Matemática (+8 questões G3/G4 Fase 6)
+
+- **Contexto:** Expansão de tópicos com pouca cobertura em Matemática (análise de `TODO.md`). Foco em temas críticos para G3/G4: resolução de problemas em 2 passos, perímetro, porcentagem, multiplicação e números decimais.
+- **Tarefa implementada:** Adicionadas 8 novas perguntas de Matemática em `src/lib/questions/matematica.ts` (Fase 6):
+  - **Resolução de Problemas em 2 Passos G3 (+1):** cartas - subtração encadeada.
+  - **Perímetro G3 (+1):** perímetro do quadrado.
+  - **Resolução de Problemas em 2 Passos G4 (+1):** livros - subtração encadeada.
+  - **Porcentagem G4 (+2):** 20% de 150; 40% de 25 alunos.
+  - **Multiplicação G3 (+1):** tabuada (9×8=72).
+  - **Números Decimais G3 (+1):** fração equivalente a 0,5.
+  - **Resolução de Problemas em 2 Passos G4 hard (+1):** compras com multiplicação e soma.
+  - IDs `mat-exp6-001` a `mat-exp6-008`.
+- **Correções incluídas:** Corrigido ID duplicado `mat-exp6-006` e indentação de `explanation` noexistent.
+- **Validação:** Banco passou de 886 a 894 perguntas; `npm run lint` ✓, `npm run typecheck` ✓, suíte completa: 544 testes a passar.
+- **Docs atualizados:** registo desta expansão.
+
 ## 2026-09-06 - Expansão banco de perguntas Estudo do Meio (+5 questões G3/G4)
 
 - **Contexto:** Continuação da expansão do banco em tópicos com pouca cobertura (análise de `TODO.md` e cobertura). Foco em Estudo do Meio G3/G4 onde persistem tópicos com 1 pergunta.
