@@ -2,6 +2,25 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-09-25 - Expansão banco de perguntas Matemática (+8 questões G3/G4 Fase 7) e correções
+
+- **Contexto:** Análise de cobertura por tópico em Matemática G3/G4 e revisão de qualidade nas questões recentes.
+- **Correções efetuadas:**
+  - `mat-exp7-002`: adaptação do termo ("camisetas" -> "camisolas").
+  - `mat-exp7-003`: corrigido enunciado de troco para bater certo com a conta (compra de 4 cadernos a 150 cêntimos = 600 cêntimos, pagamento com nota de 10 € / 1000 cêntimos, troco de 400 cêntimos).
+  - `mat-exp7-004`: clarificação do enunciado de paragens de comboio ("na primeira paragem" vs "no primeiro comboio").
+- **Novas questões adicionadas:** 8 novas questões em `src/lib/questions/matematica.ts` (Fase 7 continuação):
+  - **Subtração G3 (+1):** problema de subtração (750 - 280 = 470 maçãs).
+  - **Simetria G3 (+1):** eixos de simetria do quadrado (4 eixos).
+  - **Perímetro G3 (+1):** perímetro de retângulo de 8m × 5m (26 metros).
+  - **Moda e Média G3 (+1):** identificação da moda num conjunto de dados.
+  - **Multiplicação e Decimais G4 (+2):** preço de 4 pacotes a 1,20 € (4,80 €); comprimento de 6 pedaços de 0,75 m (4,50 m).
+  - **Arredondamentos G4 (+1):** arredondamento de 3 678 à centena mais próxima (3 700).
+  - **Divisão com Resto G4 (+1):** divisão de 53 lápis por 6 mesas com resto (resto 5).
+  - IDs `mat-exp7-009` a `mat-exp7-016`.
+- **Validação:** Banco de perguntas passou de 914 para 922 perguntas; `Duplicates: []`; `npm run lint` ✓, `npm run typecheck` ✓, 544 testes a passar.
+- **Docs atualizados:** registo em `PROGRESS.md` e `TODO.md`.
+
 ## 2026-09-06 - Expansão banco de perguntas Matemática (+8 questões G3/G4 Fase 6)
 
 - **Contexto:** Expansão de tópicos com pouca cobertura em Matemática (análise de `TODO.md`). Foco em temas críticos para G3/G4: resolução de problemas em 2 passos, perímetro, porcentagem, multiplicação e números decimais.

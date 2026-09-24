@@ -30,6 +30,7 @@
 - Confirmed European Portuguese (pt-PT) voice selection now covers all audio resources (quiz via speechSynthesis voice picker; story workshop TTS uses `pt-PT-RaquelNeural`)
 - Confirmed the Estudo do Meio question bank already covers grades 3-4 (topics and questions present in `estudo-do-meio.ts`)
 - Expanded Matemática question bank Fase 6 (+8 questões G3/G4): resolução de problemas em 2 passos, perímetro, porcentagem, multiplicação e números decimais (886→894 perguntas)
+- Expanded Matemática question bank Fase 7 (+8 questões G3/G4): subtração, simetria, perímetro, moda/média, multiplicação com decimais, arredondamentos e divisão com resto, mais correções de consistência (914→922 perguntas)
 
 ## 📋 Concluídas (histórico de pendências)
 - [x] Sincronizar catálogo de conquistas (`lib/achievements.ts`) com `BADGE_DEFINITIONS` para evitar chaves duplicadas
