@@ -22,7 +22,7 @@ describe('ErrorBoundary', () => {
         <ThrowError />
       </ErrorBoundary>
     );
-    expect(screen.getByText(/Ups!/i)).toBeDefined();
+    expect(screen.getByText(/Ups! Algo correu mal/i)).toBeDefined();
   });
 
   it('renders custom fallback when provided', () => {
