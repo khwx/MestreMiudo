@@ -2,6 +2,22 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-10-01 - Expansão banco de perguntas Matemática (+8 questões G3/G4 Fase 8)
+
+- **Contexto:** Continuação da expansão do banco em tópicos curriculum-aligned para G3/G4 (TODO item "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano"). Foco em temas essenciais: multiplicação, frações, área, tempo, números decimais, ângulos, resolução de problemas e percentagens.
+- **Novas questões adicionadas:** 8 novas questões em `src/lib/questions/matematica.ts` (Fase 8):
+  - **Multiplicação G3 (+1):** 7 mãos × 5 dedos = 35 dedos.
+  - **Frações G3 (+1):** identificação de metade (1/2).
+  - **Área G3 (+1):** área de quadrado de 4m lado (16 m²).
+  - **Tempo G3 (+1):** duração de 14:30 a 17:00 (2h30).
+  - **Números Decimais G4 (+1):** comparação de decimais (0,8 é o maior).
+  - **Ângulos G4 (+1):** ângulo reto = 90°.
+  - **Resolução de Problemas G4 (+1):** 3 caixas × 24 lápis ÷ 4 crianças = 18 lápis cada.
+  - **Percentagens G4 (+1):** 20% de 25 alunos = 5 alunos usam óculos.
+  - IDs `mat-exp8-001` a `mat-exp8-008`.
+- **Validação:** Banco de perguntas passou de 922 para 930 perguntas; `Duplicates: []`; `npm run lint` ✓, `npm run typecheck` ✓, 544 testes a passar.
+- **Docs atualizados:** registo em `PROGRESS.md` e `TODO.md`.
+
 ## 2026-09-25 - Expansão banco de perguntas Matemática (+8 questões G3/G4 Fase 7) e correções
 
 - **Contexto:** Análise de cobertura por tópico em Matemática G3/G4 e revisão de qualidade nas questões recentes.

@@ -31,6 +31,7 @@
 - Confirmed the Estudo do Meio question bank already covers grades 3-4 (topics and questions present in `estudo-do-meio.ts`)
 - Expanded Matemática question bank Fase 6 (+8 questões G3/G4): resolução de problemas em 2 passos, perímetro, porcentagem, multiplicação e números decimais (886→894 perguntas)
 - Expanded Matemática question bank Fase 7 (+8 questões G3/G4): subtração, simetria, perímetro, moda/média, multiplicação com decimais, arredondamentos e divisão com resto, mais correções de consistência (914→922 perguntas)
+- Expanded Matemática question bank Fase 8 (+8 questões G3/G4): multiplicação, frações, área, tempo, números decimais, ângulos, resolução de problemas e percentagens (922→930 perguntas)
 
 ## 📋 Concluídas (histórico de pendências)
 - [x] Sincronizar catálogo de conquistas (`lib/achievements.ts`) com `BADGE_DEFINITIONS` para evitar chaves duplicadas
@@ -53,10 +54,6 @@
 - [x] Seletor de número de perguntas (5/10/15) no início do quiz — tela de configuração criança-amigável (`lib/quiz-setup.ts` + `Quiz.tsx`)
 
 ## 🚀 Pendentes futuras (candidatas a melhorias)
-- [x] Partilha de desafio por e-mail (mailto/SMTP) diretamente a partir dos resultados do quiz
 - [ ] Envio de relatório PDF por e-mail via servidor (SMTP/Resend) a partir dos painéis de encarregado/professor
-- [x] Novo mini-jogo educativo (ex.: "Caça-Palavras" ou "Sequência Mágica") no Salão de Jogos
 - [ ] Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano
-- [x] Modo "treino livre" sem guardar pontos, para praticar sem pressão
 - [ ] Sincronização de progresso entre dispositivos (conta única do encarregado com várias crianças)
-- [x] Acessibilidade: leitor de ecrã a anunciar resultados e conquistas de forma mais rica
