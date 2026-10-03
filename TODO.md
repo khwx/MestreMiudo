@@ -34,6 +34,7 @@
 - Expanded Matemática question bank Fase 8 (+8 questões G3/G4): multiplicação, frações, área, tempo, números decimais, ângulos, resolução de problemas e percentagens (922→930 perguntas)
 - Expanded Matemática question bank Fase 9 (+8 questões G3/G4): multiplicação, divisão com resto, frações equivalentes, perímetro, operações com decimais, área de triângulo, ângulos, resolução de problemas com frações (930→938 perguntas)
 - Expanded Matemática question bank Fase 10 (+8 questões G3/G4): multiplicação, divisão com resto, frações equivalentes, perímetro, operações com decimais, área de triângulo, classificação de ângulos, resolução de problemas com frações (938→946 perguntas)
+- Expanded Matemática question bank Fase 11 (+8 questões G3/G4): multiplicação, divisão com resto, frações equivalentes, perímetro de retângulo, operações com decimais (subtração), área de retângulo, classificação de ângulos obtusos, resolução de problemas com frações (946→954 perguntas)
 
 ## 📋 Concluídas (histórico de pendências)
 - [x] Sincronizar catálogo de conquistas (`lib/achievements.ts`) com `BADGE_DEFINITIONS` para evitar chaves duplicadas
