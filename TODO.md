@@ -39,6 +39,7 @@
 - Expanded Matemática question bank Fase 13 (+8 questões G3/G4): multiplicação, divisão com resto, frações equivalentes, perímetro de retângulo, operações com decimais (soma), área de retângulo, classificação de ângulos obtusos, resolução de problemas com frações (962→970 perguntas)
 - Expanded Matemática question bank Fase 14 (+8 questões G3/G4): multiplicação, divisão com resto, frações equivalentes, perímetro de quadrado, operações com decimais (subtração), área de triângulo, classificação de ângulos agudos, resolução de problemas com frações (970→978 perguntas)
 - Expanded Matemática question bank Fase 15 (+8 questões G3/G4): multiplicação, divisão com resto, frações equivalentes, perímetro de retângulo, operações com decimais (soma), área de retângulo, classificação de ângulos obtusos, resolução de problemas com frações (978→986 perguntas)
+- Expanded Matemática question bank Fase 16 (+8 questões G3/G4): multiplicação, divisão com resto, frações equivalentes, perímetro de quadrado, operações com decimais (subtração), área de retângulo, classificação de ângulos agudos, resolução de problemas com frações (986→994 perguntas)
 
 ## 📋 Concluídas (histórico de pendências)
 - [x] Sincronizar catálogo de conquistas (`lib/achievements.ts`) com `BADGE_DEFINITIONS` para evitar chaves duplicadas
