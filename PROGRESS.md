@@ -2,6 +2,22 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-10-09 - Expansão banco de perguntas Matemática (+8 questões G3/G4 Fase 20)
+
+- **Contexto:** Continuação da expansão do banco em tópicos curriculum-aligned para G3/G4 (TODO item "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano"). Foco em temas essenciais: multiplicação, divisão com resto, frações equivalentes, perímetro de retângulo, operações com decimais (subtração), área de triângulo, classificação de ângulos agudos e resolução de problemas com frações.
+- **Novas questões adicionadas:** 8 novas questões em `src/lib/questions/matematica.ts` (Fase 20):
+  - **Multiplicação G3 (+1):** 7 caixas × 8 lápis = 56 lápis.
+  - **Divisão com Resto G3 (+1):** resto de 73 ÷ 8 = 1.
+  - **Frações Equivalentes G3 (+1):** 5/6 = 10/12.
+  - **Perímetro G3 (+1):** perímetro de retângulo 12×8 cm = 40 cm.
+  - **Operações com Decimais G4 (+1):** 85,6 - 37,4 = 48,2.
+  - **Área G4 (+1):** área de triângulo base 14m altura 10m = 70 m².
+  - **Ângulos G4 (+1):** 45° é ângulo agudo.
+  - **Resolução de Problemas G4 (+1):** 3/8 de 48 alunos = 18 meninos → 30 meninas.
+  - IDs `mat-exp20-001` a `mat-exp20-008`.
+- **Validação:** Banco de perguntas passou de 1018 para 1026 perguntas; `Duplicates: []`; `npm run lint` ✓, `npm run typecheck` ✓, 544 testes a passar.
+- **Docs atualizados:** registo em `PROGRESS.md` e `TODO.md`.
+
 ## 2026-10-08 - Expansão banco de perguntas Matemática (+8 questões G3/G4 Fase 19)
 
 - **Contexto:** Continuação da expansão do banco em tópicos curriculum-aligned para G3/G4 (TODO item "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano"). Foco em temas essenciais: multiplicação, divisão com resto, frações equivalentes, perímetro de quadrado, operações com decimais (subtração), área de retângulo, classificação de ângulos obtusos e resolução de problemas com frações.
