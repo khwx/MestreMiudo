@@ -17,6 +17,21 @@ Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 - **Validação:** Banco de perguntas passou de 1026 para 1034 perguntas; `Duplicates: []`; `npm run lint` ✓, `npm run typecheck` ✓, 544 testes a passar.
 - **Docs atualizados:** registo em `PROGRESS.md` e `TODO.md`.
 
+## 2026-10-09 - Expansão banco de perguntas Matemática (+8 questões G3/G4 Fase 23)
+
+- **Contexto:** Continuação da expansão do banco em tópicos curriculum-aligned para G3/G4 (TODO item "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano"). Foco em temas essenciais: multiplicação, divisão com resto, frações equivalentes, perímetro de retângulo, operações com decimais (subtração), área de triângulo, classificação de ângulos obtusos e resolução de problemas com frações.
+- **Novas questões adicionadas:** 8 novas questões em `src/lib/questions/matematica.ts` (Fase 23):
+  - **Multiplicação G3 (+1):** 6 caixas × 4 lápis = 24 lápis.
+  - **Divisão com Resto G3 (+1):** resto de 47 ÷ 5 = 2.
+  - **Frações Equivalentes G3 (+1):** 1/3 = 4/12.
+  - **Perímetro G3 (+1):** perímetro de retângulo 8×5 cm = 26 cm.
+  - **Operações com Decimais G4 (+1):** 75,5 - 32,8 = 42,7.
+  - **Área G4 (+1):** área de triângulo base 10m altura 6m = 30 m².
+  - **Ângulos G4 (+1):** 95° é ângulo obtuso.
+  - **Resolução de Problemas G4 (+1):** 1/4 de 40 alunos = 10 meninos.
+- **Validação:** Banco de perguntas passou de 1042 para 1050 perguntas; `Duplicates: []`; `npm run lint` ✓, `npm run typecheck` ✓, 544 testes a passar.
+- **Docs atualizados:** registo em `PROGRESS.md` e `TODO.md`.
+
 ## 2026-10-09 - Expansão banco de perguntas Matemática (+8 questões G3/G4 Fase 22)
 
 - **Contexto:** Continuação da expansão do banco em tópicos curriculum-aligned para G3/G4 (TODO item "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano"). Foco em temas essenciais: multiplicação, divisão com resto, frações equivalentes, perímetro de retângulo, operações com decimais (subtração), área de triângulo, classificação de ângulos obtusos e resolução de problemas com frações.
