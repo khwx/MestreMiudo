@@ -65,6 +65,7 @@
 - [x] Partilha de desafio no WhatsApp a partir dos resultados do quiz (botão "WhatsApp" + `buildWhatsappLink`)
 - [x] Partilha de desafio por e-mail (mailto) diretamente a partir dos resultados do quiz (botão "E-mail" + `buildEmailLink`)
 - [x] Seletor de número de perguntas (5/10/15) no início do quiz — tela de configuração criança-amigável (`lib/quiz-setup.ts` + `Quiz.tsx`)
+- [x] **Fase 22 de expansão do banco de perguntas Matemática (+8 questões G3/G4):** multiplicação, divisão com resto, frações equivalentes, perímetro, operações com decimais, área de triângulo, classificação de ângulos obtusos, resolução de problemas com frações (1034→1042 perguntas)
 
 ## 🚀 Pendentes futuras (candidatas a melhorias)
 - [ ] Envio de relatório PDF por e-mail via servidor (SMTP/Resend) a partir dos painéis de encarregado/professor
