@@ -2,6 +2,21 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-11-07 - Expansão banco de perguntas Português (+8 questões G3/G4 Fase 10)
+
+- **Contexto:** Continuação da expansão do banco em tópicos curriculum-aligned para G3/G4 (TODO item "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano"), desta vez noutra disciplina (Português) para diversificar após várias fases de Matemática.
+- **Novas questões adicionadas:** 8 novas questões em `src/lib/questions/portugues.ts` (Fase 10):
+  - **Ortografia G3 (+1):** grafia correta de "físico" (palavra esdrúxula).
+  - **Tempos Verbais G3 (+1):** "cantámos" = pretérito perfeito.
+  - **Pontuação G3 (+1):** "Onde moras tu?" termina em ponto de interrogação.
+  - **Sintaxe G3 (+1):** sujeito da frase "O João deu o livro à Ana".
+  - **Voz Ativa/Passiva G4 (+1):** transformação de "O gato perseguiu o rato." para voz passiva.
+  - **Figuras Literárias G4 (+1):** "O sol era uma bola de fogo." = metáfora.
+  - **Síntese G4 (+1):** complemento circunstancial de modo ("com paciência").
+  - **Ortografia G4 (+1):** uso correto da crase ("Vou à praia.").
+- **Validação:** Banco de perguntas passou de 1066 para 1074 perguntas; sem ids duplicados; `npm run lint` ✓, `npm run typecheck` ✓, 544 testes a passar (57 ficheiros).
+- **Docs atualizados:** registo em `PROGRESS.md` e `TODO.md`.
+
 ## 2026-10-09 - Expansão banco de perguntas Matemática (+8 questões G3/G4 Fase 21)
 
 - **Contexto:** Continuação da expansão do banco em tópicos curriculum-aligned para G3/G4 (TODO item "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano"). Foco em temas essenciais: multiplicação, divisão com resto, frações equivalentes, perímetro de retângulo, operações com decimais (subtração), área de triângulo, classificação de ângulos agudos e resolução de problemas com frações.
