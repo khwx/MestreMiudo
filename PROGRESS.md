@@ -14,7 +14,21 @@ Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
   - **Figuras Literárias G4 (+1):** "O sol era uma bola de fogo." = metáfora.
   - **Síntese G4 (+1):** complemento circunstancial de modo ("com paciência").
   - **Ortografia G4 (+1):** uso correto da crase ("Vou à praia.").
-- **Validação:** Banco de perguntas passou de 1066 para 1074 perguntas; sem ids duplicados; `npm run lint` ✓, `npm run typecheck` ✓, 544 testes a passar (57 ficheiros).
+- **Docs atualizados:** registo em `PROGRESS.md` e `TODO.md`.
+
+## 2026-11-07 - Expansão banco de perguntas Português (+8 questões G3/G4 Fase 11)
+
+- **Contexto:** Continuação da expansão do banco em tópicos curriculum-aligned para G3/G4 (TODO item "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano"), nova fase de expansão para diversificar após Fase 10.
+- **Novas questões adicionadas:** 8 novas questões em `src/lib/questions/portugues.ts` (Fase 11):
+  - **Regencia G3 (+1):** Em "O menino corre no parque", qual é o verbo da frase?.
+  - **Pronomes G3 (+1):** Qual é o pronome pessoal da primeira pessoa do singular?.
+  - **Adjetivos G4 (+1):** Em "a casa azul", qual é o adjetivo e o seu género?.
+  - **Interjeição G3 (+1):** Qual destas é uma interjeição?.
+  - **Conectivos G4 (+1):** A palavra "porque" funciona como qual tipo de conectivo?.
+  - **Coesao G4 (+1):** Em "João leu um livro. Depois disso, dormiu.", qual é o elemento de coesão?.
+  - **Textos G3 (+1):** Qual é o objetivo principal de um texto descritivo?.
+  - **Vocabulário G4 (+1):** Qual é o significado de "ambíguo"?.
+- **Validação:** Banco de perguntas passou de 1074 para 1082 perguntas; sem ids duplicados; `npm run lint` ✓, `npm run typecheck` ✓, 544 testes a passar (57 ficheiros).
 - **Docs atualizados:** registo em `PROGRESS.md` e `TODO.md`.
 
 ## 2026-10-09 - Expansão banco de perguntas Matemática (+8 questões G3/G4 Fase 21)
