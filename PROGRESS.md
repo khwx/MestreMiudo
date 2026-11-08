@@ -30,6 +30,17 @@ Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
   - **Vocabulário G4 (+1):** Qual é o significado de "ambíguo"?.
 - **Validação:** Banco de perguntas passou de 1074 para 1082 perguntas; sem ids duplicados; `npm run lint` ✓, `npm run typecheck` ✓, 544 testes a passar (57 ficheiros).
 - **Docs atualizados:** registo em `PROGRESS.md` e `TODO.md`.
+## 2026-11-08 - Expansão banco de perguntas Português (+5 questões G3 Fase 12)
+
+- **Contexto:** Continuação da expansão do banco em tópicos curriculum-aligned para G3/G4 (TODO item "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano"), nova fase de expansão para enriquecer o banco de perguntas de Português para o 3º ano.
+- **Novas questões adicionadas:** 5 novas questões em `src/lib/questions/portugues.ts` (Fase 12):
+  - **Ortografia G3 (+1):** grafia correta de "biólogo" (palavra esdrúxula).
+  - **Tempos Verbais G3 (+1):** "cantámos" = pretérito perfeito.
+  - **Pontuação G3 (+1):** "Ufa, quase atraso!" termina em ponto de exclamação.
+  - **Sintaxe G3 (+1):** predicado da frase "A Maria chamou o João".
+  - **Figuras Literárias G4 (+1):** "O tempo é um rio que tudo leva." = metáfora.
+- **Validação:** Banco de perguntas passou de 1082 para 1087 perguntas; sem ids duplicados; `npm run lint` ✓, `npm run typecheck` ✓, 544 testes a passar (57 ficheiros).
+- **Docs atualizadas:** registo em `PROGRESS.md` e `TODO.md`.
 
 ## 2026-10-09 - Expansão banco de perguntas Matemática (+8 questões G3/G4 Fase 21)
 

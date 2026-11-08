@@ -2175,6 +2175,70 @@ export const portuguesQuestions: Question[] = [
   },
 
   // ============================================
+  // PORTUGUES - PERGUNTAS ADDICIONAIS G3/G4
+  // ============================================
+  {
+    id: 'pt-g3-046',
+    subject: 'Portugues',
+    gradeLevel: 3,
+    topic: 'Ortografia',
+    difficulty: 'normal',
+    type: 'multiple_choice',
+    question: 'Qual palavra está escrita corretamente?',
+    options: ['Biólogo', 'Biologo', 'Biólogo', 'Bilógo'],
+    correctAnswer: 'Biólogo',
+    explanation: 'A palavra "biólogo" é esdrúxula e leva acento na última sílaba.',
+  },
+  {
+    id: 'pt-g3-047',
+    subject: 'Portugues',
+    gradeLevel: 3,
+    topic: 'Tempos Verbais',
+    difficulty: 'normal',
+    type: 'multiple_choice',
+    question: 'Em "Nós cantámos no festival", que tempo verbal é "cantámos"?',
+    options: ['Presente do indicativo', 'Pretérito Perfeito', 'Pretérito Imperfeito', 'Futuro do indicativo'],
+    correctAnswer: 'Pretérito Perfeito',
+    explanation: '"Cantámos" está no pretérito perfeito do indicativo, pois indica uma ação concluída no passado.',
+  },
+  {
+    id: 'pt-g3-048',
+    subject: 'Portugues',
+    gradeLevel: 3,
+    topic: 'Pontuacao',
+    difficulty: 'normal',
+    type: 'multiple_choice',
+    question: '"Ufa, quase atraso!" termina em que sinal de pontuação?',
+    options: ['Ponto final', 'Vírgula', 'Ponto de interrogação', 'Ponto de exclamação'],
+    correctAnswer: 'Ponto de exclamação',
+    explanation: 'A interjeição "Ufa" expressa alívio e termina com ponto de exclamação (!).',
+  },
+  {
+    id: 'pt-g3-049',
+    subject: 'Portugues',
+    gradeLevel: 3,
+    topic: 'Sintaxe',
+    difficulty: 'normal',
+    type: 'multiple_choice',
+    question: 'Na frase "A Maria chamou o João", qual é o predicado?',
+    options: ['A Maria', 'chamou o João', 'o João', 'A Maria chamou'],
+    correctAnswer: 'chamou o João',
+    explanation: 'O predicado é o que diz algo sobre o sujeito: "chamou o João".',
+  },
+  {
+    id: 'pt-g4-048',
+    subject: 'Portugues',
+    gradeLevel: 4,
+    topic: 'Figuras de Linguagem',
+    difficulty: 'hard',
+    type: 'multiple_choice',
+    question: '"O tempo é um rio que tudo leva." Que figura de linguagem é usada?',
+    options: ['Metáfora', 'Comparação', 'Personificação', 'Hipérbole'],
+    correctAnswer: 'Metáfora',
+    explanation: 'Comparar o tempo a um rio usando "é" é uma metáfora.',
+  },
+
+  // ============================================
   // PORTUGUES - EXPANSAO (GRADES 1-4)
   // ============================================
   {
