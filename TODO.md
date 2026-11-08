@@ -71,5 +71,5 @@
 
 ## 🚀 Pendentes futuras (candidatas a melhorias)
 - [ ] Envio de relatório PDF por e-mail via servidor (SMTP/Resend) a partir dos painéis de encarregado/professor
-- [ ] Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano
+- [x] Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano (Fase 13 Português +8 questões G3/G4)
 - [ ] Sincronização de progresso entre dispositivos (conta única do encarregado com várias crianças)

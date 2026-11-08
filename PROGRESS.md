@@ -2,6 +2,20 @@
 
 Log de execuções e ações autónomas do Bot no projeto MestreMiudo.
 
+## 2026-11-08 - Expansão banco de perguntas Português (+8 questões G3/G4 Fase 13)
+
+- **Contexto:** Continuação da expansão do banco em tópicos curriculum-aligned para G3/G4 (TODO item "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano"), nova fase de expansão após Fase 12.
+- **Novas questões adicionadas:** 8 novas questões em `src/lib/questions/portugues.ts` (Fase 13):
+  - **Regencia G3 (+1):** Em "O menino corre no parque", qual é o verbo da frase?.
+  - **Pronomes G3 (+1):** Qual é o pronome pessoal da primeira pessoa do singular?.
+  - **Adjetivos G4 (+1):** Em "a casa azul", qual é o adjetivo e o seu género?.
+  - **Interjeição G3 (+1):** Qual destas é uma interjeição?.
+  - **Conectivos G4 (+1):** A palavra "porque" funciona como qual tipo de conectivo?.
+  - **Coesao G4 (+1):** Em "João leu um livro. Depois disso, dormiu.", qual é o elemento de coesão?.
+  - **Textos G3 (+1):** Qual é o objetivo principal de um texto descritivo?.
+  - **Vocabulário G4 (+1):** Qual é o significado de "ambíguo"?.
+- **Docs atualizadas:** registo em `PROGRESS.md` e `TODO.md`.
+
 ## 2026-11-07 - Expansão banco de perguntas Português (+8 questões G3/G4 Fase 10)
 
 - **Contexto:** Continuação da expansão do banco em tópicos curriculum-aligned para G3/G4 (TODO item "Expansão do banco de perguntas com mais tópicos curriculum-aligned por disciplina e ano"), desta vez noutra disciplina (Português) para diversificar após várias fases de Matemática.
