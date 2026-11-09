@@ -1527,7 +1527,7 @@ export const portuguesQuestions: Question[] = [
   // PORTUGUES - GRADE 3 (NEW QUESTIONS - FASE 14)
   // ============================================
   {
-    id: 'pt-g3-033',
+    id: 'pt-g3-050',
     subject: 'Portugues',
     gradeLevel: 3,
     topic: 'Regencia',
@@ -1539,7 +1539,7 @@ export const portuguesQuestions: Question[] = [
     explanation: 'O verbo é a palavra que indica a ação ou estado: "corre".',
   },
   {
-    id: 'pt-g3-034',
+    id: 'pt-g3-051',
     subject: 'Portugues',
     gradeLevel: 3,
     topic: 'Pronomes',
@@ -1551,7 +1551,7 @@ export const portuguesQuestions: Question[] = [
     explanation: 'Na primeira pessoa do singular, usamos "eu".',
   },
   {
-    id: 'pt-g3-035',
+    id: 'pt-g3-052',
     subject: 'Portugues',
     gradeLevel: 3,
     topic: 'Adjetivos',
@@ -1563,7 +1563,7 @@ export const portuguesQuestions: Question[] = [
     explanation: '"Azul" é um adjetivo do género feminino, concorda com "casa".',
   },
   {
-    id: 'pt-g3-036',
+    id: 'pt-g3-053',
     subject: 'Portugues',
     gradeLevel: 3,
     topic: 'Interjeição',
@@ -1575,7 +1575,7 @@ export const portuguesQuestions: Question[] = [
     explanation: '"Ai" é uma interjeição, usada para expressar emoção ou surpresa.',
   },
   {
-    id: 'pt-g3-037',
+    id: 'pt-g3-054',
     subject: 'Portugues',
     gradeLevel: 3,
     topic: 'Conectivos',
@@ -1587,7 +1587,7 @@ export const portuguesQuestions: Question[] = [
     explanation: '"Porque" indica causa ou razão entre as frases.',
   },
   {
-    id: 'pt-g3-038',
+    id: 'pt-g3-055',
     subject: 'Portugues',
     gradeLevel: 3,
     topic: 'Coesao',
@@ -1599,7 +1599,7 @@ export const portuguesQuestions: Question[] = [
     explanation: '"Depois disso" é um elemento de coesão que liga as duas frases.',
   },
   {
-    id: 'pt-g3-039',
+    id: 'pt-g3-056',
     subject: 'Portugues',
     gradeLevel: 3,
     topic: 'Textos',
@@ -1611,7 +1611,7 @@ export const portuguesQuestions: Question[] = [
     explanation: 'O texto descritivo tem como objetivo principal descrever um cenário, objeto ou pessoa com detalhes.',
   },
   {
-    id: 'pt-g3-040',
+    id: 'pt-g3-057',
     subject: 'Portugues',
     gradeLevel: 3,
     topic: 'Vocabulário',
